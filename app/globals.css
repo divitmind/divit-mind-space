@@ -45,6 +45,18 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Marquee animations */
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+  }
+  @keyframes marquee-vertical {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-25%); }
+  }
+  --animate-marquee: marquee var(--duration, 40s) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
 }
 
 :root {
@@ -125,6 +137,50 @@
     @apply bg-background text-foreground;
   }
 }
+.text-green {
+  color: #004540 !important;
+}
+
+.bg-purple {
+  background-color: #52154E !important;
+}
+
+.bg-blue {
+  background-color: #ADBDFF !important;
+}
+
+.text-blue {
+  color: #6D9CF4 !important;
+}
+
+.text-purple {
+  color: #52154E !important;
+}
+
+.text-green-lite {
+  color: #89A09E !important;
+}
+
+.bg-green {
+  background-color: #004540 !important;
+}
+
+.bg-cream {
+  background-color: #F1EEE4 !important;
+}
+
+.bg-green-lite {
+  background-color: #89A09E !important;
+}
+
+.bg-link {
+  background-color: #52154E !important;
+}
+
+.bg-yellow {
+  background-color: #FFE175 !important;
+}
+
 
 @layer utilities {
   .container {

@@ -43,18 +43,15 @@ export function FaqSection() {
     const [openId, setOpenId] = useState<string | null>("item-1");
 
     return (
-        <section className="py-20 bg-white relative overflow-hidden">
+        <section className="py-20 bg-cream relative overflow-hidden">
             <div className="max-w-4xl mx-auto px-4 relative z-10">
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-[#E8ECE9] text-[#2F3E33] text-xs font-semibold tracking-wide uppercase mb-4">
+                    <div className="inline-flex items-center justify-center text-purple text-sm font-semibold tracking-wide uppercase mb-4">
                         Common Queries
                     </div>
-                    <h2 className="text-3xl lg:text-5xl font-bold text-[#222222] mb-4">
+                    <h2 className="text-3xl lg:text-5xl font-semibold text-green mb-4">
                         Frequently Asked Questions
                     </h2>
-                    <p className="text-gray-600 text-lg">
-                        Answers to common questions about our services and process.
-                    </p>
                 </div>
 
                 <div className="space-y-4">
@@ -69,7 +66,7 @@ export function FaqSection() {
                                     "group rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden",
                                     isOpen
                                         ? "bg-[#FDFBF7] border-[#2F3E33]/20 shadow-sm"
-                                        : "bg-white border-transparent hover:bg-gray-50 border-gray-100"
+                                        : "bg-white border-transparent hover:bg-gray-50"
                                 )}
                             >
                                 <div className="p-6 flex items-center justify-between gap-4">
@@ -81,7 +78,7 @@ export function FaqSection() {
                                     </h3>
                                     <div className={cn(
                                         "h-8 w-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300",
-                                        isOpen ? "bg-[#2F3E33] text-white rotate-180" : "bg-[#E8ECE9] text-[#2F3E33] group-hover:bg-[#dce2de]"
+                                        isOpen ? "bg-green text-white rotate-180" : "bg-[#E8ECE9] text-green group-hover:bg-[#dce2de]"
                                     )}>
                                         {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                                     </div>

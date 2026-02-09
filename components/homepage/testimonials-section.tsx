@@ -39,15 +39,12 @@ export function TestimonialsSection() {
     return (
         <section className="py-20 lg:py-28 bg-[#FDFBF7] overflow-hidden">
             <div className="container mb-16 text-center">
-                <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-[#E8ECE9] text-[#2F3E33] text-xs font-semibold tracking-wide uppercase mb-4">
+                <div className="inline-flex items-center justify-center text-purple text-sm font-semibold tracking-wide uppercase mb-4">
                     Parent Stories
                 </div>
-                <h2 className="text-3xl lg:text-5xl font-bold text-[#222222] mb-4">
+                <h2 className="text-3xl lg:text-5xl font-semibold text-green mb-4">
                     Why Families Trust Us
                 </h2>
-                <p className="text-gray-600 text-lg max-w-xl mx-auto">
-                    Real stories from real parents who found clarity, support, and hope.
-                </p>
             </div>
 
             <div className="relative w-full">
@@ -57,9 +54,6 @@ export function TestimonialsSection() {
                         <TestimonialCard key={`t1-${i}`} {...t} />
                     ))}
                 </Marquee>
-
-                {/* Second Marquee - Right Direction (Optional, if we had more content but let's stick to one nice row since we only have 3 uniques) */}
-                {/* Let's double down on one really good row or duplicate to make it long enough */}
             </div>
         </section>
     );

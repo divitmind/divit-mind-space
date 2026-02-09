@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/homepage/hero-section";
+import { FeaturesShowcaseSection } from "@/components/homepage/features-showcase-section";
 import { WhyJoinSection } from "@/components/homepage/why-join-section";
 import { ServicesSection } from "@/components/homepage/services-section";
 import { WhoNeedsItSection } from "@/components/homepage/who-needs-it-section";
@@ -11,8 +12,9 @@ export default function Page() {
     return (
         <main>
             <HeroSection />
-            <ValueProps />
+            <FeaturesShowcaseSection />
             <WhyJoinSection />
+            <ValueProps />
             <ServicesSection />
             <WhoNeedsItSection />
             <TestimonialsSection />

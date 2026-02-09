@@ -1,6 +1,4 @@
-
-import Link from "next/link";
-import { ArrowRight, Star, Quote } from "lucide-react";
+import { Quote } from "lucide-react";
 import Image from "next/image";
 import { BookConsultationModal } from "@/components/book-consultation-modal";
 import { Button } from "@/components/ui/button";
@@ -13,14 +11,14 @@ export function HeroSection() {
 
           {/* Text Content */}
           <div className="flex-1 space-y-6 text-center lg:text-left animate-in slide-in-from-bottom duration-700 fade-in">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#222222]/80 leading-[1.10]">
-              Understanding unique minds, <br />
-              <span className="text-[#2F3E33]">
-                supporting brighter futures.
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-green leading-[1.10]">
+              Understanding unique minds, supporting<br />
+              <span className="text-purple">
+                 brighter futures.
               </span>
             </h1>
 
-            <p className="max-w-2xl mx-auto lg:mx-0 text-lg text-gray-600 leading-relaxed">
+            <p className="max-w-2xl mx-auto lg:mx-0 text-lg text-green leading-relaxed">
               At Divit MindSpace, we bridge the gap between healthcare and education.
               Our team provides diagnostic assessments and personalized training
               to help adults and families thrive.
@@ -28,11 +26,11 @@ export function HeroSection() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
               <BookConsultationModal>
-                <Button className="h-12 rounded-xl bg-[#2F3E33] px-8 text-base font-medium text-white shadow-lg shadow-[#2F3E33]/10 hover:bg-[#2F3E33]/90 hover:shadow-[#7C9082]/20 transition-all duration-300">
+                <Button className="h-12 rounded-xl bg-green px-8 text-base font-medium text-white shadow-lg shadow-[#2F3E33]/10 hover:bg-[#2F3E33]/90 hover:shadow-[#7C9082]/20 transition-all duration-300">
                   Book a Consultation
                 </Button>
               </BookConsultationModal>
-              <Button variant="outline" className="h-12 rounded-xl border-[#2F3E33]/20 bg-transparent px-8 text-base font-medium text-[#2F3E33] hover:bg-[#2F3E33]/5">
+              <Button variant="outline" className="h-12 rounded-xl border-green bg-transparent px-8 text-base font-medium text-[#2F3E33] hover:bg-[#2F3E33]/5">
                 Learn about our approach
               </Button>
             </div>
@@ -72,12 +70,12 @@ export function HeroSection() {
 
               <div className="absolute bottom-6 left-6 right-6 text-white">
                 <Quote className="h-6 w-6 text-[#E8ECE9] mb-2 fill-current opacity-90" />
-                <p className="font-medium text-base leading-snug">"We finally found a place that listens and understands."</p>
+                <p className="font-medium text-base leading-snug">&quot;We finally found a place that listens and understands.&quot;</p>
               </div>
             </div>
 
             {/* Subtle Decorative Circle */}
-            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#7C9082]/10 rounded-full blur-3xl -z-10" />
+            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-green-lite/10 rounded-full blur-3xl -z-10" />
           </div>
         </div>
       </div>

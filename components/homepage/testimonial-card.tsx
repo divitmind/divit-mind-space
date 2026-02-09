@@ -35,7 +35,7 @@ export function TestimonialCard({ name, role, quote, initial, className }: Testi
             </div>
 
             <p className="text-gray-600 leading-relaxed mb-6 min-h-[80px]">
-                "{quote}"
+                &quot;{quote}&quot;
             </p>
 
             <div className="flex items-center gap-4">

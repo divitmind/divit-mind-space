@@ -72,7 +72,7 @@ export function WhoNeedsItSection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="py-20 lg:py-28 bg-white relative">
+        <section ref={sectionRef} className="py-20 lg:py-28 bg-cream relative">
             <div className="container">
 
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
@@ -102,15 +102,12 @@ export function WhoNeedsItSection() {
                     <div className="lg:w-1/2 space-y-24 py-12">
 
                         <div className="mb-12">
-                            <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-[#E8ECE9] text-[#2F3E33] text-xs font-semibold tracking-wide uppercase mb-4">
+                            <div className="inline-flex items-center justify-center text-purple text-sm font-semibold tracking-wide uppercase mb-4">
                                 Who We Serve
                             </div>
-                            <h2 className="text-4xl lg:text-5xl font-bold text-[#222222] mb-6">
+                            <h2 className="text-4xl lg:text-5xl font-semibold text-green mb-6">
                                 Who Needs It?
                             </h2>
-                            <p className="text-gray-600 text-lg">
-                                Whether you are seeking support or looking to provide it, we have a place for you.
-                            </p>
                         </div>
 
                         <div className="space-y-8">
@@ -121,7 +118,7 @@ export function WhoNeedsItSection() {
                                     className={cn(
                                         "who-needs-it-card group relative p-8 rounded-3xl transition-all duration-500 border-2",
                                         activeId === item.id
-                                            ? "bg-white border-[#2F3E33]/10 shadow-xl scale-100 opacity-100"
+                                            ? "bg-white border-green-lite shadow-xl scale-100 opacity-100"
                                             : "bg-transparent border-transparent opacity-50 scale-95 hover:opacity-80"
                                     )}
                                 >
@@ -141,11 +138,6 @@ export function WhoNeedsItSection() {
                                             <p className="text-gray-600 leading-relaxed">
                                                 {item.description}
                                             </p>
-
-                                            <div className="pt-2 flex items-center gap-2 text-sm font-bold text-[#2F3E33] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <CheckCircle2 className="h-4 w-4" />
-                                                <span>Learn More</span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
