@@ -34,7 +34,7 @@ export function CtaSection() {
                         </motion.h2>
 
                         <Link
-                            href="/contact"
+                            href="https://wa.me/919902351393"
                             className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-[#e8e4db] text-[#1a201c] font-semibold text-lg transition-opacity hover:opacity-90"
                         >
                             Let&apos;s talk

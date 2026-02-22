@@ -98,7 +98,7 @@ export function ValueProps() {
                         <div className="space-y-6">
                             <div className="relative h-20 w-20 lg:h-28 lg:w-28 rounded-full overflow-hidden shrink-0">
                                 <Image
-                                    src={cards[0].imageUrl || ""}
+                                    src="/founder1.png"
                                     alt="Pooja Mittal"
                                     fill
                                     className="object-cover"
