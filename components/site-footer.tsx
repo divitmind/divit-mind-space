@@ -53,7 +53,7 @@ export function SiteFooter() {
                     </p>
 
                     {/* Simple Email Capture */}
-                    <div className="w-full max-w-sm">
+                    {/* <div className="w-full max-w-sm">
                         <form className="relative">
                             <input
                                 type="email"
@@ -64,7 +64,7 @@ export function SiteFooter() {
                                 <ArrowUpRight className="h-5 w-5" />
                             </button>
                         </form>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Big Brand Text */}
