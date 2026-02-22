@@ -2,6 +2,7 @@ import { Quote } from "lucide-react";
 import Image from "next/image";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -14,7 +15,7 @@ export function HeroSection() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-green leading-[1.10]">
               Understanding unique minds, supporting<br />
               <span className="text-purple">
-                 brighter futures.
+                brighter futures.
               </span>
             </h1>
 
@@ -33,9 +34,11 @@ export function HeroSection() {
                   Book a Consultation
                 </WhatsAppConsultationLink>
               </Button>
-              <Button variant="outline" className="h-12 rounded-xl border-green bg-transparent px-8 text-base font-medium text-[#2F3E33] hover:bg-[#2F3E33]/5">
-                Learn about our approach
-              </Button>
+              <Link href="/about-us">
+                <Button variant="outline" className="h-12 rounded-xl border-green bg-transparent px-8 text-base font-medium text-[#2F3E33] hover:bg-[#2F3E33]/5">
+                  Learn about our approach
+                </Button>
+              </Link>
             </div>
 
             <div className="pt-4 flex items-center justify-center lg:justify-start gap-4 text-sm text-gray-500">

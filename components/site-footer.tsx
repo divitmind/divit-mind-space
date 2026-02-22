@@ -1,16 +1,8 @@
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, Twitter, ArrowUpRight } from "lucide-react";
+import { Instagram, Linkedin, Twitter, ArrowUpRight, MapPin, Phone, Mail, Facebook } from "lucide-react";
+import { FooterServiceLinks } from "@/components/footer-service-links";
 
 const footerLinks = [
-    {
-        title: "Services",
-        links: [
-            { label: "Assessments", href: "/services/assessments" },
-            { label: "Therapy", href: "/services/therapy" },
-            { label: "Parent Guidance", href: "/services/parent-guidance" },
-            { label: "School Support", href: "/services/school-support" },
-        ],
-    },
     {
         title: "Company",
         links: [
@@ -25,10 +17,28 @@ const footerLinks = [
         title: "Resources",
         links: [
             { label: "Blog", href: "/blogs" },
-            { label: "Community", href: "/community" },
-            { label: "FAQs", href: "/#faq" },
+            { label: "News", href: "/news" },
+            { label: "Gallery", href: "/gallery" },
+            { label: "Awareness Program", href: "/awareness-program" },
+            { label: "Affiliations", href: "/affiliations" },
         ],
     },
+];
+
+const contact = {
+    address: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bengaluru",
+    phones: [
+        { label: "+91 9902351393", href: "tel:+919902351393" },
+        { label: "9901666139", href: "tel:+919901666139" },
+    ],
+    email: { label: "divitmindspace@gmail.com", href: "mailto:divitmindspace@gmail.com" },
+};
+
+const socialLinks = [
+    { href: "https://instagram.com/divitmindspace", icon: Instagram, label: "Instagram" },
+    { href: "https://facebook.com/divitmindspace", icon: Facebook, label: "Facebook" },
+    { href: "https://linkedin.com/company/divitmindspace", icon: Linkedin, label: "LinkedIn" },
+    { href: "https://x.com/divitmindspace", icon: Twitter, label: "X (Twitter)" },
 ];
 
 export function SiteFooter() {
@@ -77,7 +87,8 @@ export function SiteFooter() {
                     </div>
 
                     {/* Middle Section: Links Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-20 border-t border-gray-100 pt-16">
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-20 border-t border-gray-100 pt-16">
+                        <FooterServiceLinks />
                         {footerLinks.map((group) => (
                             <div key={group.title}>
                                 <h4 className="font-bold text-[#222222] mb-6">{group.title}</h4>
@@ -96,36 +107,64 @@ export function SiteFooter() {
                             </div>
                         ))}
 
+                        {/* Contact Column */}
+                        <div className="col-span-2 md:col-span-1">
+                            <h4 className="font-bold text-[#222222] mb-6">Contact</h4>
+                            <address className="not-italic space-y-4 text-sm text-gray-500 font-medium">
+                                <p className="flex items-start gap-2">
+                                    <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-[#2F3E33]" aria-hidden />
+                                    <span>{contact.address}</span>
+                                </p>
+                                <p className="flex flex-col gap-1">
+                                    {contact.phones.map((p) => (
+                                        <a
+                                            key={p.href}
+                                            href={p.href}
+                                            className="flex items-center gap-2 hover:text-[#2F3E33] transition-colors"
+                                        >
+                                            <Phone className="h-4 w-4 shrink-0 text-[#2F3E33]" aria-hidden />
+                                            {p.label}
+                                        </a>
+                                    ))}
+                                </p>
+                                <p>
+                                    <a
+                                        href={contact.email.href}
+                                        className="flex items-center gap-2 hover:text-[#2F3E33] transition-colors"
+                                    >
+                                        <Mail className="h-4 w-4 shrink-0 text-[#2F3E33]" aria-hidden />
+                                        {contact.email.label}
+                                    </a>
+                                </p>
+                            </address>
+                        </div>
+
                         {/* Socials Column */}
                         <div className="col-span-2 md:col-span-1">
                             <h4 className="font-bold text-[#222222] mb-6">Connect</h4>
                             <div className="flex gap-4">
-                                <Link href="#" className="h-10 w-10 rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#222222] hover:bg-[#2F3E33] hover:text-white transition-all">
-                                    <Instagram className="h-5 w-5" />
-                                </Link>
-                                <Link href="#" className="h-10 w-10 rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#222222] hover:bg-[#2F3E33] hover:text-white transition-all">
-                                    <Linkedin className="h-5 w-5" />
-                                </Link>
-                                <Link href="#" className="h-10 w-10 rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#222222] hover:bg-[#2F3E33] hover:text-white transition-all">
-                                    <Twitter className="h-5 w-5" />
-                                </Link>
+                                {socialLinks.map(({ href, icon: Icon, label }) => (
+                                    <Link
+                                        key={label}
+                                        href={href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={label}
+                                        className="h-10 w-10 rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#222222] hover:bg-[#2F3E33] hover:text-white transition-all"
+                                    >
+                                        <Icon className="h-5 w-5" />
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                     </div>
 
                     {/* Bottom Section: Copyright & Status */}
                     <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-100 text-sm text-gray-400">
-                        <p>&copy; {new Date().getFullYear()} Divit MindSpace. All rights reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} Divit MindSpace. All rights reserved. </p>
                         <div className="flex gap-8 mt-4 md:mt-0">
                             <Link href="/terms" className="hover:text-[#2F3E33] transition-colors">Terms</Link>
                             <Link href="/privacy" className="hover:text-[#2F3E33] transition-colors">Privacy</Link>
-                            <div className="flex items-center gap-2">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                </span>
-                                <span className="text-[#2F3E33] font-medium">All Systems Operational</span>
-                            </div>
                         </div>
                     </div>
                 </div>
