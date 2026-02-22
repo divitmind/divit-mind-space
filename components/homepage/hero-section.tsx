@@ -1,6 +1,6 @@
 import { Quote } from "lucide-react";
 import Image from "next/image";
-import { BookConsultationModal } from "@/components/book-consultation-modal";
+import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
@@ -25,11 +25,14 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-              <BookConsultationModal>
-                <Button className="h-12 rounded-xl bg-green px-8 text-base font-medium text-white shadow-lg shadow-[#2F3E33]/10 hover:bg-[#2F3E33]/90 hover:shadow-[#7C9082]/20 transition-all duration-300">
+              <Button
+                asChild
+                className="h-12 rounded-xl bg-green px-8 text-base font-medium text-white shadow-lg shadow-[#2F3E33]/10 hover:bg-[#2F3E33]/90 hover:shadow-[#7C9082]/20 transition-all duration-300"
+              >
+                <WhatsAppConsultationLink>
                   Book a Consultation
-                </Button>
-              </BookConsultationModal>
+                </WhatsAppConsultationLink>
+              </Button>
               <Button variant="outline" className="h-12 rounded-xl border-green bg-transparent px-8 text-base font-medium text-[#2F3E33] hover:bg-[#2F3E33]/5">
                 Learn about our approach
               </Button>

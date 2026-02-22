@@ -9,9 +9,8 @@ import { client } from "@/sanity/lib/client";
 import { ALL_SERVICE_SLUGS_QUERY, SINGLE_SERVICE_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import type { Service } from "@/sanity/types";
-import { BookConsultationModal } from "@/components/book-consultation-modal";
-import { Button } from "@/components/ui/button";
 import { portableTextComponents } from "@/components/portable-text-components";
+import { CtaSection } from "@/components/homepage/cta-section";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -102,7 +101,7 @@ export default async function ServicePage({ params }: PageProps) {
       url: "https://divitmindspace.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://divitmindspace.com/logo.png",
+        url: "https://divitmindspace.com/divit-mindspace-logo.png",
       },
     },
     areaServed: {
@@ -185,68 +184,7 @@ export default async function ServicePage({ params }: PageProps) {
             )}
           </article>
 
-          <div className="mt-16 p-8 md:p-12 bg-linear-to-br from-green to-green-lite rounded-2xl text-white shadow-2xl">
-            <div className="max-w-2xl mx-auto text-center space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">
-                Ready to Get Started?
-              </h2>
-              <p className="text-lg text-white/90">
-                Book a consultation with our specialists to learn more about how we can help you.
-              </p>
-              <BookConsultationModal>
-                <Button
-                  size="lg"
-                  className="bg-yellow text-green hover:bg-yellow/90 font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Book a Consultation
-                </Button>
-              </BookConsultationModal>
-            </div>
-          </div>
-
-          {/* Contact Information */}
-          <div className="mt-12 p-6 bg-cream/50 rounded-xl border border-green/10">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <h3 className="text-lg font-semibold text-green mb-2">
-                  Have Questions?
-                </h3>
-                <p className="text-green/70">
-                  Our team is here to help you understand our services better.
-                </p>
-              </div>
-              <Link href="/contact-us">
-                <Button
-                  variant="outline"
-                  className="border-green text-green hover:bg-green hover:text-white transition-all duration-300"
-                >
-                  Contact Us
-                </Button>
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 text-green hover:text-green-lite transition-colors duration-300"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              <span className="font-medium">Back to All Services</span>
-            </Link>
-          </div>
+          <CtaSection />
         </div>
       </div>
     </>

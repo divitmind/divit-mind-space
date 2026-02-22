@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description: "Empowering neurodivergent children through clinical assessments, specialized education, and comprehensive family support. Breaking stigma through FREE community awareness sessions.",
     images: [
       {
-        url: "/og-about-us.png",
+        url: "/divit-mindspace-logo.png",
         width: 1200,
         height: 630,
         alt: "Divit MindSpace - About Us"
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About Us | Divit MindSpace - Empowering Neurodivergent Children",
     description: "Clinical assessments, specialized education, and family support for neurodivergent children. Free awareness sessions across communities.",
-    images: ["/og-about-us.png"]
+    images: ["/divit-mindspace-logo.png"]
   },
   robots: {
     index: true,

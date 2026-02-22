@@ -24,7 +24,7 @@ const PEOPLE: Person[] = [
     id: "pooja-mittal",
     name: "Pooja Mittal",
     title: "Co-Founder & Special Educator",
-    image: "https://plus.unsplash.com/premium_photo-1688350808212-4e6908a03925?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "/founder1.png",
     teaser:
       "My journey into neurodivergent care began with a deeply personal challenge. When my younger son, Divyam, was first diagnosed, he was non-verbal. With determination and continuous effort, he can now speak fluently in both Hindi and English. Out of this vision, Divit Health was born—a place of inspiration, support, and holistic care for neurodivergent children and their families.",
     fullBio: [
@@ -124,7 +124,7 @@ function PersonCard({ person }: { person: Person }) {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col flex-1 p-4 lg:p-6">
+      <div className="flex flex-col flex-1 py-4">
         <h3 className="text-lg font-semibold text-[#2F3E33] tracking-tight">
           {person.name}
         </h3>

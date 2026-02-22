@@ -3,7 +3,7 @@
 import { AwarenessHero } from "./awareness-hero";
 import { ProgramCard } from "./program-card";
 import { motion } from "motion/react";
-import { BookConsultationModal } from "@/components/book-consultation-modal";
+import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { Button } from "@/components/ui/button";
 
 interface Program {
@@ -159,11 +159,14 @@ export function AwarenessPage() {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              <BookConsultationModal>
-                <Button className="h-14 px-8 text-lg bg-green hover:bg-green/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all">
+              <Button
+                asChild
+                className="h-14 px-8 text-lg bg-green hover:bg-green/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all"
+              >
+                <WhatsAppConsultationLink>
                   Get in Touch
-                </Button>
-              </BookConsultationModal>
+                </WhatsAppConsultationLink>
+              </Button>
             </motion.div>
 
             {/* Decorative elements */}

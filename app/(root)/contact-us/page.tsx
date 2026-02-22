@@ -1,154 +1,89 @@
-"use client";
+import type { Metadata } from "next";
+import { ContactForm } from "@/components/contact/contact-form";
 
-import { useState } from "react";
-import { User, Phone, Mail} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
-import Link from "next/link";
-import Image from "next/image";
-
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    phone: "",
-    email: "",
-    message: "",
-    agreedToPrivacy: false
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Reset form
-    setFormData({
-      firstName: "",
-      lastName: "",
-      phone: "",
-      email: "",
-      message: "",
-      agreedToPrivacy: false
-    });
-  };
-
-  const handleChange = (field: string, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  return (
-    <div className="min-h-screen bg-[#FDFBF7]">
-      <div className="mx-auto container px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid items-start gap-16 lg:grid-cols-2">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-green text-3xl leading-tight font-semibold lg:text-4xl">
-                Let&#39;s Talk About
-                <br />
-                Your Goals
-              </h1>
-              <p className="text-green leading-relaxed">
-                Whether You&#39;re Curious About Our Services, Ready To Get Started, Or Just
-                Need Some Honest Guidance—Our Experts Are Here To Help.
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="relative">
-                  <User className="text-muted-foreground absolute top-3 left-3 h-5 w-5" />
-                  <Input
-                    placeholder="First Name"
-                    value={formData.firstName}
-                    onChange={(e) => handleChange("firstName", e.target.value)}
-                    className="border-border bg-card h-12 pl-10"
-                    required
-                  />
-                </div>
-                <div className="relative">
-                  <User className="text-muted-foreground absolute top-3 left-3 h-5 w-5" />
-                  <Input
-                    placeholder="Last Name"
-                    value={formData.lastName}
-                    onChange={(e) => handleChange("lastName", e.target.value)}
-                    className="border-border bg-card h-12 pl-10"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="relative">
-                <Phone className="text-muted-foreground absolute top-3 left-3 h-5 w-5" />
-                <Input
-                  placeholder="Phone No"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={(e) => handleChange("phone", e.target.value)}
-                  className="border-border bg-card h-12 pl-10"
-                  required
-                />
-              </div>
-
-              <div className="relative">
-                <Mail className="text-muted-foreground absolute top-3 left-3 h-5 w-5" />
-                <Input
-                  placeholder="Email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => handleChange("email", e.target.value)}
-                  className="border-border bg-card h-12 pl-10"
-                  required
-                />
-              </div>
-
-              <div>
-                <Textarea
-                  placeholder="Your message"
-                  value={formData.message}
-                  onChange={(e) => handleChange("message", e.target.value)}
-                  className="border-border bg-card min-h-32 resize-none"
-                  required
-                />
-              </div>
-
-              <div className="flex items-center space-x-3">
-                <Checkbox
-                  id="privacy"
-                  checked={formData.agreedToPrivacy}
-                  onCheckedChange={(checked) => handleChange("agreedToPrivacy", checked)}
-                />
-                <label htmlFor="privacy" className="text-muted-foreground text-sm leading-relaxed">
-                  I have read and agree to the{" "}
-                  <Link href="#" className="underline">
-                    privacy policy
-                  </Link>
-                </label>
-              </div>
-
-              <Button type="submit" size="lg" className="bg-green text-white hover:bg-green-dark">
-                Send Your Message
-              </Button>
-            </form>
-          </div>
-
-          {/* Right Column - Hero Image */}
-          <div className="relative">
-            <div className="overflow-hidden rounded-2xl shadow-lg">
-              <Image
-                width={1000}
-                height={1000}
-                src="https://plus.unsplash.com/premium_photo-1716603741447-7fcd7ddeba39?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Wind turbine over coastal landscape representing sustainable energy solutions"
-                className="h-[600px] w-full object-cover"
-                draggable={false}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Contact Us | Divit MindSpace",
+  description:
+    "Get in touch with Divit MindSpace. Whether you're curious about our services, ready to book an assessment, or need guidance — our experts in Bangalore are here to help.",
+  keywords: [
+    "contact Divit MindSpace",
+    "book assessment Bangalore",
+    "neurodivergent support contact",
+    "special education consultation",
+    "autism assessment appointment",
+  ],
+  alternates: {
+    canonical: "https://divitmindspace.com/contact-us",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://divitmindspace.com/contact-us",
+    title: "Contact Us | Divit MindSpace",
+    description:
+      "Reach out to our team in Bangalore. We're here to help you navigate neurodivergent care, assessments, and education.",
+    images: [
+      {
+        url: "/divit-mindspace-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Contact Divit MindSpace",
+      },
+    ],
+    siteName: "Divit MindSpace",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | Divit MindSpace",
+    description:
+      "Get in touch with our neurodivergent care experts in Bangalore.",
+    images: ["/divit-mindspace-logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
-export default Contact;
+const contactJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact Divit MindSpace",
+  url: "https://divitmindspace.com/contact-us",
+  description:
+    "Contact page for Divit MindSpace — neurodivergent care and special education in Bangalore.",
+  mainEntity: {
+    "@type": "MedicalBusiness",
+    name: "Divit MindSpace",
+    url: "https://divitmindspace.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Bangalore",
+      addressRegion: "Karnataka",
+      addressCountry: "IN",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      availableLanguage: ["English", "Hindi", "Kannada"],
+    },
+  },
+};
+
+export default function ContactUsPage() {
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
+      />
+      <ContactForm />
+    </>
+  );
+}

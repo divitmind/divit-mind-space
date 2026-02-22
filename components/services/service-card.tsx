@@ -17,13 +17,13 @@ export function ServiceCard({ service }: ServiceCardProps) {
       href={`/services/${service.slug.current}`}
       className="group relative bg-cream overflow-hidden rounded-2xl border-2 border-transparent hover:border-green-lite transition-all duration-300 hover:shadow-xl"
     >
-      {service.popular && (
+      {/* {service.popular && (
         <div className="absolute top-4 right-4 z-10 bg-yellow px-3 py-1 rounded-full">
           <span className="text-xs font-semibold text-green uppercase tracking-wide">
             Popular
           </span>
         </div>
-      )}
+      )} */}
 
       <div className="relative h-56 w-full overflow-hidden bg-green-lite/20">
         <Image

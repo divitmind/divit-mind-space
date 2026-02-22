@@ -128,7 +128,7 @@ export default async function NewsPostPage({ params }: PageProps) {
       name: "Divit MindSpace",
       logo: {
         "@type": "ImageObject",
-        url: "https://divitmindspace.com/logo.png",
+        url: "https://divitmindspace.com/divit-mindspace-logo.png",
       },
     },
     mainEntityOfPage: {

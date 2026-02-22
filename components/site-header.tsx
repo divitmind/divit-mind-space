@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookConsultationModal } from "@/components/book-consultation-modal";
+import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { MainNav } from "@/components/main-nav";
@@ -17,13 +17,14 @@ export function SiteHeader() {
                 <MainNav />
 
                 <div className="flex items-center gap-4">
-                    <BookConsultationModal>
-                        <Button
-                            className="hidden sm:inline-flex h-11 items-center justify-center rounded-md bg-green px-4 py-2 text-sm font-medium text-white shadow hover:bg-green/90 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                        >
+                    <Button
+                        asChild
+                        className="hidden sm:inline-flex h-11 items-center justify-center rounded-md bg-green px-4 py-2 text-sm font-medium text-white shadow hover:bg-green/90 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                    >
+                        <WhatsAppConsultationLink>
                             Book Consultation
-                        </Button>
-                    </BookConsultationModal>
+                        </WhatsAppConsultationLink>
+                    </Button>
 
                     <MobileNav />
                 </div>

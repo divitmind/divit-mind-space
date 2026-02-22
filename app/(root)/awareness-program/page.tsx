@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     description: "Breaking myths and building understanding. Free awareness sessions for teachers, parents, and communities about early intervention and neurodiversity support.",
     images: [
       {
-        url: "/og-awareness-program.png",
+        url: "/divit-mindspace-logo.png",
         width: 1200,
         height: 630,
         alt: "Divit MindSpace Awareness Programs - Community Education"
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "FREE Awareness Programs | Divit MindSpace",
     description: "Breaking stigma through education. Free sessions on early intervention for neurodivergent children across schools and communities.",
-    images: ["/og-awareness-program.png"]
+    images: ["/divit-mindspace-logo.png"]
   },
   robots: {
     index: true,
