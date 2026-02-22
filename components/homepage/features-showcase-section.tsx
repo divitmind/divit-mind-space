@@ -10,7 +10,7 @@ const features = [
     title: "Scholarship Programs",
     description:
       "We believe in making education accessible to all. Our scholarship programs provide financial assistance to deserving candidates.",
-    route: "/services/assessments",
+    route: "/services",
     imageUrl:
       "https://images.pexels.com/photos/9829311/pexels-photo-9829311.jpeg",
     overlayType: "testimonial" as const,
@@ -25,7 +25,7 @@ const features = [
     title: "Group Discounts",
     description:
       "Learning together is impactful! We offer special discounts for groups, making it easier for teams to upskill collectively.",
-    route: "/services/therapy",
+    route: "/services",
     imageUrl:
       "https://images.pexels.com/photos/33008585/pexels-photo-33008585.jpeg",
     overlayType: "question" as const,
@@ -39,7 +39,7 @@ const features = [
     title: "Flexibility",
     description:
       "Our training programs are designed to fit into your schedule, offering both online and offline learning options.",
-    route: "/services/parent-guidance",
+    route: "/services",
     imageUrl:
       "https://images.pexels.com/photos/6676154/pexels-photo-6676154.jpeg",
     overlayType: "feature" as const,
@@ -53,7 +53,7 @@ const features = [
     title: "Worksheets & Resources",
     description:
       "Gain access to well-structured worksheets and resource materials that reinforce learning and support real-world application.",
-    route: "/services/learning-programs",
+    route: "/services",
     imageUrl:
       "https://images.pexels.com/photos/5538357/pexels-photo-5538357.jpeg",
     overlayType: "cta" as const,
