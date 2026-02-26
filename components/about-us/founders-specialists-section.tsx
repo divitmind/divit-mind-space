@@ -23,7 +23,7 @@ const PEOPLE: Person[] = [
   {
     id: "pooja-mittal",
     name: "Pooja Mittal",
-    title: "Co-Founder & Special Educator",
+    title: "Founder, Psychologist & Special Educator",
     image: "/founder1.png",
     teaser:
       "My journey into neurodivergent care began with a deeply personal challenge. When my younger son, Divyam, was first diagnosed, he was non-verbal. With determination and continuous effort, he can now speak fluently in both Hindi and English. Out of this vision, Divit Health was born—a place of inspiration, support, and holistic care for neurodivergent children and their families.",
@@ -175,9 +175,10 @@ export function FoundersSpecialistsSection() {
   return (
     <section className="py-20 lg:py-20 " id="founders-specialists">
       <div className="px-4 md:px-6 ">
-        <h2 className="text-2xl sm:text-3xl text-center lg:text-5xl font-semibold text-[#2F3E33] tracking-tight mb-10 lg:mb-12">
-          Founders & Specialists
-        </h2>
+        <div className="text-2xl flex items-center justify-center gap-2 sm:text-3xl text-center lg:text-5xl font-semibold text-purple tracking-tight mb-10 lg:mb-12">
+          <Image src="/favorite_wing.svg" alt="Consultants" width={44} height={44} />
+          <span>Consultants</span>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
           {PEOPLE.map((person) => (
             <PersonCard key={person.id} person={person} />

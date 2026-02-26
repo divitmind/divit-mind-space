@@ -220,3 +220,26 @@ export interface CareerListItem {
 
 export type CareersQueryResult = CareerListItem[];
 export type SingleCareerQueryResult = Career | null;
+
+// Review Types
+export interface Review {
+  _id: string;
+  _type: "review";
+  name: string;
+  role?: string;
+  quote: string;
+  rating?: number;
+  publishedAt?: string;
+  featured?: boolean;
+}
+
+export interface ReviewListItem {
+  _id: string;
+  name: string;
+  role?: string;
+  quote: string;
+  rating?: number;
+  publishedAt?: string;
+}
+
+export type ReviewsQueryResult = ReviewListItem[];

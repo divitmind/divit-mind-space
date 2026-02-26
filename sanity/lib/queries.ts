@@ -304,3 +304,27 @@ export const SINGLE_CAREER_QUERY = `*[_type == "career" && slug.current == $slug
 export const ALL_CAREER_SLUGS_QUERY = `*[_type == "career" && isActive == true && defined(slug.current)] {
   "slug": slug.current
 }`;
+
+
+export const TOP_REVIEWS_QUERY = `*[_type == "review"] | order(featured desc, publishedAt desc) [0...10] {
+  _id,
+  name,
+  role,
+  quote,
+  rating
+}`;
+
+const REVIEWS_PROJECTION = `{
+  _id,
+  name,
+  role,
+  quote,
+  rating,
+  publishedAt
+}`;
+
+
+export const REVIEWS_FIRST_PAGE_QUERY = `*[_type == "review"] | order(publishedAt desc) [0...$pageSize] ${REVIEWS_PROJECTION}`;
+
+
+export const REVIEWS_NEXT_PAGE_QUERY = `*[_type == "review" && _id > $lastId] | order(publishedAt desc) [0...$pageSize] ${REVIEWS_PROJECTION}`;

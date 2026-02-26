@@ -8,6 +8,9 @@ import { TestimonialsSection } from "@/components/homepage/testimonials-section"
 import { FaqSection } from "@/components/homepage/faq-section";
 import { CtaSection } from "@/components/homepage/cta-section";
 import { ValueProps } from "@/components/homepage/value-props";
+import { sanityFetch } from "@/sanity/lib/live";
+import { TOP_REVIEWS_QUERY } from "@/sanity/lib/queries";
+import { ReviewsQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: "Divit MindSpace | Neurodivergent Care & Education in Bangalore",
@@ -128,7 +131,11 @@ const faqJsonLd = {
   ],
 };
 
-export default function Page() {
+export default async function Page() {
+  const { data: reviews } = await sanityFetch({
+    query: TOP_REVIEWS_QUERY,
+  });
+
   return (
     <>
       <script
@@ -146,7 +153,7 @@ export default function Page() {
         <ValueProps />
         <ServicesSection />
         <WhoNeedsItSection />
-        <TestimonialsSection />
+        <TestimonialsSection reviews={(reviews as ReviewsQueryResult) ?? []} />
         <FaqSection />
         <CtaSection />
       </main>

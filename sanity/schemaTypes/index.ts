@@ -4,7 +4,8 @@ import { postType } from './post'
 import { servicesType } from './services'
 import { galleryType } from './gallery'
 import { careerType } from './career'
+import { reviewType } from './review'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [authorType, postType, servicesType, galleryType, careerType],
+  types: [authorType, postType, servicesType, galleryType, careerType, reviewType],
 }
