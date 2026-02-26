@@ -96,7 +96,7 @@ export function ValueProps() {
 
 
                         <div className="space-y-6">
-                            <div className="relative h-20 w-20 lg:h-28 lg:w-28 rounded-full overflow-hidden shrink-0">
+                            {/* <div className="relative h-20 w-20 lg:h-28 lg:w-28 rounded-full overflow-hidden shrink-0">
                                 <Image
                                     src="/founder1.png"
                                     alt="Pooja Mittal"
@@ -108,7 +108,7 @@ export function ValueProps() {
                             <div className="flex flex-col gap-2">
                                 <p className="text-sm font-semibold">Pooja Mittal</p>
                                 <p className="text-xs opacity-80">Co-Founder & Special Educator</p>
-                            </div>
+                            </div> */}
 
                             <div className="flex items-center justify-end gap-2 text-white/90">
                                 <span className="text-xs font-medium">Read on</span>
