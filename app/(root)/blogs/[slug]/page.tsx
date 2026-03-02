@@ -9,6 +9,8 @@ import { ALL_POST_SLUGS_QUERY, SINGLE_POST_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import type { Post } from "@/sanity/types";
 import { portableTextComponents } from "@/components/portable-text-components";
+import { FeaturesShowcaseSection } from "@/components/homepage/features-showcase-section";
+import { CtaSection } from "@/components/homepage/cta-section";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -26,7 +28,7 @@ export async function generateStaticParams() {
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  
+
   const { data: post } = await sanityFetch({
     query: SINGLE_POST_QUERY,
     params: { slug },
@@ -74,7 +76,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  
+
   const { data: post } = await sanityFetch({
     query: SINGLE_POST_QUERY,
     params: { slug },
@@ -180,8 +182,8 @@ export default async function BlogPostPage({ params }: PageProps) {
           {/* Blog Content with PortableText */}
           <article className="mt-12 max-w-none">
             {Array.isArray(postData.body) && (
-              <PortableText 
-                value={postData.body} 
+              <PortableText
+                value={postData.body}
                 components={portableTextComponents}
               />
             )}
@@ -208,7 +210,6 @@ export default async function BlogPostPage({ params }: PageProps) {
               ))}
             </div>
           )}
-
           {/* Author Bio */}
           {postData.author.bio && (
             <div className="mt-12 p-6 bg-white rounded-xl border border-gray-200">
@@ -267,6 +268,12 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           )}
         </div>
+      </div>
+      <div className="">
+        <FeaturesShowcaseSection />
+      </div>
+      <div className="">
+        <CtaSection />
       </div>
     </>
   );

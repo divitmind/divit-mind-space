@@ -148,7 +148,7 @@ export default async function Page() {
       />
       <main>
         <HeroSection />
-        <FeaturesShowcaseSection />
+        <FeaturesShowcaseSection isHomepage />
         <WhyJoinSection />
         <ValueProps />
         <ServicesSection />

@@ -53,7 +53,7 @@ export function HeroSection() {
                     />
                   </div>
                 ))}
-                <div className="w-10 h-10 rounded-full border-2 pl-2 border-[#FDFBF7] bg-[#E8ECE9] flex items-center justify-center text-[#2F3E33] text-xs font-semibold">50k+</div>
+                <div className="w-10 h-10 rounded-full border-2 pl-2 border-[#FDFBF7] bg-[#E8ECE9] flex items-center justify-center text-[#2F3E33] text-xs font-semibold">1k+</div>
               </div>
               <p>Families trust us for <span className="font-semibold text-[#2F3E33]">comprehensive care.</span></p>
             </div>

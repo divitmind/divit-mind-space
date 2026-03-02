@@ -11,7 +11,7 @@ const cards = [
         imageUrl:
             "https://plus.unsplash.com/premium_photo-1688350808212-4e6908a03925?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         subtitle: "Pooja Mittal, Co-Founder & Special Educator",
-        href: "#",
+        href: "/blogs",
     },
     {
         type: "stat-image" as const,
@@ -21,7 +21,7 @@ const cards = [
             "We see children, not diagnoses. Every plan is tailored to their unique needs.",
         imageUrl:
             "https://images.pexels.com/photos/8535617/pexels-photo-8535617.jpeg",
-        href: "#",
+        href: "/blogs",
     },
     {
         type: "stat" as const,
@@ -29,7 +29,7 @@ const cards = [
         subtitle: "Family Focused",
         description:
             "Supporting the whole family journey with guidance and empathy.",
-        href: "#",
+        href: "/blogs",
     },
     {
         type: "stat-image" as const,
@@ -39,7 +39,7 @@ const cards = [
             "Hundreds of families helped through evidence-based therapies.",
         imageUrl:
             "https://images.pexels.com/photos/6476789/pexels-photo-6476789.jpeg",
-        href: "#",
+        href: "/blogs",
     },
 ];
 

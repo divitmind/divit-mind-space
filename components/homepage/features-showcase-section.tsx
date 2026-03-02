@@ -4,6 +4,10 @@ import { useRef } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+interface FeaturesShowcaseSectionProps {
+  isHomepage?: boolean;
+}
+
 const features = [
   {
     id: "assessments",
@@ -64,14 +68,51 @@ const features = [
   },
 ];
 
-type Feature = (typeof features)[number];
+const homepageFeatures = [
+  {
+    id: "child-autism-assessment",
+    title: "Child Autism Assessment",
+    subtitle: "Early & Comprehensive Autism Assessment",
+    description:
+      "We provide structured and compassionate autism assessments designed to understand your child's unique strengths and challenges. Our evidence-based screening and developmental evaluations help identify early signs and guide families toward the right support plan.",
+    imageUrl: "/features-service-card/child-autism-assessment.png",
+  },
+  {
+    id: "therapy-services",
+    title: "Therapy Services",
+    subtitle: "Personalized Therapy for Every Child",
+    description:
+      "Our therapy programs are tailored to each child's developmental needs. We focus on building communication, behavior regulation, emotional strength, and daily life skills in a supportive environment.",
+    imageUrl: "/features-service-card/therapy-services.png",
+  },
+  {
+    id: "parent-education",
+    title: "Parent Education & Training",
+    subtitle: "Empowering Parents Through Psychoeducation",
+    description:
+      "Parents are the most important part of a child's progress. We provide structured psychoeducation and practical training sessions to help parents confidently support their child at home and in daily life.",
+    imageUrl: "/features-service-card/parent-education.png",
+  },
+  {
+    id: "adult-counseling",
+    title: "Adolescent & Adult Counseling",
+    subtitle: "Counseling for Teenagers & Adults",
+    description:
+      "Mental health support is essential at every stage of life. We offer safe, confidential, and compassionate counseling services for teenagers and adults dealing with stress, anxiety, emotional struggles, or life transitions.",
+    imageUrl: "/features-service-card/adult-counseling.png",
+  },
+];
+
+type Feature = (typeof features)[number] & { subtitle?: string };
+type HomepageFeature = (typeof homepageFeatures)[number];
+type FeatureCardFeature = Feature | HomepageFeature;
 
 function FeatureCard({
   feature,
   className,
   imageSizes,
 }: {
-  feature: Feature;
+  feature: FeatureCardFeature;
   className?: string;
   imageSizes?: string;
 }) {
@@ -93,14 +134,18 @@ function FeatureCard({
 
       <div className="mt-5 space-y-3">
         <h3 className="font-bold text-xl text-green">{feature.title}</h3>
+        {"subtitle" in feature && feature.subtitle && (
+          <p className="text-sm text-green/80 font-medium">{feature.subtitle}</p>
+        )}
         <p className="text-sm text-green leading-relaxed">{feature.description}</p>
       </div>
     </div>
   );
 }
 
-export function FeaturesShowcaseSection() {
+export function FeaturesShowcaseSection({ isHomepage = false }: FeaturesShowcaseSectionProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const list = isHomepage ? homepageFeatures : features;
 
   const scroll = (direction: "left" | "right") => {
     const el = scrollRef.current;
@@ -128,7 +173,7 @@ export function FeaturesShowcaseSection() {
             className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth overscroll-x-contain [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden"
             style={{ scrollBehavior: "smooth" }}
           >
-            {features.map((feature) => (
+            {list.map((feature) => (
               <div
                 key={feature.id}
                 className="shrink-0 w-[85vw] sm:w-[45vw] snap-center"
@@ -163,7 +208,7 @@ export function FeaturesShowcaseSection() {
 
         {/* Grid: lg and above */}
         <div className="hidden lg:grid grid-cols-4 gap-3">
-          {features.map((feature) => (
+          {list.map((feature) => (
             <FeatureCard
               key={feature.id}
               feature={feature}

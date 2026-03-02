@@ -61,7 +61,7 @@ export function ReviewsPage({ initialReviews, initialHasMore }: ReviewsPageProps
 
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
-      <div className="bg-gradient-to-br from-cream via-[#FDFBF7] to-green-lite/10 py-16 md:py-20">
+      <div className="bg-linear-to-br from-cream via-[#FDFBF7] to-green-lite/10 py-16 md:py-20">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-green mb-6">
@@ -75,7 +75,7 @@ export function ReviewsPage({ initialReviews, initialHasMore }: ReviewsPageProps
       </div>
 
       <div className="container mx-auto px-4 py-12 md:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2">
+        <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-3">
           {reviews.map((review) => (
             <TestimonialCard key={review._id} {...reviewToCard(review)} className="w-full max-w-full shrink-0" />
           ))}
