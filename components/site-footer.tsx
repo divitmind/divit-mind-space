@@ -115,7 +115,7 @@ export function SiteFooter() {
                                     <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-[#2F3E33]" aria-hidden />
                                     <span>{contact.address}</span>
                                 </p>
-                                <p className="flex flex-col gap-1">
+                                {/* <p className="flex flex-col gap-1">
                                     {contact.phones.map((p) => (
                                         <a
                                             key={p.href}
@@ -126,7 +126,7 @@ export function SiteFooter() {
                                             {p.label}
                                         </a>
                                     ))}
-                                </p>
+                                </p> */}
                                 <p>
                                     <a
                                         href={contact.email.href}
