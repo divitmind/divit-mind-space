@@ -11,7 +11,7 @@ const cards = [
         imageUrl:
             "https://plus.unsplash.com/premium_photo-1688350808212-4e6908a03925?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         subtitle: "Pooja Mittal, Co-Founder & Special Educator",
-        href: "/blogs",
+        href: "/blogs/understanding-neurodivergent-children-why-early-support-and-inclusive-education-matter",
     },
     {
         type: "stat-image" as const,
@@ -21,7 +21,7 @@ const cards = [
             "We see children, not diagnoses. Every plan is tailored to their unique needs.",
         imageUrl:
             "https://images.pexels.com/photos/8535617/pexels-photo-8535617.jpeg",
-        href: "/blogs",
+        href: "/blogs/child-centered-approach-therapy-education",
     },
     {
         type: "stat" as const,
@@ -29,7 +29,7 @@ const cards = [
         subtitle: "Family Focused",
         description:
             "Supporting the whole family journey with guidance and empathy.",
-        href: "/blogs",
+        href: "/blogs/adolescent-adult-counseling-services",
     },
     {
         type: "stat-image" as const,
@@ -39,7 +39,7 @@ const cards = [
             "Hundreds of families helped through evidence-based therapies.",
         imageUrl:
             "https://images.pexels.com/photos/6476789/pexels-photo-6476789.jpeg",
-        href: "/blogs",
+        href: "/blogs/parent-education-training-child-development",
     },
 ];
 
@@ -90,24 +90,15 @@ export function ValueProps() {
                     >
                         <div className="flex-1">
                             <p className="text-base lg:text-lg font-normal leading-relaxed">
-                                &ldquo;As the founder, I want every parent to know: all the experts on our team are licensed professionals, each one carefully selected for both their expertise and their devotion to families like yours.&rdquo;
+                                &ldquo;Our approach puts families and children first—personalized, compassionate care from a multidisciplinary team who truly listens and adapts to your child’s unique strengths and needs.&rdquo;
                             </p>
                         </div>
 
-
                         <div className="space-y-6">
-                            {/* <div className="relative h-20 w-20 lg:h-28 lg:w-28 rounded-full overflow-hidden shrink-0">
-                                <Image
-                                    src="/founder1.png"
-                                    alt="Pooja Mittal"
-                                    fill
-                                    className="object-cover"
-                                    sizes="96px"
-                                />
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <p className="text-sm font-semibold">Pooja Mittal</p>
-                                <p className="text-xs opacity-80">Co-Founder & Special Educator</p>
+                            {/* Example alternative content—statistic or service icon could go here */}
+                            {/* <div className="flex items-center gap-4">
+                                <svg width="32" height="32" fill="none"><circle cx="16" cy="16" r="16" fill="#38BDF8" /><text x="50%" y="56%" textAnchor="middle" fontSize="18" fill="white" dy=".3em">98%</text></svg>
+                                <p className="text-sm font-semibold">Family Satisfaction</p>
                             </div> */}
 
                             <div className="flex items-center justify-end gap-2 text-white/90">

@@ -20,7 +20,7 @@ const footerLinks = [
             { label: "News", href: "/news" },
             { label: "Gallery", href: "/gallery" },
             { label: "Awareness Program", href: "/awareness-program" },
-            { label: "Affiliations", href: "/affiliations" },
+            // { label: "Affiliations", href: "/affiliations" },
         ],
     },
 ];
