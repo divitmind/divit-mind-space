@@ -28,7 +28,7 @@ const footerLinks = [
 const contact = {
     address: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bengaluru",
     phones: [
-        { label: "+91 9902351393", href: "tel:+919902351393" },
+        { label: "+91 9901666139", href: "tel:+919901666139" },
         // { label: "9901666139", href: "tel:+919901666139" },
     ],
     email: { label: "divitmindspace@gmail.com", href: "mailto:divitmindspace@gmail.com" },
