@@ -24,23 +24,13 @@ const faqs: FaqItem[] = [
     },
     {
         id: "item-3",
-        question: "How long does an assessment take?",
-        answer: "A comprehensive assessment typically takes 2-3 sessions spread over a few days. This approach ensures your child is comfortable and performs their best without fatigue.",
-    },
-    {
-        id: "item-4",
         question: "How soon will I see progress with therapy?",
         answer: "Every child is different. Some families notice changes within weeks, while others see gradual progress over months. We set realistic milestones together and keep you informed throughout the journey.",
     },
     {
-        id: "item-5",
+        id: "item-4",
         question: "What if my child doesn't cooperate during sessions?",
         answer: "This is completely normal and expected. Our therapists are trained to work with children at their own pace. We use play-based and child-led approaches to build trust before diving into structured activities.",
-    },
-    {
-        id: "item-6",
-        question: "Do you offer online sessions?",
-        answer: "Yes, we offer online options for parent guidance and certain therapies. However, assessments and some interventions are more effective in person. We'll recommend what works best for your situation.",
     },
 ];
 
@@ -82,7 +72,7 @@ export function FaqSection() {
     const [openId, setOpenId] = useState<string | null>("item-1");
 
     return (
-        <section className="py-16 lg:py-24 bg-cream relative overflow-hidden">
+        <section className="pt-6 pb-16 lg:pt-8 lg:pb-24 bg-cream relative overflow-hidden">
             <div className="max-w-4xl mx-auto px-4 relative z-10">
                 <div className="text-center mb-12">
                     <div className="inline-flex items-center justify-center text-purple text-sm font-bold tracking-widest uppercase mb-3">

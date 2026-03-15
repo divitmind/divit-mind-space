@@ -1,162 +1,67 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { Baby, Users, School, Briefcase, CheckCircle2 } from "lucide-react";
+import { Users, School, Briefcase } from "lucide-react";
 
 const items = [
     {
-        id: "children",
-        title: "Children",
-        subtitle: "With Learning Needs",
-        description: "Whether it's bridging gaps in school, building social confidence, or developing daily life skills, we provide personalized support that meets them where they are.",
-        icon: Baby,
-        color: "bg-[#FDFBF7]",
-        accent: "text-[#2F3E33]",
-    },
-    {
-        id: "parents",
-        title: "Parents",
-        subtitle: "Seeking Guidance",
-        description: "Parenting is a journey, and you don't have to walk it alone. We equip you with practical strategies, emotional support, and resources to foster your child's growth at home.",
+        id: "families",
+        title: "Families",
+        description: "Understand your child's needs and get strategies that actually work at home.",
         icon: Users,
-        color: "bg-[#E8ECE9]",
-        accent: "text-[#2F3E33]",
+        dark: false,
     },
     {
         id: "schools",
         title: "Schools",
-        subtitle: "& Institutions",
-        description: "Create truly inclusive classrooms. We offer expert training for educators and consultation services to help institutions support every student effectively.",
+        description: "Train your educators to create truly inclusive classrooms.",
         icon: School,
-        color: "bg-[#2F3E33]",
-        accent: "text-white",
         dark: true,
     },
     {
         id: "professionals",
         title: "Professionals",
-        subtitle: "In Special Ed",
-        description: "Advance your career and impact. Our specialized certification programs and workshops are designed to deepen your expertise in special education and therapy.",
+        description: "Grow your expertise with certifications built for working therapists.",
         icon: Briefcase,
-        color: "bg-[#7C9082]",
-        accent: "text-white",
         dark: true,
     },
 ];
 
 export function WhoNeedsItSection() {
-    const [activeId, setActiveId] = useState<string>("children");
-    const sectionRef = useRef<HTMLElement>(null);
-
-    // Simple scroll spy logic
-    useEffect(() => {
-        const handleScroll = () => {
-            if (!sectionRef.current) return;
-
-            const cardElements = document.querySelectorAll(".who-needs-it-card");
-
-            cardElements.forEach((card) => {
-                const rect = card.getBoundingClientRect();
-                // Check if card is roughly in the center of the viewport
-                if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
-                    const id = card.getAttribute("data-id");
-                    if (id) setActiveId(id);
-                }
-            });
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
     return (
-        <section ref={sectionRef} className="py-16 lg:py-24 bg-cream relative">
+        <section className="pt-6 pb-16 lg:pt-8 lg:pb-24 bg-cream">
             <div className="container">
-
-                <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
-
-                    <div className="hidden lg:block lg:w-1/2 relative">
-                        <div className="sticky top-32 h-[560px] w-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
-                            <Image
-                                src="/who-needs-it.png" 
-                                alt="Who Needs It"
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                            {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-black/10" />
-
-                            {/* Decorative Badge */}
-                            <div className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-md p-6 rounded-[2rem] border border-white/50 shadow-lg">
-                                <p className="text-[#2F3E33] text-lg font-bold leading-tight italic">
-                                    &quot;Every individual has a unique potential waiting to be unlocked. We are here to help find the key.&quot;
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right Side: Scrollable Content */}
-                    <div className="lg:w-1/2 space-y-20 py-8">
-
-                        <div className="mb-10">
-                            <div className="inline-flex items-center justify-center text-purple text-sm font-bold tracking-widest uppercase mb-3">
-                                Who We Serve
-                            </div>
-                            <h2 className="text-4xl lg:text-5xl font-bold text-green mb-5 tracking-tight">
-                                Who Needs It?
-                            </h2>
-                        </div>
-
-                        <div className="space-y-8">
-                            {items.map((item) => (
-                                <div
-                                    key={item.id}
-                                    data-id={item.id}
-                                    className={cn(
-                                        "who-needs-it-card group relative p-8 rounded-3xl transition-all duration-500 border-2",
-                                        activeId === item.id
-                                            ? "bg-white border-green-lite shadow-xl scale-100 opacity-100"
-                                            : "bg-transparent border-transparent opacity-50 scale-95 hover:opacity-80"
-                                    )}
-                                >
-                                    <div className="flex items-start gap-6">
-                                        <div className={cn(
-                                            "h-14 w-14 rounded-2xl flex items-center justify-center shrink-0 transition-colors duration-300",
-                                            item.dark ? "bg-[#2F3E33]" : "bg-[#E8ECE9]",
-                                            item.dark ? "text-white" : "text-[#2F3E33]"
-                                        )}>
-                                            <item.icon className="h-7 w-7" />
-                                        </div>
-                                        <div className="space-y-3">
-                                            <div>
-                                                <h3 className="text-2xl font-bold text-[#222222]">{item.title}</h3>
-                                                <p className="text-[#2F3E33] font-medium opacity-80">{item.subtitle}</p>
-                                            </div>
-                                            <p className="text-gray-600 leading-relaxed">
-                                                {item.description}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                    </div>
+                {/* Bridge Line */}
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-green/15 to-transparent" />
+                    <span className="text-green/50 text-xs font-semibold uppercase tracking-[0.15em]">
+                        Here&apos;s who we&apos;re here for
+                    </span>
+                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-green/15 to-transparent" />
                 </div>
 
-
-                <div className="lg:hidden mb-12 relative h-64 w-full rounded-3xl overflow-hidden shadow-lg border-2 border-white -mt-8">
-                    <Image
-                        src="/who-needs-it.png"
-                        alt="Who Needs It"
-                        fill
-                        className="object-cover"
-                    />
+                {/* Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    {items.map((item) => (
+                        <div
+                            key={item.id}
+                            className="group bg-white rounded-3xl p-8 border-2 border-transparent hover:border-green-lite hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                        >
+                            <div
+                                className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 ${
+                                    item.dark
+                                        ? "bg-green text-white"
+                                        : "bg-cream text-green"
+                                }`}
+                            >
+                                <item.icon className="h-6 w-6" />
+                            </div>
+                            <h3 className="text-xl font-bold text-green mb-3">
+                                {item.title}
+                            </h3>
+                            <p className="text-green/80 leading-relaxed">
+                                {item.description}
+                            </p>
+                        </div>
+                    ))}
                 </div>
-
             </div>
         </section>
     );
