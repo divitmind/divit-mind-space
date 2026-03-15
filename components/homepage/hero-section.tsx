@@ -9,7 +9,6 @@ export function HeroSection() {
     <section className="relative overflow-hidden pt-6 pb-12 lg:pt-10 lg:pb-16 min-h-[auto] lg:min-h-[calc(100vh-80px)] flex items-center">
       <div className="container relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-
           {/* Text Content */}
           <div className="flex-1 space-y-4 text-center lg:text-left animate-in slide-in-from-bottom duration-700 fade-in">
             {/* Announcement Badge */}
@@ -18,20 +17,19 @@ export function HeroSection() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-purple"></span>
               </span>
-              Now accepting new enrollments for Fall 2024
+              Limited Seats: Summer Explorers Camp Registration Open
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-green leading-[1.05]">
-              Understanding exceptional minds, supporting<br />
-              <span className="text-purple">
-                brighter futures.
-              </span>
+              Understanding exceptional minds, supporting
+              <br />
+              <span className="text-purple">brighter futures.</span>
             </h1>
 
             <p className="max-w-xl mx-auto lg:mx-0 text-base lg:text-lg text-green/90 leading-relaxed font-medium">
-              At Divit MindSpace, we bridge the gap between healthcare and education.
-              Our team provides diagnostic assessments and personalized training
-              to help adults and families thrive.
+              At Divit MindSpace, we bridge the gap between healthcare and
+              education. Our team provides diagnostic assessments and
+              personalized training to help adults and families thrive.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-1">
@@ -44,7 +42,10 @@ export function HeroSection() {
                 </WhatsAppConsultationLink>
               </Button>
               <Link href="/about-us#philosophy">
-                <Button variant="link" className="h-11 rounded-xl px-6 text-sm font-medium text-[#2F3E33] ">
+                <Button
+                  variant="link"
+                  className="h-11 rounded-xl px-6 text-sm font-medium text-[#2F3E33] "
+                >
                   Learn about our approach
                 </Button>
               </Link>
@@ -53,21 +54,33 @@ export function HeroSection() {
             {/* Trust Metrics */}
             <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
               <div className="flex flex-col items-center lg:items-start">
-                <span className="text-xl lg:text-2xl font-bold text-green">100+</span>
-                <span className="text-[10px] font-bold text-green/60 uppercase tracking-widest">Families Served</span>
+                <span className="text-xl lg:text-2xl font-bold text-green">
+                  100+
+                </span>
+                <span className="text-[10px] font-bold text-green/60 uppercase tracking-widest">
+                  Families Served
+                </span>
               </div>
               <div className="w-px h-6 bg-green/10 hidden sm:block" />
               <div className="flex flex-col items-center lg:items-start">
-                <span className="text-xl lg:text-2xl font-bold text-green">15+</span>
-                <span className="text-[10px] font-bold text-green/60 uppercase tracking-widest">Expert Therapists</span>
+                <span className="text-xl lg:text-2xl font-bold text-green">
+                  15+
+                </span>
+                <span className="text-[10px] font-bold text-green/60 uppercase tracking-widest">
+                  Expert Therapists
+                </span>
               </div>
               <div className="w-px h-6 bg-green/10 hidden sm:block" />
               <div className="flex flex-col items-center lg:items-start">
                 <div className="flex items-center gap-1">
-                  <span className="text-xl lg:text-2xl font-bold text-green">4.9/5</span>
+                  <span className="text-xl lg:text-2xl font-bold text-green">
+                    4.9/5
+                  </span>
                   <Star className="w-3 h-3 lg:w-4 lg:h-4 fill-yellow-400 text-yellow-400" />
                 </div>
-                <span className="text-[10px] font-bold text-green/60 uppercase tracking-widest">Customer Rating</span>
+                <span className="text-[10px] font-bold text-green/60 uppercase tracking-widest">
+                  Parent Rating
+                </span>
               </div>
             </div>
           </div>
@@ -89,7 +102,10 @@ export function HeroSection() {
 
               <div className="absolute bottom-6 left-6 right-6 text-white">
                 <Quote className="h-6 w-6 text-[#E8ECE9] mb-2 fill-current opacity-90" />
-                <p className="font-medium text-base leading-snug">&quot;We finally found a place that listens and understands.&quot;</p>
+                <p className="font-medium text-base leading-snug">
+                  &quot;We finally found a place that listens and
+                  understands.&quot;
+                </p>
               </div>
             </div>
 
