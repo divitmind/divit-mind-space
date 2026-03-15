@@ -38,17 +38,18 @@ export function HeroSection() {
                 className="h-11 rounded-xl bg-green px-6 text-sm font-medium text-white shadow-lg shadow-[#2F3E33]/10 hover:bg-[#2F3E33]/90 hover:shadow-[#7C9082]/20 transition-all duration-300"
               >
                 <WhatsAppConsultationLink>
-                  Book Free Consultation
+                  Book a Free Consultation
                 </WhatsAppConsultationLink>
               </Button>
-              <Link href="/about-us#philosophy">
-                <Button
-                  variant="link"
-                  className="h-11 rounded-xl px-6 text-sm font-medium text-[#2F3E33] "
-                >
-                  Learn about our approach
-                </Button>
-              </Link>
+              <Button
+                asChild
+                variant="outline"
+                className="h-11 rounded-xl px-6 text-sm font-bold text-green border-green/20 bg-white hover:bg-green/5 hover:border-green/30 transition-all duration-300 shadow-sm"
+              >
+                <Link href="/awareness-program">
+                  Host a Free Workshop
+                </Link>
+              </Button>
             </div>
 
             {/* Trust Metrics */}

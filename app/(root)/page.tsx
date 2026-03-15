@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/homepage/hero-section";
+import { TrustStrip } from "@/components/homepage/trust-strip";
 import { FeaturesShowcaseSection } from "@/components/homepage/features-showcase-section";
 import { WhyJoinSection } from "@/components/homepage/why-join-section";
 import { ServicesSection } from "@/components/homepage/services-section";
@@ -151,6 +152,7 @@ export default async function Page() {
       />
       <main>
         <HeroSection />
+        <TrustStrip />
         <ServicesSection therapyServices={therapyServicesData} />
         <WhyJoinSection />
         <ValueProps />
