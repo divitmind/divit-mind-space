@@ -155,13 +155,13 @@ export function FeaturesShowcaseSection({ isHomepage = false }: FeaturesShowcase
   };
 
   return (
-    <section className="py-20 lg:py-28 bg-cream relative overflow-hidden">
+    <section className="py-16 lg:py-24 bg-cream relative overflow-hidden">
       <div className="container relative z-10">
-        <div className="text-center space-y-4 mb-16">
-          <p className="text-sm font-semibold tracking-wide uppercase text-purple">
+        <div className="text-center space-y-3 mb-12 lg:mb-16">
+          <p className="text-sm font-bold tracking-widest uppercase text-purple">
             What makes us different
           </p>
-          <h2 className="text-3xl lg:text-5xl font-semibold text-green">
+          <h2 className="text-3xl lg:text-5xl font-bold text-green tracking-tight">
             One place to support your whole family
           </h2>
         </div>
@@ -170,7 +170,7 @@ export function FeaturesShowcaseSection({ isHomepage = false }: FeaturesShowcase
         <div className="lg:hidden space-y-6">
           <div
             ref={scrollRef}
-            className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth overscroll-x-contain [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth overscroll-x-contain [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden"
             style={{ scrollBehavior: "smooth" }}
           >
             {list.map((feature) => (
@@ -180,7 +180,7 @@ export function FeaturesShowcaseSection({ isHomepage = false }: FeaturesShowcase
               >
                 <FeatureCard
                   feature={feature}
-                  className="group bg-white rounded-3xl p-4 flex flex-col h-full"
+                  className="group bg-white rounded-[2rem] p-5 shadow-sm border border-gray-100 flex flex-col h-full"
                   imageSizes="(max-width: 640px) 85vw, 45vw"
                 />
               </div>
@@ -207,12 +207,12 @@ export function FeaturesShowcaseSection({ isHomepage = false }: FeaturesShowcase
         </div>
 
         {/* Grid: lg and above */}
-        <div className="hidden lg:grid grid-cols-4 gap-3">
+        <div className="hidden lg:grid grid-cols-4 gap-4">
           {list.map((feature) => (
             <FeatureCard
               key={feature.id}
               feature={feature}
-              className="group bg-white rounded-3xl p-4 flex flex-col"
+              className="group bg-white rounded-[2rem] p-5 shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-all duration-300 hover:-translate-y-1"
             />
           ))}
         </div>

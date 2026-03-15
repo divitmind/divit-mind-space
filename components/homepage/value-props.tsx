@@ -45,7 +45,7 @@ const cards = [
 
 export function ValueProps() {
     return (
-        <section className="relative overflow-hidden bg-cream py-20 lg:py-28">
+        <section className="relative overflow-hidden bg-cream py-16 lg:py-24">
             {/* Background decorations */}
             <div
                 className="absolute left-0 top-0 z-0 w-[min(100%,32rem)] opacity-90 pointer-events-none"
@@ -73,17 +73,17 @@ export function ValueProps() {
             </div>
 
             <div className="container relative z-10">
-                <div className="text-center space-y-4 mb-12 lg:mb-16">
-                    <div className="inline-flex items-center justify-center text-sm font-semibold tracking-wide uppercase mb-2 text-purple">
+                <div className="text-center space-y-3 mb-10 lg:mb-14">
+                    <div className="inline-flex items-center justify-center text-sm font-bold tracking-widest uppercase mb-1 text-purple">
                         Real world results
                     </div>
-                    <h2 className="text-3xl lg:text-5xl font-semibold text-green">
+                    <h2 className="text-3xl lg:text-5xl font-bold text-green tracking-tight">
                         What families achieve with us
                     </h2>
                 </div>
 
                 {/* Bento Grid Layout - Exact Reference Match */}
-                <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-fr gap-3 lg:gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-fr gap-4">
                     <Link
                         href={cards[0].href}
                         className="group relative flex flex-col justify-between rounded-3xl bg-[#0A3D3D] p-6 lg:p-8 text-white overflow-hidden md:row-span-2 min-h-[320px] md:min-h-[420px]"

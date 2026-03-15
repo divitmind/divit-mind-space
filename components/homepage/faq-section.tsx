@@ -113,13 +113,13 @@ export function FaqSection() {
     const [openId, setOpenId] = useState<string | null>("item-1");
 
     return (
-        <section className="py-20 bg-cream relative overflow-hidden">
+        <section className="py-16 lg:py-24 bg-cream relative overflow-hidden">
             <div className="max-w-4xl mx-auto px-4 relative z-10">
-                <div className="text-center mb-16">
-                    <div className="inline-flex items-center justify-center text-purple text-sm font-semibold tracking-wide uppercase mb-4">
+                <div className="text-center mb-12">
+                    <div className="inline-flex items-center justify-center text-purple text-sm font-bold tracking-widest uppercase mb-3">
                         Common Queries
                     </div>
-                    <h2 className="text-3xl lg:text-5xl font-semibold text-green mb-4">
+                    <h2 className="text-3xl lg:text-5xl font-bold text-green mb-4 tracking-tight">
                         Frequently Asked Questions
                     </h2>
                 </div>

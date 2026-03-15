@@ -6,20 +6,20 @@ import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-12 pb-24 lg:pt-20 lg:pb-32">
+    <section className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24">
       <div className="container relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
 
           {/* Text Content */}
-          <div className="flex-1 space-y-6 text-center lg:text-left animate-in slide-in-from-bottom duration-700 fade-in">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-green leading-[1.10]">
+          <div className="flex-1 space-y-5 text-center lg:text-left animate-in slide-in-from-bottom duration-700 fade-in">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-green leading-[1.05]">
               Understanding exceptional minds, supporting<br />
               <span className="text-purple">
                 brighter futures.
               </span>
             </h1>
 
-            <p className="max-w-2xl mx-auto lg:mx-0 text-lg text-green leading-relaxed">
+            <p className="max-w-2xl mx-auto lg:mx-0 text-lg lg:text-xl text-green/90 leading-relaxed font-medium">
               At Divit MindSpace, we bridge the gap between healthcare and education.
               Our team provides diagnostic assessments and personalized training
               to help adults and families thrive.

@@ -72,13 +72,13 @@ export function WhoNeedsItSection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="py-20 lg:py-28 bg-cream relative">
+        <section ref={sectionRef} className="py-16 lg:py-24 bg-cream relative">
             <div className="container">
 
-                <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
+                <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
 
                     <div className="hidden lg:block lg:w-1/2 relative">
-                        <div className="sticky top-32 h-[600px] w-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
+                        <div className="sticky top-32 h-[560px] w-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
                             <Image
                                 src="/who-needs-it.png" 
                                 alt="Who Needs It"
@@ -90,8 +90,8 @@ export function WhoNeedsItSection() {
                             <div className="absolute inset-0 bg-black/10" />
 
                             {/* Decorative Badge */}
-                            <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-white/50 shadow-lg">
-                                <p className="text-[#2F3E33] text-lg font-medium leading-relaxed">
+                            <div className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-md p-6 rounded-[2rem] border border-white/50 shadow-lg">
+                                <p className="text-[#2F3E33] text-lg font-bold leading-tight italic">
                                     &quot;Every individual has a unique potential waiting to be unlocked. We are here to help find the key.&quot;
                                 </p>
                             </div>
@@ -99,13 +99,13 @@ export function WhoNeedsItSection() {
                     </div>
 
                     {/* Right Side: Scrollable Content */}
-                    <div className="lg:w-1/2 space-y-24 py-12">
+                    <div className="lg:w-1/2 space-y-20 py-8">
 
-                        <div className="mb-12">
-                            <div className="inline-flex items-center justify-center text-purple text-sm font-semibold tracking-wide uppercase mb-4">
+                        <div className="mb-10">
+                            <div className="inline-flex items-center justify-center text-purple text-sm font-bold tracking-widest uppercase mb-3">
                                 Who We Serve
                             </div>
-                            <h2 className="text-4xl lg:text-5xl font-semibold text-green mb-6">
+                            <h2 className="text-4xl lg:text-5xl font-bold text-green mb-5 tracking-tight">
                                 Who Needs It?
                             </h2>
                         </div>

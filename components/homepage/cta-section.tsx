@@ -6,10 +6,10 @@ import Image from "next/image";
 
 export function CtaSection() {
     return (
-        <section className="py-20 bg-[#FDFBF7] md:px-0 px-4">
+        <section className="py-12 lg:py-16 bg-[#FDFBF7] md:px-0 px-4">
             <div className="max-w-6xl mx-auto">
                 <div
-                    className="relative rounded-[3rem] overflow-hidden px-6 py-10 lg:px-16 lg:py-16 text-left bg-green"
+                    className="relative rounded-[3rem] overflow-hidden px-6 py-10 lg:px-16 lg:py-14 text-left bg-green"
                 >
                     <div className="absolute top-0 right-0 z-0 w-[90%] h-full">
                         <Image
@@ -27,7 +27,7 @@ export function CtaSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
-                            className="text-4xl md:text-5xl font-semibold text-white mb-6 tracking-tight"
+                            className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight"
                         >
                             Ready for <br />
                             what&apos;s next?

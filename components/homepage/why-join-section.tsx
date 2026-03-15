@@ -4,12 +4,12 @@ import { CheckCircle2 } from "lucide-react";
 
 export function WhyJoinSection() {
     return (
-        <section className="py-20 lg:py-28 bg-[#FDFBF7]">
-            <div className="container space-y-24">
+        <section className="py-16 lg:py-24 bg-[#FDFBF7]">
+            <div className="container">
 
-                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
                     <div className="flex-1 order-2 lg:order-1 relative">
-                        <div className="relative aspect-square w-full max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <div className="relative aspect-square w-full max-w-md mx-auto rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white transform -rotate-2 hover:rotate-0 transition-transform duration-500">
                             <Image
                                 src="/who-can-join.png"
                                 alt="Who Can Join"
@@ -21,11 +21,11 @@ export function WhyJoinSection() {
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-green-lite/10 rounded-full blur-3xl -z-10" />
                     </div>
 
-                    <div className="flex-1 order-1 lg:order-2 space-y-8">
-                        <h2 className="text-3xl lg:text-5xl font-semibold text-green">
+                    <div className="flex-1 order-1 lg:order-2 space-y-7">
+                        <h2 className="text-3xl lg:text-5xl font-bold text-green tracking-tight">
                             Who Can Join?
                         </h2>
-                        <div className="space-y-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
                             <ListItem title="Parents" description="Gain knowledge and skills to support your child’s development." />
                             <ListItem title="Educators" description="Enhance teaching methodologies for students with special needs." />
                             <ListItem title="Therapists" description="Expand your expertise with specialized certifications." />

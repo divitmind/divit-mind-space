@@ -62,19 +62,19 @@ export function ServicesSection({ therapyServices = [] }: ServicesSectionProps) 
     const [activeId, setActiveId] = useState<string>("assessments");
 
     return (
-        <section className="py-20 lg:py-28 bg-[#FDFBF7] relative overflow-hidden">
+        <section className="py-16 lg:py-24 bg-[#FDFBF7] relative overflow-hidden">
             <div className="container relative z-10">
 
-                <div className="text-center space-y-4 mb-16">
-                    <div className="inline-flex items-center justify-center text-purple text-sm font-semibold tracking-wide uppercase mb-2">
+                <div className="text-center space-y-3 mb-12 lg:mb-16">
+                    <div className="inline-flex items-center justify-center text-purple text-sm font-bold tracking-widest uppercase mb-1">
                         Our Services
                     </div>
-                    <h2 className="text-3xl lg:text-5xl font-semibold text-green">
+                    <h2 className="text-3xl lg:text-5xl font-bold text-green tracking-tight">
                         How We Support Your Family
                     </h2>
                 </div>
 
-                <div className="hidden lg:flex h-[500px] gap-4">
+                <div className="hidden lg:flex h-[520px] gap-3">
                     {services.map((service) => {
                         const isActive = activeId === service.id;
                         return (

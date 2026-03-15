@@ -48,12 +48,12 @@ export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
   const marqueeItems = [...cards, ...cards];
 
   return (
-    <section className="py-20 lg:py-28 bg-[#FDFBF7] overflow-hidden">
-      <div className="container mb-16 text-center">
-        <div className="inline-flex items-center justify-center text-purple text-sm font-semibold tracking-wide uppercase mb-4">
+    <section className="py-16 lg:py-24 bg-[#FDFBF7] overflow-hidden">
+      <div className="container mb-12 text-center">
+        <div className="inline-flex items-center justify-center text-purple text-sm font-bold tracking-widest uppercase mb-3">
           Parent Stories
         </div>
-        <h2 className="text-3xl lg:text-5xl font-semibold text-green mb-4">
+        <h2 className="text-3xl lg:text-5xl font-bold text-green mb-4 tracking-tight">
           Why Families Trust Us
         </h2>
       </div>
