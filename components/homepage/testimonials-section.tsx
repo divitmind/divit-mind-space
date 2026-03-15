@@ -48,7 +48,7 @@ export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
   const marqueeItems = [...cards, ...cards];
 
   return (
-    <section className="py-16 lg:py-24 bg-[#FDFBF7] overflow-hidden">
+    <section className="pt-6 pb-16 lg:pt-8 lg:pb-24 bg-[#FDFBF7] overflow-hidden">
       <div className="container mb-12 text-center">
         <div className="inline-flex items-center justify-center text-purple text-sm font-bold tracking-widest uppercase mb-3">
           Parent Stories
