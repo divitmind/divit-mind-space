@@ -2,6 +2,7 @@
 
 import { AwarenessHero } from "./awareness-hero";
 import { ProgramCard } from "./program-card";
+import { WhyJoinSection } from "@/components/homepage/why-join-section";
 import { motion } from "motion/react";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { Button } from "@/components/ui/button";
@@ -129,6 +130,9 @@ export function AwarenessPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Who Can Join Section */}
+      <WhyJoinSection />
 
       {/* CTA Section */}
       <section className="py-20 md:py-28 bg-[#FAF9F5] relative overflow-hidden">

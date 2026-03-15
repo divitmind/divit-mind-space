@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/homepage/hero-section";
 import { FeaturesShowcaseSection } from "@/components/homepage/features-showcase-section";
-import { WhyJoinSection } from "@/components/homepage/why-join-section";
 import { ServicesSection } from "@/components/homepage/services-section";
 import { WhoNeedsItSection } from "@/components/homepage/who-needs-it-section";
 import { TestimonialsSection } from "@/components/homepage/testimonials-section";
@@ -152,7 +151,6 @@ export default async function Page() {
       <main>
         <HeroSection />
         <ServicesSection therapyServices={therapyServicesData} />
-        <WhyJoinSection />
         <ValueProps />
         <FeaturesShowcaseSection isHomepage />
         <WhoNeedsItSection />
