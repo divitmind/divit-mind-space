@@ -1,9 +1,8 @@
-
 "use client";
 
 import * as React from "react";
 import Link from "next/link";
-import { Briefcase, Newspaper, Image as ImageIcon, Megaphone, FileText, UserPlus, Award } from "lucide-react";
+import { Briefcase, Newspaper, Image as ImageIcon, Megaphone, FileText, UserPlus } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -39,23 +38,23 @@ export function MainNav() {
   }, []);
   return (
     <NavigationMenu className="hidden md:flex">
-      <NavigationMenuList>
+      <NavigationMenuList className="gap-1 lg:gap-2">
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80")} asChild>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors")} asChild>
             <Link href="/">Home</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80")} asChild>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors")} asChild>
             <Link href="/about-us">About Us</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent text-green hover:text-green/80">Services</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors">Services</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-[#FDFBF7]">
+            <ul className="grid w-[400px] gap-2 p-5 md:w-[500px] md:grid-cols-2 lg:w-[640px] bg-white rounded-[2rem] shadow-2xl">
               {isLoading ? (
                 <li className="col-span-2 p-4 text-center text-green/60">
                   Loading services...
@@ -75,10 +74,10 @@ export function MainNav() {
               )}
               {/* Link to all services */}
               {!isLoading && serviceItems.length > 0 && (
-                <li className="col-span-2 border-t border-[#E8ECE9] pt-3 mt-2">
+                <li className="col-span-2 border-t border-[#E8ECE9] pt-4 mt-2">
                   <Link
                     href="/services"
-                    className="block text-center py-2 text-sm font-medium text-green hover:text-green-lite transition-colors"
+                    className="block text-center py-2 text-sm font-bold text-green hover:text-green-lite transition-colors tracking-tight"
                   >
                     View All Services →
                   </Link>
@@ -89,35 +88,23 @@ export function MainNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80")} asChild>
-            <Link href="/contact-us">Contact Us</Link>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors")} asChild>
+            <Link href="/awareness-program">Awareness</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent text-green hover:text-green/80">More</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors">Resources</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="grid w-[600px] grid-cols-2 gap-6 p-6 bg-[#FDFBF7]">
+            <div className="grid w-[640px] grid-cols-2 gap-8 p-8 bg-white rounded-[2rem] shadow-2xl">
 
-              {/* Opportunity Section */}
-              <div className="flex flex-col gap-2">
+              {/* Media & Content */}
+              <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2 mb-2">
-                  <Briefcase className="h-4 w-4 text-[#7C9082]" />
-                  <h4 className="text-sm font-semibold text-green uppercase tracking-wider">Opportunity</h4>
-                </div>
-                <ListItem as="div" title="Internship" href="/careers?type=internship" icon={<UserPlus className="h-4 w-4" />}>
-                  Join our internship program.
-                </ListItem>
-                <ListItem as="div" title="Full-time Positions" href="/careers?type=full-time" icon={<FileText className="h-4 w-4" />}>
-                  Explore current job openings.
-                </ListItem>
-              </div>
-
-              {/* Media Section */}
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2 mb-2">
-                  <Newspaper className="h-4 w-4 text-[#7C9082]" />
-                  <h4 className="text-sm font-semibold text-green uppercase tracking-wider">Media</h4>
+                  <div className="h-8 w-8 rounded-lg bg-[#E8ECE9]/50 flex items-center justify-center">
+                    <Newspaper className="h-4 w-4 text-[#7C9082]" />
+                  </div>
+                  <h4 className="text-xs font-bold text-green uppercase tracking-widest">Media</h4>
                 </div>
                 <ListItem as="div" title="Blogs" href="/blogs" icon={<FileText className="h-4 w-4" />}>
                   Read our latest articles.
@@ -130,17 +117,20 @@ export function MainNav() {
                 </ListItem>
               </div>
 
-              {/* Bottom Section */}
-              <div className="col-span-2 grid grid-cols-2 gap-4 border-t border-[#E8ECE9] pt-4">
-                {/* <Link href="/affiliations" className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                  <div className="flex items-center gap-2 text-sm font-medium leading-none group-hover:text-[#7C9082] transition-colors">
-                    <Award className="h-4 w-4" />
-                    Affiliations
+              {/* Opportunities */}
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="h-8 w-8 rounded-lg bg-[#E8ECE9]/50 flex items-center justify-center">
+                    <Briefcase className="h-4 w-4 text-[#7C9082]" />
                   </div>
-                </Link> */}
-                <Link href="/awareness-program" className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                  <div className="flex items-center gap-2 text-sm font-medium leading-none group-hover:text-[#7C9082] transition-colors">
-                    <Megaphone className="h-4 w-4" />
+                  <h4 className="text-xs font-bold text-green uppercase tracking-widest">Careers</h4>
+                </div>
+                <ListItem as="div" title="Join Our Team" href="/careers" icon={<UserPlus className="h-4 w-4" />}>
+                  Explore internship and full-time roles.
+                </ListItem>
+                <Link href="/awareness-program" className="group block select-none space-y-1 rounded-xl p-4 leading-none no-underline outline-none transition-all hover:bg-cream border border-transparent hover:border-green/10 mt-2">
+                  <div className="flex items-center gap-2 text-sm font-bold leading-none text-green tracking-tight transition-colors">
+                    <Megaphone className="h-4 w-4 text-[#7C9082]" />
                     Awareness Program
                   </div>
                 </Link>
@@ -148,6 +138,12 @@ export function MainNav() {
 
             </div>
           </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors")} asChild>
+            <Link href="/contact-us">Contact</Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
@@ -164,18 +160,18 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "flex items-start gap-3 select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 hover:text-[#2F3E33] focus:bg-slate-100 focus:text-accent-foreground group",
+            "flex items-start gap-3 select-none rounded-xl p-3 leading-none no-underline outline-none transition-all hover:bg-cream hover:text-green focus:bg-cream focus:text-green group border border-transparent hover:border-green/5",
             className
           )}
           {...props}
         >
           {icon && (
-            <div className="mt-0.5 shrink-0 text-gray-400 group-hover:text-[#2F3E33] transition-colors">
+            <div className="mt-0.5 shrink-0 text-gray-400 group-hover:text-green transition-colors">
               {icon}
             </div>
           )}
-          <div className="space-y-1.5">
-            <div className="text-sm font-medium leading-none group-hover:text-[#2F3E33] transition-colors">
+          <div className="space-y-1">
+            <div className="text-sm font-bold leading-none group-hover:text-green transition-colors tracking-tight">
               {title}
             </div>
             {children && (
