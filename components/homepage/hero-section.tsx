@@ -22,16 +22,16 @@ export function HeroSection() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-green leading-[1.05]">
-              Understanding exceptional minds, supporting<br />
+              Empowering Every Child’s<br />
               <span className="text-purple">
-                brighter futures.
+                Unique Journey.
               </span>
             </h1>
 
             <p className="max-w-xl mx-auto lg:mx-0 text-base lg:text-lg text-green/90 leading-relaxed font-medium">
-              At Divit MindSpace, we bridge the gap between healthcare and education.
-              Our team provides diagnostic assessments and personalized training
-              to help adults and families thrive.
+              Professional therapy and developmental support for neurodiverse children.
+              Helping them build confidence, focus, and essential life skills
+              in a warm, expert-led environment.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-1">
