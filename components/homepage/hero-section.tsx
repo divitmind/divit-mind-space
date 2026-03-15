@@ -54,8 +54,22 @@ export function HeroSection() {
               </Button>
             </div>
 
+            {/* Rolling Proof Line */}
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 text-sm text-green/70 font-medium">
+              <span>Conducting awareness workshops at</span>
+              <div className="h-6 overflow-hidden relative w-48 text-center sm:text-left">
+                <div className="animate-rolling-text flex flex-col text-purple font-bold">
+                  <span className="h-6">TISB</span>
+                  <span className="h-6">Jyoti Nivas College</span>
+                  <span className="h-6">Leading Pre-Schools</span>
+                  <span className="h-6">Community Centers</span>
+                  <span className="h-6">TISB</span> {/* Duplicate for loop */}
+                </div>
+              </div>
+            </div>
+
             {/* Trust Metrics */}
-            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
+            <div className="pt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
               <div className="flex flex-col items-center lg:items-start">
                 <span className="text-xl lg:text-2xl font-bold text-green">
                   100+
