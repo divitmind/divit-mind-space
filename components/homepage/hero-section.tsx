@@ -21,15 +21,18 @@ export function HeroSection() {
               ☀️ Limited Seats: Summer Explorers Camp Registration Open
             </div>
 
-            <div className="flex flex-col w-full max-w-[540px] mx-auto lg:mx-0">
+            <div className="flex flex-col w-full max-w-[580px] mx-auto lg:mx-0">
               <h1 className="flex flex-col tracking-tight text-green leading-none">
-                <span className="flex justify-between items-baseline w-full text-[clamp(1rem,2.5vw,1.8rem)] font-bold uppercase tracking-[0.15em] mb-2 opacity-90">
+                <span className="relative flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
+                  {/* Yellow Highlight Background */}
+                  <div className="absolute inset-0 bg-yellow/40 -z-10 rounded-sm transform -rotate-1 scale-105" />
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                   <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
                   <span className="ml-1.5">C</span><span>H</span><span>I</span><span>L</span><span>D</span><span>'</span><span>S</span>
                 </span>
-                <span className="text-[clamp(2.5rem,8vw,5.5rem)] font-serif italic text-purple leading-[0.9] -mt-1 font-medium whitespace-nowrap">
-                  Unique Journey.
+                <span className="flex justify-between items-baseline w-full text-[clamp(2.2rem,7vw,4.8rem)] font-serif italic text-purple leading-[0.9] -mt-1 font-medium whitespace-nowrap">
+                  <span>U</span><span>n</span><span>i</span><span>q</span><span>u</span><span>e</span>
+                  <span className="ml-2">J</span><span>o</span><span>u</span><span>r</span><span>n</span><span>e</span><span>y</span><span>.</span>
                 </span>
               </h1>
             </div>
