@@ -25,7 +25,7 @@ export function HeroSection() {
               <h1 className="flex flex-col tracking-tight text-green leading-none">
                 <span className="relative flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
                   {/* Yellow Highlight Background */}
-                  <div className="absolute inset-0 bg-yellow/40 -z-10 rounded-sm transform -rotate-1 scale-105" />
+                  <div className="absolute inset-0 bg-[#FFE175]/40 -z-10 rounded-sm transform -rotate-1 scale-105" />
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                   <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
                   <span className="ml-1.5">C</span><span>H</span><span>I</span><span>L</span><span>D</span><span>'</span><span>S</span>
