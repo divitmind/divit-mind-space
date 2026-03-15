@@ -21,14 +21,14 @@ export function HeroSection() {
               ☀️ Limited Seats: Summer Explorers Camp Registration Open
             </div>
 
-            <div className="flex flex-col w-full max-w-2xl mx-auto lg:mx-0">
+            <div className="flex flex-col w-full max-w-[540px] mx-auto lg:mx-0">
               <h1 className="flex flex-col tracking-tight text-green leading-none">
-                <span className="flex justify-between items-baseline w-full text-[clamp(1.5rem,4vw,2.8rem)] font-bold uppercase tracking-[0.2em] mb-2">
+                <span className="flex justify-between items-baseline w-full text-[clamp(1rem,2.5vw,1.8rem)] font-bold uppercase tracking-[0.15em] mb-2 opacity-90">
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
-                  <span className="ml-2">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
-                  <span className="ml-2">C</span><span>H</span><span>I</span><span>L</span><span>D</span><span>'</span><span>S</span>
+                  <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
+                  <span className="ml-1.5">C</span><span>H</span><span>I</span><span>L</span><span>D</span><span>'</span><span>S</span>
                 </span>
-                <span className="text-[clamp(2.5rem,8vw,5.5rem)] font-serif italic text-purple leading-[0.9] -mt-1 font-medium">
+                <span className="text-[clamp(2.5rem,8vw,5.5rem)] font-serif italic text-purple leading-[0.9] -mt-1 font-medium whitespace-nowrap">
                   Unique Journey.
                 </span>
               </h1>
