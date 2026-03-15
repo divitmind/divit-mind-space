@@ -6,9 +6,10 @@ import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-6 pb-12 lg:pt-10 lg:pb-16 min-h-[auto] lg:min-h-[calc(100vh-80px)] flex items-center">
+    <section className="relative overflow-hidden pt-6 pb-8 lg:pt-10 lg:pb-10 min-h-[auto] lg:min-h-[calc(100vh-140px)] flex items-center">
       <div className="container relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+
           {/* Text Content */}
           <div className="flex-1 space-y-4 text-center lg:text-left animate-in slide-in-from-bottom duration-700 fade-in">
             {/* Announcement Badge */}
@@ -21,15 +22,16 @@ export function HeroSection() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-green leading-[1.05]">
-              Understanding exceptional minds, supporting
-              <br />
-              <span className="text-purple">brighter futures.</span>
+              Understanding exceptional minds, supporting<br />
+              <span className="text-purple">
+                brighter futures.
+              </span>
             </h1>
 
             <p className="max-w-xl mx-auto lg:mx-0 text-base lg:text-lg text-green/90 leading-relaxed font-medium">
-              At Divit MindSpace, we bridge the gap between healthcare and
-              education. Our team provides diagnostic assessments and
-              personalized training to help adults and families thrive.
+              At Divit MindSpace, we bridge the gap between healthcare and education.
+              Our team provides diagnostic assessments and personalized training
+              to help adults and families thrive.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-1">
@@ -53,7 +55,7 @@ export function HeroSection() {
             </div>
 
             {/* Trust Metrics */}
-            <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
+            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
               <div className="flex flex-col items-center lg:items-start">
                 <span className="text-xl lg:text-2xl font-bold text-green">
                   100+
