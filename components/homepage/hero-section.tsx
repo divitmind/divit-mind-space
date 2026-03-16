@@ -67,7 +67,7 @@ export function HeroSection() {
             </div>
 
             {/* Rolling Proof Line */}
-            <div className="pt-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 text-sm text-green/70 font-medium">
+            <div className="mt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 text-sm text-green/70 font-medium">
               <span>Conducting awareness workshops at</span>
               <div className="h-6 overflow-hidden relative w-48 text-center sm:text-left">
                 <div className="animate-rolling-text flex flex-col text-purple font-bold">
@@ -81,7 +81,7 @@ export function HeroSection() {
             </div>
 
             {/* Trust Metrics */}
-            <div className="pt-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
+            <div className="mt-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
               <div className="flex flex-col items-center lg:items-start">
                 <span className="text-xl lg:text-2xl font-bold text-green">
                   100+
