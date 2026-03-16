@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-2 pb-8 lg:pt-3 lg:pb-10 min-h-[auto] lg:min-h-[calc(100vh-140px)] flex items-center">
+    <section className="relative overflow-hidden pt-1 pb-8 lg:pt-2 lg:pb-10 min-h-[auto] lg:min-h-[calc(100vh-140px)] flex items-center">
       <div className="container relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-4">
 
@@ -20,7 +20,7 @@ export function HeroSection() {
               ☀️ Limited Seats: Summer Explorers Camp Registration Open
             </div>
 
-            <div className="flex flex-col w-full max-w-[580px] mx-auto lg:mx-0 mt-6">
+            <div className="flex flex-col w-full max-w-[580px] mx-auto lg:mx-0 mt-7">
               <h1 className="flex flex-col tracking-tight text-green leading-none">
                 {/* Line 1: EMPOWERING EVERY CHILD'S with overlapping yellow strokes */}
                 <span className="relative flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
