@@ -49,6 +49,11 @@ export function TrustStrip() {
             animation: marquee 20s linear infinite;
           }
         }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-marquee {
+            animation: none;
+          }
+        }
       `}</style>
     </section>
   );

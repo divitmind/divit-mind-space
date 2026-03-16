@@ -57,7 +57,7 @@ export function TestimonialCard({ name, role, quote, initial, className }: Testi
     <>
       <div
         className={cn(
-          "relative w-[350px] sm:w-[400px] shrink-0 rounded-2xl bg-white p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-[#E8ECE9]",
+          "relative w-[min(350px,calc(100vw-2rem))] sm:w-[400px] shrink-0 rounded-2xl bg-white p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-[#E8ECE9]",
           className
         )}
       >
@@ -105,7 +105,7 @@ export function TestimonialCard({ name, role, quote, initial, className }: Testi
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
         <DialogContent
-          className="sm:max-w-[560px] max-h-[85vh] overflow-hidden flex flex-col rounded-3xl bg-[#FDFBF7] border-[#2F3E33]/10"
+          className="max-w-[calc(100vw-2rem)] sm:max-w-[560px] max-h-[85vh] overflow-hidden flex flex-col rounded-3xl bg-[#FDFBF7] border-[#2F3E33]/10"
           showCloseButton
         >
           <div className="flex justify-start items-center gap-2">

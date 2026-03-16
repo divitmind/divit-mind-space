@@ -120,4 +120,3 @@ Recent changes:
 ## Git Author
 - **Name:** rikk-awal
 - **Email:** rikk.haq@gmail.com
-- **Co-author:** Claude Opus 4.5 <noreply@anthropic.com>
