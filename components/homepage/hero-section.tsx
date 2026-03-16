@@ -5,11 +5,11 @@ import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-6 pb-8 lg:pt-10 lg:pb-10 min-h-[auto] lg:min-h-[calc(100vh-140px)] flex items-center">
+    <section className="relative overflow-hidden pt-6 pb-8 lg:pt-8 lg:pb-10 min-h-[auto] lg:min-h-[calc(100vh-140px)] flex items-center">
       <div className="container relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-4">
 
-          {/* Text Content - Expanded flex for breathing room */}
+          {/* Text Content */}
           <div className="flex-[1.2] space-y-4 text-center lg:text-left animate-in slide-in-from-bottom duration-700 fade-in">
             {/* Announcement Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/50 text-purple text-[10px] sm:text-xs font-bold uppercase tracking-widest">
@@ -22,15 +22,16 @@ export function HeroSection() {
 
             <div className="flex flex-col w-full max-w-[580px] mx-auto lg:mx-0 -mt-2">
               <h1 className="flex flex-col tracking-tight text-green leading-none">
-                <span className="relative flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
-                  {/* Yellow Highlight Background */}
-                  <div className="absolute inset-0 bg-[#FFE175]/40 -z-10 rounded-sm transform -rotate-1 scale-105" />
+                <span className="flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1">
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                   <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
                   <span className="ml-1.5">C</span><span>H</span><span>I</span><span>L</span><span>D</span><span>'</span><span>S</span>
                 </span>
                 <span className="flex justify-between items-baseline w-full text-[clamp(2.2rem,7vw,4.8rem)] font-serif italic text-purple leading-[0.9] -mt-1 font-medium whitespace-nowrap">
-                  <span>U</span><span>n</span><span>i</span><span>q</span><span>u</span><span>e</span>
+                  <span className="relative inline-flex">
+                    <span className="absolute inset-0 bg-[#FFE175]/50 -z-10 rounded-sm transform -rotate-1 scale-110" />
+                    <span>U</span><span>n</span><span>i</span><span>q</span><span>u</span><span>e</span>
+                  </span>
                   <span className="ml-2">J</span><span>o</span><span>u</span><span>r</span><span>n</span><span>e</span><span>y</span><span>.</span>
                 </span>
               </h1>
@@ -59,7 +60,7 @@ export function HeroSection() {
             </div>
 
             {/* Rolling Proof Line */}
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 text-sm text-green/70 font-medium">
+            <div className="pt-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 text-sm text-green/70 font-medium">
               <span>Conducting awareness workshops at</span>
               <div className="h-6 overflow-hidden relative w-48 text-center sm:text-left">
                 <div className="animate-rolling-text flex flex-col text-purple font-bold">
@@ -73,7 +74,7 @@ export function HeroSection() {
             </div>
 
             {/* Trust Metrics */}
-            <div className="pt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
+            <div className="pt-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
               <div className="flex flex-col items-center lg:items-start">
                 <span className="text-xl lg:text-2xl font-bold text-green">
                   100+
@@ -106,15 +107,18 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right Visual - Journey Roadmap */}
-          <div className="flex-1 w-full max-w-lg lg:max-w-none relative animate-in slide-in-from-right duration-1000 fade-in delay-200">
-            <div className="relative rounded-2xl overflow-hidden shadow-lg max-w-xl mx-auto lg:ml-auto bg-white">
+          {/* Right Visual - Triptych Story */}
+          <div className="flex-1 w-full max-w-sm sm:max-w-md lg:max-w-xl relative animate-in slide-in-from-right duration-1000 fade-in delay-200">
+            {/* Offset shadow layer */}
+            <div className="absolute inset-0 bg-[#E8DFD0] rounded-2xl transform rotate-2 translate-x-2 translate-y-2 opacity-60" />
+            <div className="absolute inset-0 bg-[#D4C9B8] rounded-2xl transform -rotate-1 translate-x-1 translate-y-3 opacity-40" />
+
+            <div className="relative rounded-2xl overflow-hidden shadow-lg mx-auto lg:mr-0 aspect-[5/4] max-w-[480px] lg:max-w-none border-4 border-white">
               <Image
-                src="/child_development_journey_roadmap.png"
-                alt="Your Child's Journey at Divit Mindspace - Assessment, Therapy, Parent Guidance, Personalized Learning"
-                className="object-contain w-full"
-                width={800}
-                height={500}
+                src="/hero-triptych.png"
+                alt="Mother says 'He is finally smiling again', child playing joyfully, therapist says 'He's always had it in him'"
+                className="object-cover object-[center_8%] w-full h-full scale-[1.12]"
+                fill
                 priority
               />
             </div>
