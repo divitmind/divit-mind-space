@@ -6,135 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { ClipboardCheck, Heart, Users, GraduationCap } from "lucide-react";
-
-interface Service {
-  id: string;
-  title: string;
-  slug: string;
-  description: string;
-  category: "assessments" | "therapy" | "guidance" | "programs";
-  image: string;
-}
-
-// Hardcoded services data
-const services: Service[] = [
-  // Assessments
-  {
-    id: "1",
-    title: "Psychometric Assessment",
-    slug: "psychometric-assessment",
-    description: "Comprehensive evaluation of cognitive abilities, learning styles, and developmental milestones to understand your child's unique profile.",
-    category: "assessments",
-    image: "/services/assessment-1.jpg",
-  },
-  {
-    id: "2",
-    title: "Educational Assessment",
-    slug: "educational-assessment",
-    description: "Detailed analysis of academic strengths, learning gaps, and educational needs to create personalized learning strategies.",
-    category: "assessments",
-    image: "/services/assessment-2.jpg",
-  },
-  {
-    id: "3",
-    title: "Behavioral Assessment",
-    slug: "behavioral-assessment",
-    description: "In-depth observation and analysis of behavioral patterns to identify triggers, needs, and effective intervention strategies.",
-    category: "assessments",
-    image: "/services/assessment-3.jpg",
-  },
-  {
-    id: "4",
-    title: "Developmental Screening",
-    slug: "developmental-screening",
-    description: "Early identification of developmental delays or concerns to ensure timely intervention and support.",
-    category: "assessments",
-    image: "/services/assessment-4.jpg",
-  },
-  // Therapy
-  {
-    id: "5",
-    title: "Speech Therapy",
-    slug: "speech-therapy",
-    description: "Targeted sessions to improve communication skills, language development, and speech clarity for confident expression.",
-    category: "therapy",
-    image: "/services/therapy-1.jpg",
-  },
-  {
-    id: "6",
-    title: "Occupational Therapy",
-    slug: "occupational-therapy",
-    description: "Hands-on therapy to develop fine motor skills, sensory processing, and daily living independence.",
-    category: "therapy",
-    image: "/services/therapy-2.jpg",
-  },
-  {
-    id: "7",
-    title: "Behavior Therapy",
-    slug: "behavior-therapy",
-    description: "Evidence-based interventions to build positive behaviors, social skills, and emotional regulation.",
-    category: "therapy",
-    image: "/services/therapy-3.jpg",
-  },
-  {
-    id: "8",
-    title: "Play Therapy",
-    slug: "play-therapy",
-    description: "Child-centered therapeutic approach using play to help children express feelings and develop coping skills.",
-    category: "therapy",
-    image: "/services/therapy-4.jpg",
-  },
-  // Guidance
-  {
-    id: "9",
-    title: "Parent Counseling",
-    slug: "parent-counseling",
-    description: "One-on-one guidance sessions to help parents understand their child's needs and develop effective parenting strategies.",
-    category: "guidance",
-    image: "/services/guidance-1.jpg",
-  },
-  {
-    id: "10",
-    title: "Teacher Training",
-    slug: "teacher-training",
-    description: "Professional development for educators on inclusive practices and supporting neurodivergent students in the classroom.",
-    category: "guidance",
-    image: "/services/guidance-2.jpg",
-  },
-  {
-    id: "11",
-    title: "School Consultation",
-    slug: "school-consultation",
-    description: "Expert guidance for schools on creating inclusive environments and implementing support systems.",
-    category: "guidance",
-    image: "/services/guidance-3.jpg",
-  },
-  // Programs
-  {
-    id: "12",
-    title: "Special Education Program",
-    slug: "special-education-program",
-    description: "Structured learning program designed for children who need individualized educational approaches and support.",
-    category: "programs",
-    image: "/services/program-1.jpg",
-  },
-  {
-    id: "13",
-    title: "Social Skills Group",
-    slug: "social-skills-group",
-    description: "Small group sessions focused on building peer relationships, communication, and social confidence.",
-    category: "programs",
-    image: "/services/program-2.jpg",
-  },
-  {
-    id: "14",
-    title: "Summer Enrichment Program",
-    slug: "summer-enrichment-program",
-    description: "Engaging summer activities combining learning, therapy, and fun in a supportive group environment.",
-    category: "programs",
-    image: "/services/program-3.jpg",
-  },
-];
+import { services, type ServiceData } from "@/lib/services-data";
 
 const categories = [
   { id: "all", label: "All Services", icon: null },
@@ -358,7 +230,7 @@ export default function ServicesPage({ title = "Our Services" }: ServicesPagePro
 }
 
 // Inline Service Card Component
-function ServiceCard({ service }: { service: Service }) {
+function ServiceCard({ service }: { service: ServiceData }) {
   return (
     <Link
       href={`/services/${service.slug}`}
