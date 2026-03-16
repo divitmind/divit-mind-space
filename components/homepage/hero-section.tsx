@@ -68,7 +68,7 @@ export function HeroSection() {
 
             {/* Rolling Proof Line */}
             <div className="mt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 text-sm text-green/70 font-medium">
-              <span>Conducting awareness workshops at</span>
+              <span>Awareness Program at</span>
               <div className="h-6 overflow-hidden relative w-48 text-center sm:text-left">
                 <div className="animate-rolling-text flex flex-col text-purple font-bold">
                   <span className="h-6">TISB</span>
