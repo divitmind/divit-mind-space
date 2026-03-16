@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Briefcase, Newspaper, Image as ImageIcon, Megaphone, FileText, UserPlus } from "lucide-react";
+import { Briefcase, Image as ImageIcon, Megaphone } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -14,29 +14,12 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { client } from "@/sanity/lib/client";
-import { POPULAR_SERVICES_QUERY } from "@/sanity/lib/queries";
-import type { ServiceNavItem } from "@/sanity/types";
+import { services } from "@/lib/services-data";
+
+// Get first 6 services for nav dropdown
+const navServices = services.slice(0, 6);
 
 export function MainNav() {
-  const [serviceItems, setServiceItems] = React.useState<ServiceNavItem[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    async function fetchPopularServices() {
-      try {
-        const services = await client.fetch<ServiceNavItem[]>(POPULAR_SERVICES_QUERY);
-        setServiceItems(services || []);
-      } catch (error) {
-        console.error("Error fetching popular services:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchPopularServices();
-  }, []);
-
   return (
     <NavigationMenu className="hidden md:flex">
       <NavigationMenuList className="gap-1">
@@ -56,33 +39,21 @@ export function MainNav() {
           <NavigationMenuTrigger className="bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors px-3">Services</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-2 p-5 md:w-[500px] md:grid-cols-2 lg:w-[640px] bg-white rounded-[2rem] shadow-2xl">
-              {isLoading ? (
-                <li className="col-span-2 p-4 text-center text-green/60">
-                  Loading services...
-                </li>
-              ) : serviceItems.length > 0 ? (
-                serviceItems.map((item) => (
-                  <ListItem 
-                    key={item._id} 
-                    title={item.title} 
-                    href={`/services/${item.slug.current}`} 
-                  />
-                ))
-              ) : (
-                <li className="col-span-2 p-4 text-center text-green/60">
-                  No services available
-                </li>
-              )}
-              {!isLoading && serviceItems.length > 0 && (
-                <li className="col-span-2 border-t border-[#E8ECE9] pt-4 mt-2">
-                  <Link
-                    href="/services"
-                    className="block text-center py-2 text-sm font-bold text-green hover:text-green-lite transition-colors tracking-tight"
-                  >
-                    View All Services →
-                  </Link>
-                </li>
-              )}
+              {navServices.map((service) => (
+                <ListItem
+                  key={service.id}
+                  title={service.title}
+                  href={`/services/${service.slug}`}
+                />
+              ))}
+              <li className="col-span-2 border-t border-[#E8ECE9] pt-4 mt-2">
+                <Link
+                  href="/services"
+                  className="block text-center py-2 text-sm font-bold text-green hover:text-green-lite transition-colors tracking-tight"
+                >
+                  View All Services →
+                </Link>
+              </li>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
