@@ -233,9 +233,9 @@ function PersonCard({ person }: { person: Person }) {
 
 export function FoundersSpecialistsSection() {
   return (
-    <section className="py-20 lg:py-20 " id="founders-specialists">
-      <div className="px-4 md:px-6 ">
-        <div className="text-2xl flex items-center justify-center gap-2 sm:text-3xl text-center lg:text-5xl font-semibold text-purple tracking-tight mb-10 lg:mb-12">
+    <section className="py-12 lg:py-16 bg-cream" id="founders-specialists">
+      <div className="container mx-auto px-4">
+        <div className="text-2xl flex items-center justify-center gap-2 sm:text-3xl text-center lg:text-4xl font-semibold text-purple tracking-tight mb-8 lg:mb-10">
           <Image src="/favorite_wing.svg" alt="Consultants" width={44} height={44} />
           <span>Consultants</span>
         </div>

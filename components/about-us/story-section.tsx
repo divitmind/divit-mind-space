@@ -1,36 +1,66 @@
+"use client";
+
+import { motion } from "motion/react";
+import Image from "next/image";
 
 export function StorySection() {
   return (
-    <section className="relative py-24 lg:py-22 bg-[#FDFBF7] overflow-hidden" id="story">
-      <div className="px-4 md:px-6">
-        <div
-        className="flex flex-col gap-4 max-w-6xl"
-        >
-          {/* First Paragraph */}
-          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#A8B5AC] leading-[1.2] tracking-tight">
-            Our journey began with a{" "}
-            <span className="text-[#2F3E33] font-bold">simple goal</span>
-            to support children who{" "}
-            <span className="text-[#2F3E33] font-bold">
-              learn differently.
-            </span>
-          </p>
+    <section className="py-12 lg:py-16 bg-[#FAF9F5]">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          {/* Image */}
+          <motion.div
+            className="relative order-2 lg:order-1"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="absolute inset-0 bg-purple/10 rounded-2xl transform -rotate-2 translate-x-2 translate-y-2" />
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-lg">
+              <Image
+                src="/about_pic4.png"
+                alt="Our journey at Divit MindSpace"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </motion.div>
 
-          {/* Second Paragraph */}
-          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#A8B5AC] leading-[1.2] tracking-tight">
-            Today, we provide{" "}
-            <span className="text-[#2F3E33] font-bold">
-              personalized assessments, therapy,
-            </span>{" "}
-            and{" "}
-            <span className="text-[#2F3E33] font-bold">
-              learning programs
-            </span>{" "}
-            that help every child grow with{" "}
-            <span className="text-[#2F3E33] font-bold">
-              confidence and independence.
-            </span>
-          </p>
+          {/* Content */}
+          <motion.div
+            className="order-1 lg:order-2"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2
+              className="text-3xl lg:text-4xl font-serif text-green mb-6"
+              style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+            >
+              Our Story
+            </h2>
+
+            <div className="space-y-4 text-green/80">
+              <p>
+                Divit MindSpace was born from a deeply personal journey. Our founder's experience raising a neurodivergent child revealed the gaps in accessible, compassionate care.
+              </p>
+              <p>
+                What started as a search for answers became a mission: to create a space where every child is seen for their potential, not their diagnosis.
+              </p>
+              <p>
+                Today, we combine clinical expertise with genuine understanding—because we've walked this path ourselves. Every family that comes to us is treated like our own.
+              </p>
+            </div>
+
+            <div className="mt-6 pt-6 border-t border-green/10">
+              <div className="flex items-center gap-4">
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-green">Our Mission</span>
+                  <span className="text-sm text-green/70">Help every child achieve success using strength-based strategies.</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
