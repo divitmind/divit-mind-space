@@ -93,7 +93,7 @@ export function HeroSection() {
               <div className="w-px h-6 bg-green/10 hidden sm:block" />
               <div className="flex flex-col items-center lg:items-start">
                 <span className="text-xl lg:text-2xl font-bold text-green">
-                  15+
+                  6+
                 </span>
                 <span className="text-[10px] font-bold text-green/60 uppercase tracking-widest">
                   Expert Therapists
