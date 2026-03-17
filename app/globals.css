@@ -205,6 +205,13 @@
 }
 
 /* Rolling headline animation - exact copy from preview */
+.rolling-word-container {
+  display: inline-flex !important;
+  height: 1.2em !important;
+  overflow: hidden !important;
+  margin-left: 0.375rem !important;
+  transform: translateY(0.30em) !important;
+}
 .rolling-words {
   display: flex !important;
   flex-direction: column !important;
