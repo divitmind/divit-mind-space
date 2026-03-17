@@ -31,7 +31,7 @@ export function HeroSection() {
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                   <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
                   <span className="ml-1.5 inline-flex h-[1.2em] overflow-hidden">
-                    <span className="flex flex-col animate-[rolling-headline_9s_cubic-bezier(0.76,0,0.24,1)_infinite]">
+                    <span className="flex flex-col animate-[rolling-headline_6s_cubic-bezier(0.76,0,0.24,1)_infinite]">
                       <span className="h-[1.2em] flex items-center tracking-[0.12em]">CHILD'S</span>
                       <span className="h-[1.2em] flex items-center tracking-[0.12em]">TEEN'S</span>
                       <span className="h-[1.2em] flex items-center tracking-[0.12em]">ADULT'S</span>
