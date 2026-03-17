@@ -77,7 +77,7 @@
   --animate-marquee: marquee var(--duration, 40s) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
   --animate-rolling-text: rolling-text 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
-  --animate-rolling-headline: rolling-headline 6s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+  --animate-rolling-headline: rolling-headline 4s cubic-bezier(0.76, 0, 0.24, 1) infinite;
   --animate-crossfade-word: crossfade-word 9s infinite;
 }
 
