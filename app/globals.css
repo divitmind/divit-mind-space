@@ -63,9 +63,15 @@
     80% { transform: translateY(-80%); }
     100% { transform: translateY(-100%); }
   }
+  @keyframes crossfade-word {
+    0% { opacity: 0; transform: translateY(4px); }
+    8%, 28% { opacity: 1; transform: translateY(0); }
+    36%, 100% { opacity: 0; transform: translateY(-4px); }
+  }
   --animate-marquee: marquee var(--duration, 40s) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
   --animate-rolling-text: rolling-text 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+  --animate-crossfade-word: crossfade-word 9s infinite;
 }
 
 :root {
