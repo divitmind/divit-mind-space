@@ -206,18 +206,18 @@
 
 /* Rolling headline animation - exact copy from preview */
 .rolling-words {
-  display: flex;
-  flex-direction: column;
-  animation: roll-headline 6s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+  display: flex !important;
+  flex-direction: column !important;
+  animation: roll-headline 6s cubic-bezier(0.76, 0, 0.24, 1) infinite !important;
 }
 .rolling-words span {
-  height: 1.2em;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.12em;
+  height: 1.2em !important;
+  display: flex !important;
+  align-items: center !important;
+  letter-spacing: 0.12em !important;
 }
 .rolling-words.fast {
-  animation-duration: 4s;
+  animation-duration: 4s !important;
 }
 @keyframes roll-headline {
   0%, 30% { transform: translateY(0); }
