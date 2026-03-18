@@ -34,9 +34,9 @@ export function HeroSection() {
                 </span>
                 {/* Line 2: Different (crossed out) Unique Journey */}
                 <span className="flex items-baseline gap-3 sm:gap-4 text-[clamp(2rem,6vw,4rem)] font-serif italic text-purple leading-[0.9] -mt-1 font-medium">
-                  <span className="relative text-[#999] opacity-50">
+                  <span className="relative text-[0.7em] text-gray-400/60">
                     Different
-                    <span className="absolute left-[-4%] right-[-4%] top-1/2 h-[3px] bg-[#999] -rotate-[3deg]" />
+                    <span className="absolute left-[-4%] right-[-4%] top-1/2 h-[3px] bg-gray-400/70 -rotate-[3deg]" />
                   </span>
                   <span>Unique</span>
                   <span>Journey.</span>
