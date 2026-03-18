@@ -128,8 +128,8 @@ export function HeroSection() {
 
             <div className="relative rounded-2xl overflow-hidden shadow-lg mx-auto lg:mr-0 aspect-[5/4] max-w-[480px] lg:max-w-none border-4 border-white">
               <Image
-                src="/hero-triptych.png"
-                alt="Mother says 'He is finally smiling again', child playing joyfully, therapist says 'He's always had it in him'"
+                src="/welcome_to_neuroempower.png"
+                alt="Child confidently playing with blocks, teen journaling with self-assurance, parents feeling connected and hopeful"
                 className="object-cover object-[center_8%] w-full h-full scale-[1.12]"
                 fill
                 priority
