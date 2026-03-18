@@ -31,7 +31,7 @@ export function HeroSection() {
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                   <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
                   <span className="rolling-word-container">
-                    <span className="rolling-words fast">
+                    <span className="rolling-words">
                       <span>CHILD'S</span>
                       <span>TEEN'S</span>
                       <span>ADULT'S</span>
