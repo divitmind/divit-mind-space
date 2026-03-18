@@ -23,7 +23,7 @@ export function HeroSection() {
             <div className="flex flex-col w-full max-w-[580px] mx-auto lg:mx-0 mt-7">
               <h1 className="flex flex-col tracking-tight text-green leading-none">
                 {/* Line 1: EMPOWERING EVERY CHILD'S with overlapping yellow strokes */}
-                <span className="relative flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
+                <span className="relative flex items-baseline text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
                   {/* Multiple overlapping highlight strokes */}
                   <span className="absolute inset-0 bg-[#FFE175]/35 -z-10 rounded-sm transform -rotate-[1.5deg] scale-x-[1.08] -translate-x-0.5" />
                   <span className="absolute inset-0 bg-[#FFE175]/40 -z-10 rounded-sm transform rotate-[0.8deg] scale-x-[1.04] translate-y-px" />
