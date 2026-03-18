@@ -86,6 +86,7 @@
   position: relative;
   height: 1.2em;
   margin-left: 0.15rem;
+  transform: translateY(0.3em);
 }
 .crossfade-words {
   position: relative;
