@@ -99,7 +99,7 @@
   height: 1.2em;
   display: flex;
   align-items: center;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   opacity: 0;
   animation: crossfade-headline 3s infinite;
 }
