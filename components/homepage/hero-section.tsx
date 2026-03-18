@@ -23,7 +23,7 @@ export function HeroSection() {
             <div className="flex flex-col w-full max-w-[580px] mx-auto lg:mx-0 mt-7">
               <h1 className="flex flex-col tracking-tight text-green leading-none">
                 {/* Line 1: EMPOWERING EVERY CHILD'S with overlapping yellow strokes */}
-                <span className="relative flex justify-between items-baseline w-[336px] text-[14.4px] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
+                <span className="relative flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
                   {/* Multiple overlapping highlight strokes */}
                   <span className="absolute inset-0 bg-[#FFE175]/35 -z-10 rounded-sm transform -rotate-[1.5deg] scale-x-[1.08] -translate-x-0.5" />
                   <span className="absolute inset-0 bg-[#FFE175]/40 -z-10 rounded-sm transform rotate-[0.8deg] scale-x-[1.04] translate-y-px" />
@@ -39,7 +39,7 @@ export function HeroSection() {
                   </span>
                 </span>
                 {/* Line 2: Different (crossed out) Unique Journey */}
-                <span className="flex items-baseline w-[336px] gap-3 text-[32px] font-serif italic text-purple leading-[0.9] -mt-1 font-medium">
+                <span className="flex items-baseline gap-3 text-[clamp(2rem,6vw,4rem)] font-serif italic text-purple leading-[0.9] -mt-1 font-medium">
                   <span className="relative text-[0.7em] text-gray-400/60">
                     Different
                     <span className="absolute left-[-4%] right-[-4%] top-1/2 h-[3px] bg-gray-400/70 -rotate-[3deg]" />
