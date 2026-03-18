@@ -308,6 +308,110 @@
     /* Dev guide toggle */
     .guide-toggle { position: fixed; bottom: 1rem; right: 1rem; padding: 0.5rem 1rem; background: var(--purple); color: white; border: none; border-radius: 0.5rem; font-size: 0.75rem; cursor: pointer; z-index: 100; }
     .show-guides section { outline: 2px dashed rgba(255, 0, 0, 0.3); }
+
+    /* Rolling Headline Animation Test */
+    .rolling-test-section {
+      background: white;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 1rem;
+      border: 2px solid var(--purple);
+    }
+    .rolling-test-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .rolling-test-subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Rolling headline container */
+    .headline-line1-rolling {
+      position: relative; display: flex; justify-content: space-between; align-items: baseline;
+      width: 100%; max-width: 580px; margin: 0 auto;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.9rem, 2.2vw, 1.4rem); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      padding: 0.25rem 0.5rem; color: var(--green);
+      background: rgba(255, 225, 117, 0.35);
+      border-radius: 0.25rem;
+    }
+    .headline-line1-rolling .word-gap { margin-left: 0.375rem; }
+
+    /* Rolling word container */
+    .rolling-word-container {
+      display: inline-flex;
+      height: 1.2em;
+      overflow: hidden;
+      margin-left: 0.375rem;
+      transform: translateY(0.30em); /* Nudge down to align with baseline */
+    }
+    .rolling-words {
+      display: flex;
+      flex-direction: column;
+      animation: roll-headline 6s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+    }
+    .rolling-words span {
+      height: 1.2em;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.12em;
+    }
+
+    @keyframes roll-headline {
+      0%, 30% { transform: translateY(0); }           /* CHILD'S holds 2s */
+      33.33%, 63.33% { transform: translateY(-25%); } /* TEEN'S holds 2s */
+      66.66%, 96.66% { transform: translateY(-50%); } /* ADULT'S holds 2s */
+      100% { transform: translateY(-75%); }           /* Loop back */
+    }
+
+    /* Speed variations for testing */
+    .rolling-words.slow {
+      animation-duration: 9s;
+    }
+    .rolling-words.fast {
+      animation-duration: 4s;
+    }
+
+    /* Line 2 for context */
+    .headline-line2-test {
+      display: flex; align-items: baseline; gap: 0.75rem; justify-content: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.5rem, 5vw, 3rem); font-weight: 500; font-style: italic;
+      color: var(--purple); line-height: 1; margin-top: 0.5rem;
+    }
+    .crossed-out-test {
+      position: relative; color: #999; opacity: 0.5; font-size: 0.7em;
+    }
+    .crossed-out-test::after {
+      content: ''; position: absolute;
+      left: -4%; right: -4%; top: 50%;
+      height: 3px; background: #999;
+      transform: rotate(-3deg);
+    }
+
+    .speed-label {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .test-card {
+      background: var(--linen);
+      padding: 2rem;
+      border-radius: 1rem;
+      margin-bottom: 1.5rem;
+    }
   </style>
 </head>
 <body>
@@ -324,7 +428,14 @@
                 <span class="highlight-layer"></span>
                 <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                 <span class="word-gap">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
-                <span class="word-gap">C</span><span>H</span><span>I</span><span>L</span><span>D</span><span>'</span><span>S</span>
+                <span class="rolling-word-container word-gap">
+                  <span class="rolling-words fast">
+                    <span>CHILD'S</span>
+                    <span>TEEN'S</span>
+                    <span>ADULT'S</span>
+                    <span>CHILD'S</span>
+                  </span>
+                </span>
               </span>
               <span class="headline-line2">
                 <span class="crossed-out">Different</span>

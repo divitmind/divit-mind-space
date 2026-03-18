@@ -5,16 +5,7 @@ import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes roll-headline {
-          0% { transform: translateY(0); }
-          33.33% { transform: translateY(-25%); }
-          66.66% { transform: translateY(-50%); }
-          100% { transform: translateY(-75%); }
-        }
-      `}} />
-      <section className="relative overflow-hidden pt-1 pb-8 lg:pt-2 lg:pb-10 min-h-[auto] lg:min-h-[calc(100vh-140px)] flex items-center">
+    <section className="relative overflow-hidden pt-1 pb-8 lg:pt-2 lg:pb-10 min-h-[auto] lg:min-h-[calc(100vh-140px)] flex items-center">
       <div className="container relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-4">
 
@@ -39,26 +30,12 @@ export function HeroSection() {
                   <span className="absolute inset-0 bg-[#FFE175]/25 -z-20 rounded-sm transform -rotate-[0.5deg] scale-x-[1.06] scale-y-[1.15] -translate-y-px" />
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                   <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
-                  <span
-                    style={{
-                      display: 'inline-flex',
-                      height: '1.2em',
-                      overflow: 'hidden',
-                      marginLeft: '0.375rem',
-                      transform: 'translateY(0.30em)'
-                    }}
-                  >
-                    <span
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        animation: 'roll-headline 4s cubic-bezier(0.76, 0, 0.24, 1) infinite'
-                      }}
-                    >
-                      <span style={{ height: '1.2em', display: 'flex', alignItems: 'center', letterSpacing: '0.12em' }}>CHILD'S</span>
-                      <span style={{ height: '1.2em', display: 'flex', alignItems: 'center', letterSpacing: '0.12em' }}>TEEN'S</span>
-                      <span style={{ height: '1.2em', display: 'flex', alignItems: 'center', letterSpacing: '0.12em' }}>ADULT'S</span>
-                      <span style={{ height: '1.2em', display: 'flex', alignItems: 'center', letterSpacing: '0.12em' }}>CHILD'S</span>
+                  <span className="rolling-word-container">
+                    <span className="rolling-words fast">
+                      <span>CHILD'S</span>
+                      <span>TEEN'S</span>
+                      <span>ADULT'S</span>
+                      <span>CHILD'S</span>
                     </span>
                   </span>
                 </span>
@@ -166,6 +143,5 @@ export function HeroSection() {
         </div>
       </div>
     </section>
-    </>
   );
 }
