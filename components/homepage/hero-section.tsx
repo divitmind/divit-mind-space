@@ -87,7 +87,7 @@ export function HeroSection() {
             </div>
 
             {/* Trust Metrics */}
-            <div className="mt-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
+            <div className="mt-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-4 sm:gap-x-6 gap-y-3">
               <div className="flex flex-col items-center lg:items-start">
                 <span className="text-xl lg:text-2xl font-bold text-green">
                   100+
