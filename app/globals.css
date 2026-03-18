@@ -85,8 +85,9 @@
   display: inline-flex;
   position: relative;
   height: 1.2em;
-  margin-left: 0.375rem;
-  transform: translateY(0.15em);
+  overflow: hidden;
+  margin-left: 6px;
+  transform: translateY(0.3em);
 }
 .crossfade-words {
   position: relative;
@@ -99,7 +100,7 @@
   height: 1.2em;
   display: flex;
   align-items: center;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   opacity: 0;
   animation: crossfade-headline 3s infinite;
 }
