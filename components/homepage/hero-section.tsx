@@ -23,13 +23,12 @@ export function HeroSection() {
             <div className="flex flex-col w-full max-w-[580px] mx-auto lg:mx-0 mt-7">
               <h1 className="flex flex-col tracking-tight text-green leading-none">
                 {/* Line 1: EMPOWERING EVERY CHILD'S with overlapping yellow strokes */}
-                <span className="relative inline-flex items-baseline gap-2 text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.05em] mb-3 py-1 px-2">
+                <span className="relative inline-block text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.2em] mb-3 py-1 px-2">
                   {/* Multiple overlapping highlight strokes */}
                   <span className="absolute inset-0 bg-[#FFE175]/35 -z-10 rounded-sm transform -rotate-[1.5deg] scale-x-[1.08] -translate-x-0.5" />
                   <span className="absolute inset-0 bg-[#FFE175]/40 -z-10 rounded-sm transform rotate-[0.8deg] scale-x-[1.04] translate-y-px" />
                   <span className="absolute inset-0 bg-[#FFE175]/25 -z-20 rounded-sm transform -rotate-[0.5deg] scale-x-[1.06] scale-y-[1.15] -translate-y-px" />
-                  <span>EMPOWERING</span>
-                  <span>EVERY</span>
+                  EMPOWERING EVERY{" "}
                   <span className="crossfade-word-container">
                     <span className="crossfade-words">
                       <span>CHILD'S</span>
