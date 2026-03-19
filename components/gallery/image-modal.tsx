@@ -1,119 +1,145 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { urlFor } from "@/sanity/lib/image";
-import type { GalleryImage } from "@/sanity/types";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { type GalleryStory } from "@/lib/gallery-data";
+import { motion, AnimatePresence } from "motion/react";
+import { X, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 
 interface ImageModalProps {
-  images: GalleryImage[];
+  stories: GalleryStory[];
   currentIndex: number;
   onClose: () => void;
   onNavigate: (index: number) => void;
 }
 
-export function ImageModal({
-  images,
-  currentIndex,
-  onClose,
-  onNavigate,
-}: ImageModalProps) {
-  const currentImage = images[currentIndex];
-  const hasPrev = currentIndex > 0;
-  const hasNext = currentIndex < images.length - 1;
+export function ImageModal({ stories, currentIndex, onClose, onNavigate }: ImageModalProps) {
+  const currentStory = stories[currentIndex];
 
-  // Keyboard navigation
+  const handlePrevious = useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    onNavigate((currentIndex - 1 + stories.length) % stories.length);
+  }, [currentIndex, stories.length, onNavigate]);
+
+  const handleNext = useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    onNavigate((currentIndex + 1) % stories.length);
+  }, [currentIndex, stories.length, onNavigate]);
+
+  const handleWhatsAppShare = () => {
+    const text = `Check out this moment from Divit MindSpace: "${currentStory.title}" - ${currentStory.story} \n\nSee more at: https://divitmindspace.com/gallery`;
+    const encodedText = encodeURIComponent(text);
+    window.open(`https://wa.me/?text=${encodedText}`, '_blank');
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft" && hasPrev) {
-        onNavigate(currentIndex - 1);
-      } else if (e.key === "ArrowRight" && hasNext) {
-        onNavigate(currentIndex + 1);
-      } else if (e.key === "Escape") {
-        onClose();
-      }
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") handlePrevious();
+      if (e.key === "ArrowRight") handleNext();
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentIndex, hasPrev, hasNext, onNavigate, onClose]);
-
-  const imageUrl = urlFor(currentImage.image)?.width(1920).url();
+  }, [onClose, handlePrevious, handleNext]);
 
   return (
-    <Dialog open={true} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl w-full h-[90vh] p-0 bg-black/95 border-none">
-        <DialogTitle className="sr-only">
-          Gallery Image {currentIndex + 1} of {images.length}
-        </DialogTitle>
-        
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-50 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
-          aria-label="Close modal"
-        >
-          <X className="w-6 h-6 text-white" />
-        </button>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-green/95 backdrop-blur-md"
+      />
 
-        {/* Navigation buttons */}
-        {hasPrev && (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        className="relative w-full max-w-6xl bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
+      >
+        {/* Image Side */}
+        <div className="relative flex-1 bg-black/5 flex items-center justify-center min-h-[300px] md:min-h-0">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStory.id}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="relative w-full h-full p-4"
+            >
+              <Image
+                src={currentStory.src}
+                alt={currentStory.title}
+                fill
+                className="object-contain p-4"
+                priority
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Controls Overlay */}
           <button
-            onClick={() => onNavigate(currentIndex - 1)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
-            aria-label="Previous image"
+            onClick={handlePrevious}
+            className="absolute left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all border border-white/20 z-10"
           >
-            <ChevronLeft className="w-8 h-8 text-white" />
+            <ChevronLeft className="w-6 h-6" />
           </button>
-        )}
-
-        {hasNext && (
           <button
-            onClick={() => onNavigate(currentIndex + 1)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
-            aria-label="Next image"
+            onClick={handleNext}
+            className="absolute right-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all border border-white/20 z-10"
           >
-            <ChevronRight className="w-8 h-8 text-white" />
+            <ChevronRight className="w-6 h-6" />
           </button>
-        )}
-
-        {/* Image container */}
-        <div className="relative w-full h-full flex items-center justify-center p-4">
-          <Image
-            src={imageUrl || ""}
-            alt={currentImage.image.alt || "Gallery image"}
-            width={1920}
-            height={1080}
-            className="max-w-full max-h-full object-contain"
-            priority
-          />
         </div>
 
-        {/* Image info footer */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-          <div className="flex items-center justify-between text-white">
-            <div className="flex gap-2">
-              {currentImage.categories.map((cat) => (
-                <span
-                  key={cat}
-                  className="px-3 py-1 bg-yellow text-green text-sm font-semibold rounded-full capitalize"
-                >
-                  {cat}
-                </span>
-              ))}
+        {/* Content Side */}
+        <div className="w-full md:w-[400px] bg-[#FDFBF7] p-8 md:p-10 flex flex-col justify-between">
+          <div>
+            <div className="flex justify-between items-start mb-8">
+              <span className="px-3 py-1 bg-green/10 text-green text-[10px] font-bold uppercase tracking-[0.2em] rounded-full">
+                {currentStory.category}
+              </span>
+              <button
+                onClick={onClose}
+                className="p-2 -mt-2 -mr-2 text-green/40 hover:text-green transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
             </div>
-            <span className="text-sm">
-              {currentIndex + 1} / {images.length}
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStory.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+              >
+                <h2 className="text-3xl font-bold text-green mb-4 font-[family-name:var(--font-cormorant)] italic leading-tight">
+                  {currentStory.title}
+                </h2>
+                <div className="w-12 h-1 bg-yellow-400 mb-6" />
+                <p className="text-green/80 text-lg leading-relaxed font-medium">
+                  {currentStory.story}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="mt-12 flex items-center justify-between border-t border-green/5 pt-6">
+            <span className="text-xs text-green/40 font-semibold tracking-widest">
+              DIVIT MINDSPACE
             </span>
+            <button 
+                onClick={handleWhatsAppShare}
+                className="flex items-center gap-2 text-xs font-bold text-green hover:text-[#25D366] transition-colors"
+            >
+              <MessageCircle className="w-4 h-4" />
+              SHARE VIA WHATSAPP
+            </button>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </motion.div>
+    </div>
   );
 }

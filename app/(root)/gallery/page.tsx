@@ -1,8 +1,5 @@
 import { Metadata } from "next";
 import { GalleryPage } from "@/components/gallery/gallery-page";
-import { sanityFetch } from "@/sanity/lib/live";
-import { ALL_GALLERY_IMAGES_QUERY } from "@/sanity/lib/queries";
-import type { GalleryQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: "Gallery | Divit MindSpace",
@@ -61,19 +58,14 @@ const galleryJsonLd = {
   },
 };
 
-export default async function GalleryRoute() {
-  const { data: images } = await sanityFetch({
-    query: ALL_GALLERY_IMAGES_QUERY,
-    tags: ["gallery"],
-  });
-
+export default function GalleryRoute() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(galleryJsonLd) }}
       />
-      <GalleryPage images={(images as GalleryQueryResult) || []} />
+      <GalleryPage />
     </>
   );
 }

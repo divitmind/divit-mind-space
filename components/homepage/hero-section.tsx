@@ -1,3 +1,5 @@
+"use client";
+
 import { Star } from "lucide-react";
 import Image from "next/image";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
