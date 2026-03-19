@@ -1,9 +1,27 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter, usePathname } from "next/navigation";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
 
 export function SiteHeader() {
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const handleSpecialistsClick = (e: React.MouseEvent) => {
+        // If already on about-us page, scroll to specialists section
+        if (pathname === "/about-us") {
+            e.preventDefault();
+            const element = document.getElementById("specialists");
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+        // Otherwise, let the Link navigate normally
+    };
+
     return (
         <header className="sticky top-0 z-50 w-full bg-[#FAF9F5]/80 backdrop-blur-lg border-b border-[#2F3E33]/5">
             <div className="container flex h-20 max-w-screen-2xl items-center justify-between">
@@ -18,6 +36,7 @@ export function SiteHeader() {
                     {/* Desktop CTA - solid */}
                     <Link
                         href="/about-us#specialists"
+                        onClick={handleSpecialistsClick}
                         className="hidden md:inline-flex h-9 items-center justify-center gap-2 rounded-full bg-green px-4 text-sm font-semibold text-white hover:bg-[#003835] transition-colors"
                     >
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -32,6 +51,7 @@ export function SiteHeader() {
                     {/* Mobile CTA - premium outline button */}
                     <Link
                         href="/about-us#specialists"
+                        onClick={handleSpecialistsClick}
                         className="md:hidden inline-flex h-8 items-center justify-center rounded-full border-2 border-[#722F37] px-4 text-xs font-medium tracking-wide text-[#722F37] shadow-md shadow-[#722F37]/15 hover:bg-[#722F37] hover:text-white hover:shadow-lg hover:shadow-[#722F37]/25 transition-all"
                     >
                         Get Help
