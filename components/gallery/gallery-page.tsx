@@ -41,11 +41,11 @@ export function GalleryPage() {
 
       {/* Filter Bar - Emotional Pills */}
       <div className="container mx-auto px-4 mb-8">
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-nowrap md:flex-wrap items-center md:justify-center gap-3 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 scrollbar-none">
           <button
             onClick={() => setActiveCategory("All")}
             className={cn(
-              "px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300",
+              "px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap",
               activeCategory === "All"
                 ? "bg-green text-white shadow-lg shadow-green/20"
                 : "bg-white text-green/60 hover:bg-green/5 border border-green/10"
@@ -58,7 +58,7 @@ export function GalleryPage() {
               key={category}
               onClick={() => setActiveCategory(category)}
               className={cn(
-                "px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300",
+                "px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap",
                 activeCategory === category
                   ? "bg-green text-white shadow-lg shadow-green/20"
                   : "bg-white text-green/60 hover:bg-green/5 border border-green/10"
