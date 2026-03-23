@@ -68,7 +68,7 @@ const newsJsonLd = {
 export default async function NewsListPage() {
   const { data: posts } = await sanityFetch({
     query: NEWS_POSTS_QUERY,
-    tags: ["post"],
+    tags: ["news"],
   });
 
   return (
