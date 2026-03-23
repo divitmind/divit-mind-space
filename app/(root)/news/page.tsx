@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import BlogPage from "@/components/blogs/blog-page";
+import NewsPage from "@/components/news/news-page";
 import { sanityFetch } from "@/sanity/lib/live";
 import { NEWS_POSTS_QUERY } from "@/sanity/lib/queries";
 import type { PostsQueryResult } from "@/sanity/types";
@@ -68,7 +68,7 @@ const newsJsonLd = {
 export default async function NewsListPage() {
   const { data: posts } = await sanityFetch({
     query: NEWS_POSTS_QUERY,
-    tags: ["post"],
+    tags: ["news"],
   });
 
   return (
@@ -77,7 +77,7 @@ export default async function NewsListPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(newsJsonLd) }}
       />
-      <BlogPage posts={(posts as PostsQueryResult) || []} title="Latest News" />
+      <NewsPage posts={(posts as PostsQueryResult) || []} />
     </>
   );
 }

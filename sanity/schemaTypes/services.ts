@@ -151,4 +151,18 @@ export const servicesType = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      category: 'category',
+      media: 'image',
+    },
+    prepare({ title, category, media }) {
+      return {
+        title: title,
+        subtitle: category ? category.charAt(0).toUpperCase() + category.slice(1) : 'No category',
+        media: media,
+      }
+    },
+  },
 })

@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { ContactForm } from "@/components/contact/contact-form";
+import { ContactPage } from "@/components/contact/contact-page";
 
 export const metadata: Metadata = {
   title: "Contact Us | Divit MindSpace",
   description:
-    "Get in touch with Divit MindSpace. Whether you're curious about our services, ready to book an assessment, or need guidance — our experts in Bangalore are here to help.",
+    "Get in touch with Divit MindSpace. Whether you're curious about our services, ready to book an assessment, or need guidance — our experts in Bangalore are here to help for all age groups.",
   keywords: [
     "contact Divit MindSpace",
     "book assessment Bangalore",
     "neurodivergent support contact",
     "special education consultation",
     "autism assessment appointment",
+    "adult neurodivergent support",
   ],
   alternates: {
     canonical: "https://divitmindspace.com/contact-us",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     url: "https://divitmindspace.com/contact-us",
     title: "Contact Us | Divit MindSpace",
     description:
-      "Reach out to our team in Bangalore. We're here to help you navigate neurodivergent care, assessments, and education.",
+      "Reach out to our team in Bangalore. We're here to help you navigate neurodivergent care, assessments, and education for children, teens, and adults.",
     images: [
       {
         url: "/divit-mindspace-logo.png",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact Us | Divit MindSpace",
     description:
-      "Get in touch with our neurodivergent care experts in Bangalore.",
+      "Get in touch with our neurodivergent care experts in Bangalore for all age groups.",
     images: ["/divit-mindspace-logo.png"],
   },
   robots: {
@@ -57,7 +58,7 @@ const contactJsonLd = {
   name: "Contact Divit MindSpace",
   url: "https://divitmindspace.com/contact-us",
   description:
-    "Contact page for Divit MindSpace — neurodivergent care and special education in Bangalore.",
+    "Contact page for Divit MindSpace — neurodivergent care and special education in Bangalore for children, teens, and adults.",
   mainEntity: {
     "@type": "MedicalBusiness",
     name: "Divit MindSpace",
@@ -83,7 +84,7 @@ export default function ContactUsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
       />
-      <ContactForm />
+      <ContactPage />
     </>
   );
 }

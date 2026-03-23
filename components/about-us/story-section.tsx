@@ -2,8 +2,24 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
+import { SanityImage } from "@/sanity/types";
 
-export function StorySection() {
+interface AboutUsStoryData {
+  title?: string;
+  paragraphs?: string[];
+  image?: SanityImage;
+}
+
+const defaultParagraphs = [
+  "Divit MindSpace was born from a deeply personal journey. Our founder's experience raising a neurodivergent child revealed the gaps in accessible, compassionate care.",
+  "What started as a search for answers became a mission: to create a space where every child is seen for their potential, not their diagnosis.",
+  "Today, we combine clinical expertise with genuine understanding—because we've walked this path ourselves. Every family that comes to us is treated like our own."
+];
+
+export function StorySection({ data }: { data?: AboutUsStoryData }) {
+  const title = data?.title || "Our Story";
+  const paragraphs = data?.paragraphs || defaultParagraphs;
+
   return (
     <section className="py-12 lg:py-16 bg-[#FAF9F5]">
       <div className="container mx-auto px-4">
@@ -18,7 +34,7 @@ export function StorySection() {
             <div className="absolute inset-0 bg-purple/10 rounded-2xl transform -rotate-2 translate-x-2 translate-y-2" />
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-lg">
               <Image
-                src="/about_pic4.png"
+                src={data?.image?.asset?.url || "/about_pic4.png"}
                 alt="Our journey at Divit MindSpace"
                 fill
                 className="object-cover"
@@ -37,19 +53,13 @@ export function StorySection() {
               className="text-3xl lg:text-4xl font-serif text-green mb-6"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             >
-              Our Story
+              {title}
             </h2>
 
             <div className="space-y-4 text-green/80">
-              <p>
-                Divit MindSpace was born from a deeply personal journey. Our founder's experience raising a neurodivergent child revealed the gaps in accessible, compassionate care.
-              </p>
-              <p>
-                What started as a search for answers became a mission: to create a space where every child is seen for their potential, not their diagnosis.
-              </p>
-              <p>
-                Today, we combine clinical expertise with genuine understanding—because we've walked this path ourselves. Every family that comes to us is treated like our own.
-              </p>
+              {paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
             </div>
 
             <div className="mt-6 pt-6 border-t border-green/10">

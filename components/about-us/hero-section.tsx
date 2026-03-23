@@ -3,8 +3,19 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
+import { SanityImage } from "@/sanity/types";
 
-export function HeroSection() {
+interface AboutUsHeroData {
+  title?: string;
+  italicSubtitle?: string;
+  description?: string;
+  images?: SanityImage[];
+}
+
+export function HeroSection({ data }: { data?: AboutUsHeroData }) {
+  const title = data?.title || "Empowering Every Neurodivergent Child to Thrive";
+  const description = data?.description || "We provide expert assessments, therapy, and family support—helping children build confidence and independence in a nurturing environment.";
+  
   return (
     <section className="relative py-12 lg:py-16 bg-[#FAF9F5] overflow-hidden">
       <div className="container mx-auto px-4">
@@ -27,12 +38,12 @@ export function HeroSection() {
               className="text-4xl md:text-5xl lg:text-6xl font-serif text-green leading-[1.1]"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             >
-              Empowering Every Neurodivergent Child to Thrive
+              {title} {data?.italicSubtitle && <span className="italic text-purple">{data.italicSubtitle}</span>}
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg text-green/70 max-w-lg mx-auto lg:mx-0">
-              We provide expert assessments, therapy, and family support—helping children build confidence and independence in a nurturing environment.
+              {description}
             </p>
 
             {/* Quick Stats */}
@@ -43,7 +54,7 @@ export function HeroSection() {
               </div>
               <div className="w-px h-8 bg-green/20 hidden sm:block" />
               <div className="text-center">
-                <div className="text-2xl font-bold text-green">6+</div>
+                <div className="text-2xl font-bold text-green">10+</div>
                 <div className="text-xs text-green/60 uppercase tracking-wide">Expert Therapists</div>
               </div>
               <div className="w-px h-8 bg-green/20 hidden sm:block" />
@@ -75,7 +86,7 @@ export function HeroSection() {
               {/* Large image */}
               <div className="col-span-2 relative aspect-[16/9] rounded-2xl overflow-hidden border-4 border-white shadow-lg">
                 <Image
-                  src="/about_pic1.png"
+                  src={data?.images?.[0]?.asset?.url || "/about_pic1.png"}
                   alt="Child development session at Divit MindSpace"
                   fill
                   className="object-cover"
@@ -85,7 +96,7 @@ export function HeroSection() {
               {/* Two smaller images */}
               <div className="relative aspect-square rounded-xl overflow-hidden border-4 border-white shadow-md">
                 <Image
-                  src="/about_pic2.png"
+                  src={data?.images?.[1]?.asset?.url || "/about_pic2.png"}
                   alt="Therapy session"
                   fill
                   className="object-cover"
@@ -93,7 +104,7 @@ export function HeroSection() {
               </div>
               <div className="relative aspect-square rounded-xl overflow-hidden border-4 border-white shadow-md">
                 <Image
-                  src="/about_pic3.png"
+                  src={data?.images?.[2]?.asset?.url || "/about_pic3.png"}
                   alt="Child learning activities"
                   fill
                   className="object-cover"

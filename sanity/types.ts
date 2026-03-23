@@ -70,8 +70,12 @@ export interface Post {
   author: AuthorReference;
   categories?: string[];
   publishedAt: string;
-  body: PortableTextBlock[];
   readTime?: number;
+  featured?: boolean;
+  postFormat: "standard" | "external" | "event";
+  externalUrl?: string;
+  sourceName?: string;
+  body: PortableTextBlock[];
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
@@ -90,6 +94,10 @@ export interface PostListItem {
   excerpt?: string;
   publishedAt: string;
   readTime?: number;
+  featured?: boolean;
+  postFormat: "standard" | "external" | "event";
+  externalUrl?: string;
+  sourceName?: string;
   mainImage?: {
     asset: {
       url: string;
@@ -244,3 +252,45 @@ export interface ReviewListItem {
 }
 
 export type ReviewsQueryResult = ReviewListItem[];
+
+// Specialist / Team Types
+export interface Specialist {
+  _id: string;
+  name: string;
+  slug: { current: string };
+  title: string;
+  image: SanityImage;
+  experience?: string;
+  specialties?: string[];
+  teaser: string;
+  fullBio: PortableTextBlock[];
+  order?: number;
+}
+
+export type SpecialistsQueryResult = Specialist[];
+
+// About Us Page Singleton Type
+export interface AboutUs {
+  hero?: {
+    title?: string;
+    italicSubtitle?: string;
+    description?: string;
+    images?: SanityImage[];
+  };
+  philosophy?: {
+    title?: string;
+    description?: string;
+    points?: {
+      title: string;
+      description: string;
+      icon: string;
+    }[];
+  };
+  story?: {
+    title?: string;
+    paragraphs?: string[];
+    image?: SanityImage;
+  };
+}
+
+export type AboutUsQueryResult = AboutUs | null;

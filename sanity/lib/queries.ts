@@ -11,14 +11,14 @@
  * - Inline author dereferencing (prevents N+1 queries)
  * - Image URL resolution in projection
  */
-export const ALL_POSTS_QUERY = `*[_type == "post" && contentType == "blog"] | order(publishedAt desc) {
+export const ALL_POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) {
   _id,
   title,
   slug,
-  contentType,
   excerpt,
   publishedAt,
   readTime,
+  featured,
   "mainImage": mainImage{
     asset->{url},
     alt,
@@ -33,34 +33,21 @@ export const ALL_POSTS_QUERY = `*[_type == "post" && contentType == "blog"] | or
 }`;
 
 /**
- * Query to fetch all news posts for listing pages
- * Optimizations:
- * - Uses indexed _type filter
- * - Filters by contentType for news posts
- * - Orders by indexed publishedAt field
- * - Minimal projections (only needed fields)
- * - Inline author dereferencing (prevents N+1 queries)
- * - Image URL resolution in projection
+ * Query to fetch all news items
  */
-export const NEWS_POSTS_QUERY = `*[_type == "post" && contentType == "news"] | order(publishedAt desc) {
+export const NEWS_POSTS_QUERY = `*[_type == "news"] | order(publishedAt desc) {
   _id,
   title,
   slug,
-  contentType,
   excerpt,
   publishedAt,
-  readTime,
+  postFormat,
+  externalUrl,
+  sourceName,
+  featured,
   "mainImage": mainImage{
-    asset->{url},
-    alt,
-    hotspot
-  },
-  "author": author->{
-    name,
-    slug,
-    "image": image.asset->url
-  },
-  categories
+    asset->{url}
+  }
 }`;
 
 /**
@@ -111,6 +98,10 @@ export const RECENT_POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) 
   excerpt,
   publishedAt,
   readTime,
+  featured,
+  postFormat,
+  externalUrl,
+  sourceName,
   "mainImage": mainImage{
     asset->{url},
     alt,
@@ -137,6 +128,10 @@ export const POSTS_BY_CATEGORY_QUERY = `*[_type == "post" && $category in catego
   excerpt,
   publishedAt,
   readTime,
+  featured,
+  postFormat,
+  externalUrl,
+  sourceName,
   "mainImage": mainImage{
     asset->{url},
     alt,
@@ -366,3 +361,26 @@ export const REVIEWS_FIRST_PAGE_QUERY = `*[_type == "review"] | order(publishedA
 
 
 export const REVIEWS_NEXT_PAGE_QUERY = `*[_type == "review" && _id > $lastId] | order(publishedAt desc) [0...$pageSize] ${REVIEWS_PROJECTION}`;
+
+// ============================================================================
+// GROQ Queries for About Us & Specialists
+// ============================================================================
+
+export const SPECIALISTS_QUERY = `*[_type == "specialist"] | order(order desc, name asc) {
+  _id,
+  name,
+  slug,
+  title,
+  image,
+  experience,
+  specialties,
+  teaser,
+  fullBio,
+  order
+}`;
+
+export const ABOUT_US_QUERY = `*[_type == "aboutUs"][0] {
+  hero,
+  philosophy,
+  story
+}`;

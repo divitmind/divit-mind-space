@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# accidental files
+bash.exe.stackdump
+local_files.txt
+remote_files.txt
+public/Capture.JPG
+components/gallery/Selected Pics For Website/
+*.JPG
+*.jpeg
+*.jpg
+*.jpeg

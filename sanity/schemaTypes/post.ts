@@ -12,20 +12,6 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "contentType",
-      title: "Content Type",
-      type: "string",
-      options: {
-        list: [
-          { title: "Blog", value: "blog" },
-          { title: "News", value: "news" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "blog",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: "slug",
       type: "slug",
       options: {
@@ -82,14 +68,21 @@ export const postType = defineType({
       of: [{ type: "string" }],
       options: {
         list: [
-          { title: "Technology", value: "technology" },
-          { title: "Design", value: "design" },
-          { title: "Business", value: "business" },
-          { title: "Marketing", value: "marketing" },
-          { title: "Development", value: "development" },
-          { title: "Company", value: "company" },
+          { title: "Parenting Tips", value: "parenting" },
+          { title: "Clinical Insights", value: "clinical" },
+          { title: "Education Strategies", value: "education" },
+          { title: "Adult Support", value: "adult" },
+          { title: "Personal Stories", value: "stories" },
+          { title: "School Guidance", value: "school" },
         ],
       },
+    }),
+    defineField({
+      name: "featured",
+      title: "Featured Post",
+      type: "boolean",
+      description: "Highlight this post at the top of the blog page",
+      initialValue: false,
     }),
     defineField({
       name: "publishedAt",
