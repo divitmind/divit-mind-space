@@ -70,8 +70,9 @@ export interface Post {
   author: AuthorReference;
   categories?: string[];
   publishedAt: string;
-  body: PortableTextBlock[];
   readTime?: number;
+  featured?: boolean;
+  body: PortableTextBlock[];
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
@@ -90,6 +91,7 @@ export interface PostListItem {
   excerpt?: string;
   publishedAt: string;
   readTime?: number;
+  featured?: boolean;
   mainImage?: {
     asset: {
       url: string;
