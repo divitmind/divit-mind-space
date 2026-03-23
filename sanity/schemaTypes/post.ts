@@ -12,20 +12,6 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "contentType",
-      title: "Content Type",
-      type: "string",
-      options: {
-        list: [
-          { title: "Blog", value: "blog" },
-          { title: "News", value: "news" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "blog",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: "slug",
       type: "slug",
       options: {
@@ -95,37 +81,8 @@ export const postType = defineType({
       name: "featured",
       title: "Featured Post",
       type: "boolean",
-      description: "Highlight this post at the top of the blog or news page",
+      description: "Highlight this post at the top of the blog page",
       initialValue: false,
-    }),
-    defineField({
-      name: "postFormat",
-      title: "Post Format",
-      type: "string",
-      options: {
-        list: [
-          { title: "Standard (Internal Article)", value: "standard" },
-          { title: "External (Press/Media Link)", value: "external" },
-          { title: "Event / Announcement", value: "event" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "standard",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "externalUrl",
-      title: "External URL",
-      type: "url",
-      description: "The full link to the external article or event page",
-      hidden: ({ document }) => document?.postFormat === "standard",
-    }),
-    defineField({
-      name: "sourceName",
-      title: "Source / Organization Name",
-      type: "string",
-      description: "e.g., Indian Express, Bishop Cotton Girls School",
-      hidden: ({ document }) => document?.postFormat === "standard",
     }),
     defineField({
       name: "publishedAt",

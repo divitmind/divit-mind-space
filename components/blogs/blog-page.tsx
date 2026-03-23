@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Clock, ArrowRight, BookOpen, Tag, ExternalLink } from "lucide-react";
+import { Clock, ArrowRight, BookOpen, Tag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { PostListItem } from "@/sanity/types";
@@ -10,7 +10,6 @@ import type { PostListItem } from "@/sanity/types";
 interface BlogPageProps {
   posts: PostListItem[];
   title?: string;
-  showCategories?: boolean;
 }
 
 const categories = [
@@ -23,14 +22,14 @@ const categories = [
   { id: "school", label: "School Guidance" },
 ];
 
-export default function BlogPage({ posts, title = "Blog", showCategories = true }: BlogPageProps) {
+export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
   const [activeCategory, setActiveCategory] = useState("all");
 
   // Filter posts by category
   const filteredPosts = useMemo(() => {
-    if (!showCategories || activeCategory === "all") return posts;
+    if (activeCategory === "all") return posts;
     return posts.filter((post) => post.categories?.includes(activeCategory));
-  }, [activeCategory, posts, showCategories]);
+  }, [activeCategory, posts]);
 
   // Find the featured post (highest priority to 'featured' flag, then newest)
   const featuredPost = useMemo(() => {
@@ -40,11 +39,8 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
 
   // Remaining posts for the grid (excluding featured if it's the newest)
   const gridPosts = useMemo(() => {
-    if (!featuredPost) return filteredPosts;
     return filteredPosts.filter((p) => p._id !== featuredPost?._id);
   }, [filteredPosts, featuredPost]);
-
-  const featuredLink = featuredPost?.postFormat !== "standard" ? featuredPost.externalUrl : `/blogs/${featuredPost?.slug.current}`;
 
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
@@ -65,15 +61,13 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            {title === "Latest News" 
-              ? "Stay updated with our latest announcements, press coverage, and community events."
-              : "Insights, strategies, and stories to support your unique neurodivergent journey."}
+            Insights, strategies, and stories to support your unique neurodivergent journey.
           </motion.p>
         </div>
       </section>
 
       {/* Featured Post */}
-      {posts.length > 0 && (activeCategory === "all" || !showCategories) && featuredPost && (
+      {posts.length > 0 && activeCategory === "all" && featuredPost && (
         <section className="pb-16 px-4">
           <div className="container mx-auto">
             <motion.div 
@@ -81,12 +75,7 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
               animate={{ opacity: 1, scale: 1 }}
               className="relative bg-white rounded-3xl overflow-hidden border border-green/5 shadow-sm hover:shadow-md transition-shadow group"
             >
-              <Link 
-                href={featuredLink || "#"} 
-                target={featuredPost.postFormat !== "standard" ? "_blank" : undefined}
-                rel={featuredPost.postFormat !== "standard" ? "noopener noreferrer" : undefined}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-0"
-              >
+              <Link href={`/blogs/${featuredPost.slug.current}`} className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 <div className="relative h-64 lg:h-auto min-h-[350px] overflow-hidden">
                   {featuredPost.mainImage?.asset?.url ? (
                     <Image
@@ -104,22 +93,17 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
                     <span className="bg-purple text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
                       Featured
                     </span>
-                    {featuredPost.postFormat !== "standard" && (
-                      <span className="bg-white/90 backdrop-blur-sm text-green px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg flex items-center gap-1.5">
-                        <ExternalLink className="w-3 h-3" /> {featuredPost.postFormat === "event" ? "Event" : "External"}
-                      </span>
-                    )}
                   </div>
                 </div>
                 <div className="p-8 lg:p-12 flex flex-col justify-center">
                   <div className="flex items-center gap-4 text-sm text-green/60 mb-6">
                     <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
                       <Tag className="w-3 h-3" />
-                      {featuredPost.categories?.[0] || (title === "Latest News" ? "News" : "Insight")}
+                      {featuredPost.categories?.[0] || "Insight"}
                     </span>
                     <span className="w-1 h-1 rounded-full bg-green/20" />
                     <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
-                      {featuredPost.postFormat !== "standard" ? `via ${featuredPost.sourceName || "Press"}` : (featuredPost.author?.name || "Expert")}
+                      {featuredPost.author?.name || "Expert"}
                     </span>
                     <span className="w-1 h-1 rounded-full bg-green/20" />
                     <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
@@ -134,8 +118,7 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
                     {featuredPost.excerpt}
                   </p>
                   <div className="flex items-center gap-2 text-green font-bold uppercase tracking-widest text-sm group-hover:gap-3 transition-all">
-                    {featuredPost.postFormat !== "standard" ? (featuredPost.postFormat === "event" ? "View Details" : "Read on Source") : "Read the Full Story"} 
-                    {featuredPost.postFormat !== "standard" ? <ExternalLink className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
+                    Read the Full Story <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </Link>
@@ -145,28 +128,26 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
       )}
 
       {/* Categories Tabs */}
-      {showCategories && (
-        <section className="pb-12 px-4 sticky top-20 z-30 bg-[#FDFBF7]/80 backdrop-blur-md">
-          <div className="container mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`
-                    px-5 py-2 rounded-full text-sm font-bold transition-all border
-                    ${activeCategory === cat.id 
-                      ? "bg-green text-white border-green shadow-sm" 
-                      : "bg-white text-green/70 border-green/10 hover:border-green/30"}
-                  `}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
+      <section className="pb-12 px-4 sticky top-20 z-30 bg-[#FDFBF7]/80 backdrop-blur-md">
+        <div className="container mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`
+                  px-5 py-2 rounded-full text-sm font-bold transition-all border
+                  ${activeCategory === cat.id 
+                    ? "bg-green text-white border-green shadow-sm" 
+                    : "bg-white text-green/70 border-green/10 hover:border-green/30"}
+                `}
+              >
+                {cat.label}
+              </button>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* Posts Grid */}
       <section className="pb-24 px-4">
@@ -185,7 +166,7 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
                   transition={{ delay: idx * 0.05 }}
                   layout
                 >
-                  <BlogCard post={post} title={title} />
+                  <BlogCard post={post} />
                 </motion.div>
               ))}
             </motion.div>
@@ -196,10 +177,8 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
               <div className="w-16 h-16 bg-green/5 rounded-full flex items-center justify-center mx-auto mb-4">
                 <BookOpen className="w-8 h-8 text-green/20" />
               </div>
-              <h3 className="text-xl font-bold text-green">
-                {title === "Latest News" ? "No news updates found" : "No posts found in this category"}
-              </h3>
-              <p className="text-green/60 mt-2">Check back soon for new updates and insights.</p>
+              <h3 className="text-xl font-bold text-green">No posts found in this category</h3>
+              <p className="text-green/60 mt-2">Check back soon for new insights and strategies.</p>
             </div>
           )}
         </div>
@@ -208,14 +187,10 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
   );
 }
 
-function BlogCard({ post, title }: { post: PostListItem, title?: string }) {
-  const cardLink = post.postFormat !== "standard" ? post.externalUrl : `/blogs/${post.slug.current}`;
-  
+function BlogCard({ post }: { post: PostListItem }) {
   return (
     <Link 
-      href={cardLink || "#"}
-      target={post.postFormat !== "standard" ? "_blank" : undefined}
-      rel={post.postFormat !== "standard" ? "noopener noreferrer" : undefined}
+      href={`/blogs/${post.slug.current}`}
       className="bg-white rounded-2xl overflow-hidden border border-green/5 shadow-sm hover:shadow-lg transition-all flex flex-col h-full group"
     >
       <div className="relative h-56 overflow-hidden">
@@ -231,15 +206,10 @@ function BlogCard({ post, title }: { post: PostListItem, title?: string }) {
             <BookOpen className="w-10 h-10 text-green/10" />
           </div>
         )}
-        <div className="absolute bottom-4 left-4 flex gap-2">
+        <div className="absolute bottom-4 left-4">
            <span className="bg-white/90 backdrop-blur-sm text-green px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm">
-             {post.categories?.[0] || (title === "Latest News" ? "News" : "Insight")}
+             {post.categories?.[0] || "Insight"}
            </span>
-           {post.postFormat !== "standard" && (
-             <span className="bg-purple/90 backdrop-blur-sm text-white px-2 py-1 rounded-full text-[10px] font-bold shadow-sm">
-               <ExternalLink className="w-3 h-3" />
-             </span>
-           )}
         </div>
       </div>
       <div className="p-6 flex flex-col flex-1">
@@ -249,9 +219,7 @@ function BlogCard({ post, title }: { post: PostListItem, title?: string }) {
             {post.readTime || 5} min
           </span>
           <span className="w-1 h-1 rounded-full bg-green/10" />
-          <span className="line-clamp-1">
-            {post.postFormat !== "standard" ? `via ${post.sourceName || "Press"}` : `By ${post.author?.name || "Expert"}`}
-          </span>
+          <span>By {post.author?.name || "Expert"}</span>
         </div>
         <h3 className="text-xl font-bold text-green mb-3 leading-tight group-hover:text-purple transition-colors line-clamp-2">
           {post.title}
@@ -260,8 +228,7 @@ function BlogCard({ post, title }: { post: PostListItem, title?: string }) {
           {post.excerpt}
         </p>
         <div className="flex items-center gap-2 text-xs font-bold text-green uppercase tracking-[0.2em] group-hover:gap-3 transition-all pt-4 border-t border-green/5">
-          {post.postFormat !== "standard" ? (post.postFormat === "event" ? "View Details" : "Read on Source") : "Read More"} 
-          {post.postFormat !== "standard" ? <ExternalLink className="w-3 h-3" /> : <ArrowRight className="w-3 h-3" />}
+          Read More <ArrowRight className="w-3 h-3" />
         </div>
       </div>
     </Link>

@@ -11,18 +11,14 @@
  * - Inline author dereferencing (prevents N+1 queries)
  * - Image URL resolution in projection
  */
-export const ALL_POSTS_QUERY = `*[_type == "post" && contentType == "blog"] | order(publishedAt desc) {
+export const ALL_POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) {
   _id,
   title,
   slug,
-  contentType,
   excerpt,
   publishedAt,
   readTime,
   featured,
-  postFormat,
-  externalUrl,
-  sourceName,
   "mainImage": mainImage{
     asset->{url},
     alt,
@@ -37,38 +33,21 @@ export const ALL_POSTS_QUERY = `*[_type == "post" && contentType == "blog"] | or
 }`;
 
 /**
- * Query to fetch all news posts for listing pages
- * Optimizations:
- * - Uses indexed _type filter
- * - Filters by contentType for news posts
- * - Orders by indexed publishedAt field
- * - Minimal projections (only needed fields)
- * - Inline author dereferencing (prevents N+1 queries)
- * - Image URL resolution in projection
+ * Query to fetch all news items
  */
-export const NEWS_POSTS_QUERY = `*[_type == "post" && contentType == "news"] | order(publishedAt desc) {
+export const NEWS_POSTS_QUERY = `*[_type == "news"] | order(publishedAt desc) {
   _id,
   title,
   slug,
-  contentType,
   excerpt,
   publishedAt,
-  readTime,
-  featured,
   postFormat,
   externalUrl,
   sourceName,
+  featured,
   "mainImage": mainImage{
-    asset->{url},
-    alt,
-    hotspot
-  },
-  "author": author->{
-    name,
-    slug,
-    "image": image.asset->url
-  },
-  categories
+    asset->{url}
+  }
 }`;
 
 /**
