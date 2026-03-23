@@ -85,7 +85,7 @@ export default function NewsPage({ posts }: NewsPageProps) {
 }
 
 function NewsItem({ post, isFeatured = false }: { post: PostListItem, isFeatured?: boolean }) {
-  const link = post.isExternal ? post.externalUrl : `/news/${post.slug.current}`;
+  const link = post.postFormat !== "standard" ? post.externalUrl : `/news/${post.slug.current}`;
   
   return (
     <div className={`grid grid-cols-1 ${isFeatured ? 'lg:grid-cols-2' : 'md:grid-cols-3'} gap-0`}>
@@ -102,10 +102,10 @@ function NewsItem({ post, isFeatured = false }: { post: PostListItem, isFeatured
             <Newspaper className="w-12 h-12 text-green/10" />
           </div>
         )}
-        {post.isExternal && (
+        {post.postFormat !== "standard" && (
             <div className="absolute top-4 left-4">
                 <span className="bg-purple text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center gap-1.5">
-                    <ExternalLink className="w-3 h-3" /> Press Coverage
+                    <ExternalLink className="w-3 h-3" /> {post.postFormat === "event" ? "Event / Notice" : "Press Coverage"}
                 </span>
             </div>
         )}
@@ -119,7 +119,7 @@ function NewsItem({ post, isFeatured = false }: { post: PostListItem, isFeatured
            </span>
            <span className="w-1 h-1 rounded-full bg-green/10" />
            <span>
-             {post.isExternal ? `via ${post.sourceName || "Press"}` : "Announcement"}
+             {post.postFormat !== "standard" ? `via ${post.sourceName || "Press"}` : "Announcement"}
            </span>
         </div>
 
@@ -133,12 +133,12 @@ function NewsItem({ post, isFeatured = false }: { post: PostListItem, isFeatured
 
         <Link 
           href={link || "#"}
-          target={post.isExternal ? "_blank" : undefined}
-          rel={post.isExternal ? "noopener noreferrer" : undefined}
+          target={post.postFormat !== "standard" ? "_blank" : undefined}
+          rel={post.postFormat !== "standard" ? "noopener noreferrer" : undefined}
           className="flex items-center gap-2 text-sm font-bold text-green uppercase tracking-widest group-hover:gap-3 transition-all"
         >
-          {post.isExternal ? "Read Full Article" : "Read More"} 
-          {post.isExternal ? <ExternalLink className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
+          {post.postFormat !== "standard" ? (post.postFormat === "event" ? "View Details" : "Read Full Article") : "Read More"} 
+          {post.postFormat !== "standard" ? <ExternalLink className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
         </Link>
       </div>
     </div>

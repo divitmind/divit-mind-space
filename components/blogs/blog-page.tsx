@@ -44,7 +44,7 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
     return filteredPosts.filter((p) => p._id !== featuredPost?._id);
   }, [filteredPosts, featuredPost]);
 
-  const featuredLink = featuredPost?.isExternal ? featuredPost.externalUrl : `/blogs/${featuredPost?.slug.current}`;
+  const featuredLink = featuredPost?.postFormat !== "standard" ? featuredPost.externalUrl : `/blogs/${featuredPost?.slug.current}`;
 
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
@@ -83,8 +83,8 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
             >
               <Link 
                 href={featuredLink || "#"} 
-                target={featuredPost.isExternal ? "_blank" : undefined}
-                rel={featuredPost.isExternal ? "noopener noreferrer" : undefined}
+                target={featuredPost.postFormat !== "standard" ? "_blank" : undefined}
+                rel={featuredPost.postFormat !== "standard" ? "noopener noreferrer" : undefined}
                 className="grid grid-cols-1 lg:grid-cols-2 gap-0"
               >
                 <div className="relative h-64 lg:h-auto min-h-[350px] overflow-hidden">
@@ -104,9 +104,9 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
                     <span className="bg-purple text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
                       Featured
                     </span>
-                    {featuredPost.isExternal && (
+                    {featuredPost.postFormat !== "standard" && (
                       <span className="bg-white/90 backdrop-blur-sm text-green px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg flex items-center gap-1.5">
-                        <ExternalLink className="w-3 h-3" /> External
+                        <ExternalLink className="w-3 h-3" /> {featuredPost.postFormat === "event" ? "Event" : "External"}
                       </span>
                     )}
                   </div>
@@ -119,7 +119,7 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
                     </span>
                     <span className="w-1 h-1 rounded-full bg-green/20" />
                     <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
-                      {featuredPost.isExternal ? `via ${featuredPost.sourceName || "Press"}` : (featuredPost.author?.name || "Expert")}
+                      {featuredPost.postFormat !== "standard" ? `via ${featuredPost.sourceName || "Press"}` : (featuredPost.author?.name || "Expert")}
                     </span>
                     <span className="w-1 h-1 rounded-full bg-green/20" />
                     <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
@@ -134,8 +134,8 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
                     {featuredPost.excerpt}
                   </p>
                   <div className="flex items-center gap-2 text-green font-bold uppercase tracking-widest text-sm group-hover:gap-3 transition-all">
-                    {featuredPost.isExternal ? "Read on Source" : "Read the Full Story"} 
-                    {featuredPost.isExternal ? <ExternalLink className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
+                    {featuredPost.postFormat !== "standard" ? (featuredPost.postFormat === "event" ? "View Details" : "Read on Source") : "Read the Full Story"} 
+                    {featuredPost.postFormat !== "standard" ? <ExternalLink className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
                   </div>
                 </div>
               </Link>
@@ -209,13 +209,13 @@ export default function BlogPage({ posts, title = "Blog", showCategories = true 
 }
 
 function BlogCard({ post, title }: { post: PostListItem, title?: string }) {
-  const cardLink = post.isExternal ? post.externalUrl : `/blogs/${post.slug.current}`;
+  const cardLink = post.postFormat !== "standard" ? post.externalUrl : `/blogs/${post.slug.current}`;
   
   return (
     <Link 
       href={cardLink || "#"}
-      target={post.isExternal ? "_blank" : undefined}
-      rel={post.isExternal ? "noopener noreferrer" : undefined}
+      target={post.postFormat !== "standard" ? "_blank" : undefined}
+      rel={post.postFormat !== "standard" ? "noopener noreferrer" : undefined}
       className="bg-white rounded-2xl overflow-hidden border border-green/5 shadow-sm hover:shadow-lg transition-all flex flex-col h-full group"
     >
       <div className="relative h-56 overflow-hidden">
@@ -235,7 +235,7 @@ function BlogCard({ post, title }: { post: PostListItem, title?: string }) {
            <span className="bg-white/90 backdrop-blur-sm text-green px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm">
              {post.categories?.[0] || (title === "Latest News" ? "News" : "Insight")}
            </span>
-           {post.isExternal && (
+           {post.postFormat !== "standard" && (
              <span className="bg-purple/90 backdrop-blur-sm text-white px-2 py-1 rounded-full text-[10px] font-bold shadow-sm">
                <ExternalLink className="w-3 h-3" />
              </span>
@@ -250,7 +250,7 @@ function BlogCard({ post, title }: { post: PostListItem, title?: string }) {
           </span>
           <span className="w-1 h-1 rounded-full bg-green/10" />
           <span className="line-clamp-1">
-            {post.isExternal ? `via ${post.sourceName || "Press"}` : `By ${post.author?.name || "Expert"}`}
+            {post.postFormat !== "standard" ? `via ${post.sourceName || "Press"}` : `By ${post.author?.name || "Expert"}`}
           </span>
         </div>
         <h3 className="text-xl font-bold text-green mb-3 leading-tight group-hover:text-purple transition-colors line-clamp-2">
@@ -260,8 +260,8 @@ function BlogCard({ post, title }: { post: PostListItem, title?: string }) {
           {post.excerpt}
         </p>
         <div className="flex items-center gap-2 text-xs font-bold text-green uppercase tracking-[0.2em] group-hover:gap-3 transition-all pt-4 border-t border-green/5">
-          {post.isExternal ? "Read on Source" : "Read More"} 
-          {post.isExternal ? <ExternalLink className="w-3 h-3" /> : <ArrowRight className="w-3 h-3" />}
+          {post.postFormat !== "standard" ? (post.postFormat === "event" ? "View Details" : "Read on Source") : "Read More"} 
+          {post.postFormat !== "standard" ? <ExternalLink className="w-3 h-3" /> : <ArrowRight className="w-3 h-3" />}
         </div>
       </div>
     </Link>

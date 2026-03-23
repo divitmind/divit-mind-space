@@ -72,6 +72,9 @@ export interface Post {
   publishedAt: string;
   readTime?: number;
   featured?: boolean;
+  postFormat: "standard" | "external" | "event";
+  externalUrl?: string;
+  sourceName?: string;
   body: PortableTextBlock[];
   seo?: {
     metaTitle?: string;
@@ -92,7 +95,7 @@ export interface PostListItem {
   publishedAt: string;
   readTime?: number;
   featured?: boolean;
-  isExternal?: boolean;
+  postFormat: "standard" | "external" | "event";
   externalUrl?: string;
   sourceName?: string;
   mainImage?: {
