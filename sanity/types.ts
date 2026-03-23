@@ -92,6 +92,9 @@ export interface PostListItem {
   publishedAt: string;
   readTime?: number;
   featured?: boolean;
+  isExternal?: boolean;
+  externalUrl?: string;
+  sourceName?: string;
   mainImage?: {
     asset: {
       url: string;

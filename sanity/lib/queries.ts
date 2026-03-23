@@ -20,6 +20,9 @@ export const ALL_POSTS_QUERY = `*[_type == "post" && contentType == "blog"] | or
   publishedAt,
   readTime,
   featured,
+  isExternal,
+  externalUrl,
+  sourceName,
   "mainImage": mainImage{
     asset->{url},
     alt,
@@ -52,6 +55,9 @@ export const NEWS_POSTS_QUERY = `*[_type == "post" && contentType == "news"] | o
   publishedAt,
   readTime,
   featured,
+  isExternal,
+  externalUrl,
+  sourceName,
   "mainImage": mainImage{
     asset->{url},
     alt,
@@ -114,6 +120,9 @@ export const RECENT_POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) 
   publishedAt,
   readTime,
   featured,
+  isExternal,
+  externalUrl,
+  sourceName,
   "mainImage": mainImage{
     asset->{url},
     alt,
@@ -141,6 +150,9 @@ export const POSTS_BY_CATEGORY_QUERY = `*[_type == "post" && $category in catego
   publishedAt,
   readTime,
   featured,
+  isExternal,
+  externalUrl,
+  sourceName,
   "mainImage": mainImage{
     asset->{url},
     alt,

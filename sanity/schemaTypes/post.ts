@@ -99,6 +99,27 @@ export const postType = defineType({
       initialValue: false,
     }),
     defineField({
+      name: "isExternal",
+      title: "External Link",
+      type: "boolean",
+      description: "Check this if the news/blog is an external article or event",
+      initialValue: false,
+    }),
+    defineField({
+      name: "externalUrl",
+      title: "External URL",
+      type: "url",
+      description: "The full link to the external article (e.g., https://www.newindianexpress.com/...)",
+      hidden: ({ document }) => !document?.isExternal,
+    }),
+    defineField({
+      name: "sourceName",
+      title: "Source Name",
+      type: "string",
+      description: "e.g., Indian Express, Bishop Cotton Girls School",
+      hidden: ({ document }) => !document?.isExternal,
+    }),
+    defineField({
       name: "publishedAt",
       title: "Published at",
       type: "datetime",
