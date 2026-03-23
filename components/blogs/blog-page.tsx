@@ -103,6 +103,10 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
                     </span>
                     <span className="w-1 h-1 rounded-full bg-green/20" />
                     <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
+                      {featuredPost.author?.name || "Expert"}
+                    </span>
+                    <span className="w-1 h-1 rounded-full bg-green/20" />
+                    <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
                       <Clock className="w-3 h-3" />
                       {featuredPost.readTime || 5} min read
                     </span>
@@ -215,7 +219,7 @@ function BlogCard({ post }: { post: PostListItem }) {
             {post.readTime || 5} min
           </span>
           <span className="w-1 h-1 rounded-full bg-green/10" />
-          <span>{new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+          <span>By {post.author?.name || "Expert"}</span>
         </div>
         <h3 className="text-xl font-bold text-green mb-3 leading-tight group-hover:text-purple transition-colors line-clamp-2">
           {post.title}
