@@ -10,6 +10,7 @@ import type { PostListItem } from "@/sanity/types";
 interface BlogPageProps {
   posts: PostListItem[];
   title?: string;
+  showCategories?: boolean;
 }
 
 const categories = [
@@ -22,14 +23,14 @@ const categories = [
   { id: "school", label: "School Guidance" },
 ];
 
-export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
+export default function BlogPage({ posts, title = "Blog", showCategories = true }: BlogPageProps) {
   const [activeCategory, setActiveCategory] = useState("all");
 
   // Filter posts by category
   const filteredPosts = useMemo(() => {
-    if (activeCategory === "all") return posts;
+    if (!showCategories || activeCategory === "all") return posts;
     return posts.filter((post) => post.categories?.includes(activeCategory));
-  }, [activeCategory, posts]);
+  }, [activeCategory, posts, showCategories]);
 
   // Find the featured post (highest priority to 'featured' flag, then newest)
   const featuredPost = useMemo(() => {
@@ -39,6 +40,7 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
 
   // Remaining posts for the grid (excluding featured if it's the newest)
   const gridPosts = useMemo(() => {
+    if (!featuredPost) return filteredPosts;
     return filteredPosts.filter((p) => p._id !== featuredPost?._id);
   }, [filteredPosts, featuredPost]);
 
@@ -63,13 +65,15 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            Insights, strategies, and stories to support your unique neurodivergent journey.
+            {title === "Latest News" 
+              ? "Stay updated with our latest announcements, press coverage, and community events."
+              : "Insights, strategies, and stories to support your unique neurodivergent journey."}
           </motion.p>
         </div>
       </section>
 
       {/* Featured Post */}
-      {posts.length > 0 && activeCategory === "all" && featuredPost && (
+      {posts.length > 0 && (activeCategory === "all" || !showCategories) && featuredPost && (
         <section className="pb-16 px-4">
           <div className="container mx-auto">
             <motion.div 
@@ -111,7 +115,7 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
                   <div className="flex items-center gap-4 text-sm text-green/60 mb-6">
                     <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
                       <Tag className="w-3 h-3" />
-                      {featuredPost.categories?.[0] || "Insight"}
+                      {featuredPost.categories?.[0] || (title === "Latest News" ? "News" : "Insight")}
                     </span>
                     <span className="w-1 h-1 rounded-full bg-green/20" />
                     <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
@@ -141,26 +145,28 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
       )}
 
       {/* Categories Tabs */}
-      <section className="pb-12 px-4 sticky top-20 z-30 bg-[#FDFBF7]/80 backdrop-blur-md">
-        <div className="container mx-auto">
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`
-                  px-5 py-2 rounded-full text-sm font-bold transition-all border
-                  ${activeCategory === cat.id 
-                    ? "bg-green text-white border-green shadow-sm" 
-                    : "bg-white text-green/70 border-green/10 hover:border-green/30"}
-                `}
-              >
-                {cat.label}
-              </button>
-            ))}
+      {showCategories && (
+        <section className="pb-12 px-4 sticky top-20 z-30 bg-[#FDFBF7]/80 backdrop-blur-md">
+          <div className="container mx-auto">
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`
+                    px-5 py-2 rounded-full text-sm font-bold transition-all border
+                    ${activeCategory === cat.id 
+                      ? "bg-green text-white border-green shadow-sm" 
+                      : "bg-white text-green/70 border-green/10 hover:border-green/30"}
+                  `}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Posts Grid */}
       <section className="pb-24 px-4">
@@ -179,7 +185,7 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
                   transition={{ delay: idx * 0.05 }}
                   layout
                 >
-                  <BlogCard post={post} />
+                  <BlogCard post={post} title={title} />
                 </motion.div>
               ))}
             </motion.div>
@@ -190,8 +196,10 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
               <div className="w-16 h-16 bg-green/5 rounded-full flex items-center justify-center mx-auto mb-4">
                 <BookOpen className="w-8 h-8 text-green/20" />
               </div>
-              <h3 className="text-xl font-bold text-green">No posts found in this category</h3>
-              <p className="text-green/60 mt-2">Check back soon for new insights and strategies.</p>
+              <h3 className="text-xl font-bold text-green">
+                {title === "Latest News" ? "No news updates found" : "No posts found in this category"}
+              </h3>
+              <p className="text-green/60 mt-2">Check back soon for new updates and insights.</p>
             </div>
           )}
         </div>
@@ -200,7 +208,7 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
   );
 }
 
-function BlogCard({ post }: { post: PostListItem }) {
+function BlogCard({ post, title }: { post: PostListItem, title?: string }) {
   const cardLink = post.isExternal ? post.externalUrl : `/blogs/${post.slug.current}`;
   
   return (
@@ -225,7 +233,7 @@ function BlogCard({ post }: { post: PostListItem }) {
         )}
         <div className="absolute bottom-4 left-4 flex gap-2">
            <span className="bg-white/90 backdrop-blur-sm text-green px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm">
-             {post.categories?.[0] || "Insight"}
+             {post.categories?.[0] || (title === "Latest News" ? "News" : "Insight")}
            </span>
            {post.isExternal && (
              <span className="bg-purple/90 backdrop-blur-sm text-white px-2 py-1 rounded-full text-[10px] font-bold shadow-sm">

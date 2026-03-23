@@ -77,7 +77,11 @@ export default async function NewsListPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(newsJsonLd) }}
       />
-      <BlogPage posts={(posts as PostsQueryResult) || []} title="Latest News" />
+      <BlogPage 
+        posts={(posts as PostsQueryResult) || []} 
+        title="Latest News" 
+        showCategories={false} 
+      />
     </>
   );
 }
