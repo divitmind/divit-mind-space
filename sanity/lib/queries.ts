@@ -382,3 +382,26 @@ export const REVIEWS_FIRST_PAGE_QUERY = `*[_type == "review"] | order(publishedA
 
 
 export const REVIEWS_NEXT_PAGE_QUERY = `*[_type == "review" && _id > $lastId] | order(publishedAt desc) [0...$pageSize] ${REVIEWS_PROJECTION}`;
+
+// ============================================================================
+// GROQ Queries for About Us & Specialists
+// ============================================================================
+
+export const SPECIALISTS_QUERY = `*[_type == "specialist"] | order(order desc, name asc) {
+  _id,
+  name,
+  slug,
+  title,
+  image,
+  experience,
+  specialties,
+  teaser,
+  fullBio,
+  order
+}`;
+
+export const ABOUT_US_QUERY = `*[_type == "aboutUs"][0] {
+  hero,
+  philosophy,
+  story
+}`;

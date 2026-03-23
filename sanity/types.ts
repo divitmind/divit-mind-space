@@ -252,3 +252,45 @@ export interface ReviewListItem {
 }
 
 export type ReviewsQueryResult = ReviewListItem[];
+
+// Specialist / Team Types
+export interface Specialist {
+  _id: string;
+  name: string;
+  slug: { current: string };
+  title: string;
+  image: SanityImage;
+  experience?: string;
+  specialties?: string[];
+  teaser: string;
+  fullBio: PortableTextBlock[];
+  order?: number;
+}
+
+export type SpecialistsQueryResult = Specialist[];
+
+// About Us Page Singleton Type
+export interface AboutUs {
+  hero?: {
+    title?: string;
+    italicSubtitle?: string;
+    description?: string;
+    images?: SanityImage[];
+  };
+  philosophy?: {
+    title?: string;
+    description?: string;
+    points?: {
+      title: string;
+      description: string;
+      icon: string;
+    }[];
+  };
+  story?: {
+    title?: string;
+    paragraphs?: string[];
+    image?: SanityImage;
+  };
+}
+
+export type AboutUsQueryResult = AboutUs | null;

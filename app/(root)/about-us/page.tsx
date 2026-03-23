@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/about-us/hero-section";
 import { PhilosophySection } from "@/components/about-us/philosophy-section";
-import { BentoGridSection } from "@/components/about-us/bento-grid-section";
 import { StorySection } from "@/components/about-us/story-section";
-import { OurAdvisorSection } from "@/components/about-us/our-advisor-section";
 import { FoundersSpecialistsSection } from "@/components/about-us/founders-specialists-section";
 import { CtaSection } from "@/components/homepage/cta-section";
+import { sanityFetch } from "@/sanity/lib/live";
+import { ABOUT_US_QUERY, SPECIALISTS_QUERY } from "@/sanity/lib/queries";
+import type { AboutUsQueryResult, SpecialistsQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: "About Us | Divit MindSpace - Empowering Neurodivergent Children",
@@ -59,15 +60,21 @@ export const metadata: Metadata = {
   }
 };
 
-export default function AboutUsPage() {
+export default async function AboutUsPage() {
+  const [aboutUsData, specialistsData] = await Promise.all([
+    sanityFetch({ query: ABOUT_US_QUERY, tags: ["aboutUs"] }),
+    sanityFetch({ query: SPECIALISTS_QUERY, tags: ["specialist"] }),
+  ]);
+
+  const aboutUs = aboutUsData.data as AboutUsQueryResult;
+  const specialists = specialistsData.data as SpecialistsQueryResult;
+
   return (
     <main className="min-h-screen">
-      <HeroSection />
-      <PhilosophySection />
-      {/* <BentoGridSection /> */}
-      <StorySection />
-      <FoundersSpecialistsSection />
-      {/* <OurAdvisorSection /> */}
+      <HeroSection data={aboutUs?.hero} />
+      <PhilosophySection data={aboutUs?.philosophy} />
+      <StorySection data={aboutUs?.story} />
+      <FoundersSpecialistsSection specialists={specialists || []} />
       <CtaSection />
     </main>
   );
