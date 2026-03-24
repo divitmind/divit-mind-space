@@ -7,10 +7,13 @@ import type { GalleryItem } from "@/sanity/types";
  * Uses the WIIFM (What's In It For Me) framework focused on parents and schools.
  */
 export function enrichGalleryItem(item: GalleryItem): GalleryItem {
-  const location = item.locationEvent?.toLowerCase() || "";
+  // Clean the location: Remove file extensions like .jpeg, .jpg, .png
+  let location = item.locationEvent || "";
+  location = location.replace(/\.(jpg|jpeg|png|webp|gif)$/i, "").trim();
+  
+  const searchLocation = location.toLowerCase();
   
   // FIXED: If the title/story matches the bulk-upload defaults, we treat them as "empty"
-  // so the Smart Engine can apply the unique variety logic.
   const isDefaultTitle = item.title === "The Heart of Divit" || item.title === "Impact at Bishop Cotton" || item.title === "Excellence at DPS East";
   const isDefaultStory = item.story?.includes("Real, raw, and authentic moments") || item.story?.includes("Training educators");
 
@@ -19,21 +22,16 @@ export function enrichGalleryItem(item: GalleryItem): GalleryItem {
   let enrichedTag = item.tag;
 
   // If Navami has written a GENUINE manual override (not a default), we respect it.
-  if (enrichedTitle && enrichedStory) return item;
+  if (enrichedTitle && enrichedStory) return { ...item, locationEvent: location };
 
   // Simple stable hash based on ID to pick a variety for each item
   const hash = item._id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   const pick = (arr: string[]) => arr[hash % arr.length];
 
-  // 1. Bishop Cotton / Ryan / TISB / Shlok / School Smart Logic
-  if (location.includes("bishop cotton") || location.includes("ryan") || location.includes("tisb") || location.includes("school") || location.includes("shlok")) {
-    const titles = [
-      "Strengthening School Support",
-      "Impact in the Classroom",
-      "Empowering Every Student",
-      "Inclusion in Action",
-      "Supportive Learning Spaces"
-    ];
+  // Logic Groups based on cleaned location name
+  // 1. Schools
+  if (searchLocation.includes("bishop cotton") || searchLocation.includes("ryan") || searchLocation.includes("tisb") || searchLocation.includes("school") || searchLocation.includes("shlok")) {
+    const titles = ["Strengthening School Support", "Impact in the Classroom", "Empowering Every Student", "Inclusion in Action", "Supportive Learning Spaces"];
     const stories = [
       "Ensuring your child is understood and supported in their classroom through our specialized educator training and school awareness programs.",
       "We partner with leading institutions like this one to build environments where neurodivergent students don't just attend, but actually thrive.",
@@ -45,15 +43,9 @@ export function enrichGalleryItem(item: GalleryItem): GalleryItem {
     enrichedStory = enrichedStory || pick(stories);
     enrichedTag = enrichedTag || "Inclusive Education";
   } 
-  // 2. DPS East / Teacher Training Smart Logic
-  else if (location.includes("dps east") || location.includes("dps") || location.includes("college") || location.includes("university")) {
-    const titles = [
-      "Empowered Educators, Better Outcomes",
-      "Building Professional Bridges",
-      "Expertise Shared Locally",
-      "Leading with Understanding",
-      "The Future of Special Education"
-    ];
+  // 2. Training/University
+  else if (searchLocation.includes("dps") || searchLocation.includes("college") || searchLocation.includes("university") || searchLocation.includes("training")) {
+    const titles = ["Empowered Educators, Better Outcomes", "Building Professional Bridges", "Expertise Shared Locally", "Leading with Understanding", "The Future of Special Education"];
     const stories = [
       "Equipping the professionals who work with your child with the latest expert strategies to build a truly inclusive learning environment.",
       "When teachers are empowered with the right tools, your child's potential becomes limitless in every academic setting.",
@@ -65,15 +57,9 @@ export function enrichGalleryItem(item: GalleryItem): GalleryItem {
     enrichedStory = enrichedStory || pick(stories);
     enrichedTag = enrichedTag || "Professional Growth";
   }
-  // 3. CDC / Center / Activity Logic
-  else if (location.includes("cdc") || location.includes("development centre") || location.includes("center") || location.includes("session")) {
-    const titles = [
-      "A Space Built for Progress",
-      "Focused Growth, Every Day",
-      "Nurturing Breakthroughs",
-      "Designed for Your Child",
-      "Safety and Skill Building"
-    ];
+  // 3. Center
+  else if (searchLocation.includes("cdc") || searchLocation.includes("center") || searchLocation.includes("session")) {
+    const titles = ["A Space Built for Progress", "Focused Growth, Every Day", "Nurturing Breakthroughs", "Designed for Your Child", "Safety and Skill Building"];
     const stories = [
       "Your child's journey is accelerated in our sensory-safe environment, designed to reduce overwhelm and maximize every therapeutic session.",
       "Every corner of our center is thoughtfully designed to provide the safety and focus your child needs to master new skills.",
@@ -85,35 +71,9 @@ export function enrichGalleryItem(item: GalleryItem): GalleryItem {
     enrichedStory = enrichedStory || pick(stories);
     enrichedTag = enrichedTag || "Safe Learning Space";
   }
-  // 4. DSC / Therapy / Clinical Logic
-  else if (location.includes("dsc") || location.includes("therapy") || location.includes("clinical")) {
-    const titles = [
-      "Expert Care, Personal Growth",
-      "Evidence-Based Success",
-      "Confidence in Every Session",
-      "The Science of Potential",
-      "Compassionate Intervention"
-    ];
-    const stories = [
-      "Benefit from evidence-based therapy that focuses on your family's unique goals, helping your child build confidence and essential life skills.",
-      "Our clinical excellence is rooted in empathy, ensuring that every therapeutic intervention is as compassionate as it is effective.",
-      "Empowering your child with practical communication and social tools that translate directly into their everyday world.",
-      "Focusing on what's possible, we use specialized clinical strategies to unlock new milestones in your child's development.",
-      "Therapy that respects your child's unique personality while building the foundational skills needed for independence."
-    ];
-    enrichedTitle = enrichedTitle || pick(titles);
-    enrichedStory = enrichedStory || pick(stories);
-    enrichedTag = enrichedTag || "Clinical Excellence";
-  }
-  // 5. Default "The Heart of Divit" / General Connection
+  // 4. Default / Unknown / Heart of Divit
   else {
-    const titles = [
-      "The Heart of Your Journey",
-      "Authentic Connections",
-      "Moments of Pure Joy",
-      "Our Community in Action",
-      "Building a Brighter Future"
-    ];
+    const titles = ["The Heart of Your Journey", "Authentic Connections", "Moments of Pure Joy", "Our Community in Action", "Building a Brighter Future"];
     const stories = [
       "Real moments of connection and joy that show the progress possible when a family is supported by a community that truly cares.",
       "Beyond the clinical sessions, we are a family. These moments capture the resilience and heart of the Divit MindSpace community.",
@@ -128,6 +88,7 @@ export function enrichGalleryItem(item: GalleryItem): GalleryItem {
 
   return {
     ...item,
+    locationEvent: location || "Unknown Moment",
     title: enrichedTitle,
     story: enrichedStory,
     tag: enrichedTag
