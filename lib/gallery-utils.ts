@@ -9,15 +9,19 @@ import type { GalleryItem } from "@/sanity/types";
 export function enrichGalleryItem(item: GalleryItem): GalleryItem {
   const location = item.locationEvent?.toLowerCase() || "";
   
-  // If title and story already exist, return as is (Navami's manual override)
-  if (item.title && item.story) return item;
+  // FIXED: If the title/story matches the bulk-upload defaults, we treat them as "empty"
+  // so the Smart Engine can apply the unique variety logic.
+  const isDefaultTitle = item.title === "The Heart of Divit" || item.title === "Impact at Bishop Cotton" || item.title === "Excellence at DPS East";
+  const isDefaultStory = item.story?.includes("Real, raw, and authentic moments") || item.story?.includes("Training educators");
 
-  let enrichedTitle = item.title;
-  let enrichedStory = item.story;
+  let enrichedTitle = (item.title && !isDefaultTitle) ? item.title : "";
+  let enrichedStory = (item.story && !isDefaultStory) ? item.story : "";
   let enrichedTag = item.tag;
 
+  // If Navami has written a GENUINE manual override (not a default), we respect it.
+  if (enrichedTitle && enrichedStory) return item;
+
   // Simple stable hash based on ID to pick a variety for each item
-  // This ensures that even for the same location, different photos get different texts
   const hash = item._id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   const pick = (arr: string[]) => arr[hash % arr.length];
 
