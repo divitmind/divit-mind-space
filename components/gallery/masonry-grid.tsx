@@ -50,14 +50,21 @@ export function MasonryGrid({ items }: MasonryGridProps) {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-linear-to-t from-green/90 via-green/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                  <span className="text-[10px] font-bold text-white/70 uppercase tracking-[0.2em] mb-2">
-                    {item.tag || item.categories?.[0]}
-                  </span>
-                  <h3 className="text-white text-xl font-bold font-[family-name:var(--font-cormorant)] italic leading-tight">
-                    {item.title}
-                  </h3>
+                {/* Content Overlay - Always visible on mobile, subtle gradient on desktop */}
+                <div className="absolute inset-0 bg-gradient-to-t from-green/90 via-green/10 to-transparent flex flex-col justify-end p-5 md:p-6">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <span className="inline-block px-2 py-0.5 mb-2 bg-yellow-400 text-green text-[8px] md:text-[9px] font-bold uppercase tracking-widest rounded-sm">
+                      {item.tag || item.categories?.[0] || "Moment"}
+                    </span>
+                    <h3 className="text-white text-lg md:text-xl font-bold font-[family-name:var(--font-cormorant)] italic leading-tight group-hover:text-yellow-100 transition-colors">
+                      {item.title}
+                    </h3>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
