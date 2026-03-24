@@ -1,9 +1,10 @@
 "use client";
-import { Facebook, Twitter, Linkedin, ArrowLeft } from "lucide-react";
+import { Facebook, Twitter, Linkedin, ArrowLeft, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface BlogHeaderProps {
     category: string;
@@ -17,6 +18,23 @@ interface BlogHeaderProps {
 
 export const BlogHeader = ({ category, title, author, publishedDate }: BlogHeaderProps) => {
     const router = useRouter();
+    const [currentUrl, setCurrentUrl] = useState("");
+
+    useEffect(() => {
+        setCurrentUrl(window.location.href);
+    }, []);
+
+    const shareLinks = {
+        twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(currentUrl)}`,
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`,
+        linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`,
+        whatsapp: `https://wa.me/?text=${encodeURIComponent(`${title} ${currentUrl}`)}`,
+    };
+
+    const handleShare = (platform: keyof typeof shareLinks) => {
+        window.open(shareLinks[platform], "_blank", "noopener,noreferrer");
+    };
+
     return (
         <header className="space-y-6">
         <Button variant="outline" size="icon" className="hover:bg-blog-hover h-9 w-9 rounded-full" onClick={() => router.back()}>
@@ -49,20 +67,34 @@ export const BlogHeader = ({ category, title, author, publishedDate }: BlogHeade
                     <Button
                         variant="outline"
                         size="icon"
+                        onClick={() => handleShare("twitter")}
+                        title="Share on Twitter"
                         className="hover:bg-blog-hover h-9 w-9 rounded-full">
                         <Twitter />
                     </Button>
                     <Button
                         variant="outline"
                         size="icon"
+                        onClick={() => handleShare("facebook")}
+                        title="Share on Facebook"
                         className="hover:bg-blog-hover h-9 w-9 rounded-full">
                         <Facebook />
                     </Button>
                     <Button
                         variant="outline"
                         size="icon"
+                        onClick={() => handleShare("linkedin")}
+                        title="Share on LinkedIn"
                         className="hover:bg-blog-hover h-9 w-9 rounded-full">
                         <Linkedin />
+                    </Button>
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => handleShare("whatsapp")}
+                        title="Share on WhatsApp"
+                        className="hover:bg-blog-hover h-9 w-9 rounded-full">
+                        <MessageCircle />
                     </Button>
                 </div>
             </div>
