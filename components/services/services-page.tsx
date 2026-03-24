@@ -224,7 +224,7 @@ export default function ServicesPage({ title = "Our Services" }: ServicesPagePro
               Not Sure Where to Start?
             </h2>
             <p className="text-green/70 mb-6">
-              Book a free consultation and we'll help you understand which services are right for your child.
+              Book a free consultation and we&apos;ll help you understand which services are right for your child.
             </p>
             <WhatsAppConsultationLink className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-green text-white font-semibold hover:bg-green/90 transition-colors">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">

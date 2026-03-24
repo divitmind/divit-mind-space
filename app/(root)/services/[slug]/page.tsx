@@ -180,7 +180,7 @@ export default async function ServicePage({ params }: PageProps) {
                   className="text-2xl lg:text-3xl font-serif text-green mb-6"
                   style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
                 >
-                  What You'll Gain
+                  What You&apos;ll Gain
                 </h2>
                 <ul className="space-y-3">
                   {service.content.benefits.map((benefit, index) => (

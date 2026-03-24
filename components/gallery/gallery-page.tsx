@@ -35,7 +35,7 @@ export function GalleryPage({ initialItems, categories }: GalleryPageProps) {
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-green mb-4 font-[family-name:var(--font-cormorant)] italic"
             >
-              Our Journey in Moments
+              Milestones of Progress
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 15 }}
@@ -43,8 +43,8 @@ export function GalleryPage({ initialItems, categories }: GalleryPageProps) {
               transition={{ delay: 0.1 }}
               className="text-base md:text-lg text-green/70 leading-relaxed"
             >
-              Beyond therapy and education, we build stories of resilience, 
-              connection, and growth. Every photo is a milestone in a unique journey.
+              Every photo represents a breakthrough in a child&apos;s life, a family feeling supported, 
+              or a classroom becoming more inclusive. These are the real results of our shared journey.
             </motion.p>
           </div>
         </div>

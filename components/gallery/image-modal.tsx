@@ -56,18 +56,20 @@ export function ImageModal({ items, currentIndex, onClose, onNavigate }: ImageMo
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="relative w-full max-w-6xl bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-full max-h-[92vh] md:max-h-[85vh]"
+        className="relative w-full max-w-6xl bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-full max-h-[92vh] md:max-h-[85vh] isolate"
       >
-        {/* Close Button - Fixed Top Right */}
+        {/* Close Button - Optimized for Mobile Visibility */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-[110] p-2 bg-white/10 hover:bg-white/20 text-white md:text-green/40 md:hover:text-green backdrop-blur-sm rounded-full transition-colors md:bg-transparent"
+          className="absolute top-4 right-4 z-[120] p-2 bg-black/20 hover:bg-black/40 md:bg-white/10 md:hover:bg-white/20 text-white md:text-green/40 md:hover:text-green backdrop-blur-md rounded-full transition-all border border-white/10 md:border-transparent"
+          aria-label="Close modal"
         >
-          <X className="w-6 h-6" />
+          <X className="w-5 h-5 md:w-6 h-6" />
         </button>
 
         {/* Image Side */}
         <div className="relative h-[45%] md:h-auto md:flex-1 bg-black/5 flex items-center justify-center overflow-hidden">
+
           <AnimatePresence mode="wait">
             <motion.div
               key={currentItem._id}
