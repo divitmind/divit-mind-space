@@ -395,7 +395,13 @@ export const GALLERY_QUERY = `*[_type == "gallery"] | order(publishedAt desc) {
   locationEvent,
   story,
   tag,
-  categories,
+  "categories": categories[]->title,
   isFeatured,
   publishedAt
+}`;
+
+export const GALLERY_CATEGORIES_QUERY = `*[_type == "galleryCategory"] | order(title asc) {
+  _id,
+  title,
+  "slug": slug.current
 }`;

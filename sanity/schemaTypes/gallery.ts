@@ -51,16 +51,10 @@ export const galleryType = defineType({
     }),
     defineField({
       name: 'categories',
-      type: 'array',
       title: 'Categories',
-      of: [{type: 'string'}],
-      options: {
-        list: [
-          { title: 'Empowering Educators', value: 'Empowering Educators' },
-          { title: 'Nurturing Growth', value: 'Nurturing Growth' },
-          { title: 'Real Connections', value: 'Real Connections' },
-        ],
-      },
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'galleryCategory' }] }],
+      description: 'Select one or more categories for this image.',
       validation: (rule) => rule.required().min(1),
     }),
     defineField({

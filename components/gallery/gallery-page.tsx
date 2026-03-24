@@ -7,17 +7,12 @@ import { motion, AnimatePresence } from "motion/react";
 import type { GalleryItem } from "@/sanity/types";
 import { enrichGalleryItem } from "@/lib/gallery-utils";
 
-const GALLERY_CATEGORIES = [
-  "Empowering Educators",
-  "Nurturing Growth",
-  "Real Connections"
-];
-
 interface GalleryPageProps {
   initialItems: GalleryItem[];
+  categories: { title: string; slug: string }[];
 }
 
-export function GalleryPage({ initialItems }: GalleryPageProps) {
+export function GalleryPage({ initialItems, categories }: GalleryPageProps) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
 
   const enrichedItems = useMemo(() => {
@@ -69,18 +64,18 @@ export function GalleryPage({ initialItems }: GalleryPageProps) {
           >
             All Moments
           </button>
-          {GALLERY_CATEGORIES.map((category) => (
+          {categories.map((category) => (
             <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
+              key={category.slug}
+              onClick={() => setActiveCategory(category.title)}
               className={cn(
                 "px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap",
-                activeCategory === category
+                activeCategory === category.title
                   ? "bg-green text-white shadow-lg shadow-green/20"
                   : "bg-white text-green/60 hover:bg-green/5 border border-green/10"
               )}
             >
-              {category}
+              {category.title}
             </button>
           ))}
         </div>

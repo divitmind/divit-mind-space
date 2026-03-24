@@ -6,6 +6,7 @@ import { postType } from './post'
 import { newsType } from './news'
 import { servicesType } from './services'
 import { galleryType } from './gallery'
+import { galleryCategoryType } from './galleryCategory'
 import { careerType } from './career'
 import { reviewType } from './review'
 
@@ -18,6 +19,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     newsType,
     servicesType,
     galleryType,
+    galleryCategoryType,
     careerType,
     reviewType,
   ],

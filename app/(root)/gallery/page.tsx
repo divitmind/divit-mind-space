@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { GalleryPage } from "@/components/gallery/gallery-page";
 import { sanityFetch } from "@/sanity/lib/live";
-import { GALLERY_QUERY } from "@/sanity/lib/queries";
+import { GALLERY_QUERY, GALLERY_CATEGORIES_QUERY } from "@/sanity/lib/queries";
 import type { GalleryQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
@@ -62,10 +62,13 @@ const galleryJsonLd = {
 };
 
 export default async function GalleryRoute() {
-  const { data: galleryItems } = await sanityFetch({
-    query: GALLERY_QUERY,
-    tags: ["gallery"],
-  });
+  const [galleryItemsData, categoriesData] = await Promise.all([
+    sanityFetch({ query: GALLERY_QUERY, tags: ["gallery"] }),
+    sanityFetch({ query: GALLERY_CATEGORIES_QUERY, tags: ["galleryCategory"] }),
+  ]);
+
+  const galleryItems = galleryItemsData.data as GalleryQueryResult;
+  const categories = categoriesData.data as any[];
 
   return (
     <>
@@ -73,7 +76,10 @@ export default async function GalleryRoute() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(galleryJsonLd) }}
       />
-      <GalleryPage initialItems={(galleryItems as GalleryQueryResult) || []} />
+      <GalleryPage 
+        initialItems={galleryItems || []} 
+        categories={categories || []}
+      />
     </>
   );
 }
