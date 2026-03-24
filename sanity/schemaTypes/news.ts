@@ -7,12 +7,13 @@ export const newsType = defineType({
   fields: [
     defineField({
       name: "title",
-      title: "Title",
+      title: "[REQUIRED] News Title",
       type: "string",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "slug",
+      title: "[AUTO] Slug",
       type: "slug",
       options: {
         source: "title",
@@ -23,14 +24,14 @@ export const newsType = defineType({
     }),
     defineField({
       name: "publishedAt",
-      title: "Published Date",
+      title: "[REQUIRED] Published Date",
       type: "datetime",
       initialValue: () => new Date().toISOString(),
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "postFormat",
-      title: "News Format",
+      title: "[REQUIRED] News Format",
       type: "string",
       options: {
         list: [
@@ -45,7 +46,7 @@ export const newsType = defineType({
     }),
     defineField({
       name: "excerpt",
-      title: "Brief Summary",
+      title: "[REQUIRED] Brief Summary",
       type: "text",
       rows: 3,
       description: "A short hook for the news card",
@@ -59,7 +60,7 @@ export const newsType = defineType({
     }),
     defineField({
       name: "externalUrl",
-      title: "External URL",
+      title: "[LINK] External URL",
       type: "url",
       description: "The full link to the press article or event page",
       hidden: ({ document }) => document?.postFormat === "standard",

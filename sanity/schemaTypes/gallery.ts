@@ -8,7 +8,7 @@ export const galleryType = defineType({
     defineField({
       name: 'image',
       type: 'image',
-      title: 'Gallery Image',
+      title: '[REQUIRED] Gallery Image',
       options: {
         hotspot: true,
       },
@@ -16,7 +16,7 @@ export const galleryType = defineType({
         {
           name: 'alt',
           type: 'string',
-          title: 'Alternative text',
+          title: '[REQUIRED] Alternative text',
           description: 'Important for SEO and accessibility',
           validation: (rule) => rule.required(),
         },
@@ -25,33 +25,33 @@ export const galleryType = defineType({
     }),
     defineField({
       name: 'title',
-      title: 'Image Title (Optional)',
+      title: '[AUTO] Image Title (Optional)',
       type: 'string',
       description: 'Leave blank to use the Smart Engine based on Location/Event.',
     }),
     defineField({
       name: 'locationEvent',
-      title: 'Location / Name of Event',
+      title: '[REQUIRED] Location / Name of Event',
       type: 'string',
       description: 'e.g., Bishop Cotton, DPS East, Child Development Centre, WhatsApp Moment',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'story',
-      title: 'The Story / Caption (Optional)',
+      title: '[AUTO] The Story / Caption (Optional)',
       type: 'text',
       rows: 3,
       description: 'Leave blank to use the Smart Engine based on Location/Event.',
     }),
     defineField({
       name: 'tag',
-      title: 'Context Tag',
+      title: '[AUTO] Context Tag',
       type: 'string',
       description: 'e.g., School Orientation, Therapy Session',
     }),
     defineField({
       name: 'categories',
-      title: 'Categories',
+      title: '[REQUIRED] Categories',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'galleryCategory' }] }],
       description: 'Select one or more categories for this image.',
