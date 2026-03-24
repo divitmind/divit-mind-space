@@ -25,17 +25,23 @@ export const galleryType = defineType({
     }),
     defineField({
       name: 'title',
-      title: 'Image Title',
+      title: 'Image Title (Optional)',
       type: 'string',
+      description: 'Leave blank to use the Smart Engine based on Location/Event.',
+    }),
+    defineField({
+      name: 'locationEvent',
+      title: 'Location / Name of Event',
+      type: 'string',
+      description: 'e.g., Bishop Cotton, DPS East, Child Development Centre, WhatsApp Moment',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'story',
-      title: 'The Story / Caption',
+      title: 'The Story / Caption (Optional)',
       type: 'text',
       rows: 3,
-      description: 'The emotional story behind this moment.',
-      validation: (rule) => rule.required(),
+      description: 'Leave blank to use the Smart Engine based on Location/Event.',
     }),
     defineField({
       name: 'tag',

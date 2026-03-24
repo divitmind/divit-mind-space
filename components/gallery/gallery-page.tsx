@@ -5,6 +5,7 @@ import { MasonryGrid } from "./masonry-grid";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 import type { GalleryItem } from "@/sanity/types";
+import { enrichGalleryItem } from "@/lib/gallery-utils";
 
 const GALLERY_CATEGORIES = [
   "Empowering Educators",
@@ -19,10 +20,14 @@ interface GalleryPageProps {
 export function GalleryPage({ initialItems }: GalleryPageProps) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
 
+  const enrichedItems = useMemo(() => {
+    return initialItems.map(item => enrichGalleryItem(item));
+  }, [initialItems]);
+
   const filteredItems = useMemo(() => {
-    if (activeCategory === "All") return initialItems;
-    return initialItems.filter(item => item.categories?.includes(activeCategory));
-  }, [activeCategory, initialItems]);
+    if (activeCategory === "All") return enrichedItems;
+    return enrichedItems.filter(item => item.categories?.includes(activeCategory));
+  }, [activeCategory, enrichedItems]);
 
   return (
     <div className="min-h-screen bg-[#FDFBF7]">

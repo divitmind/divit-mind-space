@@ -185,6 +185,7 @@ export interface GalleryItem {
     alt: string;
   };
   title: string;
+  locationEvent?: string;
   story: string;
   tag?: string;
   categories: string[];

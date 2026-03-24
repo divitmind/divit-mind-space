@@ -392,6 +392,7 @@ export const GALLERY_QUERY = `*[_type == "gallery"] | order(publishedAt desc) {
     "alt": image.alt
   },
   title,
+  locationEvent,
   story,
   tag,
   categories,
