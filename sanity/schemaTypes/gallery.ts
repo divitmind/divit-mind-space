@@ -25,27 +25,27 @@ export const galleryType = defineType({
     }),
     defineField({
       name: 'title',
-      title: '[AUTO] Image Title (Optional)',
+      title: '✨ [AUTO] Image Title (Optional)',
       type: 'string',
-      description: 'Leave blank to use the Smart Engine based on Location/Event.',
+      description: 'LEAVE BLANK to use the Smart Storytelling engine.',
     }),
     defineField({
       name: 'locationEvent',
       title: '[REQUIRED] Location / Name of Event',
       type: 'string',
-      description: 'e.g., Bishop Cotton, DPS East, Child Development Centre, WhatsApp Moment',
+      description: 'Used by the Smart Engine: e.g., Bishop Cotton, DPS East, CDC, WhatsApp Moment',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'story',
-      title: '[AUTO] The Story / Caption (Optional)',
+      title: '✨ [AUTO] The Story / Caption (Optional)',
       type: 'text',
       rows: 3,
-      description: 'Leave blank to use the Smart Engine based on Location/Event.',
+      description: 'LEAVE BLANK to use the Smart Storytelling engine.',
     }),
     defineField({
       name: 'tag',
-      title: '[AUTO] Context Tag',
+      title: '✨ [AUTO] Context Tag',
       type: 'string',
       description: 'e.g., School Orientation, Therapy Session',
     }),
@@ -54,14 +54,14 @@ export const galleryType = defineType({
       title: '[REQUIRED] Categories',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'galleryCategory' }] }],
-      description: 'Select one or more categories for this image.',
+      description: 'Select at least one category.',
       validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: 'isFeatured',
       title: 'Featured Moment',
       type: 'boolean',
-      description: 'Give this image more prominence in the grid',
+      description: 'Highlight this image in the grid',
       initialValue: false,
     }),
     defineField({
@@ -75,11 +75,11 @@ export const galleryType = defineType({
     select: {
       media: 'image',
       title: 'title',
-      category: 'categories.0',
+      category: 'categories.0.title',
     },
     prepare({ media, title, category }) {
       return {
-        title: title || 'Untitled Moment',
+        title: title || '✨ Auto-Generated Title',
         subtitle: category || 'Uncategorized',
         media,
       }
