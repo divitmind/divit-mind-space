@@ -176,15 +176,23 @@ export type SingleServiceQueryResult = Service | null;
 export type ServiceNavQueryResult = ServiceNavItem[];
 
 // Gallery Types
-export interface GalleryImage {
+export interface GalleryItem {
   _id: string;
-  _type: "gallery";
-  image: SanityImage;
+  image: {
+    asset: {
+      url: string;
+    };
+    alt: string;
+  };
+  title: string;
+  story: string;
+  tag?: string;
   categories: string[];
-  uploadedAt: string;
+  isFeatured?: boolean;
+  publishedAt: string;
 }
 
-export type GalleryQueryResult = GalleryImage[];
+export type GalleryQueryResult = GalleryItem[];
 
 // Career Types
 export interface Career {

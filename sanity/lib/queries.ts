@@ -384,3 +384,17 @@ export const ABOUT_US_QUERY = `*[_type == "aboutUs"][0] {
   philosophy,
   story
 }`;
+
+export const GALLERY_QUERY = `*[_type == "gallery"] | order(publishedAt desc) {
+  _id,
+  "image": {
+    "asset": { "url": image.asset->url },
+    "alt": image.alt
+  },
+  title,
+  story,
+  tag,
+  categories,
+  isFeatured,
+  publishedAt
+}`;

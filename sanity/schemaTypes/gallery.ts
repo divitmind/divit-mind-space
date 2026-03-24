@@ -8,7 +8,7 @@ export const galleryType = defineType({
     defineField({
       name: 'image',
       type: 'image',
-      title: 'Image',
+      title: 'Gallery Image',
       options: {
         hotspot: true,
       },
@@ -18,9 +18,30 @@ export const galleryType = defineType({
           type: 'string',
           title: 'Alternative text',
           description: 'Important for SEO and accessibility',
+          validation: (rule) => rule.required(),
         },
       ],
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'title',
+      title: 'Image Title',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'story',
+      title: 'The Story / Caption',
+      type: 'text',
+      rows: 3,
+      description: 'The emotional story behind this moment.',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'tag',
+      title: 'Context Tag',
+      type: 'string',
+      description: 'e.g., School Orientation, Therapy Session',
     }),
     defineField({
       name: 'categories',
@@ -29,27 +50,37 @@ export const galleryType = defineType({
       of: [{type: 'string'}],
       options: {
         list: [
-          {title: 'Events', value: 'events'},
-          {title: 'Activities', value: 'activities'},
+          { title: 'Empowering Educators', value: 'Empowering Educators' },
+          { title: 'Nurturing Growth', value: 'Nurturing Growth' },
+          { title: 'Real Connections', value: 'Real Connections' },
         ],
       },
       validation: (rule) => rule.required().min(1),
     }),
     defineField({
-      name: 'uploadedAt',
+      name: 'isFeatured',
+      title: 'Featured Moment',
+      type: 'boolean',
+      description: 'Give this image more prominence in the grid',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'publishedAt',
       type: 'datetime',
-      title: 'Uploaded Date',
+      title: 'Published Date',
       initialValue: () => new Date().toISOString(),
     }),
   ],
   preview: {
     select: {
       media: 'image',
-      categories: 'categories',
+      title: 'title',
+      category: 'categories.0',
     },
-    prepare({ media, categories }) {
+    prepare({ media, title, category }) {
       return {
-        title: categories?.join(', ') || 'Uncategorized',
+        title: title || 'Untitled Moment',
+        subtitle: category || 'Uncategorized',
         media,
       }
     },

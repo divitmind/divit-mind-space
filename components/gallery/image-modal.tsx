@@ -2,32 +2,32 @@
 
 import { useEffect, useCallback } from "react";
 import Image from "next/image";
-import { type GalleryStory } from "@/lib/gallery-data";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
+import type { GalleryItem } from "@/sanity/types";
 
 interface ImageModalProps {
-  stories: GalleryStory[];
+  items: GalleryItem[];
   currentIndex: number;
   onClose: () => void;
   onNavigate: (index: number) => void;
 }
 
-export function ImageModal({ stories, currentIndex, onClose, onNavigate }: ImageModalProps) {
-  const currentStory = stories[currentIndex];
+export function ImageModal({ items, currentIndex, onClose, onNavigate }: ImageModalProps) {
+  const currentItem = items[currentIndex];
 
   const handlePrevious = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
-    onNavigate((currentIndex - 1 + stories.length) % stories.length);
-  }, [currentIndex, stories.length, onNavigate]);
+    onNavigate((currentIndex - 1 + items.length) % items.length);
+  }, [currentIndex, items.length, onNavigate]);
 
   const handleNext = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
-    onNavigate((currentIndex + 1) % stories.length);
-  }, [currentIndex, stories.length, onNavigate]);
+    onNavigate((currentIndex + 1) % items.length);
+  }, [currentIndex, items.length, onNavigate]);
 
   const handleWhatsAppShare = () => {
-    const text = `Check out this moment from Divit MindSpace: "${currentStory.title}" - ${currentStory.story} \n\nSee more at: https://divitmindspace.com/gallery`;
+    const text = `Check out this moment from Divit MindSpace: "${currentItem.title}" - ${currentItem.story} \n\nSee more at: https://divitmindspace.com/gallery`;
     const encodedText = encodeURIComponent(text);
     window.open(`https://wa.me/?text=${encodedText}`, '_blank');
   };
@@ -70,15 +70,15 @@ export function ImageModal({ stories, currentIndex, onClose, onNavigate }: Image
         <div className="relative h-[45%] md:h-auto md:flex-1 bg-black/5 flex items-center justify-center overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentStory.id}
+              key={currentItem._id}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               className="relative w-full h-full p-4"
             >
               <Image
-                src={currentStory.src}
-                alt={currentStory.title}
+                src={currentItem.image.asset.url}
+                alt={currentItem.image.alt || currentItem.title}
                 fill
                 className="object-contain p-2 md:p-4"
                 priority
@@ -106,23 +106,23 @@ export function ImageModal({ stories, currentIndex, onClose, onNavigate }: Image
           <div className="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar">
             <div className="mb-4 md:mb-8">
               <span className="px-3 py-1 bg-green/10 text-green text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] rounded-full">
-                {currentStory.category}
+                {currentItem.categories?.[0]}
               </span>
             </div>
 
             <AnimatePresence mode="wait">
               <motion.div
-                key={currentStory.id}
+                key={currentItem._id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
               >
                 <h2 className="text-2xl md:text-3xl font-bold text-green mb-3 md:mb-4 font-[family-name:var(--font-cormorant)] italic leading-tight">
-                  {currentStory.title}
+                  {currentItem.title}
                 </h2>
                 <div className="w-10 h-1 bg-yellow-400 mb-4 md:mb-6" />
                 <p className="text-green/80 text-base md:text-lg leading-relaxed font-medium">
-                  {currentStory.story}
+                  {currentItem.story}
                 </p>
               </motion.div>
             </AnimatePresence>

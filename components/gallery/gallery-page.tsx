@@ -1,17 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { MasonryGrid } from "./masonry-grid";
-import { GALLERY_STORIES, GALLERY_CATEGORIES, type GalleryCategory } from "@/lib/gallery-data";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
+import type { GalleryItem } from "@/sanity/types";
 
-export function GalleryPage() {
-  const [activeCategory, setActiveCategory] = useState<GalleryCategory | "All">("All");
+const GALLERY_CATEGORIES = [
+  "Empowering Educators",
+  "Nurturing Growth",
+  "Real Connections"
+];
 
-  const filteredStories = activeCategory === "All" 
-    ? GALLERY_STORIES 
-    : GALLERY_STORIES.filter(story => story.category === activeCategory);
+interface GalleryPageProps {
+  initialItems: GalleryItem[];
+}
+
+export function GalleryPage({ initialItems }: GalleryPageProps) {
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+
+  const filteredItems = useMemo(() => {
+    if (activeCategory === "All") return initialItems;
+    return initialItems.filter(item => item.categories?.includes(activeCategory));
+  }, [activeCategory, initialItems]);
 
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
@@ -41,7 +52,7 @@ export function GalleryPage() {
 
       {/* Filter Bar - Emotional Pills */}
       <div className="container mx-auto px-4 mb-8">
-        <div className="flex flex-nowrap md:flex-wrap items-center md:justify-center gap-3 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 scrollbar-none">
+        <div className="flex flex-nowrap md:flex-wrap items-center md:justify-center gap-3 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 no-scrollbar">
           <button
             onClick={() => setActiveCategory("All")}
             className={cn(
@@ -80,8 +91,8 @@ export function GalleryPage() {
             exit={{ opacity: 0, scale: 1.02 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            {filteredStories.length > 0 ? (
-              <MasonryGrid stories={filteredStories} />
+            {filteredItems.length > 0 ? (
+              <MasonryGrid items={filteredItems} />
             ) : (
               <div className="text-center py-20">
                 <p className="text-green/40 italic">More moments being added soon...</p>
