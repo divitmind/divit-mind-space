@@ -37,20 +37,17 @@ export function MasonryGrid({ items }: MasonryGridProps) {
               )}
               onClick={() => setSelectedImageIndex(index)}
             >
-              <div className={cn(
-                "relative w-full overflow-hidden bg-green-lite/5",
-                isPortrait ? "aspect-[3/4]" : "aspect-[4/3]",
-                item.isFeatured && "sm:aspect-[16/9]"
-              )}>
+              <div className="relative w-full overflow-hidden bg-green-lite/5">
                 <Image
-                  src={urlFor(item.image).width(800).height(isPortrait ? 1067 : 600).fit('crop').auto('format').url()}
+                  src={urlFor(item.image).width(800).fit('max').auto('format').url()}
                   alt={item.image.alt || item.title || "Gallery Image"}
-                  fill
+                  width={800}
+                  height={1000}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 
-                {/* Content Overlay - Always visible on mobile, subtle gradient on desktop */}
+                {/* Content Overlay - Always visible, now with Location */}
                 <div className="absolute inset-0 bg-gradient-to-t from-green/90 via-green/10 to-transparent flex flex-col justify-end p-5 md:p-6">
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -58,9 +55,16 @@ export function MasonryGrid({ items }: MasonryGridProps) {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                   >
-                    <span className="inline-block px-2 py-0.5 mb-2 bg-yellow-400 text-green text-[8px] md:text-[9px] font-bold uppercase tracking-widest rounded-sm">
-                      {item.tag || item.categories?.[0] || "Moment"}
-                    </span>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      <span className="inline-block px-2 py-0.5 bg-yellow-400 text-green text-[8px] md:text-[9px] font-bold uppercase tracking-widest rounded-sm">
+                        {item.tag || item.categories?.[0] || "Moment"}
+                      </span>
+                      {item.locationEvent && (
+                        <span className="inline-block px-2 py-0.5 bg-white/20 text-white text-[8px] md:text-[9px] font-bold uppercase tracking-widest rounded-sm backdrop-blur-sm">
+                          {item.locationEvent}
+                        </span>
+                      )}
+                    </div>
                     <h3 className="text-white text-lg md:text-xl font-bold font-[family-name:var(--font-cormorant)] italic leading-tight group-hover:text-yellow-100 transition-colors">
                       {item.title}
                     </h3>

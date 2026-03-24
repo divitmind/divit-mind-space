@@ -106,10 +106,15 @@ export function ImageModal({ items, currentIndex, onClose, onNavigate }: ImageMo
         {/* Content Side */}
         <div className="flex-1 md:w-[400px] md:flex-none bg-[#FDFBF7] flex flex-col h-[55%] md:h-auto overflow-hidden">
           <div className="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar">
-            <div className="mb-4 md:mb-8">
+            <div className="flex flex-wrap gap-2 mb-4 md:mb-8">
               <span className="px-3 py-1 bg-green/10 text-green text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] rounded-full">
                 {currentItem.categories?.[0]}
               </span>
+              {currentItem.locationEvent && (
+                <span className="px-3 py-1 bg-green/5 text-green/60 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] rounded-full border border-green/10">
+                  {currentItem.locationEvent}
+                </span>
+              )}
             </div>
 
             <AnimatePresence mode="wait">
