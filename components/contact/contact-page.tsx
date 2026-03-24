@@ -69,18 +69,18 @@ export function ContactPage() {
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Section */}
-      <section className="pt-16 pb-12 lg:pt-24 lg:pb-20 px-4">
+      <section className="pt-12 pb-8 lg:pt-24 lg:pb-20 px-4">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-green mb-6 leading-tight" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif text-green mb-4 md:mb-6 leading-tight" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               Let&apos;s Build Your <br className="hidden md:block" />
               <span className="italic text-purple">Unique Journey</span> Together
             </h1>
-            <p className="text-lg text-green/70 max-w-2xl mx-auto mb-10">
+            <p className="text-base md:text-lg text-green/70 max-w-2xl mx-auto mb-8 md:mb-10">
               Professional therapy and developmental support for children, teens, adults, and families. 
               We&apos;re here to provide expert guidance whenever you&apos;re ready.
             </p>
@@ -89,28 +89,28 @@ export function ContactPage() {
       </section>
 
       {/* Contact Cards */}
-      <section className="pb-20 px-4">
+      <section className="pb-12 md:pb-20 px-4">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {contactDetails.map((detail, idx) => (
               <motion.a
                 key={idx}
                 href={detail.link}
                 target={detail.icon === MapPin ? "_blank" : undefined}
                 rel={detail.icon === MapPin ? "noopener noreferrer" : undefined}
-                className="bg-white p-8 rounded-2xl border border-green/5 shadow-sm hover:shadow-md transition-all group"
+                className="bg-white p-6 md:p-8 rounded-2xl border border-green/5 shadow-sm hover:shadow-md transition-all group"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <div className={`w-12 h-12 rounded-xl ${detail.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <detail.icon className="w-6 h-6" />
+                <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl ${detail.color} flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform`}>
+                  <detail.icon className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
-                <h3 className="text-xl font-bold text-green mb-2">{detail.title}</h3>
-                <p className="text-lg font-medium text-green/90 mb-3">{detail.value}</p>
-                <p className="text-sm text-green/60 mb-6">{detail.description}</p>
-                <div className="flex items-center gap-2 text-sm font-bold text-green uppercase tracking-wider group-hover:gap-3 transition-all">
-                  {detail.actionText} <ArrowRight className="w-4 h-4" />
+                <h3 className="text-lg md:text-xl font-bold text-green mb-2">{detail.title}</h3>
+                <p className="text-base md:text-lg font-medium text-green/90 mb-2 md:mb-3">{detail.value}</p>
+                <p className="text-xs md:text-sm text-green/60 mb-4 md:mb-6">{detail.description}</p>
+                <div className="flex items-center gap-2 text-[10px] md:text-sm font-bold text-green uppercase tracking-wider group-hover:gap-3 transition-all">
+                  {detail.actionText} <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                 </div>
               </motion.a>
             ))}
@@ -119,41 +119,41 @@ export function ContactPage() {
       </section>
 
       {/* WIIFM Section - What to Expect */}
-      <section className="py-20 bg-cream px-4 border-y border-green/5">
+      <section className="py-12 md:py-20 bg-cream px-4 border-y border-green/5">
         <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+          <div className="max-w-4xl mx-auto text-center mb-10 md:mb-16">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-green mb-3 md:mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               How We Support You From Day 1
             </h2>
-            <p className="text-green/70">
+            <p className="text-sm md:text-base text-green/70">
               Taking the first step can feel overwhelming. Here is our simple process to ensure you get the best care.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative">
             {/* Desktop Connector Line */}
             <div className="hidden md:block absolute top-1/4 left-0 right-0 h-0.5 bg-green/5 -z-10" />
             
             {steps.map((step, idx) => (
               <motion.div 
                 key={idx} 
-                className="relative bg-white p-8 rounded-2xl border border-green/5"
+                className="relative bg-white p-6 md:p-8 rounded-2xl border border-green/5"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.2 }}
               >
-                <div className="absolute -top-4 left-8 bg-green text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">
+                <div className="absolute -top-3 md:-top-4 left-6 md:left-8 bg-green text-white w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center text-sm md:text-base font-bold">
                   {idx + 1}
                 </div>
-                <h3 className="text-xl font-bold text-green mt-2 mb-3">{step.title}</h3>
-                <p className="text-sm text-green/70 leading-relaxed">{step.description}</p>
+                <h3 className="text-lg md:text-xl font-bold text-green mt-2 mb-2 md:mb-3">{step.title}</h3>
+                <p className="text-xs md:text-sm text-green/70 leading-relaxed">{step.description}</p>
               </motion.div>
             ))}
           </div>
 
-          <div className="mt-16 text-center">
-            <WhatsAppConsultationLink className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-green text-white font-semibold hover:bg-green/90 transition-all">
+          <div className="mt-10 md:mt-16 text-center">
+            <WhatsAppConsultationLink className="inline-flex items-center justify-center gap-2 h-10 md:h-12 px-6 md:px-8 rounded-full bg-green text-white text-sm md:text-base font-semibold hover:bg-green/90 transition-all">
               Start Your Consultation Now
             </WhatsAppConsultationLink>
           </div>
@@ -161,24 +161,24 @@ export function ContactPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 px-4">
+      <section className="py-12 md:py-20 px-4">
         <div className="container mx-auto max-w-3xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-serif text-green mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-serif text-green mb-3 md:mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               Common Questions
             </h2>
           </div>
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {faqs.map((faq, idx) => (
               <motion.div 
                 key={idx} 
-                className="bg-white p-6 rounded-xl border border-green/5 shadow-sm"
+                className="bg-white p-5 md:p-6 rounded-xl border border-green/5 shadow-sm"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <h4 className="font-bold text-green mb-2">{faq.question}</h4>
-                <p className="text-sm text-green/70 leading-relaxed">{faq.answer}</p>
+                <h4 className="text-sm md:text-base font-bold text-green mb-2">{faq.question}</h4>
+                <p className="text-xs md:text-sm text-green/70 leading-relaxed">{faq.answer}</p>
               </motion.div>
             ))}
           </div>
@@ -186,19 +186,19 @@ export function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="pb-20 px-4">
+      <section className="pb-12 md:pb-20 px-4">
         <div className="container mx-auto">
-          <div className="rounded-3xl overflow-hidden h-[400px] shadow-lg border-4 border-white relative group">
-             {/* Placeholder for map - in a real app, you'd embed a Google Map iframe here */}
-             <div className="absolute inset-0 bg-green/5 flex items-center justify-center">
+          <div className="rounded-2xl md:rounded-3xl overflow-hidden h-[300px] md:h-[400px] shadow-lg border-2 md:border-4 border-white relative group">
+             {/* Placeholder for map */}
+             <div className="absolute inset-0 bg-green/5 flex items-center justify-center p-4">
                 <div className="text-center">
-                    <MapPin className="w-12 h-12 text-green/20 mx-auto mb-4" />
-                    <p className="text-green/40 font-medium">Map Location: Kasavanahalli, Bengaluru</p>
+                    <MapPin className="w-10 h-10 md:w-12 md:h-12 text-green/20 mx-auto mb-3 md:mb-4" />
+                    <p className="text-sm md:text-base text-green/40 font-medium">Map Location: Kasavanahalli, Bengaluru</p>
                     <a 
                         href="https://maps.google.com/?q=Aadeshwar+Chambers+Kasavanahalli+Bengaluru" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="mt-4 inline-block text-sm font-bold text-green underline underline-offset-4"
+                        className="mt-3 md:mt-4 inline-block text-xs md:text-sm font-bold text-green underline underline-offset-4"
                     >
                         View on Google Maps
                     </a>

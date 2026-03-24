@@ -17,8 +17,4 @@ export default defineConfig({
     structureTool({structure}),
     visionTool({defaultApiVersion: apiVersion}),
   ],
-  document: {
-    // This ensures that all standard actions (Delete, Discard, etc.) are present
-    actions: (prev) => prev,
-  },
 })

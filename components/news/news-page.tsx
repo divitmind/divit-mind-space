@@ -18,10 +18,10 @@ export default function NewsPage({ posts }: NewsPageProps) {
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Header */}
-      <section className="pt-16 pb-12 lg:pt-20 lg:pb-16 px-4">
+      <section className="pt-12 pb-8 lg:pt-20 lg:pb-16 px-4">
         <div className="container mx-auto text-center">
           <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-serif text-green mb-4"
+            className="text-3xl md:text-5xl lg:text-6xl font-serif text-green mb-4"
             style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ export default function NewsPage({ posts }: NewsPageProps) {
             Latest News
           </motion.h1>
           <motion.p 
-            className="text-green/60 max-w-2xl mx-auto text-lg"
+            className="text-base md:text-lg text-green/60 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -41,12 +41,12 @@ export default function NewsPage({ posts }: NewsPageProps) {
 
       {/* Featured News - Editorial Style */}
       {posts.length > 0 && featuredNews && (
-        <section className="pb-16 px-4">
+        <section className="pb-12 lg:pb-16 px-4">
           <div className="container mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-3xl overflow-hidden border border-green/5 shadow-sm group"
+              className="bg-white rounded-2xl md:rounded-3xl overflow-hidden border border-green/5 shadow-sm group"
             >
                <NewsItem post={featuredNews} isFeatured />
             </motion.div>
@@ -55,9 +55,9 @@ export default function NewsPage({ posts }: NewsPageProps) {
       )}
 
       {/* News Timeline/List */}
-      <section className="pb-24 px-4">
+      <section className="pb-16 lg:pb-24 px-4">
         <div className="container mx-auto max-w-5xl">
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {regularNews.map((post, idx) => (
               <motion.div 
                 key={post._id}
@@ -72,10 +72,10 @@ export default function NewsPage({ posts }: NewsPageProps) {
           </div>
 
           {posts.length === 0 && (
-            <div className="text-center py-20 bg-white rounded-3xl border border-green/5">
-              <Newspaper className="w-12 h-12 text-green/10 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-green">No news updates yet</h3>
-              <p className="text-green/60 mt-2">Check back soon for latest updates.</p>
+            <div className="text-center py-16 md:py-20 bg-white rounded-3xl border border-green/5">
+              <Newspaper className="w-10 h-10 md:w-12 md:h-12 text-green/10 mx-auto mb-4" />
+              <h3 className="text-lg md:text-xl font-bold text-green">No news updates yet</h3>
+              <p className="text-sm md:text-green/60 mt-2">Check back soon for latest updates.</p>
             </div>
           )}
         </div>
@@ -89,7 +89,7 @@ function NewsItem({ post, isFeatured = false }: { post: PostListItem, isFeatured
   
   return (
     <div className={`grid grid-cols-1 ${isFeatured ? 'lg:grid-cols-2' : 'md:grid-cols-3'} gap-0`}>
-      <div className={`relative ${isFeatured ? 'h-80 lg:h-auto min-h-[400px]' : 'h-64 md:h-auto'} overflow-hidden`}>
+      <div className={`relative ${isFeatured ? 'h-64 sm:h-80 lg:h-auto min-h-[250px] md:min-h-[400px]' : 'h-56 md:h-auto'} overflow-hidden`}>
         {post.mainImage?.asset?.url ? (
           <Image
             src={post.mainImage.asset.url}
@@ -99,35 +99,35 @@ function NewsItem({ post, isFeatured = false }: { post: PostListItem, isFeatured
           />
         ) : (
           <div className="w-full h-full bg-green/5 flex items-center justify-center">
-            <Newspaper className="w-12 h-12 text-green/10" />
+            <Newspaper className="w-10 h-10 md:w-12 md:h-12 text-green/10" />
           </div>
         )}
         {post.postFormat !== "standard" && (
-            <div className="absolute top-4 left-4">
-                <span className="bg-purple text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center gap-1.5">
+            <div className="absolute top-3 left-3 md:top-4 md:left-4">
+                <span className="bg-purple text-white px-2.5 py-1 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center gap-1.5">
                     <ExternalLink className="w-3 h-3" /> {post.postFormat === "event" ? "Event / Notice" : "Press Coverage"}
                 </span>
             </div>
         )}
       </div>
 
-      <div className={`p-8 ${isFeatured ? 'lg:p-12' : 'md:col-span-2'} flex flex-col justify-center`}>
-        <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-green/40 mb-4">
+      <div className={`p-5 md:p-8 ${isFeatured ? 'lg:p-12' : 'md:col-span-2'} flex flex-col justify-center`}>
+        <div className="flex flex-wrap items-center gap-3 md:gap-4 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-green/40 mb-3 md:mb-4">
            <span className="flex items-center gap-1.5">
              <Calendar className="w-3 h-3" />
              {new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
            </span>
-           <span className="w-1 h-1 rounded-full bg-green/10" />
-           <span>
+           <span className="hidden xs:block w-1 h-1 rounded-full bg-green/10" />
+           <span className="line-clamp-1">
              {post.postFormat !== "standard" ? `via ${post.sourceName || "Press"}` : "Announcement"}
            </span>
         </div>
 
-        <h3 className={`${isFeatured ? 'text-3xl lg:text-4xl' : 'text-2xl'} font-serif text-green mb-4 leading-tight group-hover:text-purple transition-colors`} style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+        <h3 className={`${isFeatured ? 'text-2xl md:text-3xl lg:text-4xl' : 'text-xl md:text-2xl'} font-serif text-green mb-3 md:mb-4 leading-tight group-hover:text-purple transition-colors`} style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
           {post.title}
         </h3>
 
-        <p className={`text-green/70 ${isFeatured ? 'text-lg' : 'text-base'} mb-8 line-clamp-3 leading-relaxed`}>
+        <p className={`text-sm md:text-green/70 ${isFeatured ? 'md:text-lg' : 'md:text-base'} mb-6 md:mb-8 line-clamp-3 leading-relaxed`}>
           {post.excerpt}
         </p>
 
@@ -135,7 +135,7 @@ function NewsItem({ post, isFeatured = false }: { post: PostListItem, isFeatured
           href={link || "#"}
           target={post.postFormat !== "standard" ? "_blank" : undefined}
           rel={post.postFormat !== "standard" ? "noopener noreferrer" : undefined}
-          className="flex items-center gap-2 text-sm font-bold text-green uppercase tracking-widest group-hover:gap-3 transition-all"
+          className="flex items-center gap-2 text-xs md:text-sm font-bold text-green uppercase tracking-widest group-hover:gap-3 transition-all"
         >
           {post.postFormat !== "standard" ? (post.postFormat === "event" ? "View Details" : "Read Full Article") : "Read More"} 
           {post.postFormat !== "standard" ? <ExternalLink className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
