@@ -24,17 +24,17 @@ export const galleryType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'locationEvent',
+      title: '[REQUIRED] Location / Event Name',
+      type: 'string',
+      description: 'CRITICAL: Used to pick the right Smart Story. e.g., Bishop Cotton, DPS East, CDC, etc.',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'title',
       title: '✨ [AUTO] Image Title (Optional)',
       type: 'string',
       description: 'LEAVE BLANK to use the Smart Storytelling engine.',
-    }),
-    defineField({
-      name: 'locationEvent',
-      title: '[REQUIRED] Location / Name of Event',
-      type: 'string',
-      description: 'Used by the Smart Engine: e.g., Bishop Cotton, DPS East, CDC, WhatsApp Moment',
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'story',
@@ -75,12 +75,13 @@ export const galleryType = defineType({
     select: {
       media: 'image',
       title: 'title',
+      location: 'locationEvent',
       category: 'categories.0.title',
     },
-    prepare({ media, title, category }) {
+    prepare({ media, title, location, category }) {
       return {
         title: title || '✨ Auto-Generated Title',
-        subtitle: category || 'Uncategorized',
+        subtitle: `${location || 'No Location'} | ${category || 'Uncategorized'}`,
         media,
       }
     },
