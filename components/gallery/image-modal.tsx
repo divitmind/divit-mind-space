@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import type { GalleryItem } from "@/sanity/types";
+import { urlFor } from "@/sanity/lib/image";
 
 interface ImageModalProps {
   items: GalleryItem[];
@@ -78,8 +79,8 @@ export function ImageModal({ items, currentIndex, onClose, onNavigate }: ImageMo
               className="relative w-full h-full p-4"
             >
               <Image
-                src={currentItem.image.asset.url}
-                alt={currentItem.image.alt || currentItem.title}
+                src={urlFor(currentItem.image).width(1200).height(1200).fit('max').auto('format').url()}
+                alt={currentItem.image.alt || currentItem.title || "Gallery Image"}
                 fill
                 className="object-contain p-2 md:p-4"
                 priority
