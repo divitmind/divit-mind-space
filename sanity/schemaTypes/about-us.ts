@@ -11,7 +11,7 @@ export const aboutUsType = defineType({
       title: "Hero Section",
       type: "object",
       fields: [
-        defineField({ name: "title", title: "Main Title", type: "string" }),
+        defineField({ name: "title", title: "[REQUIRED] Main Title", type: "string" }),
         defineField({ name: "italicSubtitle", title: "Italicized Subtitle", type: "string" }),
         defineField({ name: "description", title: "Description", type: "text", rows: 3 }),
         defineField({ 
@@ -29,7 +29,7 @@ export const aboutUsType = defineType({
       title: "Philosophy Section (Why Us)",
       type: "object",
       fields: [
-        defineField({ name: "title", title: "Section Title", type: "string" }),
+        defineField({ name: "title", title: "[REQUIRED] Section Title", type: "string" }),
         defineField({ name: "description", title: "Section Description", type: "text", rows: 3 }),
         defineField({
           name: "points",
@@ -54,7 +54,7 @@ export const aboutUsType = defineType({
       title: "Our Story Section",
       type: "object",
       fields: [
-        defineField({ name: "title", title: "Story Title", type: "string" }),
+        defineField({ name: "title", title: "[REQUIRED] Story Title", type: "string" }),
         defineField({ 
           name: "paragraphs", 
           title: "Story Paragraphs", 

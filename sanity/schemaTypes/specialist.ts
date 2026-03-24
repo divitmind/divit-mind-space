@@ -7,12 +7,13 @@ export const specialistType = defineType({
   fields: [
     defineField({
       name: "name",
-      title: "Full Name",
+      title: "[REQUIRED] Full Name",
       type: "string",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "slug",
+      title: "✨ [AUTO] Slug",
       type: "slug",
       options: {
         source: "name",
@@ -23,14 +24,14 @@ export const specialistType = defineType({
     }),
     defineField({
       name: "title",
-      title: "Job Title / Role",
+      title: "[REQUIRED] Job Title / Role",
       type: "string",
       description: "e.g., Clinical Psychologist, Occupational Therapist",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "image",
-      title: "Profile Image",
+      title: "[REQUIRED] Profile Image",
       type: "image",
       options: {
         hotspot: true,
@@ -53,7 +54,7 @@ export const specialistType = defineType({
     }),
     defineField({
       name: "teaser",
-      title: "Short Teaser",
+      title: "[REQUIRED] Short Teaser",
       type: "text",
       rows: 2,
       description: "A one-sentence 'What I do' hook for the card preview",
