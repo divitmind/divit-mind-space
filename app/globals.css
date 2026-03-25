@@ -236,3 +236,47 @@
     }
   }
 }
+
+/* Custom Pill Buttons for Hero Section */
+.dm-pill-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.dm-pill-button-primary {
+  background-color: #004540;
+  color: #FFFFFF !important;
+}
+
+.dm-pill-button-primary:hover {
+  background-color: #00332e;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 69, 64, 0.2);
+}
+
+.dm-pill-button-secondary {
+  background-color: #FFFFFF;
+  border-color: #004540;
+  color: #004540 !important;
+}
+
+.dm-pill-button-secondary:hover {
+  background-color: #004540;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 69, 64, 0.1);
+}
