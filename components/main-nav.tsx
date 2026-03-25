@@ -24,19 +24,19 @@ export function MainNav() {
     <NavigationMenu className="hidden md:flex">
       <NavigationMenuList className="gap-1">
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
             <Link href="/">Home</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
             <Link href="/about-us">About Us</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors px-3">Services</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3">Services</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-2 p-5 md:w-[500px] md:grid-cols-2 lg:w-[640px] bg-white rounded-[2rem] shadow-2xl">
               {navServices.map((service) => (
@@ -59,19 +59,19 @@ export function MainNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
             <Link href="/awareness-program">Free Workshops</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
             <Link href="/blogs">Blogs</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors px-3">Media</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3">Media</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="grid w-[320px] gap-2 p-5 bg-white rounded-[2rem] shadow-2xl">
               <ListItem title="Gallery" href="/gallery" icon={<ImageIcon className="h-4 w-4" />}>
@@ -88,7 +88,7 @@ export function MainNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-green hover:text-green/80 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
             <Link href="/contact-us">Contact</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>

@@ -75,38 +75,25 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --background: #FDFBF7; /* Boutique Soft Cream - Warmer and more premium than pure white */
+  --foreground: #000000;
+  --card: #FFFFFF;
+  --card-foreground: #000000;
+  --popover: #FFFFFF;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F4F4F4;
+  --secondary-foreground: #000000;
+  --muted: #F4F4F4;
+  --muted-foreground: #666666;
+  --accent: #F4F4F4;
+  --accent-foreground: #000000;
   --destructive: oklch(0.58 0.22 27);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.08);
+  --ring: #000000;
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
@@ -237,43 +224,56 @@
   }
 }
 
-/* Custom Pill Buttons for Hero Section */
+/* Custom Pill Buttons for Hero Section - High Fidelity Frosted Glass */
 .dm-pill-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 14px 32px;
-  border-radius: 30px;
+  gap: 12px;
+  padding: 14px 36px;
+  border-radius: 9999px; /* Perfect pill shape */
   font-family: var(--font-cormorant), serif;
   font-weight: 600;
   font-size: 16px;
   color: #311131 !important;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 2px solid transparent;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(49, 17, 49, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* Fine rim for the glass edge */
+  border: 1px solid rgba(124, 92, 124, 0.3);
+  
+  /* The strong "Shines" using radial gradients */
+  background: 
+    radial-gradient(circle at 10% 50%, rgba(124, 92, 124, 0.9) 0%, transparent 60%),  /* Strong Mauve on Left */
+    radial-gradient(circle at 90% 50%, rgba(216, 179, 145, 0.95) 0%, transparent 60%), /* Strong Peach on Right */
+    rgba(255, 255, 255, 0.2); /* Very light base to let glows pop */
+    
+  /* Outer glow and subtle inner rim shadow */
+  box-shadow: 
+    0 8px 32px -4px rgba(124, 92, 124, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6);
 }
 
-.dm-pill-button-primary {
-  background-color: rgba(124, 92, 124, 0.7);
-}
-
-.dm-pill-button-primary:hover {
-  background-color: rgba(124, 92, 124, 0.9);
+.dm-pill-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(49, 17, 49, 0.2);
+  /* Intensify the shines on hover */
+  background: 
+    radial-gradient(circle at 10% 50%, rgba(124, 92, 124, 1) 0%, transparent 65%),
+    radial-gradient(circle at 90% 50%, rgba(216, 179, 145, 1) 0%, transparent 65%),
+    rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 12px 36px -4px rgba(124, 92, 124, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-.dm-pill-button-secondary {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-color: rgba(124, 92, 124, 0.5);
-}
-
-.dm-pill-button-secondary:hover {
-  background-color: rgba(124, 92, 124, 0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(49, 17, 49, 0.1);
+/* Specific adjustments for icons */
+.dm-pill-button svg {
+  color: #25D366;
+  width: 20px;
+  height: 20px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
 }

@@ -10,9 +10,9 @@ const services = [
         icon: FileText,
         outcome: "Stop guessing. Get answers and a clear path forward",
         route: "/services?category=assessments",
-        color: "bg-[#004540]",
-        iconBg: "bg-white/15",
-        textColor: "text-white",
+        color: "bg-white",
+        iconBg: "bg-black/5",
+        textColor: "text-black",
     },
     {
         id: "therapy",
@@ -20,9 +20,9 @@ const services = [
         icon: Heart,
         outcome: "See real progress in confidence and daily life",
         route: "/services?category=therapy",
-        color: "bg-blue",
-        iconBg: "bg-[#004540]/10",
-        textColor: "text-purple",
+        color: "bg-white",
+        iconBg: "bg-black/5",
+        textColor: "text-black",
     },
     {
         id: "parent-guidance",
@@ -30,9 +30,9 @@ const services = [
         icon: Users,
         outcome: "Know exactly how to help & see it work",
         route: "/services?category=guidance",
-        color: "bg-yellow",
-        iconBg: "bg-[#004540]/10",
-        textColor: "text-purple",
+        color: "bg-white",
+        iconBg: "bg-black/5",
+        textColor: "text-black",
     },
     {
         id: "learning",
@@ -40,9 +40,9 @@ const services = [
         icon: GraduationCap,
         outcome: "Learn in ways that actually click",
         route: "/services?category=programs",
-        color: "bg-purple",
-        iconBg: "bg-white/15",
-        textColor: "text-white",
+        color: "bg-white",
+        iconBg: "bg-black/5",
+        textColor: "text-black",
     },
 ];
 
@@ -52,52 +52,50 @@ interface ServicesSectionProps {
 
 export function ServicesSection({ therapyServices = [] }: ServicesSectionProps) {
     return (
-        <section className="pt-8 pb-16 lg:pt-6 lg:pb-20">
+        <section className="pt-2 pb-4 lg:pt-4 lg:pb-8 bg-[#FDFBF7]">
             <div className="container">
 
                 {/* Bridge Text */}
-                <div className="flex items-center gap-4 mb-6">
-                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#004540]/15 to-transparent" />
-                    <span className="text-[#004540]/50 text-xs font-semibold uppercase tracking-[0.15em]">
-                        Here's how we help
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+                    <span className="text-black/40 text-[10px] font-bold uppercase tracking-widest">
+                        Here&apos;s how we help
                     </span>
-                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#004540]/15 to-transparent" />
+                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                 </div>
 
-                {/* Services Grid: Outcome-First, Always Visible */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {/* Services Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {services.map((service) => (
                         <Link
                             key={service.id}
                             href={service.route}
                             className={cn(
-                                "group relative flex flex-col p-6 rounded-2xl transition-all duration-300",
-                                "hover:-translate-y-1 hover:shadow-xl",
+                                "group relative flex flex-col p-10 rounded-[2rem] border border-black/5 transition-all duration-500 bg-white hover:shadow-2xl hover:shadow-black/5 hover:border-black/10",
                                 service.color
                             )}
                         >
                             {/* Icon */}
                             <div className={cn(
-                                "w-10 h-10 rounded-xl flex items-center justify-center mb-4",
+                                "w-12 h-12 rounded-2xl flex items-center justify-center mb-8 transition-colors group-hover:bg-black/10",
                                 service.iconBg
                             )}>
-                                <service.icon className={cn("h-5 w-5", service.textColor)} />
+                                <service.icon className={cn("h-6 w-6 text-black")} />
                             </div>
 
-                            {/* Outcome (Primary) */}
-                            <p className={cn(
-                                "text-base font-semibold leading-snug mb-3 flex-grow",
-                                service.textColor
-                            )}>
+                            {/* Title (Serif Italic - Unified) */}
+                            <h3 className="text-2xl font-bold text-black mb-4 font-[family-name:var(--font-cormorant)] italic leading-tight">
+                                {service.label}
+                            </h3>
+
+                            {/* Description (Outcome - Unified Sans) */}
+                            <p className="text-base text-black/60 font-medium leading-relaxed mb-8 flex-grow">
                                 {service.outcome}
                             </p>
 
-                            {/* Label + Arrow (Secondary) */}
-                            <span className={cn(
-                                "flex items-center gap-2 text-xs font-bold uppercase tracking-wide opacity-70",
-                                service.textColor
-                            )}>
-                                {service.label}
+                            {/* Footer Link */}
+                            <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black/40 group-hover:text-black transition-colors">
+                                Explore Service
                                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                             </span>
                         </Link>

@@ -23,7 +23,7 @@ export function SiteHeader() {
     };
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-[#FAF9F5]/80 backdrop-blur-lg border-b border-[#2F3E33]/5">
+        <header className="sticky top-0 z-50 w-full bg-[#FDFBF7]/80 backdrop-blur-lg border-b border-black/5">
             <div className="container flex h-20 max-w-screen-2xl items-center justify-between">
                 <Link href="/" className="flex items-center space-x-2 transition-opacity hover:opacity-90">
                     <Image src="/divit-mindspace-logo.png" alt="Logo" width={100} height={100} className="w-14 h-auto" />
@@ -33,13 +33,13 @@ export function SiteHeader() {
                 <MainNav />
 
                 <div className="flex items-center gap-3">
-                    {/* Desktop CTA - solid */}
+                    {/* Desktop CTA - solid black premium style */}
                     <Link
                         href="/about-us#specialists"
                         onClick={handleSpecialistsClick}
-                        className="hidden md:inline-flex h-9 items-center justify-center gap-2 rounded-full bg-green px-4 text-sm font-semibold text-white hover:bg-[#003835] transition-colors"
+                        className="hidden md:inline-flex h-10 items-center justify-center gap-2 rounded-full bg-black px-6 text-xs font-bold uppercase tracking-widest text-white hover:bg-black/80 transition-all duration-300 shadow-lg shadow-black/5"
                     >
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                             <circle cx="9" cy="7" r="4" />
                             <path d="M23 21v-2a4 4 0 0 0-3-3.87" />

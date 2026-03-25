@@ -47,7 +47,7 @@ function renderAnswer(answer: FaqItem["answer"]) {
                 if (line.startsWith("• ")) {
                     return (
                         <div key={i} className="flex gap-2">
-                            <span className="text-green shrink-0 font-medium">•</span>
+                            <span className="text-black shrink-0 font-medium">•</span>
                             <span>{line.slice(2)}</span>
                         </div>
                     );
@@ -56,7 +56,7 @@ function renderAnswer(answer: FaqItem["answer"]) {
                     return (
                         <h4
                             key={i}
-                            className="font-semibold text-[#2F3E33] mt-4 mb-1 first:mt-0 text-base"
+                            className="font-bold text-black mt-4 mb-1 first:mt-0 text-base font-[family-name:var(--font-cormorant)] italic"
                         >
                             {line}
                         </h4>
@@ -72,18 +72,19 @@ export function FaqSection() {
     const [openId, setOpenId] = useState<string | null>("item-1");
 
     return (
-        <section className="pt-4 pb-6 lg:pt-4 lg:pb-8 bg-cream relative overflow-hidden">
+        <section className="py-6 lg:py-12 bg-[#FDFBF7] relative overflow-hidden">
             <div className="max-w-4xl mx-auto px-4 relative z-10">
                 <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center text-purple text-sm font-bold tracking-widest uppercase mb-3">
+                    {/* Original Text Wording */}
+                    <div className="inline-flex items-center justify-center text-black/40 text-[10px] font-bold tracking-widest uppercase mb-4">
                         Common Queries
                     </div>
-                    <h2 className="text-3xl lg:text-5xl font-bold text-green mb-4 tracking-tight">
+                    <h2 className="text-3xl lg:text-5xl font-bold text-black mb-6 tracking-tight font-[family-name:var(--font-cormorant)] italic">
                         Frequently Asked Questions
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {faqs.map((faq) => {
                         const isOpen = openId === faq.id;
 
@@ -92,22 +93,22 @@ export function FaqSection() {
                                 key={faq.id}
                                 onClick={() => setOpenId(isOpen ? null : faq.id)}
                                 className={cn(
-                                    "group rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden",
+                                    "group rounded-[2rem] border transition-all duration-500 cursor-pointer overflow-hidden",
                                     isOpen
-                                        ? "bg-[#FDFBF7] border-[#2F3E33]/20 shadow-sm"
-                                        : "bg-white border-transparent hover:bg-gray-50"
+                                        ? "bg-white border-black/10 shadow-xl shadow-black/5"
+                                        : "bg-white/50 border-black/5 hover:bg-white hover:border-black/10"
                                 )}
                             >
-                                <div className="p-6 flex items-center justify-between gap-4">
+                                <div className="p-8 flex items-center justify-between gap-4">
                                     <h3 className={cn(
-                                        "text-lg font-bold transition-colors duration-300",
-                                        isOpen ? "text-[#2F3E33]" : "text-[#222222]"
+                                        "text-lg font-bold transition-colors duration-300 font-[family-name:var(--font-cormorant)] italic leading-tight",
+                                        isOpen ? "text-black" : "text-black/70"
                                     )}>
                                         {faq.question}
                                     </h3>
                                     <div className={cn(
                                         "h-8 w-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300",
-                                        isOpen ? "bg-green text-white rotate-180" : "bg-[#E8ECE9] text-green group-hover:bg-[#dce2de]"
+                                        isOpen ? "bg-black text-white" : "bg-black/5 text-black group-hover:bg-black group-hover:text-white"
                                     )}>
                                         {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                                     </div>
@@ -121,7 +122,7 @@ export function FaqSection() {
                                             exit={{ height: 0, opacity: 0 }}
                                             transition={{ duration: 0.3, ease: "easeInOut" }}
                                         >
-                                            <div className="px-6 pb-6 pt-0 text-gray-600 leading-relaxed">
+                                            <div className="px-8 pb-8 pt-0 text-black/60 font-medium leading-relaxed">
                                                 {renderAnswer(faq.answer)}
                                             </div>
                                         </motion.div>
@@ -132,12 +133,6 @@ export function FaqSection() {
                     })}
                 </div>
             </div>
-
-            {/* Decorative Background Elements */}
-            <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-gray-200 to-transparent" />
-            <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#E8ECE9]/50 rounded-full blur-3xl -z-10" />
-            <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-[#FDFBF7] rounded-full blur-3xl -z-10" />
-
         </section>
     );
 }

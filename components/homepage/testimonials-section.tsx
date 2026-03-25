@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Star } from "lucide-react";
 import { Marquee } from "@/components/ui/marquee";
 import { TestimonialCard } from "@/components/homepage/testimonial-card";
 import type { ReviewListItem } from "@/sanity/types";
@@ -44,32 +45,38 @@ interface TestimonialsSectionProps {
 export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
   const top10 = reviews.slice(0, 10);
   const cards = top10.length > 0 ? top10.map(reviewToCard) : FALLBACK_TESTIMONIALS;
-  // Duplicate for marquee volume
   const marqueeItems = [...cards, ...cards];
 
   return (
-    <section className="pt-6 pb-8 lg:pt-6 lg:pb-10 bg-[#FDFBF7] overflow-hidden">
-      <div className="container mb-12 text-center">
-        <div className="inline-flex items-center justify-center text-purple text-sm font-bold tracking-widest uppercase mb-3">
+    <section className="py-2 lg:py-4 bg-[#FDFBF7] overflow-hidden">
+      <div className="container mb-8 text-center">
+        {/* Original Text Wording */}
+        <div className="inline-flex items-center justify-center text-black/40 text-[10px] font-bold tracking-widest uppercase mb-4">
           Parent Stories
         </div>
-        <h2 className="text-3xl lg:text-5xl font-bold text-green mb-4 tracking-tight">
+        <h2 className="text-3xl lg:text-5xl font-bold text-black mb-6 tracking-tight font-[family-name:var(--font-cormorant)] italic">
           Why Families Trust Us
         </h2>
+        <div className="flex items-center justify-center gap-1">
+            {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-[#FFB800] text-[#FFB800]" />
+            ))}
+            <span className="ml-2 text-sm font-bold text-black/60">4.9 Parent Rating</span>
+        </div>
       </div>
 
       <div className="relative w-full">
-        <Marquee pauseOnHover className="pb-8">
+        <Marquee pauseOnHover className="pb-2">
           {marqueeItems.map((t, i) => (
             <TestimonialCard key={`t1-${i}`} {...t} />
           ))}
         </Marquee>
       </div>
 
-      <div className="container mt-10 text-center">
+      <div className="container mt-4 text-center">
         <Link
           href="/reviews"
-          className="inline-flex items-center justify-center rounded-lg bg-green text-white px-6 py-3 text-sm font-semibold hover:bg-green/90 transition-colors"
+          className="inline-flex items-center justify-center rounded-full border border-black/10 text-black/60 px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300"
         >
           See all reviews
         </Link>

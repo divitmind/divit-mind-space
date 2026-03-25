@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-1 pb-8 lg:pt-2 lg:pb-10 min-h-[auto] lg:min-h-[calc(100vh-140px)] flex items-center">
+    <section className="relative overflow-hidden pt-1 pb-2 lg:pt-2 lg:pb-4 min-h-[auto] lg:min-h-[600px] flex items-center">
       <div className="container relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-4">
 
@@ -23,7 +23,7 @@ export function HeroSection() {
             </div>
 
             <div className="flex flex-col w-full max-w-[580px] mx-auto lg:mx-0 mt-7">
-              <h1 className="flex flex-col tracking-tight text-[#1A1A1A] leading-none">
+              <h1 className="flex flex-col tracking-tight text-black leading-none">
                 {/* Line 1: EMPOWERING EVERY CHILD'S with overlapping yellow strokes */}
                 <span className="relative flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
                   {/* Multiple overlapping highlight strokes */}
@@ -52,7 +52,7 @@ export function HeroSection() {
               </h1>
             </div>
 
-            <p className="mt-4 max-w-xl mx-auto lg:mx-0 text-base lg:text-lg text-[#1A1A1A]/80 leading-relaxed font-medium text-balance">
+            <p className="mt-4 max-w-xl mx-auto lg:mx-0 text-base lg:text-lg text-black/80 leading-relaxed font-medium text-balance">
               Professional therapy and developmental support for neurodivergent children,
               teens, adults, and their families. Building confidence, focus, and essential
               life skills in a warm, expert-led environment.
@@ -74,7 +74,7 @@ export function HeroSection() {
             </div>
 
             {/* Rolling Proof Line */}
-            <div className="mt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 text-sm text-[#1A1A1A]/70 font-medium">
+            <div className="mt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 text-sm text-black/70 font-medium">
               <span>Conducting awareness programs at</span>
               <div className="h-6 overflow-hidden relative w-48 text-center sm:text-left">
                 <div className="animate-rolling-text flex flex-col text-purple font-bold">
@@ -88,34 +88,47 @@ export function HeroSection() {
             </div>
 
             {/* Trust Metrics */}
-            <div className="mt-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-4 sm:gap-x-6 gap-y-3">
-              <div className="flex flex-col items-center lg:items-start">
-                <span className="text-xl lg:text-2xl font-bold text-[#1A1A1A]">
+            <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 sm:gap-x-10 gap-y-6">
+              <div className="flex flex-col items-center lg:items-start group">
+                <span className="text-xl lg:text-2xl font-bold text-black group-hover:text-purple transition-colors">
                   100+
                 </span>
-                <span className="text-[10px] font-bold text-[#1A1A1A]/60 uppercase tracking-widest">
+                <span className="text-[10px] font-bold text-black/60 uppercase tracking-widest whitespace-nowrap">
                   Families Served
                 </span>
               </div>
-              <div className="w-px h-6 bg-[#1A1A1A]/10 hidden sm:block" />
-              <div className="flex flex-col items-center lg:items-start">
-                <span className="text-xl lg:text-2xl font-bold text-[#1A1A1A]">
+              
+              <div className="flex flex-col items-center lg:items-start group">
+                <span className="text-xl lg:text-2xl font-bold text-black group-hover:text-purple transition-colors">
                   6+
                 </span>
-                <span className="text-[10px] font-bold text-[#1A1A1A]/60 uppercase tracking-widest">
+                <span className="text-[10px] font-bold text-black/60 uppercase tracking-widest whitespace-nowrap">
                   Expert Therapists
                 </span>
               </div>
-              <div className="w-px h-6 bg-[#1A1A1A]/10 hidden sm:block" />
-              <div className="flex flex-col items-center lg:items-start">
-                <div className="flex items-center gap-1">
-                  <span className="text-xl lg:text-2xl font-bold text-[#1A1A1A]">
-                    4.9/5
+
+              <div className="flex flex-col items-center lg:items-start group">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="text-xl lg:text-2xl font-bold text-black group-hover:text-purple transition-colors">
+                    4.9
                   </span>
-                  <Star className="w-3 h-3 lg:w-4 lg:h-4 fill-yellow-400 text-yellow-400" />
+                  <div className="flex -space-x-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 lg:w-4 lg:h-4 fill-[#FFB800] text-[#FFB800]" />
+                    ))}
+                  </div>
                 </div>
-                <span className="text-[10px] font-bold text-[#1A1A1A]/60 uppercase tracking-widest">
+                <span className="text-[10px] font-bold text-black/60 uppercase tracking-widest whitespace-nowrap">
                   Parent Rating
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center lg:items-start group">
+                <span className="text-xl lg:text-2xl font-bold text-black group-hover:text-purple transition-colors">
+                  Holistic
+                </span>
+                <span className="text-[10px] font-bold text-black/60 uppercase tracking-widest whitespace-nowrap">
+                  Family Approach
                 </span>
               </div>
             </div>
