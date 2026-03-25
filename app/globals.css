@@ -243,40 +243,37 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 12px 28px;
-  border-radius: 9999px;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-family: var(--font-cormorant), serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #311131 !important;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 2px solid transparent;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(49, 17, 49, 0.1);
 }
 
 .dm-pill-button-primary {
-  background-color: #004540;
-  color: #FFFFFF !important;
+  background-color: rgba(124, 92, 124, 0.7);
 }
 
 .dm-pill-button-primary:hover {
-  background-color: #00332e;
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(0, 69, 64, 0.2);
+  background-color: rgba(124, 92, 124, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(49, 17, 49, 0.2);
 }
 
 .dm-pill-button-secondary {
-  background-color: #FFFFFF;
-  border-color: #004540;
-  color: #004540 !important;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(124, 92, 124, 0.5);
 }
 
 .dm-pill-button-secondary:hover {
-  background-color: #004540;
-  color: #FFFFFF !important;
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(0, 69, 64, 0.1);
+  background-color: rgba(124, 92, 124, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(49, 17, 49, 0.1);
 }
