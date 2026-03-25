@@ -303,3 +303,10 @@ export interface AboutUs {
 }
 
 export type AboutUsQueryResult = AboutUs | null;
+
+// Announcement Types
+export interface Announcement {
+  text: string;
+}
+
+export type AnnouncementQueryResult = Announcement | null;

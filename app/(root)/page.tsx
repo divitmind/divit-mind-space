@@ -6,10 +6,11 @@ import { WhoNeedsItSection } from "@/components/homepage/who-needs-it-section";
 import { FaqSection } from "@/components/homepage/faq-section";
 import { CtaSection } from "@/components/homepage/cta-section";
 import { sanityFetch } from "@/sanity/lib/live";
-import { TOP_REVIEWS_QUERY, THERAPY_SERVICES_QUERY } from "@/sanity/lib/queries";
-import { ReviewsQueryResult, ServicesQueryResult } from "@/sanity/types";
+import { TOP_REVIEWS_QUERY, THERAPY_SERVICES_QUERY, ANNOUNCEMENT_QUERY } from "@/sanity/lib/queries";
+import { ReviewsQueryResult, ServicesQueryResult, AnnouncementQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
+// ... rest of metadata unchanged
   title: "Divit MindSpace | Neurodivergent Care & Education in Bangalore",
   description:
     "Divit MindSpace empowers neurodivergent children and their families through diagnostic assessments, customized special education, and professional training programs in Bangalore. Book a consultation today.",
@@ -137,12 +138,14 @@ const faqJsonLd = {
 };
 
 export default async function Page() {
-  const [{ data: reviews }, { data: therapyServices }] = await Promise.all([
+  const [{ data: reviews }, { data: therapyServices }, { data: announcement }] = await Promise.all([
     sanityFetch({ query: TOP_REVIEWS_QUERY }),
     sanityFetch({ query: THERAPY_SERVICES_QUERY, tags: ["services"] }),
+    sanityFetch({ query: ANNOUNCEMENT_QUERY, tags: ["promowebsite"] }),
   ]);
 
   const therapyServicesData = (therapyServices as ServicesQueryResult) ?? [];
+  const announcementData = announcement as AnnouncementQueryResult;
 
   return (
     <>
@@ -155,7 +158,7 @@ export default async function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <main>
-        <HeroSection />
+        <HeroSection announcement={announcementData?.text} />
         <ServicesSection therapyServices={therapyServicesData} />
         <TestimonialsSection reviews={(reviews as ReviewsQueryResult) ?? []} />
         <WhoNeedsItSection />

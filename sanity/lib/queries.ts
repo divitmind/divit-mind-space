@@ -405,3 +405,14 @@ export const GALLERY_CATEGORIES_QUERY = `*[_type == "galleryCategory"] | order(t
   title,
   "slug": slug.current
 }`;
+
+// ============================================================================
+// GROQ Queries for Announcements
+// ============================================================================
+
+/**
+ * Query to fetch the latest active announcement from Promo Website
+ */
+export const ANNOUNCEMENT_QUERY = `*[_type == "promowebsite" && isActive == true] | order(_updatedAt desc)[0] {
+  text
+}`;
