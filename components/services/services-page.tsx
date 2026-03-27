@@ -22,38 +22,56 @@ const categoryDescriptions: Record<string, string> = {
   assessments: "Get clear answers about your child's needs with professional evaluations",
   therapy: "Build confidence, communication, and essential life skills",
   guidance: "Practical strategies for parents and educators",
-  programs: "Structured learning and development experiences",
-};
+  import { services as fallbackServices, type ServiceData } from "@/lib/services-data";
+  import { ServiceListItem } from "@/sanity/types";
 
-interface ServicesPageProps {
-  title?: string;
-}
+  // ... rest of categories and descriptions
 
-export default function ServicesPage({ title = "Our Services" }: ServicesPageProps) {
-  const searchParams = useSearchParams();
-  const [activeCategory, setActiveCategory] = useState("all");
+  interface ServicesPageProps {
+    title?: string;
+    initialServices?: ServiceListItem[];
+  }
 
-  // Read category from URL on mount
-  useEffect(() => {
-    const categoryParam = searchParams.get("category");
-    if (categoryParam && categories.some((c) => c.id === categoryParam)) {
-      setActiveCategory(categoryParam);
-    }
-  }, [searchParams]);
+  export default function ServicesPage({ title = "Our Services", initialServices = [] }: ServicesPageProps) {
+    const searchParams = useSearchParams();
+    const [activeCategory, setActiveCategory] = useState("all");
 
-  const filteredServices = useMemo(() => {
-    if (activeCategory === "all") return services;
-    return services.filter((s) => s.category === activeCategory);
-  }, [activeCategory]);
+    // Use Sanity services if available, otherwise fallback to local data
+    const displayServices = useMemo(() => {
+      if (initialServices.length > 0) {
+        return initialServices.map(s => ({
+          id: s._id,
+          title: s.title,
+          slug: s.slug.current,
+          description: s.description || "",
+          category: (s as any).category || "therapy", // Default to therapy if missing
+          image: s.image?.asset?.url || "/features-service-card/therapy-services.png",
+        }));
+      }
+      return fallbackServices;
+    }, [initialServices]);
 
-  // Count services per category
-  const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: services.length };
-    services.forEach((s) => {
-      counts[s.category] = (counts[s.category] || 0) + 1;
-    });
-    return counts;
-  }, []);
+    // Read category from URL on mount
+    useEffect(() => {
+      const categoryParam = searchParams.get("category");
+      if (categoryParam && categories.some((c) => c.id === categoryParam)) {
+        setActiveCategory(categoryParam);
+      }
+    }, [searchParams]);
+
+    const filteredServices = useMemo(() => {
+      if (activeCategory === "all") return displayServices;
+      return displayServices.filter((s) => s.category === activeCategory);
+    }, [activeCategory, displayServices]);
+
+    // Count services per category
+    const categoryCounts = useMemo(() => {
+      const counts: Record<string, number> = { all: displayServices.length };
+      displayServices.forEach((s) => {
+        counts[s.category] = (counts[s.category] || 0) + 1;
+      });
+      return counts;
+    }, [displayServices]);
 
   return (
     <div className="min-h-screen bg-[#FDFBF7]">

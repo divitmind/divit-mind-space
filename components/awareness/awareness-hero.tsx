@@ -3,8 +3,13 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
+import { AwarenessProgram } from "@/sanity/types";
 
-export function AwarenessHero() {
+export function AwarenessHero({ data }: { data?: AwarenessProgram }) {
+  const title = data?.title || "Awareness Programs for Schools & Communities";
+  const description = data?.description || "We conduct FREE sessions to help teachers, parents, and communities understand neurodivergence and early intervention.";
+  const imageUrl = data?.mainImage?.asset?.url || "/awareness-jyoti-nivas.jpeg";
+
   return (
     <section className="relative py-12 lg:py-16 bg-[#FAF9F5] overflow-hidden">
       <div className="container mx-auto px-4">
@@ -27,12 +32,12 @@ export function AwarenessHero() {
               className="text-4xl md:text-5xl lg:text-6xl font-serif text-green leading-[1.1]"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             >
-              Awareness Programs for Schools & Communities
+              {title}
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg text-green/70 max-w-lg mx-auto lg:mx-0">
-              We conduct FREE sessions to help teachers, parents, and communities understand neurodivergence and early intervention.
+              {description}
             </p>
 
             {/* Quick Stats */}
@@ -77,8 +82,8 @@ export function AwarenessHero() {
 
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-xl">
               <Image
-                src="/awareness-jyoti-nivas.jpeg"
-                alt="Awareness session at Jyoti Nivas College - educators learning about early intervention"
+                src={imageUrl}
+                alt={title}
                 fill
                 className="object-cover"
                 priority

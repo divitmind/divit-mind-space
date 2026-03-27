@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import ServicesPage from "@/components/services/services-page";
+import { sanityFetch } from "@/sanity/lib/live";
+import { ALL_SERVICES_QUERY } from "@/sanity/lib/queries";
+import type { ServicesQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
+// ... rest of metadata
   title: "Our Services | Divit MindSpace",
   description:
     "Explore our comprehensive range of specialized services including educational assessments, psychometric assessments, special education sessions, and training programs for neurodivergent individuals.",
@@ -24,30 +28,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServicesListPage() {
+export default async function ServicesListPage() {
+  const { data } = await sanityFetch({ 
+    query: ALL_SERVICES_QUERY, 
+    tags: ["services"] 
+  });
+  
+  const servicesData = (data as ServicesQueryResult) || [];
+
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Divit MindSpace Services",
-    description:
-      "Comprehensive services for neurodivergent individuals including assessments, special education, and training programs.",
-    numberOfItems: 14,
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Psychometric Assessment" },
-      { "@type": "ListItem", position: 2, name: "Educational Assessment" },
-      { "@type": "ListItem", position: 3, name: "Behavioral Assessment" },
-      { "@type": "ListItem", position: 4, name: "Developmental Screening" },
-      { "@type": "ListItem", position: 5, name: "Speech Therapy" },
-      { "@type": "ListItem", position: 6, name: "Occupational Therapy" },
-      { "@type": "ListItem", position: 7, name: "Behavior Therapy" },
-      { "@type": "ListItem", position: 8, name: "Play Therapy" },
-      { "@type": "ListItem", position: 9, name: "Parent Counseling" },
-      { "@type": "ListItem", position: 10, name: "Teacher Training" },
-      { "@type": "ListItem", position: 11, name: "School Consultation" },
-      { "@type": "ListItem", position: 12, name: "Special Education Program" },
-      { "@type": "ListItem", position: 13, name: "Social Skills Group" },
-      { "@type": "ListItem", position: 14, name: "Summer Enrichment Program" },
-    ],
+// ... rest of jsonLd
+      itemListElement: servicesData.map((service, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: service.title,
+      })),
   };
 
   return (
@@ -58,7 +53,7 @@ export default function ServicesListPage() {
       />
 
       <Suspense fallback={<div className="min-h-screen bg-[#FAF9F5]" />}>
-        <ServicesPage />
+        <ServicesPage initialServices={servicesData} />
       </Suspense>
     </>
   );

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { AffiliationsPage } from "@/components/affiliations/affiliations-page";
+import { sanityFetch } from "@/sanity/lib/live";
+import { AFFILIATIONS_QUERY } from "@/sanity/lib/queries";
+import type { AffiliationsQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: "Strategic Partnerships | Divit MindSpace x GD Goenka Healthcare Academy",
@@ -55,7 +58,14 @@ export const metadata: Metadata = {
   }
 };
 
-export default function AffiliationsRoute() {
+export default async function AffiliationsRoute() {
+  const { data } = await sanityFetch({ 
+    query: AFFILIATIONS_QUERY, 
+    tags: ["affiliations"] 
+  });
+  
+  const affiliationsData = data as AffiliationsQueryResult;
+
   return (
     <>
       {/* JSON-LD Structured Data for Partnership and Organizations */}
@@ -107,7 +117,7 @@ export default function AffiliationsRoute() {
           })
         }}
       />
-      <AffiliationsPage />
+      <AffiliationsPage data={affiliationsData} />
     </>
   );
 }

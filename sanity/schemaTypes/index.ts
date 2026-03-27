@@ -10,6 +10,9 @@ import { galleryCategoryType } from './galleryCategory'
 import { careerType } from './career'
 import { reviewType } from './review'
 import { promowebsiteType } from './promowebsite'
+import { affiliationsType } from './affiliations'
+import { awarenessProgramType } from './awareness-program'
+import { contactType } from './contact'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -24,5 +27,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     careerType,
     reviewType,
     promowebsiteType,
+    affiliationsType,
+    awarenessProgramType,
+    contactType,
   ],
 }

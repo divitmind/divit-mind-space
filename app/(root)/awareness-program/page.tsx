@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { AwarenessPage } from "@/components/awareness/awareness-page";
+import { sanityFetch } from "@/sanity/lib/live";
+import { AWARENESS_PROGRAM_QUERY } from "@/sanity/lib/queries";
+import type { AwarenessProgramQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
+// ... rest of metadata
   title: "Awareness Programs | Divit MindSpace - Community Education & Outreach",
   description: "Join our FREE awareness sessions on early intervention for neurodivergent children. Learn to recognize signs, break stigma, and support families across preschools, schools, and organizations in Bangalore.",
   keywords: [
@@ -55,7 +59,14 @@ export const metadata: Metadata = {
   }
 };
 
-export default function AwarenessProgramRoute() {
+export default async function AwarenessProgramRoute() {
+  const { data } = await sanityFetch({ 
+    query: AWARENESS_PROGRAM_QUERY, 
+    tags: ["awarenessProgram"] 
+  });
+  
+  const awarenessData = data as AwarenessProgramQueryResult;
+
   return (
     <>
       {/* JSON-LD Structured Data for Educational Events */}
@@ -73,70 +84,34 @@ export default function AwarenessProgramRoute() {
               "addressLocality": "Bangalore",
               "addressCountry": "IN"
             },
-            "event": [
-              {
-                "@type": "EducationEvent",
-                "name": "Awareness Workshop at Jyoti Nivas College, Koramangala",
-                "description": "FREE awareness session on early intervention for neurodivergent children, covering recognition of early signs, therapy benefits, and breaking stigma",
-                "location": {
-                  "@type": "Place",
-                  "name": "Jyoti Nivas College",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Koramangala, Bangalore",
-                    "addressCountry": "IN"
-                  }
-                },
-                "organizer": {
-                  "@type": "Organization",
-                  "name": "Divit MindSpace",
-                  "url": "https://divitmindspace.com"
-                },
-                "offers": {
-                  "@type": "Offer",
-                  "price": "0",
-                  "priceCurrency": "INR",
-                  "availability": "https://schema.org/InStock"
-                },
-                "audience": {
-                  "@type": "EducationalAudience",
-                  "audienceType": "Teachers, Parents, Students"
-                }
+            "event": awarenessData?.events?.map(event => ({
+              "@type": "EducationEvent",
+              "name": event.name,
+              "description": event.description,
+              "location": {
+                "@type": "Place",
+                "name": event.location,
               },
-              {
-                "@type": "EducationEvent",
-                "name": "Awareness Session for Teachers at TISB School, Domasandra",
-                "description": "FREE teacher training on recognizing neurodivergence signs and supporting neurodivergent students in educational settings",
-                "location": {
-                  "@type": "Place",
-                  "name": "TISB School",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Domasandra, Bangalore",
-                    "addressCountry": "IN"
-                  }
-                },
-                "organizer": {
-                  "@type": "Organization",
-                  "name": "Divit MindSpace",
-                  "url": "https://divitmindspace.com"
-                },
-                "offers": {
-                  "@type": "Offer",
-                  "price": "0",
-                  "priceCurrency": "INR",
-                  "availability": "https://schema.org/InStock"
-                },
-                "audience": {
-                  "@type": "EducationalAudience",
-                  "audienceType": "Teachers, Educators"
-                }
+              "organizer": {
+                "@type": "Organization",
+                "name": "Divit MindSpace",
+                "url": "https://divitmindspace.com"
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "INR",
+                "availability": "https://schema.org/InStock"
+              },
+              "audience": {
+                "@type": "EducationalAudience",
+                "audienceType": "Teachers, Parents, Students"
               }
-            ]
+            })) || []
           })
         }}
       />
-      <AwarenessPage />
+      <AwarenessPage data={awarenessData} />
     </>
   );
 }

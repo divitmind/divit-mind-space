@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { ContactPage } from "@/components/contact/contact-page";
+import { sanityFetch } from "@/sanity/lib/live";
+import { CONTACT_QUERY } from "@/sanity/lib/queries";
+import type { ContactQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
+// ... rest of metadata
   title: "Contact Us | Divit MindSpace",
   description:
     "Get in touch with Divit MindSpace. Whether you're curious about our services, ready to book an assessment, or need guidance — our experts in Bangalore are here to help for all age groups.",
@@ -77,14 +81,31 @@ const contactJsonLd = {
   },
 };
 
-export default function ContactUsPage() {
+export default async function ContactUsPage() {
+  const { data } = await sanityFetch({ 
+    query: CONTACT_QUERY, 
+    tags: ["contact"] 
+  });
+  
+  const contactData = data as ContactQueryResult;
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          ...contactJsonLd,
+          description: contactData?.description || contactJsonLd.description,
+          mainEntity: {
+            ...contactJsonLd.mainEntity,
+            address: {
+              ...contactJsonLd.mainEntity.address,
+              addressLocality: contactData?.address || contactJsonLd.mainEntity.address.addressLocality,
+            }
+          }
+        }) }}
       />
-      <ContactPage />
+      <ContactPage data={contactData} />
     </>
   );
 }

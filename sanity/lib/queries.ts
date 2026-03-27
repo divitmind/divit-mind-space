@@ -416,3 +416,35 @@ export const GALLERY_CATEGORIES_QUERY = `*[_type == "galleryCategory"] | order(t
 export const ANNOUNCEMENT_QUERY = `*[_type == "promowebsite" && isActive == true] | order(_updatedAt desc)[0] {
   text
 }`;
+
+export const AFFILIATIONS_QUERY = `*[_type == "affiliations"][0] {
+  title,
+  subtitle,
+  partners[] {
+    name,
+    logo,
+    description,
+    link
+  }
+}`;
+
+export const AWARENESS_PROGRAM_QUERY = `*[_type == "awarenessProgram"][0] {
+  title,
+  description,
+  mainImage,
+  events[] {
+    name,
+    location,
+    date,
+    description
+  }
+}`;
+
+export const CONTACT_QUERY = `*[_type == "contact"][0] {
+  title,
+  description,
+  address,
+  emails,
+  phones,
+  workingHours
+}`;

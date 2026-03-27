@@ -310,3 +310,44 @@ export interface Announcement {
 }
 
 export type AnnouncementQueryResult = Announcement | null;
+
+// Affiliations Types
+export interface Affiliation {
+  title?: string;
+  subtitle?: string;
+  partners?: {
+    name?: string;
+    logo?: SanityImage;
+    description?: string;
+    link?: string;
+  }[];
+}
+
+export type AffiliationsQueryResult = Affiliation | null;
+
+// Awareness Program Types
+export interface AwarenessProgram {
+  title?: string;
+  description?: string;
+  mainImage?: SanityImage;
+  events?: {
+    name?: string;
+    location?: string;
+    date?: string;
+    description?: string;
+  }[];
+}
+
+export type AwarenessProgramQueryResult = AwarenessProgram | null;
+
+// Contact Types
+export interface Contact {
+  title?: string;
+  description?: string;
+  address?: string;
+  emails?: string[];
+  phones?: string[];
+  workingHours?: string;
+}
+
+export type ContactQueryResult = Contact | null;
