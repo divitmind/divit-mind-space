@@ -5,24 +5,28 @@ export const servicesType = defineType({
   title: 'Services',
   type: 'document',
   groups: [
-    { name: 'basic', title: 'Basic Info', default: true },
-    { name: 'content', title: 'Service Details' },
-    { name: 'seo', title: 'SEO (Optional)' },
+    { name: 'basic', title: '1. Basic Info', default: true },
+    { name: 'content', title: '2. Service Details' },
+    { name: 'seo', title: '3. SEO (Optional)' },
   ],
   fields: [
-    // === BASIC INFO ===
+    // ============================================================
+    // BASIC INFO - Required fields for service listing
+    // ============================================================
     defineField({
       name: 'title',
-      title: 'Service Title',
+      title: '📝 [EDIT] Service Title',
       type: 'string',
       group: 'basic',
+      description: 'The main title shown on cards and page headers',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'slug',
-      title: 'URL Slug',
+      title: '🔗 [AUTO] URL Slug',
       type: 'slug',
       group: 'basic',
+      description: 'Auto-generated from title. Click "Generate" after entering title.',
       options: {
         source: 'title',
         slugify: (input) =>
@@ -37,9 +41,9 @@ export const servicesType = defineType({
     defineField({
       name: 'category',
       type: 'string',
-      title: 'Category',
+      title: '📂 [REQUIRED] Category',
       group: 'basic',
-      description: 'Select the service category.',
+      description: 'Determines where this service appears on the website',
       options: {
         list: [
           { title: 'Assessments', value: 'assessments' },
@@ -54,99 +58,103 @@ export const servicesType = defineType({
     defineField({
       name: 'description',
       type: 'text',
-      title: 'Card Description',
+      title: '📝 [EDIT] Card Description',
       group: 'basic',
       rows: 3,
-      description: 'Short text for service cards (max 200 chars)',
+      description: 'Short summary shown on service cards (max 200 characters)',
       validation: (rule) => rule.required().max(200),
     }),
     defineField({
       name: 'image',
-      title: 'Service Image',
+      title: '🖼️ [OPTIONAL] Service Image',
       type: 'image',
       group: 'basic',
+      description: 'Featured image for this service',
       options: {hotspot: true},
       fields: [
         {
           name: 'alt',
           type: 'string',
-          title: 'Alternative text',
+          title: 'Alt Text (for accessibility)',
         },
       ],
     }),
     defineField({
       name: 'popular',
       type: 'boolean',
-      title: 'Featured Service',
+      title: '⭐ [TOGGLE] Featured Service',
       group: 'basic',
-      description: 'Show at top of listings',
+      description: 'Enable to show this service at the top of listings',
       initialValue: false,
     }),
     defineField({
       name: 'isTherapy',
       type: 'boolean',
-      title: 'Therapy Badge',
+      title: '💜 [TOGGLE] Therapy Badge',
       group: 'basic',
-      description: 'Show therapy badge',
+      description: 'Enable to show the therapy badge on this service',
       initialValue: false,
     }),
 
-    // === SERVICE DETAILS ===
+    // ============================================================
+    // SERVICE DETAILS - Content shown on service detail page
+    // ============================================================
+    defineField({
+      name: 'duration',
+      title: '⏱️ [EDIT] Duration',
+      type: 'string',
+      group: 'content',
+      description: 'e.g., "45-minute sessions", "2-hour workshop", "6-week program"',
+    }),
+    defineField({
+      name: 'format',
+      title: '📍 [EDIT] Format / Location',
+      type: 'string',
+      group: 'content',
+      description: 'e.g., "In-person at our center", "Online sessions available"',
+    }),
     defineField({
       name: 'overview',
-      title: 'Overview',
+      title: '📝 [EDIT] Overview',
       type: 'text',
       group: 'content',
       rows: 5,
-      description: 'Detailed description shown on service page',
+      description: 'Detailed description shown at the top of the service page (min 50 characters)',
       validation: (rule) => rule.required().min(50),
     }),
     defineField({
       name: 'benefits',
-      title: 'Benefits (What You\'ll Gain)',
+      title: '✅ [EDIT] Benefits (What You\'ll Gain)',
       type: 'array',
       group: 'content',
       of: [{ type: 'string' }],
-      description: 'List 4-6 key benefits',
+      description: 'List 4-6 key benefits. Each item appears as a bullet point.',
       validation: (rule) => rule.required().min(3).max(8),
     }),
     defineField({
       name: 'whatToExpect',
-      title: 'What to Expect',
+      title: '📋 [EDIT] What to Expect',
       type: 'array',
       group: 'content',
       of: [{ type: 'string' }],
-      description: 'List the process steps',
+      description: 'List the process steps. Each item appears as a numbered step.',
       validation: (rule) => rule.required().min(3).max(8),
     }),
     defineField({
       name: 'whoIsItFor',
-      title: 'Who Is It For',
+      title: '👨‍👩‍👧 [EDIT] Who Is It For',
       type: 'array',
       group: 'content',
       of: [{ type: 'string' }],
-      description: 'Describe who benefits from this service',
+      description: 'Describe who benefits from this service. Each item appears as a bullet.',
       validation: (rule) => rule.required().min(3).max(8),
     }),
     defineField({
-      name: 'duration',
-      title: 'Duration',
-      type: 'string',
-      group: 'content',
-      description: 'e.g., "45-minute sessions"',
-    }),
-    defineField({
-      name: 'format',
-      title: 'Format',
-      type: 'string',
-      group: 'content',
-      description: 'e.g., "In-person at our center"',
-    }),
-    defineField({
       name: 'body',
-      title: 'Additional Content (Optional)',
+      title: '📄 [OPTIONAL] Additional Content',
       type: 'array',
       group: 'content',
+      description: 'Rich text content for detailed information (FAQs, extra details, etc.)',
       of: [
         defineArrayMember({
           type: 'block',
@@ -199,26 +207,27 @@ export const servicesType = defineType({
     defineField({
       name: 'seo',
       type: 'object',
-      title: 'SEO Settings',
+      title: '🔍 SEO Settings',
       group: 'seo',
+      description: 'Leave blank to use auto-generated SEO from title and description',
       fields: [
         {
           name: 'metaTitle',
           type: 'string',
-          title: 'Meta Title',
-          description: 'Custom title for search engines (50-60 characters)',
+          title: '✨ [AUTO] Meta Title',
+          description: 'Leave blank to use service title. Custom: 50-60 characters.',
         },
         {
           name: 'metaDescription',
           type: 'string',
-          title: 'Meta Description',
-          description: 'Custom description for search engines (150-160 characters)',
+          title: '✨ [AUTO] Meta Description',
+          description: 'Leave blank to use card description. Custom: 150-160 characters.',
         },
         {
           name: 'ogImage',
           type: 'image',
-          title: 'Social Share Image',
-          description: 'Custom image for social media sharing',
+          title: '🖼️ [OPTIONAL] Social Share Image',
+          description: 'Custom image for Facebook/Twitter sharing. Falls back to service image.',
         },
       ],
     }),
@@ -227,12 +236,19 @@ export const servicesType = defineType({
     select: {
       title: 'title',
       category: 'category',
+      popular: 'popular',
+      isTherapy: 'isTherapy',
       media: 'image',
     },
-    prepare({ title, category, media }) {
+    prepare({ title, category, popular, isTherapy, media }) {
+      const badges = [];
+      if (popular) badges.push('⭐');
+      if (isTherapy) badges.push('💜');
+      const categoryLabel = category ? category.charAt(0).toUpperCase() + category.slice(1) : 'No category';
+
       return {
-        title: title,
-        subtitle: category ? category.charAt(0).toUpperCase() + category.slice(1) : 'No category',
+        title: `${badges.join(' ')} ${title}`.trim(),
+        subtitle: categoryLabel,
         media: media,
       }
     },
