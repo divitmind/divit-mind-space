@@ -36,9 +36,9 @@ export function TrustMetrics() {
               key={index}
               className="flex items-center gap-4 group"
             >
-              {/* Warm gold icon container */}
-              <div className="w-12 h-12 rounded-full bg-[#E8DFD0] flex items-center justify-center transition-all duration-300 group-hover:bg-[#DDD2C0] group-hover:scale-105">
-                <metric.icon className="w-5 h-5 text-[#004540]" />
+              {/* Light warm beige icon container (matching reference) */}
+              <div className="w-12 h-12 rounded-full bg-[#F5EBE0] flex items-center justify-center transition-all duration-300 group-hover:bg-[#EDE5D8] group-hover:scale-105">
+                <metric.icon className="w-5 h-5 text-[#8B7355]" />
               </div>
 
               <div className="flex flex-col">
@@ -49,7 +49,7 @@ export function TrustMetrics() {
                   {metric.showStars && (
                     <div className="flex -space-x-0.5">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-[#D4A853] text-[#D4A853]" />
+                        <Star key={i} className="w-3.5 h-3.5 fill-[#8B7355] text-[#8B7355]" />
                       ))}
                     </div>
                   )}

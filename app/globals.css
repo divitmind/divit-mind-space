@@ -376,11 +376,11 @@
 }
 
 .bg-warm-gold {
-  background-color: #E8DFD0 !important;
+  background-color: #F5EBE0 !important;
 }
 
 .bg-warm-gold-dark {
-  background-color: #DDD2C0 !important;
+  background-color: #EDE5D8 !important;
 }
 
 
@@ -485,35 +485,35 @@
     inset 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-/* Hero Button - Clean Sage Green */
+/* Hero Button - Soft Sage Green (matching reference) */
 .dm-hero-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 16px 32px;
-  border-radius: 9999px;
-  font-family: var(--font-cormorant), serif;
-  font-weight: 600;
-  font-size: 16px;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
   color: #FFFFFF !important;
-  background: #004540;
+  background: #7A9A7D;
   border: none;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 4px 16px rgba(0, 69, 64, 0.25);
+  transition: all 0.3s ease;
+  box-shadow: none;
 }
 
 .dm-hero-button:hover {
-  background: #003833;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 69, 64, 0.35);
+  background: #6B8B6E;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(122, 154, 125, 0.3);
 }
 
 .dm-hero-button svg {
-  color: #25D366;
-  width: 20px;
-  height: 20px;
+  color: #FFFFFF;
+  width: 18px;
+  height: 18px;
 }
 
 /* ============================================================
