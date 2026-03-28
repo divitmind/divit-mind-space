@@ -59,7 +59,7 @@ export const services: ServiceData[] = [
     slug: "psychoeducational-assessments",
     description: "Psychoeducational assessments play a pivotal role in supporting neurodivergent children — those with learning differences such as ADHD, dyslexia, or autism spectrum disorders.",
     category: "assessments",
-    image: "/features-service-card/child-autism-assessment.png",
+    image: "/Psychoeducational Assessments.jpeg",
     content: {
       overview: "Psychoeducational assessments play a pivotal role in supporting neurodivergent children — those with learning differences such as ADHD, dyslexia, or autism spectrum disorders. These comprehensive evaluations examine both cognitive abilities and academic achievement to identify specific learning disabilities and create targeted intervention plans.",
       benefits: [
