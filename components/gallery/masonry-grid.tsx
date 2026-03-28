@@ -39,10 +39,10 @@ export function MasonryGrid({ items }: MasonryGridProps) {
             >
               <div className="relative w-full overflow-hidden bg-green-lite/5">
                 <Image
-                  src={urlFor(item.image).width(800).fit('max').auto('format').url()}
+                  src={urlFor(item.image).width(800).height(600).fit('crop').auto('format').url()}
                   alt={item.image.alt || item.title || "Gallery Image"}
                   width={800}
-                  height={1000}
+                  height={600}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                 />
