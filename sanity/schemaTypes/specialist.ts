@@ -4,17 +4,29 @@ export const specialistType = defineType({
   name: "specialist",
   title: "Specialists / Team",
   type: "document",
+  groups: [
+    { name: "basic", title: "1. Basic Info", default: true },
+    { name: "bio", title: "2. Biography" },
+    { name: "settings", title: "3. Display Settings" },
+  ],
   fields: [
+    // ============================================================
+    // BASIC INFO - Essential profile information
+    // ============================================================
     defineField({
       name: "name",
-      title: "[REQUIRED] Full Name",
+      title: "📝 [EDIT] Full Name",
       type: "string",
+      group: "basic",
+      description: "Team member's full name",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "slug",
-      title: "✨ [AUTO] Slug",
+      title: "🔗 [AUTO] URL Slug",
       type: "slug",
+      group: "basic",
+      description: "Auto-generated from name. Click 'Generate' after entering name.",
       options: {
         source: "name",
         slugify: (input) =>
@@ -24,15 +36,18 @@ export const specialistType = defineType({
     }),
     defineField({
       name: "title",
-      title: "[REQUIRED] Job Title / Role",
+      title: "📝 [EDIT] Job Title / Role",
       type: "string",
-      description: "e.g., Clinical Psychologist, Occupational Therapist",
+      group: "basic",
+      description: "e.g., Clinical Psychologist, Occupational Therapist, Founder",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "image",
-      title: "[REQUIRED] Profile Image",
+      title: "🖼️ [EDIT] Profile Photo",
       type: "image",
+      group: "basic",
+      description: "Professional headshot. Set hotspot on face!",
       options: {
         hotspot: true,
       },
@@ -40,30 +55,38 @@ export const specialistType = defineType({
     }),
     defineField({
       name: "experience",
-      title: "Years of Experience",
+      title: "📝 [EDIT] Years of Experience",
       type: "string",
-      description: "e.g., 20+ years, 8 years",
+      group: "basic",
+      description: "e.g., '20+ years', '8 years'",
     }),
     defineField({
       name: "specialties",
-      title: "Specialties / Tags",
+      title: "📝 [EDIT] Specialties / Tags",
       type: "array",
+      group: "basic",
       of: [{ type: "string" }],
-      description: "Add up to 4 key specialties (e.g., Autism, ADHD, Motor Skills)",
+      description: "Up to 4 key specialties (e.g., Autism, ADHD, Motor Skills)",
       validation: (rule) => rule.max(4),
     }),
+
+    // ============================================================
+    // BIOGRAPHY - Detailed profile content
+    // ============================================================
     defineField({
       name: "teaser",
-      title: "[REQUIRED] Short Teaser",
+      title: "📝 [EDIT] Short Teaser",
       type: "text",
+      group: "bio",
       rows: 2,
-      description: "A one-sentence 'What I do' hook for the card preview",
+      description: "One-sentence 'What I do' hook for the card preview (max 150 chars)",
       validation: (rule) => rule.required().max(150),
     }),
     defineField({
       name: "fullBio",
-      title: "Full Biography",
+      title: "📝 [EDIT] Full Biography",
       type: "array",
+      group: "bio",
       of: [
         defineArrayMember({
           type: "block",
@@ -77,14 +100,19 @@ export const specialistType = defineType({
           },
         }),
       ],
-      description: "The full professional story that appears in the 'Read More' popup",
+      description: "Full professional story shown in the 'Read More' popup",
     }),
+
+    // ============================================================
+    // DISPLAY SETTINGS
+    // ============================================================
     defineField({
       name: "order",
-      title: "Display Order",
+      title: "🔢 [SETTING] Display Order",
       type: "number",
-      description: "Higher numbers appear first (e.g., 100 for founders, 10 for specialists)",
-      initialValue: 0,
+      group: "settings",
+      description: "Higher numbers appear first. Founders: 100, Senior: 50, Others: 10",
+      initialValue: 10,
     }),
   ],
   preview: {
@@ -92,6 +120,14 @@ export const specialistType = defineType({
       title: "name",
       subtitle: "title",
       media: "image",
+      order: "order",
+    },
+    prepare({ title, subtitle, media, order }) {
+      return {
+        title: title,
+        subtitle: `${subtitle} (Order: ${order || 0})`,
+        media: media,
+      };
     },
   },
 });
