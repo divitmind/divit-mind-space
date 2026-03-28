@@ -65,22 +65,22 @@ export function ServicesSection({ therapyServices = [] }: ServicesSectionProps) 
                 </div>
 
                 {/* Services Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
                     {services.map((service) => (
                         <Link
                             key={service.id}
                             href={service.route}
                             className={cn(
-                                "group relative flex flex-col p-10 rounded-[2rem] border border-black/5 transition-all duration-500 bg-white hover:shadow-2xl hover:shadow-black/5 hover:border-black/10",
+                                "group relative flex flex-col p-10 rounded-[2rem] border border-black/5 transition-all duration-500 hover:border-black/10 card-premium shadow-premium-sm hover:shadow-premium-lg",
                                 service.color
                             )}
                         >
                             {/* Icon */}
                             <div className={cn(
-                                "w-12 h-12 rounded-2xl flex items-center justify-center mb-8 transition-colors group-hover:bg-black/10",
+                                "w-12 h-12 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500 group-hover:bg-black/10 group-hover:scale-110",
                                 service.iconBg
                             )}>
-                                <service.icon className={cn("h-6 w-6 text-black")} />
+                                <service.icon className={cn("h-6 w-6 text-black transition-transform duration-500 group-hover:scale-105")} />
                             </div>
 
                             {/* Title (Serif Italic - Unified) */}

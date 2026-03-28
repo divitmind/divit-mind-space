@@ -12,6 +12,11 @@ interface HeroSectionProps {
 export function HeroSection({ announcement }: HeroSectionProps) {
   return (
     <section className="relative overflow-hidden pt-1 pb-2 lg:pt-2 lg:pb-4 min-h-[auto] lg:min-h-[600px] flex items-center">
+      {/* Premium Background Orbs */}
+      <div className="orb-gradient orb-purple w-[500px] h-[500px] -top-64 -left-64 -z-10" />
+      <div className="orb-gradient orb-green w-[400px] h-[400px] top-1/2 -right-48 -z-10" />
+      <div className="orb-gradient orb-yellow w-[300px] h-[300px] -bottom-32 left-1/3 -z-10" />
+
       <div className="container relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-4">
 
@@ -142,11 +147,11 @@ export function HeroSection({ announcement }: HeroSectionProps) {
 
           {/* Right Visual - Triptych Story */}
           <div className="flex-1 w-full max-w-sm sm:max-w-md lg:max-w-xl relative animate-in slide-in-from-right duration-1000 fade-in delay-200">
-            {/* Offset shadow layer */}
-            <div className="absolute inset-0 bg-[#E8DFD0] rounded-2xl transform rotate-2 translate-x-2 translate-y-2 opacity-60" />
-            <div className="absolute inset-0 bg-[#D4C9B8] rounded-2xl transform -rotate-1 translate-x-1 translate-y-3 opacity-40" />
+            {/* Premium offset shadow layers */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#E8DFD0] to-[#D4C9B8] rounded-3xl transform rotate-2 translate-x-3 translate-y-3 opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#D4C9B8] to-[#C9BDA8] rounded-3xl transform -rotate-1 translate-x-1.5 translate-y-4 opacity-35" />
 
-            <div className="relative rounded-2xl overflow-hidden shadow-lg mx-auto lg:mr-0 aspect-[5/4] max-w-[480px] lg:max-w-none border-4 border-white">
+            <div className="image-premium relative mx-auto lg:mr-0 aspect-[5/4] max-w-[480px] lg:max-w-none border-4 border-white shadow-premium-lg">
               <Image
                 src="/welcome_to_neuroempower.png"
                 alt="Child confidently playing with blocks, teen journaling with self-assurance, parents feeling connected and hopeful"
@@ -156,8 +161,9 @@ export function HeroSection({ announcement }: HeroSectionProps) {
               />
             </div>
 
-            {/* Subtle Decorative Circle */}
-            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-green-lite/10 rounded-full blur-3xl -z-10" />
+            {/* Premium Decorative Elements */}
+            <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-gradient-to-br from-green-lite/15 to-transparent rounded-full blur-3xl -z-10" />
+            <div className="absolute -top-8 -left-8 w-40 h-40 bg-gradient-to-br from-yellow/10 to-transparent rounded-full blur-2xl -z-10 animate-float" />
           </div>
         </div>
       </div>

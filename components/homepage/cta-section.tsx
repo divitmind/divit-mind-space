@@ -12,8 +12,10 @@ export function CtaSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="bg-white rounded-[2.5rem] border border-black/5 p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl shadow-black/5"
+                    className="relative overflow-hidden bg-white rounded-[2.5rem] border border-black/5 p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-10 shadow-premium-xl"
                 >
+                    {/* Premium Background Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple/[0.02] via-transparent to-green-lite/[0.03] pointer-events-none" />
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         {/* High Contrast Logo/Icon Circle */}
                         <div className="w-20 h-20 rounded-full bg-black flex items-center justify-center shrink-0 shadow-lg">

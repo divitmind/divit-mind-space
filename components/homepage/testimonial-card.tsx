@@ -57,7 +57,7 @@ export function TestimonialCard({ name, role, quote, initial, className }: Testi
     <>
       <div
         className={cn(
-          "relative w-[min(350px,calc(100vw-2rem))] sm:w-[400px] shrink-0 rounded-2xl bg-white p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-[#E8ECE9]",
+          "relative w-[min(350px,calc(100vw-2rem))] sm:w-[400px] shrink-0 rounded-2xl bg-white/90 backdrop-blur-sm p-8 shadow-premium-sm hover:shadow-premium transition-all duration-500 border border-[#E8ECE9] hover:border-[#D8DCD9] hover:-translate-y-1",
           className
         )}
       >
