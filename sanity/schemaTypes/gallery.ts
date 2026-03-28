@@ -9,6 +9,7 @@ export const galleryType = defineType({
       name: 'image',
       type: 'image',
       title: '[REQUIRED] Gallery Image',
+      description: '📐 RECOMMENDED: 1200×800px or larger. Works with any aspect ratio (portrait/landscape). MIN: 600×400px. Use hotspot on faces so cropping looks good in the grid.',
       options: {
         hotspot: true,
       },
@@ -17,7 +18,7 @@ export const galleryType = defineType({
           name: 'alt',
           type: 'string',
           title: '[REQUIRED] Alternative text',
-          description: 'Important for SEO and accessibility',
+          description: 'Describe what is happening in the image (e.g., "Child playing with therapist during session")',
           validation: (rule) => rule.required(),
         },
       ],

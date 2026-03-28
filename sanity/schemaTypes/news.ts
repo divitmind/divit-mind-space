@@ -85,8 +85,11 @@ export const newsType = defineType({
       title: "🖼️ [EDIT] Main Image",
       type: "image",
       group: "media",
-      description: "Featured image for this news. Set hotspot on faces!",
+      description: "📐 RECOMMENDED: 1200×630px (1.91:1 ratio). MIN: 800×420px. IMPORTANT: Click image → set HOTSPOT on faces so cropping looks good on cards.",
       options: { hotspot: true },
+      fields: [
+        { name: "alt", type: "string", title: "Alt Text", description: "Describe the image for accessibility" },
+      ],
     }),
 
     // ============================================================
