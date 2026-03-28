@@ -111,9 +111,9 @@ export function HeroSection({ announcement }: HeroSectionProps) {
 
             <div className="image-premium relative mx-auto lg:mr-0 aspect-[5/4] max-w-[480px] lg:max-w-none border-4 border-white shadow-premium-lg">
               <Image
-                src="/welcome_to_neuroempower.png"
-                alt="Child confidently playing with blocks, teen journaling with self-assurance, parents feeling connected and hopeful"
-                className="object-cover object-[center_8%] w-full h-full scale-[1.12]"
+                src="/nurture_to_achievement_journey.png"
+                alt="Family journey from nurturing support to achievement - child, teen, and parents growing together"
+                className="object-cover object-center w-full h-full"
                 fill
                 priority
               />
