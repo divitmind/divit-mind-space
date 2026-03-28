@@ -2,48 +2,59 @@ import { defineField, defineType } from "sanity";
 
 export const reviewType = defineType({
   name: "review",
-  title: "Review",
+  title: "Reviews / Testimonials",
   type: "document",
   fields: [
     defineField({
       name: "name",
-      title: "Name",
+      title: "📝 [EDIT] Reviewer Name",
       type: "string",
-      description: "Reviewer name (e.g. Priya M., Rahul & Sneha K.)",
+      description: "e.g., Priya M., Rahul & Sneha K.",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "role",
-      title: "Role",
+      title: "📝 [EDIT] Reviewer Context",
       type: "string",
-      description: "E.g. Parent of 8-year-old with ADHD",
+      description: "e.g., Parent of 8-year-old with ADHD",
     }),
     defineField({
       name: "quote",
-      title: "Quote",
+      title: "📝 [EDIT] Review Text",
       type: "text",
-      description: "Review text",
+      rows: 4,
+      description: "The testimonial/review content",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "rating",
-      title: "Rating",
+      title: "⭐ [SELECT] Star Rating",
       type: "number",
-      description: "Star rating 1–5",
-      validation: (rule) => rule.min(1).max(5).integer(),
+      description: "1 to 5 stars",
+      options: {
+        list: [
+          { title: "⭐⭐⭐⭐⭐ (5)", value: 5 },
+          { title: "⭐⭐⭐⭐ (4)", value: 4 },
+          { title: "⭐⭐⭐ (3)", value: 3 },
+          { title: "⭐⭐ (2)", value: 2 },
+          { title: "⭐ (1)", value: 1 },
+        ],
+      },
       initialValue: 5,
+      validation: (rule) => rule.min(1).max(5).integer(),
     }),
     defineField({
       name: "publishedAt",
-      title: "Published at",
+      title: "📅 [EDIT] Date Received",
       type: "datetime",
-      description: "Used for ordering; most recent first",
+      description: "When this review was received (for ordering)",
+      initialValue: () => new Date().toISOString(),
     }),
     defineField({
       name: "featured",
-      title: "Featured",
+      title: "⭐ [TOGGLE] Featured Review",
       type: "boolean",
-      description: "Prioritize on homepage",
+      description: "Show on homepage",
       initialValue: false,
     }),
   ],
@@ -51,11 +62,14 @@ export const reviewType = defineType({
     select: {
       title: "name",
       subtitle: "quote",
+      rating: "rating",
+      featured: "featured",
     },
-    prepare({ title, subtitle }) {
+    prepare({ title, subtitle, rating, featured }) {
+      const stars = "⭐".repeat(rating || 5);
       return {
-        title: title || "Untitled",
-        subtitle: subtitle ? (subtitle as string).slice(0, 60) + "…" : undefined,
+        title: featured ? `⭐ ${title}` : title || "Untitled",
+        subtitle: `${stars} - ${subtitle ? (subtitle as string).slice(0, 50) + "…" : "No quote"}`,
       };
     },
   },

@@ -4,40 +4,79 @@ export const careerType = defineType({
   name: 'career',
   title: 'Careers',
   type: 'document',
+  groups: [
+    { name: 'basic', title: '1. Job Info', default: true },
+    { name: 'details', title: '2. Job Details' },
+    { name: 'settings', title: '3. Settings' },
+  ],
   fields: [
+    // ============================================================
+    // BASIC INFO - Job listing essentials
+    // ============================================================
     defineField({
       name: 'title',
       type: 'string',
-      title: 'Job Title',
-      description: 'e.g., Manager, Product Support - APAC',
+      title: '📝 [EDIT] Job Title',
+      group: 'basic',
+      description: 'e.g., Clinical Psychologist, Speech Therapist',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'slug',
       type: 'slug',
-      title: 'Slug',
+      title: '🔗 [AUTO] URL Slug',
+      group: 'basic',
+      description: "Auto-generated from title. Click 'Generate'.",
       options: {
         source: 'title',
         slugify: (input) =>
-          input
-            .toLowerCase()
-            .replace(/\s+/g, '-')
-            .replace(/[^\w-]+/g, '')
-            .slice(0, 96),
+          input.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').slice(0, 96),
       },
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'department',
       type: 'string',
-      title: 'Department',
-      description: 'e.g., Customer Success, Education & Training, Clinical Services',
+      title: '📝 [EDIT] Department',
+      group: 'basic',
+      description: 'e.g., Clinical Services, Education & Training',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'employmentType',
+      type: 'string',
+      title: '📂 [SELECT] Employment Type',
+      group: 'basic',
+      options: {
+        list: [
+          {title: 'Full time', value: 'full-time'},
+          {title: 'Internship', value: 'internship'},
+          {title: 'Contract', value: 'contract'},
+        ],
+        layout: 'radio',
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'locationType',
+      type: 'string',
+      title: '📂 [SELECT] Work Mode',
+      group: 'basic',
+      options: {
+        list: [
+          {title: 'Remote', value: 'remote'},
+          {title: 'Onsite', value: 'onsite'},
+          {title: 'Hybrid', value: 'hybrid'},
+        ],
+        layout: 'radio',
+      },
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'location',
       type: 'array',
-      title: 'Locations',
+      title: '📍 [SELECT] Locations',
+      group: 'basic',
       of: [{type: 'string'}],
       options: {
         list: [
@@ -52,95 +91,65 @@ export const careerType = defineType({
       validation: (rule) => rule.required().min(1),
     }),
     defineField({
-      name: 'employmentType',
-      type: 'string',
-      title: 'Employment Type',
-      options: {
-        list: [
-          {title: 'Full time', value: 'full-time'},
-          {title: 'Internship', value: 'internship'},
-          {title: 'Contract', value: 'contract'},
-        ],
-      },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'locationType',
-      type: 'string',
-      title: 'Location Type',
-      options: {
-        list: [
-          {title: 'Remote', value: 'remote'},
-          {title: 'Onsite', value: 'onsite'},
-          {title: 'Hybrid', value: 'hybrid'},
-        ],
-      },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: 'salaryRange',
       type: 'object',
-      title: 'Salary Range',
+      title: '💰 [OPTIONAL] Salary Range',
+      group: 'basic',
       fields: [
-        {
-          name: 'min',
-          type: 'string',
-          title: 'Minimum',
-          description: 'e.g., ₹75K, $75K',
-        },
-        {
-          name: 'max',
-          type: 'string',
-          title: 'Maximum',
-          description: 'e.g., ₹85K, $85K',
-        },
-        {
-          name: 'note',
-          type: 'string',
-          title: 'Additional Note',
-          description: 'e.g., Offers Equity, Multiple Ranges',
-        },
+        { name: 'min', type: 'string', title: 'Minimum', description: 'e.g., ₹30K' },
+        { name: 'max', type: 'string', title: 'Maximum', description: 'e.g., ₹50K' },
+        { name: 'note', type: 'string', title: 'Note', description: 'e.g., + Benefits' },
       ],
     }),
+
+    // ============================================================
+    // JOB DETAILS - Full job description
+    // ============================================================
     defineField({
       name: 'aboutRole',
       type: 'array',
-      title: 'About This Role',
-      of: [
-        defineArrayMember({
-          type: 'block',
-        }),
-      ],
+      title: '📝 [EDIT] About This Role',
+      group: 'details',
+      description: 'Describe the role, responsibilities, and what makes it exciting',
+      of: [defineArrayMember({ type: 'block' })],
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'requirements',
       type: 'array',
-      title: 'Role Requirements',
+      title: '📝 [EDIT] Requirements',
+      group: 'details',
       of: [{type: 'string'}],
-      description: 'Add each requirement as a separate point',
+      description: 'Add each requirement as a separate item',
       validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: 'skills',
       type: 'array',
-      title: 'Skills and Qualifications',
+      title: '📝 [EDIT] Skills & Qualifications',
+      group: 'details',
       of: [{type: 'string'}],
-      description: 'Add each skill/qualification as a separate point',
+      description: 'Add each skill/qualification as a separate item',
       validation: (rule) => rule.required().min(1),
+    }),
+
+    // ============================================================
+    // SETTINGS - Publishing options
+    // ============================================================
+    defineField({
+      name: 'postedDate',
+      type: 'datetime',
+      title: '📅 [EDIT] Posted Date',
+      group: 'settings',
+      initialValue: () => new Date().toISOString(),
     }),
     defineField({
       name: 'isActive',
       type: 'boolean',
-      title: 'Active Position',
-      description: 'Toggle to show/hide this position on careers page',
+      title: '✅ [TOGGLE] Active Position',
+      group: 'settings',
+      description: 'Turn off to hide from careers page',
       initialValue: true,
-    }),
-    defineField({
-      name: 'postedDate',
-      type: 'datetime',
-      title: 'Posted Date',
-      initialValue: () => new Date().toISOString(),
     }),
   ],
   preview: {
@@ -152,8 +161,8 @@ export const careerType = defineType({
     },
     prepare({ title, department, employmentType, isActive }) {
       return {
-        title: title,
-        subtitle: `${department} • ${employmentType} • ${isActive ? 'Active' : 'Inactive'}`,
+        title: isActive ? title : `🚫 ${title}`,
+        subtitle: `${department} • ${employmentType}`,
       }
     },
   },

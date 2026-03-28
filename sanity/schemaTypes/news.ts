@@ -4,17 +4,29 @@ export const newsType = defineType({
   name: "news",
   title: "News / Announcements",
   type: "document",
+  groups: [
+    { name: "content", title: "1. Content", default: true },
+    { name: "media", title: "2. Media" },
+    { name: "settings", title: "3. Settings" },
+  ],
   fields: [
+    // ============================================================
+    // CONTENT - Main news content
+    // ============================================================
     defineField({
       name: "title",
-      title: "[REQUIRED] News Title",
+      title: "📝 [EDIT] News Title",
       type: "string",
+      group: "content",
+      description: "Headline for this news item",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "slug",
-      title: "[AUTO] Slug",
+      title: "🔗 [AUTO] URL Slug",
       type: "slug",
+      group: "content",
+      description: "Auto-generated from title. Click 'Generate'.",
       options: {
         source: "title",
         slugify: (input) =>
@@ -23,16 +35,11 @@ export const newsType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "publishedAt",
-      title: "[REQUIRED] Published Date",
-      type: "datetime",
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: "postFormat",
-      title: "[REQUIRED] News Format",
+      title: "📂 [SELECT] News Type",
       type: "string",
+      group: "content",
+      description: "Choose the type of news item",
       options: {
         list: [
           { title: "Announcement (Internal)", value: "standard" },
@@ -46,36 +53,60 @@ export const newsType = defineType({
     }),
     defineField({
       name: "excerpt",
-      title: "[REQUIRED] Brief Summary",
+      title: "📝 [EDIT] Brief Summary",
       type: "text",
+      group: "content",
       rows: 3,
-      description: "A short hook for the news card",
+      description: "Short description for news cards (max 200 chars)",
       validation: (rule) => rule.required().max(200),
     }),
     defineField({
-      name: "mainImage",
-      title: "Main Image",
-      type: "image",
-      options: { hotspot: true },
-    }),
-    defineField({
       name: "externalUrl",
-      title: "[LINK] External URL",
+      title: "🔗 [LINK] External URL",
       type: "url",
-      description: "The full link to the press article or event page",
+      group: "content",
+      description: "Link to press article or event page (for external/event types)",
       hidden: ({ document }) => document?.postFormat === "standard",
     }),
     defineField({
       name: "sourceName",
-      title: "Source Name",
+      title: "📝 [EDIT] Source Name",
       type: "string",
-      description: "e.g., Indian Express, School Name",
+      group: "content",
+      description: "e.g., Indian Express, Times of India, School Name",
       hidden: ({ document }) => document?.postFormat === "standard",
+    }),
+
+    // ============================================================
+    // MEDIA - Images
+    // ============================================================
+    defineField({
+      name: "mainImage",
+      title: "🖼️ [EDIT] Main Image",
+      type: "image",
+      group: "media",
+      description: "Featured image for this news. Set hotspot on faces!",
+      options: { hotspot: true },
+    }),
+
+    // ============================================================
+    // SETTINGS - Publishing options
+    // ============================================================
+    defineField({
+      name: "publishedAt",
+      title: "📅 [EDIT] Published Date",
+      type: "datetime",
+      group: "settings",
+      description: "When this news was published",
+      initialValue: () => new Date().toISOString(),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "featured",
-      title: "Featured News",
+      title: "⭐ [TOGGLE] Featured News",
       type: "boolean",
+      group: "settings",
+      description: "Show at top of news page",
       initialValue: false,
     }),
   ],
@@ -84,10 +115,11 @@ export const newsType = defineType({
       title: "title",
       date: "publishedAt",
       media: "mainImage",
+      featured: "featured",
     },
-    prepare({ title, date, media }) {
+    prepare({ title, date, media, featured }) {
       return {
-        title,
+        title: featured ? `⭐ ${title}` : title,
         subtitle: date ? new Date(date).toLocaleDateString() : "No date",
         media,
       };
