@@ -166,10 +166,7 @@ export const ALL_SERVICES_QUERY = `*[_type == "services"] | order(popular desc, 
   popular,
   isTherapy,
   category,
-  "image": image{
-    asset->{url},
-    alt
-  }
+  image
 }`;
 
 /**

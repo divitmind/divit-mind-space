@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import ServicesPage from "@/components/services/services-page";
+import { sanityFetch } from "@/sanity/lib/live";
+import { ALL_SERVICES_QUERY } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Our Services | Divit MindSpace",
@@ -24,7 +26,28 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServicesListPage() {
+interface SanityService {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  description: string;
+  popular: boolean;
+  isTherapy: boolean;
+  category: string;
+  image?: {
+    asset?: { _ref: string };
+    hotspot?: { x: number; y: number; height: number; width: number };
+    crop?: { top: number; bottom: number; left: number; right: number };
+    alt?: string;
+  };
+}
+
+export default async function ServicesListPage() {
+  const { data: services } = await sanityFetch({
+    query: ALL_SERVICES_QUERY,
+    tags: ["services"],
+  }) as { data: SanityService[] | null };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -58,7 +81,7 @@ export default function ServicesListPage() {
       />
 
       <Suspense fallback={<div className="min-h-screen bg-[#FAF9F5]" />}>
-        <ServicesPage />
+        <ServicesPage services={services || []} />
       </Suspense>
     </>
   );

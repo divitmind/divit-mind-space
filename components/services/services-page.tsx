@@ -7,7 +7,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { ClipboardCheck, Heart, Users, GraduationCap } from "lucide-react";
-import { services, type ServiceData } from "@/lib/services-data";
+import { urlFor } from "@/sanity/lib/image";
+
+interface SanityService {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  description: string;
+  popular: boolean;
+  isTherapy: boolean;
+  category: string;
+  image?: {
+    asset?: { _ref: string };
+    hotspot?: { x: number; y: number; height: number; width: number };
+    crop?: { top: number; bottom: number; left: number; right: number };
+    alt?: string;
+  };
+}
 
 const categories = [
   { id: "all", label: "All Services", icon: null },
@@ -27,9 +43,10 @@ const categoryDescriptions: Record<string, string> = {
 
 interface ServicesPageProps {
   title?: string;
+  services: SanityService[];
 }
 
-export default function ServicesPage({ title = "Our Services" }: ServicesPageProps) {
+export default function ServicesPage({ title = "Our Services", services }: ServicesPageProps) {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("all");
 
@@ -44,7 +61,7 @@ export default function ServicesPage({ title = "Our Services" }: ServicesPagePro
   const filteredServices = useMemo(() => {
     if (activeCategory === "all") return services;
     return services.filter((s) => s.category === activeCategory);
-  }, [activeCategory]);
+  }, [activeCategory, services]);
 
   // Count services per category
   const categoryCounts = useMemo(() => {
@@ -53,7 +70,7 @@ export default function ServicesPage({ title = "Our Services" }: ServicesPagePro
       counts[s.category] = (counts[s.category] || 0) + 1;
     });
     return counts;
-  }, []);
+  }, [services]);
 
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
@@ -179,7 +196,7 @@ export default function ServicesPage({ title = "Our Services" }: ServicesPagePro
             >
               {filteredServices.map((service, index) => (
                 <motion.div
-                  key={service.id}
+                  key={service._id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
@@ -238,16 +255,20 @@ export default function ServicesPage({ title = "Our Services" }: ServicesPagePro
 }
 
 // Inline Service Card Component
-function ServiceCard({ service }: { service: ServiceData }) {
+function ServiceCard({ service }: { service: SanityService }) {
+  const imageUrl = service.image
+    ? urlFor(service.image).width(800).height(600).fit('crop').auto('format').url()
+    : '/placeholder-service.png';
+
   return (
     <Link
-      href={`/services/${service.slug}`}
+      href={`/services/${service.slug.current}`}
       className="group relative bg-white overflow-hidden rounded-[2rem] border border-black/5 hover:border-black/10 transition-all duration-500 hover:shadow-2xl hover:shadow-black/5"
     >
       <div className="relative h-64 w-full overflow-hidden bg-black/5">
         <Image
-          src={service.image}
-          alt={service.title}
+          src={imageUrl}
+          alt={service.image?.alt || service.title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
