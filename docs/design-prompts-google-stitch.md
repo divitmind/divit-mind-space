@@ -1,325 +1,384 @@
-# Google Stitch Image Prompts for Divit MindSpace
+# Divit MindSpace - Brand & Image Guidelines
 
 **Brand Focus:** Professional therapy and developmental support for neurodivergent CHILDREN, TEENS, ADULTS, and FAMILIES.
 
-Use these prompts in Google Stitch to generate premium, editorial-quality images that represent ALL age groups you serve.
+---
+
+## YOUR EXISTING BRAND IDENTITY
+
+### Logo Analysis
+Your logo is a **lotus/leaf design** with:
+- **5 petals** in green gradient (dark forest to light sage)
+- **Purple dots** on each petal tip
+- **"DIVIT"** in bold black serif
+- **"MINDSPACE"** in lighter weight below
+
+### Brand Symbolism
+- **Lotus petals** = Growth, transformation, emergence
+- **Multiple petals** = Different journeys, neurodiversity
+- **Green gradient** = Natural growth, healing, life
+- **Purple accents** = Wisdom, calm, trust
+- **Organic shapes** = Warmth, not clinical
+
+### Brand Color Palette (From Your Logo)
+
+| Color | Hex | Usage |
+|-------|-----|-------|
+| **Forest Green** | `#004540` | Primary, headings, CTAs |
+| **Sage Green** | `#89A09E` | Accents, backgrounds |
+| **Deep Purple** | `#52154E` | Accent highlights, links |
+| **Soft Cream** | `#FDFBF7` | Page background |
+| **Honey Gold** | `#FFE175` | Warm highlights |
+| **Black** | `#000000` | Text, wordmark |
 
 ---
 
-## Color Reference (Match Your Brand)
-- Background: `#FDFBF7` (soft cream)
-- Warm accent: `#FFE175` (honey yellow)
-- Green accent: `#89A09E` (sage gray-green)
-- Deep purple: `#52154E`
-- Forest green: `#004540`
+## INTERNATIONAL COMPETITOR ANALYSIS
+
+### UK Market
+
+| Clinic | Website | Aesthetic | Key Insight |
+|--------|---------|-----------|-------------|
+| **[NeuroTribe UK](https://neurotribe.uk/)** | Vibrant purple + coral | Multi-color = neurodiversity | Uses collage art of different faces |
+| **[The Key Clinic](https://www.thekeyclinic.co.uk)** | Muted teal + white | Premium clinical | Minimalist, evidence-based positioning |
+| **[Genius Within](https://geniuswithin.org/)** | Purple + teal | Strength-based | "68% of us are neurodivergent ourselves" |
+| **[Navigate Neurodiversity OT](https://www.navigateneurodiversityot.com/)** | Warm, informal | Adults-focused | "Attend in your PJs" - validates lived experience |
+| **[Paradigm Neurodiversity](https://paradigm-neurodiversity.uk/)** | Modern minimal | Families + children | CPD training focus |
+
+### USA Market
+
+| Clinic | Website | Aesthetic | Key Insight |
+|--------|---------|-----------|-------------|
+| **[The Neurodiversity Clinic](https://theneurodiversityclinic.com/)** | Blue + white | Professional warm | Staff includes neurodivergent clinicians |
+| **[Open Doors Therapy](https://opendoorstherapy.com/)** | Teal + warm tan | Adults/teens focus | NOT childish imagery |
+| **[Thrive Emerge](https://www.thriveemerge.com/)** | Nature imagery | Young adults | "Neurospicy" affirming language |
+
+### India Market
+
+| Clinic | Website | Aesthetic | Key Insight |
+|--------|---------|-----------|-------------|
+| **[Ummeed](https://www.ummeed.org/)** | Bold red + white | Warm institutional | Hindi/English, accessibility features |
+| **[India Autism Center](https://indiaautismcenter.org/)** | Blue + green | Residential focus | Opening Samaavesh campus Nov 2026 |
+| **[Babblz India](https://babblzindia.com/)** | Bright multicolor | Child-focused | ABA + Speech therapy |
+| **[Mitra For Life](https://www.mitraforlife.org/)** | Green + warm | Community-based | Teens/young adults programs |
+
+### Europe Market
+
+| Country | Notable Centers | Approach |
+|---------|----------------|----------|
+| **Germany** | Charité Hospital, Rechts der Isar | Evidence-based, early diagnosis |
+| **Netherlands** | Various | Early intervention, ABA, OT |
+| **Sweden** | National system | Inclusive education programs |
+| **Turkey** | NP Istanbul Brain Hospital | TMS, neurofeedback |
+
+### Design Trends Across Competitors
+
+| Trend | Examples | Apply to Divit? |
+|-------|----------|-----------------|
+| **Purple as primary** | Genius Within, NeuroTribe | Already using - good |
+| **Nature imagery** | Thrive Emerge, Key Clinic | Aligns with lotus logo |
+| **Warm, not clinical** | Navigate OT, Open Doors | Match cream background |
+| **Lived experience emphasis** | Most UK clinics | Consider for messaging |
+| **Multi-age representation** | Few do this well | **Opportunity for Divit** |
 
 ---
 
-## HERO IMAGES (Represent All Ages)
+## HOW DIVIT COMPARES
 
-### 1. Hero Option A - Multi-Generational Family
+### Strengths vs Competitors
+1. **Unique lotus logo** - More elegant than most competitors
+2. **Green + purple palette** - Distinctive (most use blue or purple alone)
+3. **All-ages positioning** - Rare in market (most focus on children OR adults)
+4. **Indian context** - Limited premium competition
+
+### Opportunities
+1. Show **adults and teens prominently** - Most Indian centers show only children
+2. Use **nature/botanical imagery** to echo lotus logo
+3. **Warm editorial photography** vs sterile stock photos
+4. **Family support across generations** - unique positioning
+
+---
+
+## GOOGLE STITCH IMAGE PROMPTS
+
+All prompts are designed to:
+- Match your **green + purple + cream** brand palette
+- Echo the **lotus/growth** symbolism
+- Represent **ALL age groups equally**
+- Feel **warm and editorial**, not clinical
+
+---
+
+### HERO IMAGES
+
+#### 1. Multi-Generational Connection (PRIMARY RECOMMENDATION)
 ```
-Editorial lifestyle photograph showing three generations: Indian
-grandmother (60s), adult daughter (35), and teenage granddaughter (16)
-sitting together on a cream-colored sofa, having a warm conversation.
-Natural window light streaming in, soft golden hour glow. Minimalist
-modern Indian home interior with warm beige walls, small green plant.
-All three genuinely engaged, authentic smiles. Shot on medium format
-camera, shallow depth of field, warm color grading with cream and
-honey tones. Premium lifestyle magazine aesthetic. Aspect ratio 5:4.
+Editorial photograph of three generations of an Indian family: grandmother
+(60s), mother (35), and teenage daughter (16), sitting together in a
+modern living room with cream walls and sage green accents. Natural
+window light, golden hour warmth. All three engaged in genuine
+conversation, authentic expressions. Small green plant visible.
+Shallow depth of field, warm color grading matching cream (#FDFBF7)
+and sage green (#89A09E). Premium lifestyle magazine quality.
+Aspect ratio 5:4.
+```
+**Why:** Shows your unique all-ages positioning, echoes green palette.
+
+#### 2. Adult Empowerment
+```
+Editorial portrait of an Indian professional man in his early 30s,
+sitting thoughtfully in a modern therapy-like setting. Wearing earth-
+toned clothing (forest green or cream). Cream walls, natural light
+from window, small potted plant with leaves. Expression shows
+self-awareness and confidence, NOT vulnerability. Shallow depth of
+field, warm premium color grading. Magazine quality, NOT clinical.
+```
+**Why:** Adults are underrepresented in Indian developmental centers.
+
+#### 3. Teen Self-Discovery
+```
+Lifestyle photograph of Indian teenage girl (15-16) journaling at a
+wooden desk near a window. Natural afternoon light, cream-colored
+room with touches of sage green. Wearing casual earth-toned clothes.
+Expression shows focus and quiet confidence. Small succulent plant
+on desk. Editorial photography, shallow depth of field, warm film
+tones. Authentic, reflective moment.
+```
+**Why:** Teens need representation beyond "troubled youth" imagery.
+
+#### 4. Family with Adult Child
+```
+Warm lifestyle photograph of Indian parents (late 40s) and their
+adult son (24-26) having a supportive conversation in a living room.
+Cream sofa, sage green throw pillows, natural lighting. Son speaking,
+parents listening with engaged body language. Shows neurodivergent
+adults receiving family support. Warm honey and cream tones.
+Editorial quality, shallow depth of field.
+```
+**Why:** Shows adult neurodivergent individuals in family context.
+
+---
+
+### SERVICES SECTION
+
+#### 5. Assessment - Adult Hands
+```
+Close-up of adult Indian hands (woman, 30s) writing on assessment
+materials at a wooden desk. Warm overhead lighting, cream background.
+A small green leaf or plant edge visible in frame. Modern, elegant
+stationery. Editorial product photography style, shallow depth of
+field. Warm tones matching #FDFBF7 background. NOT clinical forms.
 ```
 
-### 2. Hero Option B - Adult Focus
+#### 6. Therapy - Adult Session
 ```
-Editorial photograph of an Indian professional woman in her 30s,
-sitting in a calm therapy-like setting, looking thoughtful and
-empowered. Wearing smart casual earth-toned clothing. Modern
-minimalist office with cream walls, natural light from large window,
-green plant in background. Expression shows confidence and self-
-awareness. Shallow depth of field, warm premium color grading.
-Magazine-quality portrait. NOT clinical, NOT posed.
-```
-
-### 3. Hero Option C - Teen Empowerment
-```
-Lifestyle photograph of Indian teenage boy (16-17) journaling at a
-wooden desk near a window. Natural side lighting, cream-colored room,
-warm afternoon glow. Expression shows focus and self-reflection.
-Wearing casual clothing (earth tones). Small plant visible, minimalist
-decor. Editorial photography style, shallow depth of field, warm
-film-like color grading. Authentic, NOT staged or forced.
+Indian woman in her late 20s in a comfortable therapy session,
+sitting in a modern armchair. Therapist's hands visible with notepad.
+Warm office with cream walls, forest green accent chair, natural
+light, potted plant. Client's expression shows openness and engagement.
+Editorial photography, warm premium color grading. Professional
+but inviting atmosphere.
 ```
 
-### 4. Hero Option D - Family Support
+#### 7. Therapy - Teen Group
 ```
-Wide shot of Indian parents (40s) and adult son (22-25) in a warm
-living room setting, engaged in supportive conversation. Natural
-lighting, cream and beige interior, touches of greenery. Son
-expressing himself, parents listening attentively with supportive
-body language. Editorial photography, warm premium color palette.
-Shows neurodivergent adults getting family support. Aspect ratio 5:4.
+Small group of 3-4 Indian teenagers (ages 14-17, mixed gender)
+in a supportive group setting. Sitting in a circle on comfortable
+chairs in a modern room with cream walls and green plants. Natural
+light, authentic expressions - engaged discussion. Editorial
+documentary style, warm sage and cream tones. NOT clinical,
+NOT posed.
+```
+
+#### 8. Therapy - Child Play
+```
+Indian child (7-8 years old) engaged in play therapy with wooden
+blocks and green toys. Therapist's hands gently visible nearby.
+Wooden table, soft natural lighting, cream background. Child
+showing focused concentration and quiet joy. Shallow depth of
+field, warm honey and cream color grading. Editorial lifestyle
+quality.
+```
+
+#### 9. Parent Guidance
+```
+Indian couple (40s) in a consultation, sitting together on a cream
+sofa with sage green cushions. Listening attentively, expressions
+showing hope. Professional environment with soft window light,
+green plant in background. Therapist hands visible with notepad.
+Medium shot, editorial style, warm beige and green tones.
 ```
 
 ---
 
-## SERVICES SECTION - All Ages
+### ABOUT/TEAM SECTION
 
-### 5. Assessment - Adult
-```
-Close-up of adult Indian woman's hands (30s) completing a cognitive
-assessment form, wooden desk surface, soft warm lighting from above.
-Modern assessment materials visible (not clinical-looking). Cream-
-colored environment, subtle green plant at edge of frame. Editorial
-product photography, shallow depth of field, premium warm tones.
-```
-
-### 6. Assessment - Teen
-```
-Indian teenage girl (15-16) engaged in a structured assessment
-activity with a therapist (hands visible). Wooden table, natural
-light, modern assessment tools. Teen looks focused and comfortable.
-Cream background, warm honey lighting. Editorial lifestyle
-photography, shallow depth of field. NOT clinical, warm professional.
-```
-
-### 7. Therapy - Adult Session
-```
-Indian man in his late 20s in a one-on-one therapy session, sitting
-comfortably in a modern armchair. Therapist partially visible. Calm,
-warm office environment with cream walls, natural light, green plant.
-Man's expression shows openness and engagement. Editorial photography,
-warm color grading, shallow depth of field. Professional but inviting.
-```
-
-### 8. Therapy - Teen Group
-```
-Small group of Indian teenagers (3-4 teens, ages 14-17, mixed gender)
-in a supportive group therapy setting. Sitting in a circle on
-comfortable chairs, engaged in discussion. Modern room with cream
-walls, natural light, plants. Authentic expressions - some talking,
-some listening thoughtfully. Editorial documentary style, warm
-premium color palette.
-```
-
-### 9. Therapy - Child Play-Based
-```
-Indian child (7-8 years old) engaged in play therapy with colorful
-building blocks. Therapist's hands gently visible nearby. Wooden
-table, soft natural lighting, cream background. Child's face showing
-focused joy and concentration. Shallow depth of field, editorial
-lifestyle photography, warm honey and cream color grading.
-```
-
-### 10. Parent/Family Guidance
-```
-Indian couple (40s) in a consultation session, sitting together on
-a cream sofa, listening attentively to guidance (therapist hands
-visible with notepad). Professional but warm environment, soft window
-light, modern minimalist decor. Expressions show hope and engagement.
-Medium shot, editorial style, warm beige and sage green tones.
-```
-
----
-
-## ABOUT/TEAM SECTION
-
-### 11. Professional Portrait - Female
+#### 10. Professional Portrait - Female
 ```
 Professional Indian female psychologist in her 40s, warm genuine
-smile, wearing elegant earth-toned blouse (cream or sage green).
-Standing in a modern minimalist office with cream walls, soft
-bookshelf in background. Natural window light creating soft shadows.
-Editorial portrait photography, shallow depth of field, warm
-professional aesthetic. Confident, approachable, NOT clinical.
+smile. Wearing elegant earth-toned blouse (cream or sage green,
+matching brand). Modern minimalist office with cream walls, soft
+bookshelf, green plant in background. Natural window light creating
+soft shadows. Editorial portrait, shallow depth of field. Confident,
+approachable, warm.
 ```
 
-### 12. Professional Portrait - Male
+#### 11. Professional Portrait - Male
 ```
 Professional Indian male therapist in his 30s, friendly approachable
-expression, wearing smart casual shirt (earth tones - navy or forest
-green). Modern office setting with cream walls, plants, natural light.
-Head and shoulders portrait, editorial quality, warm color grading.
-Professional yet warm and welcoming.
+expression. Wearing smart casual shirt in forest green or cream.
+Modern office with cream walls, plants, natural light. Head and
+shoulders portrait, editorial quality, warm color grading. Matches
+brand palette.
 ```
 
-### 13. Team Collaboration
+#### 12. Team Collaboration
 ```
 Small team of 3-4 Indian mental health professionals (mixed gender,
-varied ages 30s-50s) having a warm discussion around a wooden table.
-Modern office with cream walls, natural light, green plants.
-Collaborative body language, genuine engagement. Editorial
-documentary style, warm premium color palette.
+ages 30s-50s) collaborating around a wooden table. Modern office
+with cream walls, natural light, green plants. Warm body language,
+genuine engagement. Editorial documentary style, sage and cream
+tones.
 ```
 
 ---
 
-## TESTIMONIALS/REVIEWS BACKGROUND
+### AWARENESS PROGRAMS
 
-### 14. Abstract Texture
+#### 13. School Workshop
 ```
-Abstract soft watercolor wash in warm cream, pale honey yellow, and
-very subtle sage green. Organic flowing shapes, minimal and elegant,
-suitable as subtle background texture. Premium paper texture visible,
-artistic but understated. High resolution, seamless edges for tiling.
-```
-
----
-
-## AWARENESS PROGRAMS
-
-### 15. School Workshop
-```
-Indian therapist leading an awareness workshop for a group of school
-teachers and parents. Modern classroom or meeting room with cream
-walls, natural lighting, professional visual aids. Audience engaged,
-taking notes. Editorial documentary photography, warm color grading,
-authentic candid moment.
+Indian therapist (female, 30s) leading awareness workshop for
+teachers and parents. Modern classroom with cream walls, natural
+light, presentation materials. Audience engaged, taking notes.
+Green plants visible. Editorial documentary photography, warm
+tones. Authentic candid moment.
 ```
 
-### 16. Corporate Workshop
+#### 14. Corporate Workshop (NEW - Most competitors don't have this)
 ```
-Indian mental health professional presenting a neurodiversity awareness
-session to corporate employees in a modern office conference room.
-Adults (25-50s) seated, engaged, professional setting. Natural light,
-minimal modern decor. Editorial business photography, warm tones.
+Indian mental health professional presenting neurodiversity awareness
+to corporate employees in modern conference room. Adults (25-50s)
+seated, engaged. Natural light, minimal modern decor with green
+plant accents. Editorial business photography, warm tones. Shows
+adult-focused services.
 ```
 
 ---
 
-## WHO NEEDS IT SECTION
+### WHO NEEDS IT SECTION
 
-### 17. Families Card
+#### 15. Families Card - Hands Across Ages
 ```
-Close-up of three hands stacked together - elderly parent (60s),
-adult (35), and young adult (22). Warm cream background, soft studio
-lighting. Emotional connection showing multi-generational support.
-Premium editorial still life, shallow depth of field, warm honey
-and cream tones. Represents family across all ages.
-```
-
-### 18. Adults Card
-```
-Indian woman in her 30s, close-up profile shot, looking out a window
-with soft natural light illuminating her face. Thoughtful, hopeful
-expression. Cream and sage green color palette, editorial portrait
-style. Represents adults seeking self-understanding and growth.
+Close-up of three hands stacked together - elderly (60s), adult (35),
+young adult (22). Warm cream background, soft studio lighting.
+Emotional connection without faces. Premium editorial still life,
+shallow depth of field, warm honey and cream tones. Represents
+multi-generational support.
 ```
 
-### 19. Teens Card
+#### 16. Adults Card
 ```
-Indian teenage boy (16-17) walking outdoors in a park or garden
-setting, natural golden hour lighting. Wearing casual earth-toned
-clothing. Expression shows quiet confidence and self-acceptance.
-Editorial lifestyle photography, warm premium color grading.
-Represents teens finding their path.
+Indian woman in her 30s, close-up profile, looking out window with
+soft natural light on face. Thoughtful, hopeful expression. Cream
+and sage green color palette. Editorial portrait style. Represents
+adults seeking self-understanding.
 ```
 
----
-
-## CTA/CONTACT SECTION
-
-### 20. Connection Moment
+#### 17. Teens Card
 ```
-Close-up of two hands reaching toward each other - one adult (30s),
-one elderly (60s) - almost touching. Warm cream background, soft
-diffused lighting. Represents connection and support across ages.
-Editorial still life, shallow depth of field, honey and cream
-color palette. Emotional, not clinical.
+Indian teenage boy (16-17) outdoors in garden setting, golden hour
+light. Casual earth-toned clothing. Expression shows quiet confidence
+and self-acceptance. Green foliage background echoing logo. Editorial
+lifestyle photography, warm premium tones.
+```
+
+#### 18. Children Card
+```
+Indian child (6-7 years old) drawing with colored pencils, shot
+from above. Green and purple crayons visible (matching brand).
+Wooden table, cream paper, natural light. Child's hands focused
+on creative work. Editorial product photography, warm tones.
 ```
 
 ---
 
-## Usage Instructions
+### CTA/CONTACT SECTION
 
-1. Copy the prompt text (inside the code blocks)
-2. Paste into Google Stitch
-3. Generate 3-4 variations
-4. Choose the one that best matches the warm, premium aesthetic
-5. Upload to Sanity CMS in the appropriate section
-
-## Key Principles
-
-- **ALL AGES**: Always represent children, teens, adults, AND families
-- **Authentic**: Not posed or clinical - genuine moments
-- **Warm**: Cream, honey, sage green tones - NOT cold whites
-- **Premium**: Editorial/magazine quality, not stock photos
-- **Inclusive**: Show diverse family structures, age groups
-- **Empowering**: Show confidence, growth, connection - NOT deficit
-
----
-
-# LOGO & BRAND RECOMMENDATIONS
-
-Based on competitive research of similar neurodivergent-affirming clinics:
-
-## Color Palette Recommendations
-
-| Color | Use | Feeling |
-|-------|-----|---------|
-| Deep Purple `#52154E` | Primary brand | Trust, calm, wisdom |
-| Forest Green `#004540` | Secondary | Growth, healing, nature |
-| Warm Cream `#FDFBF7` | Background | Approachable, premium |
-| Sage Green `#89A09E` | Accent | Gentle, nurturing |
-| Honey Gold `#FFE175` | Highlight | Optimism, warmth |
-
-## Logo Style Recommendations
-
-**DO:**
-- Clean, modern wordmark (like "Divit MindSpace" in elegant serif)
-- Infinity symbol (official neurodiversity symbol)
-- Abstract flowing shapes suggesting connection/growth
-- Nature-inspired elements (leaves, organic curves)
-- Simple geometric forms
-
-**AVOID:**
-- Puzzle pieces (considered outdated, associated with Autism Speaks controversy)
-- Brain imagery (too clinical)
-- Childish illustrations (limits to children only)
-- Complex detailed logos (sensory overwhelm)
-
-## Similar Brands to Reference
-
-1. **[The Neurodiversity Clinic](https://theneurodiversityclinic.com/)** - Clean blue/white, professional yet warm
-2. **[Open Doors Therapy](https://opendoorstherapy.com/)** - Teal/seafoam + warm tan, adults-focused
-3. **[Thrive Emerge](https://www.thriveemerge.com/)** - Nature imagery, young adults focus
-4. **[Ummeed](https://www.ummeed.org/)** - Bold red accent, Indian context
-5. **[The Neurodivergent Collective](https://theneurodivergentcollective.com/)** - Modern, adults 18+
-
-## Logo Concepts for Divit MindSpace
-
-### Concept 1: Infinity Flow
+#### 19. Connection & Growth
 ```
-Logo prompt for designer:
-Modern wordmark "DIVIT MINDSPACE" in clean serif (like Cormorant
-Garamond). Above or beside, a subtle infinity symbol formed by two
-flowing organic shapes in purple (#52154E) and green (#004540),
-suggesting continuous growth and neurodiversity. Minimal, elegant,
-works at all sizes.
-```
-
-### Concept 2: Connected Minds
-```
-Logo prompt for designer:
-"DIVIT" in bold serif, "MINDSPACE" in lighter weight below.
-Accompanying icon: two or three abstract circular shapes overlapping
-gently (like Venn diagram), in gradient from purple to green,
-representing different minds connecting. Premium, minimal, modern.
-```
-
-### Concept 3: Growth Path
-```
-Logo prompt for designer:
-Elegant wordmark "Divit MindSpace" in Cormorant Garamond italic.
-Icon: abstract upward-flowing line that branches into 3-4 gentle
-curves (like a growing plant or neural pathways), purple to green
-gradient. Suggests growth, multiple paths, organic development.
+Close-up of a hand gently holding a small green plant seedling in
+soil. Warm natural lighting, cream background. Represents growth,
+nurturing, potential. Editorial still life, shallow depth of field,
+warm earthy tones matching brand. Echoes lotus logo symbolism.
 ```
 
 ---
 
-## Next Steps
+### BACKGROUND TEXTURES
 
-1. Use Google Stitch to generate hero/service images with prompts above
-2. Share logo concepts with a designer for professional execution
-3. Ensure all imagery represents CHILDREN + TEENS + ADULTS + FAMILIES
-4. Maintain warm, premium, non-clinical aesthetic throughout
+#### 20. Abstract Botanical
+```
+Abstract soft watercolor texture in warm cream, pale sage green,
+and very subtle purple hints. Organic flowing shapes suggesting
+lotus petals or leaves. Minimal and elegant, suitable as subtle
+website background. Premium paper texture visible. High resolution,
+seamless edges for tiling.
+```
+
+---
+
+## IMAGE SIZE RECOMMENDATIONS
+
+| Usage | Dimensions | Aspect Ratio |
+|-------|------------|--------------|
+| Hero desktop | 1920 x 1080px | 16:9 |
+| Hero mobile | 1080 x 1350px | 4:5 |
+| Service cards | 800 x 600px | 4:3 |
+| Team portraits | 600 x 800px | 3:4 |
+| Background texture | 1920 x 1080px | 16:9 |
+
+---
+
+## KEY PRINCIPLES
+
+### DO:
+- Use **greens and cream** as primary tones (match logo)
+- Show **ALL ages** - children, teens, adults, elderly
+- Feature **natural light** and **plants/greenery**
+- Capture **authentic moments**, not posed shots
+- Include **purple accents** sparingly (like logo dots)
+- Show **Indian families** in modern settings
+
+### DON'T:
+- Over-represent children (you serve ALL ages)
+- Use clinical white backgrounds
+- Show distressed or deficit-focused expressions
+- Use cold blue lighting
+- Feature Western/non-Indian subjects
+- Use stock photo aesthetics
+
+---
+
+## USAGE INSTRUCTIONS
+
+1. Copy prompt text from code blocks above
+2. Paste into **Google Stitch** (or Midjourney, DALL-E)
+3. Generate **3-4 variations** of each
+4. Select images matching **warm, green-cream palette**
+5. Upload to **Sanity CMS** in appropriate section
+6. Set **hotspot on faces** for responsive cropping
+
+---
+
+## COMPETITOR SOURCES
+
+- [NeuroTribe UK](https://neurotribe.uk/) - Vibrant, celebrates difference
+- [The Key Clinic](https://www.thekeyclinic.co.uk) - Premium clinical
+- [Genius Within](https://geniuswithin.org/) - Strength-based messaging
+- [Navigate Neurodiversity OT](https://www.navigateneurodiversityot.com/) - Adults-focused
+- [The Neurodiversity Clinic](https://theneurodiversityclinic.com/) - USA, lived experience
+- [Open Doors Therapy](https://opendoorstherapy.com/) - Adults/teens
+- [Thrive Emerge](https://www.thriveemerge.com/) - Young adults, nature imagery
+- [Ummeed](https://www.ummeed.org/) - Indian context
+- [Mitra For Life](https://www.mitraforlife.org/) - Bengaluru, community-based
+- [99designs Therapy Websites](https://99designs.com/inspiration/websites/therapy) - Design trends
