@@ -204,21 +204,26 @@ export const POPULAR_SERVICES_QUERY = `*[_type == "services" && popular == true]
 
 /**
  * Query to fetch a single service by slug
- * Optimizations:
- * - Compound filter on indexed fields (_type and slug.current)
- * - [0] selector for single result
- * - Complete body content for PortableText rendering
- * - Full SEO fields for metadata
+ * Includes all structured content fields for service detail page
  */
 export const SINGLE_SERVICE_QUERY = `*[_type == "services" && slug.current == $slug][0] {
   _id,
   title,
   slug,
   description,
-  image,
+  category,
+  "image": image{
+    asset->{url},
+    alt
+  },
   popular,
   isTherapy,
-  body,
+  overview,
+  benefits,
+  whatToExpect,
+  whoIsItFor,
+  duration,
+  format,
   seo
 }`;
 

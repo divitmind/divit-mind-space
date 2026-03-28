@@ -1,24 +1,56 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
-import { services, getServiceBySlug } from "@/lib/services-data";
+import { sanityFetch } from "@/sanity/lib/live";
+import { SINGLE_SERVICE_QUERY, ALL_SERVICE_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { Check, Clock, MapPin } from "lucide-react";
+
+interface ServiceData {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  description: string;
+  category: string;
+  image?: {
+    asset?: { url: string };
+    alt?: string;
+  };
+  overview?: string;
+  benefits?: string[];
+  whatToExpect?: string[];
+  whoIsItFor?: string[];
+  duration?: string;
+  format?: string;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+  };
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return services.map((service) => ({
-    slug: service.slug,
+  const { data: slugs } = await sanityFetch({
+    query: ALL_SERVICE_SLUGS_QUERY,
+    tags: ["services"],
+  }) as { data: { slug: string }[] | null };
+
+  return (slugs || []).map((item) => ({
+    slug: item.slug,
   }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = getServiceBySlug(slug);
+
+  const { data: service } = await sanityFetch({
+    query: SINGLE_SERVICE_QUERY,
+    params: { slug },
+    tags: ["services"],
+  }) as { data: ServiceData | null };
 
   if (!service) {
     return {
@@ -26,22 +58,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const serviceUrl = `https://divitmindspace.com/services/${service.slug}`;
+  const serviceUrl = `https://divitmindspace.com/services/${service.slug.current}`;
+  const title = service.seo?.metaTitle || service.title;
+  const description = service.seo?.metaDescription || service.description;
 
   return {
-    title: `${service.title} | Divit MindSpace`,
-    description: service.description,
+    title: `${title} | Divit MindSpace`,
+    description: description,
     openGraph: {
-      title: service.title,
-      description: service.description,
+      title: title,
+      description: description,
       type: "website",
       url: serviceUrl,
       siteName: "Divit MindSpace",
     },
     twitter: {
       card: "summary_large_image",
-      title: service.title,
-      description: service.description,
+      title: title,
+      description: description,
     },
     alternates: {
       canonical: serviceUrl,
@@ -51,7 +85,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ServicePage({ params }: PageProps) {
   const { slug } = await params;
-  const service = getServiceBySlug(slug);
+
+  const { data: service } = await sanityFetch({
+    query: SINGLE_SERVICE_QUERY,
+    params: { slug },
+    tags: ["services"],
+  }) as { data: ServiceData | null };
 
   if (!service) {
     notFound();
@@ -72,7 +111,7 @@ export default async function ServicePage({ params }: PageProps) {
       name: "India",
     },
     serviceType: "Healthcare/Education",
-    url: `https://divitmindspace.com/services/${service.slug}`,
+    url: `https://divitmindspace.com/services/${service.slug.current}`,
   };
 
   const categoryLabels: Record<string, string> = {
@@ -112,10 +151,12 @@ export default async function ServicePage({ params }: PageProps) {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {/* Category Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-purple/10 text-purple text-xs font-bold uppercase tracking-widest">
-                <span className="w-2 h-2 rounded-full bg-purple" />
-                {categoryLabels[service.category]}
-              </div>
+              {service.category && (
+                <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-purple/10 text-purple text-xs font-bold uppercase tracking-widest">
+                  <span className="w-2 h-2 rounded-full bg-purple" />
+                  {categoryLabels[service.category] || service.category}
+                </div>
+              )}
 
               {/* Title */}
               <h1
@@ -132,16 +173,16 @@ export default async function ServicePage({ params }: PageProps) {
 
               {/* Quick Info */}
               <div className="flex flex-wrap items-center gap-4 mb-8">
-                {service.content.duration && (
+                {service.duration && (
                   <div className="flex items-center gap-2 text-sm text-green/70">
                     <Clock className="w-4 h-4" />
-                    <span>{service.content.duration}</span>
+                    <span>{service.duration}</span>
                   </div>
                 )}
-                {service.content.format && (
+                {service.format && (
                   <div className="flex items-center gap-2 text-sm text-green/70">
                     <MapPin className="w-4 h-4" />
-                    <span>{service.content.format}</span>
+                    <span>{service.format}</span>
                   </div>
                 )}
               </div>
@@ -162,77 +203,85 @@ export default async function ServicePage({ params }: PageProps) {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {/* Overview */}
-              <div className="mb-12">
-                <h2
-                  className="text-2xl lg:text-3xl font-serif text-green mb-4"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                >
-                  Overview
-                </h2>
-                <p className="text-green/80 leading-relaxed">
-                  {service.content.overview}
-                </p>
-              </div>
+              {service.overview && (
+                <div className="mb-12">
+                  <h2
+                    className="text-2xl lg:text-3xl font-serif text-green mb-4"
+                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                  >
+                    Overview
+                  </h2>
+                  <p className="text-green/80 leading-relaxed">
+                    {service.overview}
+                  </p>
+                </div>
+              )}
 
               {/* Benefits */}
-              <div className="mb-12 bg-white rounded-2xl p-6 lg:p-8 border border-green/10">
-                <h2
-                  className="text-2xl lg:text-3xl font-serif text-green mb-6"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                >
-                  What You&apos;ll Gain
-                </h2>
-                <ul className="space-y-3">
-                  {service.content.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check className="w-3 h-3 text-green" />
-                      </div>
-                      <span className="text-green/80">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {service.benefits && service.benefits.length > 0 && (
+                <div className="mb-12 bg-white rounded-2xl p-6 lg:p-8 border border-green/10">
+                  <h2
+                    className="text-2xl lg:text-3xl font-serif text-green mb-6"
+                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                  >
+                    What You&apos;ll Gain
+                  </h2>
+                  <ul className="space-y-3">
+                    {service.benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check className="w-3 h-3 text-green" />
+                        </div>
+                        <span className="text-green/80">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* What to Expect */}
-              <div className="mb-12">
-                <h2
-                  className="text-2xl lg:text-3xl font-serif text-green mb-6"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                >
-                  What to Expect
-                </h2>
-                <div className="space-y-4">
-                  {service.content.whatToExpect.map((item, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="w-8 h-8 rounded-full bg-purple/10 flex items-center justify-center flex-shrink-0 text-purple font-semibold text-sm">
-                        {index + 1}
+              {service.whatToExpect && service.whatToExpect.length > 0 && (
+                <div className="mb-12">
+                  <h2
+                    className="text-2xl lg:text-3xl font-serif text-green mb-6"
+                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                  >
+                    What to Expect
+                  </h2>
+                  <div className="space-y-4">
+                    {service.whatToExpect.map((item, index) => (
+                      <div key={index} className="flex items-start gap-4">
+                        <div className="w-8 h-8 rounded-full bg-purple/10 flex items-center justify-center flex-shrink-0 text-purple font-semibold text-sm">
+                          {index + 1}
+                        </div>
+                        <p className="text-green/80 pt-1">{item}</p>
                       </div>
-                      <p className="text-green/80 pt-1">{item}</p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Who Is It For */}
-              <div className="mb-12 bg-white rounded-2xl p-6 lg:p-8 border border-green/10">
-                <h2
-                  className="text-2xl lg:text-3xl font-serif text-green mb-6"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                >
-                  Is This Right for Your Child?
-                </h2>
-                <ul className="space-y-3">
-                  {service.content.whoIsItFor.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded-full bg-yellow/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check className="w-3 h-3 text-yellow-700" />
-                      </div>
-                      <span className="text-green/80">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {service.whoIsItFor && service.whoIsItFor.length > 0 && (
+                <div className="mb-12 bg-white rounded-2xl p-6 lg:p-8 border border-green/10">
+                  <h2
+                    className="text-2xl lg:text-3xl font-serif text-green mb-6"
+                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                  >
+                    Is This Right for Your Child?
+                  </h2>
+                  <ul className="space-y-3">
+                    {service.whoIsItFor.map((item, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-yellow/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check className="w-3 h-3 text-yellow-700" />
+                        </div>
+                        <span className="text-green/80">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </section>
