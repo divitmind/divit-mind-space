@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/homepage/hero-section";
+import { TrustMetrics } from "@/components/homepage/trust-metrics";
 import { ServicesSection } from "@/components/homepage/services-section";
 import { TestimonialsSection } from "@/components/homepage/testimonials-section";
 import { WhoNeedsItSection } from "@/components/homepage/who-needs-it-section";
@@ -159,6 +160,7 @@ export default async function Page() {
       />
       <main>
         <HeroSection announcement={announcementData?.text} />
+        <TrustMetrics />
         <ServicesSection therapyServices={therapyServicesData} />
         <TestimonialsSection reviews={(reviews as ReviewsQueryResult) ?? []} />
         <WhoNeedsItSection />
