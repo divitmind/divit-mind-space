@@ -3,18 +3,32 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
-import { SanityImage } from "@/sanity/types";
+import { urlFor } from "@/sanity/lib/image";
+
+interface AboutUsHeroImage {
+  asset?: { url?: string };
+  alt?: string;
+  hotspot?: { x: number; y: number };
+  crop?: { top: number; bottom: number; left: number; right: number };
+}
 
 interface AboutUsHeroData {
   title?: string;
   italicSubtitle?: string;
   description?: string;
-  images?: SanityImage[];
+  images?: AboutUsHeroImage[];
 }
 
 export function HeroSection({ data }: { data?: AboutUsHeroData }) {
   const title = data?.title || "Empowering Every Neurodivergent Child to Thrive";
   const description = data?.description || "We provide expert assessments, therapy, and family support—helping children build confidence and independence in a nurturing environment.";
+
+  const getImageUrl = (image: AboutUsHeroImage | undefined, fallback: string) => {
+    if (image?.asset) {
+      return urlFor(image).width(800).auto('format').url();
+    }
+    return fallback;
+  };
   
   return (
     <section className="relative py-12 lg:py-16 bg-[#FAF9F5] overflow-hidden">
@@ -86,8 +100,8 @@ export function HeroSection({ data }: { data?: AboutUsHeroData }) {
               {/* Large image */}
               <div className="col-span-2 relative aspect-[16/9] rounded-2xl overflow-hidden border-4 border-white shadow-lg">
                 <Image
-                  src={data?.images?.[0]?.asset?.url || "/about_pic1.png"}
-                  alt="Child development session at Divit MindSpace"
+                  src={getImageUrl(data?.images?.[0], "/about_pic1.png")}
+                  alt={data?.images?.[0]?.alt || "Child development session at Divit MindSpace"}
                   fill
                   className="object-cover"
                   priority
@@ -96,16 +110,16 @@ export function HeroSection({ data }: { data?: AboutUsHeroData }) {
               {/* Two smaller images */}
               <div className="relative aspect-square rounded-xl overflow-hidden border-4 border-white shadow-md">
                 <Image
-                  src={data?.images?.[1]?.asset?.url || "/about_pic2.png"}
-                  alt="Therapy session"
+                  src={getImageUrl(data?.images?.[1], "/about_pic2.png")}
+                  alt={data?.images?.[1]?.alt || "Therapy session"}
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="relative aspect-square rounded-xl overflow-hidden border-4 border-white shadow-md">
                 <Image
-                  src={data?.images?.[2]?.asset?.url || "/about_pic3.png"}
-                  alt="Child learning activities"
+                  src={getImageUrl(data?.images?.[2], "/about_pic3.png")}
+                  alt={data?.images?.[2]?.alt || "Child learning activities"}
                   fill
                   className="object-cover"
                 />

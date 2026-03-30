@@ -405,9 +405,36 @@ export const SPECIALISTS_QUERY = `*[_type == "specialist"] | order(order desc, n
 }`;
 
 export const ABOUT_US_QUERY = `*[_type == "aboutUs"][0] {
-  hero,
-  philosophy,
-  story
+  "hero": {
+    "title": hero.title,
+    "italicSubtitle": hero.italicSubtitle,
+    "description": hero.description,
+    "images": hero.images[]{
+      asset->{url},
+      alt,
+      hotspot,
+      crop
+    }
+  },
+  "philosophy": {
+    "title": philosophy.title,
+    "description": philosophy.description,
+    "points": philosophy.points[]{
+      title,
+      description,
+      icon
+    }
+  },
+  "story": {
+    "title": story.title,
+    "paragraphs": story.paragraphs,
+    "image": story.image{
+      asset->{url},
+      alt,
+      hotspot,
+      crop
+    }
+  }
 }`;
 
 export const GALLERY_QUERY = `*[_type == "gallery"] | order(publishedAt desc) {

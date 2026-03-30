@@ -2,12 +2,19 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { SanityImage } from "@/sanity/types";
+import { urlFor } from "@/sanity/lib/image";
+
+interface AboutUsStoryImage {
+  asset?: { url?: string };
+  alt?: string;
+  hotspot?: { x: number; y: number };
+  crop?: { top: number; bottom: number; left: number; right: number };
+}
 
 interface AboutUsStoryData {
   title?: string;
   paragraphs?: string[];
-  image?: SanityImage;
+  image?: AboutUsStoryImage;
 }
 
 const defaultParagraphs = [
@@ -34,8 +41,8 @@ export function StorySection({ data }: { data?: AboutUsStoryData }) {
             <div className="absolute inset-0 bg-purple/10 rounded-2xl transform -rotate-2 translate-x-2 translate-y-2" />
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-lg">
               <Image
-                src={data?.image?.asset?.url || "/about_pic4.png"}
-                alt="Our journey at Divit MindSpace"
+                src={data?.image?.asset ? urlFor(data.image).width(800).auto('format').url() : "/about_pic4.png"}
+                alt={data?.image?.alt || "Our journey at Divit MindSpace"}
                 fill
                 className="object-cover"
               />
