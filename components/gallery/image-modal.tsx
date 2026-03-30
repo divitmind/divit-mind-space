@@ -79,7 +79,7 @@ export function ImageModal({ items, currentIndex, onClose, onNavigate }: ImageMo
               className="relative w-full h-full p-4"
             >
               <Image
-                src={urlFor(currentItem.image).width(1200).height(1200).fit('max').auto('format').url()}
+                src={urlFor(currentItem.image).width(1600).auto('format').url()}
                 alt={currentItem.image.alt || currentItem.title || "Gallery Image"}
                 fill
                 className="object-contain p-2 md:p-4"
