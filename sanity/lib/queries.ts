@@ -22,7 +22,8 @@ export const ALL_POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) {
   "mainImage": mainImage{
     asset->{url},
     alt,
-    hotspot
+    hotspot,
+    crop
   },
   "author": author->{
     name,
@@ -46,7 +47,10 @@ export const NEWS_POSTS_QUERY = `*[_type == "news"] | order(publishedAt desc) {
   sourceName,
   featured,
   "mainImage": mainImage{
-    asset->{url}
+    asset->{url},
+    alt,
+    hotspot,
+    crop
   }
 }`;
 
@@ -105,7 +109,8 @@ export const RECENT_POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) 
   "mainImage": mainImage{
     asset->{url},
     alt,
-    hotspot
+    hotspot,
+    crop
   },
   "author": author->{
     name,
@@ -135,7 +140,8 @@ export const POSTS_BY_CATEGORY_QUERY = `*[_type == "post" && $category in catego
   "mainImage": mainImage{
     asset->{url},
     alt,
-    hotspot
+    hotspot,
+    crop
   },
   "author": author->{
     name,
@@ -166,7 +172,12 @@ export const ALL_SERVICES_QUERY = `*[_type == "services"] | order(popular desc, 
   popular,
   isTherapy,
   category,
-  image
+  "image": image{
+    asset->{url},
+    alt,
+    hotspot,
+    crop
+  }
 }`;
 
 /**
@@ -182,7 +193,9 @@ export const SERVICES_BY_CATEGORY_QUERY = `*[_type == "services" && category == 
   category,
   "image": image{
     asset->{url},
-    alt
+    alt,
+    hotspot,
+    crop
   }
 }`;
 
@@ -211,7 +224,9 @@ export const SINGLE_SERVICE_QUERY = `*[_type == "services" && slug.current == $s
   category,
   "image": image{
     asset->{url},
-    alt
+    alt,
+    hotspot,
+    crop
   },
   popular,
   isTherapy,
@@ -246,7 +261,9 @@ export const THERAPY_SERVICES_QUERY = `*[_type == "services" && isTherapy == tru
   category,
   "image": image{
     asset->{url},
-    alt
+    alt,
+    hotspot,
+    crop
   }
 }`;
 
@@ -267,7 +284,8 @@ export const ALL_GALLERY_IMAGES_QUERY = `*[_type == "gallery"] | order(uploadedA
   "image": image{
     asset->{url},
     alt,
-    hotspot
+    hotspot,
+    crop
   },
   categories,
   uploadedAt
@@ -373,7 +391,12 @@ export const SPECIALISTS_QUERY = `*[_type == "specialist"] | order(order desc, n
   name,
   slug,
   title,
-  image,
+  "image": image{
+    asset->{url},
+    alt,
+    hotspot,
+    crop
+  },
   experience,
   specialties,
   teaser,
@@ -391,7 +414,9 @@ export const GALLERY_QUERY = `*[_type == "gallery"] | order(publishedAt desc) {
   _id,
   "image": {
     "asset": { "url": image.asset->url },
-    "alt": image.alt
+    "alt": image.alt,
+    "hotspot": image.hotspot,
+    "crop": image.crop
   },
   title,
   locationEvent,
