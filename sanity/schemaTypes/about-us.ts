@@ -10,6 +10,68 @@ export const aboutUsType = defineType({
     { name: "philosophy", title: "2. Why Us Section" },
     { name: "story", title: "3. Our Story" },
   ],
+  initialValue: {
+    hero: {
+      title: "Empowering Every Neurodivergent Child to Thrive",
+      description: "We provide expert assessments, therapy, and family support—helping children build confidence and independence in a nurturing environment.",
+    },
+    philosophy: {
+      title: "Why Families Choose Us",
+      description: "What sets Divit MindSpace apart from other centers",
+      points: [
+        {
+          _type: "object",
+          _key: "1",
+          icon: "Brain",
+          title: "Expert-Led Care",
+          description: "Our team includes licensed psychologists, speech therapists, occupational therapists, and special educators.",
+        },
+        {
+          _type: "object",
+          _key: "2",
+          icon: "Heart",
+          title: "Child-First Approach",
+          description: "We focus on each child's unique strengths, not just their challenges. Every plan is personalized.",
+        },
+        {
+          _type: "object",
+          _key: "3",
+          icon: "Users",
+          title: "Family Involvement",
+          description: "Parents are partners in therapy. We equip you with strategies that work at home too.",
+        },
+        {
+          _type: "object",
+          _key: "4",
+          icon: "Shield",
+          title: "Safe & Nurturing",
+          description: "A warm, sensory-friendly environment where children feel comfortable and supported.",
+        },
+        {
+          _type: "object",
+          _key: "5",
+          icon: "Sparkles",
+          title: "Holistic Development",
+          description: "We address communication, motor skills, behavior, academics, and social skills together.",
+        },
+        {
+          _type: "object",
+          _key: "6",
+          icon: "Clock",
+          title: "Early Intervention Focus",
+          description: "The earlier we start, the better the outcomes. We work with children as young as 18 months.",
+        },
+      ],
+    },
+    story: {
+      title: "Our Story",
+      paragraphs: [
+        "Divit MindSpace was born from a deeply personal journey. Our founder's experience raising a neurodivergent child revealed the gaps in accessible, compassionate care.",
+        "What started as a search for answers became a mission: to create a space where every child is seen for their potential, not their diagnosis.",
+        "Today, we combine clinical expertise with genuine understanding—because we've walked this path ourselves. Every family that comes to us is treated like our own.",
+      ],
+    },
+  },
   fields: [
     // ============================================================
     // HERO SECTION - Top of the About Us page
@@ -25,7 +87,7 @@ export const aboutUsType = defineType({
           name: "title",
           title: "📝 [EDIT] Main Title",
           type: "string",
-          description: "Current: 'Empowering Every Neurodivergent Child to Thrive'. Leave blank to keep default.",
+          description: "Main headline on the About Us page",
         }),
         defineField({
           name: "italicSubtitle",
@@ -38,7 +100,7 @@ export const aboutUsType = defineType({
           title: "📝 [EDIT] Description",
           type: "text",
           rows: 3,
-          description: "Current: 'We provide expert assessments, therapy, and family support...'. Leave blank to keep default.",
+          description: "Subtitle paragraph below the headline",
         }),
         defineField({
           name: "images",
@@ -81,20 +143,20 @@ export const aboutUsType = defineType({
           name: "title",
           title: "📝 [EDIT] Section Title",
           type: "string",
-          description: "Current: 'Why Families Choose Us'. Leave blank to keep default.",
+          description: "e.g., 'Why Families Choose Us'",
         }),
         defineField({
           name: "description",
           title: "📝 [EDIT] Section Description",
           type: "text",
           rows: 2,
-          description: "Current: 'What sets Divit MindSpace apart from other centers'. Leave blank to keep default.",
+          description: "Brief intro paragraph for this section",
         }),
         defineField({
           name: "points",
           title: "📝 [EDIT] Key Points (6 cards)",
           type: "array",
-          description: "Add 6 key differentiators. Default: Expert-Led Care, Child-First Approach, Family Involvement, Safe & Nurturing, Holistic Development, Early Intervention Focus",
+          description: "6 key differentiators shown as cards. Each has title, description, and icon.",
           of: [
             {
               type: "object",
@@ -143,14 +205,14 @@ export const aboutUsType = defineType({
           name: "title",
           title: "📝 [EDIT] Story Title",
           type: "string",
-          description: "Current: 'Our Story'. Leave blank to keep default.",
+          description: "e.g., 'Our Story' or 'Our Journey'",
         }),
         defineField({
           name: "paragraphs",
           title: "📝 [EDIT] Story Content",
           type: "array",
           of: [{ type: "text", rows: 4 }],
-          description: "Add 2-4 paragraphs. Current default tells the founder's journey and mission.",
+          description: "2-4 paragraphs telling the Divit MindSpace story",
         }),
         defineField({
           name: "image",
