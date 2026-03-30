@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { ImageWithPreview } from "../components/ImageWithPreview";
 
 export const postType = defineType({
   name: "post",
@@ -37,8 +38,13 @@ export const postType = defineType({
       name: "mainImage",
       title: "Main Image",
       type: "image",
+      description:
+        "📐 RECOMMENDED: 1200×630px (1.91:1 ratio) for best social sharing. Use hotspot on faces/key areas.",
       options: {
         hotspot: true,
+      },
+      components: {
+        input: ImageWithPreview,
       },
       fields: [
         {

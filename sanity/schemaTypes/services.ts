@@ -1,4 +1,5 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import { ImageWithPreview } from '../components/ImageWithPreview'
 
 export const servicesType = defineType({
   name: 'services',
@@ -69,8 +70,11 @@ export const servicesType = defineType({
       title: '🖼️ [OPTIONAL] Service Image',
       type: 'image',
       group: 'basic',
-      description: 'Featured image for this service',
+      description: '📐 RECOMMENDED: 800×600px (4:3 ratio) or larger. Use hotspot on faces/key areas so cropping looks good.',
       options: {hotspot: true},
+      components: {
+        input: ImageWithPreview,
+      },
       fields: [
         {
           name: 'alt',

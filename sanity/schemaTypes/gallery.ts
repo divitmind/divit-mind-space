@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { ImageWithPreview } from '../components/ImageWithPreview'
 
 export const galleryType = defineType({
   name: 'gallery',
@@ -9,8 +10,12 @@ export const galleryType = defineType({
       name: 'image',
       type: 'image',
       title: '[REQUIRED] Gallery Image',
+      description: '📐 RECOMMENDED: 1200×800px or larger. Works with any aspect ratio. Use hotspot on faces so cropping looks good.',
       options: {
         hotspot: true,
+      },
+      components: {
+        input: ImageWithPreview,
       },
       fields: [
         {
