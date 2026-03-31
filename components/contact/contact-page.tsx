@@ -69,7 +69,7 @@ export function ContactPage() {
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Section */}
-      <section className="pt-12 pb-8 lg:pt-24 lg:pb-20 px-4">
+      <section className="pt-8 pb-4 lg:pt-12 lg:pb-8 px-4">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -89,7 +89,7 @@ export function ContactPage() {
       </section>
 
       {/* Contact Cards */}
-      <section className="pb-12 md:pb-20 px-4">
+      <section className="pb-8 md:pb-12 px-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {contactDetails.map((detail, idx) => (
@@ -119,9 +119,9 @@ export function ContactPage() {
       </section>
 
       {/* WIIFM Section - What to Expect */}
-      <section className="py-12 md:py-20 bg-cream px-4 border-y border-green/5">
+      <section className="py-8 md:py-12 bg-cream px-4 border-y border-green/5">
         <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center mb-10 md:mb-16">
+          <div className="max-w-4xl mx-auto text-center mb-6 md:mb-10">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-green mb-3 md:mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               How We Support You From Day 1
             </h2>
@@ -152,7 +152,7 @@ export function ContactPage() {
             ))}
           </div>
 
-          <div className="mt-10 md:mt-16 text-center">
+          <div className="mt-8 md:mt-10 text-center">
             <WhatsAppConsultationLink className="inline-flex items-center justify-center gap-2 h-10 md:h-12 px-6 md:px-8 rounded-full bg-green text-white text-sm md:text-base font-semibold hover:bg-green/90 transition-all">
               Start Your Consultation Now
             </WhatsAppConsultationLink>
@@ -161,9 +161,9 @@ export function ContactPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-12 md:py-20 px-4">
+      <section className="py-8 md:py-12 px-4">
         <div className="container mx-auto max-w-3xl">
-          <div className="text-center mb-8 md:mb-12">
+          <div className="text-center mb-6 md:mb-8">
             <h2 className="text-2xl md:text-3xl font-serif text-green mb-3 md:mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               Common Questions
             </h2>
@@ -186,9 +186,9 @@ export function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="pb-12 md:pb-20 px-4">
+      <section className="pb-8 md:pb-12 px-4">
         <div className="container mx-auto">
-          <div className="rounded-2xl md:rounded-3xl overflow-hidden h-[300px] md:h-[400px] shadow-lg border-2 md:border-4 border-white relative group">
+          <div className="rounded-2xl md:rounded-3xl overflow-hidden h-[180px] md:h-[220px] shadow-lg border-2 md:border-4 border-white relative group">
              {/* Placeholder for map */}
              <div className="absolute inset-0 bg-green/5 flex items-center justify-center p-4">
                 <div className="text-center">
