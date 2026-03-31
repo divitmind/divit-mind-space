@@ -76,7 +76,7 @@ export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
       <div className="container mt-4 text-center">
         <Link
           href="/reviews"
-          className="inline-flex items-center justify-center rounded-full border border-black/10 text-black/60 px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300"
+          className="inline-flex items-center justify-center rounded-full border border-black/10 text-black/60 px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#7A9A7D] hover:text-white hover:border-[#7A9A7D] transition-all duration-300"
         >
           See all reviews
         </Link>

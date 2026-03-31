@@ -108,7 +108,7 @@ export function FaqSection() {
                                     </h3>
                                     <div className={cn(
                                         "h-8 w-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300",
-                                        isOpen ? "bg-black text-white" : "bg-black/5 text-black group-hover:bg-black group-hover:text-white"
+                                        isOpen ? "bg-[#7A9A7D] text-white" : "bg-black/5 text-black group-hover:bg-[#7A9A7D] group-hover:text-white"
                                     )}>
                                         {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                                     </div>

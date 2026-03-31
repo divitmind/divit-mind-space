@@ -11,8 +11,8 @@ const services = [
         outcome: "Stop guessing. Get answers and a clear path forward",
         route: "/services?category=assessments",
         color: "bg-white",
-        iconBg: "bg-black/5",
-        textColor: "text-black",
+        iconBg: "bg-[#E8D5B7]",
+        iconColor: "text-[#7A9A7D]",
     },
     {
         id: "therapy",
@@ -21,8 +21,8 @@ const services = [
         outcome: "See real progress in confidence and daily life",
         route: "/services?category=therapy",
         color: "bg-white",
-        iconBg: "bg-black/5",
-        textColor: "text-black",
+        iconBg: "bg-[#E8D5B7]",
+        iconColor: "text-[#7A9A7D]",
     },
     {
         id: "parent-guidance",
@@ -31,8 +31,8 @@ const services = [
         outcome: "Know exactly how to help & see it work",
         route: "/services?category=guidance",
         color: "bg-white",
-        iconBg: "bg-black/5",
-        textColor: "text-black",
+        iconBg: "bg-[#E8D5B7]",
+        iconColor: "text-[#7A9A7D]",
     },
     {
         id: "learning",
@@ -41,8 +41,8 @@ const services = [
         outcome: "Learn in ways that actually click",
         route: "/services?category=programs",
         color: "bg-white",
-        iconBg: "bg-black/5",
-        textColor: "text-black",
+        iconBg: "bg-[#E8D5B7]",
+        iconColor: "text-[#7A9A7D]",
     },
 ];
 
@@ -77,10 +77,10 @@ export function ServicesSection({ therapyServices = [] }: ServicesSectionProps) 
                         >
                             {/* Icon */}
                             <div className={cn(
-                                "w-12 h-12 rounded-2xl flex items-center justify-center mb-8 transition-colors group-hover:bg-black/10",
+                                "w-12 h-12 rounded-2xl flex items-center justify-center mb-8 transition-all group-hover:scale-105",
                                 service.iconBg
                             )}>
-                                <service.icon className={cn("h-6 w-6 text-black")} />
+                                <service.icon className={cn("h-6 w-6", service.iconColor)} />
                             </div>
 
                             {/* Title (Serif Italic - Unified) */}

@@ -43,8 +43,8 @@ export function WhoNeedsItSection() {
                             key={item.id}
                             className="group bg-white rounded-[2.5rem] p-10 border border-black/5 hover:border-black/10 transition-all duration-500 hover:shadow-2xl hover:shadow-black/5"
                         >
-                            <div className="h-14 w-14 rounded-2xl flex items-center justify-center mb-8 bg-black/5 transition-colors group-hover:bg-black/10">
-                                <item.icon className="h-6 w-6 text-black" />
+                            <div className="h-14 w-14 rounded-2xl flex items-center justify-center mb-8 bg-[#E8D5B7] transition-colors group-hover:bg-[#E8D5B7]/80">
+                                <item.icon className="h-6 w-6 text-[#7A9A7D]" />
                             </div>
                             
                             {/* Title (Serif Italic - Unified) */}

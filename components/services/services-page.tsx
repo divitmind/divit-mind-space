@@ -162,8 +162,8 @@ export default function ServicesPage({ title = "Our Services", services }: Servi
                   className={`
                     inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all
                     ${isActive
-                      ? "bg-black text-white shadow-lg shadow-black/10"
-                      : "bg-white text-black/60 hover:bg-black/5 border border-black/5"
+                      ? "bg-[#7A9A7D] text-white shadow-lg shadow-[#7A9A7D]/20"
+                      : "bg-white text-black/60 hover:bg-[#7A9A7D]/10 border border-black/5"
                     }
                   `}
                 >

@@ -33,11 +33,11 @@ export function SiteHeader() {
                 <MainNav />
 
                 <div className="flex items-center gap-3">
-                    {/* Desktop CTA - solid black premium style */}
+                    {/* Desktop CTA - Sage Green style */}
                     <Link
                         href="/about-us#specialists"
                         onClick={handleSpecialistsClick}
-                        className="hidden md:inline-flex h-10 items-center justify-center gap-2 rounded-full bg-black px-6 text-xs font-bold uppercase tracking-widest text-white hover:bg-black/80 transition-all duration-300 shadow-lg shadow-black/5"
+                        className="hidden md:inline-flex h-10 items-center justify-center gap-2 rounded-full bg-[#7A9A7D] px-6 text-xs font-bold uppercase tracking-widest text-white hover:bg-[#6a8a6d] transition-all duration-300 shadow-lg shadow-[#7A9A7D]/20"
                     >
                         <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -52,7 +52,7 @@ export function SiteHeader() {
                     <Link
                         href="/about-us#specialists"
                         onClick={handleSpecialistsClick}
-                        className="md:hidden inline-flex h-8 items-center justify-center rounded-full border-2 border-[#722F37] px-4 text-xs font-medium tracking-wide text-[#722F37] shadow-md shadow-[#722F37]/15 hover:bg-[#722F37] hover:text-white hover:shadow-lg hover:shadow-[#722F37]/25 transition-all"
+                        className="md:hidden inline-flex h-8 items-center justify-center rounded-full border-2 border-[#7A9A7D] px-4 text-xs font-medium tracking-wide text-[#7A9A7D] shadow-md shadow-[#7A9A7D]/15 hover:bg-[#7A9A7D] hover:text-white hover:shadow-lg hover:shadow-[#7A9A7D]/25 transition-all"
                     >
                         Get Help
                     </Link>

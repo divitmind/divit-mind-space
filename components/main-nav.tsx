@@ -49,7 +49,7 @@ export function MainNav() {
               <li className="col-span-2 border-t border-[#E8ECE9] pt-4 mt-2">
                 <Link
                   href="/services"
-                  className="block text-center py-2 text-sm font-bold text-green hover:text-green-lite transition-colors tracking-tight"
+                  className="block text-center py-2 text-sm font-bold text-[#7A9A7D] hover:text-[#5a7a5d] transition-colors tracking-tight"
                 >
                   View All Services →
                 </Link>
@@ -107,18 +107,18 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "flex items-start gap-3 select-none rounded-xl p-3 leading-none no-underline outline-none transition-all hover:bg-cream hover:text-green focus:bg-cream focus:text-green group border border-transparent hover:border-green/5",
+            "flex items-start gap-3 select-none rounded-xl p-3 leading-none no-underline outline-none transition-all hover:bg-[#FAF7F2] hover:text-[#7A9A7D] focus:bg-[#FAF7F2] focus:text-[#7A9A7D] group border border-transparent hover:border-[#7A9A7D]/10",
             className
           )}
           {...props}
         >
           {icon && (
-            <div className="mt-0.5 shrink-0 text-gray-400 group-hover:text-green transition-colors">
+            <div className="mt-0.5 shrink-0 text-gray-400 group-hover:text-[#7A9A7D] transition-colors">
               {icon}
             </div>
           )}
           <div className="space-y-1">
-            <div className="text-sm font-bold leading-none group-hover:text-green transition-colors tracking-tight">
+            <div className="text-sm font-bold leading-none group-hover:text-[#7A9A7D] transition-colors tracking-tight">
               {title}
             </div>
             {children && (

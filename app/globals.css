@@ -153,7 +153,7 @@
   25%, 100% { opacity: 0; transform: translateY(-8px); }
 }
 .text-green {
-  color: #004540 !important;
+  color: #7A9A7D !important;
 }
 
 .bg-purple {
@@ -173,19 +173,19 @@
 }
 
 .text-green-lite {
-  color: #89A09E !important;
+  color: #6a8a6d !important;
 }
 
 .bg-green {
-  background-color: #004540 !important;
+  background-color: #7A9A7D !important;
 }
 
 .bg-cream {
-  background-color: #F1EEE4 !important;
+  background-color: #FAF7F2 !important;
 }
 
 .bg-green-lite {
-  background-color: #89A09E !important;
+  background-color: #E8D5B7 !important;
 }
 
 .bg-link {
@@ -194,6 +194,31 @@
 
 .bg-yellow {
   background-color: #FFE175 !important;
+}
+
+/* New Sage Green & Light Gold Palette */
+.bg-sage {
+  background-color: #7A9A7D !important;
+}
+
+.text-sage {
+  color: #7A9A7D !important;
+}
+
+.bg-light-gold {
+  background-color: #E8D5B7 !important;
+}
+
+.text-light-gold {
+  color: #E8D5B7 !important;
+}
+
+.bg-warm-cream {
+  background-color: #FAF7F2 !important;
+}
+
+.border-sage {
+  border-color: #7A9A7D !important;
 }
 
 
@@ -224,56 +249,57 @@
   }
 }
 
-/* Custom Pill Buttons for Hero Section - High Fidelity Frosted Glass */
+/* Custom Pill Buttons for Hero Section - Sage Green */
 .dm-pill-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 14px 36px;
-  border-radius: 9999px; /* Perfect pill shape */
-  font-family: var(--font-cormorant), serif;
-  font-weight: 600;
-  font-size: 16px;
-  color: #311131 !important;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 9999px;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: #FFFFFF !important;
+  background: #7A9A7D;
+  border: none;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  
-  /* Fine rim for the glass edge */
-  border: 1px solid rgba(124, 92, 124, 0.3);
-  
-  /* The strong "Shines" using radial gradients */
-  background: 
-    radial-gradient(circle at 10% 50%, rgba(124, 92, 124, 0.9) 0%, transparent 60%),  /* Strong Mauve on Left */
-    radial-gradient(circle at 90% 50%, rgba(216, 179, 145, 0.95) 0%, transparent 60%), /* Strong Peach on Right */
-    rgba(255, 255, 255, 0.2); /* Very light base to let glows pop */
-    
-  /* Outer glow and subtle inner rim shadow */
-  box-shadow: 
-    0 8px 32px -4px rgba(124, 92, 124, 0.25),
-    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px -2px rgba(122, 154, 125, 0.4);
 }
 
 .dm-pill-button:hover {
+  background: #6B8B6E;
   transform: translateY(-2px);
-  /* Intensify the shines on hover */
-  background: 
-    radial-gradient(circle at 10% 50%, rgba(124, 92, 124, 1) 0%, transparent 65%),
-    radial-gradient(circle at 90% 50%, rgba(216, 179, 145, 1) 0%, transparent 65%),
-    rgba(255, 255, 255, 0.3);
-  box-shadow: 
-    0 12px 36px -4px rgba(124, 92, 124, 0.35),
-    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 6px 20px -2px rgba(122, 154, 125, 0.5);
 }
 
-/* Specific adjustments for icons */
+/* WhatsApp icon in button */
 .dm-pill-button svg {
-  color: #25D366;
-  width: 20px;
-  height: 20px;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+  color: #FFFFFF;
+  width: 18px;
+  height: 18px;
+}
+
+/* Secondary button - Light gold outline */
+.dm-pill-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #7A9A7D !important;
+  background: transparent;
+  border: 2px solid #E8D5B7;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dm-pill-button-secondary:hover {
+  background: #E8D5B7;
+  color: #5A7A5D !important;
 }

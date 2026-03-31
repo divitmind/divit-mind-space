@@ -47,7 +47,7 @@ export function MobileNav() {
             <Link
               href="/"
               onClick={() => setOpen(false)}
-              className="px-4 py-2 text-lg font-medium hover:text-[#7C9082] transition-colors"
+              className="px-4 py-2 text-lg font-medium hover:text-[#7A9A7D] transition-colors"
             >
               Home
             </Link>
@@ -56,7 +56,7 @@ export function MobileNav() {
             <Link
               href="/about-us"
               onClick={() => setOpen(false)}
-              className="px-4 py-2 text-lg font-medium hover:text-[#7C9082] transition-colors"
+              className="px-4 py-2 text-lg font-medium hover:text-[#7A9A7D] transition-colors"
             >
               About Us
             </Link>
@@ -64,7 +64,7 @@ export function MobileNav() {
             <Accordion type="single" collapsible className="w-full">
               {/* Services Accordion */}
               <AccordionItem value="services" className="border-none">
-                <AccordionTrigger className="px-4 py-2 text-lg font-medium hover:text-[#7C9082] hover:no-underline">
+                <AccordionTrigger className="px-4 py-2 text-lg font-medium hover:text-[#7A9A7D] hover:no-underline">
                   Services
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 pl-4 text-base text-gray-600">
@@ -78,7 +78,7 @@ export function MobileNav() {
                       {group.label}
                     </MobileLink>
                   ))}
-                  <MobileLink href="/services" setOpen={setOpen} className="pt-2 font-semibold text-green">
+                  <MobileLink href="/services" setOpen={setOpen} className="pt-2 font-semibold text-[#7A9A7D]">
                     View All Services →
                   </MobileLink>
                 </AccordionContent>
@@ -86,7 +86,7 @@ export function MobileNav() {
 
               {/* Media Accordion */}
               <AccordionItem value="media" className="border-none">
-                <AccordionTrigger className="px-4 py-2 text-lg font-medium hover:text-[#7C9082] hover:no-underline">
+                <AccordionTrigger className="px-4 py-2 text-lg font-medium hover:text-[#7A9A7D] hover:no-underline">
                   Media
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 pl-4 text-base text-gray-600">
@@ -107,7 +107,7 @@ export function MobileNav() {
             <Link
               href="/awareness-program"
               onClick={() => setOpen(false)}
-              className="px-4 py-2 text-lg font-medium hover:text-[#7C9082] transition-colors"
+              className="px-4 py-2 text-lg font-medium hover:text-[#7A9A7D] transition-colors"
             >
               Free Workshops
             </Link>
@@ -116,7 +116,7 @@ export function MobileNav() {
             <Link
               href="/blogs"
               onClick={() => setOpen(false)}
-              className="px-4 py-2 text-lg font-medium hover:text-[#7C9082] transition-colors"
+              className="px-4 py-2 text-lg font-medium hover:text-[#7A9A7D] transition-colors"
             >
               Blogs
             </Link>
@@ -125,7 +125,7 @@ export function MobileNav() {
             <Link
               href="/contact-us"
               onClick={() => setOpen(false)}
-              className="px-4 py-2 text-lg font-medium hover:text-[#7C9082] transition-colors"
+              className="px-4 py-2 text-lg font-medium hover:text-[#7A9A7D] transition-colors"
             >
               Contact
             </Link>
@@ -153,9 +153,9 @@ function MobileLink({
     <Link
       href={href}
       onClick={() => setOpen(false)}
-      className={`flex items-center gap-2 py-1 hover:text-[#7C9082] transition-colors ${className}`}
+      className={`flex items-center gap-2 py-1 hover:text-[#7A9A7D] transition-colors ${className}`}
     >
-      {icon && <span className="text-gray-400">{icon}</span>}
+      {icon && <span className="text-[#7A9A7D]">{icon}</span>}
       {children}
     </Link>
   );

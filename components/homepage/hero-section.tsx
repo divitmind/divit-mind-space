@@ -19,10 +19,10 @@ export function HeroSection({ announcement }: HeroSectionProps) {
           <div className="flex-[1.2] text-center lg:text-left animate-in slide-in-from-bottom duration-700 fade-in">
             {/* Announcement Badge */}
             {announcement && (
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/50 text-purple text-[10px] sm:text-xs font-bold uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF7F2] border border-[#E8D5B7] text-[#7A9A7D] text-[10px] sm:text-xs font-bold uppercase tracking-widest">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-purple"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7A9A7D] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#7A9A7D]"></span>
                 </span>
                 {announcement}
               </div>
@@ -32,10 +32,10 @@ export function HeroSection({ announcement }: HeroSectionProps) {
               <h1 className="flex flex-col tracking-tight text-black leading-none">
                 {/* Line 1: EMPOWERING EVERY CHILD'S with overlapping yellow strokes */}
                 <span className="relative flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
-                  {/* Multiple overlapping highlight strokes */}
-                  <span className="absolute inset-0 bg-[#FFE175]/35 -z-10 rounded-sm transform -rotate-[1.5deg] scale-x-[1.08] -translate-x-0.5" />
-                  <span className="absolute inset-0 bg-[#FFE175]/40 -z-10 rounded-sm transform rotate-[0.8deg] scale-x-[1.04] translate-y-px" />
-                  <span className="absolute inset-0 bg-[#FFE175]/25 -z-20 rounded-sm transform -rotate-[0.5deg] scale-x-[1.06] scale-y-[1.15] -translate-y-px" />
+                  {/* Multiple overlapping highlight strokes - Light Gold */}
+                  <span className="absolute inset-0 bg-[#E8D5B7]/50 -z-10 rounded-sm transform -rotate-[1.5deg] scale-x-[1.08] -translate-x-0.5" />
+                  <span className="absolute inset-0 bg-[#E8D5B7]/60 -z-10 rounded-sm transform rotate-[0.8deg] scale-x-[1.04] translate-y-px" />
+                  <span className="absolute inset-0 bg-[#E8D5B7]/40 -z-20 rounded-sm transform -rotate-[0.5deg] scale-x-[1.06] scale-y-[1.15] -translate-y-px" />
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                   <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
                   {/* Rolling audience: CHILD'S → TEEN'S → ADULT'S → FAMILY'S */}
@@ -47,7 +47,7 @@ export function HeroSection({ announcement }: HeroSectionProps) {
                   </span>
                 </span>
                 {/* Line 2: Different (crossed out) Unique Journey */}
-                <span className="flex items-baseline gap-[1.125rem] sm:gap-4 text-[clamp(2rem,6vw,4rem)] font-[family-name:var(--font-cormorant)] italic text-purple leading-[0.9] -mt-1 font-medium">
+                <span className="flex items-baseline gap-[1.125rem] sm:gap-4 text-[clamp(2rem,6vw,4rem)] font-[family-name:var(--font-cormorant)] italic text-[#7A9A7D] leading-[0.9] -mt-1 font-medium">
                   <span className="relative text-[#999] opacity-50">
                     Different
                     <span className="absolute left-[-4%] right-[-4%] top-1/2 h-[3px] bg-[#999] -rotate-[3deg]" />
@@ -83,7 +83,7 @@ export function HeroSection({ announcement }: HeroSectionProps) {
             <div className="mt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 text-sm text-black/70 font-medium">
               <span>Conducting awareness programs at</span>
               <div className="h-6 overflow-hidden relative w-48 text-center sm:text-left">
-                <div className="animate-rolling-text flex flex-col text-purple font-bold">
+                <div className="animate-rolling-text flex flex-col text-[#7A9A7D] font-bold">
                   <span className="h-6">TISB</span>
                   <span className="h-6">Jyoti Nivas College</span>
                   <span className="h-6">Leading Pre-Schools</span>
@@ -93,60 +93,54 @@ export function HeroSection({ announcement }: HeroSectionProps) {
               </div>
             </div>
 
-            {/* Trust Metrics */}
-            <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 sm:gap-x-10 gap-y-6">
-              <div className="flex flex-col items-center lg:items-start group">
-                <span className="text-xl lg:text-2xl font-bold text-black group-hover:text-purple transition-colors">
-                  100+
-                </span>
-                <span className="text-[10px] font-bold text-black/60 uppercase tracking-widest whitespace-nowrap">
-                  Families Served
-                </span>
-              </div>
-              
-              <div className="flex flex-col items-center lg:items-start group">
-                <span className="text-xl lg:text-2xl font-bold text-black group-hover:text-purple transition-colors">
-                  6+
-                </span>
-                <span className="text-[10px] font-bold text-black/60 uppercase tracking-widest whitespace-nowrap">
-                  Expert Therapists
-                </span>
+            {/* Trust Metrics - Premium Style */}
+            <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6">
+              {/* Families Served */}
+              <div className="flex flex-col">
+                <span className="text-lg font-bold text-black leading-tight">100+</span>
+                <span className="text-[9px] font-semibold text-black/50 uppercase tracking-wider">Families</span>
               </div>
 
-              <div className="flex flex-col items-center lg:items-start group">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-xl lg:text-2xl font-bold text-black group-hover:text-purple transition-colors">
-                    4.9
-                  </span>
-                  <div className="flex -space-x-0.5">
+              <div className="hidden sm:block w-px h-8 bg-black/10" />
+
+              {/* Expert Therapists */}
+              <div className="flex flex-col">
+                <span className="text-lg font-bold text-black leading-tight">6+</span>
+                <span className="text-[9px] font-semibold text-black/50 uppercase tracking-wider">Therapists</span>
+              </div>
+
+              <div className="hidden sm:block w-px h-8 bg-black/10" />
+
+              {/* Parent Rating */}
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-lg font-bold text-black leading-tight">4.9</span>
+                  <div className="flex">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 lg:w-4 lg:h-4 fill-[#FFB800] text-[#FFB800]" />
+                      <Star key={i} className="w-2.5 h-2.5 fill-[#FFB800] text-[#FFB800]" />
                     ))}
                   </div>
                 </div>
-                <span className="text-[10px] font-bold text-black/60 uppercase tracking-widest whitespace-nowrap">
-                  Parent Rating
-                </span>
+                <span className="text-[9px] font-semibold text-black/50 uppercase tracking-wider">Rating</span>
               </div>
 
-              <div className="flex flex-col items-center lg:items-start group">
-                <span className="text-xl lg:text-2xl font-bold text-black group-hover:text-purple transition-colors">
-                  Holistic
-                </span>
-                <span className="text-[10px] font-bold text-black/60 uppercase tracking-widest whitespace-nowrap">
-                  Family Approach
-                </span>
+              <div className="hidden sm:block w-px h-8 bg-black/10" />
+
+              {/* Holistic Approach */}
+              <div className="flex flex-col">
+                <span className="text-lg font-bold text-black leading-tight">Holistic</span>
+                <span className="text-[9px] font-semibold text-black/50 uppercase tracking-wider">Family Approach</span>
               </div>
             </div>
           </div>
 
           {/* Right Visual - Triptych Story */}
           <div className="flex-1 w-full max-w-sm sm:max-w-md lg:max-w-xl relative animate-in slide-in-from-right duration-1000 fade-in delay-200">
-            {/* Offset shadow layer */}
-            <div className="absolute inset-0 bg-[#E8DFD0] rounded-2xl transform rotate-2 translate-x-2 translate-y-2 opacity-60" />
-            <div className="absolute inset-0 bg-[#D4C9B8] rounded-2xl transform -rotate-1 translate-x-1 translate-y-3 opacity-40" />
+            {/* Offset shadow layers - Sage Green & Light Gold palette */}
+            <div className="absolute inset-0 bg-[#7A9A7D] rounded-2xl transform rotate-2 translate-x-2 translate-y-2 opacity-40" />
+            <div className="absolute inset-0 bg-[#E8D5B7] rounded-2xl transform -rotate-1 translate-x-1 translate-y-3 opacity-50" />
 
-            <div className="relative rounded-2xl overflow-hidden shadow-lg mx-auto lg:mr-0 aspect-[5/4] max-w-[480px] lg:max-w-none border-4 border-white">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg mx-auto lg:mr-0 aspect-[5/4] max-w-[480px] lg:max-w-none border-4 border-[#FAF7F2]">
               <Image
                 src="/welcome_to_neuroempower.png"
                 alt="Child confidently playing with blocks, teen journaling with self-assurance, parents feeling connected and hopeful"
@@ -156,8 +150,8 @@ export function HeroSection({ announcement }: HeroSectionProps) {
               />
             </div>
 
-            {/* Subtle Decorative Circle */}
-            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-green-lite/10 rounded-full blur-3xl -z-10" />
+            {/* Subtle Decorative Circle - Sage Green */}
+            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#7A9A7D]/15 rounded-full blur-3xl -z-10" />
           </div>
         </div>
       </div>

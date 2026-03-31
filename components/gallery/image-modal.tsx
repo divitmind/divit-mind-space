@@ -139,7 +139,7 @@ export function ImageModal({ items, currentIndex, onClose, onNavigate }: ImageMo
           <div className="shrink-0 p-5 md:p-8 bg-[#FDFBF7] border-t border-green/5">
             <button 
                 onClick={handleWhatsAppShare}
-                className="w-full flex items-center justify-center gap-3 py-3 rounded-full bg-[#25D366] text-white text-sm font-bold shadow-lg shadow-[#25D366]/20 hover:bg-[#20ba56] transition-all group"
+                className="w-full flex items-center justify-center gap-3 py-3 rounded-full bg-[#7A9A7D] text-white text-sm font-bold shadow-lg shadow-[#7A9A7D]/20 hover:bg-[#6a8a6d] transition-all group"
             >
               <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
               SHARE VIA WHATSAPP

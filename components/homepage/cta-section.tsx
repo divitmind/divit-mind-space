@@ -16,9 +16,9 @@ export function CtaSection() {
                 >
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         {/* High Contrast Logo/Icon Circle */}
-                        <div className="w-20 h-20 rounded-full bg-black flex items-center justify-center shrink-0 shadow-lg">
+                        <div className="w-20 h-20 rounded-full bg-[#7A9A7D] flex items-center justify-center shrink-0 shadow-lg">
                             <svg
-                                className="w-10 h-10 text-[#25D366]"
+                                className="w-10 h-10 text-white"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
                             >
