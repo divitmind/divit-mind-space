@@ -65,9 +65,16 @@ SANITY_API_VERSION = '2021-06-07'
 # Default author - Dr. Pavithra Lakshminarasimhan (Clinical Psychologist)
 PAVITHRA_AUTHOR_ID = '62aceb06-d288-4682-a3ad-441a655839fc'
 
-# Email notification config (optional)
+# Email notification config (Gmail SMTP - FREE)
 NOTIFICATION_EMAIL = "divitmindspace@gmail.com"
-SMTP_ENABLED = False  # Set True and configure SMTP to enable email notifications
+SMTP_ENABLED = True  # Enable email notifications
+
+# Gmail SMTP settings
+SMTP_HOST = "smtp.gmail.com"
+SMTP_PORT = 587
+SMTP_USER = "divitmindspace@gmail.com"
+SMTP_PASSWORD = ""  # Set your Gmail App Password here (not regular password)
+# To get App Password: https://myaccount.google.com/apppasswords
 
 
 def log(message: str, level: str = "INFO"):
@@ -421,17 +428,60 @@ def publish_to_sanity(content: dict, category: str, author_id: str, main_image: 
 
 
 def send_email_notification(title: str, slug: str, doc_id: str, status: str):
-    """Send email notification about new draft/post (placeholder for SMTP integration)."""
-    if not SMTP_ENABLED:
-        log(f"  Email notification skipped (SMTP disabled)")
+    """Send email notification about new draft/post via Gmail SMTP."""
+    if not SMTP_ENABLED or not SMTP_PASSWORD:
+        log(f"  Email notification skipped (SMTP not configured)")
         return
 
-    # TODO: Implement SMTP email sending
-    # This would send an email to NOTIFICATION_EMAIL with:
-    # - Blog title
-    # - Preview link: https://divitmindspace.com/studio/structure/post;{doc_id}
-    # - Status (draft/published)
-    log(f"  Email notification sent to {NOTIFICATION_EMAIL}")
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+
+    # Construct studio URL for the draft
+    studio_url = f"https://divitmindspace.com/studio/structure/post;{doc_id}"
+    preview_url = f"https://divitmindspace.com/blogs/{slug}"
+
+    # Email content
+    subject = f"[Divit MindSpace] New Blog Draft: {title}"
+    body = f"""
+New blog draft has been created and is ready for review.
+
+📝 TITLE: {title}
+
+📊 STATUS: {status.upper()}
+
+🔗 REVIEW IN STUDIO:
+{studio_url}
+
+👁️ PREVIEW (after publishing):
+{preview_url}
+
+---
+To publish this draft:
+1. Open the Studio link above
+2. Review the content
+3. Click "Publish" when ready
+
+---
+Divit MindSpace Autonomous Blog Agent
+Author: Dr. Pavithra Lakshminarasimhan
+    """
+
+    try:
+        msg = MIMEMultipart()
+        msg['From'] = SMTP_USER
+        msg['To'] = NOTIFICATION_EMAIL
+        msg['Subject'] = subject
+        msg.attach(MIMEText(body, 'plain'))
+
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SMTP_USER, SMTP_PASSWORD)
+            server.send_message(msg)
+
+        log(f"  Email notification sent to {NOTIFICATION_EMAIL}")
+    except Exception as e:
+        log(f"  Email notification failed: {e}", "WARN")
 
 
 def process_post(post: dict, generate_images: bool = True, require_approval: bool = False, as_draft: bool = True) -> dict:
