@@ -57,10 +57,10 @@ QUEUE_FILE = BASE_DIR / "data" / "content_queue.json"
 LOG_FILE = BASE_DIR / "data" / "agent_log.json"
 
 # Sanity config
-SANITY_TOKEN = 'skFjK2lunCGax2IhkArkpe0E3h9z0UYnc30ivtcnecgvejFNThHakbMnYGhqsbZmITfUQHwhhpcEW0fWUO5nawiU19OlBJsJNckVEGNH5EC1T2l7Zky0zw78NBLYVln5LurIysWFiBqlWOHjFhGo2dP76EaHDTf37jCwCl8r3QdfDZ8fTSZB'
-SANITY_PROJECT_ID = '3c4uripz'
-SANITY_DATASET = 'production'
-SANITY_API_VERSION = '2021-06-07'
+SANITY_TOKEN = os.environ.get('SANITY_WRITE_TOKEN', 'skFjK2lunCGax2IhkArkpe0E3h9z0UYnc30ivtcnecgvejFNThHakbMnYGhqsbZmITfUQHwhhpcEW0fWUO5nawiU19OlBJsJNckVEGNH5EC1T2l7Zky0zw78NBLYVln5LurIysWFiBqlWOHjFhGo2dP76EaHDTf37jCwCl8r3QdfDZ8fTSZB')
+SANITY_PROJECT_ID = os.environ.get('NEXT_PUBLIC_SANITY_PROJECT_ID', '3c4uripz')
+SANITY_DATASET = os.environ.get('NEXT_PUBLIC_SANITY_DATASET', 'production')
+SANITY_API_VERSION = os.environ.get('NEXT_PUBLIC_SANITY_API_VERSION', '2021-06-07')
 
 # Default author - Dr. Pavithra Lakshminarasimhan (Clinical Psychologist)
 PAVITHRA_AUTHOR_ID = '62aceb06-d288-4682-a3ad-441a655839fc'
