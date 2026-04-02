@@ -148,7 +148,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       />
 
       <div className="bg-[#FDFBF7] min-h-screen">
-        <div className="mx-auto max-w-4xl px-6 py-12">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 py-6 lg:py-10">
           {/* Blog Header */}
           <BlogHeader
             category={primaryCategory}
@@ -162,7 +162,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           {/* Main Image */}
           {mainImageUrl && (
-            <div className="mt-12 overflow-hidden rounded-xl">
+            <div className="mt-6 lg:mt-8 overflow-hidden rounded-xl">
               <Image
                 src={mainImageUrl}
                 alt={postData.mainImage?.alt || postData.title}
@@ -180,7 +180,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           )}
 
           {/* Blog Content with PortableText */}
-          <article className="mt-12 max-w-none">
+          <article className="mt-6 lg:mt-8 max-w-none">
             {Array.isArray(postData.body) && (
               <PortableText
                 value={postData.body}
@@ -212,7 +212,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           )}
           {/* Author Bio */}
           {postData.author.bio && (
-            <div className="mt-12 p-6 bg-white rounded-xl border border-gray-200">
+            <div className="mt-8 p-4 md:p-6 bg-white rounded-xl border border-gray-200">
               <h3 className="text-lg font-semibold mb-2">About the author</h3>
               <div className="flex items-start gap-4">
                 {authorAvatar && (
@@ -269,12 +269,8 @@ export default async function BlogPostPage({ params }: PageProps) {
           )}
         </div>
       </div>
-      <div className="">
-        <FeaturesShowcaseSection />
-      </div>
-      <div className="">
-        <CtaSection />
-      </div>
+      <FeaturesShowcaseSection />
+      <CtaSection />
     </>
   );
 }

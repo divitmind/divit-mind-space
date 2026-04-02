@@ -45,7 +45,7 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Header */}
-      <section className="pt-12 pb-8 lg:pt-20 lg:pb-16 px-4 text-center">
+      <section className="pt-8 pb-4 lg:pt-12 lg:pb-8 px-4 text-center">
         <div className="container mx-auto">
           <motion.h1 
             className="text-3xl md:text-5xl lg:text-6xl font-serif text-green mb-4"
@@ -68,7 +68,7 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
 
       {/* Featured Post */}
       {posts.length > 0 && activeCategory === "all" && featuredPost && (
-        <section className="pb-12 lg:pb-16 px-4">
+        <section className="pb-6 lg:pb-10 px-4">
           <div className="container mx-auto">
             <motion.div 
               initial={{ opacity: 0, scale: 0.98 }}
@@ -128,7 +128,7 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
       )}
 
       {/* Categories Tabs - scrollable on mobile */}
-      <section className="pb-8 lg:pb-12 px-4 sticky top-16 md:top-20 z-30 bg-[#FDFBF7]/80 backdrop-blur-md">
+      <section className="pb-4 lg:pb-6 px-4 sticky top-16 md:top-20 z-30 bg-[#FDFBF7]/80 backdrop-blur-md">
         <div className="container mx-auto">
           <div className="flex items-center overflow-x-auto no-scrollbar pb-2 md:pb-0 md:justify-center gap-2">
             {categories.map((cat) => (
@@ -150,7 +150,7 @@ export default function BlogPage({ posts, title = "Blog" }: BlogPageProps) {
       </section>
 
       {/* Posts Grid */}
-      <section className="pb-16 lg:pb-24 px-4">
+      <section className="pb-10 lg:pb-16 px-4">
         <div className="container mx-auto">
           <AnimatePresence mode="popLayout">
             <motion.div 
