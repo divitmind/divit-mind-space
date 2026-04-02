@@ -37,7 +37,13 @@ interface DraftPost {
 }
 
 export default async function DraftsPage() {
+  console.log("[Preview List] Fetching all drafts...");
   const drafts: DraftPost[] = await serverClient.fetch(DRAFT_POSTS_QUERY);
+  console.log(`[Preview List] Found ${drafts?.length || 0} drafts`);
+  
+  if (drafts && drafts.length > 0) {
+    console.log("[Preview List] First draft ID:", drafts[0]._id);
+  }
 
   return (
     <div className="bg-[#FDFBF7] min-h-screen">
