@@ -57,10 +57,10 @@ QUEUE_FILE = BASE_DIR / "data" / "content_queue.json"
 LOG_FILE = BASE_DIR / "data" / "agent_log.json"
 
 # Sanity config
-SANITY_TOKEN = 'skFjK2lunCGax2IhkArkpe0E3h9z0UYnc30ivtcnecgvejFNThHakbMnYGhqsbZmITfUQHwhhpcEW0fWUO5nawiU19OlBJsJNckVEGNH5EC1T2l7Zky0zw78NBLYVln5LurIysWFiBqlWOHjFhGo2dP76EaHDTf37jCwCl8r3QdfDZ8fTSZB'
-SANITY_PROJECT_ID = '3c4uripz'
-SANITY_DATASET = 'production'
-SANITY_API_VERSION = '2021-06-07'
+SANITY_TOKEN = os.environ.get('SANITY_WRITE_TOKEN', 'skFjK2lunCGax2IhkArkpe0E3h9z0UYnc30ivtcnecgvejFNThHakbMnYGhqsbZmITfUQHwhhpcEW0fWUO5nawiU19OlBJsJNckVEGNH5EC1T2l7Zky0zw78NBLYVln5LurIysWFiBqlWOHjFhGo2dP76EaHDTf37jCwCl8r3QdfDZ8fTSZB')
+SANITY_PROJECT_ID = os.environ.get('NEXT_PUBLIC_SANITY_PROJECT_ID', '3c4uripz')
+SANITY_DATASET = os.environ.get('NEXT_PUBLIC_SANITY_DATASET', 'production')
+SANITY_API_VERSION = os.environ.get('NEXT_PUBLIC_SANITY_API_VERSION', '2021-06-07')
 
 # Default author - Dr. Pavithra Lakshminarasimhan (Clinical Psychologist)
 PAVITHRA_AUTHOR_ID = '62aceb06-d288-4682-a3ad-441a655839fc'
@@ -437,30 +437,32 @@ def send_email_notification(title: str, slug: str, doc_id: str, status: str):
     from email.mime.text import MIMEText
     from email.mime.multipart import MIMEMultipart
 
-    # Construct studio URL for the draft
-    studio_url = f"https://divitmindspace.com/studio/structure/post;{doc_id}"
-    preview_url = f"https://divitmindspace.com/blogs/{slug}"
+    # Construct preview URL for review & approval
+    preview_url = f"https://divitmindspace.com/preview/{doc_id}"
+    all_drafts_url = "https://divitmindspace.com/preview"
 
     # Email content
     subject = f"[Divit MindSpace] New Blog Draft: {title}"
     body = f"""
-New blog draft has been created and is ready for review.
+New blog draft has been created and is ready for your review.
 
 📝 TITLE: {title}
 
 📊 STATUS: {status.upper()}
 
-🔗 REVIEW IN STUDIO:
-{studio_url}
-
-👁️ PREVIEW (after publishing):
+👁️ PREVIEW & APPROVE:
 {preview_url}
 
+📋 VIEW ALL DRAFTS:
+{all_drafts_url}
+
 ---
-To publish this draft:
-1. Open the Studio link above
-2. Review the content
-3. Click "Publish" when ready
+How to Review:
+1. Click the Preview link above
+2. See exactly how the blog will appear on the website
+3. Add feedback or comments directly on the page
+4. Click "Approve & Publish" to make it live
+   OR "Request Revision" to send feedback
 
 ---
 Divit MindSpace Autonomous Blog Agent
@@ -592,7 +594,14 @@ def process_post(post: dict, generate_images: bool = True, require_approval: boo
     result = publish_to_sanity(content, category, author_id, main_image=main_image, as_draft=as_draft)
 
     if result['success']:
-        log(f"  SUCCESS: Saved as {result.get('status', status_text)} - {result['url']}")
+        # Build preview URL for drafts
+        preview_url = f"https://divitmindspace.com/preview/{result['document_id']}" if as_draft else None
+
+        if as_draft:
+            log(f"  SUCCESS: Saved as draft")
+            log(f"  Preview: {preview_url}")
+        else:
+            log(f"  SUCCESS: Published - {result['url']}")
 
         # Send email notification for drafts
         if as_draft:
@@ -606,6 +615,8 @@ def process_post(post: dict, generate_images: bool = True, require_approval: boo
             'title': content['title'],
             'status': result.get('status', status_text)
         }
+        if preview_url:
+            response['preview_url'] = preview_url
         if image_url:
             response['image_url'] = image_url
         return response
@@ -671,6 +682,8 @@ def check_and_process_queue(generate_images: bool = True, require_approval: bool
                 post['document_id'] = result.get('document_id')
                 post['blog_url'] = result.get('url')
                 post['published_title'] = result.get('title')
+                if result.get('preview_url'):
+                    post['preview_url'] = result.get('preview_url')
                 if result.get('image_url'):
                     post['image_url'] = result.get('image_url')
                 processed_count += 1

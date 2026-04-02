@@ -1,5 +1,5 @@
 import { defineField, defineType } from "sanity";
-import { ImageWithPreview } from "../components/ImageWithPreview";
+// import { ImageWithPreview } from "../components/ImageWithPreview";
 
 export const newsType = defineType({
   name: "news",
@@ -60,9 +60,9 @@ export const newsType = defineType({
       description:
         "📐 RECOMMENDED: 1200×630px (1.91:1 ratio) for best display. Use hotspot on faces/key areas.",
       options: { hotspot: true },
-      components: {
-        input: ImageWithPreview,
-      },
+      // components: {
+      //   input: ImageWithPreview,
+      // },
     }),
     defineField({
       name: "externalUrl",

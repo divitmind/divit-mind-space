@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
-import { ImageWithPreview } from "../components/ImageWithPreview";
+// import { ImageWithPreview } from "../components/ImageWithPreview";
 
 export const postType = defineType({
   name: "post",
@@ -43,22 +43,6 @@ export const postType = defineType({
       options: {
         hotspot: true,
       },
-      components: {
-        input: ImageWithPreview,
-      },
-      fields: [
-        {
-          name: "alt",
-          type: "string",
-          title: "Alternative text",
-          validation: (rule) => rule.required(),
-        },
-        {
-          name: "caption",
-          type: "string",
-          title: "Caption",
-        },
-      ],
     }),
     defineField({
       name: "author",
@@ -131,7 +115,6 @@ export const postType = defineType({
                     name: "href",
                     title: "URL",
                     type: "url",
-                    validation: (rule) => rule.required(),
                   },
                 ],
               },
@@ -141,19 +124,6 @@ export const postType = defineType({
         defineArrayMember({
           type: "image",
           options: { hotspot: true },
-          fields: [
-            {
-              name: "alt",
-              type: "string",
-              title: "Alternative text",
-              validation: (rule) => rule.required(),
-            },
-            {
-              name: "caption",
-              type: "string",
-              title: "Caption",
-            },
-          ],
         }),
       ],
     }),
@@ -185,16 +155,6 @@ export const postType = defineType({
             "Override the excerpt for SEO (leave empty to use post excerpt)",
           rows: 3,
           validation: (rule) => rule.max(160),
-        },
-        {
-          name: "ogImage",
-          title: "Open Graph Image",
-          type: "image",
-          description:
-            "Override the main image for social sharing (leave empty to use main image)",
-          options: {
-            hotspot: true,
-          },
         },
       ],
       options: {
