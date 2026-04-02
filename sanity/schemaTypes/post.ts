@@ -1,5 +1,4 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
-// import { ImageWithPreview } from "../components/ImageWithPreview";
 
 export const postType = defineType({
   name: "post",
@@ -10,7 +9,6 @@ export const postType = defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "slug",
@@ -24,7 +22,6 @@ export const postType = defineType({
             .replace(/[^\w-]+/g, "")
             .slice(0, 96),
       },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "excerpt",
@@ -32,14 +29,11 @@ export const postType = defineType({
       type: "text",
       description: "Short summary of the post for previews and SEO",
       rows: 3,
-      validation: (rule) => rule.max(200),
     }),
     defineField({
       name: "mainImage",
       title: "Main Image",
       type: "image",
-      description:
-        "📐 RECOMMENDED: 1200×630px (1.91:1 ratio) for best social sharing. Use hotspot on faces/key areas.",
       options: {
         hotspot: true,
       },
@@ -49,7 +43,6 @@ export const postType = defineType({
       title: "Author",
       type: "reference",
       to: [{ type: "author" }],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "categories",
@@ -71,7 +64,6 @@ export const postType = defineType({
       name: "featured",
       title: "Featured Post",
       type: "boolean",
-      description: "Highlight this post at the top of the blog page",
       initialValue: false,
     }),
     defineField({
@@ -79,7 +71,6 @@ export const postType = defineType({
       title: "Published at",
       type: "datetime",
       initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "body",
@@ -88,38 +79,6 @@ export const postType = defineType({
       of: [
         defineArrayMember({
           type: "block",
-          styles: [
-            { title: "Normal", value: "normal" },
-            { title: "H2", value: "h2" },
-            { title: "H3", value: "h3" },
-            { title: "H4", value: "h4" },
-            { title: "Quote", value: "blockquote" },
-          ],
-          lists: [
-            { title: "Bullet", value: "bullet" },
-            { title: "Number", value: "number" },
-          ],
-          marks: {
-            decorators: [
-              { title: "Strong", value: "strong" },
-              { title: "Emphasis", value: "em" },
-              { title: "Code", value: "code" },
-            ],
-            annotations: [
-              {
-                name: "link",
-                title: "External Link",
-                type: "object",
-                fields: [
-                  {
-                    name: "href",
-                    title: "URL",
-                    type: "url",
-                  },
-                ],
-              },
-            ],
-          },
         }),
         defineArrayMember({
           type: "image",
@@ -131,35 +90,6 @@ export const postType = defineType({
       name: "readTime",
       title: "Read Time (minutes)",
       type: "number",
-      description: "Estimated read time in minutes",
-      validation: (rule) => rule.min(1).integer(),
-    }),
-    defineField({
-      name: "seo",
-      title: "SEO Settings",
-      type: "object",
-      fields: [
-        {
-          name: "metaTitle",
-          title: "Meta Title",
-          type: "string",
-          description:
-            "Override the title for SEO (leave empty to use post title)",
-          validation: (rule) => rule.max(60),
-        },
-        {
-          name: "metaDescription",
-          title: "Meta Description",
-          type: "text",
-          description:
-            "Override the excerpt for SEO (leave empty to use post excerpt)",
-          rows: 3,
-          validation: (rule) => rule.max(160),
-        },
-      ],
-      options: {
-        collapsed: true,
-      },
     }),
   ],
   preview: {
