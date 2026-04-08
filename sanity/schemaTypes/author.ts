@@ -26,6 +26,12 @@ export const authorType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "title",
+      title: "Credentials / Job Title",
+      type: "string",
+      description: "e.g., Art therapist | SEN (uk certified)",
+    }),
+    defineField({
       name: "image",
       title: "Profile Image",
       type: "image",

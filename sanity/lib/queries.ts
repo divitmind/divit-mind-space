@@ -76,6 +76,7 @@ export const SINGLE_POST_QUERY = `*[_type == "post" && slug.current == $slug][0]
   "author": author->{
     name,
     slug,
+    title,
     bio,
     "image": image.asset->url,
     social

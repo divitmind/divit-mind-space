@@ -5,6 +5,7 @@ export interface Author {
   _id: string;
   _type: "author";
   name: string;
+  title?: string;
   slug: {
     current: string;
   };
@@ -26,6 +27,7 @@ export interface Author {
 // Simplified Author for Post References
 export interface AuthorReference {
   name: string;
+  title?: string;
   slug: {
     current: string;
   };

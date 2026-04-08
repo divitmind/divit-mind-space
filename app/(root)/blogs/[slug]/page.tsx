@@ -11,6 +11,7 @@ import type { Post } from "@/sanity/types";
 import { portableTextComponents } from "@/components/portable-text-components";
 import { FeaturesShowcaseSection } from "@/components/homepage/features-showcase-section";
 import { CtaSection } from "@/components/homepage/cta-section";
+import { AuthorBio } from "@/components/blogs/author-bio";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -211,62 +212,15 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           )}
           {/* Author Bio */}
-          {postData.author.bio && (
-            <div className="mt-8 p-4 md:p-6 bg-white rounded-xl border border-gray-200">
-              <h3 className="text-lg font-semibold mb-2">About the author</h3>
-              <div className="flex items-start gap-4">
-                {authorAvatar && (
-                  <Image
-                    src={authorAvatar}
-                    alt={postData.author.name}
-                    width={64}
-                    height={64}
-                    className="rounded-full object-cover"
-                  />
-                )}
-                <div className="flex-1">
-                  <p className="font-medium text-foreground">{postData.author.name}</p>
-                  <div className="mt-2 text-sm text-foreground/70 prose prose-sm">
-                    <PortableText value={postData.author.bio} />
-                  </div>
-                  {postData.author.social && (
-                    <div className="mt-3 flex gap-3">
-                      {postData.author.social.twitter && (
-                        <a
-                          href={postData.author.social.twitter}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-green hover:underline"
-                        >
-                          Twitter
-                        </a>
-                      )}
-                      {postData.author.social.linkedin && (
-                        <a
-                          href={postData.author.social.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-green hover:underline"
-                        >
-                          LinkedIn
-                        </a>
-                      )}
-                      {postData.author.social.github && (
-                        <a
-                          href={postData.author.social.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-green hover:underline"
-                        >
-                          GitHub
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
+          <AuthorBio
+            author={{
+              name: postData.author.name,
+              title: postData.author.title,
+              bio: postData.author.bio,
+              image: authorAvatar,
+              social: postData.author.social,
+            }}
+          />
         </div>
       </div>
       <FeaturesShowcaseSection />
