@@ -185,7 +185,7 @@ export default function ServicesPage({ title = "Our Services", services }: Servi
       </section>
 
       {/* Services Grid */}
-      <section className="py-12 lg:py-20 bg-[#FDFBF7]">
+      <section className="py-8 lg:py-12 bg-[#FDFBF7]">
         <div className="container mx-auto px-4">
           {filteredServices.length > 0 ? (
             <motion.div
@@ -206,7 +206,7 @@ export default function ServicesPage({ title = "Our Services", services }: Servi
               ))}
             </motion.div>
           ) : (
-            <div className="text-center py-20">
+            <div className="text-center py-12">
               <div className="max-w-md mx-auto">
                 <div className="w-16 h-16 mx-auto mb-6 bg-black/5 rounded-full flex items-center justify-center">
                   <ClipboardCheck className="w-8 h-8 text-black/20" />
@@ -224,7 +224,7 @@ export default function ServicesPage({ title = "Our Services", services }: Servi
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-12 lg:py-24 bg-[#FDFBF7]">
+      <section className="py-8 lg:py-16 bg-[#FDFBF7]">
         <div className="container mx-auto px-4">
           <motion.div
             className="max-w-3xl mx-auto text-center bg-white rounded-[2rem] p-10 lg:p-16 border border-black/5 shadow-xl shadow-black/5"

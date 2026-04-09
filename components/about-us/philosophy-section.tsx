@@ -59,39 +59,39 @@ export function PhilosophySection({ data }: { data?: AboutUsPhilosophyData }) {
     <section className="py-12 lg:py-16 bg-cream">
       <div className="container mx-auto px-4">
         <motion.div
-          className="text-center mb-10"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           <h2
-            className="text-3xl lg:text-4xl font-serif text-green mb-3"
+            className="text-3xl lg:text-4xl font-serif text-green mb-4"
             style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
           >
             {title}
           </h2>
-          <p className="text-green/60 max-w-xl mx-auto">
+          <p className="text-black/70 font-medium max-w-xl mx-auto">
             {description}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {points.map((reason, idx) => {
             const IconComponent = iconMap[reason.icon] || Sparkles;
             return (
               <motion.div
                 key={idx}
-                className="bg-white rounded-xl p-6 border border-green/5 hover:shadow-lg transition-shadow"
+                className="bg-white rounded-2xl p-8 border border-black/5 shadow-xl shadow-black/[0.02] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <div className="w-10 h-10 rounded-lg bg-purple/10 flex items-center justify-center mb-4">
-                  <IconComponent className="w-5 h-5 text-purple" />
+                <div className="w-12 h-12 rounded-xl bg-purple/10 flex items-center justify-center mb-6">
+                  <IconComponent className="w-6 h-6 text-purple" />
                 </div>
-                <h3 className="font-bold text-green mb-2">{reason.title}</h3>
-                <p className="text-sm text-green/70">{reason.description}</p>
+                <h3 className="text-xl font-bold text-green mb-3">{reason.title}</h3>
+                <p className="text-sm text-black/70 font-medium leading-relaxed">{reason.description}</p>
               </motion.div>
             );
           })}

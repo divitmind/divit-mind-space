@@ -26,13 +26,13 @@ const socialLinks = [
 
 export function SiteFooter() {
     return (
-        <footer className="bg-white border-t border-gray-100 pt-8 pb-4">
+        <footer className="bg-white border-t border-black/5 pt-16 pb-12">
             <div className="max-w-7xl mx-auto px-4">
                 {/* Top Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-8 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-12 mb-12">
                     {/* Brand Column */}
                     <div>
-                        <div className="w-12 h-12 mb-3 relative">
+                        <div className="w-16 h-16 mb-6 relative">
                             <Image
                                 src="/divit-mindspace-logo.png"
                                 alt="Divit MindSpace Logo"
@@ -40,37 +40,37 @@ export function SiteFooter() {
                                 className="object-contain"
                             />
                         </div>
-                        <p className="text-sm text-gray-600 leading-relaxed max-w-[280px] mb-3">
-                            Empowering neurodivergent children and their families through expert care and education.
+                        <p className="text-sm text-black/70 font-medium leading-relaxed max-w-[280px] mb-6">
+                            Empowering neurodivergent children and their families through expert care, diagnostic assessments, and specialized education.
                         </p>
                         <Link
                             href="/careers"
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-cream rounded-lg text-sm font-semibold text-green hover:bg-green hover:text-white transition-all"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-black/5 rounded-xl text-sm font-bold text-green hover:bg-green hover:text-white transition-all group"
                         >
-                            <Briefcase className="h-4 w-4" />
+                            <Briefcase className="h-4 w-4 group-hover:scale-110 transition-transform" />
                             We&apos;re Hiring
                         </Link>
                     </div>
 
                     {/* Services Column */}
                     <div>
-                        <h4 className="text-xs font-bold text-green uppercase tracking-widest mb-3">
-                            Services
+                        <h4 className="text-lg font-serif text-green mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                            Our Services
                         </h4>
                         <FooterServiceLinks />
                     </div>
 
                     {/* Quick Links Column */}
                     <div>
-                        <h4 className="text-xs font-bold text-green uppercase tracking-widest mb-3">
-                            Quick Links
+                        <h4 className="text-lg font-serif text-green mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                            Explore
                         </h4>
-                        <ul className="space-y-2.5">
+                        <ul className="space-y-3.5">
                             {quickLinks.map((link) => (
                                 <li key={link.label}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm text-gray-600 hover:text-green transition-colors"
+                                        className="text-sm text-black/70 font-medium hover:text-green transition-colors"
                                     >
                                         {link.label}
                                     </Link>
@@ -81,29 +81,29 @@ export function SiteFooter() {
 
                     {/* Contact Column */}
                     <div>
-                        <h4 className="text-xs font-bold text-green uppercase tracking-widest mb-3">
-                            Contact
+                        <h4 className="text-lg font-serif text-green mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                            Get in Touch
                         </h4>
-                        <address className="not-italic space-y-3 text-sm text-gray-600">
-                            <p className="flex items-start gap-2">
-                                <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-green" />
+                        <address className="not-italic space-y-4 text-sm text-black/70 font-medium">
+                            <p className="flex items-start gap-3">
+                                <MapPin className="h-5 w-5 shrink-0 mt-0.5 text-green" />
                                 <span>{contact.address}</span>
                             </p>
                             <p>
                                 <a
                                     href={contact.phone.href}
-                                    className="flex items-center gap-2 hover:text-green transition-colors"
+                                    className="flex items-center gap-3 hover:text-green transition-colors"
                                 >
-                                    <Phone className="h-4 w-4 shrink-0 text-green" />
+                                    <Phone className="h-5 w-5 shrink-0 text-green" />
                                     {contact.phone.label}
                                 </a>
                             </p>
                             <p>
                                 <a
                                     href={contact.email.href}
-                                    className="flex items-center gap-2 hover:text-green transition-colors"
+                                    className="flex items-center gap-3 hover:text-green transition-colors"
                                 >
-                                    <Mail className="h-4 w-4 shrink-0 text-green" />
+                                    <Mail className="h-5 w-5 shrink-0 text-green" />
                                     {contact.email.label}
                                 </a>
                             </p>
@@ -112,19 +112,19 @@ export function SiteFooter() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-4 border-t border-gray-100">
-                    <p className="text-[13px] text-gray-400">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-black/5">
+                    <p className="text-[13px] text-black/40 font-medium">
                         © {new Date().getFullYear()} Divit MindSpace. All rights reserved.
                     </p>
-                    <div className="flex items-center gap-6">
-                        <Link href="/terms" className="text-[13px] text-gray-400 hover:text-green transition-colors">
-                            Terms
+                    <div className="flex items-center gap-8">
+                        <Link href="/terms" className="text-[13px] text-black/40 font-medium hover:text-green transition-colors">
+                            Terms of Service
                         </Link>
-                        <Link href="/privacy" className="text-[13px] text-gray-400 hover:text-green transition-colors">
-                            Privacy
+                        <Link href="/privacy" className="text-[13px] text-black/40 font-medium hover:text-green transition-colors">
+                            Privacy Policy
                         </Link>
                     </div>
-                    <div className="flex gap-3">
+                    <div className="flex gap-4">
                         {socialLinks.map(({ href, icon: Icon, label }) => (
                             <Link
                                 key={label}
@@ -132,9 +132,9 @@ export function SiteFooter() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={label}
-                                className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-green hover:text-white transition-all"
+                                className="h-10 w-10 rounded-xl bg-black/5 flex items-center justify-center text-black/60 hover:bg-green hover:text-white transition-all"
                             >
-                                <Icon className="h-4 w-4" />
+                                <Icon className="h-5 w-5" />
                             </Link>
                         ))}
                     </div>
@@ -143,3 +143,4 @@ export function SiteFooter() {
         </footer>
     );
 }
+

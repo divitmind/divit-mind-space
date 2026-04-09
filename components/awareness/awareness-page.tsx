@@ -61,32 +61,32 @@ export function AwarenessPage() {
       <section className="py-12 lg:py-16 bg-cream">
         <div className="container mx-auto px-4">
           <motion.div
-            className="text-center mb-10"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-3" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               What Your School Gets
             </h2>
-            <p className="text-green/60">Tangible benefits for your institution</p>
+            <p className="text-black/70 font-medium max-w-2xl mx-auto">Tangible benefits for your institution and community</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, idx) => (
               <motion.div
                 key={idx}
-                className="bg-white rounded-xl p-6 border border-green/5 hover:shadow-lg transition-shadow"
+                className="bg-white rounded-2xl p-8 border border-black/5 shadow-xl shadow-black/[0.02] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <div className="w-10 h-10 rounded-lg bg-purple/10 flex items-center justify-center mb-4">
-                  <benefit.icon className="w-5 h-5 text-purple" />
+                <div className="w-12 h-12 rounded-xl bg-purple/10 flex items-center justify-center mb-6">
+                  <benefit.icon className="w-6 h-6 text-purple" />
                 </div>
-                <h3 className="font-bold text-green mb-2">{benefit.title}</h3>
-                <p className="text-sm text-green/70">{benefit.description}</p>
+                <h3 className="text-xl font-bold text-green mb-3">{benefit.title}</h3>
+                <p className="text-sm text-black/70 font-medium leading-relaxed">{benefit.description}</p>
               </motion.div>
             ))}
           </div>
@@ -96,7 +96,7 @@ export function AwarenessPage() {
       {/* What We Cover */}
       <section className="py-12 lg:py-16 bg-[#FAF9F5]">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -105,10 +105,10 @@ export function AwarenessPage() {
               <h2 className="text-3xl lg:text-4xl font-serif text-green mb-6" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
                 What We Cover
               </h2>
-              <p className="text-green/70 mb-6">
-                Each session is tailored to your audience—whether teachers, parents, or students. Here's what participants learn:
+              <p className="text-black/70 mb-8 font-medium leading-relaxed max-w-xl">
+                Each session is tailored to your audience—whether teachers, parents, or students. Here&apos;s what participants learn:
               </p>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {sessionHighlights.map((item, idx) => (
                   <motion.li
                     key={idx}
@@ -119,7 +119,7 @@ export function AwarenessPage() {
                     transition={{ delay: idx * 0.05 }}
                   >
                     <CheckCircle2 className="w-5 h-5 text-purple mt-0.5 shrink-0" />
-                    <span className="text-green/80">{item}</span>
+                    <span className="text-black/70 font-medium">{item}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -131,8 +131,8 @@ export function AwarenessPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="absolute inset-0 bg-purple/10 rounded-2xl transform rotate-2 translate-x-2 translate-y-2" />
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-lg">
+              <div className="absolute inset-0 bg-purple/10 rounded-[2rem] transform rotate-2 translate-x-2 translate-y-2" />
+              <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl">
                 <Image
                   src="/awareness-tisb.jpg"
                   alt="Teacher training session at TISB"
@@ -149,22 +149,22 @@ export function AwarenessPage() {
       <section className="py-12 lg:py-16 bg-cream">
         <div className="container mx-auto px-4">
           <motion.div
-            className="text-center mb-10"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-3" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-              Sessions We've Conducted
+            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+              Sessions We&apos;ve Conducted
             </h2>
-            <p className="text-green/60">Real impact in schools and colleges</p>
+            <p className="text-black/70 font-medium">Real impact in schools and colleges across Bangalore</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {pastSessions.map((session, idx) => (
               <motion.div
                 key={idx}
-                className="group relative rounded-2xl overflow-hidden"
+                className="group relative rounded-[2rem] overflow-hidden shadow-2xl border border-black/5"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -175,13 +175,13 @@ export function AwarenessPage() {
                     src={session.image}
                     alt={`Awareness session at ${session.venue}`}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-green/80 via-green/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-                  <h3 className="font-bold text-lg">{session.venue}</h3>
-                  <p className="text-white/80 text-sm">{session.audience}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                  <h3 className="font-serif italic text-2xl mb-2">{session.venue}</h3>
+                  <p className="text-white/80 text-xs font-bold uppercase tracking-widest">{session.audience}</p>
                 </div>
               </motion.div>
             ))}
@@ -193,26 +193,26 @@ export function AwarenessPage() {
       <section className="py-12 lg:py-16 bg-[#FAF9F5]">
         <div className="container mx-auto px-4">
           <motion.div
-            className="max-w-2xl mx-auto text-center bg-white rounded-2xl p-8 lg:p-10 border border-green/10 shadow-sm"
+            className="max-w-3xl mx-auto text-center bg-white rounded-[2rem] p-10 lg:p-16 border border-black/5 shadow-2xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl lg:text-3xl font-serif text-green mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               Want to Host a Session?
             </h2>
-            <p className="text-green/70 mb-6">
-              Bring awareness to your school, college, or organization—completely free. Just reach out and we'll coordinate everything.
+            <p className="text-black/70 mb-10 text-lg font-medium leading-relaxed">
+              Bring awareness to your school, college, or organization—completely free. Just reach out and we&apos;ll coordinate everything.
             </p>
-            <WhatsAppConsultationLink className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-green text-white font-semibold hover:bg-green/90 transition-colors">
+            <WhatsAppConsultationLink className="dm-pill-button dm-pill-button-primary scale-110">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
               </svg>
               Request a Free Session
             </WhatsAppConsultationLink>
 
-            <p className="mt-4 text-sm text-green/50">
-              We'll get back to you within 24 hours
+            <p className="mt-8 text-[10px] text-black/40 font-bold uppercase tracking-widest">
+              We&apos;ll get back to you within 24 hours
             </p>
           </motion.div>
         </div>

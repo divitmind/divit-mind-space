@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "motion/react";
 import {
   Dialog,
   DialogContent,
@@ -114,8 +115,8 @@ const PEOPLE: Person[] = [
 
 function PersonImagePlaceholder() {
   return (
-    <div className="w-full aspect-square rounded-3xl flex flex-col items-center justify-center text-center px-4">
-      <div className="w-14 h-14 rounded-full bg-[#2F3E33]/10 flex items-center justify-center text-[#2F3E33]/50 shrink-0">
+    <div className="w-full aspect-square rounded-[2rem] flex flex-col items-center justify-center text-center px-4 bg-black/5">
+      <div className="w-14 h-14 rounded-full bg-black/10 flex items-center justify-center text-black/30 shrink-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="26"
@@ -132,99 +133,98 @@ function PersonImagePlaceholder() {
           <circle cx="12" cy="7" r="4" />
         </svg>
       </div>
-      <p className="mt-3 text-xs text-[#2F3E33]/50 font-medium">Photo</p>
-      <p className="mt-0.5 text-[10px] text-[#2F3E33]/40">Placeholder</p>
+      <p className="mt-3 text-[10px] text-black/40 font-bold uppercase tracking-widest">No Image</p>
     </div>
   );
 }
 
 function PersonCard({ person }: { person: Specialist }) {
   return (
-    <article className="flex flex-col rounded-3xl overflow-hidden h-full">
+    <article className="flex flex-col h-full group">
       {/* Image */}
-      <div className="relative w-full aspect-square rounded-3xl shrink-0">
+      <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shrink-0 border border-black/5 shadow-xl group-hover:shadow-2xl transition-all duration-500">
         {person.image?.asset?.url ? (
           <Image
             src={person.image.asset.url}
             alt={person.name}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover"
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
         ) : (
           <PersonImagePlaceholder />
         )}
         {/* Experience Badge */}
         {person.experience && (
-          <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-sm">
-            <span className="text-xs font-semibold text-[#004540]">{person.experience}</span>
+          <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg border border-black/5">
+            <span className="text-[10px] font-bold text-green uppercase tracking-widest">{person.experience} Exp</span>
           </div>
         )}
       </div>
 
       {/* Content */}
-      <div className="flex flex-col flex-1 py-4">
-        <h3 className="text-lg font-semibold text-[#2F3E33] tracking-tight">
+      <div className="flex flex-col flex-1 py-6 px-2">
+        <h3 className="text-2xl font-serif italic text-black tracking-tight leading-tight mb-2">
           {person.name}
         </h3>
-        <p className="mt-1 text-xs font-medium text-[#2F3E33]/70 uppercase tracking-wider">
+        <p className="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-4">
           {person.title}
         </p>
 
         {/* Specialty Tags */}
-        <div className="mt-3 flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2 mb-4">
           {person.specialties?.slice(0, 3).map((specialty) => (
             <span
               key={specialty}
-              className="inline-flex px-2 py-0.5 rounded-full bg-[#004540]/10 text-[10px] font-medium text-[#004540]"
+              className="inline-flex px-2.5 py-1 rounded-full bg-purple/5 text-[9px] font-bold text-purple uppercase tracking-wider border border-purple/10"
             >
               {specialty}
             </span>
           ))}
         </div>
 
-        <p className="mt-3 text-sm text-[#2F3E33]/90 leading-relaxed line-clamp-3">
+        <p className="text-sm text-black/70 font-medium leading-relaxed line-clamp-3 mb-6">
           {person.teaser}
         </p>
 
-        <div className="mt-4 flex flex-wrap items-center gap-3">
+        <div className="mt-auto flex items-center gap-4">
           <Dialog>
             <DialogTrigger
               className={cn(
                 "inline-flex items-center gap-2",
-                "text-[#2F3E33] font-medium text-sm",
-                "underline underline-offset-4 decoration-2 decoration-[#2F3E33]/40",
-                "hover:decoration-[#2F3E33] transition-colors",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F3E33] focus-visible:ring-offset-2 rounded"
+                "text-black/40 font-bold text-[10px] uppercase tracking-widest",
+                "underline underline-offset-4 decoration-2 decoration-black/10",
+                "hover:decoration-purple hover:text-purple transition-all",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple focus-visible:ring-offset-2 rounded"
               )}
             >
-              Read more
+              Full Profile
             </DialogTrigger>
             <DialogContent
-              className="sm:max-w-[560px] max-h-[85vh] overflow-hidden flex flex-col rounded-3xl bg-[#FDFBF7] border-[#2F3E33]/10"
+              className="sm:max-w-[640px] max-h-[85vh] overflow-hidden flex flex-col rounded-[2rem] bg-[#FDFBF7] border-black/10 shadow-3xl"
               showCloseButton
             >
-              <DialogHeader>
-                <DialogTitle className="text-xl sm:text-2xl font-semibold text-[#2F3E33] pr-8">
+              <DialogHeader className="mb-6">
+                <DialogTitle className="text-3xl font-serif italic text-black pr-8">
                   {person.name}
                 </DialogTitle>
-                <p className="text-sm text-[#2F3E33]/80 uppercase tracking-wider font-medium">
+                <p className="text-[10px] text-black/40 uppercase tracking-widest font-bold mt-2">
                   {person.title}
                 </p>
               </DialogHeader>
-              <div className="overflow-y-auto flex-1 -mx-1 px-1 py-2 space-y-4 text-[#2F3E33]/90 text-sm leading-relaxed prose prose-sm prose-green max-w-none">
+              <div className="overflow-y-auto flex-1 -mx-4 px-4 py-2 space-y-6 text-black/70 text-sm leading-relaxed font-medium prose prose-sm prose-green max-w-none scrollbar-thin scrollbar-thumb-black/10">
                 <PortableText value={person.fullBio} />
               </div>
             </DialogContent>
           </Dialog>
 
           <WhatsAppConsultationLink
-            className="inline-flex h-8 items-center justify-center gap-1.5 rounded-full border-2 border-green px-3 text-xs font-semibold text-green hover:bg-green hover:text-white transition-colors"
+            className="inline-flex h-9 items-center justify-center gap-2 rounded-full border border-green/20 px-4 text-[10px] font-bold text-green uppercase tracking-widest hover:bg-green hover:text-white transition-all duration-300"
           >
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
             </svg>
-            WhatsApp Me
+            Contact
           </WhatsAppConsultationLink>
         </div>
       </div>
@@ -247,15 +247,36 @@ export function FoundersSpecialistsSection({ specialists }: { specialists: Speci
   })) as Specialist[];
 
   return (
-    <section className="py-12 lg:py-16 bg-cream" id="specialists">
+    <section className="py-12 lg:py-20 bg-cream" id="specialists">
       <div className="container mx-auto px-4">
-        <div className="text-2xl flex items-center justify-center gap-2 sm:text-3xl text-center lg:text-4xl font-semibold text-purple tracking-tight mb-8 lg:mb-10">
-          <Image src="/favorite_wing.svg" alt="Specialists" width={44} height={44} />
-          <span>Our Specialists</span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
-          {displayPeople.map((person) => (
-            <PersonCard key={person._id} person={person} />
+        <motion.div 
+          className="text-center mb-12 lg:mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="inline-flex items-center justify-center gap-3 mb-4">
+            <Image src="/favorite_wing.svg" alt="Specialists" width={44} height={44} className="opacity-80" />
+            <h2 className="text-3xl lg:text-5xl font-serif italic text-green tracking-tight">
+              Our Specialists
+            </h2>
+          </div>
+          <p className="text-black/70 font-medium max-w-2xl mx-auto">
+            A multidisciplinary team of dedicated experts working together to support your child&apos;s growth.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+          {displayPeople.map((person, idx) => (
+            <motion.div
+              key={person._id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.05 }}
+            >
+              <PersonCard person={person} />
+            </motion.div>
           ))}
         </div>
       </div>

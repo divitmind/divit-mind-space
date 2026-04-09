@@ -69,18 +69,18 @@ export function ContactPage() {
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Section */}
-      <section className="pt-8 pb-4 lg:pt-12 lg:pb-8 px-4">
+      <section className="pt-10 pb-6 lg:pt-16 lg:pb-10 px-4">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif text-green mb-4 md:mb-6 leading-tight" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif text-green mb-6 md:mb-8 leading-tight" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               Let&apos;s Build Your <br className="hidden md:block" />
-              <span className="italic text-purple">Unique Journey</span> Together
+              <span className="italic text-purple font-serif">Unique Journey</span> Together
             </h1>
-            <p className="text-base md:text-lg text-green/70 max-w-2xl mx-auto mb-8 md:mb-10">
+            <p className="text-lg md:text-xl text-black/70 font-medium max-w-2xl mx-auto mb-8 md:mb-10">
               Professional therapy and developmental support for children, teens, adults, and families. 
               We&apos;re here to provide expert guidance whenever you&apos;re ready.
             </p>
@@ -89,28 +89,28 @@ export function ContactPage() {
       </section>
 
       {/* Contact Cards */}
-      <section className="pb-8 md:pb-12 px-4">
+      <section className="pb-12 lg:pb-16 px-4">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {contactDetails.map((detail, idx) => (
               <motion.a
                 key={idx}
                 href={detail.link}
                 target={detail.icon === MapPin ? "_blank" : undefined}
                 rel={detail.icon === MapPin ? "noopener noreferrer" : undefined}
-                className="bg-white p-6 md:p-8 rounded-2xl border border-green/5 shadow-sm hover:shadow-md transition-all group"
+                className="bg-white p-8 lg:p-10 rounded-[2rem] border border-black/5 shadow-xl shadow-black/[0.02] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1 group flex flex-col items-center text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl ${detail.color} flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform`}>
-                  <detail.icon className="w-5 h-5 md:w-6 md:h-6" />
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 rounded-2xl ${detail.color} flex items-center justify-center mb-6 lg:mb-8 group-hover:scale-110 transition-transform`}>
+                  <detail.icon className="w-6 h-6 lg:w-8 lg:h-8" />
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-green mb-2">{detail.title}</h3>
-                <p className="text-base md:text-lg font-medium text-green/90 mb-2 md:mb-3">{detail.value}</p>
-                <p className="text-xs md:text-sm text-green/60 mb-4 md:mb-6">{detail.description}</p>
-                <div className="flex items-center gap-2 text-[10px] md:text-sm font-bold text-green uppercase tracking-wider group-hover:gap-3 transition-all">
-                  {detail.actionText} <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
+                <h3 className="text-xl lg:text-2xl font-bold text-green mb-2 lg:mb-3">{detail.title}</h3>
+                <p className="text-lg lg:text-xl font-medium text-black/80 mb-3 lg:mb-4">{detail.value}</p>
+                <p className="text-sm text-black/60 font-medium mb-6 lg:mb-8 max-w-[240px] leading-relaxed">{detail.description}</p>
+                <div className="mt-auto flex items-center gap-2 text-[10px] lg:text-xs font-bold text-green uppercase tracking-[0.2em] group-hover:gap-3 transition-all border-b border-green/20 pb-1">
+                  {detail.actionText} <ArrowRight className="w-3 h-3 lg:w-4 h-4" />
                 </div>
               </motion.a>
             ))}
@@ -118,42 +118,39 @@ export function ContactPage() {
         </div>
       </section>
 
-      {/* WIIFM Section - What to Expect */}
-      <section className="py-8 md:py-12 bg-cream px-4 border-y border-green/5">
+      {/* How We Support You Section */}
+      <section className="py-12 lg:py-16 bg-cream px-4 border-y border-black/5">
         <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center mb-6 md:mb-10">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-green mb-3 md:mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-              How We Support You From Day 1
+          <div className="max-w-4xl mx-auto text-center mb-10 lg:mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-green mb-4 lg:mb-6" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+              How We Support You <span className="italic text-purple">From Day 1</span>
             </h2>
-            <p className="text-sm md:text-base text-green/70">
+            <p className="text-lg text-black/70 font-medium max-w-2xl mx-auto">
               Taking the first step can feel overwhelming. Here is our simple process to ensure you get the best care.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative">
-            {/* Desktop Connector Line */}
-            <div className="hidden md:block absolute top-1/4 left-0 right-0 h-0.5 bg-green/5 -z-10" />
-            
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 relative">
             {steps.map((step, idx) => (
               <motion.div 
                 key={idx} 
-                className="relative bg-white p-6 md:p-8 rounded-2xl border border-green/5"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                className="relative bg-white p-8 lg:p-10 rounded-[2rem] border border-black/5 shadow-lg shadow-black/[0.01]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.2 }}
               >
-                <div className="absolute -top-3 md:-top-4 left-6 md:left-8 bg-green text-white w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center text-sm md:text-base font-bold">
+                <div className="absolute -top-4 left-8 lg:left-10 bg-purple text-white w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center text-base lg:text-lg font-bold shadow-lg shadow-purple/20">
                   {idx + 1}
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-green mt-2 mb-2 md:mb-3">{step.title}</h3>
-                <p className="text-xs md:text-sm text-green/70 leading-relaxed">{step.description}</p>
+                <h3 className="text-xl font-bold text-green mt-2 lg:mt-4 mb-3 lg:mb-4">{step.title}</h3>
+                <p className="text-sm text-black/70 font-medium leading-relaxed">{step.description}</p>
               </motion.div>
             ))}
           </div>
 
-          <div className="mt-8 md:mt-10 text-center">
-            <WhatsAppConsultationLink className="inline-flex items-center justify-center gap-2 h-10 md:h-12 px-6 md:px-8 rounded-full bg-green text-white text-sm md:text-base font-semibold hover:bg-green/90 transition-all">
+          <div className="mt-12 lg:mt-16 text-center">
+            <WhatsAppConsultationLink className="dm-pill-button px-10">
               Start Your Consultation Now
             </WhatsAppConsultationLink>
           </div>
@@ -161,24 +158,30 @@ export function ContactPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-8 md:py-12 px-4">
-        <div className="container mx-auto max-w-3xl">
-          <div className="text-center mb-6 md:mb-8">
-            <h2 className="text-2xl md:text-3xl font-serif text-green mb-3 md:mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-              Common Questions
+      <section className="py-12 lg:py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-10 lg:mb-12">
+            <h2 className="text-3xl md:text-4xl font-serif text-green mb-4 lg:mb-6" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+              Common <span className="italic text-purple font-serif">Questions</span>
             </h2>
           </div>
-          <div className="space-y-4 md:space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
             {faqs.map((faq, idx) => (
               <motion.div 
                 key={idx} 
-                className="bg-white p-5 md:p-6 rounded-xl border border-green/5 shadow-sm"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                className="bg-white p-6 lg:p-8 rounded-[2rem] border border-black/5 shadow-xl shadow-black/[0.02]"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
               >
-                <h4 className="text-sm md:text-base font-bold text-green mb-2">{faq.question}</h4>
-                <p className="text-xs md:text-sm text-green/70 leading-relaxed">{faq.answer}</p>
+                <div className="flex items-start gap-3 lg:gap-4 mb-3 lg:mb-4">
+                  <div className="w-6 h-6 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle2 className="w-3 h-3 text-green" />
+                  </div>
+                  <h4 className="text-lg font-bold text-green">{faq.question}</h4>
+                </div>
+                <p className="text-sm text-black/70 font-medium leading-relaxed pl-9 lg:pl-10">{faq.answer}</p>
               </motion.div>
             ))}
           </div>
@@ -186,29 +189,32 @@ export function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="pb-8 md:pb-12 px-4">
+      <section className="pb-12 lg:pb-20 px-4">
         <div className="container mx-auto">
-          <div className="rounded-2xl md:rounded-3xl overflow-hidden h-[180px] md:h-[220px] shadow-lg border-2 md:border-4 border-white relative group">
-             {/* Placeholder for map */}
-             <div className="absolute inset-0 bg-green/5 flex items-center justify-center p-4">
-                <div className="text-center">
-                    <MapPin className="w-10 h-10 md:w-12 md:h-12 text-green/20 mx-auto mb-3 md:mb-4" />
-                    <p className="text-sm md:text-base text-green/40 font-medium">Map Location: Kasavanahalli, Bengaluru</p>
+          <div className="rounded-[2.5rem] overflow-hidden h-[280px] md:h-[400px] shadow-2xl shadow-black/10 border-8 border-white relative group">
+             <div className="absolute inset-0 bg-[#F5F1E9] flex items-center justify-center p-4">
+                <div className="text-center max-w-md">
+                    <div className="w-16 h-16 lg:w-20 lg:h-20 bg-green/5 rounded-full flex items-center justify-center mx-auto mb-6 lg:mb-8 group-hover:scale-110 transition-transform duration-500">
+                        <MapPin className="w-8 h-8 lg:w-10 lg:h-10 text-green" />
+                    </div>
+                    <h3 className="text-xl lg:text-2xl font-serif text-green mb-3 lg:mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>Our Location</h3>
+                    <p className="text-black/70 font-medium mb-6 lg:mb-8">Aadeshwar Chambers, Kasavanahalli, <br />Off Sarjapur Road, Bengaluru</p>
                     <a 
                         href="https://maps.google.com/?q=Aadeshwar+Chambers+Kasavanahalli+Bengaluru" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="mt-3 md:mt-4 inline-block text-xs md:text-sm font-bold text-green underline underline-offset-4"
+                        className="inline-flex items-center gap-2 text-[10px] lg:text-xs font-bold text-green uppercase tracking-widest border-b-2 border-green/20 pb-1 hover:border-green hover:gap-3 transition-all"
                     >
-                        View on Google Maps
+                        View on Google Maps <ArrowRight className="w-3 h-3 lg:w-4 lg:h-4" />
                     </a>
                 </div>
              </div>
-             {/* Simple visual representation of a map area */}
-             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#004540_1px,transparent_1px)] [background-size:20px_20px]" />
+             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#004540_1px,transparent_1px)] [background-size:24px_24px]" />
           </div>
         </div>
       </section>
     </div>
   );
 }
+
+

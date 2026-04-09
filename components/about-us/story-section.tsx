@@ -30,7 +30,7 @@ export function StorySection({ data }: { data?: AboutUsStoryData }) {
   return (
     <section className="py-12 lg:py-16 bg-[#FAF9F5]">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image */}
           <motion.div
             className="relative order-2 lg:order-1"
@@ -38,8 +38,8 @@ export function StorySection({ data }: { data?: AboutUsStoryData }) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="absolute inset-0 bg-purple/10 rounded-2xl transform -rotate-2 translate-x-2 translate-y-2" />
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-lg">
+            <div className="absolute inset-0 bg-purple/10 rounded-[2rem] transform -rotate-2 translate-x-2 translate-y-2" />
+            <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl">
               <Image
                 src={data?.image?.asset ? urlFor(data.image).width(800).auto('format').url() : "/about_pic4.png"}
                 alt={data?.image?.alt || "Our journey at Divit MindSpace"}
@@ -57,23 +57,24 @@ export function StorySection({ data }: { data?: AboutUsStoryData }) {
             viewport={{ once: true }}
           >
             <h2
-              className="text-3xl lg:text-4xl font-serif text-green mb-6"
+              className="text-3xl lg:text-4xl font-serif text-green mb-8"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             >
               {title}
             </h2>
 
-            <div className="space-y-4 text-green/80">
+            <div className="space-y-6 text-black/70 font-medium leading-relaxed">
               {paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
+                <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
               ))}
             </div>
 
-            <div className="mt-6 pt-6 border-t border-green/10">
+            <div className="mt-10 pt-8 border-t border-black/5">
               <div className="flex items-center gap-4">
+                <div className="w-1.5 h-12 bg-purple/20 rounded-full" />
                 <div className="flex flex-col">
-                  <span className="text-sm font-bold text-green">Our Mission</span>
-                  <span className="text-sm text-green/70">Help every child achieve success using strength-based strategies.</span>
+                  <span className="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-1">Our Mission</span>
+                  <span className="text-lg font-serif italic text-green">Empowering potential through compassionate, evidence-based care.</span>
                 </div>
               </div>
             </div>
