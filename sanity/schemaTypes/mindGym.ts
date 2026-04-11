@@ -1,32 +1,44 @@
 import { defineField, defineType } from "sanity";
 import { ImageWithPreview } from "../components/ImageWithPreview";
+import { Brain, Layout, GraduationCap, Settings } from "lucide-react";
 
 export const mindGymType = defineType({
   name: "mindGym",
   title: "Mind Gym Games",
   type: "document",
+  groups: [
+    { name: "basic", title: "Basic Info" },
+    { name: "display", title: "Landing Page" },
+    { name: "content", title: "Educational Content" },
+    { name: "settings", title: "System Settings" },
+  ],
   fields: [
+    // --- BASIC INFO GROUP ---
     defineField({
       name: "title",
       title: "Game Title",
       type: "string",
+      description: "The name of the exercise (e.g., 'Neural Fusion').",
+      group: "basic",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
-      title: "Slug",
+      title: "URL Slug",
       type: "slug",
+      description: "Unique identifier for the URL. Click 'Generate' based on the title.",
       options: {
         source: "title",
         maxLength: 96,
       },
+      group: "basic",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "category",
-      title: "Category",
+      title: "Game Category",
       type: "string",
-      description: "e.g., 'focus', 'memory', 'spatial', 'flexibility'",
+      description: "Used for the 'Choose Your Focus' filter on the landing page.",
       options: {
         list: [
           { title: "Focus & Attention", value: "focus" },
@@ -35,60 +47,73 @@ export const mindGymType = defineType({
           { title: "Cognitive Flexibility", value: "flexibility" },
         ],
       },
+      group: "basic",
       validation: (Rule) => Rule.required(),
     }),
+
+    // --- LANDING PAGE GROUP ---
     defineField({
       name: "coverImage",
-      title: "Cover Image",
+      title: "Card Image",
       type: "image",
+      description: "The main visual for the game card. Recommended: 16:9 aspect ratio.",
       options: { hotspot: true },
       components: {
         input: ImageWithPreview,
       },
+      group: "display",
     }),
     defineField({
       name: "ageGroup",
       title: "Target Age Group",
       type: "string",
-      description: "e.g., 'Kids 8+', 'Teens', 'Adults'",
+      description: "Displayed on the card (e.g., 'All Ages', 'Teens & Adults').",
+      group: "display",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "focusArea",
-      title: "Cognitive Focus Area",
+      title: "Primary Focus Area",
       type: "string",
-      description: "e.g., 'Working Memory', 'Visual Scanning', 'Cognitive Flexibility'",
+      description: "The specific cognitive skill (e.g., 'Processing Speed').",
+      group: "display",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "shortDescription",
-      title: "Short Description",
+      title: "Card Summary",
       type: "text",
       rows: 3,
-      description: "Brief summary shown on the landing page cards",
+      description: "A brief, catchy summary for the landing page card.",
+      group: "display",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "benefit",
-      title: "Specific Benefit",
+      title: "One-Sentence Benefit",
       type: "text",
       rows: 2,
-      description: "A one-sentence scientific benefit for the landing card",
+      description: "The scientific value-add (e.g., 'Enhances neural efficiency').",
+      group: "display",
     }),
+
+    // --- EDUCATIONAL CONTENT GROUP ---
     defineField({
       name: "scienceBehindIt",
       title: "The Science Behind It",
       type: "array",
       of: [{ type: "block" }],
-      description: "Educational content explaining how this game helps the brain",
+      description: "Detailed explanation shown in the game's info panel (i).",
+      group: "content",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "quickTips",
-      title: "Quick Tips",
+      title: "Quick Tips for Flow",
       type: "array",
       of: [{ type: "string" }],
-      description: "Bulleted tips for the game sidebar",
+      description: "Bullet points to help the user achieve a 'flow state'.",
+      group: "content",
     }),
   ],
   preview: {
