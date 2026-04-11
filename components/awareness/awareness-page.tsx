@@ -15,6 +15,17 @@ const iconMap: Record<string, LucideIcon> = {
   GraduationCap, Users, Heart, School, Sparkles
 };
 
+// Helper to handle both Sanity assets and hardcoded string paths
+function getImageUrl(image: any, fallback: string): string {
+  if (!image) return fallback;
+  if (typeof image === 'string') return image;
+  if (image.asset && typeof image.asset === 'object' && 'url' in image.asset) {
+    return image.asset.url as string;
+  }
+  if (typeof image.asset === 'string') return image.asset;
+  return fallback;
+}
+
 const defaultBenefits = [
   {
     icon: "GraduationCap",
@@ -49,7 +60,7 @@ const defaultHighlights = {
     "When and how to seek professional help",
     "Q&A with experienced therapists"
   ],
-  image: { asset: { url: "/awareness-tisb.jpg" } }
+  image: { asset: { url: "/awareness-tisb.jpg" }, alt: "What we cover" }
 };
 
 const defaultPastSessions = {
@@ -59,12 +70,12 @@ const defaultPastSessions = {
     {
       venue: "Jyoti Nivas College, Koramangala",
       audience: "Education Students & Faculty",
-      image: { asset: { url: "/awareness-jyoti-nivas.jpeg" } }
+      image: { asset: { url: "/awareness-jyoti-nivas.jpeg" }, alt: "Awareness session at Jyoti Nivas College" }
     },
     {
       venue: "TISB School, Domasandra",
       audience: "Teachers & Staff",
-      image: { asset: { url: "/awareness-tisb.jpg" } }
+      image: { asset: { url: "/awareness-tisb.jpg" }, alt: "Awareness session at TISB School" }
     }
   ]
 };
@@ -103,7 +114,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {(benefits.items || defaultBenefits).map((benefit, idx) => {
-              const IconComponent = iconMap[benefit.icon] || Sparkles;
+              const IconComponent = (benefit.icon && iconMap[benefit.icon]) || Sparkles;
               return (
                 <motion.div
                   key={idx}
@@ -166,11 +177,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
               <div className="absolute inset-0 bg-purple/10 rounded-[2rem] transform rotate-2 translate-x-2 translate-y-2" />
               <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl">
                 <Image
-                  src={
-                    (highlights.image?.asset && typeof highlights.image.asset === 'object' && 'url' in highlights.image.asset)
-                      ? (highlights.image.asset.url as string)
-                      : defaultHighlights.image.asset.url
-                  }
+                  src={getImageUrl(highlights.image, defaultHighlights.image.asset.url)}
                   alt={highlights.image?.alt || "What we cover"}
                   fill
                   className="object-cover"
@@ -208,12 +215,8 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
               >
                 <div className="aspect-[4/3] relative">
                   <Image
-                    src={
-                      (session.image?.asset && typeof session.image.asset === 'object' && 'url' in session.image.asset)
-                        ? (session.image.asset.url as string)
-                        : (idx === 0 ? "/awareness-jyoti-nivas.jpeg" : "/awareness-tisb.jpg")
-                    }
-                    alt={`Awareness session at ${session.venue}`}
+                    src={getImageUrl(session.image, idx === 0 ? "/awareness-jyoti-nivas.jpeg" : "/awareness-tisb.jpg")}
+                    alt={session.image?.alt || `Awareness session at ${session.venue}`}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />

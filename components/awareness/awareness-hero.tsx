@@ -29,11 +29,15 @@ export function AwarenessHero({ data }: AwarenessHeroProps) {
   
   // Type-safe image URL extraction
   let imageUrl = defaultHero.image.asset.url;
-  if (hero.image?.asset) {
-    if (typeof hero.image.asset === 'string') {
-      imageUrl = hero.image.asset;
-    } else if (hero.image.asset.url) {
-      imageUrl = hero.image.asset.url;
+  if (hero.image) {
+    if (typeof hero.image === 'string') {
+      imageUrl = hero.image;
+    } else if (hero.image.asset) {
+      if (typeof hero.image.asset === 'string') {
+        imageUrl = hero.image.asset;
+      } else if ('url' in hero.image.asset && hero.image.asset.url) {
+        imageUrl = hero.image.asset.url;
+      }
     }
   }
 
