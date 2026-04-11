@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MindGymItem } from "@/sanity/types";
 import { cn } from "@/lib/utils";
+import { GameThumbnail } from "./game-thumbnail";
 
 // Temporary extended type until Sanity re-generates types.ts
 interface ExtendedMindGymItem extends MindGymItem {
@@ -182,11 +183,7 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                           className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                         />
                       ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-20 h-24 rounded-full bg-purple/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-700">
-                            <Brain className="w-8 h-8 text-purple/20" />
-                          </div>
-                        </div>
+                        <GameThumbnail slug={gameSlug as string} />
                       )}
                       
                       {/* Cognitive Tags - Tightened */}
