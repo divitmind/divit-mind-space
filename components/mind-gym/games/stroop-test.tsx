@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Zap, CheckCircle2, Heart, Timer, Target, Sparkles } from "lucide-react";
+import { Play, RotateCcw, Trophy, Zap, CheckCircle2, Heart, Timer, Target, Sparkles, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { WhatsAppShare } from "../whatsapp-share";
 
 const COLORS = [
   { name: "Red", value: "#ef4444", class: "text-red-500" },
@@ -320,6 +321,14 @@ export function StroopTest() {
                   <RotateCcw className="w-4 h-4" />
                   Try to Beat Score
                 </button>
+                
+                <WhatsAppShare 
+                  gameName="Stroop Test"
+                  result={`${score} points (Speed: ${averageTime}s)`}
+                  slug="stroop-test"
+                  className="w-full"
+                />
+
                 <div className="text-[10px] text-black/40 font-bold uppercase tracking-widest pt-2">
                   Tip: Use your peripheral vision for faster response
                 </div>

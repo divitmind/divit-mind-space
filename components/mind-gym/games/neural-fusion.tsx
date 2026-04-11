@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Brain, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Undo2 } from "lucide-react";
+import { Play, RotateCcw, Trophy, Brain, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Undo2, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { WhatsAppShare } from "../whatsapp-share";
 
 type Tile = {
   id: number;
@@ -297,13 +298,20 @@ export function NeuralFusion() {
               <p className="text-black/60 text-sm mb-6 font-medium">
                 Final Score: <span className="font-bold text-green">{score}</span>
               </p>
-              <button
-                onClick={startGame}
-                className="dm-pill-button dm-pill-button-primary inline-flex items-center gap-2"
-              >
-                <RotateCcw className="w-4 h-4" />
-                Retry Fusion
-              </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button
+                  onClick={startGame}
+                  className="dm-pill-button dm-pill-button-primary inline-flex items-center gap-2"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  Retry Fusion
+                </button>
+                <WhatsAppShare 
+                  gameName="Neural Fusion"
+                  result={`${score} points`}
+                  slug="neural-fusion"
+                />
+              </div>
             </div>
           </motion.div>
         )}

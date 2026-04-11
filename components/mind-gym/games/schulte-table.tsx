@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Timer, Target, Settings2, BarChart3 } from "lucide-react";
+import { Play, RotateCcw, Trophy, Timer, Target, Settings2, BarChart3, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { WhatsAppShare } from "../whatsapp-share";
 
 type GridSize = 3 | 4 | 5;
 
@@ -234,9 +235,17 @@ export function SchulteTable() {
                   <RotateCcw className="w-4 h-4" />
                   Try Again
                 </button>
+
+                <WhatsAppShare 
+                  gameName={`Schulte Table (${gridSize}x${gridSize})`}
+                  result={`${formatTime(timeElapsed)} (Avg: ${avgTimePerItem}s/item)`}
+                  slug="schulte-table"
+                  className="w-full"
+                />
+
                 <button
                   onClick={() => setGameState("START")}
-                  className="text-xs font-bold uppercase tracking-widest text-black/40 hover:text-green transition-colors"
+                  className="text-xs font-bold uppercase tracking-widest text-black/40 hover:text-green transition-colors w-full"
                 >
                   Change Grid Size
                 </button>

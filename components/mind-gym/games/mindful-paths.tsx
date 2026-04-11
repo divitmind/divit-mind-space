@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Compass, ArrowRight, Sparkles } from "lucide-react";
+import { Play, RotateCcw, Trophy, Compass, ArrowRight, Sparkles, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { WhatsAppShare } from "../whatsapp-share";
 
 type Tile = {
   id: number;
@@ -221,13 +222,20 @@ export function MindfulPaths() {
               <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
                 Your spatial reasoning and patience have successfully restored the flow of every path.
               </p>
-              <button
-                onClick={startOver}
-                className="dm-pill-button dm-pill-button-primary inline-flex items-center gap-2"
-              >
-                <RotateCcw className="w-4 h-4" />
-                Restart Journey
-              </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button
+                  onClick={startOver}
+                  className="dm-pill-button dm-pill-button-primary inline-flex items-center gap-2"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  Restart Journey
+                </button>
+                <WhatsAppShare 
+                  gameName="Mindful Paths"
+                  result={`Journey Completed!`}
+                  slug="mindful-paths"
+                />
+              </div>
             </div>
           </motion.div>
         )}

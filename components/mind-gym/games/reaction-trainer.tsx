@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Zap, AlertCircle, Timer, Activity } from "lucide-react";
+import { Play, RotateCcw, Trophy, Zap, AlertCircle, Timer, Activity, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { WhatsAppShare } from "../whatsapp-share";
 
 const TOTAL_TRIALS = 5;
 
@@ -199,17 +200,19 @@ export function ReactionTrainer() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <button
                   onClick={resetGame}
                   className="dm-pill-button dm-pill-button-primary inline-flex items-center justify-center gap-2"
                 >
                   <RotateCcw className="w-4 h-4" />
-                  Restart
+                  Restart Test
                 </button>
-                <div className="flex items-center justify-center p-4 rounded-full border-2 border-black/5 text-[10px] font-bold uppercase tracking-widest text-black/40">
-                  Share Result
-                </div>
+                <WhatsAppShare 
+                  gameName="Pulse Check"
+                  result={`${averageTime}ms (Insight: ${getInsight(averageTime).label})`}
+                  slug="pulse-check"
+                />
               </div>
             </div>
           </motion.div>
