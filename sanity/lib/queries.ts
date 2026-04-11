@@ -518,6 +518,37 @@ export const GALLERY_CATEGORIES_QUERY = `*[_type == "galleryCategory"] | order(t
   "slug": slug.current
 }`;
 
+export const MIND_GYM_QUERY = `*[_type == "mindGym"] | order(title asc) {
+  _id,
+  title,
+  "slug": slug.current,
+  ageGroup,
+  focusArea,
+  shortDescription,
+  "coverImage": coverImage {
+    asset->{url},
+    alt,
+    hotspot,
+    crop
+  }
+}`;
+
+export const SINGLE_MIND_GYM_QUERY = `*[_type == "mindGym" && slug.current == $slug][0] {
+  _id,
+  title,
+  "slug": slug.current,
+  ageGroup,
+  focusArea,
+  shortDescription,
+  scienceBehindIt,
+  "coverImage": coverImage {
+    asset->{url},
+    alt,
+    hotspot,
+    crop
+  }
+}`;
+
 // ============================================================================
 // GROQ Queries for Announcements
 // ============================================================================

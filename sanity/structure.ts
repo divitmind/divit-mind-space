@@ -70,6 +70,11 @@ export const structure: StructureResolver = (S) =>
         .icon(Star)
         .child(S.documentTypeList("review").title("Reviews")),
 
+      S.listItem()
+        .title("Mind Gym")
+        .icon(GraduationCap)
+        .child(S.documentTypeList("mindGym").title("Mind Gym Games")),
+
       S.divider(),
 
       S.listItem()
@@ -105,7 +110,7 @@ export const structure: StructureResolver = (S) =>
       // ============================================================
       ...S.documentTypeListItems().filter(
         (listItem) =>
-          !["awareness", "aboutUs", "promowebsite", "post", "services", "specialist", "review", "gallery", "galleryCategory", "career", "author", "media.tag"].includes(
+          !["mindGym", "awareness", "aboutUs", "promowebsite", "post", "services", "specialist", "review", "gallery", "galleryCategory", "career", "author", "media.tag"].includes(
             listItem.getId() || ""
           )
       ),

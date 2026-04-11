@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Briefcase, Image as ImageIcon, Megaphone } from "lucide-react";
+import { Brain, Briefcase, Image as ImageIcon, Megaphone } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -74,6 +74,9 @@ export function MainNav() {
           <NavigationMenuTrigger className="bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3">Media</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="grid w-[320px] gap-2 p-5 bg-white rounded-[2rem] shadow-2xl">
+              <ListItem title="Mind Gym" href="/mind-gym" icon={<Brain className="h-4 w-4" />}>
+                Interactive cognitive games.
+              </ListItem>
               <ListItem title="Gallery" href="/gallery" icon={<ImageIcon className="h-4 w-4" />}>
                 Our events and activities.
               </ListItem>

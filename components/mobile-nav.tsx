@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, ImageIcon, Megaphone, Briefcase, FileText, Heart, Users, GraduationCap } from "lucide-react";
+import { Menu, ImageIcon, Megaphone, Briefcase, FileText, Heart, Users, GraduationCap, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -90,6 +90,9 @@ export function MobileNav() {
                   Media
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 pl-4 text-base text-gray-600">
+                  <MobileLink href="/mind-gym" setOpen={setOpen} icon={<Brain className="h-4 w-4" />}>
+                    Mind Gym
+                  </MobileLink>
                   <MobileLink href="/gallery" setOpen={setOpen} icon={<ImageIcon className="h-4 w-4" />}>
                     Gallery
                   </MobileLink>

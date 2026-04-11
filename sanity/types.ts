@@ -365,3 +365,23 @@ export interface Announcement {
 }
 
 export type AnnouncementQueryResult = Announcement | null;
+
+// Mind Gym Types
+export interface MindGymItem {
+  _id: string;
+  title: string;
+  slug: string;
+  ageGroup: string;
+  focusArea: string;
+  shortDescription: string;
+  coverImage?: {
+    asset: {
+      url: string;
+    };
+    alt?: string;
+  };
+  scienceBehindIt?: PortableTextBlock[];
+}
+
+export type MindGymQueryResult = MindGymItem[];
+export type SingleMindGymQueryResult = MindGymItem | null;
