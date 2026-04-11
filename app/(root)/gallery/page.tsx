@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { GalleryPage } from "@/components/gallery/gallery-page";
 import { sanityFetch } from "@/sanity/lib/live";
 import { GALLERY_QUERY, GALLERY_CATEGORIES_QUERY } from "@/sanity/lib/queries";
-import type { GalleryQueryResult } from "@/sanity/types";
+import type { GalleryQueryResult, GalleryCategoriesQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: "Gallery | Divit MindSpace",
@@ -68,7 +68,7 @@ export default async function GalleryRoute() {
   ]);
 
   const galleryItems = galleryItemsData.data as GalleryQueryResult;
-  const categories = categoriesData.data as any[];
+  const categories = categoriesData.data as GalleryCategoriesQueryResult;
 
   return (
     <>

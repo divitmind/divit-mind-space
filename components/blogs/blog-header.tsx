@@ -21,6 +21,7 @@ export const BlogHeader = ({ category, title, author, publishedDate }: BlogHeade
     const [currentUrl, setCurrentUrl] = useState("");
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         setCurrentUrl(window.location.href);
     }, []);
 

@@ -197,6 +197,14 @@ export interface GalleryItem {
 
 export type GalleryQueryResult = GalleryItem[];
 
+export interface GalleryCategory {
+  _id: string;
+  title: string;
+  slug: { current: string };
+}
+
+export type GalleryCategoriesQueryResult = GalleryCategory[];
+
 // Career Types
 export interface Career {
   _id: string;
@@ -305,6 +313,51 @@ export interface AboutUs {
 }
 
 export type AboutUsQueryResult = AboutUs | null;
+
+// Awareness Page Singleton Type
+export interface Awareness {
+  hero?: {
+    badge?: string;
+    title?: string;
+    description?: string;
+    stats?: {
+      label: string;
+      value: string;
+    }[];
+    image?: SanityImage;
+  };
+  benefits?: {
+    title?: string;
+    subtitle?: string;
+    items?: {
+      title: string;
+      description: string;
+      icon: string;
+    }[];
+  };
+  highlights?: {
+    title?: string;
+    description?: string;
+    items?: string[];
+    image?: SanityImage;
+  };
+  pastSessions?: {
+    title?: string;
+    subtitle?: string;
+    sessions?: {
+      venue: string;
+      audience: string;
+      image: SanityImage;
+    }[];
+  };
+  cta?: {
+    title?: string;
+    description?: string;
+    buttonText?: string;
+  };
+}
+
+export type AwarenessQueryResult = Awareness | null;
 
 // Announcement Types
 export interface Announcement {

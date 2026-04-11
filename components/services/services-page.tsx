@@ -54,6 +54,7 @@ export default function ServicesPage({ title = "Our Services", services }: Servi
   useEffect(() => {
     const categoryParam = searchParams.get("category");
     if (categoryParam && categories.some((c) => c.id === categoryParam)) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       setActiveCategory(categoryParam);
     }
   }, [searchParams]);

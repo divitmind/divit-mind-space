@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { AwarenessPage } from "@/components/awareness/awareness-page";
+import { sanityFetch } from "@/sanity/lib/live";
+import { AWARENESS_QUERY } from "@/sanity/lib/queries";
+import { AwarenessQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: "Awareness Programs | Divit MindSpace - Community Education & Outreach",
@@ -55,7 +58,14 @@ export const metadata: Metadata = {
   }
 };
 
-export default function AwarenessProgramRoute() {
+export default async function AwarenessProgramRoute() {
+  const awarenessData = await sanityFetch({ 
+    query: AWARENESS_QUERY, 
+    tags: ["awareness"] 
+  });
+  
+  const awareness = awarenessData.data as AwarenessQueryResult;
+
   return (
     <>
       {/* JSON-LD Structured Data for Educational Events */}
@@ -136,7 +146,7 @@ export default function AwarenessProgramRoute() {
           })
         }}
       />
-      <AwarenessPage />
+      <AwarenessPage data={awareness || undefined} />
     </>
   );
 }

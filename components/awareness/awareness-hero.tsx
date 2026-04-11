@@ -3,8 +3,40 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
+import { Awareness } from "@/sanity/types";
 
-export function AwarenessHero() {
+interface AwarenessHeroProps {
+  data?: Awareness["hero"];
+}
+
+const defaultHero = {
+  badge: "100% Free Sessions",
+  title: "Awareness Programs for Schools & Communities",
+  description: "We conduct FREE sessions to help teachers, parents, and communities understand neurodivergence and early intervention.",
+  stats: [
+    { label: "Sessions Done", value: "10+" },
+    { label: "People Reached", value: "500+" },
+    { label: "Always", value: "FREE" }
+  ],
+  image: {
+    asset: { url: "/awareness-jyoti-nivas.jpeg" },
+    alt: "Awareness session at Jyoti Nivas College - educators learning about early intervention"
+  }
+};
+
+export function AwarenessHero({ data }: AwarenessHeroProps) {
+  const hero = data || defaultHero;
+  
+  // Type-safe image URL extraction
+  let imageUrl = defaultHero.image.asset.url;
+  if (hero.image?.asset) {
+    if (typeof hero.image.asset === 'string') {
+      imageUrl = hero.image.asset;
+    } else if (hero.image.asset.url) {
+      imageUrl = hero.image.asset.url;
+    }
+  }
+
   return (
     <section className="relative pt-8 pb-4 lg:pt-10 lg:pb-6 bg-[#FAF9F5] overflow-hidden">
       <div className="container mx-auto px-4">
@@ -17,41 +49,42 @@ export function AwarenessHero() {
             transition={{ duration: 0.6 }}
           >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple/10 text-purple text-xs font-bold uppercase tracking-widest">
-              <span className="w-2 h-2 rounded-full bg-purple animate-pulse" />
-              100% Free Sessions
-            </div>
+            {hero.badge && (
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple/10 text-purple text-xs font-bold uppercase tracking-widest">
+                <span className="w-2 h-2 rounded-full bg-purple animate-pulse" />
+                {hero.badge}
+              </div>
+            )}
 
             {/* Title */}
             <h1
               className="text-4xl md:text-5xl lg:text-6xl font-serif text-green leading-[1.1]"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             >
-              Awareness Programs for Schools & Communities
+              {hero.title}
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg text-black/70 max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
-              We conduct FREE sessions to help teachers, parents, and communities understand neurodivergence and early intervention.
+              {hero.description}
             </p>
 
             {/* Quick Stats */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-2">
-              <div className="text-center group">
-                <div className="text-2xl font-bold text-green group-hover:text-purple transition-colors">10+</div>
-                <div className="text-[10px] text-black/50 font-bold uppercase tracking-widest">Sessions Done</div>
+            {hero.stats && hero.stats.length > 0 && (
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-2">
+                {hero.stats.map((stat, idx) => (
+                  <div key={idx} className="flex items-center gap-8">
+                    <div className="text-center group">
+                      <div className="text-2xl font-bold text-green group-hover:text-purple transition-colors">{stat.value}</div>
+                      <div className="text-[10px] text-black/50 font-bold uppercase tracking-widest">{stat.label}</div>
+                    </div>
+                    {idx < (hero.stats?.length || 0) - 1 && (
+                      <div className="w-px h-8 bg-green/20 hidden sm:block" />
+                    )}
+                  </div>
+                ))}
               </div>
-              <div className="w-px h-8 bg-green/20 hidden sm:block" />
-              <div className="text-center group">
-                <div className="text-2xl font-bold text-green group-hover:text-purple transition-colors">500+</div>
-                <div className="text-[10px] text-black/50 font-bold uppercase tracking-widest">People Reached</div>
-              </div>
-              <div className="w-px h-8 bg-green/20 hidden sm:block" />
-              <div className="text-center group">
-                <div className="text-2xl font-bold text-green group-hover:text-purple transition-colors">FREE</div>
-                <div className="text-[10px] text-black/50 font-bold uppercase tracking-widest">Always</div>
-              </div>
-            </div>
+            )}
 
             {/* CTA */}
             <div className="pt-4">
@@ -77,8 +110,8 @@ export function AwarenessHero() {
 
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-xl">
               <Image
-                src="/awareness-jyoti-nivas.jpeg"
-                alt="Awareness session at Jyoti Nivas College - educators learning about early intervention"
+                src={imageUrl}
+                alt={hero.image?.alt || "Awareness session"}
                 fill
                 className="object-cover"
                 priority
