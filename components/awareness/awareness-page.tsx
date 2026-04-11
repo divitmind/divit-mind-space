@@ -98,37 +98,37 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
       <AwarenessHero data={data?.hero} />
 
       {/* What Your School Gets - WIIFM Section */}
-      <section className="py-12 lg:py-16 bg-cream">
+      <section className="py-8 lg:py-10 bg-cream">
         <div className="container mx-auto px-4">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-3" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               {benefits.title}
             </h2>
-            <p className="text-black/70 font-medium max-w-2xl mx-auto">{benefits.subtitle}</p>
+            <p className="text-black/70 font-medium max-w-2xl mx-auto text-sm lg:text-base">{benefits.subtitle}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {(benefits.items || defaultBenefits).map((benefit, idx) => {
               const IconComponent = (benefit.icon && iconMap[benefit.icon]) || Sparkles;
               return (
                 <motion.div
                   key={idx}
-                  className="bg-white rounded-2xl p-8 border border-black/5 shadow-xl shadow-black/[0.02] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1"
+                  className="bg-white rounded-2xl p-6 border border-black/5 shadow-xl shadow-black/[0.02] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-purple/10 flex items-center justify-center mb-6">
-                    <IconComponent className="w-6 h-6 text-purple" />
+                  <div className="w-10 h-10 rounded-xl bg-purple/10 flex items-center justify-center mb-4">
+                    <IconComponent className="w-5 h-5 text-purple" />
                   </div>
-                  <h3 className="text-xl font-bold text-green mb-3">{benefit.title}</h3>
-                  <p className="text-sm text-black/70 font-medium leading-relaxed">{benefit.description}</p>
+                  <h3 className="text-lg font-bold text-green mb-2">{benefit.title}</h3>
+                  <p className="text-xs lg:text-sm text-black/70 font-medium leading-relaxed">{benefit.description}</p>
                 </motion.div>
               );
             })}
@@ -137,21 +137,21 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
       </section>
 
       {/* What We Cover */}
-      <section className="py-12 lg:py-16 bg-[#FAF9F5]">
+      <section className="py-8 lg:py-10 bg-[#FAF9F5]">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl lg:text-4xl font-serif text-green mb-6" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+              <h2 className="text-3xl lg:text-4xl font-serif text-green mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
                 {highlights.title}
               </h2>
-              <p className="text-black/70 mb-8 font-medium leading-relaxed max-w-xl">
+              <p className="text-black/70 mb-6 font-medium leading-relaxed max-w-xl text-sm lg:text-base">
                 {highlights.description}
               </p>
-              <ul className="space-y-4">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                 {(highlights.items || []).map((item, idx) => (
                   <motion.li
                     key={idx}
@@ -161,8 +161,8 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.05 }}
                   >
-                    <CheckCircle2 className="w-5 h-5 text-purple mt-0.5 shrink-0" />
-                    <span className="text-black/70 font-medium">{item}</span>
+                    <CheckCircle2 className="w-4 h-4 text-purple mt-0.5 shrink-0" />
+                    <span className="text-black/70 font-medium text-xs lg:text-sm">{item}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -174,8 +174,8 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="absolute inset-0 bg-purple/10 rounded-[2rem] transform rotate-2 translate-x-2 translate-y-2" />
-              <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl">
+              <div className="absolute inset-0 bg-purple/10 rounded-[1.5rem] transform rotate-2 translate-x-2 translate-y-2" />
+              <div className="relative aspect-[4/3] rounded-[1.5rem] overflow-hidden border-4 border-white shadow-xl">
                 <Image
                   src={getImageUrl(highlights.image, defaultHighlights.image.asset.url)}
                   alt={highlights.image?.alt || "What we cover"}
@@ -189,25 +189,25 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
       </section>
 
       {/* Past Sessions Gallery */}
-      <section className="py-12 lg:py-16 bg-cream">
+      <section className="py-8 lg:py-10 bg-cream">
         <div className="container mx-auto px-4">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-3" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               {pastSessions.title}
             </h2>
-            <p className="text-black/70 font-medium">{pastSessions.subtitle}</p>
+            <p className="text-black/70 font-medium text-sm lg:text-base">{pastSessions.subtitle}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {(pastSessions.sessions || []).map((session, idx) => (
               <motion.div
                 key={idx}
-                className="group relative rounded-[2rem] overflow-hidden shadow-2xl border border-black/5"
+                className="group relative rounded-[1.5rem] overflow-hidden shadow-xl border border-black/5"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -222,9 +222,9 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                  <h3 className="font-serif italic text-2xl mb-2">{session.venue}</h3>
-                  <p className="text-white/80 text-xs font-bold uppercase tracking-widest">{session.audience}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="font-serif italic text-xl mb-1">{session.venue}</h3>
+                  <p className="text-white/80 text-[10px] font-bold uppercase tracking-widest">{session.audience}</p>
                 </div>
               </motion.div>
             ))}
@@ -233,28 +233,33 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 lg:py-16 bg-[#FAF9F5]">
+      <section className="py-10 lg:py-14 bg-[#FAF9F5]">
         <div className="container mx-auto px-4">
           <motion.div
-            className="max-w-3xl mx-auto text-center bg-white rounded-[2rem] p-10 lg:p-16 border border-black/5 shadow-2xl"
+            className="max-w-2xl mx-auto text-center bg-white rounded-[1.5rem] p-8 lg:p-12 border border-black/5 shadow-2xl relative overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl lg:text-4xl font-serif text-green mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+            {/* Subtle decorative background element */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-purple/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+            
+            <h2 className="text-2xl lg:text-3xl font-serif text-green mb-4 italic relative z-10" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               {cta.title}
             </h2>
-            <p className="text-black/70 mb-10 text-lg font-medium leading-relaxed">
+            <p className="text-black/70 mb-8 text-base lg:text-lg font-medium leading-relaxed max-w-lg mx-auto relative z-10">
               {cta.description}
             </p>
-            <WhatsAppConsultationLink className="dm-pill-button dm-pill-button-primary scale-110">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
-              {cta.buttonText}
-            </WhatsAppConsultationLink>
+            <div className="relative z-10">
+              <WhatsAppConsultationLink className="dm-pill-button dm-pill-button-primary scale-105">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                {cta.buttonText}
+              </WhatsAppConsultationLink>
+            </div>
 
-            <p className="mt-8 text-[10px] text-black/40 font-bold uppercase tracking-widest">
+            <p className="mt-6 text-[10px] text-black/40 font-bold uppercase tracking-widest relative z-10">
               We&apos;ll get back to you within 24 hours
             </p>
           </motion.div>

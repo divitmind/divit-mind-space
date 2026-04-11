@@ -42,9 +42,9 @@ export function AwarenessHero({ data }: AwarenessHeroProps) {
   }
 
   return (
-    <section className="relative pt-8 pb-4 lg:pt-10 lg:pb-6 bg-[#FAF9F5] overflow-hidden">
+    <section className="relative pt-6 pb-2 lg:pt-8 lg:pb-4 bg-[#FAF9F5] overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
           {/* Left: Content */}
           <motion.div
             className="space-y-6 text-center lg:text-left"
