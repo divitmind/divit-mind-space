@@ -12,6 +12,13 @@ interface MindGymPageProps {
 
 const defaultGames: Partial<MindGymItem>[] = [
   {
+    title: "Pulse Check",
+    slug: "pulse-check",
+    focusArea: "Processing Speed",
+    ageGroup: "All Ages",
+    shortDescription: "Test your raw reaction time and neural efficiency with this simple benchmark test.",
+  },
+  {
     title: "Schulte Table",
     slug: "schulte-table",
     focusArea: "Visual Scanning & Focus",

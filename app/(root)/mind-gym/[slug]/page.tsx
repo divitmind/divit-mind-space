@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, Brain } from "lucide-react";
 import { SchulteTable } from "@/components/mind-gym/games/schulte-table";
 import { StroopTest } from "@/components/mind-gym/games/stroop-test";
+import { ReactionTrainer } from "@/components/mind-gym/games/reaction-trainer";
 import { PortableText } from "next-sanity";
 import { portableTextComponents } from "@/components/portable-text-components";
 
@@ -37,6 +38,8 @@ export default async function GamePageRoute({ params }: GamePageProps) {
         return <SchulteTable />;
       case "stroop-test":
         return <StroopTest />;
+      case "pulse-check":
+        return <ReactionTrainer />;
       default:
         return (
           <div className="flex flex-col items-center justify-center py-20 text-center">
