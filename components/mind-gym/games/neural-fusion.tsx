@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Brain, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Undo2, Share2 } from "lucide-react";
+import { Play, RotateCcw, Trophy, Brain, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Undo2, Share2, HelpCircle, Lightbulb } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WhatsAppShare } from "../whatsapp-share";
 
@@ -21,6 +21,8 @@ export function NeuralFusion() {
   const [bestScore, setBestScore] = useState(0);
   const [gameState, setGameState] = useState<"START" | "PLAYING" | "WON" | "LOST">("START");
   const [history, setHistory] = useState<{ tiles: Tile[]; score: number }[]>([]);
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [suggestedMove, setSuggestedMove] = useState<"UP" | "DOWN" | "LEFT" | "RIGHT" | null>(null);
   
   const tileIdCounter = useRef(0);
 
@@ -60,19 +62,86 @@ export function NeuralFusion() {
     setTiles(newTiles);
     setScore(0);
     setHistory([]);
+    setSuggestedMove(null);
     setGameState("PLAYING");
+  };
+
+  const getMoveResult = (currentTiles: Tile[], direction: string) => {
+    let moved = false;
+    let mergeScore = 0;
+    const nextTiles: Tile[] = [];
+    
+    const grid: (Tile | null)[][] = Array.from({ length: GRID_SIZE }, () => 
+      Array.from({ length: GRID_SIZE }, () => null)
+    );
+    currentTiles.forEach(t => grid[t.y][t.x] = t);
+
+    const isVertical = direction === "UP" || direction === "DOWN";
+    const isForward = direction === "RIGHT" || direction === "DOWN";
+
+    for (let i = 0; i < GRID_SIZE; i++) {
+      let line: (Tile | null)[] = [];
+      for (let j = 0; j < GRID_SIZE; j++) {
+        line.push(isVertical ? grid[j][i] : grid[i][j]);
+      }
+      if (isForward) line.reverse();
+
+      let activeTiles = line.filter((t): t is Tile => t !== null);
+      const mergedLine: Tile[] = [];
+      for (let j = 0; j < activeTiles.length; j++) {
+        const current = activeTiles[j];
+        const next = activeTiles[j + 1];
+        if (next && current.value === next.value) {
+          mergedLine.push({ ...current, value: current.value * 2 });
+          mergeScore += current.value * 2;
+          moved = true;
+          j++;
+        } else {
+          mergedLine.push(current);
+        }
+      }
+
+      mergedLine.forEach((tile, index) => {
+        const finalIndex = isForward ? GRID_SIZE - 1 - index : index;
+        const newX = isVertical ? i : finalIndex;
+        const newY = isVertical ? finalIndex : i;
+        if (tile.x !== newX || tile.y !== newY) moved = true;
+      });
+    }
+    return { moved, mergeScore };
+  };
+
+  const findBestMove = () => {
+    const directions = ["UP", "DOWN", "LEFT", "RIGHT"];
+    let bestDir: any = null;
+    let maxMerge = -1;
+
+    directions.forEach(dir => {
+      const { moved, mergeScore } = getMoveResult(tiles, dir);
+      if (moved && mergeScore > maxMerge) {
+        maxMerge = mergeScore;
+        bestDir = dir;
+      }
+    });
+
+    // If no merges possible, just pick any valid move
+    if (bestDir === null) {
+      bestDir = directions.find(dir => getMoveResult(tiles, dir).moved);
+    }
+
+    setSuggestedMove(bestDir);
+    setTimeout(() => setSuggestedMove(null), 2000);
   };
 
   const move = useCallback((direction: "UP" | "DOWN" | "LEFT" | "RIGHT") => {
     if (gameState !== "PLAYING") return;
+    setSuggestedMove(null);
 
     setTiles(prevTiles => {
       let moved = false;
       let newScore = score;
       const nextTiles: Tile[] = [];
-      const mergedIds = new Set<number>();
 
-      // Create a 2D map of tiles for easy lookup
       const grid: (Tile | null)[][] = Array.from({ length: GRID_SIZE }, () => 
         Array.from({ length: GRID_SIZE }, () => null)
       );
@@ -86,35 +155,28 @@ export function NeuralFusion() {
         for (let j = 0; j < GRID_SIZE; j++) {
           line.push(isVertical ? grid[j][i] : grid[i][j]);
         }
-
         if (isForward) line.reverse();
 
-        // 1. Filter out nulls
         let activeTiles = line.filter((t): t is Tile => t !== null);
-
-        // 2. Merge
         const mergedLine: Tile[] = [];
         for (let j = 0; j < activeTiles.length; j++) {
           const current = activeTiles[j];
           const next = activeTiles[j + 1];
-
           if (next && current.value === next.value) {
             const mergedValue = current.value * 2;
             mergedLine.push({ ...current, value: mergedValue });
             newScore += mergedValue;
             moved = true;
-            j++; // skip next
+            j++;
           } else {
             mergedLine.push(current);
           }
         }
 
-        // 3. Position them back
         mergedLine.forEach((tile, index) => {
           const finalIndex = isForward ? GRID_SIZE - 1 - index : index;
           const newX = isVertical ? i : finalIndex;
           const newY = isVertical ? finalIndex : i;
-          
           if (tile.x !== newX || tile.y !== newY) moved = true;
           nextTiles.push({ ...tile, x: newX, y: newY });
         });
@@ -122,21 +184,10 @@ export function NeuralFusion() {
 
       if (!moved) return prevTiles;
 
-      // Save history for undo
       setHistory(prev => [...prev.slice(-4), { tiles: prevTiles, score: score }]);
-      
       setScore(newScore);
       if (newScore > bestScore) setBestScore(newScore);
-      
-      const tilesWithNew = addRandomTile(nextTiles);
-      
-      // Check for Game Over (simple version)
-      if (getEmptyCells(tilesWithNew).length === 0) {
-        // We could add complex check for possible merges here
-        // but let's keep it simple for now
-      }
-
-      return tilesWithNew;
+      return addRandomTile(nextTiles);
     });
   }, [gameState, score, bestScore]);
 
@@ -192,16 +243,47 @@ export function NeuralFusion() {
               <h3 className="text-xl font-serif text-green mb-4 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
                 Neural Fusion
               </h3>
-              <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
-                A strategic challenge for pattern recognition and neural planning. Merge matching tiles to reach higher numbers.
-              </p>
-              <button
-                onClick={startGame}
-                className="dm-pill-button dm-pill-button-primary inline-flex items-center gap-2"
-              >
-                <Play className="w-4 h-4" />
-                Initialize
-              </button>
+              
+              {!showTutorial ? (
+                <>
+                  <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
+                    A strategic challenge for pattern recognition and neural planning. Merge matching tiles to reach higher numbers.
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <button
+                      onClick={startGame}
+                      className="dm-pill-button dm-pill-button-primary inline-flex items-center justify-center gap-2"
+                    >
+                      <Play className="w-4 h-4" />
+                      Initialize
+                    </button>
+                    <button
+                      onClick={() => setShowTutorial(true)}
+                      className="text-xs font-bold uppercase tracking-widest text-purple hover:text-green transition-colors flex items-center justify-center gap-2"
+                    >
+                      <HelpCircle className="w-4 h-4" />
+                      How to Play?
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="text-left space-y-4 mb-8">
+                  <div className="space-y-2">
+                    <p className="text-xs font-bold uppercase text-green tracking-widest">The Goal</p>
+                    <p className="text-sm text-black/60 font-medium">Merge tiles with the same number to create larger numbers. Reach 2048 to win!</p>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-xs font-bold uppercase text-green tracking-widest">Controls</p>
+                    <p className="text-sm text-black/60 font-medium">Use **Arrow Keys** or **Swipe** to slide all tiles. When two matching tiles touch, they fuse into one.</p>
+                  </div>
+                  <button
+                    onClick={() => setShowTutorial(false)}
+                    className="dm-pill-button-secondary w-full text-xs"
+                  >
+                    Got it, let's play
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
@@ -215,43 +297,47 @@ export function NeuralFusion() {
           >
             {/* Header Stats */}
             <div className="flex justify-between items-center px-2">
-              <div className="flex gap-4">
-                <div className="text-center bg-white px-4 py-2 rounded-2xl shadow-sm border border-black/5 min-w-[80px]">
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-black/30">Score</div>
-                  <div className="text-xl font-black text-green tabular-nums">{score}</div>
+              <div className="flex gap-3">
+                <div className="text-center bg-white px-3 py-2 rounded-2xl shadow-sm border border-black/5 min-w-[70px]">
+                  <div className="text-[9px] font-bold uppercase tracking-widest text-black/30">Score</div>
+                  <div className="text-lg font-black text-green tabular-nums">{score}</div>
                 </div>
-                <div className="text-center bg-white px-4 py-2 rounded-2xl shadow-sm border border-black/5 min-w-[80px]">
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-black/30">Best</div>
-                  <div className="text-xl font-black text-purple tabular-nums">{bestScore}</div>
+                <div className="text-center bg-white px-3 py-2 rounded-2xl shadow-sm border border-black/5 min-w-[70px]">
+                  <div className="text-[9px] font-bold uppercase tracking-widest text-black/30">Best</div>
+                  <div className="text-lg font-black text-purple tabular-nums">{bestScore}</div>
                 </div>
               </div>
-              <button 
-                onClick={undo}
-                disabled={history.length === 0}
-                className="w-10 h-10 flex items-center justify-center bg-white rounded-full border border-black/5 shadow-sm text-green hover:border-purple/30 disabled:opacity-30 transition-all"
-              >
-                <Undo2 className="w-4 h-4" />
-              </button>
+              <div className="flex gap-2">
+                <button 
+                  onClick={findBestMove}
+                  className="w-10 h-10 flex items-center justify-center bg-purple/10 rounded-full border border-purple/20 text-purple hover:bg-purple hover:text-white transition-all shadow-sm"
+                  title="Get a hint"
+                >
+                  <Lightbulb className="w-4 h-4" />
+                </button>
+                <button 
+                  onClick={undo}
+                  disabled={history.length === 0}
+                  className="w-10 h-10 flex items-center justify-center bg-white rounded-full border border-black/5 shadow-sm text-green hover:border-purple/30 disabled:opacity-30 transition-all"
+                >
+                  <Undo2 className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             {/* Game Grid */}
             <div className="relative bg-black/5 p-3 rounded-[2rem] aspect-square grid grid-cols-4 grid-rows-4 gap-3">
-              {/* Grid Background */}
               {Array.from({ length: 16 }).map((_, i) => (
                 <div key={i} className="bg-white/40 rounded-xl" />
               ))}
 
-              {/* Tiles */}
               <AnimatePresence>
                 {tiles.map((tile) => (
                   <motion.div
                     key={tile.id}
                     layoutId={tile.id.toString()}
                     initial={{ scale: 0, opacity: 0 }}
-                    animate={{ 
-                      scale: 1, 
-                      opacity: 1,
-                    }}
+                    animate={{ scale: 1, opacity: 1 }}
                     transition={{ 
                       layout: { type: "spring", stiffness: 300, damping: 30 },
                       opacity: { duration: 0.1 }
@@ -271,14 +357,30 @@ export function NeuralFusion() {
               </AnimatePresence>
             </div>
 
-            {/* Mobile Controls */}
-            <div className="grid grid-cols-3 gap-2 max-w-[180px] mx-auto pt-4 lg:hidden">
+            {/* Controls */}
+            <div className="grid grid-cols-3 gap-2 max-w-[180px] mx-auto pt-4">
               <div />
-              <button onClick={() => move("UP")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green active:bg-green/5"><ChevronUp /></button>
+              <button 
+                onClick={() => move("UP")} 
+                className={cn("p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green transition-all", suggestedMove === "UP" && "bg-purple text-white scale-110 shadow-lg shadow-purple/20")}>
+                <ChevronUp />
+              </button>
               <div />
-              <button onClick={() => move("LEFT")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green active:bg-green/5"><ChevronLeft /></button>
-              <button onClick={() => move("DOWN")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green active:bg-green/5"><ChevronDown /></button>
-              <button onClick={() => move("RIGHT")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green active:bg-green/5"><ChevronRight /></button>
+              <button 
+                onClick={() => move("LEFT")} 
+                className={cn("p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green transition-all", suggestedMove === "LEFT" && "bg-purple text-white scale-110 shadow-lg shadow-purple/20")}>
+                <ChevronLeft />
+              </button>
+              <button 
+                onClick={() => move("DOWN")} 
+                className={cn("p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green transition-all", suggestedMove === "DOWN" && "bg-purple text-white scale-110 shadow-lg shadow-purple/20")}>
+                <ChevronDown />
+              </button>
+              <button 
+                onClick={() => move("RIGHT")} 
+                className={cn("p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green transition-all", suggestedMove === "RIGHT" && "bg-purple text-white scale-110 shadow-lg shadow-purple/20")}>
+                <ChevronRight />
+              </button>
             </div>
           </motion.div>
         )}

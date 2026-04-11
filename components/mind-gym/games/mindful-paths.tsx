@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Compass, ArrowRight, Sparkles, Share2 } from "lucide-react";
+import { Play, RotateCcw, Trophy, Compass, ArrowRight, Sparkles, Share2, HelpCircle, Lightbulb } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WhatsAppShare } from "../whatsapp-share";
 
@@ -37,6 +37,8 @@ export function MindfulPaths() {
   const [tiles, setTiles] = useState<Tile[]>([]);
   const [gameState, setGameState] = useState<"START" | "PLAYING" | "LEVEL_COMPLETE" | "FINISHED">("START");
   const [moves, setMoves] = useState(0);
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [showHints, setShowHints] = useState(false);
 
   const initLevel = useCallback((levelIdx: number) => {
     const level = LEVELS[levelIdx];
@@ -44,13 +46,18 @@ export function MindfulPaths() {
       id: t.id,
       type: t.type as any,
       targetRotation: t.target,
-      // Randomize initial rotation (but not the target one)
       rotation: [0, 90, 180, 270].filter(r => r !== t.target)[Math.floor(Math.random() * 3)]
     }));
     setTiles(newTiles);
     setMoves(0);
     setGameState("PLAYING");
   }, []);
+
+  const isTileSolved = (t: Tile) => {
+    if (t.type === "straight") return t.rotation % 180 === t.targetRotation % 180;
+    if (t.type === "cross") return true;
+    return t.rotation === t.targetRotation;
+  };
 
   const handleTileClick = (id: number) => {
     if (gameState !== "PLAYING") return;
@@ -62,13 +69,7 @@ export function MindfulPaths() {
       
       setMoves(m => m + 1);
 
-      // Check if all tiles match their target rotation
-      // (Note: some types like "straight" have two valid rotations, but let's keep it simple for now)
-      const isSolved = newTiles.every(t => {
-        if (t.type === "straight") return t.rotation % 180 === t.targetRotation % 180;
-        if (t.type === "cross") return true; // cross always matches
-        return t.rotation === t.targetRotation;
-      });
+      const isSolved = newTiles.every(isTileSolved);
 
       if (isSolved) {
         setTimeout(() => {
@@ -95,6 +96,11 @@ export function MindfulPaths() {
     initLevel(0);
   };
 
+  const triggerHint = () => {
+    setShowHints(true);
+    setTimeout(() => setShowHints(false), 2000);
+  };
+
   return (
     <div className="w-full max-w-md mx-auto">
       <AnimatePresence mode="wait">
@@ -110,16 +116,47 @@ export function MindfulPaths() {
               <h3 className="text-xl font-serif text-green mb-4 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
                 Mindful Paths
               </h3>
-              <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
-                A meditative spatial puzzle. Rotate the tiles to align the flow and connect the patterns.
-              </p>
-              <button
-                onClick={() => initLevel(0)}
-                className="dm-pill-button dm-pill-button-primary inline-flex items-center gap-2"
-              >
-                <Play className="w-4 h-4" />
-                Begin Journey
-              </button>
+              
+              {!showTutorial ? (
+                <>
+                  <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
+                    A meditative spatial puzzle. Rotate the tiles to align the flow and connect the patterns.
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <button
+                      onClick={() => initLevel(0)}
+                      className="dm-pill-button dm-pill-button-primary inline-flex items-center justify-center gap-2"
+                    >
+                      <Play className="w-4 h-4" />
+                      Begin Journey
+                    </button>
+                    <button
+                      onClick={() => setShowTutorial(true)}
+                      className="text-xs font-bold uppercase tracking-widest text-purple hover:text-green transition-colors flex items-center justify-center gap-2"
+                    >
+                      <HelpCircle className="w-4 h-4" />
+                      How to Play?
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="text-left space-y-4 mb-8">
+                  <div className="space-y-2">
+                    <p className="text-xs font-bold uppercase text-green tracking-widest">The Goal</p>
+                    <p className="text-sm text-black/60 font-medium">Rotate every tile until all the green lines connect to form a continuous pattern or flow.</p>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-xs font-bold uppercase text-green tracking-widest">Controls</p>
+                    <p className="text-sm text-black/60 font-medium">**Tap or Click** a tile to rotate it 90 degrees. Tiles will glow when they are in the correct position if you use a hint.</p>
+                  </div>
+                  <button
+                    onClick={() => setShowTutorial(false)}
+                    className="dm-pill-button-secondary w-full text-xs"
+                  >
+                    Got it, let's play
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
@@ -132,47 +169,62 @@ export function MindfulPaths() {
             className="space-y-8"
           >
             <div className="flex justify-between items-center px-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-black/40">
-                Path {currentLevel + 1} of {LEVELS.length}
+              <div className="flex flex-col">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-black/40">
+                  Path {currentLevel + 1} of {LEVELS.length}
+                </div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-green">
+                  Moves: {moves}
+                </div>
               </div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-green">
-                Moves: {moves}
-              </div>
+              <button 
+                onClick={triggerHint}
+                className="w-10 h-10 flex items-center justify-center bg-purple/10 rounded-full border border-purple/20 text-purple hover:bg-purple hover:text-white transition-all shadow-sm"
+                title="Get a hint"
+              >
+                <Lightbulb className="w-4 h-4" />
+              </button>
             </div>
 
             <div className={cn(
               "grid gap-3 p-4 bg-white rounded-[2rem] shadow-2xl border border-black/5 aspect-square",
               LEVELS[currentLevel].gridSize === 3 ? "grid-cols-3" : "grid-cols-4"
             )}>
-              {tiles.map((tile) => (
-                <button
-                  key={tile.id}
-                  onClick={() => handleTileClick(tile.id)}
-                  className="aspect-square bg-purple/5 rounded-2xl flex items-center justify-center relative overflow-hidden group hover:bg-purple/10 transition-colors"
-                >
-                  <motion.div
-                    animate={{ rotate: tile.rotation }}
-                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                    className="w-full h-full flex items-center justify-center p-4"
+              {tiles.map((tile) => {
+                const solved = isTileSolved(tile);
+                return (
+                  <button
+                    key={tile.id}
+                    onClick={() => handleTileClick(tile.id)}
+                    className={cn(
+                      "aspect-square rounded-2xl flex items-center justify-center relative overflow-hidden transition-all duration-500",
+                      showHints && !solved ? "bg-red-50 ring-2 ring-red-200" : "bg-purple/5 hover:bg-purple/10"
+                    )}
                   >
-                    {tile.type === "straight" && (
-                      <div className="w-2 h-full bg-green rounded-full opacity-60" />
-                    )}
-                    {tile.type === "corner" && (
-                      <div className="w-full h-full relative">
-                        <div className="absolute top-1/2 left-1/2 w-2 h-1/2 bg-green -translate-x-1/2 rounded-full opacity-60" />
-                        <div className="absolute top-1/2 left-1/2 h-2 w-1/2 bg-green -translate-y-1/2 rounded-full opacity-60" />
-                      </div>
-                    )}
-                    {tile.type === "cross" && (
-                      <div className="w-full h-full relative">
-                        <div className="absolute top-0 left-1/2 w-2 h-full bg-green -translate-x-1/2 rounded-full opacity-60" />
-                        <div className="absolute top-1/2 left-0 h-2 w-full bg-green -translate-y-1/2 rounded-full opacity-60" />
-                      </div>
-                    )}
-                  </motion.div>
-                </button>
-              ))}
+                    <motion.div
+                      animate={{ rotate: tile.rotation }}
+                      transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                      className="w-full h-full flex items-center justify-center p-4"
+                    >
+                      {tile.type === "straight" && (
+                        <div className="w-2 h-full bg-green rounded-full opacity-60" />
+                      )}
+                      {tile.type === "corner" && (
+                        <div className="w-full h-full relative">
+                          <div className="absolute top-1/2 left-1/2 w-2 h-1/2 bg-green -translate-x-1/2 rounded-full opacity-60" />
+                          <div className="absolute top-1/2 left-1/2 h-2 w-1/2 bg-green -translate-y-1/2 rounded-full opacity-60" />
+                        </div>
+                      )}
+                      {tile.type === "cross" && (
+                        <div className="w-full h-full relative">
+                          <div className="absolute top-0 left-1/2 w-2 h-full bg-green -translate-x-1/2 rounded-full opacity-60" />
+                          <div className="absolute top-1/2 left-0 h-2 w-full bg-green -translate-y-1/2 rounded-full opacity-60" />
+                        </div>
+                      )}
+                    </motion.div>
+                  </button>
+                );
+              })}
             </div>
 
             <p className="text-center text-[10px] font-bold uppercase tracking-widest text-black/20 italic">
