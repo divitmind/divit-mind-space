@@ -438,6 +438,63 @@ export const ABOUT_US_QUERY = `*[_type == "aboutUs"][0] {
   }
 }`;
 
+export const AWARENESS_QUERY = `*[_type == "awareness"][0] {
+  "hero": {
+    "badge": hero.badge,
+    "title": hero.title,
+    "description": hero.description,
+    "stats": hero.stats[]{
+      label,
+      value
+    },
+    "image": hero.image{
+      asset->{url},
+      alt,
+      hotspot,
+      crop
+    }
+  },
+  "benefits": {
+    "title": benefits.title,
+    "subtitle": benefits.subtitle,
+    "items": benefits.items[]{
+      title,
+      description,
+      icon
+    }
+  },
+  "highlights": {
+    "title": highlights.title,
+    "description": highlights.description,
+    "items": highlights.items,
+    "image": highlights.image{
+      asset->{url},
+      alt,
+      hotspot,
+      crop
+    }
+  },
+  "pastSessions": {
+    "title": pastSessions.title,
+    "subtitle": pastSessions.subtitle,
+    "sessions": pastSessions.sessions[]{
+      venue,
+      audience,
+      "image": image{
+        asset->{url},
+        alt,
+        hotspot,
+        crop
+      }
+    }
+  },
+  "cta": {
+    "title": cta.title,
+    "description": cta.description,
+    "buttonText": cta.buttonText
+  }
+}`;
+
 export const GALLERY_QUERY = `*[_type == "gallery"] | order(publishedAt desc) {
   _id,
   "image": {
