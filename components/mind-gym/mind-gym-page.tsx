@@ -87,7 +87,7 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
   return (
     <div className="min-h-screen bg-[#FAF9F5]">
       {/* Immersive Hero Section - Tightened Padding */}
-      <section className="relative pt-20 pb-8 lg:pt-32 lg:pb-16 overflow-hidden bg-white">
+      <section className="relative pt-20 pb-8 lg:pt-32 lg:pb-12 overflow-hidden bg-white">
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -101,8 +101,8 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-green leading-[1.1] mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               Mind Gym
             </h1>
-            <p className="text-base md:text-lg text-black/40 max-w-2xl mx-auto font-medium leading-relaxed italic">
-              Browse our full library of brain training games by skill, including attention, working memory, reaction time, visual tracking, and ADHD-friendly practice.
+            <p className="text-base md:text-lg text-black/40 max-w-3xl mx-auto font-medium leading-relaxed italic">
+              Browse our cognitive rituals for children, teens, and adults. Sharpen your attention, memory, and reaction precision through daily practice. Challenge a friend on WhatsApp to win a complimentary specialist session or workshops.
             </p>
           </motion.div>
         </div>
@@ -113,34 +113,34 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
       </section>
 
       {/* Choose Your Focus - Refined sticky nav */}
-      <section className="py-6 md:py-8 border-y border-black/5 bg-[#FAF9F5]/80 sticky top-0 z-40 backdrop-blur-md">
+      <section className="py-8 md:py-10 border-y border-black/5 bg-[#FAF9F5]/80 sticky top-0 z-40 backdrop-blur-md">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3 shrink-0">
-              <div className="w-9 h-9 rounded-xl bg-white shadow-sm border border-black/5 flex items-center justify-center">
-                <Focus className="w-4 h-4 text-green" />
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="flex items-center gap-4 shrink-0">
+              <div className="w-10 h-10 rounded-2xl bg-white shadow-sm border border-black/5 flex items-center justify-center">
+                <Focus className="w-5 h-5 text-green" />
               </div>
               <div>
-                <h3 className="text-[10px] font-black uppercase tracking-widest text-green leading-none">Targeted Training</h3>
-                <p className="text-[9px] text-black/30 font-bold uppercase tracking-widest mt-1">Select mental goal</p>
+                <h3 className="text-xs font-black uppercase tracking-widest text-green leading-none">Targeted Training</h3>
+                <p className="text-[10px] text-black/30 font-bold uppercase tracking-widest mt-1.5">Select mental goal</p>
               </div>
             </div>
             
             {/* Horizontal scroll on mobile for categories */}
             <div className="w-full lg:w-auto overflow-x-auto no-scrollbar pb-2 lg:pb-0">
-              <div className="flex justify-start lg:justify-end gap-2 px-1">
+              <div className="flex justify-start lg:justify-end gap-3 px-1">
                 {CATEGORIES.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
                     className={cn(
-                      "px-4 py-2.5 rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border whitespace-nowrap shrink-0",
+                      "px-5 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border whitespace-nowrap shrink-0",
                       activeCategory === cat.id 
-                        ? "bg-green text-white border-green shadow-md shadow-green/10 scale-105" 
+                        ? "bg-green text-white border-green shadow-lg shadow-green/10 scale-105" 
                         : "bg-white text-black/40 border-black/5 hover:border-green/20 hover:text-green"
                     )}
                   >
-                    <cat.icon className="w-3 h-3" />
+                    <cat.icon className="w-3.5 h-3.5" />
                     {cat.label}
                   </button>
                 ))}
@@ -155,7 +155,7 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
         <div className="container mx-auto px-4">
           <motion.div 
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12"
           >
             <AnimatePresence mode="popLayout">
               {filteredGames.map((game, idx) => {
@@ -171,7 +171,7 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.4, delay: idx * 0.05 }}
-                    className="group bg-white rounded-[2.5rem] overflow-hidden border border-black/5 shadow-sm hover:shadow-xl hover:shadow-purple/5 transition-all duration-500 flex flex-col h-full"
+                    className="group bg-white rounded-[3rem] overflow-hidden border border-black/5 shadow-sm hover:shadow-xl hover:shadow-purple/5 transition-all duration-500 flex flex-col h-full"
                   >
                     {/* Card Visual Header */}
                     <div className="aspect-[16/10] relative bg-[#FAF9F5] overflow-hidden">
@@ -186,34 +186,34 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                         <GameThumbnail slug={gameSlug as string} />
                       )}
                       
-                      {/* Cognitive Tags - Tightened */}
-                      <div className="absolute top-4 left-4 flex flex-wrap gap-1.5">
-                        <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[8px] font-black text-green uppercase tracking-[0.15em] border border-green/10 shadow-sm">
+                      {/* Cognitive Tags - Refined Positioning to avoid overlap */}
+                      <div className="absolute top-0 left-0 right-0 p-5 flex flex-wrap gap-2 pointer-events-none">
+                        <span className="px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-[9px] font-black text-green uppercase tracking-[0.15em] border border-green/10 shadow-sm leading-none whitespace-nowrap">
                           {game.focusArea}
                         </span>
-                        <span className="px-2.5 py-1 rounded-full bg-purple/90 backdrop-blur-md text-[8px] font-black text-white uppercase tracking-[0.15em] border border-purple/10 shadow-sm">
+                        <span className="px-3 py-1.5 rounded-full bg-purple/90 backdrop-blur-md text-[9px] font-black text-white uppercase tracking-[0.15em] border border-purple/10 shadow-sm leading-none whitespace-nowrap">
                           {game.ageGroup}
                         </span>
                       </div>
                     </div>
 
                     {/* Card Content - Refined Spacing */}
-                    <div className="p-6 md:p-8 flex flex-col flex-grow">
-                      <h2 className="text-2xl font-serif text-green mb-3 italic group-hover:text-purple transition-colors duration-500 leading-tight" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                    <div className="p-8 md:p-10 flex flex-col flex-grow">
+                      <h2 className="text-2xl md:text-3xl font-serif text-green mb-4 italic group-hover:text-purple transition-colors duration-500 leading-tight" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
                         {game.title}
                       </h2>
                       
-                      <p className="text-xs md:text-sm text-black/50 font-medium leading-relaxed mb-6 line-clamp-2">
+                      <p className="text-sm text-black/50 font-medium leading-relaxed mb-8 line-clamp-2">
                         {game.shortDescription}
                       </p>
 
                       {/* Benefit Section - Inspiration from FreeFocusGames */}
-                      <div className="bg-[#FAF9F5] rounded-2xl p-5 mb-8 border border-black/5 group-hover:bg-green/5 transition-colors duration-500">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Lightbulb className="w-3 h-3 text-green" />
-                          <span className="text-[9px] font-black uppercase tracking-widest text-green">The Benefit</span>
+                      <div className="bg-[#FAF9F5] rounded-[2rem] p-6 mb-10 border border-black/5 group-hover:bg-green/5 transition-colors duration-500">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Lightbulb className="w-3.5 h-3.5 text-green" />
+                          <span className="text-[10px] font-black uppercase tracking-widest text-green">The Benefit</span>
                         </div>
-                        <p className="text-[11px] text-black/50 font-medium leading-relaxed italic">
+                        <p className="text-xs text-black/50 font-medium leading-relaxed italic">
                           &ldquo;{game.benefit || "Strengthens neural pathways and enhances cognitive agility through repeated exposure."}&rdquo;
                         </p>
                       </div>
@@ -221,10 +221,10 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                       <div className="mt-auto">
                         <Link 
                           href={`/mind-gym/${gameSlug}`}
-                          className="dm-pill-button dm-pill-button-primary w-full text-[9px] py-3.5 inline-flex items-center justify-center gap-2.5 group-hover:scale-[1.01] transition-transform"
+                          className="dm-pill-button dm-pill-button-primary w-full text-[10px] py-4.5 inline-flex items-center justify-center gap-3 group-hover:scale-[1.01] transition-transform"
                         >
                           Enter Training Session
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-4 h-4" />
                         </Link>
                       </div>
                     </div>
