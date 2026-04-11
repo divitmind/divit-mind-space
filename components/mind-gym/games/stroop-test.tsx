@@ -2,181 +2,94 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Zap, CheckCircle2, Heart, Timer, Target, Sparkles, Share2 } from "lucide-react";
+import { Play, RotateCcw, Trophy, Zap, MousePointer2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WhatsAppShare } from "../whatsapp-share";
+import { useMindGym } from "../mind-gym-context";
 
 const COLORS = [
-  { name: "Red", value: "#ef4444", class: "text-red-500" },
-  { name: "Blue", value: "#3b82f6", class: "text-blue-500" },
-  { name: "Green", value: "#22c55e", class: "text-green-500" },
-  { name: "Yellow", value: "#eab308", class: "text-yellow-500" },
-  { name: "Purple", value: "#a855f7", class: "text-purple-500" },
+  { name: "Green", value: "text-green", hex: "#7A9A7D" },
+  { name: "Purple", value: "text-purple", hex: "#52154E" },
+  { name: "Blue", value: "text-blue-600", hex: "#2563eb" },
+  { name: "Red", value: "text-red-600", hex: "#dc2626" },
 ];
 
-const INITIAL_LIVES = 3;
-const BASE_TIME = 3000; // 3 seconds per round
-const MIN_TIME = 1000;  // Minimum 1 second
+const ROUNDS = 15;
 
 export function StroopTest() {
-  const [currentWord, setCurrentWord] = useState({ text: "", color: "", colorName: "" });
+  const [currentRound, setCurrentRound] = useState(0);
+  const [word, setWord] = useState(COLORS[0]);
+  const [color, setColor] = useState(COLORS[1]);
+  const [options, setOptions] = useState<typeof COLORS>([]);
   const [score, setScore] = useState(0);
-  const [lives, setLives] = useState(INITIAL_LIVES);
-  const [streak, setStreak] = useState(0);
-  const [maxStreak, setMaxStreak] = useState(0);
   const [gameState, setGameState] = useState<"START" | "PLAYING" | "FINISHED">("START");
-  const [results, setResults] = useState<{ time: number; correct: boolean }[]>([]);
-  const [feedback, setFeedback] = useState<"CORRECT" | "WRONG" | "TIMEOUT" | null>(null);
-  const [timeLeft, setTimeLeft] = useState(100);
-  const [isShaking, setIsShaking] = useState(false);
-  
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const startTimeRef = useRef(0);
+  const [feedback, setFeedback] = useState<"CORRECT" | "WRONG" | null>(null);
+  const { addProgress } = useMindGym();
 
-  // Calculate allowed time based on score (gets faster)
-  const getAllowedTime = useCallback(() => {
-    return Math.max(MIN_TIME, BASE_TIME - (score * 50));
-  }, [score]);
-
-  const generateWord = useCallback(() => {
-    const textIdx = Math.floor(Math.random() * COLORS.length);
-    let colorIdx = Math.floor(Math.random() * COLORS.length);
-    
-    // Ensure we have a mix of congruent and incongruent trials (more incongruent)
-    if (Math.random() > 0.2) {
-      while (colorIdx === textIdx) {
-        colorIdx = Math.floor(Math.random() * COLORS.length);
-      }
+  const nextRound = useCallback(() => {
+    if (currentRound >= ROUNDS) {
+      setGameState("FINISHED");
+      addProgress(30);
+      return;
     }
-    
-    setCurrentWord({
-      text: COLORS[textIdx].name,
-      color: COLORS[colorIdx].value,
-      colorName: COLORS[colorIdx].name
-    });
-    
-    startTimeRef.current = Date.now();
-    setTimeLeft(100);
-    
-    if (timerRef.current) clearInterval(timerRef.current);
-    
-    const allowedTime = getAllowedTime();
-    const interval = 20; // 20ms update rate
-    const step = (interval / allowedTime) * 100;
 
-    timerRef.current = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 0) {
-          handleTimeout();
-          return 0;
-        }
-        return prev - step;
-      });
-    }, interval);
-  }, [getAllowedTime]);
-
-  const handleTimeout = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    setFeedback("TIMEOUT");
-    setLives(prev => prev - 1);
-    setStreak(0);
-    setIsShaking(true);
-    setTimeout(() => setIsShaking(false), 500);
-
-    setTimeout(() => {
-      setFeedback(null);
-      if (lives > 1) {
-        generateWord();
-      } else {
-        setGameState("FINISHED");
-      }
-    }, 600);
-  };
+    const randomWord = COLORS[Math.floor(Math.random() * COLORS.length)];
+    const randomColor = COLORS[Math.floor(Math.random() * COLORS.length)];
+    
+    setWord(randomWord);
+    setColor(randomColor);
+    setOptions([...COLORS].sort(() => Math.random() - 0.5));
+    setCurrentRound(prev => prev + 1);
+    setFeedback(null);
+  }, [currentRound, addProgress]);
 
   const startGame = () => {
+    setCurrentRound(0);
     setScore(0);
-    setLives(INITIAL_LIVES);
-    setStreak(0);
-    setMaxStreak(0);
-    setResults([]);
     setGameState("PLAYING");
-    generateWord();
+    nextRound();
   };
 
-  const handleAnswer = (colorName: string) => {
-    if (gameState !== "PLAYING" || feedback) return;
-    if (timerRef.current) clearInterval(timerRef.current);
+  const handleOptionClick = (selectedColorName: string) => {
+    if (feedback) return;
 
-    const reactionTime = Date.now() - startTimeRef.current;
-    const isCorrect = colorName === currentWord.colorName;
-
-    if (isCorrect) {
+    if (selectedColorName === color.name) {
       setScore(prev => prev + 1);
-      setStreak(prev => {
-        const newStreak = prev + 1;
-        if (newStreak > maxStreak) setMaxStreak(newStreak);
-        return newStreak;
-      });
       setFeedback("CORRECT");
+      addProgress(2);
     } else {
-      setLives(prev => prev - 1);
-      setStreak(0);
       setFeedback("WRONG");
-      setIsShaking(true);
-      setTimeout(() => setIsShaking(false), 500);
     }
 
-    setResults(prev => [...prev, { time: reactionTime, correct: isCorrect }]);
-
-    setTimeout(() => {
-      setFeedback(null);
-      if (isCorrect || lives > (isCorrect ? 0 : 1)) {
-        if (!isCorrect && lives <= 1) {
-          setGameState("FINISHED");
-        } else {
-          generateWord();
-        }
-      } else {
-        setGameState("FINISHED");
-      }
-    }, 400);
+    setTimeout(nextRound, 600);
   };
 
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, []);
-
-  const averageTime = results.length > 0 
-    ? (results.filter(r => r.correct).reduce((acc, curr) => acc + curr.time, 0) / (results.filter(r => r.correct).length || 1) / 1000).toFixed(2)
-    : 0;
-
   return (
-    <div className="w-full max-w-xl mx-auto">
+    <div className="w-full h-full flex flex-col items-center justify-center">
       <AnimatePresence mode="wait">
         {gameState === "START" && (
           <motion.div
             key="start"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="text-center space-y-6"
+            className="text-center space-y-8"
           >
-            <div className="p-8 bg-purple/5 rounded-[2rem] border border-purple/10">
-              <Zap className="w-12 h-12 text-purple mx-auto mb-4" />
-              <h3 className="text-xl font-serif text-green mb-4 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-                Color Clash Challenge
+            <div className="p-10 bg-purple/5 rounded-[3rem] border border-purple/10 max-w-sm">
+              <div className="w-16 h-16 bg-purple/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                <Zap className="w-8 h-8 text-purple" />
+              </div>
+              <h3 className="text-2xl font-serif text-green mb-4 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                Stroop Test
               </h3>
-              <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed max-w-sm mx-auto">
-                Identify the <strong>color of the ink</strong> as fast as you can. Don't let the word meaning distract you. You have 3 lives!
+              <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
+                Ignore the word text and identify the ink color as fast as possible.
               </p>
               <button
                 onClick={startGame}
-                className="dm-pill-button dm-pill-button-primary inline-flex items-center gap-2"
+                className="dm-pill-button dm-pill-button-primary w-full inline-flex items-center justify-center gap-2 py-4"
               >
                 <Play className="w-4 h-4" />
-                Start Training
+                Begin Test
               </button>
             </div>
           </motion.div>
@@ -187,94 +100,67 @@ export function StroopTest() {
             key="playing"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className={cn("space-y-8 p-4 rounded-[2rem] transition-colors duration-300", 
-              feedback === "WRONG" || feedback === "TIMEOUT" ? "bg-red-50" : 
-              feedback === "CORRECT" ? "bg-green-50" : "bg-transparent",
-              isShaking && "animate-shake"
-            )}
+            className="w-full h-full flex flex-col items-center justify-center space-y-12"
           >
-            {/* Header Stats */}
-            <div className="flex justify-between items-center">
-              <div className="flex gap-2">
-                {Array.from({ length: INITIAL_LIVES }).map((_, i) => (
-                  <Heart 
-                    key={i} 
-                    className={cn("w-5 h-5 transition-colors", i < lives ? "fill-red-500 text-red-500" : "text-black/10")} 
-                  />
-                ))}
+            <div className="flex justify-between items-center w-full max-w-sm px-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-black/30">
+                Round {currentRound} / {ROUNDS}
               </div>
-              <div className="flex flex-col items-end">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-black/40">Score</div>
-                <div className="text-xl font-bold text-green">{score}</div>
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-green">
+                Correct: {score}
               </div>
             </div>
 
-            {/* Timer Bar */}
-            <div className="w-full h-1.5 bg-black/5 rounded-full overflow-hidden">
-              <motion.div 
-                className={cn("h-full transition-colors", 
-                  timeLeft < 30 ? "bg-red-500" : timeLeft < 60 ? "bg-yellow-500" : "bg-purple"
-                )}
-                initial={{ width: "100%" }}
-                animate={{ width: `${timeLeft}%` }}
-                transition={{ duration: 0.05, ease: "linear" }}
-              />
-            </div>
-
-            {/* Word Area */}
-            <div className="h-48 flex flex-col items-center justify-center relative">
-              {streak > 1 && (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="absolute top-0 text-purple font-black text-sm uppercase tracking-[0.2em]"
+            <div className="relative h-48 flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`${word.name}-${color.name}`}
+                  initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0, 
+                    scale: feedback === "WRONG" ? [1, 1.1, 1] : 1,
+                    x: feedback === "WRONG" ? [0, -10, 10, -10, 0] : 0
+                  }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  className={cn(
+                    "text-6xl md:text-8xl font-black uppercase tracking-tighter transition-colors duration-300",
+                    color.value
+                  )}
                 >
-                  {streak} STREAK!
+                  {word.name}
                 </motion.div>
-              )}
+              </AnimatePresence>
               
-              <motion.div
-                key={`${score}-${currentWord.text}`}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-6xl md:text-8xl font-black tracking-tight drop-shadow-sm"
-                style={{ color: currentWord.color }}
-              >
-                {currentWord.text}
-              </motion.div>
-              
+              {/* Visual Feedback Ripple */}
               <AnimatePresence>
-                {feedback && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
+                {feedback === "CORRECT" && (
+                  <motion.div 
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 2, opacity: 0.2 }}
                     exit={{ opacity: 0 }}
-                    className={cn("mt-4 text-xs font-bold uppercase tracking-widest",
-                      feedback === "CORRECT" ? "text-green" : "text-red-500"
-                    )}
-                  >
-                    {feedback === "CORRECT" ? "Perfect!" : feedback === "TIMEOUT" ? "Too Slow!" : "Wrong Color!"}
-                  </motion.div>
+                    className="absolute inset-0 bg-green rounded-full blur-3xl pointer-events-none"
+                  />
                 )}
               </AnimatePresence>
             </div>
 
-            {/* Buttons Area */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-              {COLORS.map((color) => (
+            <div className="grid grid-cols-2 gap-4 w-full max-w-sm p-4">
+              {options.map((option) => (
                 <button
-                  key={color.name}
-                  onClick={() => handleAnswer(color.name)}
-                  disabled={!!feedback}
-                  className={cn(
-                    "px-4 py-4 rounded-2xl border-2 border-black/5 font-bold text-sm transition-all active:scale-95",
-                    "hover:border-purple/30 hover:shadow-md bg-white text-green",
-                    feedback && "opacity-50 grayscale-[0.5]"
-                  )}
+                  key={option.name}
+                  onClick={() => handleOptionClick(option.name)}
+                  className="bg-white hover:bg-black/5 text-black/40 hover:text-green font-black text-[10px] uppercase tracking-[0.3em] py-6 rounded-2xl border border-black/5 shadow-sm transition-all active:scale-95"
                 >
-                  {color.name}
+                  {option.name}
                 </button>
               ))}
+            </div>
+
+            <div className="h-8 flex items-center justify-center">
+              <div className="flex items-center gap-2 text-purple/20 font-black text-[10px] uppercase tracking-[0.3em]">
+                Select the Ink Color
+              </div>
             </div>
           </motion.div>
         )}
@@ -284,54 +170,33 @@ export function StroopTest() {
             key="finished"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center space-y-6"
+            className="text-center space-y-8"
           >
-            <div className="p-8 bg-green/5 rounded-[2rem] border border-green/10">
-              <Trophy className="w-12 h-12 text-yellow-600 mx-auto mb-4" />
+            <div className="p-10 bg-green/5 rounded-[3rem] border border-green/10 max-w-sm">
+              <Trophy className="w-16 h-16 text-yellow-600 mx-auto mb-6" />
               <h3 className="text-2xl font-serif text-green mb-2" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-                Mind Gym Results
+                Test Complete
               </h3>
-              
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
-                <div className="p-4 bg-white rounded-2xl shadow-sm border border-black/5">
-                  <div className="text-[10px] font-bold text-black/40 uppercase mb-1">Final Score</div>
-                  <div className="text-2xl font-bold text-green">{score}</div>
-                </div>
-                <div className="p-4 bg-white rounded-2xl shadow-sm border border-black/5">
-                  <div className="text-[10px] font-bold text-black/40 uppercase mb-1">Best Streak</div>
-                  <div className="text-2xl font-bold text-purple">{maxStreak}</div>
-                </div>
-                <div className="p-4 bg-white rounded-2xl shadow-sm border border-black/5">
-                  <div className="text-[10px] font-bold text-black/40 uppercase mb-1">Avg Speed</div>
-                  <div className="text-2xl font-bold text-green">{averageTime}s</div>
-                </div>
-                <div className="p-4 bg-white rounded-2xl shadow-sm border border-black/5">
-                  <div className="text-[10px] font-bold text-black/40 uppercase mb-1">Focus Level</div>
-                  <div className="text-lg font-bold text-yellow-600">
-                    {score > 30 ? "Master" : score > 15 ? "Advanced" : "Learner"}
-                  </div>
-                </div>
+              <div className="text-4xl font-black text-green mb-4 tabular-nums">
+                {score} / {ROUNDS}
               </div>
-
-              <div className="space-y-4">
+              <p className="text-black/60 text-sm mb-10 font-medium">
+                Accuracy: {Math.round((score / ROUNDS) * 100)}%
+              </p>
+              <div className="grid grid-cols-1 gap-4">
                 <button
                   onClick={startGame}
-                  className="dm-pill-button dm-pill-button-primary w-full inline-flex items-center justify-center gap-2"
+                  className="dm-pill-button dm-pill-button-primary w-full py-4 flex items-center justify-center gap-2"
                 >
                   <RotateCcw className="w-4 h-4" />
-                  Try to Beat Score
+                  Try Again
                 </button>
-                
                 <WhatsAppShare 
                   gameName="Stroop Test"
-                  result={`${score} points (Speed: ${averageTime}s)`}
+                  result={`${score}/${ROUNDS} correct`}
                   slug="stroop-test"
                   className="w-full"
                 />
-
-                <div className="text-[10px] text-black/40 font-bold uppercase tracking-widest pt-2">
-                  Tip: Use your peripheral vision for faster response
-                </div>
               </div>
             </div>
           </motion.div>

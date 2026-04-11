@@ -2,28 +2,27 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Zap, AlertCircle, Timer, Activity, Share2 } from "lucide-react";
+import { Play, RotateCcw, Trophy, Activity, Zap, MousePointer2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WhatsAppShare } from "../whatsapp-share";
+import { useMindGym } from "../mind-gym-context";
 
-const TOTAL_TRIALS = 5;
+const ROUNDS = 5;
 
 export function ReactionTrainer() {
-  const [gameState, setGameState] = useState<"START" | "WAITING" | "ACTION" | "RESULT" | "TOO_EARLY">("START");
-  const [trials, setTrials] = useState<number[]>([]);
-  const [startTime, setStartTime] = useState(0);
-  const [currentReaction, setCurrentReaction] = useState(0);
+  const [gameState, setGameState] = useState<"START" | "WAITING" | "READY" | "CLICKED" | "FINISHED" | "TOO_SOON">("START");
+  const [results, setResults] = useState<number[]>([]);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const { addProgress } = useMindGym();
   
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const startTrial = useCallback(() => {
+  const startRound = useCallback(() => {
     setGameState("WAITING");
-    
-    // Random delay between 2 and 5 seconds
-    const delay = Math.random() * 3000 + 2000;
+    const delay = 1000 + Math.random() * 4000;
     
     timerRef.current = setTimeout(() => {
-      setGameState("ACTION");
+      setGameState("READY");
       setStartTime(Date.now());
     }, delay);
   }, []);
@@ -31,187 +30,192 @@ export function ReactionTrainer() {
   const handleClick = () => {
     if (gameState === "WAITING") {
       if (timerRef.current) clearTimeout(timerRef.current);
-      setGameState("TOO_EARLY");
-    } else if (gameState === "ACTION") {
+      setGameState("TOO_SOON");
+    } else if (gameState === "READY" && startTime) {
       const reactionTime = Date.now() - startTime;
-      setCurrentReaction(reactionTime);
-      setTrials(prev => [...prev, reactionTime]);
-      setGameState("RESULT");
+      const newResults = [...results, reactionTime];
+      setResults(newResults);
+      setGameState("CLICKED");
+      addProgress(10);
+
+      if (newResults.length >= ROUNDS) {
+        setTimeout(() => {
+          setGameState("FINISHED");
+          addProgress(20);
+        }, 1000);
+      }
     }
   };
 
-  const nextStep = () => {
-    if (trials.length < TOTAL_TRIALS) {
-      startTrial();
-    } else {
-      setGameState("FINISHED" as any);
-    }
+  const startGame = () => {
+    setResults([]);
+    startRound();
   };
 
-  const resetGame = () => {
-    setTrials([]);
-    setCurrentReaction(0);
-    setGameState("START");
+  const getAverage = () => {
+    if (results.length === 0) return 0;
+    return Math.round(results.reduce((a, b) => a + b, 0) / results.length);
   };
 
-  const averageTime = trials.length > 0 
-    ? Math.round(trials.reduce((a, b) => a + b, 0) / trials.length)
-    : 0;
-
-  const getInsight = (ms: number) => {
-    if (ms < 200) return { label: "Elite", desc: "Your processing speed is in the top 1% of the population." };
-    if (ms < 250) return { label: "Sharp", desc: "Excellent focus and neural efficiency." };
-    if (ms < 300) return { label: "Steady", desc: "Solid reaction time, typical for healthy focused adults." };
-    return { label: "Mindful", desc: "A great baseline. Practice can help sharpen your quick-response focus." };
-  };
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   return (
-    <div className="w-full max-w-xl mx-auto h-[400px] flex flex-col items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-center">
       <AnimatePresence mode="wait">
         {gameState === "START" && (
           <motion.div
             key="start"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="text-center space-y-6 w-full"
+            className="text-center space-y-8"
           >
-            <div className="p-8 bg-purple/5 rounded-[2rem] border border-purple/10">
-              <Activity className="w-12 h-12 text-purple mx-auto mb-4" />
-              <h3 className="text-xl font-serif text-green mb-4 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+            <div className="p-10 bg-purple/5 rounded-[3rem] border border-purple/10 max-w-sm">
+              <div className="w-16 h-16 bg-purple/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                <Activity className="w-8 h-8 text-purple" />
+              </div>
+              <h3 className="text-2xl font-serif text-green mb-4 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
                 Pulse Check
               </h3>
-              <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed max-w-xs mx-auto">
-                Test your raw processing speed. Click the screen as soon as it turns <strong>Sage Green</strong>.
+              <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
+                Click as fast as you can when the screen turns green.
               </p>
               <button
-                onClick={startTrial}
-                className="dm-pill-button dm-pill-button-primary inline-flex items-center gap-2"
+                onClick={startGame}
+                className="dm-pill-button dm-pill-button-primary w-full inline-flex items-center justify-center gap-2 py-4"
               >
                 <Play className="w-4 h-4" />
-                Begin Test
+                Start Test
               </button>
             </div>
           </motion.div>
         )}
 
-        {(gameState === "WAITING" || gameState === "ACTION" || gameState === "TOO_EARLY") && (
+        {(gameState === "WAITING" || gameState === "READY" || gameState === "CLICKED" || gameState === "TOO_SOON") && (
           <motion.div
-            key="game-area"
+            key="active"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className={cn(
-              "w-full h-full rounded-[2rem] flex flex-col items-center justify-center cursor-pointer transition-colors duration-300 relative overflow-hidden border-4 border-white shadow-2xl",
-              gameState === "WAITING" ? "bg-[#FAF7F2]" : 
-              gameState === "ACTION" ? "bg-[#7A9A7D]" : "bg-red-50"
-            )}
-            onClick={handleClick}
+            className="w-full h-full flex flex-col items-center justify-center space-y-8"
           >
-            {gameState === "WAITING" && (
-              <div className="text-center">
-                <motion.div 
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="w-20 h-20 bg-purple/5 rounded-full flex items-center justify-center mx-auto mb-4"
-                >
-                  <div className="w-12 h-12 bg-purple/10 rounded-full" />
-                </motion.div>
-                <p className="text-green/40 font-bold uppercase tracking-[0.3em] text-xs">Wait for green...</p>
+            <div className="flex justify-between items-center w-full max-w-sm px-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-black/30">
+                Attempt {results.length + (gameState === "CLICKED" ? 0 : 1)} / {ROUNDS}
               </div>
-            )}
-
-            {gameState === "ACTION" && (
-              <>
-                <motion.div 
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 4, opacity: 0.3 }}
-                  className="absolute inset-0 bg-white rounded-full pointer-events-none"
-                />
-                <div className="text-center relative z-10">
-                  <p className="text-white font-black text-4xl uppercase tracking-widest animate-pulse">CLICK NOW!</p>
-                </div>
-              </>
-            )}
-
-            {gameState === "TOO_EARLY" && (
-              <div className="text-center">
-                <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                <p className="text-red-500 font-bold uppercase tracking-widest text-lg mb-4">Too Early!</p>
-                <button
-                  onClick={(e) => { e.stopPropagation(); startTrial(); }}
-                  className="dm-pill-button-secondary text-xs"
-                >
-                  Try Again
-                </button>
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-green">
+                Avg: {getAverage()}ms
               </div>
-            )}
+            </div>
 
-            <div className="absolute top-6 right-8 text-[10px] font-bold uppercase tracking-widest text-black/20">
-              Trial {trials.length + 1} / {TOTAL_TRIALS}
+            <button
+              onClick={handleClick}
+              className={cn(
+                "w-full max-w-[400px] aspect-square rounded-[3rem] shadow-2xl transition-all duration-150 flex flex-col items-center justify-center gap-4 border-4 border-white",
+                gameState === "WAITING" && "bg-purple text-white/40",
+                gameState === "READY" && "bg-green text-white scale-105 shadow-green/20",
+                gameState === "CLICKED" && "bg-white text-green",
+                gameState === "TOO_SOON" && "bg-red-500 text-white"
+              )}
+            >
+              <AnimatePresence mode="wait">
+                {gameState === "WAITING" && (
+                  <motion.div 
+                    key="waiting"
+                    initial={{ opacity: 0 }} 
+                    animate={{ opacity: 1 }} 
+                    exit={{ opacity: 0 }}
+                    className="flex flex-col items-center gap-4"
+                  >
+                    <div className="w-12 h-12 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+                    <span className="font-black text-[10px] uppercase tracking-[0.4em]">Wait for Green</span>
+                  </motion.div>
+                )}
+                {gameState === "READY" && (
+                  <motion.div 
+                    key="ready"
+                    initial={{ scale: 0.8, opacity: 0 }} 
+                    animate={{ scale: 1, opacity: 1 }} 
+                    className="flex flex-col items-center gap-4"
+                  >
+                    <Zap className="w-16 h-16 fill-white" />
+                    <span className="font-black text-2xl uppercase tracking-[0.4em]">CLICK!</span>
+                  </motion.div>
+                )}
+                {gameState === "CLICKED" && (
+                  <motion.div 
+                    key="clicked"
+                    initial={{ y: 20, opacity: 0 }} 
+                    animate={{ y: 0, opacity: 1 }}
+                    className="flex flex-col items-center gap-4"
+                  >
+                    <span className="text-6xl font-black tabular-nums">{results[results.length - 1]}ms</span>
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); startRound(); }}
+                      className="dm-pill-button dm-pill-button-secondary py-3 px-8 text-[10px]"
+                    >
+                      Next Attempt
+                    </button>
+                  </motion.div>
+                )}
+                {gameState === "TOO_SOON" && (
+                  <motion.div 
+                    key="soon"
+                    initial={{ x: -20, opacity: 0 }} 
+                    animate={{ x: 0, opacity: 1 }}
+                    className="flex flex-col items-center gap-4"
+                  >
+                    <span className="font-black text-xl uppercase tracking-[0.2em]">Too Soon!</span>
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); startRound(); }}
+                      className="bg-white/20 hover:bg-white/30 text-white font-black text-[10px] uppercase tracking-widest py-3 px-8 rounded-full transition-all"
+                    >
+                      Try Again
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
+
+            <div className="h-8 flex items-center justify-center text-purple/20 font-black text-[10px] uppercase tracking-[0.3em]">
+              Test your processing speed
             </div>
           </motion.div>
         )}
 
-        {gameState === "RESULT" && (
-          <motion.div
-            key="result"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center"
-          >
-            <div className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2">Reaction Time</div>
-            <div className="text-7xl font-black text-green mb-8 tabular-nums">{currentReaction}<span className="text-xl ml-1">ms</span></div>
-            <button
-              onClick={nextStep}
-              className="dm-pill-button dm-pill-button-primary"
-            >
-              {trials.length < TOTAL_TRIALS ? "Next Trial" : "View Final Report"}
-            </button>
-          </motion.div>
-        )}
-
-        {(gameState as any) === "FINISHED" && (
+        {gameState === "FINISHED" && (
           <motion.div
             key="finished"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center space-y-6 w-full"
+            className="text-center space-y-8"
           >
-            <div className="p-8 bg-green/5 rounded-[2rem] border border-green/10">
-              <Trophy className="w-12 h-12 text-yellow-600 mx-auto mb-4" />
+            <div className="p-10 bg-green/5 rounded-[3rem] border border-green/10 max-w-sm">
+              <Trophy className="w-16 h-16 text-yellow-600 mx-auto mb-6" />
               <h3 className="text-2xl font-serif text-green mb-2" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-                Final Pulse Result
+                Pulse Confirmed
               </h3>
-              
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-black/5 my-6">
-                <div className="text-[10px] font-bold text-black/40 uppercase mb-1">Average Speed</div>
-                <div className="text-4xl font-black text-green">{averageTime}ms</div>
+              <p className="text-black/60 text-sm mb-4 font-medium">
+                Average Reaction Time
+              </p>
+              <div className="text-4xl font-black text-green mb-10 tabular-nums">
+                {getAverage()}ms
               </div>
-
-              <div className="text-left bg-purple/5 p-6 rounded-2xl border border-purple/10 mb-8">
-                <div className="flex items-center gap-2 mb-2">
-                  <Zap className="w-4 h-4 text-purple" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-purple">
-                    Insight: {getInsight(averageTime).label}
-                  </span>
-                </div>
-                <p className="text-sm text-black/70 font-medium leading-relaxed">
-                  {getInsight(averageTime).desc}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <button
-                  onClick={resetGame}
-                  className="dm-pill-button dm-pill-button-primary inline-flex items-center justify-center gap-2"
+                  onClick={startGame}
+                  className="dm-pill-button dm-pill-button-primary w-full py-4 flex items-center justify-center gap-2"
                 >
                   <RotateCcw className="w-4 h-4" />
-                  Restart Test
+                  Reset Pulse
                 </button>
                 <WhatsAppShare 
                   gameName="Pulse Check"
-                  result={`${averageTime}ms (Insight: ${getInsight(averageTime).label})`}
+                  result={`${getAverage()}ms average`}
                   slug="pulse-check"
+                  className="w-full"
                 />
               </div>
             </div>
