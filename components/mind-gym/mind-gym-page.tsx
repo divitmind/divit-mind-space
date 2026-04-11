@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Brain, Sparkles, Target, Zap, Share2 } from "lucide-react";
+import { Brain, Sparkles, Target, Zap, Share2, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { MindGymItem } from "@/sanity/types";
+import { cn } from "@/lib/utils";
 
 interface MindGymPageProps {
   initialGames: MindGymItem[];

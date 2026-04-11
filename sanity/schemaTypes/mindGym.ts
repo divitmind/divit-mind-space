@@ -61,6 +61,13 @@ export const mindGymType = defineType({
       description: "Educational content explaining how this game helps the brain",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "quickTips",
+      title: "Quick Tips",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "Bulleted tips for the game sidebar",
+    }),
   ],
   preview: {
     select: {

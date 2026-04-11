@@ -381,6 +381,7 @@ export interface MindGymItem {
     alt?: string;
   };
   scienceBehindIt?: PortableTextBlock[];
+  quickTips?: string[];
 }
 
 export type MindGymQueryResult = MindGymItem[];

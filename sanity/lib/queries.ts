@@ -541,6 +541,7 @@ export const SINGLE_MIND_GYM_QUERY = `*[_type == "mindGym" && slug.current == $s
   focusArea,
   shortDescription,
   scienceBehindIt,
+  quickTips,
   "coverImage": coverImage {
     asset->{url},
     alt,
