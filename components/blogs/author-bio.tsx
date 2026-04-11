@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { PortableText } from "next-sanity";
+import { PortableText, PortableTextBlock } from "next-sanity";
 import { Plus, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -10,7 +10,7 @@ interface AuthorBioProps {
   author: {
     name: string;
     title?: string;
-    bio?: any;
+    bio?: PortableTextBlock[];
     image?: string;
     social?: {
       twitter?: string;
@@ -78,7 +78,7 @@ export function AuthorBio({ author }: AuthorBioProps) {
             <div className="min-h-0">
               <div className="pt-4 border-t border-gray-50">
                 <div className="text-sm text-green/80 leading-relaxed prose prose-sm prose-green max-w-none">
-                  <PortableText value={author.bio} />
+                  {author.bio && <PortableText value={author.bio} />}
                 </div>
 
                 {author.social && (
