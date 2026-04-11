@@ -101,8 +101,8 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-green leading-[1.1] mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               Mind Gym
             </h1>
-            <p className="text-base md:text-lg text-black/40 max-w-xl mx-auto font-medium leading-relaxed italic">
-              Cultivate clarity, strengthen focus, and nurture resilience through scientifically-inspired cognitive rituals.
+            <p className="text-base md:text-lg text-black/40 max-w-2xl mx-auto font-medium leading-relaxed italic">
+              Browse our full library of brain training games by skill, including attention, working memory, reaction time, visual tracking, and ADHD-friendly practice.
             </p>
           </motion.div>
         </div>
