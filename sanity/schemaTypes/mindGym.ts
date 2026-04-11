@@ -23,6 +23,21 @@ export const mindGymType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "category",
+      title: "Category",
+      type: "string",
+      description: "e.g., 'focus', 'memory', 'spatial', 'flexibility'",
+      options: {
+        list: [
+          { title: "Focus & Attention", value: "focus" },
+          { title: "Working Memory", value: "memory" },
+          { title: "Spatial Logic", value: "spatial" },
+          { title: "Cognitive Flexibility", value: "flexibility" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "coverImage",
       title: "Cover Image",
       type: "image",
@@ -52,6 +67,13 @@ export const mindGymType = defineType({
       rows: 3,
       description: "Brief summary shown on the landing page cards",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "benefit",
+      title: "Specific Benefit",
+      type: "text",
+      rows: 2,
+      description: "A one-sentence scientific benefit for the landing card",
     }),
     defineField({
       name: "scienceBehindIt",
