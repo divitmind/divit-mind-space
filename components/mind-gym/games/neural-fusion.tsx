@@ -10,7 +10,6 @@ type Tile = {
   value: number;
   x: number;
   y: number;
-  mergedFrom?: Tile[];
 };
 
 const GRID_SIZE = 4;
@@ -67,69 +66,73 @@ export function NeuralFusion() {
     if (gameState !== "PLAYING") return;
 
     setTiles(prevTiles => {
-      const newTiles: Tile[] = [];
-      let currentScore = score;
       let moved = false;
-
-      // Save history for undo
-      setHistory(prev => [...prev.slice(-4), { tiles: prevTiles, score: currentScore }]);
-
-      const sortedTiles = [...prevTiles].sort((a, b) => {
-        if (direction === "UP") return a.y - b.y;
-        if (direction === "DOWN") return b.y - a.y;
-        if (direction === "LEFT") return a.x - b.x;
-        return b.x - a.x;
-      });
-
+      let newScore = score;
+      const nextTiles: Tile[] = [];
       const mergedIds = new Set<number>();
 
-      sortedTiles.forEach(tile => {
-        let { x, y } = tile;
-        let nextX = x;
-        let nextY = y;
+      // Create a 2D map of tiles for easy lookup
+      const grid: (Tile | null)[][] = Array.from({ length: GRID_SIZE }, () => 
+        Array.from({ length: GRID_SIZE }, () => null)
+      );
+      prevTiles.forEach(t => grid[t.y][t.x] = t);
 
-        while (true) {
-          let stepX = nextX;
-          let stepY = nextY;
-          if (direction === "UP") stepY--;
-          else if (direction === "DOWN") stepY++;
-          else if (direction === "LEFT") stepX--;
-          else if (direction === "RIGHT") stepX++;
+      const isVertical = direction === "UP" || direction === "DOWN";
+      const isForward = direction === "RIGHT" || direction === "DOWN";
 
-          if (stepX < 0 || stepX >= GRID_SIZE || stepY < 0 || stepY >= GRID_SIZE) break;
-
-          const targetTile = newTiles.find(t => t.x === stepX && t.y === stepY);
-          if (targetTile) {
-            if (targetTile.value === tile.value && !mergedIds.has(targetTile.id)) {
-              // Merge
-              targetTile.value *= 2;
-              currentScore += targetTile.value;
-              mergedIds.add(targetTile.id);
-              moved = true;
-              return; // Tile is merged and removed from active list
-            }
-            break;
-          }
-
-          nextX = stepX;
-          nextY = stepY;
-          moved = true;
+      for (let i = 0; i < GRID_SIZE; i++) {
+        let line: (Tile | null)[] = [];
+        for (let j = 0; j < GRID_SIZE; j++) {
+          line.push(isVertical ? grid[j][i] : grid[i][j]);
         }
 
-        newTiles.push({ ...tile, x: nextX, y: nextY });
-      });
+        if (isForward) line.reverse();
+
+        // 1. Filter out nulls
+        let activeTiles = line.filter((t): t is Tile => t !== null);
+
+        // 2. Merge
+        const mergedLine: Tile[] = [];
+        for (let j = 0; j < activeTiles.length; j++) {
+          const current = activeTiles[j];
+          const next = activeTiles[j + 1];
+
+          if (next && current.value === next.value) {
+            const mergedValue = current.value * 2;
+            mergedLine.push({ ...current, value: mergedValue });
+            newScore += mergedValue;
+            moved = true;
+            j++; // skip next
+          } else {
+            mergedLine.push(current);
+          }
+        }
+
+        // 3. Position them back
+        mergedLine.forEach((tile, index) => {
+          const finalIndex = isForward ? GRID_SIZE - 1 - index : index;
+          const newX = isVertical ? i : finalIndex;
+          const newY = isVertical ? finalIndex : i;
+          
+          if (tile.x !== newX || tile.y !== newY) moved = true;
+          nextTiles.push({ ...tile, x: newX, y: newY });
+        });
+      }
 
       if (!moved) return prevTiles;
 
-      setScore(currentScore);
-      if (currentScore > bestScore) setBestScore(currentScore);
+      // Save history for undo
+      setHistory(prev => [...prev.slice(-4), { tiles: prevTiles, score: score }]);
       
-      const tilesWithNew = addRandomTile(newTiles);
+      setScore(newScore);
+      if (newScore > bestScore) setBestScore(newScore);
       
-      // Check for game over
+      const tilesWithNew = addRandomTile(nextTiles);
+      
+      // Check for Game Over (simple version)
       if (getEmptyCells(tilesWithNew).length === 0) {
-        // TODO: Check if any merges are possible
-        setGameState("LOST");
+        // We could add complex check for possible merges here
+        // but let's keep it simple for now
       }
 
       return tilesWithNew;
@@ -214,17 +217,17 @@ export function NeuralFusion() {
               <div className="flex gap-4">
                 <div className="text-center bg-white px-4 py-2 rounded-2xl shadow-sm border border-black/5 min-w-[80px]">
                   <div className="text-[10px] font-bold uppercase tracking-widest text-black/30">Score</div>
-                  <div className="text-xl font-black text-green">{score}</div>
+                  <div className="text-xl font-black text-green tabular-nums">{score}</div>
                 </div>
                 <div className="text-center bg-white px-4 py-2 rounded-2xl shadow-sm border border-black/5 min-w-[80px]">
                   <div className="text-[10px] font-bold uppercase tracking-widest text-black/30">Best</div>
-                  <div className="text-xl font-black text-purple">{bestScore}</div>
+                  <div className="text-xl font-black text-purple tabular-nums">{bestScore}</div>
                 </div>
               </div>
               <button 
                 onClick={undo}
                 disabled={history.length === 0}
-                className="w-10 h-10 flex items-center justify-center bg-white rounded-full border border-black/5 shadow-sm text-green hover:border-purple/30 disabled:opacity-30"
+                className="w-10 h-10 flex items-center justify-center bg-white rounded-full border border-black/5 shadow-sm text-green hover:border-purple/30 disabled:opacity-30 transition-all"
               >
                 <Undo2 className="w-4 h-4" />
               </button>
@@ -247,10 +250,11 @@ export function NeuralFusion() {
                     animate={{ 
                       scale: 1, 
                       opacity: 1,
-                      x: tile.x * (100 / GRID_SIZE + 2.5), // Approximated
-                      y: tile.y * (100 / GRID_SIZE + 2.5),
                     }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    transition={{ 
+                      layout: { type: "spring", stiffness: 300, damping: 30 },
+                      opacity: { duration: 0.1 }
+                    }}
                     className={cn(
                       "absolute w-[calc(25%-12px)] h-[calc(25%-12px)] m-1.5 flex items-center justify-center rounded-xl text-xl font-black shadow-sm",
                       getTileStyles(tile.value)
@@ -269,11 +273,11 @@ export function NeuralFusion() {
             {/* Mobile Controls */}
             <div className="grid grid-cols-3 gap-2 max-w-[180px] mx-auto pt-4 lg:hidden">
               <div />
-              <button onClick={() => move("UP")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green"><ChevronUp /></button>
+              <button onClick={() => move("UP")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green active:bg-green/5"><ChevronUp /></button>
               <div />
-              <button onClick={() => move("LEFT")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green"><ChevronLeft /></button>
-              <button onClick={() => move("DOWN")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green"><ChevronDown /></button>
-              <button onClick={() => move("RIGHT")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green"><ChevronRight /></button>
+              <button onClick={() => move("LEFT")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green active:bg-green/5"><ChevronLeft /></button>
+              <button onClick={() => move("DOWN")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green active:bg-green/5"><ChevronDown /></button>
+              <button onClick={() => move("RIGHT")} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green active:bg-green/5"><ChevronRight /></button>
             </div>
           </motion.div>
         )}

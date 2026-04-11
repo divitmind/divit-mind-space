@@ -38,6 +38,13 @@ const defaultGames: Partial<MindGymItem>[] = [
     focusArea: "Strategic Planning",
     ageGroup: "Teens & Adults",
     shortDescription: "A logic-based numbers game that builds pattern recognition and long-term strategic thinking.",
+  },
+  {
+    title: "Mindful Paths",
+    slug: "mindful-paths",
+    focusArea: "Spatial Reasoning",
+    ageGroup: "All Ages",
+    shortDescription: "A meditative spatial puzzle. Rotate the tiles to align the flow and connect patterns.",
   }
 ];
 
