@@ -2,6 +2,7 @@ import { type SchemaTypeDefinition } from 'sanity'
 import { authorType } from './author'
 import { specialistType } from './specialist'
 import { aboutUsType } from './about-us'
+import { awarenessType } from './awareness'
 import { postType } from './post'
 import { newsType } from './news'
 import { servicesType } from './services'
@@ -16,6 +17,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     authorType,
     specialistType,
     aboutUsType,
+    awarenessType,
     postType,
     newsType,
     servicesType,
