@@ -1,16 +1,16 @@
 import { defineField, defineType } from "sanity";
 import { ImageWithPreview } from "../components/ImageWithPreview";
-import { Brain, Layout, GraduationCap, Settings } from "lucide-react";
+import { Brain, Layout, GraduationCap, Sparkles, Microscope, Settings2 } from "lucide-react";
 
 export const mindGymType = defineType({
   name: "mindGym",
   title: "Mind Gym Games",
   type: "document",
+  icon: Brain,
   groups: [
-    { name: "basic", title: "Basic Info" },
-    { name: "display", title: "Landing Page" },
-    { name: "content", title: "Educational Content" },
-    { name: "settings", title: "System Settings" },
+    { name: "basic", title: "1. Basic Info", icon: Settings2 },
+    { name: "display", title: "2. Landing Card", icon: Layout },
+    { name: "content", title: "3. Science & Tips", icon: Microscope },
   ],
   fields: [
     // --- BASIC INFO GROUP ---
@@ -18,7 +18,7 @@ export const mindGymType = defineType({
       name: "title",
       title: "Game Title",
       type: "string",
-      description: "The name of the exercise (e.g., 'Neural Fusion').",
+      description: "Enter the full name of the exercise (e.g., 'Neural Fusion').",
       group: "basic",
       validation: (Rule) => Rule.required(),
     }),
@@ -26,7 +26,7 @@ export const mindGymType = defineType({
       name: "slug",
       title: "URL Slug",
       type: "slug",
-      description: "Unique identifier for the URL. Click 'Generate' based on the title.",
+      description: "Click 'Generate' to create the URL path based on the title.",
       options: {
         source: "title",
         maxLength: 96,
@@ -38,7 +38,7 @@ export const mindGymType = defineType({
       name: "category",
       title: "Game Category",
       type: "string",
-      description: "Used for the 'Choose Your Focus' filter on the landing page.",
+      description: "Controls which filter this game appears under on the landing page.",
       options: {
         list: [
           { title: "Focus & Attention", value: "focus" },
@@ -54,9 +54,9 @@ export const mindGymType = defineType({
     // --- LANDING PAGE GROUP ---
     defineField({
       name: "coverImage",
-      title: "Card Image",
+      title: "Game Cover Image",
       type: "image",
-      description: "The main visual for the game card. Recommended: 16:9 aspect ratio.",
+      description: "The main visual for the landing page card. (Recommended: 16:9 Landscape)",
       options: { hotspot: true },
       components: {
         input: ImageWithPreview,
@@ -67,33 +67,33 @@ export const mindGymType = defineType({
       name: "ageGroup",
       title: "Target Age Group",
       type: "string",
-      description: "Displayed on the card (e.g., 'All Ages', 'Teens & Adults').",
+      description: "e.g., 'All Ages' or 'Teens & Adults'.",
       group: "display",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "focusArea",
-      title: "Primary Focus Area",
+      title: "Cognitive Focus Area",
       type: "string",
-      description: "The specific cognitive skill (e.g., 'Processing Speed').",
+      description: "The specific skill being trained (e.g., 'Processing Speed').",
       group: "display",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "shortDescription",
-      title: "Card Summary",
+      title: "Short Summary",
       type: "text",
       rows: 3,
-      description: "A brief, catchy summary for the landing page card.",
+      description: "A 2-line summary shown on the landing page card.",
       group: "display",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "benefit",
-      title: "One-Sentence Benefit",
+      title: "The Core Benefit",
       type: "text",
       rows: 2,
-      description: "The scientific value-add (e.g., 'Enhances neural efficiency').",
+      description: "A powerful one-sentence scientific value-add.",
       group: "display",
     }),
 
@@ -103,7 +103,7 @@ export const mindGymType = defineType({
       title: "The Science Behind It",
       type: "array",
       of: [{ type: "block" }],
-      description: "Detailed explanation shown in the game's info panel (i).",
+      description: "Detailed scientific explanation shown in the game's info modal.",
       group: "content",
       validation: (Rule) => Rule.required(),
     }),
@@ -112,15 +112,28 @@ export const mindGymType = defineType({
       title: "Quick Tips for Flow",
       type: "array",
       of: [{ type: "string" }],
-      description: "Bullet points to help the user achieve a 'flow state'.",
+      description: "Bullet points to help the user master the exercise.",
       group: "content",
     }),
   ],
   preview: {
     select: {
       title: "title",
-      subtitle: "focusArea",
+      category: "category",
       media: "coverImage",
+    },
+    prepare({ title, category, media }) {
+      const categoryMap: any = {
+        focus: "🎯 Focus",
+        memory: "🧠 Memory",
+        spatial: "🧭 Spatial",
+        flexibility: "⚡ Flexibility"
+      };
+      return {
+        title,
+        subtitle: categoryMap[category] || "Brain Exercise",
+        media,
+      };
     },
   },
 });
