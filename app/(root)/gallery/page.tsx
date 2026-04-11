@@ -68,7 +68,7 @@ export default async function GalleryRoute() {
   ]);
 
   const galleryItems = galleryItemsData.data as GalleryQueryResult;
-  const categories = categoriesData.data as any[];
+  const categories = categoriesData.data as GalleryCategoriesQueryResult;
 
   return (
     <>

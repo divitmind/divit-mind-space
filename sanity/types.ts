@@ -197,6 +197,14 @@ export interface GalleryItem {
 
 export type GalleryQueryResult = GalleryItem[];
 
+export interface GalleryCategory {
+  _id: string;
+  title: string;
+  slug: { current: string };
+}
+
+export type GalleryCategoriesQueryResult = GalleryCategory[];
+
 // Career Types
 export interface Career {
   _id: string;

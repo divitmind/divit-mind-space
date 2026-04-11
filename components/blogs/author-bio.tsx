@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { PortableText } from "next-sanity";
+import { PortableText, PortableTextBlock } from "next-sanity";
 import { Plus, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -10,7 +10,7 @@ interface AuthorBioProps {
   author: {
     name: string;
     title?: string;
-    bio?: any;
+    bio?: PortableTextBlock[];
     image?: string;
     social?: {
       twitter?: string;
