@@ -31,6 +31,13 @@ const defaultGames: Partial<MindGymItem>[] = [
     focusArea: "Cognitive Flexibility",
     ageGroup: "Teens & Adults",
     shortDescription: "Train your brain to overcome conflicting information between word meaning and color.",
+  },
+  {
+    title: "Neural Fusion",
+    slug: "neural-fusion",
+    focusArea: "Strategic Planning",
+    ageGroup: "Teens & Adults",
+    shortDescription: "A logic-based numbers game that builds pattern recognition and long-term strategic thinking.",
   }
 ];
 

@@ -7,6 +7,7 @@ import { ArrowLeft, Brain } from "lucide-react";
 import { SchulteTable } from "@/components/mind-gym/games/schulte-table";
 import { StroopTest } from "@/components/mind-gym/games/stroop-test";
 import { ReactionTrainer } from "@/components/mind-gym/games/reaction-trainer";
+import { NeuralFusion } from "@/components/mind-gym/games/neural-fusion";
 import { PortableText } from "next-sanity";
 import { portableTextComponents } from "@/components/portable-text-components";
 
@@ -27,7 +28,8 @@ export default async function GamePageRoute({ params }: GamePageProps) {
 
   if (!game) {
     // If it's one of our default slugs but not in Sanity, we still want to show it
-    if (slug !== "schulte-table" && slug !== "stroop-test") {
+    const defaultSlugs = ["schulte-table", "stroop-test", "pulse-check", "neural-fusion"];
+    if (!defaultSlugs.includes(slug)) {
       notFound();
     }
   }
@@ -40,6 +42,8 @@ export default async function GamePageRoute({ params }: GamePageProps) {
         return <StroopTest />;
       case "pulse-check":
         return <ReactionTrainer />;
+      case "neural-fusion":
+        return <NeuralFusion />;
       default:
         return (
           <div className="flex flex-col items-center justify-center py-20 text-center">
