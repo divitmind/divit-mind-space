@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Brain, Undo2, Lightbulb, MousePointer2 } from "lucide-react";
+import { Play, RotateCcw, Trophy, Brain, Undo2, Lightbulb, MousePointer2, HelpCircle, ChevronUp, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WhatsAppShare } from "../whatsapp-share";
 import { useMindGym } from "../mind-gym-context";
@@ -22,12 +22,12 @@ export function NeuralFusion() {
   const [bestScore, setBestScore] = useState(0);
   const [gameState, setGameState] = useState<"START" | "PLAYING" | "WON" | "LOST">("START");
   const [history, setHistory] = useState<{ tiles: Tile[]; score: number }[]>([]);
+  const [showTutorial, setShowTutorial] = useState(false);
   const [suggestedMove, setSuggestedMove] = useState<"UP" | "DOWN" | "LEFT" | "RIGHT" | null>(null);
   const { addProgress } = useMindGym();
   
   const tileIdCounter = useRef(0);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
-  const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const createTile = (value: number, x: number, y: number): Tile => ({
     id: tileIdCounter.current++,
@@ -67,7 +67,6 @@ export function NeuralFusion() {
     setHistory([]);
     setSuggestedMove(null);
     setGameState("PLAYING");
-    startIdleTimer();
   };
 
   const getMoveResult = (currentTiles: Tile[], direction: string) => {
@@ -113,7 +112,7 @@ export function NeuralFusion() {
     return { moved, mergeScore };
   };
 
-  const findBestMove = useCallback(() => {
+  const findBestMove = () => {
     const directions = ["UP", "DOWN", "LEFT", "RIGHT"] as const;
     let bestDir: "UP" | "DOWN" | "LEFT" | "RIGHT" | null = null;
     let maxMerge = -1;
@@ -131,14 +130,8 @@ export function NeuralFusion() {
     }
 
     setSuggestedMove(bestDir);
-  }, [tiles]);
-
-  const startIdleTimer = useCallback(() => {
-    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-    idleTimerRef.current = setTimeout(() => {
-      if (gameState === "PLAYING") findBestMove();
-    }, 5000); // Suggest move after 5s of inactivity
-  }, [gameState, findBestMove]);
+    setTimeout(() => setSuggestedMove(null), 3000);
+  };
 
   const undo = () => {
     if (history.length === 0) return;
@@ -151,7 +144,6 @@ export function NeuralFusion() {
   const move = useCallback((direction: "UP" | "DOWN" | "LEFT" | "RIGHT") => {
     if (gameState !== "PLAYING") return;
     setSuggestedMove(null);
-    startIdleTimer();
 
     setTiles(prevTiles => {
       let moved = false;
@@ -202,14 +194,14 @@ export function NeuralFusion() {
 
       if (!moved) return prevTiles;
 
-      if (mergedThisTurn) addProgress(5); // Gamification: Progress on merge
+      if (mergedThisTurn) addProgress(5);
 
       setHistory(prev => [...prev.slice(-4), { tiles: prevTiles, score: score }]);
       setScore(newScore);
       if (newScore > bestScore) setBestScore(newScore);
       return addRandomTile(nextTiles);
     });
-  }, [gameState, score, bestScore, addProgress, startIdleTimer]);
+  }, [gameState, score, bestScore, addProgress]);
 
   // Touch Handlers
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -222,7 +214,7 @@ export function NeuralFusion() {
     const deltaY = e.changedTouches[0].clientY - touchStartRef.current.y;
     touchStartRef.current = null;
 
-    if (Math.abs(deltaX) < 30 && Math.abs(deltaY) < 30) return; // Ignore small movements
+    if (Math.abs(deltaX) < 30 && Math.abs(deltaY) < 30) return;
 
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
       move(deltaX > 0 ? "RIGHT" : "LEFT");
@@ -239,10 +231,7 @@ export function NeuralFusion() {
       else if (e.key === "ArrowRight") move("RIGHT");
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-    };
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [move]);
 
   const getTileStyles = (value: number) => {
@@ -280,16 +269,47 @@ export function NeuralFusion() {
               <h3 className="text-2xl font-serif text-green mb-4 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
                 Neural Fusion
               </h3>
-              <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
-                Strategic planning through numeric synthesis. Swipe to merge matching tiles.
-              </p>
-              <button
-                onClick={startGame}
-                className="dm-pill-button dm-pill-button-primary w-full inline-flex items-center justify-center gap-2 py-4"
-              >
-                <Play className="w-4 h-4" />
-                Initialize Flow
-              </button>
+
+              {!showTutorial ? (
+                <>
+                  <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
+                    Strategic planning through numeric synthesis. Merge tiles to reach higher capacities.
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <button
+                      onClick={startGame}
+                      className="dm-pill-button dm-pill-button-primary w-full inline-flex items-center justify-center gap-2 py-4"
+                    >
+                      <Play className="w-4 h-4" />
+                      Initialize Flow
+                    </button>
+                    <button
+                      onClick={() => setShowTutorial(true)}
+                      className="text-xs font-bold uppercase tracking-[0.2em] text-purple hover:text-green transition-colors flex items-center justify-center gap-2"
+                    >
+                      <HelpCircle className="w-4 h-4" />
+                      Assisted Mode: How to Play?
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="text-left space-y-6 mb-8">
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-black uppercase text-green tracking-widest">The Goal</p>
+                    <p className="text-sm text-black/60 font-medium">Merge tiles with the same number to double their value. Reach 2048 to master the session.</p>  
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-black uppercase text-green tracking-widest">Controls</p>
+                    <p className="text-sm text-black/60 font-medium">Use **Arrow Keys**, **Swipe**, or **Buttons** to slide tiles. Matching tiles fuse when they collide.</p>
+                  </div>
+                  <button
+                    onClick={() => setShowTutorial(false)}
+                    className="dm-pill-button dm-pill-button-secondary w-full py-3 text-[10px]"
+                  >
+                    Return to Start
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
@@ -303,28 +323,38 @@ export function NeuralFusion() {
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
-            {/* Minimal Stats */}
-            <div className="flex gap-4 w-full max-w-md justify-center">
-              <div className="bg-white/50 backdrop-blur-sm px-6 py-2 rounded-2xl border border-black/5 shadow-sm">
-                <div className="text-[10px] font-black uppercase tracking-widest text-black/20">Score</div>
-                <div className="text-xl font-black text-green tabular-nums">{score}</div>
+            {/* Immersive Header Stats */}
+            <div className="flex justify-between items-center w-full max-w-sm px-4">
+              <div className="flex gap-3">
+                <div className="bg-white/50 backdrop-blur-sm px-4 py-1.5 rounded-2xl border border-black/5 shadow-sm">
+                  <div className="text-[8px] font-black uppercase tracking-widest text-black/20">Score</div>
+                  <div className="text-lg font-black text-green tabular-nums">{score}</div>
+                </div>
+                <div className="bg-white/50 backdrop-blur-sm px-4 py-1.5 rounded-2xl border border-black/5 shadow-sm">
+                  <div className="text-[8px] font-black uppercase tracking-widest text-black/20">Best</div>
+                  <div className="text-lg font-black text-purple tabular-nums">{bestScore}</div>
+                </div>
               </div>
-              <div className="bg-white/50 backdrop-blur-sm px-6 py-2 rounded-2xl border border-black/5 shadow-sm">
-                <div className="text-[10px] font-black uppercase tracking-widest text-black/20">Best</div>
-                <div className="text-xl font-black text-purple tabular-nums">{bestScore}</div>
+              <div className="flex gap-2">
+                <button
+                  onClick={findBestMove}
+                  className="w-10 h-10 flex items-center justify-center bg-purple/10 rounded-full border border-purple/20 text-purple hover:bg-purple hover:text-white transition-all shadow-sm"
+                  title="Show Hint"
+                >
+                  <Lightbulb className="w-4 h-4" />
+                </button>
+                <button 
+                  onClick={undo}
+                  disabled={history.length === 0}
+                  className="w-10 h-10 flex items-center justify-center bg-white/50 backdrop-blur-sm rounded-full border border-black/5 text-green disabled:opacity-20 transition-all active:scale-95"
+                >
+                  <Undo2 className="w-4 h-4" />
+                </button>
               </div>
-              <button 
-                onClick={undo}
-                disabled={history.length === 0}
-                className="w-12 h-12 flex items-center justify-center bg-white/50 backdrop-blur-sm rounded-2xl border border-black/5 text-green disabled:opacity-20 transition-all active:scale-95"
-              >
-                <Undo2 className="w-5 h-5" />
-              </button>
             </div>
 
             {/* Immersive Game Grid */}
             <div className="relative bg-black/5 p-3 rounded-[2.5rem] aspect-square w-full max-w-[400px] border-4 border-white shadow-2xl overflow-hidden group">
-              {/* Grid Background */}
               <div className="absolute inset-0 grid grid-cols-4 grid-rows-4 gap-3 p-3">
                 {Array.from({ length: 16 }).map((_, i) => (
                   <div key={i} className="bg-white/40 rounded-2xl" />
@@ -349,7 +379,6 @@ export function NeuralFusion() {
                 )}
               </AnimatePresence>
 
-              {/* Tiles */}
               <div className="relative z-10 w-full h-full">
                 <AnimatePresence>
                   {tiles.map((tile) => (
@@ -378,8 +407,33 @@ export function NeuralFusion() {
               </div>
             </div>
 
-            {/* Subtle Guide Hint */}
-            <div className="h-8 flex items-center justify-center">
+            {/* Assisted Controls (On-Screen Arrows) */}
+            <div className="grid grid-cols-3 gap-2 w-full max-w-[180px]">
+              <div />
+              <button
+                onClick={() => move("UP")}
+                className={cn("p-4 bg-white/50 backdrop-blur-sm rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green transition-all active:scale-95", suggestedMove === "UP" && "bg-purple text-white scale-110 shadow-lg shadow-purple/20")}>
+                <ChevronUp className="w-5 h-5" />
+              </button>
+              <div />
+              <button
+                onClick={() => move("LEFT")}
+                className={cn("p-4 bg-white/50 backdrop-blur-sm rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green transition-all active:scale-95", suggestedMove === "LEFT" && "bg-purple text-white scale-110 shadow-lg shadow-purple/20")}>
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => move("DOWN")}
+                className={cn("p-4 bg-white/50 backdrop-blur-sm rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green transition-all active:scale-95", suggestedMove === "DOWN" && "bg-purple text-white scale-110 shadow-lg shadow-purple/20")}>
+                <ChevronDown className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => move("RIGHT")}
+                className={cn("p-4 bg-white/50 backdrop-blur-sm rounded-2xl border border-black/5 shadow-sm flex items-center justify-center text-green transition-all active:scale-95", suggestedMove === "RIGHT" && "bg-purple text-white scale-110 shadow-lg shadow-purple/20")}>
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="h-4">
               <AnimatePresence>
                 {suggestedMove && (
                   <motion.div 
@@ -389,7 +443,7 @@ export function NeuralFusion() {
                     className="flex items-center gap-2 text-purple/40 font-black text-[10px] uppercase tracking-[0.3em]"
                   >
                     <MousePointer2 className="w-3 h-3 animate-bounce" />
-                    Swipe {suggestedMove} to Merge
+                    Move {suggestedMove} to Merge
                   </motion.div>
                 )}
               </AnimatePresence>

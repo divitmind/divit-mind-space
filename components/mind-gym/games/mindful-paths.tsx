@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, RotateCcw, Trophy, Compass, ArrowRight, Sparkles, Share2, MousePointer2 } from "lucide-react";
+import { Play, RotateCcw, Trophy, Compass, ArrowRight, Sparkles, Share2, MousePointer2, HelpCircle, Lightbulb } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WhatsAppShare } from "../whatsapp-share";
 import { useMindGym } from "../mind-gym-context";
@@ -38,26 +38,23 @@ export function MindfulPaths() {
   const [tiles, setTiles] = useState<Tile[]>([]);
   const [gameState, setGameState] = useState<"START" | "PLAYING" | "LEVEL_COMPLETE" | "FINISHED">("START");
   const [moves, setMoves] = useState(0);
+  const [showTutorial, setShowTutorial] = useState(false);
   const [hintTileId, setHintTileId] = useState<number | null>(null);
   const { addProgress } = useMindGym();
   
-  const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
-
   const isTileSolved = (t: Tile) => {
     if (t.type === "straight") return t.rotation % 180 === t.targetRotation % 180;
     if (t.type === "cross") return true;
     return t.rotation === t.targetRotation;
   };
 
-  const startIdleTimer = useCallback(() => {
-    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-    idleTimerRef.current = setTimeout(() => {
-      if (gameState === "PLAYING") {
-        const unsolved = tiles.find(t => !isTileSolved(t));
-        if (unsolved) setHintTileId(unsolved.id);
-      }
-    }, 4000);
-  }, [gameState, tiles]);
+  const triggerHint = () => {
+    const unsolved = tiles.find(t => !isTileSolved(t));
+    if (unsolved) {
+      setHintTileId(unsolved.id);
+      setTimeout(() => setHintTileId(null), 3000);
+    }
+  };
 
   const initLevel = useCallback((levelIdx: number) => {
     const level = LEVELS[levelIdx];
@@ -65,7 +62,6 @@ export function MindfulPaths() {
       id: t.id,
       type: t.type as any,
       targetRotation: t.target,
-      // Randomize initial rotation
       rotation: [0, 90, 180, 270].filter(r => r !== t.target)[Math.floor(Math.random() * 3)]
     }));
     
@@ -80,13 +76,11 @@ export function MindfulPaths() {
     setMoves(0);
     setHintTileId(null);
     setGameState("PLAYING");
-    startIdleTimer();
-  }, [startIdleTimer]);
+  }, []);
 
   const handleTileClick = (id: number) => {
     if (gameState !== "PLAYING") return;
     setHintTileId(null);
-    startIdleTimer();
 
     setTiles(prev => {
       const newTiles = prev.map(t => 
@@ -97,7 +91,7 @@ export function MindfulPaths() {
       const isSolved = newTiles.every(isTileSolved);
 
       if (isSolved) {
-        addProgress(20); // Level completion reward
+        addProgress(20);
         setTimeout(() => {
           if (currentLevel < LEVELS.length - 1) {
             setGameState("LEVEL_COMPLETE");
@@ -122,12 +116,6 @@ export function MindfulPaths() {
     initLevel(0);
   };
 
-  useEffect(() => {
-    return () => {
-      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-    };
-  }, []);
-
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <AnimatePresence mode="wait">
@@ -145,16 +133,47 @@ export function MindfulPaths() {
               <h3 className="text-2xl font-serif text-green mb-4 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
                 Mindful Paths
               </h3>
-              <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
-                Connect the lines to restore flow. A meditative spatial logic exercise.
-              </p>
-              <button
-                onClick={() => initLevel(0)}
-                className="dm-pill-button dm-pill-button-primary w-full inline-flex items-center justify-center gap-2 py-4"
-              >
-                <Play className="w-4 h-4" />
-                Begin Journey
-              </button>
+
+              {!showTutorial ? (
+                <>
+                  <p className="text-black/60 text-sm mb-8 font-medium leading-relaxed">
+                    Connect the lines to restore flow. A meditative spatial logic exercise.
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <button
+                      onClick={() => initLevel(0)}
+                      className="dm-pill-button dm-pill-button-primary w-full inline-flex items-center justify-center gap-2 py-4"
+                    >
+                      <Play className="w-4 h-4" />
+                      Begin Journey
+                    </button>
+                    <button
+                      onClick={() => setShowTutorial(true)}
+                      className="text-xs font-bold uppercase tracking-[0.2em] text-purple hover:text-green transition-colors flex items-center justify-center gap-2"
+                    >
+                      <HelpCircle className="w-4 h-4" />
+                      Assisted Mode: How to Play?
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="text-left space-y-6 mb-8">
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-black uppercase text-green tracking-widest">The Goal</p>
+                    <p className="text-sm text-black/60 font-medium">Rotate every tile until all green lines connect to form a continuous flow or pattern.</p>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-black uppercase text-green tracking-widest">Controls</p>
+                    <p className="text-sm text-black/60 font-medium">**Tap or Click** a tile to rotate it 90 degrees. Tiles will glow when you use a hint if they are misplaced.</p>
+                  </div>
+                  <button
+                    onClick={() => setShowTutorial(false)}
+                    className="dm-pill-button dm-pill-button-secondary w-full py-3 text-[10px]"
+                  >
+                    Return to Start
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
@@ -167,12 +186,21 @@ export function MindfulPaths() {
             className="w-full h-full flex flex-col items-center justify-center space-y-8"
           >
             <div className="flex justify-between items-center w-full max-w-sm px-4">
-              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-black/30">
-                Path {currentLevel + 1} of {LEVELS.length}
+              <div className="flex flex-col">
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-black/30">
+                  Path {currentLevel + 1} of {LEVELS.length}
+                </div>
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-green">
+                  Moves: {moves}
+                </div>
               </div>
-              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-green">
-                Moves: {moves}
-              </div>
+              <button
+                onClick={triggerHint}
+                className="w-10 h-10 flex items-center justify-center bg-purple/10 rounded-full border border-purple/20 text-purple hover:bg-purple hover:text-white transition-all shadow-sm"
+                title="Show Hint"
+              >
+                <Lightbulb className="w-4 h-4" />
+              </button>
             </div>
 
             <div className={cn(
