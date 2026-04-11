@@ -200,7 +200,7 @@ export type GalleryQueryResult = GalleryItem[];
 export interface GalleryCategory {
   _id: string;
   title: string;
-  slug: { current: string };
+  slug: string;
 }
 
 export type GalleryCategoriesQueryResult = GalleryCategory[];

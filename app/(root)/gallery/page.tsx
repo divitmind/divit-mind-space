@@ -67,7 +67,7 @@ export default async function GalleryRoute() {
     sanityFetch({ query: GALLERY_CATEGORIES_QUERY, tags: ["galleryCategory"] }),
   ]);
 
-  const galleryItems = galleryItemsData.data as GalleryQueryResult;
+  const galleryItems = galleryItemsData.data as GalleryQueryResult;      
   const categories = categoriesData.data as GalleryCategoriesQueryResult;
 
   return (
@@ -76,10 +76,11 @@ export default async function GalleryRoute() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(galleryJsonLd) }}
       />
-      <GalleryPage 
-        initialItems={galleryItems || []} 
+      <GalleryPage
+        initialItems={galleryItems || []}
         categories={categories || []}
       />
     </>
   );
 }
+

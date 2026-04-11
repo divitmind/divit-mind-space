@@ -78,7 +78,7 @@ export function AuthorBio({ author }: AuthorBioProps) {
             <div className="min-h-0">
               <div className="pt-4 border-t border-gray-50">
                 <div className="text-sm text-green/80 leading-relaxed prose prose-sm prose-green max-w-none">
-                  <PortableText value={author.bio} />
+                  {author.bio && <PortableText value={author.bio} />}
                 </div>
 
                 {author.social && (
