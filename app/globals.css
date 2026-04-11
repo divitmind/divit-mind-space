@@ -68,10 +68,16 @@
     0%, 22% { opacity: 1; transform: translateY(0); }
     25%, 100% { opacity: 0; transform: translateY(-20%); }
   }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
   --animate-marquee: marquee var(--duration, 40s) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
   --animate-rolling-text: rolling-text 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
   --animate-hero-crossfade: hero-crossfade 8s ease-in-out infinite;
+  --animate-shake: shake 0.2s ease-in-out 0s 2;
 }
 
 :root {
