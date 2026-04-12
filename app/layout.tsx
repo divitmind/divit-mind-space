@@ -125,11 +125,15 @@ const organizationJsonLd = {
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Speech & Language Therapy" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Occupational Therapy" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Pediatric Physiotherapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Adult Physiotherapy & Pain Management" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Post-Surgical Rehabilitation" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Applied Behavior Analysis (ABA)" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cognitive Behavioral Therapy (CBT)" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Play Therapy" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Early Intervention Program" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Special Education & Remedial Teaching" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "NIOS Support & Academic Guidance" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "School Readiness Program" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sensory Integration Therapy" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Teen Counseling & Mental Health" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Parent Guidance & Counseling" } },
@@ -174,18 +178,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${cormorant.variable} bg-[#FAF9F5] antialiased`}>
-        <ClarityInit />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
-        <SanityLive />
-        <Provider>{children}</Provider>
-      </body>
-    </html>
-  );
-}
-} ${cormorant.variable} bg-[#FAF9F5] antialiased`}>
         <ClarityInit />
         <script
           type="application/ld+json"
