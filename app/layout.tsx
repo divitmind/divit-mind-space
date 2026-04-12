@@ -20,22 +20,26 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL("https://divitmindspace.com"),
   title: {
-    default: "Divit MindSpace | Neurodivergent Care & Education in Bangalore",
+    default: "Divit MindSpace | Leading Center for Mental Health, Neurodevelopment & Physiotherapy Bangalore",
     template: "%s | Divit MindSpace",
   },
   description:
-    "Bangalore's comprehensive center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, professional counseling, and specialized education for children, teens, and adults.",
+    "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Located off Sarjapur Road (Kasavanahalli), Divit MindSpace provides expert-led Clinical Assessments, Counseling, and Pediatric Physiotherapy for children, teens, and adults.",
   keywords: [
     "mental health Bangalore",
     "neurodevelopmental care",
-    "physiotherapy Bangalore",
-    "clinical assessments",
-    "special education",
-    "autism support",
-    "ADHD counseling",
-    "adult mental health",
-    "teen counseling",
-    "child development center",
+    "physiotherapy Sarjapur Road",
+    "clinical assessments Bangalore",
+    "adult ADHD counseling Bangalore",
+    "autism spectrum support",
+    "speech therapy Bangalore",
+    "occupational therapy Bangalore",
+    "ABA therapy Bangalore",
+    "neuro-affirming care",
+    "Kasavanahalli wellness center",
+    "CBT therapy Bangalore",
+    "special education Bangalore",
+    "sensory integration therapy",
   ],
   authors: [{ name: "Divit MindSpace", url: "https://divitmindspace.com" }],
   creator: "Divit MindSpace",
@@ -54,23 +58,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Divit MindSpace",
-    title: "Divit MindSpace | Neurodivergent Care & Education in Bangalore",
+    title: "Divit MindSpace | Leading Center for Mental Health & Neurodevelopment",
     description:
-      "Diagnostic assessments, customized teaching, and training for neurodivergent individuals and families in Bangalore.",
+      "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Providing 21+ evidence-based services for children, teens, and adults off Sarjapur Road.",
     images: [
       {
         url: "/divit-mindspace-logo.png",
         width: 1200,
         height: 630,
-        alt: "Divit MindSpace — Neurodivergent Care & Education",
+        alt: "Divit MindSpace — Mental Health, Neurodevelopment & Physiotherapy",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Divit MindSpace | Neurodivergent Care & Education",
+    title: "Divit MindSpace | Leading Mental Health & Neurodevelopment Center",
     description:
-      "Diagnostic assessments, customized teaching, and training for neurodivergent individuals and families in Bangalore.",
+      "Expert clinical assessments, physiotherapy, and specialized education for all ages off Sarjapur Road (Kasavanahalli).",
     images: ["/divit-mindspace-logo.png"],
   },
   icons: {
@@ -86,37 +90,80 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": ["MedicalBusiness", "EducationalOrganization"],
   name: "Divit MindSpace",
-  alternateName: "Divit Health",
+  alternateName: ["Divit Health", "Divit MindSpace Clinic"],
   url: "https://divitmindspace.com",
   logo: {
     "@type": "ImageObject",
     url: "https://divitmindspace.com/divit-mindspace-logo.png",
   },
   description:
-    "Bangalore's comprehensive center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, professional counseling, and specialized education for children, teens, and adults.",
+    "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Divit MindSpace provides expert-led Clinical Assessments, Professional Counseling, Speech Therapy, and Occupational Therapy for children, teens, and adults off Sarjapur Road (Kasavanahalli).",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "Aadeshwar Chambers, Kasavanahalli",
     addressLocality: "Bangalore",
     addressRegion: "Karnataka",
+    postalCode: "560035",
     addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "12.9081",
+    longitude: "77.6744"
   },
   areaServed: {
     "@type": "City",
     name: "Bangalore",
   },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Clinical & Therapeutic Services",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Clinical Psychological Assessments" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Adult ADHD Counseling & Support" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Autism Spectrum Disorder (ASD) Support" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Speech & Language Therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Occupational Therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Pediatric Physiotherapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Applied Behavior Analysis (ABA)" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cognitive Behavioral Therapy (CBT)" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Play Therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Early Intervention Program" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Special Education & Remedial Teaching" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sensory Integration Therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Teen Counseling & Mental Health" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Parent Guidance & Counseling" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Family & Couples Therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Individual Adult Counseling" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Behavioral Therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Social Skills Training Groups" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Teacher Training Workshops" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Corporate Mental Wellness Programs" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Developmental Screening Camps" } }
+    ]
+  },
   medicalSpecialty: [
     "Neurodevelopmental Disorders",
     "Educational Psychology",
-    "Special Education",
+    "Physical Therapy",
+    "Mental Health",
+    "Speech Pathology"
   ],
   knowsAbout: [
     "Autism Spectrum Disorder",
     "ADHD",
     "Learning Disabilities",
     "Neurodivergence",
-    "Special Education",
-    "Early Intervention",
+    "Sensory Processing Disorder",
+    "Developmental Delays",
+    "Mental Wellness"
   ],
+  sameAs: [
+    "https://instagram.com/divitmindspace",
+    "https://facebook.com/divitmindspace",
+    "https://www.linkedin.com/in/divitmindspace/",
+    "https://x.com/divitmindspace"
+  ]
 };
 
 export default function RootLayout({

@@ -10,13 +10,13 @@ import { TOP_REVIEWS_QUERY, THERAPY_SERVICES_QUERY, ANNOUNCEMENT_QUERY } from "@
 import { ReviewsQueryResult, ServicesQueryResult, AnnouncementQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
-  title: "Divit MindSpace | Mental Health, Neurodevelopment & Physiotherapy Bangalore",
+  title: "Divit MindSpace | Leading Center for Mental Health, Neurodevelopment & Physiotherapy Bangalore",
   description:
-    "Bangalore's comprehensive center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, professional counseling, and specialized education for children, teens, and adults. Book a consultation today.",
+    "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Located off Sarjapur Road (Kasavanahalli), Divit MindSpace provides expert-led Clinical Assessments, Counseling, and Pediatric Physiotherapy for children, teens, and adults.",
   keywords: [
     "mental health Bangalore",
     "neurodevelopmental care Bangalore",
-    "physiotherapy Bangalore",
+    "physiotherapy Sarjapur Road",
     "clinical assessments Bangalore",
     "special education Bangalore",
     "autism support Bangalore",
@@ -24,7 +24,10 @@ export const metadata: Metadata = {
     "adult mental health Bangalore",
     "teen counseling Bangalore",
     "child development center Bangalore",
-    "integrative wellness Bangalore"
+    "integrative wellness Bangalore",
+    "speech therapy Bangalore",
+    "occupational therapy Bangalore",
+    "ABA therapy Bangalore",
   ],
   alternates: {
     canonical: "https://divitmindspace.com",
@@ -32,9 +35,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://divitmindspace.com",
-    title: "Divit MindSpace | Mental Health, Neurodevelopment & Physiotherapy",
+    title: "Divit MindSpace | Leading Center for Mental Health & Neurodevelopment",
     description:
-      "Bangalore's comprehensive center for mental health, neurodevelopment, and physiotherapy. Supporting children, teens, and adults with clinical excellence.",
+      "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Supporting children, teens, and adults with clinical excellence off Sarjapur Road (Kasavanahalli).",
     images: [
       {
         url: "/divit-mindspace-logo.png",
@@ -49,7 +52,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Divit MindSpace | Mental Health & Neurodevelopment",
     description:
-      "Expert clinical assessments, physiotherapy, and specialized education for neurodevelopmental and mental health needs in Bangalore.",
+      "Expert clinical assessments, physiotherapy, and 21+ evidence-based services for all ages off Sarjapur Road (Kasavanahalli).",
     images: ["/divit-mindspace-logo.png"],
   },
   robots: {
@@ -71,7 +74,7 @@ const websiteJsonLd = {
   name: "Divit MindSpace",
   url: "https://divitmindspace.com",
   description:
-    "Bangalore's comprehensive center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, specialized education, and counseling for all ages.",
+    "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Divit MindSpace provides expert-led Clinical Assessments, Professional Counseling, Speech Therapy, and Occupational Therapy for children, teens, and adults off Sarjapur Road (Kasavanahalli).",
   potentialAction: {
     "@type": "SearchAction",
     target: {

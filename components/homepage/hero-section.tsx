@@ -59,9 +59,9 @@ export function HeroSection({ announcement }: HeroSectionProps) {
                   </h1>
                   </div>
 
-                  <p className="mt-4 max-w-xl mx-auto lg:mx-0 text-base lg:text-lg text-black/80 leading-relaxed font-medium text-balance">
-                  Bangalore’s comprehensive center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, professional counseling, and specialized education for all ages.
-                  </p>
+            <p className="mt-4 max-w-xl mx-auto lg:mx-0 text-base lg:text-lg text-black/80 leading-relaxed font-medium text-balance">
+              Bangalore’s leading center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, professional counseling, and specialized education for all ages.
+            </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start">
               <WhatsAppConsultationLink className="dm-pill-button dm-pill-button-primary">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
