@@ -38,32 +38,30 @@ export function HeroSection({ announcement }: HeroSectionProps) {
                   <span className="absolute inset-0 bg-[#E8D5B7]/40 -z-20 rounded-sm transform -rotate-[0.5deg] scale-x-[1.06] scale-y-[1.15] -translate-y-px" />
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                   <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
-                  {/* Rolling audience: CHILD'S → TEEN'S → ADULT'S → FAMILY'S */}
+                  {/* Rolling audience: CHILD'S → TEEN'S → ADULT'S → INDIVIDUAL'S → FAMILY'S */}
                   <span className="ml-1.5 relative inline-flex translate-y-[1px] md:translate-y-[2px]">
-                    <span className="animate-hero-crossfade" style={{ animationDelay: '0s' }}>CHILD&apos;S</span>
-                    <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '2s' }}>TEEN&apos;S</span>
-                    <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '4s' }}>ADULT&apos;S</span>
-                    <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '6s' }}>FAMILY&apos;S</span>
+                   <span className="animate-hero-crossfade" style={{ animationDelay: '0s' }}>CHILD&apos;S</span>
+                   <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '2s' }}>TEEN&apos;S</span>
+                   <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '4s' }}>ADULT&apos;S</span>
+                   <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '6s' }}>INDIVIDUAL&apos;S</span>
+                   <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '8s' }}>FAMILY&apos;S</span>
                   </span>
-                </span>
-                {/* Line 2: Different (crossed out) Unique Journey */}
-                <span className="flex items-baseline gap-[1.125rem] sm:gap-4 text-[clamp(2rem,6vw,4rem)] font-[family-name:var(--font-cormorant)] italic text-[#7A9A7D] leading-[0.9] -mt-1 font-medium">
+                  </span>
+                  {/* Line 2: Different (crossed out) Unique Journey */}
+                  <span className="flex items-baseline gap-[1.125rem] sm:gap-4 text-[clamp(2rem,6vw,4rem)] font-[family-name:var(--font-cormorant)] italic text-[#7A9A7D] leading-[0.9] -mt-1 font-medium">
                   <span className="relative text-[#999] opacity-50">
-                    Different
-                    <span className="absolute left-[-4%] right-[-4%] top-1/2 h-[3px] bg-[#999] -rotate-[3deg]" />
+                   Different
+                   <span className="absolute left-[-4%] right-[-4%] top-1/2 h-[3px] bg-[#999] -rotate-[3deg]" />
                   </span>
                   <span>Unique</span>
                   <span>Journey.</span>
-                </span>
-              </h1>
-            </div>
+                  </span>
+                  </h1>
+                  </div>
 
-            <p className="mt-4 max-w-xl mx-auto lg:mx-0 text-base lg:text-lg text-black/80 leading-relaxed font-medium text-balance">
-              Professional therapy and developmental support for neurodivergent children,
-              teens, adults, and their families. Building confidence, focus, and essential
-              life skills in a warm, expert-led environment.
-            </p>
-
+                  <p className="mt-4 max-w-xl mx-auto lg:mx-0 text-base lg:text-lg text-black/80 leading-relaxed font-medium text-balance">
+                  Bangalore’s comprehensive center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, professional counseling, and specialized education for all ages.
+                  </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start">
               <WhatsAppConsultationLink className="dm-pill-button dm-pill-button-primary">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
