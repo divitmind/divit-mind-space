@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Divit MindSpace",
   },
   description:
-    "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Located off Sarjapur Road (Kasavanahalli), Divit MindSpace provides expert-led Clinical Assessments, Counseling, and Pediatric Physiotherapy for children, teens, and adults.",
+    "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy, serving children, teens, and adults. Located off Sarjapur Road (Kasavanahalli), we provide expert Clinical Assessments and therapies including Speech Therapy, Occupational Therapy, ABA, Pediatric & Adult Physiotherapy (Pain Management & Rehab), CBT, and Special Education.",
   keywords: [
     "mental health Bangalore",
     "neurodevelopmental care",
@@ -36,10 +36,10 @@ export const metadata: Metadata = {
     "occupational therapy Bangalore",
     "ABA therapy Bangalore",
     "neuro-affirming care",
-    "Kasavanahalli wellness center",
-    "CBT therapy Bangalore",
-    "special education Bangalore",
-    "sensory integration therapy",
+    "NIOS support Bangalore",
+    "school readiness program",
+    "pain management physiotherapy",
+    "surgical rehab Bangalore",
   ],
   authors: [{ name: "Divit MindSpace", url: "https://divitmindspace.com" }],
   creator: "Divit MindSpace",
@@ -174,6 +174,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${cormorant.variable} bg-[#FAF9F5] antialiased`}>
+        <ClarityInit />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <SanityLive />
+        <Provider>{children}</Provider>
+      </body>
+    </html>
+  );
+}
+} ${cormorant.variable} bg-[#FAF9F5] antialiased`}>
         <ClarityInit />
         <script
           type="application/ld+json"

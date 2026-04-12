@@ -12,7 +12,7 @@ import { ReviewsQueryResult, ServicesQueryResult, AnnouncementQueryResult } from
 export const metadata: Metadata = {
   title: "Divit MindSpace | Leading Center for Mental Health, Neurodevelopment & Physiotherapy Bangalore",
   description:
-    "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Located off Sarjapur Road (Kasavanahalli), Divit MindSpace provides expert-led Clinical Assessments, Counseling, and Pediatric Physiotherapy for children, teens, and adults.",
+    "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy, serving children, teens, and adults. Located off Sarjapur Road (Kasavanahalli), we provide expert Clinical Assessments and therapies including Speech Therapy, Occupational Therapy, ABA, Pediatric & Adult Physiotherapy, CBT, and Special Education.",
   keywords: [
     "mental health Bangalore",
     "neurodevelopmental care Bangalore",
