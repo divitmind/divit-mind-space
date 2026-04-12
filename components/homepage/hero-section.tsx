@@ -38,13 +38,12 @@ export function HeroSection({ announcement }: HeroSectionProps) {
                   <span className="absolute inset-0 bg-[#E8D5B7]/40 -z-20 rounded-sm transform -rotate-[0.5deg] scale-x-[1.06] scale-y-[1.15] -translate-y-px" />
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                   <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
-                  {/* Rolling audience: CHILD'S → TEEN'S → ADULT'S → INDIVIDUAL'S → FAMILY'S */}
+                  {/* Rolling audience: CHILD'S → TEEN'S → ADULT'S → FAMILY'S */}
                   <span className="ml-1.5 relative inline-flex translate-y-[1px] md:translate-y-[2px]">
                    <span className="animate-hero-crossfade" style={{ animationDelay: '0s' }}>CHILD&apos;S</span>
                    <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '2s' }}>TEEN&apos;S</span>
                    <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '4s' }}>ADULT&apos;S</span>
-                   <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '6s' }}>INDIVIDUAL&apos;S</span>
-                   <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '8s' }}>FAMILY&apos;S</span>
+                   <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '6s' }}>FAMILY&apos;S</span>
                   </span>
                   </span>
                   {/* Line 2: Different (crossed out) Unique Journey */}
