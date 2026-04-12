@@ -41,7 +41,7 @@ export function SiteFooter() {
                             />
                         </div>
                         <p className="text-sm text-black/70 font-medium leading-relaxed max-w-[280px] mb-6">
-                            Empowering neurodivergent children and their families through expert care, diagnostic assessments, and specialized education.
+                            Bangalore’s comprehensive center for mental health, neurodevelopment, and physiotherapy. Supporting children, teens, and adults through clinical excellence and specialized education.
                         </p>
                         <Link
                             href="/careers"

@@ -5,13 +5,13 @@ import { MindGymQueryResult } from "@/sanity/types";
 import { MindGymPage } from "@/components/mind-gym/mind-gym-page";
 
 export const metadata: Metadata = {
-  title: "Mind Gym | Interactive Brain Training | Divit MindSpace",
-  description: "Boost focus, memory, and cognitive flexibility with our interactive brain training games. Scientific brain teasers for children, teenagers, and adults.",
+  title: "Mind Gym | Interactive Brain Games | Divit MindSpace",
+  description: "Boost focus, memory, and cognitive flexibility with our interactive brain games. Scientific brain teasers for children, teenagers, and adults.",
   keywords: [
-    "brain training",
+    "brain games",
     "cognitive games",
     "focus games",
-    "working memory training",
+    "working memory games",
     "Schulte Table",
     "Stroop Test",
     "neurodiversity tools",
@@ -41,7 +41,7 @@ export default async function MindGymRoute() {
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": "Mind Gym - Divit MindSpace",
-            "description": "Free cognitive training and brain teasers for all ages.",
+            "description": "Free cognitive games and brain teasers for all ages.",
             "publisher": {
               "@type": "Organization",
               "name": "Divit MindSpace"

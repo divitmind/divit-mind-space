@@ -89,7 +89,7 @@ export function SchulteTable() {
                 className="dm-pill-button dm-pill-button-primary w-full inline-flex items-center justify-center gap-2 py-4"
               >
                 <Play className="w-4 h-4" />
-                Start Training
+                Start Game
               </button>
             </div>
           </motion.div>

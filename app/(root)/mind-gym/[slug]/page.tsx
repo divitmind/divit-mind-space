@@ -77,7 +77,7 @@ export default async function GamePageRoute({ params }: GamePageProps) {
       default:
         return {
           title: "Brain Exercise",
-          focusArea: "Cognitive Training",
+          focusArea: "Cognitive Games",
           ageGroup: "All Ages",
           science: "Interactive cognitive exercises help maintain neural plasticity and sharpen mental acuity through targeted stimulation of specific brain regions.",
           tips: ["Stay consistent.", "Challenge yourself.", "Have fun while learning."]

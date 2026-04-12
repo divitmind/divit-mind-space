@@ -12,218 +12,172 @@ export function GameThumbnail({ slug, className }: GameThumbnailProps) {
   const renderIllustration = () => {
     switch (slug) {
       case "pulse-check":
-        // Processing Speed: Concentric waves with a central "firing" neuron
+        // Reaction Time Preview
         return (
           <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <defs>
-              <radialGradient id="pulse-grad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#7A9A7D" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#7A9A7D" stopOpacity="0" />
-              </radialGradient>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="4" result="blur" />
-                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-              </filter>
-            </defs>
-            <rect width="400" height="225" fill="#F5F4F0" />
+            <rect width="400" height="225" fill="#FAF9F5" />
             
-            {/* Background Waves */}
-            {[1, 2, 3].map((i) => (
-              <motion.circle
-                key={i}
-                cx="200" cy="112.5" r={30 * i}
-                stroke="#7A9A7D"
-                strokeWidth="1.5"
-                strokeOpacity="0.3"
-                animate={{
-                  r: [30 * i, 30 * i + 25, 30 * i],
-                  opacity: [0.2, 0.5, 0.2],
-                }}
-                transition={{ duration: 4, delay: i * 0.5, repeat: Infinity, ease: "easeInOut" }}
-              />
-            ))}
-
-            {/* Central "Pulse" */}
-            <motion.circle
-              cx="200" cy="112.5" r="8"
+            {/* Main Central Button */}
+            <motion.rect
+              x="130" y="42.5" width="140" height="140" rx="70"
               fill="#7A9A7D"
-              filter="url(#glow)"
               animate={{
-                scale: [1, 2, 1],
-                opacity: [0.7, 1, 0.7],
+                fill: ["#7A9A7D", "#52154E", "#7A9A7D"],
+                scale: [1, 1.05, 1]
               }}
-              transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
+              transition={{ duration: 2, repeat: Infinity }}
             />
             
-            {/* Scanning Line */}
-            <motion.path
-              d="M80 112.5H320"
-              stroke="#7A9A7D"
-              strokeWidth="2"
-              strokeOpacity="0.15"
-              strokeDasharray="6 10"
-              animate={{ x: [-20, 20, -20] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </svg>
-        );
+            <text x="200" y="118" textAnchor="middle" className="font-sans font-black" fill="white" fontSize="14" style={{ letterSpacing: '0.1em' }}>
+              WAIT...
+            </text>
 
-      case "schulte-table":
-        // Visual Scanning: Grid with "discovery" highlights
-        return (
-          <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <rect width="400" height="225" fill="#F5F4F0" />
-            <g transform="translate(140, 52.5)">
-              {Array.from({ length: 4 }).map((_, i) => (
-                Array.from({ length: 4 }).map((_, j) => (
-                  <g key={`${i}-${j}`}>
-                    <rect
-                      x={i * 30} y={j * 30}
-                      width="26" height="26"
-                      rx="8"
-                      fill="#52154E"
-                      fillOpacity="0.08"
-                      stroke="#52154E"
-                      strokeOpacity="0.15"
-                      strokeWidth="1"
-                    />
-                    {/* Random active states */}
-                    {(i + j) % 3 === 0 && (
-                      <motion.rect
-                        x={i * 30} y={j * 30}
-                        width="26" height="26"
-                        rx="8"
-                        fill="#52154E"
-                        animate={{ opacity: [0, 0.4, 0] }}
-                        transition={{ duration: 3, delay: (i + j) * 0.2, repeat: Infinity }}
-                      />
-                    )}
-                  </g>
-                ))
-              ))}
-            </g>
-            {/* Eye Tracking Trail */}
-            <motion.path
-              d="M152 65L242 125L182 155L272 95"
-              stroke="#52154E"
-              strokeWidth="2.5"
-              strokeOpacity="0.2"
-              strokeLinecap="round"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </svg>
-        );
-
-      case "stroop-test":
-        // Flexibility: Color interference and overlap
-        return (
-          <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <rect width="400" height="225" fill="#F5F4F0" />
+            <text x="200" y="200" textAnchor="middle" className="font-sans font-bold" fill="#7A9A7D" fillOpacity="0.4" fontSize="10">
+              REACTION SPEED TEST
+            </text>
             
-            <motion.circle
-              cx="180" cy="112.5" r="55"
-              fill="#7A9A7D"
-              fillOpacity="0.35"
-              animate={{ 
-                x: [0, 25, 0],
-                scale: [1, 1.15, 1] 
-              }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            />
-            
-            <motion.circle
-              cx="220" cy="112.5" r="55"
-              fill="#52154E"
-              fillOpacity="0.35"
-              style={{ mixBlendMode: 'multiply' }}
-              animate={{ 
-                x: [0, -25, 0],
-                scale: [1, 0.85, 1] 
-              }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            />
-
-            <text x="200" y="118" textAnchor="middle" className="font-serif italic font-bold" fill="#52154E" fillOpacity="0.6" fontSize="16" style={{ letterSpacing: '0.25em' }}>
-              AGILITY
+            {/* MS Counter */}
+            <text x="350" y="40" textAnchor="middle" className="font-mono font-bold" fill="#7A9A7D" fontSize="12">
+              214ms
             </text>
           </svg>
         );
 
-      case "neural-fusion":
-        // Pattern Recognition: Connected nodes and logic paths
+      case "schulte-table":
+        // Schulte Table Grid Preview
         return (
           <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <rect width="400" height="225" fill="#F5F4F0" />
-            <g transform="translate(100, 62.5)">
-              {/* Nodes */}
-              {[
-                { x: 50, y: 50 }, { x: 150, y: 30 }, { x: 250, y: 70 },
-                { x: 100, y: 120 }, { x: 200, y: 100 }
-              ].map((node, i) => (
-                <g key={i}>
-                  {/* Connections */}
-                  {i > 0 && (
-                    <motion.line
-                      x1={50} y1={50} x2={node.x} y2={node.y}
-                      stroke="#7A9A7D" strokeWidth="1.5" strokeOpacity="0.4"
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
-                    />
+            <rect width="400" height="225" fill="#FAF9F5" />
+            <g transform="translate(115, 27.5)">
+              {[0, 1, 2, 3, 4].map((i) => (
+                [0, 1, 2, 3, 4].map((j) => {
+                  const num = (i * 5 + j + 1);
+                  const isTarget = num === 7;
+                  return (
+                    <g key={`${i}-${j}`}>
+                      <rect
+                        x={i * 34} y={j * 34}
+                        width="30" height="30"
+                        rx="6"
+                        fill={isTarget ? "#52154E" : "white"}
+                        stroke="#52154E"
+                        strokeOpacity="0.1"
+                        strokeWidth="1"
+                      />
+                      <text 
+                        x={i * 34 + 15} y={j * 34 + 20} 
+                        textAnchor="middle" 
+                        fontSize="10" 
+                        fontWeight="900" 
+                        fill={isTarget ? "white" : "#52154E"}
+                        fillOpacity={isTarget ? 1 : 0.4}
+                      >
+                        {num}
+                      </text>
+                      {isTarget && (
+                        <motion.circle
+                          cx={i * 34 + 15} cy={j * 34 + 15} r="20"
+                          stroke="#52154E"
+                          strokeWidth="2"
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: [0, 1, 0], scale: [0.5, 1.5, 1.8] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+                      )}
+                    </g>
+                  );
+                })
+              ))}
+            </g>
+          </svg>
+        );
+
+      case "stroop-test":
+        // Stroop Interference Preview
+        return (
+          <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <rect width="400" height="225" fill="#FAF9F5" />
+            
+            {/* Word "BLUE" in Red */}
+            <motion.g
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <rect x="80" y="62.5" width="240" height="60" rx="30" fill="white" stroke="#52154E" strokeOpacity="0.05" />
+              <text x="200" y="103" textAnchor="middle" className="font-sans font-black" fill="#EF4444" fontSize="32" style={{ letterSpacing: '0.1em' }}>
+                BLUE
+              </text>
+            </motion.g>
+
+            {/* Response Buttons */}
+            <g transform="translate(100, 140)">
+              {['RED', 'GREEN', 'BLUE'].map((color, i) => (
+                <g key={color} transform={`translate(${i * 70}, 0)`}>
+                  <rect width="60" height="30" rx="15" fill={i === 0 ? "#52154E" : "white"} stroke="#52154E" strokeOpacity="0.1" />
+                  <text x="30" y="20" textAnchor="middle" fontSize="8" fontWeight="900" fill={i === 0 ? "white" : "#52154E"}>{color}</text>
+                  {i === 0 && (
+                     <motion.circle cx="30" cy="15" r="20" stroke="#52154E" strokeWidth="1" animate={{ scale: [1, 1.5], opacity: [0.5, 0] }} transition={{ repeat: Infinity, duration: 1 }} />
                   )}
-                  <motion.circle
-                    cx={node.x} cy={node.y} r="6"
-                    fill={i % 2 === 0 ? "#7A9A7D" : "#52154E"}
-                    fillOpacity="0.5"
-                    animate={{ r: [6, 9, 6], fillOpacity: [0.5, 0.8, 0.5] }}
-                    transition={{ duration: 3, delay: i * 0.5, repeat: Infinity }}
-                  />
                 </g>
               ))}
             </g>
           </svg>
         );
 
-      case "mindful-paths":
-        // Spatial Rotation: Flowing, meditative lines
+      case "neural-fusion":
+        // 2048-style Synthesis Preview
         return (
           <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <rect width="400" height="225" fill="#F5F4F0" />
-            <motion.path
-              d="M100 112.5 C 150 40, 250 185, 300 112.5"
-              stroke="#7A9A7D"
-              strokeWidth="3.5"
-              strokeOpacity="0.4"
-              fill="none"
-              strokeLinecap="round"
-              animate={{
-                d: [
-                  "M100 112.5 C 150 40, 250 185, 300 112.5",
-                  "M100 112.5 C 150 185, 250 40, 300 112.5",
-                  "M100 112.5 C 150 40, 250 185, 300 112.5"
-                ]
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.path
-              d="M100 112.5 C 150 185, 250 40, 300 112.5"
-              stroke="#52154E"
-              strokeWidth="2.5"
-              strokeOpacity="0.25"
-              fill="none"
-              strokeLinecap="round"
-              animate={{
-                d: [
-                  "M100 112.5 C 150 185, 250 40, 300 112.5",
-                  "M100 112.5 C 150 40, 250 185, 300 112.5",
-                  "M100 112.5 C 150 185, 250 40, 300 112.5"
-                ]
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            />
+            <rect width="400" height="225" fill="#FAF9F5" />
+            <g transform="translate(110, 22.5)">
+              {[0, 1, 2, 3].map((i) => (
+                [0, 1, 2, 3].map((j) => (
+                  <rect key={`${i}-${j}`} x={i * 46} y={j * 46} width="42" height="42" rx="8" fill="white" stroke="#7A9A7D" strokeOpacity="0.1" />
+                ))
+              ))}
+              
+              {/* Active Tiles Merging */}
+              <motion.g animate={{ x: [0, 46, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "anticipate" }}>
+                <rect x="46" y="46" width="42" height="42" rx="8" fill="#7A9A7D" />
+                <text x="67" y="74" textAnchor="middle" fontSize="16" fontWeight="900" fill="white">8</text>
+              </motion.g>
+              <rect x="92" y="46" width="42" height="42" rx="8" fill="#7A9A7D" />
+              <text x="113" y="74" textAnchor="middle" fontSize="16" fontWeight="900" fill="white">8</text>
+              
+              <rect x="0" y="0" width="42" height="42" rx="8" fill="#52154E" fillOpacity="0.8" />
+              <text x="21" y="28" textAnchor="middle" fontSize="16" fontWeight="900" fill="white">64</text>
+            </g>
+          </svg>
+        );
+
+      case "mindful-paths":
+        // Spatial Pattern Preview
+        return (
+          <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <rect width="400" height="225" fill="#FAF9F5" />
+            <g transform="translate(125, 37.5)">
+              {[0, 1, 2].map((i) => (
+                [0, 1, 2].map((j) => (
+                  <circle key={`${i}-${j}`} cx={i * 75} cy={j * 75} r="4" fill="#7A9A7D" fillOpacity="0.2" />
+                ))
+              ))}
+              <motion.path
+                d="M0 0 L75 0 L75 75 L150 75 L150 150"
+                stroke="#7A9A7D"
+                strokeWidth="6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+              <motion.circle
+                cx="150" cy="150" r="10"
+                fill="#7A9A7D"
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </g>
           </svg>
         );
 

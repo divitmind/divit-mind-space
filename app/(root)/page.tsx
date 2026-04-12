@@ -10,21 +10,21 @@ import { TOP_REVIEWS_QUERY, THERAPY_SERVICES_QUERY, ANNOUNCEMENT_QUERY } from "@
 import { ReviewsQueryResult, ServicesQueryResult, AnnouncementQueryResult } from "@/sanity/types";
 
 export const metadata: Metadata = {
-// ... rest of metadata unchanged
-  title: "Divit MindSpace | Neurodivergent Care & Education in Bangalore",
+  title: "Divit MindSpace | Mental Health, Neurodevelopment & Physiotherapy Bangalore",
   description:
-    "Divit MindSpace empowers neurodivergent children and their families through diagnostic assessments, customized special education, and professional training programs in Bangalore. Book a consultation today.",
+    "Bangalore's comprehensive center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, professional counseling, and specialized education for children, teens, and adults. Book a consultation today.",
   keywords: [
-    "neurodivergent care Bangalore",
-    "autism assessment Bangalore",
-    "ADHD support India",
+    "mental health Bangalore",
+    "neurodevelopmental care Bangalore",
+    "physiotherapy Bangalore",
+    "clinical assessments Bangalore",
     "special education Bangalore",
-    "early intervention neurodivergent",
-    "learning disability assessment",
-    "psychometric assessment children",
-    "parent training neurodiversity",
-    "neurodiversity support India",
-    "special needs school Bangalore",
+    "autism support Bangalore",
+    "ADHD counseling Bangalore",
+    "adult mental health Bangalore",
+    "teen counseling Bangalore",
+    "child development center Bangalore",
+    "integrative wellness Bangalore"
   ],
   alternates: {
     canonical: "https://divitmindspace.com",
@@ -32,24 +32,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://divitmindspace.com",
-    title: "Divit MindSpace | Neurodivergent Care & Education in Bangalore",
+    title: "Divit MindSpace | Mental Health, Neurodevelopment & Physiotherapy",
     description:
-      "Empowering neurodivergent children through diagnostic assessments, customized special education, and family training programs in Bangalore.",
+      "Bangalore's comprehensive center for mental health, neurodevelopment, and physiotherapy. Supporting children, teens, and adults with clinical excellence.",
     images: [
       {
         url: "/divit-mindspace-logo.png",
         width: 1200,
         height: 630,
-        alt: "Divit MindSpace — Neurodivergent Care & Education",
+        alt: "Divit MindSpace — Mental Health & Neurodevelopment",
       },
     ],
     siteName: "Divit MindSpace",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Divit MindSpace | Neurodivergent Care & Education in Bangalore",
+    title: "Divit MindSpace | Mental Health & Neurodevelopment",
     description:
-      "Diagnostic assessments, customized special education, and family training for neurodivergent individuals in Bangalore.",
+      "Expert clinical assessments, physiotherapy, and specialized education for neurodevelopmental and mental health needs in Bangalore.",
     images: ["/divit-mindspace-logo.png"],
   },
   robots: {
@@ -71,7 +71,7 @@ const websiteJsonLd = {
   name: "Divit MindSpace",
   url: "https://divitmindspace.com",
   description:
-    "Neurodivergent care and education — diagnostic assessments, customized teaching, and training in Bangalore.",
+    "Bangalore's comprehensive center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, specialized education, and counseling for all ages.",
   potentialAction: {
     "@type": "SearchAction",
     target: {

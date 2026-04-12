@@ -20,7 +20,7 @@ interface MindGymPageProps {
 }
 
 const CATEGORIES = [
-  { id: "all", label: "All Training", icon: Brain, color: "text-purple", bg: "bg-purple/5" },
+  { id: "all", label: "All Games", icon: Brain, color: "text-purple", bg: "bg-purple/5" },
   { id: "focus", label: "Focus & Attention", icon: Target, color: "text-green", bg: "bg-green/5" },
   { id: "memory", label: "Working Memory", icon: Activity, color: "text-blue-600", bg: "bg-blue-50" },
   { id: "spatial", label: "Spatial Logic", icon: Compass, color: "text-yellow-600", bg: "bg-yellow-50" },
@@ -33,7 +33,7 @@ const defaultGames: Partial<ExtendedMindGymItem>[] = [
     slug: { current: "pulse-check", _type: "slug" } as any,
     focusArea: "Processing Speed",
     ageGroup: "All Ages",
-    shortDescription: "Test your raw reaction time and neural efficiency with this simple benchmark test.",
+    shortDescription: "A high-precision test of your Neural Processing Speed. Measure the millisecond gap between visual stimulus and motor response to track your Brain-Motor Efficiency.",
     category: "focus",
     benefit: "Enhances neural efficiency and information processing speed between eyes and brain."
   },
@@ -42,7 +42,7 @@ const defaultGames: Partial<ExtendedMindGymItem>[] = [
     slug: { current: "schulte-table", _type: "slug" } as any,
     focusArea: "Visual Scanning & Focus",
     ageGroup: "All Ages",
-    shortDescription: "Improve peripheral vision and speed reading by finding numbers in a grid sequence.",
+    shortDescription: "Find numbers 1 to 25 in sequence while maintaining a central gaze. Train your Peripheral Vision and Selective Attention—the gold-standard benchmark for speed-reading.",
     category: "focus",
     benefit: "Trains peripheral vision and sustained attention by maintaining a central gaze."
   },
@@ -51,7 +51,7 @@ const defaultGames: Partial<ExtendedMindGymItem>[] = [
     slug: { current: "stroop-test", _type: "slug" } as any,
     focusArea: "Cognitive Flexibility",
     ageGroup: "Teens & Adults",
-    shortDescription: "Train your brain to overcome conflicting information between word meaning and color.",
+    shortDescription: "Identify the ink color while suppressing the impulse to read the word. Measure your Inhibition Control and Conflict Resolution by calculating your 'Stroop Interference'.",
     category: "flexibility",
     benefit: "Strengthens executive function by filtering out distracting visual data."
   },
@@ -60,7 +60,7 @@ const defaultGames: Partial<ExtendedMindGymItem>[] = [
     slug: { current: "neural-fusion", _type: "slug" } as any,
     focusArea: "Strategic Planning",
     ageGroup: "Teens & Adults",
-    shortDescription: "A logic-based numbers game that builds pattern recognition and long-term strategic thinking.",
+    shortDescription: "A logic-based synthesis game that builds Pattern Recognition and Long-Term Strategic Planning. Calculate multiple future states in a constrained environment.",
     category: "memory",
     benefit: "Develops advanced strategic planning and working memory capacity."
   },
@@ -69,7 +69,7 @@ const defaultGames: Partial<ExtendedMindGymItem>[] = [
     slug: { current: "mindful-paths", _type: "slug" } as any,
     focusArea: "Spatial Reasoning",
     ageGroup: "All Ages",
-    shortDescription: "A meditative spatial puzzle. Rotate the tiles to align the flow and connect patterns.",
+    shortDescription: "A meditative spatial puzzle requiring you to manipulate geometry to align paths. Challenges the parietal lobe's ability to process and visualize 2D relationships.",
     category: "spatial",
     benefit: "Improves mental rotation skills and spatial relationship processing."
   }
@@ -123,12 +123,12 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
   }, [activeCategory, games]);
 
   const handleWhatsAppShare = (title: string, level: string = "ELITE") => {
-    const text = `🧠 DIVIT MIND GYM 🧠\n\nActivity: ${title}\nNeuro-Efficiency: 🟩🟩🟩🟩🟩 [${level}]\nTraining Streak: ${streak} Days 🔥\n\nCan you beat my focus? Challenge me to win a specialist session:\nhttps://divitmindspace.com/mind-gym`;
+    const text = `🧠 DIVIT MIND GYM 🧠\n\nActivity: ${title}\nNeuro-Efficiency: 🟩🟩🟩🟩🟩 [${level}]\nGames Streak: ${streak} Days 🔥\n\nCan you beat my focus? Challenge me to win a Clinical Assessment:\nhttps://divitmindspace.com/mind-gym`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const handleClaimReward = () => {
-    const text = `Hi Divit Team! 🧠\n\nI just hit a ${streak}-Day Streak at the Mind Gym! 🔥\n\nI'd like to claim my complimentary specialist session/workshop. Looking forward to it!`;
+    const text = `Hi Divit Team! 🧠\n\nI just hit a ${streak}-Day Streak at the Mind Gym! 🔥\n\nI'd like to claim my complimentary Clinical Assessment. Looking forward to it!`;
     window.open(`https://wa.me/919910604104?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -151,7 +151,7 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
               Mind Gym
             </h1>
             <p className="text-base md:text-lg text-black/40 max-w-2xl mx-auto font-medium leading-relaxed italic">
-              Browse our brain training games for children, teens, and adults. Sharpen your attention, memory, and reaction precision through daily practice. Challenge a friend on WhatsApp to win a complimentary specialist session or workshops.
+              Browse our brain games for children, teens, and adults. Sharpen your attention, memory, and reaction precision through daily practice. Challenge a friend on WhatsApp to win a complimentary Clinical Assessment.
             </p>
           </motion.div>
         </div>
@@ -162,12 +162,12 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
       </section>
 
       {/* The "Direct-to-WhatsApp" Claim Card */}
-      <section className="pb-10 bg-white relative z-10">
+      <section className="pb-6 bg-white relative z-10">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-green rounded-[2.5rem] p-8 md:p-10 relative overflow-hidden shadow-2xl shadow-green/20"
+            className="bg-green rounded-[2.5rem] px-8 py-6 md:px-10 md:py-8 relative overflow-hidden shadow-2xl shadow-green/20"
           >
             <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
               <div className="max-w-2xl text-center lg:text-left">
@@ -176,31 +176,39 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                   Divit Performance Reward
                 </div>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white italic mb-4 leading-tight" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-                  Unlock a Specialist Neuro-Audit
+                  Unlock a Specialist Clinical Assessment
                 </h2>
                 <p className="text-white/70 text-base md:text-lg font-medium leading-relaxed mb-8 italic">
-                  Complete your **3-Day Training Streak** and challenge a friend to qualify for a complimentary clinical assessment with our specialists. {streak >= 3 ? "Your reward is now available!" : "Continue training to unlock."}
+                  Complete your **3-Day Games Streak** and challenge a friend to qualify for a complimentary clinical assessment with our specialists. {streak >= 3 ? "Your reward is now available!" : "Continue games to unlock."}
                   <span className="block mt-4 text-[10px] text-white/40 font-bold uppercase tracking-[0.1em] not-italic">
                     <ShieldCheck className="w-3 h-3 inline-block mr-1 -mt-0.5" />
                     Progress saved privately to this browser • No login required
                   </span>
                 </p>
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                  <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-sm relative group">
-                    <Flame className={cn("w-5 h-5", streak >= 1 ? "text-orange-400 fill-orange-400" : "text-white/40")} />
-                    {streak >= 1 && (
-                      <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-orange-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(249,115,22,0.8)]" />
-                    )}
-                    <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-white/40 leading-none">Streak Status</p>
-                      <p className="text-sm font-bold text-white mt-1">{Math.min(streak, 3)}/3 Days Active</p>
+                <div className="flex flex-wrap justify-center lg:justify-start gap-6">
+                  <div className="flex flex-col gap-3 min-w-[200px]">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-2">
+                        <Flame className={cn("w-5 h-5", streak >= 1 ? "text-orange-400 fill-orange-400" : "text-white/40")} />
+                        <p className="text-[10px] font-black uppercase tracking-widest text-white/40 leading-none">Streak Status</p>
+                      </div>
+                      <p className="text-xs font-bold text-white">{Math.min(streak, 3)}/3 Days</p>
+                    </div>
+                    {/* Visual Progress Bar */}
+                    <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden border border-white/5">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: `${(Math.min(streak, 3) / 3) * 100}%` }}
+                        className="h-full bg-gradient-to-r from-orange-400 to-yellow-400 shadow-[0_0_10px_rgba(249,115,22,0.5)]"
+                      />
                     </div>
                   </div>
+
                   <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                     <Award className={cn("w-5 h-5", streak >= 3 ? "text-yellow-400" : "text-white/40")} />
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-widest text-white/40 leading-none">Reward</p>
-                      <p className="text-sm font-bold text-white mt-1">Specialist Consultation</p>
+                      <p className="text-sm font-bold text-white mt-1">Clinical Assessment</p>
                     </div>
                   </div>
                 </div>
@@ -220,7 +228,7 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                     onClick={scrollToGym}
                     className="px-10 py-5 rounded-full bg-white text-green text-[12px] font-black uppercase tracking-[0.2em] shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-4 group"
                   >
-                    Continue Training
+                    Continue Games
                     <Lock className="w-4 h-4 opacity-40 group-hover:opacity-100 transition-opacity" />
                   </button>
                 )}
@@ -242,7 +250,7 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
         </div>
       </section>
 
-      {/* Targeted Training sticky nav */}
+      {/* Targeted Games sticky nav */}
       <section className="py-4 md:py-6 border-y border-black/5 bg-[#FAF9F5]/90 sticky top-0 z-40 backdrop-blur-xl shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
@@ -251,7 +259,7 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                 <Sparkles className="w-5 h-5 text-green" />
               </div>
               <div>
-                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-green leading-none">Targeted Training</h3>
+                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-green leading-none">Targeted Games</h3>
                 <p className="text-[10px] text-black/40 font-bold uppercase tracking-widest mt-1.5">Select Your Focus</p>
               </div>
             </div>
@@ -298,9 +306,10 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                     layout
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
+                    whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(122, 154, 125, 0.12)" }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.4, delay: idx * 0.05 }}
-                    className="group bg-white rounded-[2.5rem] overflow-hidden border border-black/5 shadow-sm hover:shadow-xl hover:shadow-purple/5 transition-all duration-500 flex flex-col h-full relative"
+                    className="group bg-white rounded-[2.5rem] overflow-hidden border border-black/5 shadow-sm hover:border-green/20 transition-all duration-500 flex flex-col h-full relative"
                   >
                     {/* Visual Header */}
                     <div className="aspect-[16/10] relative bg-[#FAF9F5] overflow-hidden">
@@ -315,19 +324,13 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                         <GameThumbnail slug={gameSlug as string} />
                       )}
                       
-                      <div className="absolute top-5 left-5 flex flex-col items-start gap-1.5 pointer-events-none z-10">
-                        <div className="px-3 py-1.5 rounded-full bg-green/5 backdrop-blur-md text-[8px] font-black text-green uppercase tracking-[0.15em] border border-green/10 shadow-sm leading-none">
+                      <div className="absolute top-5 left-5 flex items-center gap-2 pointer-events-none z-10">
+                        <div className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[8px] font-black text-green uppercase tracking-[0.15em] border border-black/5 shadow-sm leading-none">
                           {game.focusArea}
                         </div>
-                        <div className="px-3 py-1.5 rounded-full bg-green/5 backdrop-blur-md text-[8px] font-black text-green uppercase tracking-[0.15em] border border-green/10 shadow-sm leading-none">
+                        <div className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[8px] font-black text-black/40 uppercase tracking-[0.15em] border border-black/5 shadow-sm leading-none">
                           {game.ageGroup}
                         </div>
-                      </div>
-
-                      {/* Rank/Flex Badge */}
-                      <div className="absolute top-5 right-5 flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple text-white text-[8px] font-black uppercase tracking-widest shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-90 group-hover:scale-100">
-                        <Star className="w-2.5 h-2.5 fill-current" />
-                        Elite Status
                       </div>
                     </div>
 
@@ -336,7 +339,7 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                         {game.title}
                       </h2>
                       
-                      <p className="text-sm text-black/50 font-medium leading-relaxed mb-5 line-clamp-2 italic">
+                      <p className="text-sm text-black/50 font-medium leading-relaxed mb-5 line-clamp-3 italic">
                         {game.shortDescription}
                       </p>
 
@@ -355,7 +358,7 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                           href={`/mind-gym/${gameSlug}`}
                           className="dm-pill-button dm-pill-button-primary w-full text-[10px] py-4 inline-flex items-center justify-center gap-3 group-hover:scale-[1.01] transition-all"
                         >
-                          Start Training
+                          Start Game
                           <ArrowRight className="w-4 h-4" />
                         </Link>
                         
@@ -389,13 +392,13 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
                 The Science of Neuroplasticity
               </h2>
               <p className="text-base md:text-lg text-white/80 font-medium leading-relaxed mb-6 max-w-3xl mx-auto italic">
-                Our Mind Gym exercises are built on the principles of neuroplasticity—the brain&apos;s innate ability to reorganize itself by forming new neural connections. Regular training helps maintain acuity and sharpens executive function across all ages.
+                Our Mind Gym exercises are built on the principles of neuroplasticity—the brain&apos;s innate ability to reorganize itself by forming new neural connections. Regular games help maintain acuity and sharpens executive function across all ages.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
                   { title: "Daily Practice", desc: "Just 10 minutes a day leads to measurable improvements in focus and mental agility." },
-                  { title: "Targeted Training", desc: "Select exercises based on your specific developmental needs and goals." },
+                  { title: "Targeted Games", desc: "Select exercises based on your specific developmental needs and goals." },
                   { title: "Evidence Based", desc: "Inspired by gold-standard neuropsychological assessments and clinical practices." }
                 ].map((item, i) => (
                   <div key={i} className="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-5 border border-white/10 text-left transition-all duration-500 h-full flex flex-col justify-center">
@@ -411,4 +414,3 @@ export function MindGymPage({ initialGames }: MindGymPageProps) {
     </div>
   );
 }
-
