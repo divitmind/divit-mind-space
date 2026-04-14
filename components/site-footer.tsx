@@ -26,10 +26,10 @@ const socialLinks = [
 
 export function SiteFooter() {
     return (
-        <footer className="bg-[#FDFBF7] border-t border-black/5 pt-20 pb-12">
+        <footer className="bg-[#FDFBF7] border-t border-black/5 pt-3 pb-12">
             <div className="container">
                 {/* Top Grid: 2 columns on mobile, 4 on desktop */}
-                <div className="grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-x-8 gap-y-12 mb-16">
+                <div className="grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-x-8 gap-y-8 lg:gap-y-12 mb-8 lg:mb-16">
                     {/* Brand Column: Full width on mobile */}
                     <div className="col-span-2 lg:col-span-1">
                         <div className="w-16 h-16 mb-6 relative">
@@ -83,7 +83,7 @@ export function SiteFooter() {
                     </div>
 
                     {/* Contact Column: Full width on mobile */}
-                    <div className="col-span-2 lg:col-span-1 pt-8 lg:pt-0 border-t lg:border-none border-black/5">
+                    <div className="col-span-2 lg:col-span-1 pt-3 lg:pt-0 border-t lg:border-none border-black/5">
                         <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-8">
                             Get in Touch
                         </h4>
@@ -92,7 +92,7 @@ export function SiteFooter() {
                                 <MapPin className="h-5 w-5 shrink-0 text-green/40" />
                                 <span className="leading-relaxed">{contact.address}</span>
                             </p>
-                            <div className="space-y-3">
+                            <div className="flex flex-wrap gap-x-8 gap-y-4">
                                 <a
                                     href={contact.phone.href}
                                     className="flex items-center gap-4 hover:text-green transition-colors group"
@@ -113,7 +113,7 @@ export function SiteFooter() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-8 pt-10 border-t border-black/5">
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-8 pt-3 lg:pt-10 border-t border-black/5">
                     <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-8">
                         <p className="text-[11px] text-black/30 font-bold uppercase tracking-widest">
                             © {new Date().getFullYear()} Divit MindSpace
