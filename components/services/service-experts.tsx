@@ -1,23 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { User } from "lucide-react";
-
-interface Specialist {
-  _id: string;
-  name: string;
-  slug: { current: string };
-  title: string;
-  image: {
-    asset: { url: string };
-    alt?: string;
-  };
-  experience?: string;
-  specialties?: string[];
-  teaser: string;
-}
+import { SpecialistCard } from "@/components/ui/specialist-card";
+import { Specialist } from "@/sanity/types";
 
 interface ServiceExpertsProps {
   specialists: Specialist[];
@@ -49,8 +36,8 @@ export function ServiceExperts({ specialists, onDemand }: ServiceExpertsProps) {
                   <p className="text-black/70 leading-relaxed font-medium">
                     This service is overseen by our Senior Clinical Specialists and delivered by qualified consultants on-demand to ensure the highest standards of care and clinical excellence.
                   </p>
-                  <Link 
-                    href="/about-us#specialists" 
+                  <Link
+                    href="/about-us#specialists"
                     className="inline-flex items-center gap-2 mt-4 text-sm font-bold uppercase tracking-widest text-green hover:text-green/80 transition-colors"
                   >
                     View our full team of specialists
@@ -70,28 +57,8 @@ export function ServiceExperts({ specialists, onDemand }: ServiceExpertsProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="group bg-[#FAF9F5] rounded-2xl p-6 border border-green/10 hover:border-green/20 transition-all"
                 >
-                  <div className="flex gap-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-white shadow-sm">
-                      <Image
-                        src={specialist.image.asset.url}
-                        alt={specialist.image.alt || specialist.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="font-serif text-lg text-green leading-tight">{specialist.name}</h3>
-                      <p className="text-xs text-green/60 font-bold uppercase tracking-wider mb-2">{specialist.title}</p>
-                      <p className="text-sm text-black/70 line-clamp-2 mb-3">{specialist.teaser}</p>
-                      {specialist.experience && (
-                        <p className="text-[10px] text-green/40 font-bold uppercase tracking-widest">
-                          {specialist.experience} Experience
-                        </p>
-                      )}
-                    </div>
-                  </div>
+                  <SpecialistCard specialist={specialist} variant="compact" />
                 </motion.div>
               ))}
             </div>

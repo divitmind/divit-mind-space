@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, ImageIcon, Megaphone, FileText, Heart, Users, GraduationCap, Brain, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,6 +32,14 @@ const serviceGroups = [
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
+  const pathname = usePathname();
+
+  const handleHomeClick = () => {
+    if (pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    setOpen(false);
+  };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -53,7 +62,7 @@ export function MobileNav() {
         <ScrollArea className="h-[calc(100vh-66px)]">
           <div className="flex flex-col gap-1 p-4 pt-0">
             <div className="space-y-0">
-                <MobileNavItem href="/" label="Home" setOpen={setOpen} />
+                <MobileNavItem href="/" label="Home" setOpen={setOpen} onCustomClick={handleHomeClick} />
                 <MobileNavItem href="/about-us" label="About Us" setOpen={setOpen} />
             </div>
 
@@ -129,11 +138,11 @@ export function MobileNav() {
   );
 }
 
-function MobileNavItem({ href, label, setOpen }: { href: string; label: string; setOpen: (open: boolean) => void }) {
+function MobileNavItem({ href, label, setOpen, onCustomClick }: { href: string; label: string; setOpen: (open: boolean) => void; onCustomClick?: () => void }) {
     return (
         <Link
             href={href}
-            onClick={() => setOpen(false)}
+            onClick={onCustomClick || (() => setOpen(false))}
             className="group flex items-center justify-between px-6 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 hover:text-green hover:bg-green/5 rounded-[1.5rem] transition-all duration-500"
         >
             {label}

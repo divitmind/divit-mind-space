@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Brain, Briefcase, Image as ImageIcon, Megaphone, ChevronDown, FileText, Heart, Users, GraduationCap } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -26,11 +27,20 @@ const serviceCategories = [
 ];
 
 export function MainNav() {
+  const pathname = usePathname();
+
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <NavigationMenu className="hidden md:flex">
       <NavigationMenuList className="gap-2">
         <NavigationMenuItem>
-          <NavLink href="/">Home</NavLink>
+          <NavLink href="/" onClick={handleHomeClick}>Home</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
@@ -122,16 +132,16 @@ export function MainNav() {
   );
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({ href, children, onClick }: { href: string; children: React.ReactNode; onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void }) {
     return (
-        <NavigationMenuLink 
+        <NavigationMenuLink
             className={cn(
-                navigationMenuTriggerStyle(), 
+                navigationMenuTriggerStyle(),
                 "bg-transparent text-black/40 hover:text-green font-bold text-[10px] uppercase tracking-[0.2em] transition-all px-4 h-10"
-            )} 
+            )}
             asChild
         >
-            <Link href={href}>{children}</Link>
+            <Link href={href} onClick={onClick}>{children}</Link>
         </NavigationMenuLink>
     );
 }

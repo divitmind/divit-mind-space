@@ -255,6 +255,7 @@ export const SINGLE_SERVICE_QUERY = `*[_type == "services" && slug.current == $s
     experience,
     specialties,
     teaser,
+    fullBio,
     order
   }
 }`;
