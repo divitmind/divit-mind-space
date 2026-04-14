@@ -52,16 +52,20 @@ const steps = [
 
 const faqs = [
   {
-    question: "Do I need a prior diagnosis to contact you?",
-    answer: "No, you don't. We provide full diagnostic assessments for all age groups. You can reach out even if you just have concerns or questions.",
+    question: "Is there a center in Bangalore that offers mental health, neurodevelopment, and physiotherapy together?",
+    answer: "Yes. Divit MindSpace is one of the few centers in Bangalore offering all three under one roof — mental health (counseling, clinical assessments), neurodevelopment (speech therapy, occupational therapy, ADHD and autism evaluations), and physiotherapy. Located off Sarjapur Road in Kasavanahalli, we provide integrated care for children, teens, and adults.",
   },
   {
-    question: "How soon can I get an appointment?",
-    answer: "We typically schedule initial consultations within 24-48 hours. Clinical assessments are scheduled based on specialist availability.",
+    question: "Where can I get an ADHD or autism assessment for my child near Sarjapur Road?",
+    answer: "Divit MindSpace offers comprehensive ADHD and autism assessments at our Kasavanahalli center off Sarjapur Road, Bangalore. Our clinical team provides full diagnostic evaluations, therapy recommendations, and ongoing support. Call +91 99016 66139 to book.",
   },
   {
-    question: "Do you offer support for adults?",
-    answer: "Yes, we support neurodivergent individuals of all ages — children, teens, and adults — through assessments and guidance.",
+    question: "How do I book an appointment at Divit MindSpace?",
+    answer: "Contact us via WhatsApp or call at +91 99016 66139 for a free consultation. We're open Monday to Saturday, 10 AM to 7 PM at Aadeshwar Chambers, Kasavanahalli, off Sarjapur Road, Bangalore.",
+  },
+  {
+    question: "Does Divit MindSpace provide therapy and assessments for adults?",
+    answer: "Yes. We support individuals of all ages — children, teens, and adults. Services include mental health counseling, ADHD and autism assessments, speech therapy, occupational therapy, and physiotherapy at our Bangalore center.",
   },
 ];
 
@@ -69,7 +73,7 @@ export function ContactPage() {
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Section */}
-      <section className="pt-10 pb-6 lg:pt-16 lg:pb-10 px-4">
+      <section className="pt-4 pb-6 lg:pt-8 lg:pb-10 px-4">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -80,9 +84,8 @@ export function ContactPage() {
               Let&apos;s Build Your <br className="hidden md:block" />
               <span className="italic text-purple font-serif">Unique Journey</span> Together
             </h1>
-            <p className="text-lg md:text-xl text-black/70 font-medium max-w-2xl mx-auto mb-8 md:mb-10">
+            <p className="text-lg md:text-xl text-black/70 font-medium max-w-2xl mx-auto">
               Mental health, neurodevelopment, and physiotherapy for children, teens, adults, and families.
-              Located off Sarjapur Road, Bangalore - serving HSR Layout, Bellandur, Kasavanahalli, and beyond.
             </p>
           </motion.div>
         </div>
@@ -119,7 +122,7 @@ export function ContactPage() {
       </section>
 
       {/* How We Support You Section */}
-      <section className="py-12 lg:py-16 bg-cream px-4 border-y border-black/5">
+      <section className="pt-6 lg:pt-10 pb-6 lg:pb-10 bg-cream px-4 border-y border-black/5">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center mb-10 lg:mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-green mb-4 lg:mb-6" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
@@ -149,19 +152,19 @@ export function ContactPage() {
             ))}
           </div>
 
-          <div className="mt-12 lg:mt-16 text-center">
+          <div className="mt-8 lg:mt-12 text-center">
             <WhatsAppConsultationLink className="dm-pill-button px-10">
-              Start Your Consultation Now
+              Chat with Us
             </WhatsAppConsultationLink>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-12 lg:py-16 px-4">
+      <section className="pt-6 lg:pt-10 pb-10 lg:pb-16 px-4">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-10 lg:mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif text-green mb-4 lg:mb-6" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+          <div className="text-center mb-6 lg:mb-8">
+            <h2 className="text-3xl md:text-4xl font-serif text-green" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               Common <span className="italic text-purple font-serif">Questions</span>
             </h2>
           </div>
@@ -188,31 +191,6 @@ export function ContactPage() {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="pb-12 lg:pb-20 px-4">
-        <div className="container mx-auto">
-          <div className="rounded-[2.5rem] overflow-hidden h-[280px] md:h-[400px] shadow-2xl shadow-black/10 border-8 border-white relative group">
-             <div className="absolute inset-0 bg-[#F5F1E9] flex items-center justify-center p-4">
-                <div className="text-center max-w-md">
-                    <div className="w-16 h-16 lg:w-20 lg:h-20 bg-green/5 rounded-full flex items-center justify-center mx-auto mb-6 lg:mb-8 group-hover:scale-110 transition-transform duration-500">
-                        <MapPin className="w-8 h-8 lg:w-10 lg:h-10 text-green" />
-                    </div>
-                    <h3 className="text-xl lg:text-2xl font-serif text-green mb-3 lg:mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>Our Location</h3>
-                    <p className="text-black/70 font-medium mb-6 lg:mb-8">Aadeshwar Chambers, Kasavanahalli, <br />Off Sarjapur Road, Bengaluru</p>
-                    <a 
-                        href="https://maps.google.com/?q=Aadeshwar+Chambers+Kasavanahalli+Bengaluru" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-[10px] lg:text-xs font-bold text-green uppercase tracking-widest border-b-2 border-green/20 pb-1 hover:border-green hover:gap-3 transition-all"
-                    >
-                        View on Google Maps <ArrowRight className="w-3 h-3 lg:w-4 lg:h-4" />
-                    </a>
-                </div>
-             </div>
-             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#004540_1px,transparent_1px)] [background-size:24px_24px]" />
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

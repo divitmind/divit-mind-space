@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, ImageIcon, Megaphone, Briefcase, FileText, Heart, Users, GraduationCap, Brain, ChevronRight, Sparkles } from "lucide-react";
+import { Menu, ImageIcon, Megaphone, FileText, Heart, Users, GraduationCap, Brain, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -41,21 +41,18 @@ export function MobileNav() {
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-full sm:w-[400px] bg-[#FDFBF7] p-0 border-l border-black/5">
-        <SheetHeader className="p-8 border-b border-black/5 bg-white/50 backdrop-blur-xl">
-          <div className="flex items-center gap-4">
+        <SheetHeader className="px-6 py-3 border-b border-black/5 bg-white/50 backdrop-blur-xl">
+          <div className="flex items-center">
             <div className="relative w-12 h-12">
-                <Image src="/divit-mindspace-logo.png" alt="Logo" fill className="object-contain" />
+                <Image src="/divit-mindspace-logo.png" alt="Divit MindSpace Logo" fill className="object-contain" />
             </div>
-            <div className="text-left">
-                <SheetTitle className="font-serif italic text-2xl text-green leading-none" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>Divit</SheetTitle>
-                <span className="text-[9px] font-bold text-black/30 uppercase tracking-[0.3em]">MindSpace</span>
-            </div>
+            <SheetTitle className="sr-only">Divit MindSpace Menu</SheetTitle>
           </div>
         </SheetHeader>
         
-        <ScrollArea className="h-[calc(100vh-110px)]">
-          <div className="flex flex-col gap-2 p-6">
-            <div className="space-y-1">
+        <ScrollArea className="h-[calc(100vh-66px)]">
+          <div className="flex flex-col gap-1 p-4 pt-0">
+            <div className="space-y-0">
                 <MobileNavItem href="/" label="Home" setOpen={setOpen} />
                 <MobileNavItem href="/about-us" label="About Us" setOpen={setOpen} />
             </div>
@@ -105,25 +102,25 @@ export function MobileNav() {
               </AccordionItem>
             </Accordion>
 
-            <div className="space-y-1">
+            <div className="space-y-0">
                 <MobileNavItem href="/awareness-program" label="Workshops" setOpen={setOpen} />
                 <MobileNavItem href="/careers" label="Careers" setOpen={setOpen} />
                 <MobileNavItem href="/blogs" label="Blogs" setOpen={setOpen} />
                 <MobileNavItem href="/contact-us" label="Contact" setOpen={setOpen} />
             </div>
 
-            <div className="mt-12 px-2">
-              <WhatsAppConsultationLink className="w-full dm-pill-button dm-pill-button-primary py-5 shadow-2xl shadow-green/20 scale-105">
-                Book a Free Consultation
+            <div className="mt-6 px-2 pb-4">
+              <WhatsAppConsultationLink className="w-full dm-pill-button dm-pill-button-primary py-4 shadow-xl shadow-green/20">
+                Chat with Us
               </WhatsAppConsultationLink>
-            <div className="mt-8 text-center space-y-2">
-              <p className="text-[9px] font-bold text-black/20 uppercase tracking-[0.15em] leading-relaxed">
-                Bangalore&apos;s Leading Center for All Ages
-              </p>
-              <p className="text-[8px] font-bold text-black/15 uppercase tracking-[0.1em] leading-relaxed">
-                Mental Health • Neurodevelopment • Physiotherapy
-              </p>
-            </div>
+              <div className="mt-4 text-center space-y-1">
+                <p className="text-[9px] font-bold text-black/20 uppercase tracking-[0.15em] leading-relaxed">
+                  Bangalore&apos;s Leading Center for All Ages
+                </p>
+                <p className="text-[8px] font-bold text-black/15 uppercase tracking-[0.1em] leading-relaxed">
+                  Mental Health • Neurodevelopment • Physiotherapy
+                </p>
+              </div>
             </div>
           </div>
         </ScrollArea>

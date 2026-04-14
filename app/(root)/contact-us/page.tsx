@@ -118,34 +118,34 @@ const faqJsonLd = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Where is Divit MindSpace located in Bangalore?",
+      name: "Is there a center in Bangalore that offers mental health, neurodevelopment, and physiotherapy together?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Divit MindSpace is located at Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bengaluru 560035. We serve families across HSR Layout, Bellandur, Koramangala, Marathahalli, and all of Bangalore.",
+        text: "Yes. Divit MindSpace is one of the few centers in Bangalore offering all three under one roof — mental health (counseling, clinical assessments), neurodevelopment (speech therapy, occupational therapy, ADHD and autism evaluations), and physiotherapy. Located off Sarjapur Road in Kasavanahalli, we provide integrated care for children, teens, and adults.",
       },
     },
     {
       "@type": "Question",
-      name: "How do I contact Divit MindSpace?",
+      name: "Where can I get an ADHD or autism assessment for my child near Sarjapur Road?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "You can reach Divit MindSpace via WhatsApp or call at +91 99016 66139, or email divitmindspace@gmail.com. We're open Monday to Saturday, 10:00 AM to 7:00 PM.",
+        text: "Divit MindSpace offers comprehensive ADHD and autism assessments at our Kasavanahalli center off Sarjapur Road, Bangalore. Our clinical team provides full diagnostic evaluations, therapy recommendations, and ongoing support. Call +91 99016 66139 to book.",
       },
     },
     {
       "@type": "Question",
-      name: "Do I need a prior diagnosis to contact Divit MindSpace?",
+      name: "How do I book an appointment at Divit MindSpace?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No, you don't need a prior diagnosis. Divit MindSpace provides full diagnostic assessments for all age groups. You can reach out even if you just have concerns or questions about mental health, neurodevelopment, or physiotherapy.",
+        text: "Contact us via WhatsApp or call at +91 99016 66139 for a free consultation. We're open Monday to Saturday, 10 AM to 7 PM at Aadeshwar Chambers, Kasavanahalli, off Sarjapur Road, Bangalore.",
       },
     },
     {
       "@type": "Question",
-      name: "Does Divit MindSpace offer support for adults?",
+      name: "Does Divit MindSpace provide therapy and assessments for adults?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, Divit MindSpace supports neurodivergent individuals of all ages — children, teens, and adults — through clinical assessments, counseling, therapy, and physiotherapy services in Bangalore.",
+        text: "Yes. We support individuals of all ages — children, teens, and adults. Services include mental health counseling, ADHD and autism assessments, speech therapy, occupational therapy, and physiotherapy at our Bangalore center.",
       },
     },
   ],
