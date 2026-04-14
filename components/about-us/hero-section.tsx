@@ -67,22 +67,22 @@ export function HeroSection({ data }: { data?: AboutUsHeroData }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <div className="text-center">
+            <div className="text-center group">
+              <div className="text-xl font-bold text-black">21+</div>
+              <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Services</div>
+            </div>
+            <div className="w-px h-8 bg-black/10" />
+            <div className="text-center group">
+              <div className="text-xl font-bold text-black">12+</div>
+              <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Specialists</div>
+            </div>
+            <div className="w-px h-8 bg-black/10" />
+            <div className="text-center group">
               <div className="text-xl font-bold text-black">100+</div>
               <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Families</div>
             </div>
             <div className="w-px h-8 bg-black/10" />
-            <div className="text-center">
-              <div className="text-xl font-bold text-black">10+</div>
-              <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Experts</div>
-            </div>
-            <div className="w-px h-8 bg-black/10" />
-            <div className="text-center">
-              <div className="text-xl font-bold text-black">4.9/5</div>
-              <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Rating</div>
-            </div>
-            <div className="w-px h-8 bg-black/10" />
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 group">
               <svg className="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                 <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
