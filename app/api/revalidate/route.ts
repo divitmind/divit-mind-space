@@ -1,72 +1,24 @@
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import { parseBody } from "next-sanity/webhook";
 
 // Secret token to validate webhook requests from Sanity
 const SANITY_REVALIDATE_SECRET = process.env.SANITY_REVALIDATE_SECRET;
 
-// Map Sanity document types to paths and tags that need revalidation
-const revalidationMap: Record<string, { paths: string[]; tags: string[] }> = {
-  // Careers
-  career: {
-    paths: ["/careers"],
-    tags: ["career"],
-  },
-  // Services
-  services: {
-    paths: ["/services"],
-    tags: ["services"],
-  },
-  // Blog posts
-  post: {
-    paths: ["/blogs"],
-    tags: ["post"],
-  },
-  // News
-  news: {
-    paths: ["/blogs"],
-    tags: ["news"],
-  },
-  // Reviews/Testimonials
-  review: {
-    paths: ["/"],
-    tags: ["review"],
-  },
-  // Gallery
-  gallery: {
-    paths: ["/gallery"],
-    tags: ["gallery"],
-  },
-  // About Us
-  aboutUs: {
-    paths: ["/about-us"],
-    tags: ["aboutUs"],
-  },
-  // Specialists
-  specialist: {
-    paths: ["/about-us"],
-    tags: ["specialist"],
-  },
-  // Awareness/Workshops
-  awareness: {
-    paths: ["/awareness-program"],
-    tags: ["awareness"],
-  },
-  // Site Settings (affects multiple pages)
-  siteSettings: {
-    paths: ["/", "/contact-us", "/services", "/about-us"],
-    tags: ["siteSettings"],
-  },
-  // Promo/Announcements
-  promowebsite: {
-    paths: ["/"],
-    tags: ["promowebsite"],
-  },
-  // Mind Gym
-  mindGym: {
-    paths: ["/mind-gym"],
-    tags: ["mindGym"],
-  },
+// Map Sanity document types to paths that need revalidation
+const revalidationMap: Record<string, string[]> = {
+  career: ["/careers"],
+  services: ["/services"],
+  post: ["/blogs"],
+  news: ["/blogs"],
+  review: ["/"],
+  gallery: ["/gallery"],
+  aboutUs: ["/about-us"],
+  specialist: ["/about-us"],
+  awareness: ["/awareness-program"],
+  siteSettings: ["/", "/contact-us", "/services", "/about-us"],
+  promowebsite: ["/"],
+  mindGym: ["/mind-gym"],
 };
 
 export async function POST(req: NextRequest) {
@@ -103,45 +55,30 @@ export async function POST(req: NextRequest) {
     }
 
     const { _type, slug } = body;
-    const config = revalidationMap[_type];
-
+    const paths = revalidationMap[_type] || ["/"];
     const revalidatedPaths: string[] = [];
-    const revalidatedTags: string[] = [];
 
-    if (config) {
-      // Revalidate configured paths
-      for (const path of config.paths) {
-        revalidatePath(path);
-        revalidatedPaths.push(path);
-      }
-
-      // Revalidate configured tags
-      for (const tag of config.tags) {
-        revalidateTag(tag);
-        revalidatedTags.push(tag);
-      }
-
-      // If there's a slug, also revalidate the specific page
-      if (slug?.current) {
-        const slugPath = getSlugPath(_type, slug.current);
-        if (slugPath) {
-          revalidatePath(slugPath);
-          revalidatedPaths.push(slugPath);
-        }
-      }
-    } else {
-      // Unknown type - revalidate home page as fallback
-      revalidatePath("/");
-      revalidatedPaths.push("/");
+    // Revalidate configured paths
+    for (const path of paths) {
+      revalidatePath(path);
+      revalidatedPaths.push(path);
     }
 
-    console.log(`Revalidated for ${_type}:`, { revalidatedPaths, revalidatedTags });
+    // If there's a slug, also revalidate the specific page
+    if (slug?.current) {
+      const slugPath = getSlugPath(_type, slug.current);
+      if (slugPath) {
+        revalidatePath(slugPath);
+        revalidatedPaths.push(slugPath);
+      }
+    }
+
+    console.log(`Revalidated for ${_type}:`, revalidatedPaths);
 
     return NextResponse.json({
       revalidated: true,
       message: `Revalidated ${_type}`,
       paths: revalidatedPaths,
-      tags: revalidatedTags,
     });
   } catch (error) {
     console.error("Revalidation error:", error);
