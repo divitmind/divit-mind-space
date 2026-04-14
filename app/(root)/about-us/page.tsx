@@ -78,25 +78,25 @@ function generateFaqSchema(faqs: FAQ[]) {
 }
 
 export const metadata: Metadata = {
-  title: "About Us | Divit MindSpace - Empowering Neurodivergent Children",
-  description: "Divit MindSpace offers clinical assessments, specialized education, and comprehensive training for neurodivergent children and their families. Free awareness sessions across communities to break stigma and nurture potential.",
+  title: "About Us | Divit MindSpace - Mental Health & Neurodevelopment Bangalore",
+  description: "Bangalore's leading center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and Bengaluru.",
   keywords: [
-    "neurodivergent care",
-    "special education",
-    "clinical assessments",
-    "family support",
-    "early intervention",
-    "autism support",
-    "ADHD support",
-    "learning disabilities",
-    "parent training",
-    "inclusive education"
+    "mental health Bangalore",
+    "neurodevelopmental care Bangalore",
+    "physiotherapy Sarjapur Road",
+    "clinical assessments Bangalore",
+    "special education Bangalore",
+    "autism support Bangalore",
+    "ADHD counseling Bangalore",
+    "Kasavanahalli therapy center",
+    "HSR Layout child development",
+    "Bellandur mental health services"
   ],
   openGraph: {
     type: "website",
     url: "https://divitmindspace.com/about-us",
-    title: "About Us | Divit MindSpace - Empowering Neurodivergent Children",
-    description: "Empowering neurodivergent children through clinical assessments, specialized education, and comprehensive family support. Breaking stigma through FREE community awareness sessions.",
+    title: "About Us | Divit MindSpace - Leading Center for Mental Health & Neurodevelopment",
+    description: "Expert clinical assessments, therapies, and specialized education off Sarjapur Road. Trusted care for families in Kasavanahalli, HSR Layout, and Bellandur.",
     images: [
       {
         url: "/divit-mindspace-logo.png",
@@ -109,8 +109,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Us | Divit MindSpace - Empowering Neurodivergent Children",
-    description: "Clinical assessments, specialized education, and family support for neurodivergent children. Free awareness sessions across communities.",
+    title: "About Us | Divit MindSpace - Mental Health & Neurodevelopment Bangalore",
+    description: "Clinical assessments, therapies, and family support for neurodivergent individuals off Sarjapur Road.",
     images: ["/divit-mindspace-logo.png"]
   },
   robots: {

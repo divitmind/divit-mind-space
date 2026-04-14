@@ -51,29 +51,32 @@ const defaultReasons = [
 ];
 
 export function PhilosophySection({ data }: { data?: AboutUsPhilosophyData }) {
-  const title = data?.title || "Why Families Choose Us";
-  const description = data?.description || "What sets Divit MindSpace apart from other centers";
+  const title = "Why Bangalore Families Choose Divit MindSpace";
+  const description = data?.description || "What sets our center apart from other facilities in Bengaluru";
   const points = data?.points || defaultReasons;
 
   return (
-    <section className="py-12 lg:py-16 bg-cream">
+    <section className="py-8 lg:pt-6 lg:pb-6 bg-white">
       <div className="container mx-auto px-4">
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-8 lg:mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
+
+
           <h2
-            className="text-3xl lg:text-4xl font-serif text-green mb-4"
+            className="text-4xl lg:text-5xl font-serif text-black mb-4"
             style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
           >
             {title}
           </h2>
-          <p className="text-black/70 font-medium max-w-xl mx-auto">
+          <p className="text-black/70 text-lg font-medium max-w-2xl mx-auto">
             {description}
           </p>
         </motion.div>
+
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {points.map((reason, idx) => {
@@ -81,17 +84,17 @@ export function PhilosophySection({ data }: { data?: AboutUsPhilosophyData }) {
             return (
               <motion.div
                 key={idx}
-                className="bg-white rounded-2xl p-8 border border-black/5 shadow-xl shadow-black/[0.02] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1"
+                className="bg-[#FAF9F5] rounded-[2rem] p-10 border border-black/5 shadow-xl shadow-black/[0.01] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <div className="w-12 h-12 rounded-xl bg-purple/10 flex items-center justify-center mb-6">
-                  <IconComponent className="w-6 h-6 text-purple" />
+                <div className="w-14 h-14 rounded-2xl bg-[#7A9A7D]/10 flex items-center justify-center mb-8">
+                  <IconComponent className="w-7 h-7 text-[#7A9A7D]" />
                 </div>
-                <h3 className="text-xl font-bold text-green mb-3">{reason.title}</h3>
-                <p className="text-sm text-black/70 font-medium leading-relaxed">{reason.description}</p>
+                <h3 className="text-2xl font-bold text-black mb-4">{reason.title}</h3>
+                <p className="text-base text-black/60 font-medium leading-relaxed">{reason.description}</p>
               </motion.div>
             );
           })}
@@ -100,3 +103,5 @@ export function PhilosophySection({ data }: { data?: AboutUsPhilosophyData }) {
     </section>
   );
 }
+
+

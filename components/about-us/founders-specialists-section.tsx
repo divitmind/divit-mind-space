@@ -119,10 +119,10 @@ export function FoundersSpecialistsSection({ specialists }: { specialists: Speci
   })) as Specialist[];
 
   return (
-    <section className="py-12 lg:py-20 bg-cream" id="specialists">
+    <section className="py-8 lg:pt-6 lg:pb-6 bg-cream" id="specialists">
       <div className="container mx-auto px-4">
         <motion.div
-          className="text-center mb-12 lg:mb-16"
+          className="text-center mb-8 lg:mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -133,10 +133,11 @@ export function FoundersSpecialistsSection({ specialists }: { specialists: Speci
               Our Specialists
             </h2>
           </div>
-          <p className="text-black/70 font-medium max-w-2xl mx-auto">
+          <p className="text-black/70 font-medium max-w-3xl mx-auto">
             A multidisciplinary team of dedicated experts working together to support your child&apos;s growth.
           </p>
         </motion.div>
+
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {displayPeople.map((person, idx) => (

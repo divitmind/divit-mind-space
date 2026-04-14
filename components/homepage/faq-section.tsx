@@ -16,9 +16,10 @@ export function FaqSection({ faqs, title = "Frequently Asked Questions", subtitl
     const [openId, setOpenId] = useState<number | null>(0);
 
     return (
-        <section className="pt-6 lg:pt-10 pb-4 lg:pb-8 bg-[#FDFBF7] relative overflow-hidden">
+        <section className="pt-4 lg:pt-6 pb-4 lg:pb-6 bg-[#FDFBF7] relative overflow-hidden">
             <div className="max-w-4xl mx-auto px-4 relative z-10">
                 <div className="text-center mb-8">
+
                     <div className="inline-flex items-center justify-center text-black/40 text-[10px] font-bold tracking-widest uppercase mb-4">
                         {subtitle}
                     </div>
