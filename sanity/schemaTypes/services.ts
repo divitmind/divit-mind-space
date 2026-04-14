@@ -8,7 +8,9 @@ export const servicesType = defineType({
   groups: [
     { name: 'basic', title: '1. Basic Info', default: true },
     { name: 'content', title: '2. Service Details' },
-    { name: 'seo', title: '3. SEO (Optional)' },
+    { name: 'experts', title: '3. Experts & FAQ' },
+    { name: 'cta', title: '4. CTA Override' },
+    { name: 'seo', title: '5. SEO (Optional)' },
   ],
   fields: [
     // ============================================================
@@ -208,6 +210,51 @@ export const servicesType = defineType({
         }),
       ],
     }),
+
+    // ============================================================
+    // EXPERTS & FAQ - GEO/LLM Optimization
+    // ============================================================
+    defineField({
+      name: 'onDemand',
+      title: '📅 [TOGGLE] On-Demand Service',
+      type: 'boolean',
+      group: 'experts',
+      description: 'If enabled, shows "Clinical Leadership" fallback instead of specific specialists.',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'faqs',
+      title: '❓ [GEO] Frequently Asked Questions',
+      type: 'array',
+      group: 'experts',
+      description: 'Critical for LLM clipping. Add 3-5 high-intent questions and answers.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            { name: 'question', type: 'string', title: 'Question' },
+            { name: 'answer', type: 'text', title: 'Answer', rows: 3 },
+          ],
+        }),
+      ],
+    }),
+
+    // ============================================================
+    // CTA OVERRIDE - Tailored Conversion
+    // ============================================================
+    defineField({
+      name: 'ctaOverride',
+      title: '🎯 [OPTIONAL] Tailored CTA',
+      type: 'object',
+      group: 'cta',
+      description: 'Leave blank to use the global "All Ages" CTA.',
+      fields: [
+        { name: 'title', type: 'string', title: 'CTA Title', description: 'e.g., "Ready for Your Diagnostic Assessment?"' },
+        { name: 'description', type: 'text', title: 'CTA Description', rows: 3 },
+        { name: 'buttonText', type: 'string', title: 'Button Label', initialValue: 'Book Free Consultation' },
+      ],
+    }),
+
     defineField({
       name: 'seo',
       type: 'object',

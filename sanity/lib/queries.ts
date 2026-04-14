@@ -237,7 +237,26 @@ export const SINGLE_SERVICE_QUERY = `*[_type == "services" && slug.current == $s
   whoIsItFor,
   duration,
   format,
-  seo
+  seo,
+  faqs,
+  ctaOverride,
+  onDemand,
+  "specialists": *[_type == "specialist" && references(^._id)] | order(order desc, name asc) {
+    _id,
+    name,
+    slug,
+    title,
+    "image": image{
+      asset->{url},
+      alt,
+      hotspot,
+      crop
+    },
+    experience,
+    specialties,
+    teaser,
+    order
+  }
 }`;
 
 /**

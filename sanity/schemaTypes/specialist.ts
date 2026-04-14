@@ -69,6 +69,14 @@ export const specialistType = defineType({
       description: "Up to 4 key specialties (e.g., Autism, ADHD, Motor Skills)",
       validation: (rule) => rule.max(4),
     }),
+    defineField({
+      name: "servicesProvided",
+      title: "🛠️ [GEO] Services Provided",
+      type: "array",
+      group: "basic",
+      description: "Link this specialist to specific services for dynamic display and LLM discovery.",
+      of: [{ type: "reference", to: [{ type: "services" }] }],
+    }),
 
     // ============================================================
     // BIOGRAPHY - Detailed profile content
