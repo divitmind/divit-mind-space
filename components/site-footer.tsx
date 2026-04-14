@@ -104,7 +104,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                             </h3>
                         </div>
                         <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px]">
-                            {footerContent?.description || "Expert clinical assessments, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and Bengaluru."}
+                            {footerContent?.description || "Expert clinical assessments, therapies, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and Bengaluru."}
                         </p>
                     </div>
 
