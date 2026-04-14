@@ -617,6 +617,16 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
     "tagline": footer.tagline,
     "description": footer.description
   },
+  "navigation": {
+    "quickLinks": navigation.quickLinks[]{
+      label,
+      href
+    },
+    "headerCtaText": navigation.headerCtaText,
+    "headerCtaMobileText": navigation.headerCtaMobileText,
+    "headerCtaLink": navigation.headerCtaLink,
+    "joinTeamText": navigation.joinTeamText
+  },
   "homepage": {
     "heroDescription": homepage.heroDescription,
     "rollingAudiences": homepage.rollingAudiences,
@@ -630,5 +640,21 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
     "therapyDescription": servicesPage.therapyDescription,
     "guidanceDescription": servicesPage.guidanceDescription,
     "programsDescription": servicesPage.programsDescription
+  },
+  "contactPage": {
+    "heroTitle": contactPage.heroTitle,
+    "heroTitleHighlight": contactPage.heroTitleHighlight,
+    "heroSubtitle": contactPage.heroSubtitle,
+    "processTitle": contactPage.processTitle,
+    "processSubtitle": contactPage.processSubtitle,
+    "processSteps": contactPage.processSteps[]{
+      title,
+      description
+    },
+    "faqTitle": contactPage.faqTitle,
+    "faqs": contactPage.faqs[]{
+      question,
+      answer
+    }
   }
 }`;

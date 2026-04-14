@@ -9,8 +9,10 @@ export const siteSettingsType = defineType({
     { name: "social", title: "2. Social Links" },
     { name: "metrics", title: "3. Trust Metrics" },
     { name: "footer", title: "4. Footer Content" },
-    { name: "homepage", title: "5. Homepage" },
-    { name: "services", title: "6. Services Page" },
+    { name: "navigation", title: "5. Navigation Links" },
+    { name: "homepage", title: "6. Homepage" },
+    { name: "services", title: "7. Services Page" },
+    { name: "contactPage", title: "8. Contact Page" },
   ],
   fields: [
     // ============================================================
@@ -188,6 +190,61 @@ export const siteSettingsType = defineType({
     }),
 
     // ============================================================
+    // NAVIGATION LINKS - Quick links in footer and header
+    // ============================================================
+    defineField({
+      name: "navigation",
+      title: "Navigation Links",
+      type: "object",
+      group: "navigation",
+      description: "Quick links shown in footer and navigation menus",
+      fields: [
+        defineField({
+          name: "quickLinks",
+          title: "📑 [EDIT] Footer Quick Links",
+          type: "array",
+          description: "Links shown in footer under 'Explore' section",
+          of: [
+            {
+              type: "object",
+              fields: [
+                { name: "label", type: "string", title: "Link Label" },
+                { name: "href", type: "string", title: "Link URL (e.g., /about-us)" },
+              ],
+              preview: {
+                select: { title: "label", subtitle: "href" },
+              },
+            },
+          ],
+        }),
+        defineField({
+          name: "headerCtaText",
+          title: "🔘 [EDIT] Header CTA Text (Desktop)",
+          type: "string",
+          description: "Button text in header, e.g., 'Meet Our Specialists'",
+        }),
+        defineField({
+          name: "headerCtaMobileText",
+          title: "🔘 [EDIT] Header CTA Text (Mobile)",
+          type: "string",
+          description: "Shorter button text for mobile, e.g., 'Get Help'",
+        }),
+        defineField({
+          name: "headerCtaLink",
+          title: "🔗 [EDIT] Header CTA Link",
+          type: "string",
+          description: "Link for header CTA button, e.g., '/about-us#specialists'",
+        }),
+        defineField({
+          name: "joinTeamText",
+          title: "💼 [EDIT] Join Team Button Text",
+          type: "string",
+          description: "Footer careers button text, e.g., 'Join Our Team'",
+        }),
+      ],
+    }),
+
+    // ============================================================
     // HOMEPAGE CONTENT - Hero section dynamic content
     // ============================================================
     defineField({
@@ -280,12 +337,100 @@ export const siteSettingsType = defineType({
         }),
       ],
     }),
+
+    // ============================================================
+    // CONTACT PAGE - Hero, process steps, and FAQs
+    // ============================================================
+    defineField({
+      name: "contactPage",
+      title: "Contact Page Content",
+      type: "object",
+      group: "contactPage",
+      description: "Content shown on the Contact Us page",
+      fields: [
+        defineField({
+          name: "heroTitle",
+          title: "📝 [EDIT] Hero Title",
+          type: "string",
+          description: "Main headline, e.g., 'Let's Build Your'",
+        }),
+        defineField({
+          name: "heroTitleHighlight",
+          title: "📝 [EDIT] Hero Title Highlight",
+          type: "string",
+          description: "Italic highlighted text, e.g., 'Unique Journey'",
+        }),
+        defineField({
+          name: "heroSubtitle",
+          title: "📝 [EDIT] Hero Subtitle",
+          type: "text",
+          rows: 2,
+          description: "Description below headline",
+        }),
+        defineField({
+          name: "processTitle",
+          title: "📝 [EDIT] Process Section Title",
+          type: "string",
+          description: "e.g., 'How We Support You From Day 1'",
+        }),
+        defineField({
+          name: "processSubtitle",
+          title: "📝 [EDIT] Process Section Subtitle",
+          type: "text",
+          rows: 2,
+          description: "Description for process section",
+        }),
+        defineField({
+          name: "processSteps",
+          title: "📋 [EDIT] Process Steps",
+          type: "array",
+          description: "3 steps shown in the 'How We Support You' section",
+          of: [
+            {
+              type: "object",
+              fields: [
+                { name: "title", type: "string", title: "Step Title" },
+                { name: "description", type: "text", title: "Step Description", rows: 2 },
+              ],
+              preview: {
+                select: { title: "title" },
+              },
+            },
+          ],
+          validation: (rule) => rule.max(3),
+        }),
+        defineField({
+          name: "faqTitle",
+          title: "📝 [EDIT] FAQ Section Title",
+          type: "string",
+          description: "e.g., 'Common Questions'",
+        }),
+        defineField({
+          name: "faqs",
+          title: "❓ [SEO] Frequently Asked Questions",
+          type: "array",
+          description: "FAQs shown on contact page - important for SEO/GEO",
+          of: [
+            {
+              type: "object",
+              fields: [
+                { name: "question", type: "string", title: "Question" },
+                { name: "answer", type: "text", title: "Answer", rows: 3 },
+              ],
+              preview: {
+                select: { title: "question" },
+              },
+            },
+          ],
+        }),
+      ],
+    }),
   ],
   preview: {
     prepare() {
       return {
         title: "Site Settings",
-        subtitle: "Contact, Social, Metrics & Content",
+        subtitle: "Contact, Social, Metrics, Navigation & Page Content",
       };
     },
   },
