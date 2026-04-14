@@ -3,8 +3,14 @@
 import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
 import { usePathname } from "next/navigation";
+import type { SiteSettings } from "@/lib/types";
 
-const Provider = ({ children }: { children: React.ReactNode }) => {
+interface ProviderProps {
+    children: React.ReactNode;
+    siteSettings: SiteSettings | null;
+}
+
+const Provider = ({ children, siteSettings }: ProviderProps) => {
     const pathname = usePathname();
 
     if (pathname.startsWith("/studio")) {
@@ -14,7 +20,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
             <>
                 <SiteHeader />
                 {children}
-                <SiteFooter />
+                <SiteFooter siteSettings={siteSettings} />
             </>
         )
     }

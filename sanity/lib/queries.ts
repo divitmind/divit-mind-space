@@ -599,12 +599,10 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
     "mapLink": contact.mapLink,
     "workingHours": contact.workingHours
   },
-  "social": {
-    "instagram": social.instagram,
-    "facebook": social.facebook,
-    "linkedin": social.linkedin,
-    "twitter": social.twitter,
-    "youtube": social.youtube
+  "socialLinks": socialLinks[]{
+    platform,
+    url,
+    "icon": icon.asset->url
   },
   "metrics": {
     "familiesCount": metrics.familiesCount,
@@ -632,7 +630,13 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
     "rollingAudiences": homepage.rollingAudiences,
     "rollingSchools": homepage.rollingSchools,
     "ctaPrimary": homepage.ctaPrimary,
-    "ctaSecondary": homepage.ctaSecondary
+    "ctaSecondary": homepage.ctaSecondary,
+    "faqTitle": homepage.faqTitle,
+    "faqSubtitle": homepage.faqSubtitle,
+    "faqs": homepage.faqs[]{
+      question,
+      answer
+    }
   },
   "servicesPage": {
     "allServicesDescription": servicesPage.allServicesDescription,

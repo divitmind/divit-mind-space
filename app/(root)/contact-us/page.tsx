@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { ContactPage } from "@/components/contact/contact-page";
+import { sanityFetch } from "@/sanity/lib/live";
+import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import type { SiteSettings, FAQ } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Contact Divit MindSpace | Mental Health & Therapy Center Sarjapur Road, Bangalore",
@@ -111,47 +114,54 @@ const contactJsonLd = {
   },
 };
 
-// FAQ Schema for voice search and featured snippets
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Is there a center in Bangalore that offers mental health, neurodevelopment, and physiotherapy together?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. Divit MindSpace is one of the few centers in Bangalore offering all three under one roof — mental health (counseling, clinical assessments), neurodevelopment (speech therapy, occupational therapy, ADHD and autism evaluations), and physiotherapy. Located off Sarjapur Road in Kasavanahalli, we provide integrated care for children, teens, and adults.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Where can I get an ADHD or autism assessment for my child near Sarjapur Road?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Divit MindSpace offers comprehensive ADHD and autism assessments at our Kasavanahalli center off Sarjapur Road, Bangalore. Our clinical team provides full diagnostic evaluations, therapy recommendations, and ongoing support. Call +91 99016 66139 to book.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How do I book an appointment at Divit MindSpace?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Contact us via WhatsApp or call at +91 99016 66139 for a free consultation. We're open Monday to Saturday, 10 AM to 7 PM at Aadeshwar Chambers, Kasavanahalli, off Sarjapur Road, Bangalore.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Does Divit MindSpace provide therapy and assessments for adults?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. We support individuals of all ages — children, teens, and adults. Services include mental health counseling, ADHD and autism assessments, speech therapy, occupational therapy, and physiotherapy at our Bangalore center.",
-      },
-    },
-  ],
-};
+// Default FAQs for fallback (GEO optimized for Bangalore/Sarjapur Road)
+const defaultFaqs: FAQ[] = [
+  {
+    question: "Is there a center in Bangalore that offers mental health, neurodevelopment, and physiotherapy together?",
+    answer: "Yes. Divit MindSpace is one of the few centers in Bangalore offering all three under one roof — mental health (counseling, clinical assessments), neurodevelopment (speech therapy, occupational therapy, ADHD and autism evaluations), and physiotherapy. Located off Sarjapur Road in Kasavanahalli, we provide integrated care for children, teens, and adults.",
+  },
+  {
+    question: "Where can I get an ADHD or autism assessment for my child near Sarjapur Road?",
+    answer: "Divit MindSpace offers comprehensive ADHD and autism assessments at our Kasavanahalli center off Sarjapur Road, Bangalore. Our clinical team provides full diagnostic evaluations, therapy recommendations, and ongoing support. Call +91 99016 66139 to book.",
+  },
+  {
+    question: "How do I book an appointment at Divit MindSpace?",
+    answer: "Contact us via WhatsApp or call at +91 99016 66139 for a free consultation. We're open Monday to Saturday, 10 AM to 7 PM at Aadeshwar Chambers, Kasavanahalli, off Sarjapur Road, Bangalore.",
+  },
+  {
+    question: "Does Divit MindSpace provide therapy and assessments for adults?",
+    answer: "Yes. We support individuals of all ages — children, teens, and adults. Services include mental health counseling, ADHD and autism assessments, speech therapy, occupational therapy, and physiotherapy at our Bangalore center.",
+  },
+];
 
-export default function ContactUsPage() {
+// Generate FAQ Schema JSON-LD dynamically
+function generateFaqSchema(faqs: FAQ[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+export default async function ContactUsPage() {
+  const { data: siteSettings } = await sanityFetch<SiteSettings>({
+    query: SITE_SETTINGS_QUERY,
+  });
+
+  // Get FAQ data from Sanity with fallback
+  const contactFaqs = siteSettings?.contactPage?.faqs?.length ? siteSettings.contactPage.faqs : defaultFaqs;
+  const faqTitle = siteSettings?.contactPage?.faqTitle || "Frequently Asked Questions";
+
+  // Generate FAQ Schema dynamically
+  const faqJsonLd = generateFaqSchema(contactFaqs);
+
   return (
     <>
       <script
@@ -162,7 +172,7 @@ export default function ContactUsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <ContactPage />
+      <ContactPage faqs={contactFaqs} faqTitle={faqTitle} />
     </>
   );
 }

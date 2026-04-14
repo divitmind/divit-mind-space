@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import { SanityLive } from "@/sanity/lib/live";
+import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import Provider from "@/components/provider";
 import { ClarityInit } from "@/components/clarity-init";
+import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import type { SiteSettings } from "@/lib/types";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -188,11 +190,15 @@ const organizationJsonLd = {
   ]
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { data: siteSettings } = await sanityFetch<SiteSettings>({
+    query: SITE_SETTINGS_QUERY,
+  });
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${cormorant.variable} bg-[#FAF9F5] antialiased`}>
@@ -202,7 +208,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <SanityLive />
-        <Provider>{children}</Provider>
+        <Provider siteSettings={siteSettings}>{children}</Provider>
       </body>
     </html>
   );

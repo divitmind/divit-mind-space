@@ -81,42 +81,46 @@ export const siteSettingsType = defineType({
     // SOCIAL LINKS - Footer and contact page
     // ============================================================
     defineField({
-      name: "social",
+      name: "socialLinks",
       title: "Social Media Links",
-      type: "object",
+      type: "array",
       group: "social",
-      description: "Social media profile URLs",
-      fields: [
-        defineField({
-          name: "instagram",
-          title: "📸 [EDIT] Instagram URL",
-          type: "url",
-          description: "e.g., https://instagram.com/divitmindspace",
-        }),
-        defineField({
-          name: "facebook",
-          title: "📘 [EDIT] Facebook URL",
-          type: "url",
-          description: "e.g., https://facebook.com/divitmindspace",
-        }),
-        defineField({
-          name: "linkedin",
-          title: "💼 [EDIT] LinkedIn URL",
-          type: "url",
-          description: "e.g., https://linkedin.com/in/divitmindspace",
-        }),
-        defineField({
-          name: "twitter",
-          title: "🐦 [EDIT] X (Twitter) URL",
-          type: "url",
-          description: "e.g., https://x.com/divitmindspace",
-        }),
-        defineField({
-          name: "youtube",
-          title: "📺 [OPTIONAL] YouTube URL",
-          type: "url",
-          description: "YouTube channel URL (if any)",
-        }),
+      description: "Social media links with icons. Drag to reorder. Upload colorful brand icons (SVG or PNG).",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "platform",
+              title: "📝 Platform Name",
+              type: "string",
+              description: "e.g., Instagram, Facebook, LinkedIn, X (Twitter)",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "url",
+              title: "🔗 Profile URL",
+              type: "url",
+              description: "Full URL to your social profile",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "icon",
+              title: "🎨 Icon (Color)",
+              type: "image",
+              description: "Upload colorful brand icon (SVG preferred, or PNG with transparent background). Recommended: 64x64px",
+              options: { hotspot: false },
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              title: "platform",
+              subtitle: "url",
+              media: "icon",
+            },
+          },
+        },
       ],
     }),
 
@@ -286,6 +290,36 @@ export const siteSettingsType = defineType({
           title: "🔘 [EDIT] Secondary CTA Text",
           type: "string",
           description: "Secondary button text, e.g., 'Host a Free Workshop'",
+        }),
+        defineField({
+          name: "faqTitle",
+          title: "📝 [EDIT] FAQ Section Title",
+          type: "string",
+          description: "e.g., 'Frequently Asked Questions'",
+        }),
+        defineField({
+          name: "faqSubtitle",
+          title: "📝 [EDIT] FAQ Section Subtitle",
+          type: "string",
+          description: "Badge text above title, e.g., 'Common Queries'",
+        }),
+        defineField({
+          name: "faqs",
+          title: "❓ [SEO/GEO] Homepage FAQs",
+          type: "array",
+          description: "FAQs shown on homepage - optimized for SEO/GEO with location signals",
+          of: [
+            {
+              type: "object",
+              fields: [
+                { name: "question", type: "string", title: "Question" },
+                { name: "answer", type: "text", title: "Answer", rows: 3 },
+              ],
+              preview: {
+                select: { title: "question" },
+              },
+            },
+          ],
         }),
       ],
     }),

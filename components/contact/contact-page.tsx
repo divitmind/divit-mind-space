@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Phone, Mail, MapPin, MessageCircle, Clock, CheckCircle2, ArrowRight } from "lucide-react";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import Image from "next/image";
+import type { FAQ } from "@/lib/types";
 
 const contactDetails = [
   {
@@ -50,26 +51,12 @@ const steps = [
   },
 ];
 
-const faqs = [
-  {
-    question: "Is there a center in Bangalore that offers mental health, neurodevelopment, and physiotherapy together?",
-    answer: "Yes. Divit MindSpace is one of the few centers in Bangalore offering all three under one roof — mental health (counseling, clinical assessments), neurodevelopment (speech therapy, occupational therapy, ADHD and autism evaluations), and physiotherapy. Located off Sarjapur Road in Kasavanahalli, we provide integrated care for children, teens, and adults.",
-  },
-  {
-    question: "Where can I get an ADHD or autism assessment for my child near Sarjapur Road?",
-    answer: "Divit MindSpace offers comprehensive ADHD and autism assessments at our Kasavanahalli center off Sarjapur Road, Bangalore. Our clinical team provides full diagnostic evaluations, therapy recommendations, and ongoing support. Call +91 99016 66139 to book.",
-  },
-  {
-    question: "How do I book an appointment at Divit MindSpace?",
-    answer: "Contact us via WhatsApp or call at +91 99016 66139 for a free consultation. We're open Monday to Saturday, 10 AM to 7 PM at Aadeshwar Chambers, Kasavanahalli, off Sarjapur Road, Bangalore.",
-  },
-  {
-    question: "Does Divit MindSpace provide therapy and assessments for adults?",
-    answer: "Yes. We support individuals of all ages — children, teens, and adults. Services include mental health counseling, ADHD and autism assessments, speech therapy, occupational therapy, and physiotherapy at our Bangalore center.",
-  },
-];
+interface ContactPageProps {
+  faqs: FAQ[];
+  faqTitle?: string;
+}
 
-export function ContactPage() {
+export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions" }: ContactPageProps) {
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Section */}
@@ -165,7 +152,7 @@ export function ContactPage() {
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-6 lg:mb-8">
             <h2 className="text-3xl md:text-4xl font-serif text-green" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-              Common <span className="italic text-purple font-serif">Questions</span>
+              <span className="italic text-purple font-serif">{faqTitle}</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">

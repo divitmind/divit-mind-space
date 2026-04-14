@@ -6,8 +6,9 @@ import { WhoNeedsItSection } from "@/components/homepage/who-needs-it-section";
 import { FaqSection } from "@/components/homepage/faq-section";
 import { CtaSection } from "@/components/homepage/cta-section";
 import { sanityFetch } from "@/sanity/lib/live";
-import { TOP_REVIEWS_QUERY, THERAPY_SERVICES_QUERY, ANNOUNCEMENT_QUERY } from "@/sanity/lib/queries";
+import { TOP_REVIEWS_QUERY, THERAPY_SERVICES_QUERY, ANNOUNCEMENT_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import { ReviewsQueryResult, ServicesQueryResult, AnnouncementQueryResult } from "@/sanity/types";
+import type { SiteSettings, FAQ } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Divit MindSpace | Leading Center for Mental Health, Neurodevelopment & Physiotherapy Bangalore",
@@ -85,70 +86,60 @@ const websiteJsonLd = {
   },
 };
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
+// Default FAQs for fallback when Sanity data isn't available
+const defaultFaqs: FAQ[] = [
+  {
+    question: "Do I need a diagnosis or referral before booking at Divit MindSpace?",
+    answer: "No referral or prior diagnosis is needed. You can book directly with us at our Kasavanahalli center off Sarjapur Road, Bangalore. If you have any existing reports from schools or doctors, bring them along—but they're not required to get started.",
+  },
+  {
+    question: "My child is very young. Is it too early to seek help?",
+    answer: "Early intervention is one of the most effective ways to support development. If you have concerns, it's never too early to consult our specialists in Bangalore. We work with children as young as 18 months at our center off Sarjapur Road.",
+  },
+  {
+    question: "How soon will I see progress with therapy?",
+    answer: "Every child is different. Some families notice changes within weeks, while others see gradual progress over months. Our Bangalore-based therapists set realistic milestones together and keep you informed throughout the journey.",
+  },
+  {
+    question: "What if my child doesn't cooperate during sessions?",
+    answer: "This is completely normal and expected. Our therapists at Divit MindSpace are trained to work with children at their own pace. We use play-based and child-led approaches to build trust before diving into structured activities.",
+  },
+];
+
+// Generate FAQ Schema JSON-LD dynamically
+function generateFaqSchema(faqs: FAQ[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      name: "Do I need a diagnosis or referral before booking?",
+      name: faq.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No referral or prior diagnosis is needed. You can book directly with us. If you have any existing reports from schools or doctors, bring them along—but they're not required to get started.",
+        text: faq.answer,
       },
-    },
-    {
-      "@type": "Question",
-      name: "My child is very young. Is it too early to seek help?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Early intervention is one of the most effective ways to support development. If you have concerns, it's never too early to consult. We work with children as young as 18 months.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How long does an assessment take?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "A comprehensive assessment typically takes 2-3 sessions spread over a few days. This approach ensures your child is comfortable and performs their best without fatigue.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How soon will I see progress with therapy?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Every child is different. Some families notice changes within weeks, while others see gradual progress over months. We set realistic milestones together and keep you informed throughout the journey.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What if my child doesn't cooperate during sessions?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "This is completely normal and expected. Our therapists are trained to work with children at their own pace. We use play-based and child-led approaches to build trust before diving into structured activities.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you offer online sessions?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes, we offer online options for parent guidance and certain therapies. However, assessments and some interventions are more effective in person. We'll recommend what works best for your situation.",
-      },
-    },
-  ],
-};
+    })),
+  };
+}
 
 export default async function Page() {
-  const [{ data: reviews }, { data: therapyServices }, { data: announcement }] = await Promise.all([
+  const [{ data: reviews }, { data: therapyServices }, { data: announcement }, { data: siteSettings }] = await Promise.all([
     sanityFetch({ query: TOP_REVIEWS_QUERY }),
     sanityFetch({ query: THERAPY_SERVICES_QUERY, tags: ["services"] }),
     sanityFetch({ query: ANNOUNCEMENT_QUERY, tags: ["promowebsite"] }),
+    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY }),
   ]);
 
   const therapyServicesData = (therapyServices as ServicesQueryResult) ?? [];
   const announcementData = announcement as AnnouncementQueryResult;
+
+  // Get FAQ data from Sanity with fallback
+  const homepageFaqs = siteSettings?.homepage?.faqs?.length ? siteSettings.homepage.faqs : defaultFaqs;
+  const faqTitle = siteSettings?.homepage?.faqTitle || "Frequently Asked Questions";
+  const faqSubtitle = siteSettings?.homepage?.faqSubtitle || "Common Queries";
+
+  // Generate FAQ Schema dynamically
+  const faqJsonLd = generateFaqSchema(homepageFaqs);
 
   return (
     <>
@@ -165,7 +156,7 @@ export default async function Page() {
         <ServicesSection therapyServices={therapyServicesData} />
         <TestimonialsSection reviews={(reviews as ReviewsQueryResult) ?? []} />
         <WhoNeedsItSection />
-        <FaqSection />
+        <FaqSection faqs={homepageFaqs} title={faqTitle} subtitle={faqSubtitle} />
         <CtaSection />
       </main>
     </>

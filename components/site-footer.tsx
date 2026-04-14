@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail, Briefcase } from "lucide-react";
 import { FooterServiceLinks } from "@/components/footer-service-links";
+import type { SiteSettings } from "@/lib/types";
 
 const quickLinks = [
     { label: "About Us", href: "/about-us" },
@@ -65,7 +66,23 @@ const socialLinks = [
     },
 ];
 
-export function SiteFooter() {
+interface SiteFooterProps {
+    siteSettings: SiteSettings | null;
+}
+
+export function SiteFooter({ siteSettings }: SiteFooterProps) {
+    // Use Sanity data with fallbacks
+    const socialLinksData = siteSettings?.socialLinks;
+    const quickLinksData = siteSettings?.navigation?.quickLinks || quickLinks;
+    const footerContent = siteSettings?.footer;
+    const joinTeamText = siteSettings?.navigation?.joinTeamText || "Join Our Team";
+
+    // Contact info with explicit fallbacks (Sanity has flat strings, fallback has nested objects)
+    const displayAddress = siteSettings?.contact?.address || contact.address;
+    const displayPhone = siteSettings?.contact?.phone || contact.phone.label;
+    const displayPhoneLink = siteSettings?.contact?.phoneLink || contact.phone.href;
+    const displayEmail = siteSettings?.contact?.email || contact.email.label;
+    const displayEmailLink = siteSettings?.contact?.email ? `mailto:${siteSettings.contact.email}` : contact.email.href;
     return (
         <footer className="bg-[#FDFBF7] border-t border-black/5 pt-8 lg:pt-12 pb-6 lg:pb-10">
             <div className="container">
@@ -83,11 +100,11 @@ export function SiteFooter() {
                                 />
                             </div>
                             <h3 className="font-serif italic text-lg lg:text-xl text-green leading-tight pt-1" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-                                Bangalore's Leading Center for Mental Health, Neurodevelopment & Physiotherapy
+                                {footerContent?.tagline || "Bangalore's Leading Center for Mental Health, Neurodevelopment & Physiotherapy"}
                             </h3>
                         </div>
                         <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px]">
-                            Expert clinical assessments, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and Bengaluru.
+                            {footerContent?.description || "Expert clinical assessments, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and Bengaluru."}
                         </p>
                     </div>
 
@@ -105,7 +122,7 @@ export function SiteFooter() {
                             Explore
                         </h4>
                         <ul className="space-y-4">
-                            {quickLinks.map((link) => (
+                            {quickLinksData.map((link) => (
                                 <li key={link.label}>
                                     <Link
                                         href={link.href}
@@ -126,38 +143,63 @@ export function SiteFooter() {
                         <address className="not-italic space-y-4 text-[13px] text-black/60 font-medium">
                             <p className="flex items-start gap-4">
                                 <MapPin className="h-5 w-5 shrink-0 text-green/40" />
-                                <span className="leading-relaxed">{contact.address}</span>
+                                <span className="leading-relaxed">{displayAddress}</span>
                             </p>
                             <div className="flex flex-nowrap lg:flex-wrap gap-x-4 sm:gap-x-6 gap-y-2">
                                 <a
-                                    href={contact.phone.href}
+                                    href={displayPhoneLink}
                                     className="flex items-center gap-2 hover:text-green transition-colors group"
                                 >
                                     <Phone className="h-4 w-4 shrink-0 text-green/40 group-hover:text-green transition-colors" />
-                                    {contact.phone.label}
+                                    {displayPhone}
                                 </a>
                                 <a
-                                    href={contact.email.href}
+                                    href={displayEmailLink}
                                     className="flex items-center gap-2 hover:text-green transition-colors group"
                                 >
                                     <Mail className="h-4 w-4 shrink-0 text-green/40 group-hover:text-green transition-colors" />
-                                    {contact.email.label}
+                                    {displayEmail}
                                 </a>
                             </div>
                         </address>
                         <div className="flex gap-3 mt-5">
-                            {socialLinks.map(({ href, icon, label }) => (
-                                <Link
-                                    key={label}
-                                    href={href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={label}
-                                    className="h-9 w-9 rounded-full bg-white border border-black/5 flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-sm"
-                                >
-                                    {icon}
-                                </Link>
-                            ))}
+                            {socialLinksData && socialLinksData.length > 0 ? (
+                                socialLinksData.map((social) => (
+                                    <Link
+                                        key={social.platform}
+                                        href={social.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={social.platform}
+                                        className="h-9 w-9 rounded-full bg-white border border-black/5 flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-sm"
+                                    >
+                                        {social.icon ? (
+                                            <Image
+                                                src={social.icon}
+                                                alt={social.platform}
+                                                width={16}
+                                                height={16}
+                                                className="w-4 h-4"
+                                            />
+                                        ) : (
+                                            <span className="text-xs">{social.platform.charAt(0)}</span>
+                                        )}
+                                    </Link>
+                                ))
+                            ) : (
+                                socialLinks.map(({ href, icon, label }) => (
+                                    <Link
+                                        key={label}
+                                        href={href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={label}
+                                        className="h-9 w-9 rounded-full bg-white border border-black/5 flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-sm"
+                                    >
+                                        {icon}
+                                    </Link>
+                                ))
+                            )}
                         </div>
                     </div>
                 </div>
@@ -169,7 +211,7 @@ export function SiteFooter() {
                         className="inline-flex items-center gap-2 px-6 py-3 bg-green/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-green hover:bg-green hover:text-white transition-all duration-500 group border border-green/10"
                     >
                         <Briefcase className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
-                        Join Our Team
+                        {joinTeamText}
                     </Link>
                     <div className="flex flex-wrap justify-center items-center gap-3 lg:gap-6">
                         <p className="text-[10px] text-black/30 font-bold uppercase tracking-widest">
