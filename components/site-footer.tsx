@@ -26,7 +26,7 @@ const socialLinks = [
 
 export function SiteFooter() {
     return (
-        <footer className="bg-[#FDFBF7] border-t border-black/5 pt-12 lg:pt-16 pb-8 lg:pb-10">
+        <footer className="bg-[#FDFBF7] border-t border-black/5 pt-10 lg:pt-16 pb-6 lg:pb-10">
             <div className="container">
                 {/* Top Grid: 2 columns on mobile, 4 on desktop */}
                 <div className="grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-x-8 gap-y-8 lg:gap-y-12">
@@ -118,7 +118,7 @@ export function SiteFooter() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-5 pt-6 lg:pt-8 mt-6 lg:mt-0 border-t border-black/5">
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-4 lg:pt-8 mt-4 lg:mt-0 border-t border-black/5">
                     <Link
                         href="/careers"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-green/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-green hover:bg-green hover:text-white transition-all duration-500 group border border-green/10"
