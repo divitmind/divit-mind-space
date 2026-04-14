@@ -11,7 +11,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ announcement }: HeroSectionProps) {
   return (
-    <section className="relative overflow-hidden pt-1 pb-2 lg:pt-2 lg:pb-4 min-h-[auto] lg:min-h-[600px] flex items-center">
+    <section className="relative overflow-hidden pt-2 pb-4 lg:pt-4 lg:pb-6 min-h-[auto] lg:min-h-[500px] flex items-start">
       <div className="container relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-4">
 
@@ -28,7 +28,7 @@ export function HeroSection({ announcement }: HeroSectionProps) {
               </div>
             )}
 
-            <div className="flex flex-col w-full max-w-[580px] mx-auto lg:mx-0 mt-7">
+            <div className="flex flex-col w-full max-w-[580px] mx-auto lg:mx-0 mt-3 sm:mt-4">
               <h1 className="flex flex-col tracking-tight text-black leading-none">
                 {/* Line 1: EMPOWERING EVERY CHILD'S with overlapping yellow strokes */}
                 <span className="relative flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
@@ -110,15 +110,8 @@ export function HeroSection({ announcement }: HeroSectionProps) {
 
               {/* Parent Rating */}
               <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-lg font-bold text-black leading-tight">4.9</span>
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-2.5 h-2.5 fill-[#FFB800] text-[#FFB800]" />
-                    ))}
-                  </div>
-                </div>
-                <span className="text-[9px] font-semibold text-black/50 uppercase tracking-wider">Rating</span>
+                <span className="text-xl font-serif italic text-green leading-none" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>4.9 / 5</span>
+                <span className="text-[9px] font-bold text-black/30 uppercase tracking-[0.2em] mt-1">Top Rated on Google</span>
               </div>
 
               <div className="hidden sm:block w-px h-8 bg-black/10" />

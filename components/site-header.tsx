@@ -5,13 +5,13 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
-import { Users, Sparkles } from "lucide-react";
+import { Users } from "lucide-react";
 
 export function SiteHeader() {
     const router = useRouter();
     const pathname = usePathname();
 
-    const handleSpecialistsClick = (e: React.MouseEvent) => {
+    const handleSpecialistsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         if (pathname === "/about-us") {
             e.preventDefault();
             const element = document.getElementById("specialists");
@@ -52,17 +52,16 @@ export function SiteHeader() {
                         className="hidden md:inline-flex h-12 items-center justify-center gap-3 rounded-full bg-green px-8 text-[10px] font-bold uppercase tracking-[0.2em] text-white hover:bg-green/90 transition-all duration-500 shadow-xl shadow-green/20 hover:shadow-2xl hover:shadow-green/30 hover:-translate-y-1 active:scale-95 group"
                     >
                         <Users className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        Expert Specialists
+                        Meet Our Specialists
                     </Link>
 
-                    {/* Mobile CTA */}
+                    {/* Mobile CTA - premium outline button */}
                     <Link
                         href="/about-us#specialists"
                         onClick={handleSpecialistsClick}
-                        className="md:hidden inline-flex h-10 items-center justify-center gap-2 rounded-full border border-green/20 px-5 text-[10px] font-bold uppercase tracking-widest text-green shadow-sm active:scale-95"
+                        className="md:hidden inline-flex h-8 items-center justify-center rounded-full border-2 border-[#7A9A7D] px-4 text-xs font-medium tracking-wide text-[#7A9A7D] shadow-md shadow-[#7A9A7D]/15 hover:bg-[#7A9A7D] hover:text-white hover:shadow-lg hover:shadow-[#7A9A7D]/25 transition-all"
                     >
-                        <Sparkles className="w-3 h-3" />
-                        Consult
+                        Get Help
                     </Link>
 
                     <MobileNav />

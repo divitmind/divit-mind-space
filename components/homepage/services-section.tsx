@@ -52,11 +52,11 @@ interface ServicesSectionProps {
 
 export function ServicesSection({ therapyServices = [] }: ServicesSectionProps) {
     return (
-        <section className="pt-2 pb-4 lg:pt-4 lg:pb-8 bg-[#FDFBF7]">
+        <section className="pt-0 pb-10 lg:pb-16 bg-[#FDFBF7]">
             <div className="container">
 
                 {/* Bridge Text */}
-                <div className="flex items-center gap-4 mb-8">
+                <div className="flex items-center gap-4 mt-8 mb-8">
                     <div className="flex-1 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                     <span className="text-black/40 text-[10px] font-bold uppercase tracking-widest">
                         Here&apos;s how we help

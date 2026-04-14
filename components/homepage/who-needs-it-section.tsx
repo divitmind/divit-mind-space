@@ -23,7 +23,7 @@ const items = [
 
 export function WhoNeedsItSection() {
     return (
-        <section className="py-2 lg:py-4 bg-[#FDFBF7]">
+        <section className="pt-4 pb-10 lg:pt-8 lg:pb-16 bg-[#FDFBF7]">
 
             <div className="container">
                 {/* Bridge Text - Original Wording */}

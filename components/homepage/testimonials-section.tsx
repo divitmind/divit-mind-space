@@ -48,7 +48,7 @@ export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
   const marqueeItems = [...cards, ...cards];
 
   return (
-    <section className="py-2 lg:py-4 bg-[#FDFBF7] overflow-hidden">
+    <section className="pt-4 pb-10 lg:pt-8 lg:pb-16 bg-[#FDFBF7] overflow-hidden">
       <div className="container mb-8 text-center">
         {/* Original Text Wording */}
         <div className="inline-flex items-center justify-center text-black/40 text-[10px] font-bold tracking-widest uppercase mb-4">
@@ -57,11 +57,9 @@ export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
         <h2 className="text-3xl lg:text-5xl font-bold text-black mb-6 tracking-tight font-[family-name:var(--font-cormorant)] italic">
           Why Families Trust Us
         </h2>
-        <div className="flex items-center justify-center gap-1">
-            {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-[#FFB800] text-[#FFB800]" />
-            ))}
-            <span className="ml-2 text-sm font-bold text-black/60">4.9 Parent Rating</span>
+        <div className="flex flex-col items-center gap-2">
+            <span className="text-2xl font-serif italic text-green leading-none" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>4.9 / 5</span>
+            <span className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em]">Top Rated on Google</span>
         </div>
       </div>
 

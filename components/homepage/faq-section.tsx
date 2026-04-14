@@ -72,7 +72,7 @@ export function FaqSection() {
     const [openId, setOpenId] = useState<string | null>("item-1");
 
     return (
-        <section className="py-6 lg:py-12 bg-[#FDFBF7] relative overflow-hidden">
+        <section className="py-10 lg:py-16 bg-[#FDFBF7] relative overflow-hidden">
             <div className="max-w-4xl mx-auto px-4 relative z-10">
                 <div className="text-center mb-8">
                     {/* Original Text Wording */}

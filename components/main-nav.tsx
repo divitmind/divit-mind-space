@@ -70,7 +70,7 @@ export function MainNav() {
 
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent text-black/40 hover:text-green font-bold text-[10px] uppercase tracking-[0.2em] transition-all px-4 h-10 data-[state=open]:text-green group">
-            Media
+            Resources
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="grid w-[300px] gap-2 p-6 bg-white rounded-[2.5rem] shadow-2xl border border-black/5">

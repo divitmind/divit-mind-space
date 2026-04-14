@@ -40,7 +40,7 @@ export function MobileNav() {
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-full sm:w-[400px] bg-[#FDFBF7] p-0 border-r border-black/5">
+      <SheetContent side="right" className="w-full sm:w-[400px] bg-[#FDFBF7] p-0 border-l border-black/5">
         <SheetHeader className="p-8 border-b border-black/5 bg-white/50 backdrop-blur-xl">
           <div className="flex items-center gap-4">
             <div className="relative w-12 h-12">
@@ -48,7 +48,7 @@ export function MobileNav() {
             </div>
             <div className="text-left">
                 <SheetTitle className="font-serif italic text-2xl text-green leading-none" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>Divit</SheetTitle>
-                <span className="text-[9px] font-bold text-black/30 uppercase tracking-[0.3em]">MindSpace Clinic</span>
+                <span className="text-[9px] font-bold text-black/30 uppercase tracking-[0.3em]">MindSpace</span>
             </div>
           </div>
         </SheetHeader>
@@ -63,7 +63,7 @@ export function MobileNav() {
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="services" className="border-none">
                 <AccordionTrigger className="px-6 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 hover:text-green hover:no-underline hover:bg-green/5 rounded-[1.5rem] transition-all duration-500">
-                  Clinical Services
+                  Services
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 p-4 pt-2">
                   {serviceGroups.map((group) => (
@@ -89,7 +89,7 @@ export function MobileNav() {
 
               <AccordionItem value="media" className="border-none">
                 <AccordionTrigger className="px-6 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 hover:text-green hover:no-underline hover:bg-green/5 rounded-[1.5rem] transition-all duration-500">
-                  Media
+                  Resources
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 p-4 pt-2">
                   <MobileLink href="/mind-gym" setOpen={setOpen} icon={<Brain className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
@@ -116,9 +116,14 @@ export function MobileNav() {
               <WhatsAppConsultationLink className="w-full dm-pill-button dm-pill-button-primary py-5 shadow-2xl shadow-green/20 scale-105">
                 Book a Free Consultation
               </WhatsAppConsultationLink>
-              <p className="mt-8 text-center text-[9px] font-bold text-black/20 uppercase tracking-[0.4em]">
-                Excellence in Neurodivergent Care
+            <div className="mt-8 text-center space-y-2">
+              <p className="text-[9px] font-bold text-black/20 uppercase tracking-[0.15em] leading-relaxed">
+                Bangalore&apos;s Leading Center for All Ages
               </p>
+              <p className="text-[8px] font-bold text-black/15 uppercase tracking-[0.1em] leading-relaxed">
+                Mental Health • Neurodevelopment • Physiotherapy
+              </p>
+            </div>
             </div>
           </div>
         </ScrollArea>
