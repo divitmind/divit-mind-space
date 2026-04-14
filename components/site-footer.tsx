@@ -44,7 +44,7 @@ export function SiteFooter() {
                             Bangalore’s Leading Center for Mental Health, Neurodevelopment & Physiotherapy
                         </h3>
                         <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px] mb-8">
-                            Expert clinical assessments, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and across the entire city of Bengaluru.
+                            Expert clinical assessments, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and Bengaluru.
                         </p>
                         <Link
                             href="/careers"

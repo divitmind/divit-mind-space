@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Brain, Briefcase, Image as ImageIcon, Megaphone, ChevronDown } from "lucide-react";
+import { Brain, Briefcase, Image as ImageIcon, Megaphone, ChevronDown, FileText, Heart, Users, GraduationCap } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -17,6 +17,13 @@ import {
 import { services } from "@/lib/services-data";
 
 const navServices = services.slice(0, 6);
+
+const serviceCategories = [
+  { id: "assessments", label: "Assessments", href: "/services?category=assessments", icon: FileText },
+  { id: "therapy", label: "Therapy", href: "/services?category=therapy", icon: Heart },
+  { id: "guidance", label: "Guidance", href: "/services?category=guidance", icon: Users },
+  { id: "programs", label: "Programs", href: "/services?category=programs", icon: GraduationCap },
+];
 
 export function MainNav() {
   return (
@@ -35,15 +42,35 @@ export function MainNav() {
             Services
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-2 p-6 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white rounded-[2.5rem] shadow-2xl border border-black/5">
-              {navServices.map((service) => (
-                <ListItem
-                  key={service.id}
-                  title={service.title}
-                  href={`/services/${service.slug}`}
-                />
-              ))}
-              <li className="col-span-2 border-t border-black/5 pt-6 mt-4">
+            <div className="w-[400px] p-6 md:w-[500px] lg:w-[600px] bg-white rounded-[2.5rem] shadow-2xl border border-black/5">
+              {/* Category Links */}
+              <div className="grid grid-cols-4 gap-3 mb-6">
+                {serviceCategories.map((cat) => (
+                  <Link
+                    key={cat.id}
+                    href={cat.href}
+                    className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-black/5 hover:border-green/20 hover:bg-green/5 transition-all group"
+                  >
+                    <cat.icon className="w-5 h-5 text-black/30 group-hover:text-green transition-colors" />
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-black/50 group-hover:text-green transition-colors">
+                      {cat.label}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Individual Services */}
+              <ul className="grid gap-2 md:grid-cols-2 border-t border-black/5 pt-4">
+                {navServices.map((service) => (
+                  <ListItem
+                    key={service.id}
+                    title={service.title}
+                    href={`/services/${service.slug}`}
+                  />
+                ))}
+              </ul>
+
+              <div className="border-t border-black/5 pt-4 mt-4">
                 <Link
                   href="/services"
                   className="inline-flex items-center gap-2 text-[10px] font-bold text-green hover:gap-4 transition-all tracking-[0.2em] uppercase w-full justify-center"
@@ -51,8 +78,8 @@ export function MainNav() {
                   Explore All Services
                   <ChevronDown className="w-3 h-3 -rotate-90" />
                 </Link>
-              </li>
-            </ul>
+              </div>
+            </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
 
