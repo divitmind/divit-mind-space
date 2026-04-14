@@ -35,7 +35,7 @@ export function ServiceExperts({ specialists, onDemand }: ServiceExpertsProps) {
             className="text-2xl lg:text-3xl font-serif text-green mb-8"
             style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
           >
-            {showLeadership ? "Clinical Leadership & Oversight" : "Meet the Specialists"}
+            {showLeadership ? "Professional Specialist Oversight" : "Meet the Specialists"}
           </h2>
 
           {showLeadership ? (
@@ -45,15 +45,15 @@ export function ServiceExperts({ specialists, onDemand }: ServiceExpertsProps) {
                   <User className="w-12 h-12 text-green/40" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-serif text-green mb-2">Guided by Professional Excellence</h3>
+                  <h3 className="text-xl font-serif text-green mb-2">Expert-Led Service Continuity</h3>
                   <p className="text-black/70 leading-relaxed font-medium">
-                    This service is overseen by our Senior Clinical Team and delivered by specialized consultants on-demand to ensure the highest standards of care and clinical integrity.
+                    This service is overseen by our Senior Clinical Specialists and delivered by qualified consultants on-demand to ensure the highest standards of care and clinical excellence.
                   </p>
                   <Link 
-                    href="/about-us" 
+                    href="/about-us#specialists" 
                     className="inline-flex items-center gap-2 mt-4 text-sm font-bold uppercase tracking-widest text-green hover:text-green/80 transition-colors"
                   >
-                    Meet our leadership team
+                    View our full team of specialists
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
