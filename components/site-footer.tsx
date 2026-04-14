@@ -26,12 +26,12 @@ const socialLinks = [
 
 export function SiteFooter() {
     return (
-        <footer className="bg-white border-t border-black/5 pt-16 pb-12">
-            <div className="max-w-7xl mx-auto px-4">
-                {/* Top Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-12 mb-12">
-                    {/* Brand Column */}
-                    <div>
+        <footer className="bg-[#FDFBF7] border-t border-black/5 pt-20 pb-12">
+            <div className="container">
+                {/* Top Grid: 2 columns on mobile, 4 on desktop */}
+                <div className="grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-x-8 gap-y-12 mb-16">
+                    {/* Brand Column: Full width on mobile */}
+                    <div className="col-span-2 lg:col-span-1">
                         <div className="w-16 h-16 mb-6 relative">
                             <Image
                                 src="/divit-mindspace-logo.png"
@@ -40,37 +40,40 @@ export function SiteFooter() {
                                 className="object-contain"
                             />
                         </div>
-                        <p className="text-sm text-black/70 font-medium leading-relaxed max-w-[280px] mb-6">
-                            Bangalore’s leading center for mental health, neurodevelopment, and physiotherapy. Supporting children, teens, and adults through clinical excellence and specialized education.
+                        <h3 className="font-serif italic text-xl lg:text-2xl text-green mb-4 leading-tight" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                            Bangalore’s Leading Center for Mental Health, Neurodevelopment & Physiotherapy
+                        </h3>
+                        <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px] mb-8">
+                            Expert clinical assessments, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and across the entire city of Bengaluru.
                         </p>
                         <Link
                             href="/careers"
-                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-black/5 rounded-xl text-sm font-bold text-green hover:bg-green hover:text-white transition-all group"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-green/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-green hover:bg-green hover:text-white transition-all duration-500 group border border-green/10"
                         >
-                            <Briefcase className="h-4 w-4 group-hover:scale-110 transition-transform" />
-                            We&apos;re Hiring
+                            <Briefcase className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
+                            Join Our Team
                         </Link>
                     </div>
 
                     {/* Services Column */}
-                    <div>
-                        <h4 className="text-lg font-serif text-green mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                    <div className="col-span-1">
+                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-8">
                             Our Services
                         </h4>
                         <FooterServiceLinks />
                     </div>
 
                     {/* Quick Links Column */}
-                    <div>
-                        <h4 className="text-lg font-serif text-green mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                    <div className="col-span-1">
+                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-8">
                             Explore
                         </h4>
-                        <ul className="space-y-3.5">
+                        <ul className="space-y-4">
                             {quickLinks.map((link) => (
                                 <li key={link.label}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm text-black/70 font-medium hover:text-green transition-colors"
+                                        className="text-[13px] text-black/60 font-medium hover:text-green transition-colors"
                                     >
                                         {link.label}
                                     </Link>
@@ -79,52 +82,53 @@ export function SiteFooter() {
                         </ul>
                     </div>
 
-                    {/* Contact Column */}
-                    <div>
-                        <h4 className="text-lg font-serif text-green mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                    {/* Contact Column: Full width on mobile */}
+                    <div className="col-span-2 lg:col-span-1 pt-8 lg:pt-0 border-t lg:border-none border-black/5">
+                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-8">
                             Get in Touch
                         </h4>
-                        <address className="not-italic space-y-4 text-sm text-black/70 font-medium">
-                            <p className="flex items-start gap-3">
-                                <MapPin className="h-5 w-5 shrink-0 mt-0.5 text-green" />
-                                <span>{contact.address}</span>
+                        <address className="not-italic space-y-6 text-[13px] text-black/60 font-medium">
+                            <p className="flex items-start gap-4">
+                                <MapPin className="h-5 w-5 shrink-0 text-green/40" />
+                                <span className="leading-relaxed">{contact.address}</span>
                             </p>
-                            <p>
+                            <div className="space-y-3">
                                 <a
                                     href={contact.phone.href}
-                                    className="flex items-center gap-3 hover:text-green transition-colors"
+                                    className="flex items-center gap-4 hover:text-green transition-colors group"
                                 >
-                                    <Phone className="h-5 w-5 shrink-0 text-green" />
+                                    <Phone className="h-5 w-5 shrink-0 text-green/40 group-hover:text-green transition-colors" />
                                     {contact.phone.label}
                                 </a>
-                            </p>
-                            <p>
                                 <a
                                     href={contact.email.href}
-                                    className="flex items-center gap-3 hover:text-green transition-colors"
+                                    className="flex items-center gap-4 hover:text-green transition-colors group"
                                 >
-                                    <Mail className="h-5 w-5 shrink-0 text-green" />
+                                    <Mail className="h-5 w-5 shrink-0 text-green/40 group-hover:text-green transition-colors" />
                                     {contact.email.label}
                                 </a>
-                            </p>
+                            </div>
                         </address>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-black/5">
-                    <p className="text-[13px] text-black/40 font-medium">
-                        © {new Date().getFullYear()} Divit MindSpace. All rights reserved.
-                    </p>
-                    <div className="flex items-center gap-8">
-                        <Link href="/terms" className="text-[13px] text-black/40 font-medium hover:text-green transition-colors">
-                            Terms of Service
-                        </Link>
-                        <Link href="/privacy" className="text-[13px] text-black/40 font-medium hover:text-green transition-colors">
-                            Privacy Policy
-                        </Link>
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-8 pt-10 border-t border-black/5">
+                    <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-8">
+                        <p className="text-[11px] text-black/30 font-bold uppercase tracking-widest">
+                            © {new Date().getFullYear()} Divit MindSpace
+                        </p>
+                        <div className="flex items-center gap-6">
+                            <Link href="/terms" className="text-[10px] text-black/30 font-bold uppercase tracking-widest hover:text-green transition-colors">
+                                Terms
+                            </Link>
+                            <Link href="/privacy" className="text-[10px] text-black/30 font-bold uppercase tracking-widest hover:text-green transition-colors">
+                                Privacy
+                            </Link>
+                        </div>
                     </div>
-                    <div className="flex gap-4">
+                    
+                    <div className="flex gap-3">
                         {socialLinks.map(({ href, icon: Icon, label }) => (
                             <Link
                                 key={label}
@@ -132,9 +136,9 @@ export function SiteFooter() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={label}
-                                className="h-10 w-10 rounded-xl bg-black/5 flex items-center justify-center text-black/60 hover:bg-green hover:text-white transition-all"
+                                className="h-10 w-10 rounded-full bg-white border border-black/5 flex items-center justify-center text-black/40 hover:bg-green hover:text-white hover:border-green transition-all duration-500 shadow-sm"
                             >
-                                <Icon className="h-5 w-5" />
+                                <Icon className="h-4 w-4" />
                             </Link>
                         ))}
                     </div>
