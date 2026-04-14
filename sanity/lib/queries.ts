@@ -665,5 +665,17 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
       question,
       answer
     }
+  },
+  "aboutPage": {
+    "faqs": aboutPage.faqs[]{
+      question,
+      answer
+    }
+  },
+  "careersPage": {
+    "faqs": careersPage.faqs[]{
+      question,
+      answer
+    }
   }
 }`;

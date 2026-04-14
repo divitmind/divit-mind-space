@@ -4,9 +4,11 @@ import { PhilosophySection } from "@/components/about-us/philosophy-section";
 import { StorySection } from "@/components/about-us/story-section";
 import { FoundersSpecialistsSection } from "@/components/about-us/founders-specialists-section";
 import { CtaSection } from "@/components/homepage/cta-section";
+import { FaqSection } from "@/components/homepage/faq-section";
 import { sanityFetch } from "@/sanity/lib/live";
-import { ABOUT_US_QUERY, SPECIALISTS_QUERY } from "@/sanity/lib/queries";
+import { ABOUT_US_QUERY, SPECIALISTS_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import type { AboutUsQueryResult, SpecialistsQueryResult, Specialist } from "@/sanity/types";
+import type { SiteSettings, FAQ } from "@/lib/types";
 
 // Generate Person schema for specialists (critical for LLM "who" queries)
 function generateSpecialistSchema(specialist: Specialist) {
@@ -42,6 +44,38 @@ function generateSpecialistSchema(specialist: Specialist) {
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
+
+// Default FAQs for fallback when Sanity data isn't available
+const defaultAboutFaqs: FAQ[] = [
+  {
+    question: "Who are the founders and specialists at Divit MindSpace Bangalore?",
+    answer: "Divit MindSpace was founded by Debarati Basak (Clinical Psychologist) and Pavithra Lakshmi (Behavioral Therapist). Our multidisciplinary team includes licensed speech therapists, occupational therapists, special educators, and physiotherapists—all with specialized training in neurodevelopmental conditions like autism and ADHD.",
+  },
+  {
+    question: "What makes Divit MindSpace different from other therapy centers in Bangalore?",
+    answer: "We combine clinical expertise with personal understanding—our founders have firsthand experience with neurodivergent families. Our neuro-affirming approach focuses on each child's strengths, not just challenges. We also conduct FREE awareness sessions across schools and communities in Sarjapur Road, HSR Layout, and Bellandur areas.",
+  },
+  {
+    question: "Does Divit MindSpace offer services for adults with ADHD or autism?",
+    answer: "Yes, we provide comprehensive services for adults including ADHD assessments, autism evaluations, counseling, cognitive therapy, and physiotherapy. Many adults visit our Kasavanahalli center for late-diagnosis support, workplace challenges, and mental health concerns.",
+  },
+];
+
+// Generate FAQ Schema JSON-LD dynamically
+function generateFaqSchema(faqs: FAQ[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
 
 export const metadata: Metadata = {
   title: "About Us | Divit MindSpace - Empowering Neurodivergent Children",
@@ -96,16 +130,24 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutUsPage() {
-  const [aboutUsData, specialistsData] = await Promise.all([
+  const [aboutUsData, specialistsData, siteSettingsData] = await Promise.all([
     sanityFetch({ query: ABOUT_US_QUERY, tags: ["aboutUs"] }),
     sanityFetch({ query: SPECIALISTS_QUERY, tags: ["specialist"] }),
+    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY }),
   ]);
 
   const aboutUs = aboutUsData.data as AboutUsQueryResult;
   const specialists = (specialistsData.data as SpecialistsQueryResult) || [];
+  const siteSettings = siteSettingsData.data;
 
   // Generate Person schemas for all specialists
   const specialistSchemas = specialists.map(generateSpecialistSchema);
+
+  // Get FAQ data from Sanity with fallback
+  const aboutFaqs = siteSettings?.aboutPage?.faqs?.length ? siteSettings.aboutPage.faqs : defaultAboutFaqs;
+
+  // Generate FAQ Schema dynamically
+  const faqJsonLd = generateFaqSchema(aboutFaqs);
 
   // Breadcrumb schema
   const breadcrumbJsonLd = {
@@ -124,6 +166,11 @@ export default async function AboutUsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      {/* FAQ Schema for LLM visibility */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* Person Schema for each specialist - critical for LLM "who" queries */}
       {specialistSchemas.map((schema, index) => (
         <script
@@ -137,6 +184,7 @@ export default async function AboutUsPage() {
         <PhilosophySection data={aboutUs?.philosophy} />
         <StorySection data={aboutUs?.story} />
         <FoundersSpecialistsSection specialists={specialists} />
+        <FaqSection faqs={aboutFaqs} title="Frequently Asked Questions" subtitle="About Our Team & Approach" />
         <CtaSection />
       </main>
     </>

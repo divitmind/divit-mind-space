@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 import { CareersPage } from "@/components/careers/careers-page";
+import { FaqSection } from "@/components/homepage/faq-section";
 import { sanityFetch } from "@/sanity/lib/live";
-import { ALL_CAREERS_QUERY } from "@/sanity/lib/queries";
+import { ALL_CAREERS_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import type { CareersQueryResult, CareerListItem } from "@/sanity/types";
+import type { SiteSettings, FAQ } from "@/lib/types";
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
@@ -147,6 +149,38 @@ function generateJobPostingSchema(job: CareerListItem) {
   };
 }
 
+// Default FAQs for fallback when Sanity data isn't available
+const defaultCareersFaqs: FAQ[] = [
+  {
+    question: "What qualifications do I need to work at Divit MindSpace?",
+    answer: "We hire licensed professionals including clinical psychologists (RCI registered), speech-language pathologists, occupational therapists, special educators with relevant certifications, and physiotherapists. For training programs and shadow teacher roles, we provide comprehensive in-house training.",
+  },
+  {
+    question: "Does Divit MindSpace offer internships for psychology and therapy students?",
+    answer: "Yes, we offer internship opportunities for students pursuing degrees in clinical psychology, speech therapy, occupational therapy, and special education. Our Bangalore center provides hands-on experience with neurodevelopmental assessments and evidence-based interventions under expert supervision.",
+  },
+  {
+    question: "What is the work culture like at Divit MindSpace?",
+    answer: "We foster a collaborative, neuro-affirming environment where team members learn from each other. Regular case conferences, professional development workshops, and a supportive leadership ensure continuous growth. Our team treats every family like our own.",
+  },
+];
+
+// Generate FAQ Schema JSON-LD dynamically
+function generateFaqSchema(faqs: FAQ[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
 // Breadcrumb schema
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
@@ -173,15 +207,24 @@ interface PageProps {
 
 export default async function CareersRoute({ searchParams }: PageProps) {
   const params = await searchParams;
-  const { data: jobs } = await sanityFetch({
-    query: ALL_CAREERS_QUERY,
-    tags: ["career"],
-  });
+  const [{ data: jobs }, { data: siteSettings }] = await Promise.all([
+    sanityFetch({
+      query: ALL_CAREERS_QUERY,
+      tags: ["career"],
+    }),
+    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY }),
+  ]);
 
   const jobsList = (jobs as CareersQueryResult) || [];
 
   // Generate JobPosting schema for each active job
   const jobPostingSchemas = jobsList.map(generateJobPostingSchema);
+
+  // Get FAQ data from Sanity with fallback
+  const careersFaqs = siteSettings?.careersPage?.faqs?.length ? siteSettings.careersPage.faqs : defaultCareersFaqs;
+
+  // Generate FAQ Schema dynamically
+  const faqJsonLd = generateFaqSchema(careersFaqs);
 
   return (
     <>
@@ -189,6 +232,11 @@ export default async function CareersRoute({ searchParams }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {/* FAQ Schema for LLM visibility */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       {/* Individual JobPosting Schema for each job - critical for Google Jobs */}
       {jobPostingSchemas.map((schema, index) => (
@@ -199,6 +247,7 @@ export default async function CareersRoute({ searchParams }: PageProps) {
         />
       ))}
       <CareersPage jobs={jobsList} initialFilter={params.type} />
+      <FaqSection faqs={careersFaqs} title="Frequently Asked Questions" subtitle="Working at Divit MindSpace" />
     </>
   );
 }

@@ -83,6 +83,14 @@ export interface ContactPageSettings {
   faqs: FAQ[];
 }
 
+export interface AboutPageSettings {
+  faqs: FAQ[];
+}
+
+export interface CareersPageSettings {
+  faqs: FAQ[];
+}
+
 export interface SiteSettings {
   contact: ContactInfo;
   socialLinks: SocialLink[];
@@ -92,4 +100,6 @@ export interface SiteSettings {
   homepage: HomepageSettings;
   servicesPage: ServicesPageSettings;
   contactPage: ContactPageSettings;
+  aboutPage: AboutPageSettings;
+  careersPage: CareersPageSettings;
 }

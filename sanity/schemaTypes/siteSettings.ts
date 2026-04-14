@@ -13,6 +13,8 @@ export const siteSettingsType = defineType({
     { name: "homepage", title: "6. Homepage" },
     { name: "services", title: "7. Services Page" },
     { name: "contactPage", title: "8. Contact Page" },
+    { name: "aboutPage", title: "9. About Us Page" },
+    { name: "careersPage", title: "10. Careers Page" },
   ],
   fields: [
     // ============================================================
@@ -444,6 +446,68 @@ export const siteSettingsType = defineType({
           title: "❓ [SEO] Frequently Asked Questions",
           type: "array",
           description: "FAQs shown on contact page - important for SEO/GEO",
+          of: [
+            {
+              type: "object",
+              fields: [
+                { name: "question", type: "string", title: "Question" },
+                { name: "answer", type: "text", title: "Answer", rows: 3 },
+              ],
+              preview: {
+                select: { title: "question" },
+              },
+            },
+          ],
+        }),
+      ],
+    }),
+
+    // ============================================================
+    // ABOUT US PAGE - FAQs for LLM/SEO visibility
+    // ============================================================
+    defineField({
+      name: "aboutPage",
+      title: "About Us Page Content",
+      type: "object",
+      group: "aboutPage",
+      description: "FAQs and content shown on the About Us page",
+      fields: [
+        defineField({
+          name: "faqs",
+          title: "❓ [SEO/GEO] About Us FAQs",
+          type: "array",
+          description: "FAQs about Divit MindSpace, team, and approach - optimized for LLM/SEO visibility",
+          of: [
+            {
+              type: "object",
+              fields: [
+                { name: "question", type: "string", title: "Question" },
+                { name: "answer", type: "text", title: "Answer", rows: 3 },
+              ],
+              preview: {
+                select: { title: "question" },
+              },
+            },
+          ],
+        }),
+      ],
+    }),
+
+    // ============================================================
+    // CAREERS PAGE - FAQs for job seekers
+    // ============================================================
+    defineField({
+      name: "careersPage",
+      title: "Careers Page Content",
+      type: "object",
+      group: "careersPage",
+      description: "FAQs and content shown on the Careers page",
+      fields: [
+        defineField({
+          name: "faqs",
+          title: "❓ [SEO] Careers FAQs",
+          type: "array",
+          description: "FAQs for job seekers about working at Divit MindSpace",
           of: [
             {
               type: "object",
