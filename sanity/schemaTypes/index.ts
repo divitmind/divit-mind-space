@@ -12,6 +12,7 @@ import { careerType } from './career'
 import { reviewType } from './review'
 import { promowebsiteType } from './promowebsite'
 import { mindGymType } from './mindGym'
+import { siteSettingsType } from './siteSettings'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -28,5 +29,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     reviewType,
     promowebsiteType,
     mindGymType,
+    siteSettingsType,
   ],
 }

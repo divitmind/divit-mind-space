@@ -1,15 +1,16 @@
 import type { StructureResolver } from "sanity/structure";
-import { 
-  BookOpen, 
-  Info, 
-  Megaphone, 
-  FileText, 
-  Layout, 
-  Users, 
-  GraduationCap, 
-  Briefcase, 
+import {
+  BookOpen,
+  Info,
+  Megaphone,
+  FileText,
+  Layout,
+  Users,
+  GraduationCap,
+  Briefcase,
   Image as ImageIcon,
-  Star
+  Star,
+  Settings
 } from "lucide-react";
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
@@ -17,6 +18,20 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title("Content Management")
     .items([
+      // ============================================================
+      // SITE SETTINGS (Global configuration)
+      // ============================================================
+      S.listItem()
+        .title("⚙️ Site Settings")
+        .icon(Settings)
+        .child(
+          S.document()
+            .schemaType("siteSettings")
+            .documentId("siteSettings")
+        ),
+
+      S.divider(),
+
       // ============================================================
       // SINGLETON PAGES (Pages that exist only once)
       // ============================================================
@@ -110,7 +125,7 @@ export const structure: StructureResolver = (S) =>
       // ============================================================
       ...S.documentTypeListItems().filter(
         (listItem) =>
-          !["mindGym", "awareness", "aboutUs", "promowebsite", "post", "services", "specialist", "review", "gallery", "galleryCategory", "career", "author", "media.tag"].includes(
+          !["siteSettings", "mindGym", "awareness", "aboutUs", "promowebsite", "post", "services", "specialist", "review", "gallery", "galleryCategory", "career", "author", "media.tag"].includes(
             listItem.getId() || ""
           )
       ),

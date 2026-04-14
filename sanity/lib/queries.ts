@@ -579,3 +579,56 @@ export const SINGLE_MIND_GYM_QUERY = `*[_type == "mindGym" && slug.current == $s
 export const ANNOUNCEMENT_QUERY = `*[_type == "promowebsite" && isActive == true] | order(_updatedAt desc)[0] {
   text
 }`;
+
+// ============================================================================
+// GROQ Queries for Site Settings
+// ============================================================================
+
+/**
+ * Query to fetch site-wide settings (singleton document)
+ * Used across footer, contact page, homepage, and services page
+ */
+export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
+  "contact": {
+    "phone": contact.phone,
+    "phoneLink": contact.phoneLink,
+    "whatsapp": contact.whatsapp,
+    "email": contact.email,
+    "address": contact.address,
+    "addressShort": contact.addressShort,
+    "mapLink": contact.mapLink,
+    "workingHours": contact.workingHours
+  },
+  "social": {
+    "instagram": social.instagram,
+    "facebook": social.facebook,
+    "linkedin": social.linkedin,
+    "twitter": social.twitter,
+    "youtube": social.youtube
+  },
+  "metrics": {
+    "familiesCount": metrics.familiesCount,
+    "therapistsCount": metrics.therapistsCount,
+    "servicesCount": metrics.servicesCount,
+    "googleRating": metrics.googleRating,
+    "googleReviewsUrl": metrics.googleReviewsUrl
+  },
+  "footer": {
+    "tagline": footer.tagline,
+    "description": footer.description
+  },
+  "homepage": {
+    "heroDescription": homepage.heroDescription,
+    "rollingAudiences": homepage.rollingAudiences,
+    "rollingSchools": homepage.rollingSchools,
+    "ctaPrimary": homepage.ctaPrimary,
+    "ctaSecondary": homepage.ctaSecondary
+  },
+  "servicesPage": {
+    "allServicesDescription": servicesPage.allServicesDescription,
+    "assessmentsDescription": servicesPage.assessmentsDescription,
+    "therapyDescription": servicesPage.therapyDescription,
+    "guidanceDescription": servicesPage.guidanceDescription,
+    "programsDescription": servicesPage.programsDescription
+  }
+}`;
