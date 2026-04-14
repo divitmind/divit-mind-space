@@ -11,7 +11,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ announcement }: HeroSectionProps) {
   return (
-    <section className="relative overflow-hidden pt-2 pb-4 lg:pt-4 lg:pb-6 min-h-[auto] lg:min-h-[500px] flex items-start">
+    <section className="relative overflow-hidden pt-2 pb-4 lg:pt-4 lg:pb-10 min-h-[auto] lg:min-h-[500px] flex items-start">
       <div className="container relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-4">
 

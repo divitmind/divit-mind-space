@@ -5,7 +5,7 @@ import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-lin
 
 export function CtaSection() {
     return (
-        <section className="py-10 lg:py-16 bg-[#FDFBF7] px-4">
+        <section className="pt-4 lg:pt-8 pb-10 lg:pb-16 bg-[#FDFBF7] px-4">
             <div className="container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

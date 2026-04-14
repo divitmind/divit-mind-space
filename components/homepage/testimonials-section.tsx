@@ -48,7 +48,7 @@ export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
   const marqueeItems = [...cards, ...cards];
 
   return (
-    <section className="pt-4 pb-10 lg:pt-8 lg:pb-16 bg-[#FDFBF7] overflow-hidden">
+    <section className="pt-6 lg:pt-10 pb-10 lg:pb-16 bg-[#FDFBF7] overflow-hidden">
       <div className="container mb-8 text-center">
         {/* Original Text Wording */}
         <div className="inline-flex items-center justify-center text-black/40 text-[10px] font-bold tracking-widest uppercase mb-4">

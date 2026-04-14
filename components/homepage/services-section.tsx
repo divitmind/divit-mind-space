@@ -52,7 +52,7 @@ interface ServicesSectionProps {
 
 export function ServicesSection({ therapyServices = [] }: ServicesSectionProps) {
     return (
-        <section className="pt-0 pb-10 lg:pb-16 bg-[#FDFBF7]">
+        <section className="pt-0 pb-6 lg:pb-10 bg-[#FDFBF7]">
             <div className="container">
 
                 {/* Bridge Text */}
