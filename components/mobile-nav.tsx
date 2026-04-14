@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, ImageIcon, Megaphone, FileText, Heart, Users, GraduationCap, Brain, ChevronRight } from "lucide-react";
+import { Menu, ImageIcon, Megaphone, FileText, Heart, Users, GraduationCap, Brain, ChevronRight, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -63,7 +63,6 @@ export function MobileNav() {
           <div className="flex flex-col gap-1 p-4 pt-0">
             <div className="space-y-0">
                 <MobileNavItem href="/" label="Home" setOpen={setOpen} onCustomClick={handleHomeClick} />
-                <MobileNavItem href="/about-us" label="About Us" setOpen={setOpen} />
             </div>
 
             <Accordion type="single" collapsible className="w-full">
@@ -83,8 +82,8 @@ export function MobileNav() {
                       {group.label}
                     </MobileLink>
                   ))}
-                  <Link 
-                    href="/services" 
+                  <Link
+                    href="/services"
                     onClick={() => setOpen(false)}
                     className="px-6 py-4 mt-2 font-bold text-[9px] uppercase tracking-[0.3em] text-green bg-green/5 rounded-2xl text-center border border-green/10"
                   >
@@ -92,30 +91,46 @@ export function MobileNav() {
                   </Link>
                 </AccordionContent>
               </AccordionItem>
+            </Accordion>
 
-              <AccordionItem value="media" className="border-none">
+            <div className="space-y-0">
+                <MobileNavItem href="/about-us" label="About Us" setOpen={setOpen} />
+                <MobileNavItem href="/awareness-program" label="Workshops" setOpen={setOpen} />
+            </div>
+
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="resources" className="border-none">
                 <AccordionTrigger className="px-6 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 hover:text-green hover:no-underline hover:bg-green/5 rounded-[1.5rem] transition-all duration-500">
                   Resources
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 p-4 pt-2">
+                  <MobileLink href="/blogs" setOpen={setOpen} icon={<BookOpen className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
+                    Blogs
+                  </MobileLink>
                   <MobileLink href="/mind-gym" setOpen={setOpen} icon={<Brain className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
                     Mind Gym
                   </MobileLink>
-                  <MobileLink href="/gallery" setOpen={setOpen} icon={<ImageIcon className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
-                    Our Gallery
-                  </MobileLink>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="media" className="border-none">
+                <AccordionTrigger className="px-6 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 hover:text-green hover:no-underline hover:bg-green/5 rounded-[1.5rem] transition-all duration-500">
+                  Media
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2 p-4 pt-2">
                   <MobileLink href="/news" setOpen={setOpen} icon={<Megaphone className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
-                    Announcements
+                    News
+                  </MobileLink>
+                  <MobileLink href="/gallery" setOpen={setOpen} icon={<ImageIcon className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
+                    Gallery
                   </MobileLink>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
 
             <div className="space-y-0">
-                <MobileNavItem href="/awareness-program" label="Workshops" setOpen={setOpen} />
-                <MobileNavItem href="/careers" label="Careers" setOpen={setOpen} />
-                <MobileNavItem href="/blogs" label="Blogs" setOpen={setOpen} />
                 <MobileNavItem href="/contact-us" label="Contact" setOpen={setOpen} />
+                <MobileNavItem href="/careers" label="Careers" setOpen={setOpen} />
             </div>
 
             <div className="mt-6 px-2 pb-4">

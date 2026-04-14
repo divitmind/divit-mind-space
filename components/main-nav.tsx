@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Brain, Briefcase, Image as ImageIcon, Megaphone, ChevronDown, FileText, Heart, Users, GraduationCap } from "lucide-react";
+import { Brain, Image as ImageIcon, Megaphone, ChevronDown, FileText, Heart, Users, GraduationCap, BookOpen } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -41,10 +41,6 @@ export function MainNav() {
       <NavigationMenuList className="gap-2">
         <NavigationMenuItem>
           <NavLink href="/" onClick={handleHomeClick}>Home</NavLink>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavLink href="/about-us">About Us</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
@@ -94,15 +90,11 @@ export function MainNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
+          <NavLink href="/about-us">About Us</NavLink>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
           <NavLink href="/awareness-program">Workshops</NavLink>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavLink href="/careers">Careers</NavLink>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavLink href="/blogs">Blogs</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
@@ -111,14 +103,27 @@ export function MainNav() {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="grid w-[300px] gap-2 p-6 bg-white rounded-[2.5rem] shadow-2xl border border-black/5">
+              <ListItem title="Blogs" href="/blogs" icon={<BookOpen className="h-4 w-4" />}>
+                Expert Insights
+              </ListItem>
               <ListItem title="Mind Gym" href="/mind-gym" icon={<Brain className="h-4 w-4" />}>
                 Brain Training
               </ListItem>
-              <ListItem title="Gallery" href="/gallery" icon={<ImageIcon className="h-4 w-4" />}>
-                Our Moments
-              </ListItem>
+            </div>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="bg-transparent text-black/40 hover:text-green font-bold text-[10px] uppercase tracking-[0.2em] transition-all px-4 h-10 data-[state=open]:text-green group">
+            Media
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div className="grid w-[300px] gap-2 p-6 bg-white rounded-[2.5rem] shadow-2xl border border-black/5">
               <ListItem title="News" href="/news" icon={<Megaphone className="h-4 w-4" />}>
                 Announcements
+              </ListItem>
+              <ListItem title="Gallery" href="/gallery" icon={<ImageIcon className="h-4 w-4" />}>
+                Our Moments
               </ListItem>
             </div>
           </NavigationMenuContent>
@@ -126,6 +131,10 @@ export function MainNav() {
 
         <NavigationMenuItem>
           <NavLink href="/contact-us">Contact</NavLink>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavLink href="/careers">Careers</NavLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
