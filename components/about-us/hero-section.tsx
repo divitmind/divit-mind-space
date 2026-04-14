@@ -20,10 +20,23 @@ interface AboutUsHeroData {
 }
 
 export function HeroSection({ data }: { data?: AboutUsHeroData }) {
-  const title = data?.title || "Empowering Every Neurodivergent Child to Thrive";
-  const description = "Bangalore's leading center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, therapies, professional counseling, and specialized education for all ages.";
+  // SEO Ranking Hack Strategy
+  const seoTitle = "Leading Mental Health, Neurodevelopment & Physiotherapy Center in Bangalore";
+  const seoDescription = "Expert clinical assessments, therapies, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and across Bengaluru.";
+
+
+  // If Sanity has the old default or is empty, use the new SEO version
+  const title = !data?.title || data.title.includes("Empowering Every") 
+    ? seoTitle 
+    : data.title;
+    
+  const description = !data?.description || data.description.includes("Bangalore's leading center") || data.description.includes("We provide expert")
+    ? seoDescription 
+    : data.description;
 
   return (
+
+
     <section className="pt-4 lg:pt-8 pb-8 lg:pb-6 bg-[#FAF9F5]">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">

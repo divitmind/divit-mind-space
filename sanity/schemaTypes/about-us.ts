@@ -12,12 +12,13 @@ export const aboutUsType = defineType({
   ],
   initialValue: {
     hero: {
-      title: "Empowering Every Neurodivergent Child to Thrive",
-      description: "We provide expert assessments, therapy, and family support—helping children build confidence and independence in a nurturing environment.",
+      title: "Leading Mental Health, Neurodevelopment & Physiotherapy Center in Bangalore",
+      description: "Expert clinical assessments, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and across Bengaluru.",
     },
     philosophy: {
-      title: "Why Families Choose Us",
-      description: "What sets Divit MindSpace apart from other centers",
+      title: "Why Bangalore Families Choose Divit MindSpace",
+      description: "What sets our center apart from other facilities in Bengaluru",
+
       points: [
         {
           _type: "object",
