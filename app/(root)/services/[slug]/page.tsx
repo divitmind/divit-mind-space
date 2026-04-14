@@ -8,6 +8,9 @@ import { ServiceExperts } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { Check, Clock, MapPin } from "lucide-react";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 interface ServiceData {
   _id: string;
   title: string;

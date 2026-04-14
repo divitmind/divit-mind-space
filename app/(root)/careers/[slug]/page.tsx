@@ -6,6 +6,9 @@ import { client } from "@/sanity/lib/client";
 import { ALL_CAREER_SLUGS_QUERY, SINGLE_CAREER_QUERY } from "@/sanity/lib/queries";
 import type { Career } from "@/sanity/types";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }

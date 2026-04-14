@@ -4,6 +4,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { AWARENESS_QUERY } from "@/sanity/lib/queries";
 import { AwarenessQueryResult } from "@/sanity/types";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Awareness Programs | Divit MindSpace - Community Education & Outreach",
   description: "Join our FREE awareness sessions on early intervention for neurodivergent children. Learn to recognize signs, break stigma, and support families across preschools, schools, and organizations in Bangalore.",

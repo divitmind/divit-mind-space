@@ -4,6 +4,9 @@ import { MIND_GYM_QUERY } from "@/sanity/lib/queries";
 import { MindGymQueryResult } from "@/sanity/types";
 import { MindGymPage } from "@/components/mind-gym/mind-gym-page";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Mind Gym | Interactive Brain Games | Divit MindSpace",
   description: "Boost focus, memory, and cognitive flexibility with our interactive brain games. Scientific brain teasers for children, teenagers, and adults.",

@@ -4,6 +4,9 @@ import { REVIEWS_FIRST_PAGE_QUERY } from "@/sanity/lib/queries";
 import type { ReviewListItem } from "@/sanity/types";
 import { ReviewsPage } from "@/components/reviews/reviews-page";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 const PAGE_SIZE = 12;
 
 export const metadata: Metadata = {

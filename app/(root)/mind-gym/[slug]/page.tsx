@@ -10,6 +10,9 @@ import { MindfulPaths } from "@/components/mind-gym/games/mindful-paths";
 import { GameLayout } from "@/components/mind-gym/game-layout";
 import { Brain } from "lucide-react";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 interface GamePageProps {
   params: Promise<{ slug: string }>;
 }

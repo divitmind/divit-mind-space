@@ -4,6 +4,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { GALLERY_QUERY, GALLERY_CATEGORIES_QUERY } from "@/sanity/lib/queries";
 import type { GalleryQueryResult, GalleryCategoriesQueryResult } from "@/sanity/types";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Gallery | Divit MindSpace",
   description:

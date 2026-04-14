@@ -4,6 +4,9 @@ import ServicesPage from "@/components/services/services-page";
 import { sanityFetch } from "@/sanity/lib/live";
 import { ALL_SERVICES_QUERY } from "@/sanity/lib/queries";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Our Services | Divit MindSpace",
   description:

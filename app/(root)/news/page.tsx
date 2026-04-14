@@ -4,6 +4,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { NEWS_POSTS_QUERY } from "@/sanity/lib/queries";
 import type { PostsQueryResult } from "@/sanity/types";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "News | Divit MindSpace",
   description:

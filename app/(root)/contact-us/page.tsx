@@ -4,6 +4,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import type { SiteSettings, FAQ } from "@/lib/types";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Contact Divit MindSpace | Mental Health & Therapy Center Sarjapur Road, Bangalore",
   description:

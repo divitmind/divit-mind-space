@@ -8,6 +8,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { ABOUT_US_QUERY, SPECIALISTS_QUERY } from "@/sanity/lib/queries";
 import type { AboutUsQueryResult, SpecialistsQueryResult } from "@/sanity/types";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "About Us | Divit MindSpace - Empowering Neurodivergent Children",
   description: "Divit MindSpace offers clinical assessments, specialized education, and comprehensive training for neurodivergent children and their families. Free awareness sessions across communities to break stigma and nurture potential.",

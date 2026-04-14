@@ -10,6 +10,9 @@ import { urlFor } from "@/sanity/lib/image";
 import type { Post } from "@/sanity/types";
 import { portableTextComponents } from "@/components/portable-text-components";
 import { FeaturesShowcaseSection } from "@/components/homepage/features-showcase-section";
+
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
 import { CtaSection } from "@/components/homepage/cta-section";
 import { AuthorBio } from "@/components/blogs/author-bio";
 
