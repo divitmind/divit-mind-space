@@ -85,20 +85,22 @@ export function SiteFooter() {
                                 <MapPin className="h-5 w-5 shrink-0 text-green/40" />
                                 <span className="leading-relaxed">{contact.address}</span>
                             </p>
-                            <a
-                                href={contact.phone.href}
-                                className="flex items-center gap-4 hover:text-green transition-colors group"
-                            >
-                                <Phone className="h-5 w-5 shrink-0 text-green/40 group-hover:text-green transition-colors" />
-                                {contact.phone.label}
-                            </a>
-                            <a
-                                href={contact.email.href}
-                                className="flex items-center gap-4 hover:text-green transition-colors group"
-                            >
-                                <Mail className="h-5 w-5 shrink-0 text-green/40 group-hover:text-green transition-colors" />
-                                {contact.email.label}
-                            </a>
+                            <div className="flex flex-wrap gap-x-6 gap-y-3">
+                                <a
+                                    href={contact.phone.href}
+                                    className="flex items-center gap-2 hover:text-green transition-colors group"
+                                >
+                                    <Phone className="h-4 w-4 shrink-0 text-green/40 group-hover:text-green transition-colors" />
+                                    {contact.phone.label}
+                                </a>
+                                <a
+                                    href={contact.email.href}
+                                    className="flex items-center gap-2 hover:text-green transition-colors group"
+                                >
+                                    <Mail className="h-4 w-4 shrink-0 text-green/40 group-hover:text-green transition-colors" />
+                                    {contact.email.label}
+                                </a>
+                            </div>
                         </address>
                         <div className="flex gap-3 mt-5">
                             {socialLinks.map(({ href, icon: Icon, label }) => (
