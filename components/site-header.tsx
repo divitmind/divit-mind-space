@@ -33,10 +33,6 @@ export function SiteHeader() {
                             className="object-contain" 
                         />
                     </div>
-                    <div className="hidden lg:flex flex-col">
-                        <span className="font-serif italic text-2xl text-green leading-none" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>Divit</span>
-                        <span className="text-[10px] font-bold text-black/30 uppercase tracking-[0.3em]">MindSpace</span>
-                    </div>
                 </Link>
 
                 {/* Desktop Nav */}
