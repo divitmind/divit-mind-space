@@ -4,6 +4,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { ALL_CAREERS_QUERY } from "@/sanity/lib/queries";
 import type { CareersQueryResult } from "@/sanity/types";
 
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Careers | Divit MindSpace",
   description:
