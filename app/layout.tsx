@@ -98,6 +98,9 @@ const organizationJsonLd = {
   },
   description:
     "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Divit MindSpace provides expert-led Clinical Assessments, Professional Counseling, Speech Therapy, and Occupational Therapy for children, teens, and adults off Sarjapur Road (Kasavanahalli).",
+  telephone: "+91-99016-66139",
+  email: "divitmindspace@gmail.com",
+  priceRange: "₹₹",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Aadeshwar Chambers, Kasavanahalli",
@@ -111,10 +114,25 @@ const organizationJsonLd = {
     latitude: "12.9081",
     longitude: "77.6744"
   },
-  areaServed: {
-    "@type": "City",
-    name: "Bangalore",
-  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "10:00",
+      closes: "19:00",
+    },
+  ],
+  areaServed: [
+    { "@type": "City", name: "Bangalore" },
+    { "@type": "Place", name: "Sarjapur Road" },
+    { "@type": "Place", name: "HSR Layout" },
+    { "@type": "Place", name: "Bellandur" },
+    { "@type": "Place", name: "Kasavanahalli" },
+    { "@type": "Place", name: "Koramangala" },
+    { "@type": "Place", name: "Marathahalli" },
+    { "@type": "Place", name: "Electronic City" },
+    { "@type": "Place", name: "Whitefield" },
+  ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Clinical & Therapeutic Services",

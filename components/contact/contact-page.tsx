@@ -81,8 +81,8 @@ export function ContactPage() {
               <span className="italic text-purple font-serif">Unique Journey</span> Together
             </h1>
             <p className="text-lg md:text-xl text-black/70 font-medium max-w-2xl mx-auto mb-8 md:mb-10">
-              Professional therapy and developmental support for children, teens, adults, and families. 
-              We&apos;re here to provide expert guidance whenever you&apos;re ready.
+              Mental health, neurodevelopment, and physiotherapy for children, teens, adults, and families.
+              Located off Sarjapur Road, Bangalore - serving HSR Layout, Bellandur, Kasavanahalli, and beyond.
             </p>
           </motion.div>
         </div>
