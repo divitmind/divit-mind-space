@@ -33,12 +33,37 @@ export function CareersPage({ jobs, initialFilter }: CareersPageProps) {
       <div className="bg-gradient-to-br from-cream via-[#FDFBF7] to-green-lite/10 py-16 md:py-20">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
+            {/* Location Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-black/5 text-black text-[10px] font-bold uppercase tracking-widest">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D]" />
+              Sarjapur Road, Bengaluru
+            </div>
+
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-green mb-6">
               Join Our Team
             </h1>
-            <p className="text-lg md:text-xl text-green/70">
-              Join a team that strives to do their best work every day.
+            <p className="text-lg md:text-xl text-green/70 mb-8">
+              Build your career at Bangalore&apos;s leading center for mental health, neurodevelopment, and physiotherapy.
+              Work with passionate therapists and educators at our Kasavanahalli center, serving families across HSR Layout, Bellandur, and South Bangalore.
             </p>
+
+            {/* Quick Stats */}
+            <div className="flex items-center justify-center gap-5 sm:gap-6 text-green">
+              <div className="text-center">
+                <div className="text-xl font-bold">{jobs.length}</div>
+                <div className="text-[9px] text-green/50 font-bold uppercase tracking-widest">Open Roles</div>
+              </div>
+              <div className="w-px h-8 bg-green/10" />
+              <div className="text-center">
+                <div className="text-xl font-bold">{departments.length}</div>
+                <div className="text-[9px] text-green/50 font-bold uppercase tracking-widest">Departments</div>
+              </div>
+              <div className="w-px h-8 bg-green/10" />
+              <div className="text-center">
+                <div className="text-xl font-bold">Onsite</div>
+                <div className="text-[9px] text-green/50 font-bold uppercase tracking-widest">Work Model</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

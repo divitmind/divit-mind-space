@@ -240,10 +240,11 @@ export interface CareerListItem {
   employmentType: string;
   locationType: string;
   salaryRange?: {
-    min?: string;
-    max?: string;
+    min?: number;
+    max?: number;
     note?: string;
   };
+  postedDate?: string;
 }
 
 export type CareersQueryResult = CareerListItem[];
