@@ -421,7 +421,12 @@ export const SPECIALISTS_QUERY = `*[_type == "specialist"] | order(order desc, n
   specialties,
   teaser,
   fullBio,
-  order
+  order,
+  "servicesProvided": servicesProvided[]->{
+    _id,
+    title,
+    "slug": slug.current
+  }
 }`;
 
 export const ABOUT_US_QUERY = `*[_type == "aboutUs"][0] {

@@ -102,18 +102,28 @@ function getEmploymentType(type: string): string {
   return typeMap[type.toLowerCase()] || "FULL_TIME";
 }
 
+// Calculate validThrough (90 days from posted date)
+function getValidThrough(postedDate?: string): string {
+  const posted = postedDate ? new Date(postedDate) : new Date();
+  const validThrough = new Date(posted);
+  validThrough.setDate(validThrough.getDate() + 90);
+  return validThrough.toISOString().split("T")[0];
+}
+
 // Generate JobPosting schema for each job
 function generateJobPostingSchema(job: CareerListItem) {
+  const datePosted = job.postedDate || new Date().toISOString().split("T")[0];
   return {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: job.title,
     description: `${job.title} position at Divit MindSpace, Bangalore's leading center for mental health, neurodevelopment, and physiotherapy. Join our ${job.department} team at our center off Sarjapur Road, Kasavanahalli.`,
-    datePosted: job.postedDate || new Date().toISOString().split("T")[0],
+    datePosted,
+    validThrough: getValidThrough(job.postedDate),
     employmentType: getEmploymentType(job.employmentType),
     hiringOrganization,
     jobLocation,
-    jobLocationType: job.locationType === "onsite" ? "TELECOMMUTE" : undefined,
+    ...(job.locationType === "remote" || job.locationType === "hybrid" ? { jobLocationType: "TELECOMMUTE" } : {}),
     applicantLocationRequirements: {
       "@type": "Country",
       name: "India",

@@ -20,13 +20,19 @@ function WhatsAppIcon({ className }: { className?: string }) {
 export function WhatsAppConsultationLink({
   children,
   className,
+  message,
 }: {
   children: React.ReactNode;
   className?: string;
+  message?: string;
 }) {
+  const url = message
+    ? `${WHATSAPP_CONSULTATION_URL}?text=${encodeURIComponent(message)}`
+    : WHATSAPP_CONSULTATION_URL;
+
   return (
     <a
-      href={WHATSAPP_CONSULTATION_URL}
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
       className={cn(

@@ -182,12 +182,54 @@ const organizationJsonLd = {
     "Developmental Delays",
     "Mental Wellness"
   ],
+  founder: [
+    {
+      "@type": "Person",
+      name: "Debarati Basak",
+      jobTitle: "Founder & Clinical Psychologist",
+      description: "Clinical Psychologist specializing in neurodevelopmental assessments and mental health support for children, teens, and adults in Bangalore"
+    },
+    {
+      "@type": "Person",
+      name: "Pavithra Lakshmi",
+      jobTitle: "Co-Founder & Behavioral Therapist",
+      description: "Behavioral Therapist specializing in autism support, ADHD management, and art-based therapy interventions"
+    }
+  ],
   sameAs: [
     "https://instagram.com/divitmindspace",
     "https://facebook.com/divitmindspace",
     "https://www.linkedin.com/in/divitmindspace/",
     "https://x.com/divitmindspace"
-  ]
+  ],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    bestRating: "5",
+    worstRating: "1",
+    ratingCount: "50",
+    reviewCount: "50"
+  },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+91-99016-66139",
+      contactType: "customer service",
+      areaServed: "IN",
+      availableLanguage: ["English", "Hindi", "Kannada"]
+    },
+    {
+      "@type": "ContactPoint",
+      url: "https://wa.me/919902351393",
+      contactType: "customer service",
+      description: "WhatsApp for appointments and inquiries",
+      areaServed: "IN",
+      availableLanguage: ["English", "Hindi", "Kannada"]
+    }
+  ],
+  availableLanguage: ["English", "Hindi", "Kannada"],
+  paymentAccepted: ["Cash", "Credit Card", "Debit Card", "UPI", "Bank Transfer"],
+  currenciesAccepted: "INR"
 };
 
 export default async function RootLayout({

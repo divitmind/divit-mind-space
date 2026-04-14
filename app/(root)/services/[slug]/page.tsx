@@ -111,20 +111,35 @@ export default async function ServicePage({ params }: PageProps) {
 
   const jsonLd: any = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": "MedicalService",
     name: service.title,
     description: service.description,
     provider: {
-      "@type": "Organization",
+      "@type": "MedicalBusiness",
       name: "Divit MindSpace",
       url: "https://divitmindspace.com",
+      telephone: "+91-99016-66139",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Aadeshwar Chambers, Kasavanahalli",
+        addressLocality: "Bangalore",
+        addressRegion: "Karnataka",
+        postalCode: "560035",
+        addressCountry: "IN",
+      },
     },
-    areaServed: {
-      "@type": "Country",
-      name: "India",
-    },
-    serviceType: "Healthcare/Education",
+    areaServed: [
+      { "@type": "City", name: "Bangalore" },
+      { "@type": "Place", name: "Sarjapur Road" },
+      { "@type": "Place", name: "HSR Layout" },
+      { "@type": "Place", name: "Bellandur" },
+      { "@type": "Place", name: "Kasavanahalli" },
+      { "@type": "Place", name: "Koramangala" },
+    ],
+    serviceType: service.category === "therapy" ? "Therapy" : service.category === "assessments" ? "Clinical Assessment" : "Healthcare/Education",
     url: `https://divitmindspace.com/services/${service.slug.current}`,
+    ...(service.duration && { estimatedCost: { "@type": "MonetaryAmount", description: service.duration } }),
+    ...(service.format && { availableChannel: { "@type": "ServiceChannel", serviceLocation: { "@type": "Place", name: service.format } } }),
   };
 
   if (service.faqs && service.faqs.length > 0) {
@@ -145,11 +160,26 @@ export default async function ServicePage({ params }: PageProps) {
     programs: "Program",
   };
 
+  // Breadcrumb schema for service pages
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://divitmindspace.com" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://divitmindspace.com/services" },
+      { "@type": "ListItem", position: 3, name: service.title, item: `https://divitmindspace.com/services/${service.slug.current}` },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <div className="bg-[#FAF9F5] min-h-screen">

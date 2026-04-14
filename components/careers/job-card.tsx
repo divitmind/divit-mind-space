@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MapPin, Clock, Building2 } from "lucide-react";
 import type { CareerListItem } from "@/sanity/types";
 
 interface JobCardProps {
@@ -9,27 +10,52 @@ export function JobCard({ job }: JobCardProps) {
   return (
     <Link
       href={`/careers/${job.slug.current}`}
-      className="block p-6 bg-white rounded-xl border border-green/10 hover:border-green/30 hover:shadow-lg transition-all duration-300"
+      className="group relative bg-white overflow-hidden rounded-[2rem] border border-black/5 hover:border-black/10 transition-all duration-500 hover:shadow-2xl hover:shadow-black/5 p-8"
     >
-      {/* Department badge */}
-      <div className="mb-3">
-        <span className="text-xs font-semibold text-green uppercase tracking-wide">
+      {/* Department Badge */}
+      <div className="mb-4">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#7A9A7D]/10 text-[#7A9A7D] text-[10px] font-bold uppercase tracking-widest">
+          <Building2 className="w-3 h-3" />
           {job.department}
         </span>
       </div>
 
-      {/* Job title */}
-      <h3 className="text-xl font-bold text-green mb-3 leading-tight">
+      {/* Job Title - Serif Italic like services */}
+      <h3
+        className="text-2xl font-serif italic text-black leading-tight mb-4 group-hover:text-[#7A9A7D] transition-colors duration-300"
+        style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+      >
         {job.title}
       </h3>
 
-      {/* Job details */}
-      <div className="flex flex-wrap gap-2 text-sm text-green/70 mb-3">
-        <span className="capitalize">{job.location.join(', ')}</span>
-        <span>•</span>
-        <span className="capitalize">{job.employmentType.replace('-', ' ')}</span>
-        <span>•</span>
-        <span className="capitalize">{job.locationType}</span>
+      {/* Job Details */}
+      <div className="flex flex-wrap gap-4 text-sm text-black/60 mb-6">
+        <span className="inline-flex items-center gap-1.5">
+          <MapPin className="w-4 h-4" />
+          {job.location.join(", ")}
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <Clock className="w-4 h-4" />
+          <span className="capitalize">{job.employmentType.replace("-", " ")}</span>
+        </span>
+      </div>
+
+      {/* View Role Link */}
+      <div className="pt-4 border-t border-black/5 flex items-center gap-2 text-black/40 group-hover:text-black transition-all duration-300 uppercase text-[10px] font-bold tracking-widest">
+        <span>View Role</span>
+        <svg
+          className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M17 8l4 4m0 0l-4 4m4-4H3"
+          />
+        </svg>
       </div>
     </Link>
   );

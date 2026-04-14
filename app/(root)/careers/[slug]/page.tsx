@@ -107,12 +107,21 @@ export default async function JobDetailRoute({ params }: PageProps) {
     "temporary": "TEMPORARY",
   };
 
+  // Calculate validThrough (90 days from posted date)
+  const getValidThrough = (postedDate?: string): string => {
+    const posted = postedDate ? new Date(postedDate) : new Date();
+    const validThrough = new Date(posted);
+    validThrough.setDate(validThrough.getDate() + 90);
+    return validThrough.toISOString().split("T")[0];
+  };
+
   const jobPostingJsonLd = {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: jobData.title,
     description: jobData.aboutRole || `${jobData.title} position at Divit MindSpace`,
     datePosted: jobData.postedDate,
+    validThrough: getValidThrough(jobData.postedDate),
     employmentType: employmentTypeMap[jobData.employmentType] || "OTHER",
     jobLocation: {
       "@type": "Place",
