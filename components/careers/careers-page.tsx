@@ -43,8 +43,8 @@ export function CareersPage({ jobs, initialFilter }: CareersPageProps) {
               Join Our Team
             </h1>
             <p className="text-lg md:text-xl text-green/70 mb-8">
-              Build your career at Bangalore&apos;s leading center for mental health, neurodevelopment, and physiotherapy.
-              Work with passionate therapists and educators at our Kasavanahalli center, serving families across HSR Layout, Bellandur, and South Bangalore.
+              Join Bangalore&apos;s leading center for mental health, neurodevelopment, and physiotherapy.
+              Serving families across Kasavanahalli, HSR Layout, Bellandur, and Bengaluru.
             </p>
 
             {/* Quick Stats */}
