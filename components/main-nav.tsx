@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Brain, Briefcase, Image as ImageIcon, Megaphone } from "lucide-react";
+import { Brain, Briefcase, Image as ImageIcon, Megaphone, ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -16,29 +16,26 @@ import {
 } from "@/components/ui/navigation-menu";
 import { services } from "@/lib/services-data";
 
-// Get first 6 services for nav dropdown
 const navServices = services.slice(0, 6);
 
 export function MainNav() {
   return (
     <NavigationMenu className="hidden md:flex">
-      <NavigationMenuList className="gap-1">
+      <NavigationMenuList className="gap-2">
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
-            <Link href="/">Home</Link>
-          </NavigationMenuLink>
+          <NavLink href="/">Home</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
-            <Link href="/about-us">About Us</Link>
-          </NavigationMenuLink>
+          <NavLink href="/about-us">About Us</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3">Services</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent text-black/40 hover:text-green font-bold text-[10px] uppercase tracking-[0.2em] transition-all px-4 h-10 data-[state=open]:text-green group">
+            Services
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-2 p-5 md:w-[500px] md:grid-cols-2 lg:w-[640px] bg-white rounded-[2rem] shadow-2xl">
+            <ul className="grid w-[400px] gap-2 p-6 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white rounded-[2.5rem] shadow-2xl border border-black/5">
               {navServices.map((service) => (
                 <ListItem
                   key={service.id}
@@ -46,12 +43,13 @@ export function MainNav() {
                   href={`/services/${service.slug}`}
                 />
               ))}
-              <li className="col-span-2 border-t border-[#E8ECE9] pt-4 mt-2">
+              <li className="col-span-2 border-t border-black/5 pt-6 mt-4">
                 <Link
                   href="/services"
-                  className="block text-center py-2 text-sm font-bold text-[#7A9A7D] hover:text-[#5a7a5d] transition-colors tracking-tight"
+                  className="inline-flex items-center gap-2 text-[10px] font-bold text-green hover:gap-4 transition-all tracking-[0.2em] uppercase w-full justify-center"
                 >
-                  View All Services →
+                  Explore All Services
+                  <ChevronDown className="w-3 h-3 -rotate-90" />
                 </Link>
               </li>
             </ul>
@@ -59,45 +57,56 @@ export function MainNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
-            <Link href="/awareness-program">Free Workshops</Link>
-          </NavigationMenuLink>
+          <NavLink href="/awareness-program">Workshops</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
-            <Link href="/blogs">Blogs</Link>
-          </NavigationMenuLink>
+          <NavLink href="/careers">Careers</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3">Media</NavigationMenuTrigger>
+          <NavLink href="/blogs">Blogs</NavLink>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="bg-transparent text-black/40 hover:text-green font-bold text-[10px] uppercase tracking-[0.2em] transition-all px-4 h-10 data-[state=open]:text-green group">
+            Media
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="grid w-[320px] gap-2 p-5 bg-white rounded-[2rem] shadow-2xl">
+            <div className="grid w-[300px] gap-2 p-6 bg-white rounded-[2.5rem] shadow-2xl border border-black/5">
               <ListItem title="Mind Gym" href="/mind-gym" icon={<Brain className="h-4 w-4" />}>
-                Interactive cognitive games.
+                Brain Training
               </ListItem>
               <ListItem title="Gallery" href="/gallery" icon={<ImageIcon className="h-4 w-4" />}>
-                Our events and activities.
+                Our Moments
               </ListItem>
               <ListItem title="News" href="/news" icon={<Megaphone className="h-4 w-4" />}>
-                Latest updates and announcements.
-              </ListItem>
-              <ListItem title="Careers" href="/careers" icon={<Briefcase className="h-4 w-4" />}>
-                Join our expert team.
+                Announcements
               </ListItem>
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-black hover:text-black/60 font-bold text-sm tracking-tight transition-colors px-3")} asChild>
-            <Link href="/contact-us">Contact</Link>
-          </NavigationMenuLink>
+          <NavLink href="/contact-us">Contact</NavLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   );
+}
+
+function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+    return (
+        <NavigationMenuLink 
+            className={cn(
+                navigationMenuTriggerStyle(), 
+                "bg-transparent text-black/40 hover:text-green font-bold text-[10px] uppercase tracking-[0.2em] transition-all px-4 h-10"
+            )} 
+            asChild
+        >
+            <Link href={href}>{children}</Link>
+        </NavigationMenuLink>
+    );
 }
 
 const ListItem = React.forwardRef<
@@ -110,22 +119,22 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "flex items-start gap-3 select-none rounded-xl p-3 leading-none no-underline outline-none transition-all hover:bg-[#FAF7F2] hover:text-[#7A9A7D] focus:bg-[#FAF7F2] focus:text-[#7A9A7D] group border border-transparent hover:border-[#7A9A7D]/10",
+            "flex items-start gap-4 select-none rounded-[1.5rem] p-4 leading-none no-underline outline-none transition-all hover:bg-green/5 hover:text-green group border border-transparent hover:border-green/10",
             className
           )}
           {...props}
         >
           {icon && (
-            <div className="mt-0.5 shrink-0 text-gray-400 group-hover:text-[#7A9A7D] transition-colors">
+            <div className="mt-0.5 shrink-0 text-black/20 group-hover:text-green transition-colors">
               {icon}
             </div>
           )}
-          <div className="space-y-1">
-            <div className="text-sm font-bold leading-none group-hover:text-[#7A9A7D] transition-colors tracking-tight">
+          <div className="space-y-1.5">
+            <div className="text-xs font-bold leading-none group-hover:text-green transition-colors tracking-[0.1em] uppercase">
               {title}
             </div>
             {children && (
-              <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground/80">
+              <p className="line-clamp-1 text-[10px] font-medium leading-relaxed text-black/40 group-hover:text-green/60 uppercase tracking-widest">
                 {children}
               </p>
             )}
