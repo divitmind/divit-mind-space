@@ -155,10 +155,13 @@ export default async function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <main>
-        <HeroSection announcement={announcementData?.text} />
-        <ServicesSection therapyServices={therapyServicesData} />
+        <HeroSection announcement={announcementData?.text} siteSettings={siteSettings} />
+        <ServicesSection therapyServices={therapyServicesData} serviceCategories={siteSettings?.homepage?.serviceCategories} />
         <TestimonialsSection reviews={(reviews as ReviewsQueryResult) ?? []} />
-        <WhoNeedsItSection />
+        <WhoNeedsItSection
+          title={siteSettings?.homepage?.whoNeedsItTitle}
+          items={siteSettings?.homepage?.whoNeedsIt}
+        />
         <FaqSection faqs={homepageFaqs} title={faqTitle} subtitle={faqSubtitle} />
         <CtaSection />
       </main>

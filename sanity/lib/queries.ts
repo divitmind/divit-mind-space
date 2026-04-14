@@ -642,6 +642,26 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
     "faqs": homepage.faqs[]{
       question,
       answer
+    },
+    "heroImage": homepage.heroImage{
+      asset->{url},
+      alt,
+      hotspot,
+      crop
+    },
+    "heroImageAlt": homepage.heroImageAlt,
+    "missionStatement": homepage.missionStatement,
+    "serviceCategories": homepage.serviceCategories[]{
+      title,
+      outcome,
+      href,
+      icon
+    },
+    "whoNeedsItTitle": homepage.whoNeedsItTitle,
+    "whoNeedsIt": homepage.whoNeedsIt[]{
+      title,
+      description,
+      icon
     }
   },
   "servicesPage": {

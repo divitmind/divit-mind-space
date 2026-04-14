@@ -323,6 +323,96 @@ export const siteSettingsType = defineType({
             },
           ],
         }),
+        defineField({
+          name: "heroImage",
+          title: "🖼️ [EDIT] Hero Image",
+          type: "image",
+          description: "Main hero image on homepage (recommended: 1200x960px)",
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: "heroImageAlt",
+          title: "🖼️ [EDIT] Hero Image Alt Text",
+          type: "string",
+          description: "Accessibility text describing the hero image",
+        }),
+        defineField({
+          name: "missionStatement",
+          title: "🎯 [EDIT] Mission Statement",
+          type: "string",
+          description: "e.g., 'Empowering potential through compassionate, evidence-based care.'",
+        }),
+        defineField({
+          name: "serviceCategories",
+          title: "🏷️ [EDIT] Service Category Cards",
+          type: "array",
+          description: "4 service category cards shown on homepage with outcomes",
+          of: [
+            {
+              type: "object",
+              fields: [
+                { name: "title", type: "string", title: "Category Title", description: "e.g., Assessments, Therapy, Guidance, Programs" },
+                { name: "outcome", type: "text", title: "Outcome Text", rows: 2, description: "e.g., 'Stop guessing. Get answers...'" },
+                { name: "href", type: "string", title: "Link", description: "e.g., /services?category=assessments" },
+                {
+                  name: "icon",
+                  type: "string",
+                  title: "Icon Name",
+                  description: "Icon identifier: clipboard, heart, compass, graduation",
+                  options: {
+                    list: [
+                      { title: "Clipboard (Assessments)", value: "clipboard" },
+                      { title: "Heart (Therapy)", value: "heart" },
+                      { title: "Compass (Guidance)", value: "compass" },
+                      { title: "Graduation (Programs)", value: "graduation" },
+                    ],
+                  },
+                },
+              ],
+              preview: {
+                select: { title: "title", subtitle: "outcome" },
+              },
+            },
+          ],
+          validation: (rule) => rule.max(4),
+        }),
+        defineField({
+          name: "whoNeedsItTitle",
+          title: "👥 [EDIT] 'Who Needs It' Section Title",
+          type: "string",
+          description: "e.g., 'Here's who we're here for'",
+        }),
+        defineField({
+          name: "whoNeedsIt",
+          title: "👥 [EDIT] 'Who Needs It' Cards",
+          type: "array",
+          description: "Audience cards: Families, Schools, Professionals",
+          of: [
+            {
+              type: "object",
+              fields: [
+                { name: "title", type: "string", title: "Audience Title", description: "e.g., Families, Schools, Professionals" },
+                { name: "description", type: "text", title: "Description", rows: 2 },
+                {
+                  name: "icon",
+                  type: "string",
+                  title: "Icon Name",
+                  options: {
+                    list: [
+                      { title: "Users (Families)", value: "users" },
+                      { title: "Building (Schools)", value: "building" },
+                      { title: "Briefcase (Professionals)", value: "briefcase" },
+                    ],
+                  },
+                },
+              ],
+              preview: {
+                select: { title: "title", subtitle: "description" },
+              },
+            },
+          ],
+          validation: (rule) => rule.max(3),
+        }),
       ],
     }),
 

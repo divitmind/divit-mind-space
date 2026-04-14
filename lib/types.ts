@@ -43,6 +43,19 @@ export interface NavigationSettings {
   joinTeamText: string;
 }
 
+export interface ServiceCategoryCard {
+  title: string;
+  outcome: string;
+  href: string;
+  icon: "clipboard" | "heart" | "compass" | "graduation";
+}
+
+export interface WhoNeedsItCard {
+  title: string;
+  description: string;
+  icon: "users" | "building" | "briefcase";
+}
+
 export interface HomepageSettings {
   heroDescription: string;
   rollingAudiences: string[];
@@ -52,6 +65,15 @@ export interface HomepageSettings {
   faqTitle: string;
   faqSubtitle: string;
   faqs: FAQ[];
+  heroImage?: {
+    asset: { url: string };
+    alt?: string;
+  };
+  heroImageAlt?: string;
+  missionStatement?: string;
+  serviceCategories?: ServiceCategoryCard[];
+  whoNeedsItTitle?: string;
+  whoNeedsIt?: WhoNeedsItCard[];
 }
 
 export interface ServicesPageSettings {
