@@ -244,7 +244,7 @@ export default async function ServicePage({ params }: PageProps) {
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
                     style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
                   >
-                    Is This Right for Your Child?
+                    Is This Right for You or Your Loved Ones?
                   </h2>
                   <ul className="space-y-3">
                     {service.whoIsItFor.map((item, index) => (
@@ -270,10 +270,10 @@ export default async function ServicePage({ params }: PageProps) {
                 className="text-2xl lg:text-3xl font-serif text-green mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
               >
-                Ready to Get Started?
+                Take the Next Step Toward Your Wellbeing
               </h2>
-              <p className="text-green/70 mb-6">
-                Book a free consultation to discuss if {service.title} is right for your child.
+              <p className="text-green/70 mb-6 font-medium">
+                Book a free consultation to explore how {service.title} can help you achieve your clinical goals. Our multidisciplinary experts provide the clarity and support needed for individuals of all ages.
               </p>
               <WhatsAppConsultationLink className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-green text-white font-semibold hover:bg-green/90 transition-colors">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
