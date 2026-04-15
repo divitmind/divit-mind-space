@@ -114,6 +114,26 @@ export const careerType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'additionalAdvantage',
+      type: 'array',
+      title: 'Additional Advantage',
+      of: [
+        defineArrayMember({
+          type: 'block',
+        }),
+      ],
+    }),
+    defineField({
+      name: 'whatWeOffer',
+      type: 'array',
+      title: 'What We Offer',
+      of: [
+        defineArrayMember({
+          type: 'block',
+        }),
+      ],
+    }),
+    defineField({
       name: 'requirements',
       type: 'array',
       title: 'Role Requirements',
