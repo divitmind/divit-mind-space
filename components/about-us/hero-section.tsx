@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { urlFor } from "@/sanity/lib/image";
+import type { TrustMetrics } from "@/lib/types";
 
 interface AboutUsHeroImage {
   asset?: { url?: string };
@@ -19,7 +20,21 @@ interface AboutUsHeroData {
   images?: AboutUsHeroImage[];
 }
 
-export function HeroSection({ data }: { data?: AboutUsHeroData }) {
+const DEFAULT_METRICS: TrustMetrics = {
+  familiesCount: "100+",
+  specialistsCount: "6+",
+  servicesCount: "21+",
+  googleRating: "4.9 / 5",
+  googleReviewsUrl: "",
+};
+
+export function HeroSection({ data, metrics: sanityMetrics }: { data?: AboutUsHeroData, metrics?: TrustMetrics }) {
+  const metrics = {
+    familiesCount: sanityMetrics?.familiesCount || DEFAULT_METRICS.familiesCount,
+    specialistsCount: sanityMetrics?.specialistsCount || DEFAULT_METRICS.specialistsCount,
+    servicesCount: sanityMetrics?.servicesCount || DEFAULT_METRICS.servicesCount,
+    googleRating: sanityMetrics?.googleRating || DEFAULT_METRICS.googleRating,
+  };
   // SEO Ranking Hack Strategy
   const seoTitle = "Leading Mental Health, Neurodevelopment & Physiotherapy Center in Bangalore";
   const seoDescription = "Expert clinical assessments, therapies, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and across Bengaluru.";
@@ -81,17 +96,17 @@ export function HeroSection({ data }: { data?: AboutUsHeroData }) {
             transition={{ delay: 0.3 }}
           >
             <div className="text-center group">
-              <div className="text-xl font-bold text-black">21+</div>
+              <div className="text-xl font-bold text-black">{metrics.servicesCount}</div>
               <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Services</div>
             </div>
             <div className="w-px h-8 bg-black/10" />
             <div className="text-center group">
-              <div className="text-xl font-bold text-black">12+</div>
+              <div className="text-xl font-bold text-black">{metrics.specialistsCount}</div>
               <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Specialists</div>
             </div>
             <div className="w-px h-8 bg-black/10" />
             <div className="text-center group">
-              <div className="text-xl font-bold text-black">100+</div>
+              <div className="text-xl font-bold text-black">{metrics.familiesCount}</div>
               <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Families</div>
             </div>
             <div className="w-px h-8 bg-black/10" />
@@ -102,7 +117,7 @@ export function HeroSection({ data }: { data?: AboutUsHeroData }) {
                 <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
                 <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
               </svg>
-              <span className="text-xl font-serif italic text-green leading-none" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>4.9 / 5</span>
+              <span className="text-xl font-serif italic text-green leading-none" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>{metrics.googleRating}</span>
             </div>
           </motion.div>
         </div>

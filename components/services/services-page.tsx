@@ -8,6 +8,7 @@ import Link from "next/link";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { ClipboardCheck, Heart, Users, GraduationCap } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
+import type { SiteSettings, TrustMetrics } from "@/lib/types";
 
 interface SanityService {
   _id: string;
@@ -24,6 +25,14 @@ interface SanityService {
     alt?: string;
   };
 }
+
+const DEFAULT_METRICS: TrustMetrics = {
+  familiesCount: "100+",
+  specialistsCount: "12+",
+  servicesCount: "21+",
+  googleRating: "4.9 / 5",
+  googleReviewsUrl: "",
+};
 
 const categories = [
   { id: "all", label: "All Services", icon: null },
@@ -44,11 +53,13 @@ const categoryDescriptions: Record<string, string> = {
 interface ServicesPageProps {
   title?: string;
   services: SanityService[];
+  siteSettings?: SiteSettings | null;
 }
 
-export default function ServicesPage({ title: propTitle = "Our Services", services }: ServicesPageProps) {
+export default function ServicesPage({ title: propTitle = "Our Services", services, siteSettings }: ServicesPageProps) {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("all");
+  const metrics = siteSettings?.metrics || DEFAULT_METRICS;
 
   // Dynamic title based on category
   const dynamicTitle = useMemo(() => {
@@ -131,7 +142,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
               </div>
               <div className="w-px h-8 bg-black/10" />
               <div className="text-center group">
-                <div className="text-xl font-bold text-black">12+</div>
+                <div className="text-xl font-bold text-black">6+</div>
                 <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Specialists</div>
               </div>
               <div className="w-px h-8 bg-black/10" />
