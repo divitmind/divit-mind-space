@@ -19,7 +19,7 @@ const DEFAULT_CTA_PRIMARY = "Book a Free Consultation";
 const DEFAULT_CTA_SECONDARY = "Host a Free Workshop";
 const DEFAULT_METRICS = {
   familiesCount: "100+",
-  therapistsCount: "6+",
+  specialistsCount: "6+",
   googleRating: "4.9 / 5",
 };
 
@@ -30,7 +30,11 @@ export function HeroSection({ announcement, siteSettings }: HeroSectionProps) {
   const heroDescription = siteSettings?.homepage?.heroDescription || DEFAULT_HERO_DESCRIPTION;
   const ctaPrimary = siteSettings?.homepage?.ctaPrimary || DEFAULT_CTA_PRIMARY;
   const ctaSecondary = siteSettings?.homepage?.ctaSecondary || DEFAULT_CTA_SECONDARY;
-  const metrics = siteSettings?.metrics || DEFAULT_METRICS;
+  const metrics = {
+    familiesCount: siteSettings?.metrics?.familiesCount || DEFAULT_METRICS.familiesCount,
+    specialistsCount: siteSettings?.metrics?.specialistsCount || DEFAULT_METRICS.specialistsCount,
+    googleRating: siteSettings?.metrics?.googleRating || DEFAULT_METRICS.googleRating,
+  };
   const heroImage = siteSettings?.homepage?.heroImage?.asset?.url || "/welcome_to_neuroempower.png";
   const heroImageAlt = siteSettings?.homepage?.heroImageAlt || "Child confidently playing with blocks, teen journaling with self-assurance, parents feeling connected and hopeful";
 
@@ -123,10 +127,10 @@ export function HeroSection({ announcement, siteSettings }: HeroSectionProps) {
 
               <div className="hidden sm:block w-px h-8 bg-black/10" />
 
-              {/* Expert Therapists */}
+              {/* Expert Specialists */}
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-black leading-tight">{metrics.therapistsCount}</span>
-                <span className="text-[9px] font-semibold text-black/50 uppercase tracking-wider">Therapists</span>
+                <span className="text-lg font-bold text-black leading-tight">{metrics.specialistsCount}</span>
+                <span className="text-[9px] font-semibold text-black/50 uppercase tracking-wider">Specialists</span>
               </div>
 
               <div className="hidden sm:block w-px h-8 bg-black/10" />
