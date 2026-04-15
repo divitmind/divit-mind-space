@@ -19,7 +19,7 @@ export interface ContactInfo {
 
 export interface TrustMetrics {
   familiesCount: string;
-  therapistsCount: string;
+  specialistsCount: string;
   servicesCount: string;
   googleRating: string;
   googleReviewsUrl: string;
