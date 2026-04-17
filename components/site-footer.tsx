@@ -27,7 +27,7 @@ const contact = {
 
 const socialLinks = [
     {
-        href: "https://instagram.com/divitmindspace",
+        href: "https://www.instagram.com/divitmindspace/",
         label: "Instagram",
         icon: (
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
@@ -45,7 +45,7 @@ const socialLinks = [
         )
     },
     {
-        href: "https://facebook.com/divitmindspace",
+        href: "https://www.facebook.com/DivitMindspace/",
         label: "Facebook",
         icon: (
             <svg className="h-4 w-4" viewBox="0 0 24 24">

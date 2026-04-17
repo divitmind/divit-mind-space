@@ -237,11 +237,15 @@ const organizationJsonLd = {
       description: "Behavioral Therapist specializing in autism support, ADHD management, and art-based therapy interventions"
     }
   ],
+  // sameAs URLs should be the canonical, 200-OK URLs (not redirects). Instagram
+  // + Facebook confirmed live 2026-04-18. LinkedIn + X awaiting manual confirmation
+  // because both platforms block automated HEAD requests; if either is absent,
+  // remove it to avoid an "entity broken link" downgrade from Google/LLMs.
   sameAs: [
-    "https://instagram.com/divitmindspace",
-    "https://facebook.com/divitmindspace",
+    "https://www.instagram.com/divitmindspace/",
+    "https://www.facebook.com/DivitMindspace/",
     "https://www.linkedin.com/in/divitmindspace/",
-    "https://x.com/divitmindspace"
+    "https://x.com/divitmindspace",
   ],
   aggregateRating: {
     "@type": "AggregateRating",
