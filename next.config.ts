@@ -42,7 +42,7 @@ const nextConfig: NextConfig = {
       },
       {
         // Long-cache the static LLM + crawler discovery files.
-        source: "/(robots.txt|sitemap.xml|feed.xml|llms.txt|ai.txt|humans.txt)",
+        source: "/(robots.txt|sitemap.xml|sitemap-images.xml|feed.xml|llms.txt|llms-full.txt|ai.txt|humans.txt)",
         headers: [
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400" },
         ],

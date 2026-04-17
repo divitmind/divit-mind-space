@@ -25,12 +25,31 @@ export const MEDICAL_CONTENT_LAST_REVIEWED = "2026-04-18";
 
 export const MEDICAL_CONTENT_REVIEWER = {
   "@type": "Person" as const,
-  name: "Dr. Debarati Basak",
-  jobTitle: "Founder & Clinical Psychologist, Divit MindSpace",
-  url: `${SITE_URL}/specialists/debarati-basak`,
+  name: "Dr. Pavithra Lakshmi Narasimhan",
+  // Credentials first — E-E-A-T signal for YMYL content. Matches exactly what's
+  // on her specialist profile page so Google can reconcile entities.
+  jobTitle:
+    "PhD · Clinical Psychologist · Child & Adolescent Behaviour Intervention Specialist · Certified Art Therapist · SEN (UK certified)",
+  url: `${SITE_URL}/specialists/pavithra-lakshmi-narasimhan`,
+  // Explicit credentials array — Google's YMYL healthcare signal prefers this
+  // over free-text jobTitle alone.
+  hasCredential: [
+    { "@type": "EducationalOccupationalCredential", credentialCategory: "Degree", name: "PhD in Clinical Psychology" },
+    { "@type": "EducationalOccupationalCredential", credentialCategory: "Certification", name: "Certified Art Therapist" },
+    { "@type": "EducationalOccupationalCredential", credentialCategory: "Certification", name: "Special Educational Needs (SEN) — UK Certified" },
+    { "@type": "EducationalOccupationalCredential", credentialCategory: "Specialization", name: "Child & Adolescent Behaviour Intervention" },
+  ],
 };
 
 export const MEDICAL_CONTENT_REVIEW_BLOCK = {
   lastReviewed: MEDICAL_CONTENT_LAST_REVIEWED,
   reviewedBy: MEDICAL_CONTENT_REVIEWER,
+};
+
+// Plain object used by the visible UI badge + author card. Kept separate from the
+// schema block above so we can include the photo + slug (schema just needs name/url).
+export const MEDICAL_CONTENT_REVIEWER_UI = {
+  name: "Dr. Pavithra Lakshmi Narasimhan",
+  title: "PhD · Clinical Psychologist · Certified Art Therapist · SEN (UK Certified)",
+  slug: "pavithra-lakshmi-narasimhan",
 };

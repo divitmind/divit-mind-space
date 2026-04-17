@@ -8,7 +8,8 @@ import type { Specialist } from "@/sanity/types";
 import { CONDITION_PIVOTS, RELATED_CONDITIONS, type ConditionPivot } from "@/lib/seo-pivots";
 import { HOWTO_ARTICLES, CONDITION_TO_HOWTOS } from "@/lib/howto";
 import { GLOSSARY_ENTRIES } from "@/lib/glossary";
-import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID, MEDICAL_CONTENT_REVIEW_BLOCK } from "@/lib/seo";
+import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID, MEDICAL_CONTENT_REVIEW_BLOCK, MEDICAL_CONTENT_LAST_REVIEWED, MEDICAL_CONTENT_REVIEWER_UI } from "@/lib/seo";
+import { ContentReviewBadge } from "@/components/content-review-badge";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
 import { ArrowRight, Clock, BookOpen } from "lucide-react";
 
@@ -140,6 +141,16 @@ export default async function ConditionPage({ params }: PageProps) {
         "@type": "MedicalCondition",
         "@id": `${pageUrl}#condition`,
         name: condition.name,
+        // Enrich MedicalCondition with possibleTreatment links to real services.
+        // This creates a direct graph edge from the condition entity → each treatment service.
+        // Google's healthcare SERP widgets rely on this relationship.
+        ...(services.length > 0 && {
+          possibleTreatment: services.map((s) => ({
+            "@type": "MedicalTherapy",
+            name: s.title,
+            url: `${SITE_URL}/services/${s.slug}`,
+          })),
+        }),
       },
       mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
       provider: ORGANIZATION_REF,
@@ -213,6 +224,13 @@ export default async function ConditionPage({ params }: PageProps) {
               <p className="text-lg text-black/70 max-w-2xl mx-auto font-medium" data-speakable>
                 {condition.intro}
               </p>
+              <div className="max-w-2xl mx-auto mt-6">
+                <ContentReviewBadge
+                  lastReviewedDate={MEDICAL_CONTENT_LAST_REVIEWED}
+                  reviewer={MEDICAL_CONTENT_REVIEWER_UI}
+                  compact
+                />
+              </div>
             </div>
           </div>
         </section>

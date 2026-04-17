@@ -226,16 +226,33 @@ const organizationJsonLd = {
   founder: [
     {
       "@type": "Person",
-      name: "Debarati Basak",
-      jobTitle: "Founder & Clinical Psychologist",
-      description: "Clinical Psychologist specializing in neurodevelopmental assessments and mental health support for children, teens, and adults in Bangalore"
+      name: "Dr. Debarati Basak",
+      jobTitle:
+        "Psy.D · Founding Partner, Carpediem EdPsych Consultancy LLP · Chief Growth Officer, Divit MindSpace",
+      description:
+        "Clinical psychologist specializing in neurodevelopmental assessments, counselling, and mental health support for children, teens, and adults in Bangalore.",
+      url: "https://divitmindspace.com/specialists/debarati-basak",
+      hasCredential: [
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Degree", name: "Doctor of Psychology (Psy.D)" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Specialization", name: "Clinical Psychology" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Specialization", name: "Neurodevelopmental Assessments" },
+      ],
     },
     {
       "@type": "Person",
-      name: "Pavithra Lakshmi",
-      jobTitle: "Co-Founder & Behavioral Therapist",
-      description: "Behavioral Therapist specializing in autism support, ADHD management, and art-based therapy interventions"
-    }
+      name: "Dr. Pavithra Lakshmi Narasimhan",
+      jobTitle:
+        "PhD · Clinical Psychologist · Child & Adolescent Behaviour Intervention Specialist · Certified Art Therapist · SEN (UK certified)",
+      description:
+        "PhD clinical psychologist using CBT, DBT, and expressive art therapy to help children and adolescents with ADHD, emotional regulation, and behavioural support.",
+      url: "https://divitmindspace.com/specialists/pavithra-lakshmi-narasimhan",
+      hasCredential: [
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Degree", name: "PhD in Clinical Psychology" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Certification", name: "Certified Art Therapist" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Certification", name: "Special Educational Needs (SEN) — UK Certified" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Specialization", name: "Child & Adolescent Behaviour Intervention" },
+      ],
+    },
   ],
   // sameAs URLs should be the canonical, 200-OK URLs (not redirects). Instagram
   // + Facebook confirmed live 2026-04-18. LinkedIn + X awaiting manual confirmation

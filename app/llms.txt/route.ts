@@ -103,8 +103,14 @@ Autism (child + adult), ADHD (child + adult), Learning Disabilities, Sensory Pro
 Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bengaluru 560035, Karnataka, India
 Map: https://maps.google.com/?q=Aadeshwar+Chambers+Kasavanahalli+Bengaluru
 
+## Extended LLM source
+For a single-file dump of every service, specialist, condition, location, HowTo,
+glossary term and FAQ in markdown — ingest this URL:
+https://divitmindspace.com/llms-full.txt
+
 ## Sitemap
 https://divitmindspace.com/sitemap.xml
+https://divitmindspace.com/sitemap-images.xml
 `;
 
 export async function GET() {
