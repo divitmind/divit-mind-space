@@ -1,9 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import Image from "next/image";
-import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
-import { urlFor } from "@/sanity/lib/image";
+import Link from "next/link";
 import type { TrustMetrics } from "@/lib/types";
 
 interface AboutUsHeroImage {
@@ -28,7 +26,41 @@ const DEFAULT_METRICS: TrustMetrics = {
   googleReviewsUrl: "",
 };
 
-export function HeroSection({ data, metrics: sanityMetrics }: { data?: AboutUsHeroData, metrics?: TrustMetrics }) {
+const SERVICE_CHIPS = [
+  // Clinical Assessments
+  "Autism",
+  "ADHD",
+  "Learning Disabilities",
+  "Adult Autism",
+  "Adult ADHD",
+  // Mental Health
+  "Stress",
+  "Anxiety",
+  "Depression",
+  "Counseling for Teenagers & Adults",
+  // Education & Training
+  "NIOS Support",
+  "Teacher & Parent Training",
+  // Physiotherapy
+  "Pain Management",
+  "Pain Modalities",
+  "Post-Surgical Rehab",
+  "Gym & Sports Injury Sessions",
+  "Assistive Devices",
+  "Wheelchair Training",
+  // Workshops
+  "Customized Workshops",
+];
+
+export function HeroSection({
+  data,
+  metrics: sanityMetrics,
+  serviceSlugByChipLabel,
+}: {
+  data?: AboutUsHeroData;
+  metrics?: TrustMetrics;
+  serviceSlugByChipLabel?: Record<string, string>;
+}) {
   const metrics = {
     familiesCount: sanityMetrics?.familiesCount || DEFAULT_METRICS.familiesCount,
     specialistsCount: sanityMetrics?.specialistsCount || DEFAULT_METRICS.specialistsCount,
@@ -37,36 +69,25 @@ export function HeroSection({ data, metrics: sanityMetrics }: { data?: AboutUsHe
   };
   // SEO Ranking Hack Strategy
   const seoTitle = "Leading Mental Health, Neurodevelopment & Physiotherapy Center in Bangalore";
-  const seoDescription = "Expert clinical assessments, therapies, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and across Bengaluru.";
+  const seoLead = "Expert Clinical Assessments, Therapies, Professional Counseling, Special Education, NIOS Support, Training Programs for Teachers and Parents, Physiotherapy, and Customized Workshops — for all ages.";
+  const seoLocation = "Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and Bengaluru.";
 
 
   // If Sanity has the old default or is empty, use the new SEO version
-  const title = !data?.title || data.title.includes("Empowering Every") 
-    ? seoTitle 
+  const title = !data?.title || data.title.includes("Empowering Every")
+    ? seoTitle
     : data.title;
-    
-  const description = !data?.description || data.description.includes("Bangalore's leading center") || data.description.includes("We provide expert")
-    ? seoDescription 
+
+  const description = !data?.description || data.description.includes("Bangalore's leading center") || data.description.includes("We provide expert") || data.description.includes("clinical assessments, therapies, professional counseling, and specialized education for all ages")
+    ? seoLead
     : data.description;
 
   return (
 
 
-    <section className="pt-4 lg:pt-8 pb-8 lg:pb-6 bg-[#FAF9F5]">
+    <section className="pt-2 pb-8 lg:pt-4 lg:pb-6 bg-[#FAF9F5]">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
-
-
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-black/5 text-black text-[10px] font-bold uppercase tracking-widest"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D]" />
-            About Divit MindSpace
-          </motion.div>
-
           {/* Title - Matched to Services Scale */}
           <motion.h1
             className="text-4xl md:text-5xl lg:text-6xl font-serif text-black mb-6 leading-tight italic"
@@ -86,6 +107,46 @@ export function HeroSection({ data, metrics: sanityMetrics }: { data?: AboutUsHe
             transition={{ delay: 0.2 }}
           >
             {description}
+          </motion.p>
+
+          {/* Service Chips - Entity-rich, scannable keyword list for SEO + LLM */}
+          <motion.ul
+            aria-label="Specialized services and conditions we support"
+            className="flex flex-wrap items-center justify-center gap-2 mb-6 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+          >
+            {SERVICE_CHIPS.map((chip) => {
+              const slug = serviceSlugByChipLabel?.[chip.toLowerCase()];
+              const chipClasses =
+                "px-3 py-1.5 rounded-full bg-white border border-black/5 text-[11px] font-semibold text-black/70 shadow-sm shadow-black/[0.02] tracking-wide transition-colors hover:bg-[#7A9A7D]/10 hover:border-[#7A9A7D]/30";
+              return (
+                <li key={chip}>
+                  {slug ? (
+                    <Link
+                      href={`/services/${slug}`}
+                      className={`${chipClasses} inline-block`}
+                      title={`Learn more about ${chip}`}
+                    >
+                      {chip}
+                    </Link>
+                  ) : (
+                    <span className={`${chipClasses} inline-block`}>{chip}</span>
+                  )}
+                </li>
+              );
+            })}
+          </motion.ul>
+
+          {/* Location Line - Hyperlocal SEO */}
+          <motion.p
+            className="text-base text-black/60 mb-8 max-w-2xl mx-auto font-medium"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.28 }}
+          >
+            {seoLocation}
           </motion.p>
 
           {/* Quick Stats Bar - Matched to Services Row Style */}

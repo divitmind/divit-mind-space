@@ -1,0 +1,13 @@
+/* TEAM */
+  Founder & Clinical Psychologist: Debarati Basak
+  Co-Founder & Behavioral Therapist: Pavithra Lakshmi
+
+  Contact: divitmindspace@gmail.com
+  Phone: +91-99016-66139
+  Location: Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bengaluru 560035
+
+/* SITE */
+  Last update: 2026/04/17
+  Standards: HTML5, CSS3, RSS 2.0, JSON-LD, llms.txt, ai.txt
+  Components: Next.js 16, React 19, Sanity, Tailwind CSS
+  Built with care in Bengaluru.

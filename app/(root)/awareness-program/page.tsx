@@ -3,6 +3,7 @@ import { AwarenessPage } from "@/components/awareness/awareness-page";
 import { sanityFetch } from "@/sanity/lib/live";
 import { AWARENESS_QUERY } from "@/sanity/lib/queries";
 import { AwarenessQueryResult } from "@/sanity/types";
+import { ORGANIZATION_REF, SITE_URL } from "@/lib/seo";
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
@@ -61,93 +62,92 @@ export const metadata: Metadata = {
   }
 };
 
+type PastSession = { venue?: string; audience?: string; image?: { asset?: { url?: string } } };
+
 export default async function AwarenessProgramRoute() {
-  const awarenessData = await sanityFetch({ 
-    query: AWARENESS_QUERY, 
-    tags: ["awareness"] 
+  const awarenessData = await sanityFetch({
+    query: AWARENESS_QUERY,
+    tags: ["awareness"],
   });
-  
+
   const awareness = awarenessData.data as AwarenessQueryResult;
+  const pastSessions: PastSession[] = (awareness?.pastSessions?.sessions as PastSession[]) ?? [];
+
+  // Dynamic EducationEvent schema per real past session from Sanity — no fabrication.
+  // If Sanity has no sessions, we skip the event[] block entirely.
+  const eventJsonLd = pastSessions.length > 0
+    ? pastSessions
+        .filter((s) => s.venue)
+        .map((s) => ({
+          "@type": "EducationEvent",
+          name: `Awareness Session at ${s.venue}`,
+          description: s.audience
+            ? `Free awareness session for ${s.audience} on early intervention, neurodivergence recognition, and community support — delivered by Divit MindSpace Bangalore.`
+            : "Free awareness session on early intervention and neurodivergence support by Divit MindSpace Bangalore.",
+          location: {
+            "@type": "Place",
+            name: s.venue,
+          },
+          organizer: ORGANIZATION_REF,
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "INR",
+            availability: "https://schema.org/InStock",
+          },
+          ...(s.audience && {
+            audience: {
+              "@type": "EducationalAudience",
+              audienceType: s.audience,
+            },
+          }),
+          ...(s.image?.asset?.url && { image: s.image.asset.url }),
+        }))
+    : [];
+
+  const educationalOrgJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "@id": `${SITE_URL}/awareness-program#edu-org`,
+    name: "Divit MindSpace",
+    url: SITE_URL,
+    description:
+      "Provider of free awareness programs on early intervention, autism, ADHD, and neurodiversity — delivered to schools, colleges, and community groups across Bangalore.",
+    parentOrganization: ORGANIZATION_REF,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road",
+      addressLocality: "Bangalore",
+      addressRegion: "Karnataka",
+      postalCode: "560035",
+      addressCountry: "IN",
+    },
+    ...(eventJsonLd.length > 0 && { event: eventJsonLd }),
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Awareness Program", item: `${SITE_URL}/awareness-program` },
+    ],
+  };
+
+  const pageGraph = {
+    "@context": "https://schema.org",
+    "@graph": [educationalOrgJsonLd, breadcrumbJsonLd].map((s) => {
+      const clone: Record<string, unknown> = { ...(s as Record<string, unknown>) };
+      delete clone["@context"];
+      return clone;
+    }),
+  };
 
   return (
     <>
-      {/* JSON-LD Structured Data for Educational Events */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            "name": "Divit MindSpace",
-            "url": "https://divitmindspace.com",
-            "description": "Provider of awareness programs and education on early intervention for neurodivergent children",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Bangalore",
-              "addressCountry": "IN"
-            },
-            "event": [
-              {
-                "@type": "EducationEvent",
-                "name": "Awareness Workshop at Jyoti Nivas College, Koramangala",
-                "description": "FREE awareness session on early intervention for neurodivergent children, covering recognition of early signs, therapy benefits, and breaking stigma",
-                "location": {
-                  "@type": "Place",
-                  "name": "Jyoti Nivas College",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Koramangala, Bangalore",
-                    "addressCountry": "IN"
-                  }
-                },
-                "organizer": {
-                  "@type": "Organization",
-                  "name": "Divit MindSpace",
-                  "url": "https://divitmindspace.com"
-                },
-                "offers": {
-                  "@type": "Offer",
-                  "price": "0",
-                  "priceCurrency": "INR",
-                  "availability": "https://schema.org/InStock"
-                },
-                "audience": {
-                  "@type": "EducationalAudience",
-                  "audienceType": "Teachers, Parents, Students"
-                }
-              },
-              {
-                "@type": "EducationEvent",
-                "name": "Awareness Session for Teachers at TISB School, Domasandra",
-                "description": "FREE teacher training on recognizing neurodivergence signs and supporting neurodivergent students in educational settings",
-                "location": {
-                  "@type": "Place",
-                  "name": "TISB School",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Domasandra, Bangalore",
-                    "addressCountry": "IN"
-                  }
-                },
-                "organizer": {
-                  "@type": "Organization",
-                  "name": "Divit MindSpace",
-                  "url": "https://divitmindspace.com"
-                },
-                "offers": {
-                  "@type": "Offer",
-                  "price": "0",
-                  "priceCurrency": "INR",
-                  "availability": "https://schema.org/InStock"
-                },
-                "audience": {
-                  "@type": "EducationalAudience",
-                  "audienceType": "Teachers, Educators"
-                }
-              }
-            ]
-          })
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageGraph) }}
       />
       <AwarenessPage data={awareness || undefined} />
     </>

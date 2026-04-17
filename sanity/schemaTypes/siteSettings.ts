@@ -143,10 +143,10 @@ export const siteSettingsType = defineType({
           description: "e.g., '100+' - shown as trust metric",
         }),
         defineField({
-          name: "therapistsCount",
-          title: "👩‍⚕️ [EDIT] Therapists/Specialists",
+          name: "specialistsCount",
+          title: "👩‍⚕️ [EDIT] Specialists Count",
           type: "string",
-          description: "e.g., '6+' - number of team members",
+          description: "e.g., '12+' - number of team members/specialists",
         }),
         defineField({
           name: "servicesCount",

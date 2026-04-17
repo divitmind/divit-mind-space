@@ -2,12 +2,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail, Briefcase } from "lucide-react";
 import { FooterServiceLinks } from "@/components/footer-service-links";
+import { ContactClickLink } from "@/components/contact-click-link";
 import type { SiteSettings } from "@/lib/types";
 
 const quickLinks = [
     { label: "About Us", href: "/about-us" },
+    { label: "Our Specialists", href: "/specialists" },
+    { label: "Conditions", href: "/conditions" },
+    { label: "Near Me", href: "/near-me" },
+    { label: "How-To Guides", href: "/howto" },
+    { label: "Glossary", href: "/glossary" },
+    { label: "All FAQs", href: "/faq" },
+    { label: "Reviews", href: "/reviews" },
     { label: "Blog", href: "/blogs" },
-    { label: "Gallery", href: "/gallery" },
     { label: "Workshops", href: "/awareness-program" },
     { label: "Contact", href: "/contact-us" },
 ];
@@ -65,7 +72,7 @@ const socialLinks = [
         )
     },
     {
-        href: "https://wa.me/919902351393",
+        href: "https://wa.me/919901666139",
         label: "WhatsApp",
         icon: (
             <svg className="h-4 w-4" viewBox="0 0 24 24">
@@ -155,20 +162,24 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                                 <span className="leading-relaxed">{displayAddress}</span>
                             </p>
                             <div className="flex flex-nowrap lg:flex-wrap gap-x-4 sm:gap-x-6 gap-y-2">
-                                <a
+                                <ContactClickLink
                                     href={displayPhoneLink}
+                                    type="phone"
+                                    source="footer_cta"
                                     className="flex items-center gap-2 hover:text-green transition-colors group"
                                 >
                                     <Phone className="h-4 w-4 shrink-0 text-green/40 group-hover:text-green transition-colors" />
                                     {displayPhone}
-                                </a>
-                                <a
+                                </ContactClickLink>
+                                <ContactClickLink
                                     href={displayEmailLink}
+                                    type="email"
+                                    source="footer_cta"
                                     className="flex items-center gap-2 hover:text-green transition-colors group"
                                 >
                                     <Mail className="h-4 w-4 shrink-0 text-green/40 group-hover:text-green transition-colors" />
                                     {displayEmail}
-                                </a>
+                                </ContactClickLink>
                             </div>
                         </address>
                         <div className="flex gap-3 mt-5">

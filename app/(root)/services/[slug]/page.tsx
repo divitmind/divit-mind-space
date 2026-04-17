@@ -2,11 +2,15 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
-import { SINGLE_SERVICE_QUERY, ALL_SERVICE_SLUGS_QUERY } from "@/sanity/lib/queries";
+import { SINGLE_SERVICE_QUERY, ALL_SERVICE_SLUGS_QUERY, RELATED_SERVICES_QUERY } from "@/sanity/lib/queries";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { ServiceExperts } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
-import { Check, Clock, MapPin } from "lucide-react";
+import { Check } from "lucide-react";
+import type { Specialist } from "@/sanity/types";
+import { ORGANIZATION_REF, SITE_URL } from "@/lib/seo";
+import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
+import { HOWTO_ARTICLES, SERVICE_TO_HOWTO } from "@/lib/howto";
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
@@ -38,7 +42,7 @@ interface ServiceData {
     buttonText?: string;
   };
   onDemand?: boolean;
-  specialists?: any[];
+  specialists?: Specialist[];
 }
 
 interface PageProps {
@@ -74,6 +78,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const serviceUrl = `https://divitmindspace.com/services/${service.slug.current}`;
   const title = service.seo?.metaTitle || service.title;
   const description = service.seo?.metaDescription || service.description;
+  // Prefer the service's own image as the OG preview — much higher social/LLM
+  // click-through than a generic logo. Fall back to logo only if unset.
+  const ogImage = service.image?.asset?.url || "https://divitmindspace.com/divit-mindspace-logo.png";
+  const ogAlt = service.image?.alt || `${service.title} at Divit MindSpace`;
 
   return {
     title: `${title} | Divit MindSpace`,
@@ -84,11 +92,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
       url: serviceUrl,
       siteName: "Divit MindSpace",
+      images: [{ url: ogImage, alt: ogAlt }],
     },
     twitter: {
       card: "summary_large_image",
       title: title,
       description: description,
+      images: [ogImage],
     },
     alternates: {
       canonical: serviceUrl,
@@ -109,77 +119,145 @@ export default async function ServicePage({ params }: PageProps) {
     notFound();
   }
 
-  const jsonLd: any = {
+  // Sibling services from the same category — powers the internal-linking entity graph.
+  const { data: relatedData } = (await sanityFetch({
+    query: RELATED_SERVICES_QUERY,
+    params: { category: service.category, currentSlug: service.slug.current },
+    tags: ["services"],
+  })) as { data: { _id: string; title: string; slug: string; description: string; category: string }[] | null };
+  const related = relatedData ?? [];
+
+  // Find condition-pivot pages that list this service — powers "Conditions this addresses"
+  // internal linking + closes the bidirectional entity graph (condition ↔ service).
+  const addressedConditions = CONDITION_PIVOTS.filter((c) =>
+    c.serviceSlugs.includes(service.slug.current),
+  );
+
+  // Matching preparation guide — rendered as a "Preparation Guide" callout on service pages.
+  const howtoSlug = SERVICE_TO_HOWTO[service.slug.current];
+  const howtoArticle = howtoSlug
+    ? HOWTO_ARTICLES.find((a) => a.slug === howtoSlug)
+    : undefined;
+
+  const serviceUrl = `${SITE_URL}/services/${service.slug.current}`;
+
+  // Map category → richest schema type. Physiotherapy and therapies are MedicalTherapy;
+  // assessments are MedicalProcedure; guidance/workshops are Service; programs are
+  // EducationalOccupationalProgram. Using the most specific type improves LLM matching.
+  const serviceTypeByCategory: Record<string, string> = {
+    assessments: "MedicalProcedure",
+    therapy: "MedicalTherapy",
+    physiotherapy: "MedicalTherapy",
+    guidance: "Service",
+    programs: "EducationalOccupationalProgram",
+  };
+  const schemaType = serviceTypeByCategory[service.category] || "MedicalService";
+
+  // Main Service/Therapy/Procedure schema — provider references canonical Organization via @id.
+  const serviceJsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",
-    "@type": "MedicalService",
+    "@type": schemaType,
+    "@id": `${serviceUrl}#service`,
     name: service.title,
     description: service.description,
-    provider: {
-      "@type": "MedicalBusiness",
-      name: "Divit MindSpace",
-      url: "https://divitmindspace.com",
-      telephone: "+91-99016-66139",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Aadeshwar Chambers, Kasavanahalli",
-        addressLocality: "Bangalore",
-        addressRegion: "Karnataka",
-        postalCode: "560035",
-        addressCountry: "IN",
-      },
-    },
+    url: serviceUrl,
+    image: service.image?.asset?.url,
+    provider: ORGANIZATION_REF,
     areaServed: [
       { "@type": "City", name: "Bangalore" },
+      { "@type": "City", name: "Bengaluru" },
       { "@type": "Place", name: "Sarjapur Road" },
+      { "@type": "Place", name: "Kasavanahalli" },
       { "@type": "Place", name: "HSR Layout" },
       { "@type": "Place", name: "Bellandur" },
-      { "@type": "Place", name: "Kasavanahalli" },
       { "@type": "Place", name: "Koramangala" },
+      { "@type": "Place", name: "Whitefield" },
+      { "@type": "Place", name: "Electronic City" },
     ],
-    serviceType: service.category === "therapy" ? "Therapy" : service.category === "assessments" ? "Clinical Assessment" : "Healthcare/Education",
-    url: `https://divitmindspace.com/services/${service.slug.current}`,
-    ...(service.duration && { estimatedCost: { "@type": "MonetaryAmount", description: service.duration } }),
-    ...(service.format && { availableChannel: { "@type": "ServiceChannel", serviceLocation: { "@type": "Place", name: service.format } } }),
+    ...(service.duration && { termsOfService: service.duration }),
+    ...(service.format && {
+      availableChannel: {
+        "@type": "ServiceChannel",
+        serviceLocation: { "@type": "Place", name: service.format },
+      },
+    }),
+    // For programs / educational entries, add audience hint.
+    ...(schemaType === "EducationalOccupationalProgram" && {
+      educationalProgramMode: "onsite",
+    }),
+    // Cross-link sibling services in same category — entity graph signal for LLMs
+    // ("what else does Divit MindSpace offer in this area?").
+    ...(related.length > 0 && {
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: `Related ${service.category} services`,
+        itemListElement: related.map((r) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: r.title,
+            url: `${SITE_URL}/services/${r.slug}`,
+          },
+        })),
+      },
+    }),
   };
 
-  if (service.faqs && service.faqs.length > 0) {
-    jsonLd.mainEntity = service.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    }));
-  }
+  // Dedicated FAQPage schema — Google recommends separate block over nesting in mainEntity.
+  const faqPageJsonLd =
+    service.faqs && service.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: service.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
 
   const categoryLabels: Record<string, string> = {
     assessments: "Assessment",
     therapy: "Therapy",
     guidance: "Guidance",
     programs: "Program",
+    physiotherapy: "Physiotherapy",
   };
 
-  // Breadcrumb schema for service pages
+  // Breadcrumb
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://divitmindspace.com" },
-      { "@type": "ListItem", position: 2, name: "Services", item: "https://divitmindspace.com/services" },
-      { "@type": "ListItem", position: 3, name: service.title, item: `https://divitmindspace.com/services/${service.slug.current}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
+      { "@type": "ListItem", position: 3, name: service.title, item: serviceUrl },
     ],
   };
 
   return (
     <>
+      {/* Single @graph — Google recommends this over multiple independent blocks. */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              ...[serviceJsonLd, breadcrumbJsonLd, ...(faqPageJsonLd ? [faqPageJsonLd] : [])].map(
+                (s) => {
+                  const clone: Record<string, unknown> = { ...(s as Record<string, unknown>) };
+                  delete clone["@context"];
+                  return clone;
+                },
+              ),
+            ],
+          }),
+        }}
       />
 
       <div className="bg-[#FAF9F5] min-h-screen">
@@ -324,6 +402,119 @@ export default async function ServicePage({ params }: PageProps) {
 
         {/* Dynamic FAQ Section */}
         <ServiceFAQ faqs={service.faqs || []} />
+
+        {/* Preparation guide (if a matching HowTo article exists) — closes service ↔ HowTo graph */}
+        {howtoArticle && (
+          <section className="py-6 lg:py-8 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto">
+                <Link
+                  href={`/howto/${howtoArticle.slug}`}
+                  className="group flex items-center justify-between gap-4 p-6 rounded-2xl bg-[#FAF9F5] border border-green/10 hover:border-green/30 hover:shadow-lg transition-all"
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="font-bold text-green/60 text-[10px] uppercase tracking-widest mb-2">
+                      Preparation Guide
+                    </div>
+                    <div className="font-semibold text-green group-hover:text-green/80 transition-colors mb-1">
+                      {howtoArticle.title}
+                    </div>
+                    <p className="text-sm text-black/60 line-clamp-2">{howtoArticle.lead}</p>
+                  </div>
+                  <span className="text-green text-sm font-semibold whitespace-nowrap">
+                    Read guide →
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Conditions this service addresses — internal linking for condition-first search intent */}
+        {addressedConditions.length > 0 && (
+          <section className="py-8 lg:py-10 bg-[#FAF9F5]">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <h2
+                  className="text-2xl lg:text-3xl font-serif text-green mb-6 text-center"
+                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                >
+                  Conditions This Helps With
+                </h2>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {addressedConditions.map((c) => (
+                    <Link
+                      key={c.slug}
+                      href={`/conditions/${c.slug}`}
+                      className="px-4 py-2 rounded-full bg-white border border-green/10 text-sm font-semibold text-green hover:bg-green hover:text-white transition-all"
+                    >
+                      {c.name} →
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Available near — closes service ↔ location entity graph */}
+        <section className="py-8 lg:py-10 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2
+                className="text-2xl lg:text-3xl font-serif text-green mb-6 text-center"
+                style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+              >
+                Available for families near
+              </h2>
+              <div className="flex flex-wrap justify-center gap-3">
+                {LOCATION_PIVOTS.map((l) => (
+                  <Link
+                    key={l.slug}
+                    href={`/near-me/${l.slug}`}
+                    className="px-4 py-2 rounded-full bg-[#FAF9F5] border border-black/5 text-sm font-semibold text-black/70 hover:bg-green hover:text-white hover:border-green transition-all"
+                  >
+                    {l.name} →
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Related services — internal linking boost for SEO + entity graph for LLMs */}
+        {related.length > 0 && (
+          <section className="py-8 lg:py-10 bg-cream">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <h2
+                  className="text-2xl lg:text-3xl font-serif text-green mb-6 text-center"
+                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                >
+                  Related {categoryLabels[service.category] || "Services"}
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {related.map((r) => (
+                    <Link
+                      key={r._id}
+                      href={`/services/${r.slug}`}
+                      className="block p-5 bg-white rounded-2xl border border-green/10 hover:border-green/30 hover:shadow-lg transition-all group"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-green group-hover:text-green/80 transition-colors mb-1">
+                            {r.title}
+                          </h3>
+                          <p className="text-sm text-black/60 line-clamp-2">{r.description}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Bottom CTA */}
         <section className="pt-6 pb-8 lg:pt-8 lg:pb-10 bg-[#FAF9F5]">

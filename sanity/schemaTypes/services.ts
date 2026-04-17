@@ -53,6 +53,7 @@ export const servicesType = defineType({
           { title: 'Therapy', value: 'therapy' },
           { title: 'Guidance', value: 'guidance' },
           { title: 'Programs', value: 'programs' },
+          { title: 'Physiotherapy', value: 'physiotherapy' },
         ],
         layout: 'radio',
       },

@@ -5,10 +5,17 @@ import { TestimonialsSection } from "@/components/homepage/testimonials-section"
 import { WhoNeedsItSection } from "@/components/homepage/who-needs-it-section";
 import { FaqSection } from "@/components/homepage/faq-section";
 import { CtaSection } from "@/components/homepage/cta-section";
+import { ExplorePivotsSection } from "@/components/homepage/explore-pivots-section";
 import { sanityFetch } from "@/sanity/lib/live";
 import { TOP_REVIEWS_QUERY, THERAPY_SERVICES_QUERY, ANNOUNCEMENT_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import { ReviewsQueryResult, ServicesQueryResult, AnnouncementQueryResult } from "@/sanity/types";
 import type { SiteSettings, FAQ } from "@/lib/types";
+import {
+  ORGANIZATION_REF,
+  SITE_URL,
+  SITE_LANGUAGE,
+  WEBSITE_ID,
+} from "@/lib/seo";
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
@@ -75,15 +82,19 @@ export const metadata: Metadata = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": WEBSITE_ID,
   name: "Divit MindSpace",
-  url: "https://divitmindspace.com",
+  alternateName: "Divit MindSpace Bangalore",
+  url: SITE_URL,
+  inLanguage: SITE_LANGUAGE,
+  publisher: ORGANIZATION_REF,
   description:
-    "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Divit MindSpace provides expert-led Clinical Assessments, Professional Counseling, Speech Therapy, and Occupational Therapy for children, teens, and adults off Sarjapur Road (Kasavanahalli).",
+    "Bangalore's leading center for Mental Health, Neurodevelopment & Physiotherapy. Divit MindSpace provides expert-led Clinical Assessments, Professional Counseling, Speech Therapy, Occupational Therapy, Special Education, NIOS Support, and Physiotherapy for children, teens, and adults off Sarjapur Road (Kasavanahalli).",
   potentialAction: {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://divitmindspace.com/blogs?q={search_term_string}",
+      urlTemplate: `${SITE_URL}/blogs?q={search_term_string}`,
     },
     "query-input": "required name=search_term_string",
   },
@@ -109,11 +120,20 @@ const defaultFaqs: FAQ[] = [
   },
 ];
 
-// Generate FAQ Schema JSON-LD dynamically
+// FAQPage JSON-LD — includes Speakable specification so voice assistants
+// (Google Assistant, Alexa, Siri) know which parts of the page to read aloud.
 function generateFaqSchema(faqs: FAQ[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": `${SITE_URL}/#homepage-faq`,
+    inLanguage: SITE_LANGUAGE,
+    isPartOf: { "@id": WEBSITE_ID },
+    about: ORGANIZATION_REF,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h3", "[role='region']"],
+    },
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
@@ -162,6 +182,7 @@ export default async function Page() {
           title={siteSettings?.homepage?.whoNeedsItTitle}
           items={siteSettings?.homepage?.whoNeedsIt}
         />
+        <ExplorePivotsSection />
         <FaqSection faqs={homepageFaqs} title={faqTitle} subtitle={faqSubtitle} />
         <CtaSection />
       </main>

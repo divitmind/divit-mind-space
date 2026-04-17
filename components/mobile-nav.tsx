@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, ImageIcon, Megaphone, FileText, Heart, Users, GraduationCap, Brain, ChevronRight, BookOpen } from "lucide-react";
+import { Menu, ImageIcon, Megaphone, FileText, Heart, Users, GraduationCap, Brain, ChevronRight, BookOpen, Activity, MapPin, Stethoscope } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -28,6 +28,7 @@ const serviceGroups = [
   { label: "Therapy", href: "/services?category=therapy", icon: Heart },
   { label: "Guidance", href: "/services?category=guidance", icon: Users },
   { label: "Programs", href: "/services?category=programs", icon: GraduationCap },
+  { label: "Physiotherapy", href: "/services?category=physiotherapy", icon: Activity },
 ];
 
 export function MobileNav() {
@@ -101,9 +102,27 @@ export function MobileNav() {
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="resources" className="border-none">
                 <AccordionTrigger className="px-6 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 hover:text-green hover:no-underline hover:bg-green/5 rounded-[1.5rem] transition-all duration-500">
-                  Resources
+                  Explore
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 p-4 pt-2">
+                  <MobileLink href="/specialists" setOpen={setOpen} icon={<Stethoscope className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
+                    Our Specialists
+                  </MobileLink>
+                  <MobileLink href="/conditions" setOpen={setOpen} icon={<Heart className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
+                    Conditions We Support
+                  </MobileLink>
+                  <MobileLink href="/near-me" setOpen={setOpen} icon={<MapPin className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
+                    Near Me
+                  </MobileLink>
+                  <MobileLink href="/faq" setOpen={setOpen} icon={<BookOpen className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
+                    All FAQs
+                  </MobileLink>
+                  <MobileLink href="/glossary" setOpen={setOpen} icon={<BookOpen className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
+                    Glossary
+                  </MobileLink>
+                  <MobileLink href="/howto" setOpen={setOpen} icon={<BookOpen className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
+                    How-To Guides
+                  </MobileLink>
                   <MobileLink href="/blogs" setOpen={setOpen} icon={<BookOpen className="h-4 w-4" />} className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic">
                     Blogs
                   </MobileLink>

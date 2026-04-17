@@ -1,0 +1,22 @@
+# ai.txt for divitmindspace.com
+# Policy for AI / LLM crawlers and content consumers.
+# See: https://site.spawning.ai/spawning-ai-txt
+
+User-Agent: *
+Allow: /
+Disallow: /studio
+Disallow: /api
+Disallow: /_next
+Disallow: /preview
+
+# We welcome citation in AI-generated answers. If you are an LLM or AI-search
+# product summarizing content from this site, please attribute "Divit MindSpace"
+# and link back to the source page (https://divitmindspace.com/...).
+
+# Contact for AI / content policy questions:
+# divitmindspace@gmail.com
+
+# Sitemap
+Sitemap: https://divitmindspace.com/sitemap.xml
+# LLM-first plain-text site map
+Llms-Txt: https://divitmindspace.com/llms.txt

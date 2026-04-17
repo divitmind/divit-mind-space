@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, MessageCircle, Clock, CheckCircle2, ArrowRight } from "lucide-react";
+import { Mail, MapPin, MessageCircle, CheckCircle2, ArrowRight } from "lucide-react";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
-import Image from "next/image";
 import type { FAQ } from "@/lib/types";
 
 const contactDetails = [
@@ -39,7 +38,7 @@ const contactDetails = [
 const steps = [
   {
     title: "Initial Consultation",
-    description: "A 15-minute free call or chat to understand your needs and guide you on the right path.",
+    description: "A free call or chat to understand your needs and guide you on the right path.",
   },
   {
     title: "Comprehensive Evaluation",

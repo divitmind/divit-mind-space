@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
-import { ClipboardCheck, Heart, Users, GraduationCap } from "lucide-react";
+import { ClipboardCheck, Heart, Users, GraduationCap, Activity } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
 import type { SiteSettings, TrustMetrics } from "@/lib/types";
 
@@ -40,6 +40,7 @@ const categories = [
   { id: "therapy", label: "Therapy", icon: Heart },
   { id: "guidance", label: "Guidance", icon: Users },
   { id: "programs", label: "Programs", icon: GraduationCap },
+  { id: "physiotherapy", label: "Physiotherapy", icon: Activity },
 ];
 
 const categoryDescriptions: Record<string, string> = {
@@ -48,6 +49,7 @@ const categoryDescriptions: Record<string, string> = {
   therapy: "Speech therapy, occupational therapy, ABA, sensory integration, and play therapy for all ages. Expert neurodevelopmental care at our Kasavanahalli center, Bangalore.",
   guidance: "Child, adolescent, and adult counseling plus parent guidance programs. Professional mental health support for families in HSR Layout, Bellandur, and Bangalore.",
   programs: "Early intervention, special education, school readiness, and NIOS support programs. Structured developmental programs at our center off Sarjapur Road, Bangalore.",
+  physiotherapy: "Pain Management, Pain Modalities, Post-Surgical Rehabilitation, Gym & Sports Injury Sessions, Assistive Devices, and Wheelchair Training. Expert physical therapy at our Kasavanahalli center off Sarjapur Road, Bangalore.",
 };
 
 interface ServicesPageProps {
@@ -68,10 +70,13 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
     return cat ? cat.label : propTitle;
   }, [activeCategory, propTitle]);
 
-  // Read category from URL on mount and scroll to top
+  // Read category from URL on mount and scroll to top — this is a legitimate
+  // URL → state sync pattern (the React team has clarified these are valid
+  // uses of useEffect despite the generic "don't setState in effects" guidance).
   useEffect(() => {
     const categoryParam = searchParams.get("category");
     if (categoryParam && categories.some((c) => c.id === categoryParam)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveCategory(categoryParam);
       // Scroll to top of page
       window.scrollTo({ top: 0, behavior: "smooth" });
