@@ -8,7 +8,7 @@ import type { Specialist } from "@/sanity/types";
 import { CONDITION_PIVOTS, RELATED_CONDITIONS, type ConditionPivot } from "@/lib/seo-pivots";
 import { HOWTO_ARTICLES, CONDITION_TO_HOWTOS } from "@/lib/howto";
 import { GLOSSARY_ENTRIES } from "@/lib/glossary";
-import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID } from "@/lib/seo";
+import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID, MEDICAL_CONTENT_REVIEW_BLOCK } from "@/lib/seo";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
 import { ArrowRight, Clock, BookOpen } from "lucide-react";
 
@@ -143,6 +143,8 @@ export default async function ConditionPage({ params }: PageProps) {
       },
       mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
       provider: ORGANIZATION_REF,
+      // YMYL signal — Google weighs "who reviewed this health content and when".
+      ...MEDICAL_CONTENT_REVIEW_BLOCK,
       speakable: {
         "@type": "SpeakableSpecification",
         cssSelector: ["h1", "h3", "[data-speakable]"],

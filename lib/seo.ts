@@ -15,3 +15,22 @@ export const WEBSITE_REF = { "@id": WEBSITE_ID };
 
 // Consistent language identifier for all content. Matches the <html lang> tag.
 export const SITE_LANGUAGE = "en-IN";
+
+// YMYL (Your Money or Your Life) medical-content review metadata.
+// Google explicitly rewards healthcare content that shows who reviewed it and when.
+// Update MEDICAL_CONTENT_LAST_REVIEWED each time a major content refresh ships;
+// MEDICAL_CONTENT_REVIEWER is the default attribution for condition/service/HowTo
+// pages. Individual pages can override by passing their own `reviewedBy`.
+export const MEDICAL_CONTENT_LAST_REVIEWED = "2026-04-18";
+
+export const MEDICAL_CONTENT_REVIEWER = {
+  "@type": "Person" as const,
+  name: "Dr. Debarati Basak",
+  jobTitle: "Founder & Clinical Psychologist, Divit MindSpace",
+  url: `${SITE_URL}/specialists/debarati-basak`,
+};
+
+export const MEDICAL_CONTENT_REVIEW_BLOCK = {
+  lastReviewed: MEDICAL_CONTENT_LAST_REVIEWED,
+  reviewedBy: MEDICAL_CONTENT_REVIEWER,
+};

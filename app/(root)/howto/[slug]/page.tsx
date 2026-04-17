@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { HOWTO_ARTICLES, type HowToArticle } from "@/lib/howto";
-import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID } from "@/lib/seo";
+import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID, MEDICAL_CONTENT_REVIEW_BLOCK } from "@/lib/seo";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
 import { ArrowRight, Clock } from "lucide-react";
 
@@ -70,6 +70,7 @@ export default async function HowToPage({ params }: PageProps) {
         isPartOf: { "@id": WEBSITE_ID },
         totalTime: a.totalTime,
         publisher: ORGANIZATION_REF,
+        ...MEDICAL_CONTENT_REVIEW_BLOCK,
         step: a.steps.map((s, i) => ({
           "@type": "HowToStep",
           position: i + 1,

@@ -8,7 +8,7 @@ import { ServiceExperts } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { Check } from "lucide-react";
 import type { Specialist } from "@/sanity/types";
-import { ORGANIZATION_REF, SITE_URL } from "@/lib/seo";
+import { ORGANIZATION_REF, SITE_URL, MEDICAL_CONTENT_REVIEW_BLOCK } from "@/lib/seo";
 import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
 import { HOWTO_ARTICLES, SERVICE_TO_HOWTO } from "@/lib/howto";
 
@@ -154,6 +154,10 @@ export default async function ServicePage({ params }: PageProps) {
   const schemaType = serviceTypeByCategory[service.category] || "MedicalService";
 
   // Main Service/Therapy/Procedure schema — provider references canonical Organization via @id.
+  // Medical service types get lastReviewed/reviewedBy to meet YMYL signals Google weighs
+  // heavily for healthcare content.
+  const isMedicalType =
+    schemaType === "MedicalTherapy" || schemaType === "MedicalProcedure" || schemaType === "MedicalService";
   const serviceJsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": schemaType,
@@ -163,6 +167,7 @@ export default async function ServicePage({ params }: PageProps) {
     url: serviceUrl,
     image: service.image?.asset?.url,
     provider: ORGANIZATION_REF,
+    ...(isMedicalType ? MEDICAL_CONTENT_REVIEW_BLOCK : {}),
     areaServed: [
       { "@type": "City", name: "Bangalore" },
       { "@type": "City", name: "Bengaluru" },

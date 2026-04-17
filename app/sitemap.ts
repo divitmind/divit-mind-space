@@ -63,6 +63,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // Programmatic condition × location matrix — up to 42 highly-targeted
+  // long-tail landing pages. Generated from pivot data, no fabrication.
+  const conditionLocationRoutes: MetadataRoute.Sitemap = [];
+  for (const c of CONDITION_PIVOTS) {
+    for (const l of LOCATION_PIVOTS) {
+      conditionLocationRoutes.push({
+        url: `${BASE_URL}/conditions/${c.slug}/${l.slug}`,
+        lastModified: siteLastMod,
+        changeFrequency: "monthly",
+        priority: 0.7,
+      });
+    }
+  }
+
   const conditionRoutes: MetadataRoute.Sitemap = CONDITION_PIVOTS.map((c) => ({
     url: `${BASE_URL}/conditions/${c.slug}`,
     lastModified: siteLastMod,
@@ -126,5 +140,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...conditionRoutes,
     ...locationRoutes,
     ...howtoRoutes,
+    ...conditionLocationRoutes,
   ];
 }
