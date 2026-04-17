@@ -1,122 +1,119 @@
 import type { MetadataRoute } from "next";
 import { client } from "@/sanity/lib/client";
-import {
-  ALL_SERVICE_SLUGS_QUERY,
-  ALL_POST_SLUGS_QUERY,
-  ALL_CAREER_SLUGS_QUERY,
-} from "@/sanity/lib/queries";
+import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
+import { HOWTO_ARTICLES } from "@/lib/howto";
 
 const BASE_URL = "https://divitmindspace.com";
 
+type SlugWithUpdated = { slug: string; updatedAt?: string };
+
+const toDate = (v?: string) => (v ? new Date(v) : new Date());
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Fetch dynamic slugs from Sanity
-  const [serviceSlugs, postSlugs, careerSlugs, newsSlugs] = await Promise.all([
-    client.fetch<{ slug: string }[]>(ALL_SERVICE_SLUGS_QUERY),
-    client.fetch<{ slug: string }[]>(
-      `*[_type == "post" && contentType == "blog" && defined(slug.current)] { "slug": slug.current }`
+  // Fetch slugs AND _updatedAt per document — freshness signal for Google + LLMs.
+  // Filter drafts (Sanity stores them as drafts.*).
+  const [serviceRows, postRows, newsRows, careerRows, specialistRows, latestUpdate] = await Promise.all([
+    client.fetch<SlugWithUpdated[]>(
+      `*[_type == "services" && !(_id in path("drafts.**")) && defined(slug.current)] { "slug": slug.current, "updatedAt": _updatedAt }`
     ),
-    client.fetch<{ slug: string }[]>(ALL_CAREER_SLUGS_QUERY),
-    client.fetch<{ slug: string }[]>(
-      `*[_type == "post" && contentType == "news" && defined(slug.current)] { "slug": slug.current }`
+    client.fetch<SlugWithUpdated[]>(
+      `*[_type == "post" && !(_id in path("drafts.**")) && contentType == "blog" && defined(slug.current)] { "slug": slug.current, "updatedAt": _updatedAt }`
+    ),
+    client.fetch<SlugWithUpdated[]>(
+      `*[_type == "post" && !(_id in path("drafts.**")) && contentType == "news" && defined(slug.current)] { "slug": slug.current, "updatedAt": _updatedAt }`
+    ),
+    client.fetch<SlugWithUpdated[]>(
+      `*[_type == "career" && !(_id in path("drafts.**")) && defined(slug.current)] { "slug": slug.current, "updatedAt": _updatedAt }`
+    ),
+    client.fetch<SlugWithUpdated[]>(
+      `*[_type == "specialist" && !(_id in path("drafts.**")) && defined(slug.current)] { "slug": slug.current, "updatedAt": _updatedAt }`
+    ),
+    client.fetch<string | null>(
+      `*[_updatedAt != null && !(_id in path("drafts.**"))] | order(_updatedAt desc)[0]._updatedAt`
     ),
   ]);
 
   const now = new Date();
+  const siteLastMod = toDate(latestUpdate ?? undefined);
 
-  // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: BASE_URL,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1.0,
-    },
-    {
-      url: `${BASE_URL}/about-us`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/services`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/blogs`,
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/news`,
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/gallery`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${BASE_URL}/careers`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/contact-us`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/awareness-program`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/affiliations`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
+    { url: BASE_URL, lastModified: siteLastMod, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${BASE_URL}/about-us`, lastModified: siteLastMod, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE_URL}/services`, lastModified: siteLastMod, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE_URL}/blogs`, lastModified: siteLastMod, changeFrequency: "daily", priority: 0.8 },
+    { url: `${BASE_URL}/news`, lastModified: siteLastMod, changeFrequency: "daily", priority: 0.8 },
+    { url: `${BASE_URL}/gallery`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/careers`, lastModified: siteLastMod, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/contact-us`, lastModified: now, changeFrequency: "yearly", priority: 0.7 },
+    { url: `${BASE_URL}/awareness-program`, lastModified: siteLastMod, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/affiliations`, lastModified: siteLastMod, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/reviews`, lastModified: siteLastMod, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/specialists`, lastModified: siteLastMod, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/conditions`, lastModified: siteLastMod, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/near-me`, lastModified: siteLastMod, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/faq`, lastModified: siteLastMod, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/glossary`, lastModified: siteLastMod, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/howto`, lastModified: siteLastMod, changeFrequency: "monthly", priority: 0.7 },
   ];
 
-  // Dynamic service routes
-  const serviceRoutes: MetadataRoute.Sitemap = (serviceSlugs || []).map(({ slug }) => ({
-    url: `${BASE_URL}/services/${slug}`,
-    lastModified: now,
+  const howtoRoutes: MetadataRoute.Sitemap = HOWTO_ARTICLES.map((a) => ({
+    url: `${BASE_URL}/howto/${a.slug}`,
+    lastModified: siteLastMod,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  const conditionRoutes: MetadataRoute.Sitemap = CONDITION_PIVOTS.map((c) => ({
+    url: `${BASE_URL}/conditions/${c.slug}`,
+    lastModified: siteLastMod,
     changeFrequency: "monthly",
     priority: 0.8,
   }));
 
-  // Dynamic blog post routes
-  const blogRoutes: MetadataRoute.Sitemap = (postSlugs || []).map(({ slug }) => ({
-    url: `${BASE_URL}/blogs/${slug}`,
-    lastModified: now,
+  const locationRoutes: MetadataRoute.Sitemap = LOCATION_PIVOTS.map((l) => ({
+    url: `${BASE_URL}/near-me/${l.slug}`,
+    lastModified: siteLastMod,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const serviceRoutes: MetadataRoute.Sitemap = (serviceRows || []).map((r) => ({
+    url: `${BASE_URL}/services/${r.slug}`,
+    lastModified: toDate(r.updatedAt),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const blogRoutes: MetadataRoute.Sitemap = (postRows || []).map((r) => ({
+    url: `${BASE_URL}/blogs/${r.slug}`,
+    lastModified: toDate(r.updatedAt),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  // Dynamic news post routes
-  const newsRoutes: MetadataRoute.Sitemap = (newsSlugs || []).map(({ slug }) => ({
-    url: `${BASE_URL}/news/${slug}`,
-    lastModified: now,
+  const newsRoutes: MetadataRoute.Sitemap = (newsRows || []).map((r) => ({
+    url: `${BASE_URL}/news/${r.slug}`,
+    lastModified: toDate(r.updatedAt),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  // Dynamic career routes
-  const careerRoutes: MetadataRoute.Sitemap = (careerSlugs || []).map(({ slug }) => ({
-    url: `${BASE_URL}/careers/${slug}`,
-    lastModified: now,
+  const careerRoutes: MetadataRoute.Sitemap = (careerRows || []).map((r) => ({
+    url: `${BASE_URL}/careers/${r.slug}`,
+    lastModified: toDate(r.updatedAt),
     changeFrequency: "weekly",
     priority: 0.6,
+  }));
+
+  // Dedupe specialist slugs (Sanity token queries can return drafts + published pairs).
+  const uniqSpecialists = Array.from(
+    new Map((specialistRows || []).map((r) => [r.slug, r])).values(),
+  );
+  const specialistRoutes: MetadataRoute.Sitemap = uniqSpecialists.map((r) => ({
+    url: `${BASE_URL}/specialists/${r.slug}`,
+    lastModified: toDate(r.updatedAt),
+    changeFrequency: "monthly",
+    priority: 0.7,
   }));
 
   return [
@@ -125,5 +122,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogRoutes,
     ...newsRoutes,
     ...careerRoutes,
+    ...specialistRoutes,
+    ...conditionRoutes,
+    ...locationRoutes,
+    ...howtoRoutes,
   ];
 }

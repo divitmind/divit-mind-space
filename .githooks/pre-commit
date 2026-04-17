@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Pre-commit hook: keep lint + typecheck clean before anything lands.
+# Zero external deps — activated by `pnpm run prepare` which sets core.hooksPath.
+set -e
+
+# Only run if there are staged .ts/.tsx/.mjs files.
+STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx|mjs)$' || true)
+if [ -z "$STAGED" ]; then
+  exit 0
+fi
+
+echo "🔎 Pre-commit: running lint on staged files..."
+# shellcheck disable=SC2086
+npx eslint $STAGED
+
+echo "🔎 Pre-commit: running typecheck..."
+pnpm typecheck
+
+echo "✅ Pre-commit checks passed."

@@ -25,18 +25,18 @@ const defaultReasons = [
   },
   {
     icon: "Heart",
-    title: "Child-First Approach",
-    description: "We focus on each child's unique strengths, not just their challenges. Every plan is personalized."
+    title: "Strength-Based, Neuro-Affirming Approach",
+    description: "We focus on each individual's unique strengths, not just their challenges. Every plan is personalized, neuro-affirming, and tailored to your age and needs."
   },
   {
     icon: "Users",
-    title: "Family Involvement",
-    description: "Parents are partners in therapy. We equip you with strategies that work at home too."
+    title: "Families & Caregivers as Partners",
+    description: "Families and caregivers are partners in therapy. We equip you with strategies that work at home, school, and work too."
   },
   {
     icon: "Shield",
-    title: "Safe & Nurturing",
-    description: "A warm, sensory-friendly environment where children feel comfortable and supported."
+    title: "Safe & Sensory-Friendly Space",
+    description: "A warm, sensory-friendly environment where individuals of all ages feel comfortable and supported."
   },
   {
     icon: "Sparkles",
@@ -45,15 +45,40 @@ const defaultReasons = [
   },
   {
     icon: "Clock",
-    title: "Early Intervention Focus",
-    description: "The earlier we start, the better the outcomes. We work with children as young as 18 months."
+    title: "Lifespan Care — Early Intervention to Adult Support",
+    description: "From early intervention for children as young as 18 months to late-diagnosis support for teenagers and adults, we meet you where you are."
   }
 ];
+
+// Migration map: when Sanity still holds the old child-specific titles, swap to the new all-ages copy at render time
+const legacyTitleRemap: Record<string, { title: string; description: string; icon: string }> = {
+  "Child-First Approach": {
+    title: "Strength-Based, Neuro-Affirming Approach",
+    description: "We focus on each individual's unique strengths, not just their challenges. Every plan is personalized, neuro-affirming, and tailored to your age and needs.",
+    icon: "Heart",
+  },
+  "Family Involvement": {
+    title: "Families & Caregivers as Partners",
+    description: "Families and caregivers are partners in therapy. We equip you with strategies that work at home, school, and work too.",
+    icon: "Users",
+  },
+  "Safe & Nurturing": {
+    title: "Safe & Sensory-Friendly Space",
+    description: "A warm, sensory-friendly environment where individuals of all ages feel comfortable and supported.",
+    icon: "Shield",
+  },
+  "Early Intervention Focus": {
+    title: "Lifespan Care — Early Intervention to Adult Support",
+    description: "From early intervention for children as young as 18 months to late-diagnosis support for teenagers and adults, we meet you where you are.",
+    icon: "Clock",
+  },
+};
 
 export function PhilosophySection({ data }: { data?: AboutUsPhilosophyData }) {
   const title = "Why Bangalore Families Choose Divit MindSpace";
   const description = data?.description || "What sets our center apart from other facilities in Bengaluru";
-  const points = data?.points || defaultReasons;
+  const rawPoints = data?.points || defaultReasons;
+  const points = rawPoints.map((p) => legacyTitleRemap[p.title] ?? p);
 
   return (
     <section className="py-8 lg:pt-6 lg:pb-6 bg-white">

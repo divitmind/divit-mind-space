@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   Dialog,
   DialogContent,
@@ -143,7 +144,16 @@ export function SpecialistCard({ specialist, variant = "full" }: SpecialistCardP
       {/* Content */}
       <div className="flex flex-col flex-1 py-6 px-2">
         <h3 className="text-2xl font-serif italic text-black tracking-tight leading-tight mb-2">
-          {specialist.name}
+          {specialist.slug?.current ? (
+            <Link
+              href={`/specialists/${specialist.slug.current}`}
+              className="hover:text-[#7A9A7D] transition-colors"
+            >
+              {specialist.name}
+            </Link>
+          ) : (
+            specialist.name
+          )}
         </h3>
         <p className="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-4">
           {specialist.title}
@@ -165,7 +175,15 @@ export function SpecialistCard({ specialist, variant = "full" }: SpecialistCardP
           {specialist.teaser}
         </p>
 
-        <div className="mt-auto flex items-center gap-4">
+        <div className="mt-auto flex items-center gap-4 flex-wrap">
+          {specialist.slug?.current && (
+            <Link
+              href={`/specialists/${specialist.slug.current}`}
+              className="inline-flex items-center gap-2 text-[#7A9A7D] font-bold text-[10px] uppercase tracking-widest underline underline-offset-4 decoration-2 decoration-[#7A9A7D]/20 hover:decoration-[#7A9A7D] transition-all"
+            >
+              View Page →
+            </Link>
+          )}
           {hasFullBio && (
             <Dialog>
               <DialogTrigger
@@ -177,7 +195,7 @@ export function SpecialistCard({ specialist, variant = "full" }: SpecialistCardP
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple focus-visible:ring-offset-2 rounded"
                 )}
               >
-                Full Profile
+                Quick Bio
               </DialogTrigger>
               <DialogContent
                 className="sm:max-w-[640px] max-h-[85vh] overflow-hidden flex flex-col rounded-[2rem] bg-[#FDFBF7] border-black/10 shadow-3xl"

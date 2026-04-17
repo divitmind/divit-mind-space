@@ -403,11 +403,60 @@ export const REVIEWS_FIRST_PAGE_QUERY = `*[_type == "review"] | order(publishedA
 
 export const REVIEWS_NEXT_PAGE_QUERY = `*[_type == "review" && _id > $lastId] | order(publishedAt desc) [0...$pageSize] ${REVIEWS_PROJECTION}`;
 
+// Aggregate stats for AggregateRating schema on /reviews and root Organization.
+export const REVIEWS_AGGREGATE_QUERY = `{
+  "count": count(*[_type == "review"]),
+  "average": math::avg(*[_type == "review"].rating),
+  "best": math::max(*[_type == "review"].rating),
+  "worst": math::min(*[_type == "review"].rating)
+}`;
+
+// First N reviews (full projection) for embedding individual Review JSON-LD on /reviews.
+// Capped at 20 to keep schema payload reasonable; Google + LLMs sample, they don't need every review.
+export const REVIEWS_FOR_SCHEMA_QUERY = `*[_type == "review"] | order(publishedAt desc) [0...20] ${REVIEWS_PROJECTION}`;
+
 // ============================================================================
 // GROQ Queries for About Us & Specialists
 // ============================================================================
 
-export const SPECIALISTS_QUERY = `*[_type == "specialist"] | order(order desc, name asc) {
+// Related services for a given service's category — used to render hasOfferCatalog
+// cross-links on /services/[slug] pages. Excludes the current service.
+export const RELATED_SERVICES_QUERY = `*[_type == "services" && !(_id in path("drafts.**")) && category == $category && slug.current != $currentSlug] | order(popular desc, title asc) [0...6] {
+  _id,
+  title,
+  "slug": slug.current,
+  description,
+  category
+}`;
+
+// Slug-only query for generateStaticParams + sitemap (published docs only).
+export const ALL_SPECIALIST_SLUGS_QUERY = `*[_type == "specialist" && !(_id in path("drafts.**")) && defined(slug.current)] { "slug": slug.current, "updatedAt": _updatedAt }`;
+
+// Full specialist by slug — used by /specialists/[slug] detail page.
+export const SPECIALIST_BY_SLUG_QUERY = `*[_type == "specialist" && !(_id in path("drafts.**")) && slug.current == $slug][0] {
+  _id,
+  name,
+  "slug": slug.current,
+  title,
+  "image": image{
+    asset->{url},
+    alt,
+    hotspot,
+    crop
+  },
+  experience,
+  specialties,
+  teaser,
+  fullBio,
+  "servicesProvided": servicesProvided[]->{
+    _id,
+    title,
+    "slug": slug.current,
+    category
+  }
+}`;
+
+export const SPECIALISTS_QUERY = `*[_type == "specialist" && !(_id in path("drafts.**"))] | order(order desc, name asc) {
   _id,
   name,
   slug,
@@ -612,7 +661,7 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
   },
   "metrics": {
     "familiesCount": metrics.familiesCount,
-    "therapistsCount": metrics.therapistsCount,
+    "specialistsCount": metrics.specialistsCount,
     "servicesCount": metrics.servicesCount,
     "googleRating": metrics.googleRating,
     "googleReviewsUrl": metrics.googleReviewsUrl

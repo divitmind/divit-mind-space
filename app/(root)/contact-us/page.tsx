@@ -3,6 +3,7 @@ import { ContactPage } from "@/components/contact/contact-page";
 import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import type { SiteSettings, FAQ } from "@/lib/types";
+import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID } from "@/lib/seo";
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
@@ -137,11 +138,20 @@ const defaultFaqs: FAQ[] = [
   },
 ];
 
-// Generate FAQ Schema JSON-LD dynamically
+// FAQPage JSON-LD with Speakable — voice assistants (Google Assistant / Siri / Alexa)
+// use this to read answers aloud. Cross-references canonical Organization + WebSite.
 function generateFaqSchema(faqs: FAQ[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": `${SITE_URL}/contact-us#faq`,
+    inLanguage: SITE_LANGUAGE,
+    isPartOf: { "@id": WEBSITE_ID },
+    about: ORGANIZATION_REF,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h3"],
+    },
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
@@ -165,15 +175,20 @@ export default async function ContactUsPage() {
   // Generate FAQ Schema dynamically
   const faqJsonLd = generateFaqSchema(contactFaqs);
 
+  const pageGraph = {
+    "@context": "https://schema.org",
+    "@graph": [contactJsonLd, faqJsonLd].map((s) => {
+      const clone: Record<string, unknown> = { ...(s as Record<string, unknown>) };
+      delete clone["@context"];
+      return clone;
+    }),
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageGraph) }}
       />
       <ContactPage faqs={contactFaqs} faqTitle={faqTitle} />
     </>

@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Brain, Image as ImageIcon, Megaphone, ChevronDown, FileText, Heart, Users, GraduationCap, BookOpen } from "lucide-react";
+import { Brain, Image as ImageIcon, Megaphone, ChevronDown, FileText, Heart, Users, GraduationCap, BookOpen, Activity, MapPin, Stethoscope } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -24,6 +24,7 @@ const serviceCategories = [
   { id: "therapy", label: "Therapy", href: "/services?category=therapy", icon: Heart },
   { id: "guidance", label: "Guidance", href: "/services?category=guidance", icon: Users },
   { id: "programs", label: "Programs", href: "/services?category=programs", icon: GraduationCap },
+  { id: "physiotherapy", label: "Physiotherapy", href: "/services?category=physiotherapy", icon: Activity },
 ];
 
 export function MainNav() {
@@ -99,10 +100,19 @@ export function MainNav() {
 
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent text-black/40 hover:text-green font-bold text-[10px] uppercase tracking-[0.2em] transition-all px-4 h-10 data-[state=open]:text-green group">
-            Resources
+            Explore
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="grid w-[300px] gap-2 p-6 bg-white rounded-[2.5rem] shadow-2xl border border-black/5">
+            <div className="grid w-[320px] gap-2 p-6 bg-white rounded-[2.5rem] shadow-2xl border border-black/5">
+              <ListItem title="Our Specialists" href="/specialists" icon={<Stethoscope className="h-4 w-4" />}>
+                Meet the Team
+              </ListItem>
+              <ListItem title="Conditions We Support" href="/conditions" icon={<Heart className="h-4 w-4" />}>
+                Autism, ADHD, LD, Pain & More
+              </ListItem>
+              <ListItem title="Near Me" href="/near-me" icon={<MapPin className="h-4 w-4" />}>
+                Locations Across Bangalore
+              </ListItem>
               <ListItem title="Blogs" href="/blogs" icon={<BookOpen className="h-4 w-4" />}>
                 Expert Insights
               </ListItem>

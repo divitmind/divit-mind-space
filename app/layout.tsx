@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import Provider from "@/components/provider";
 import { ClarityInit } from "@/components/clarity-init";
 import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import type { SiteSettings } from "@/lib/types";
+
+// GA4 — set NEXT_PUBLIC_GA_MEASUREMENT_ID in .env.local to activate.
+// The component renders nothing if the ID is missing, so this is safe to ship today.
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 const inter = Inter({
   variable: "--font-inter",
@@ -84,13 +89,24 @@ export const metadata: Metadata = {
     apple: "/divit-mindspace-logo.png",
   },
   manifest: "/manifest.webmanifest",
-  // Add your Google Search Console verification token here when available:
-  // verification: { google: "YOUR_GOOGLE_VERIFICATION_TOKEN" },
+  // Search engine ownership verification — drop real tokens here once claimed.
+  // Google: https://search.google.com/search-console  (copy the content value from the HTML tag method)
+  // Bing:   https://www.bing.com/webmasters           (powers Copilot + ChatGPT search)
+  // Yandex: https://webmaster.yandex.com              (optional — minor for Indian audience)
+  verification: {
+    google: "GYO7QvbO-n_dTolT72KQywtEY5apBRoN4GVYMlz9gj4",
+    // other: { "msvalidate.01": "paste-your-bing-webmaster-token-here" },
+    // yandex: "paste-your-yandex-token-here",
+  },
 };
+
+// Canonical organization entity — referenced by other pages via @id
+const ORG_ID = "https://divitmindspace.com/#organization";
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": ["MedicalBusiness", "EducationalOrganization"],
+  "@id": ORG_ID,
   name: "Divit MindSpace",
   alternateName: ["Divit Health", "Divit MindSpace Clinic"],
   url: "https://divitmindspace.com",
@@ -98,14 +114,16 @@ const organizationJsonLd = {
     "@type": "ImageObject",
     url: "https://divitmindspace.com/divit-mindspace-logo.png",
   },
+  image: "https://divitmindspace.com/divit-mindspace-logo.png",
+  slogan: "Mental Health, Neurodevelopment & Physiotherapy for All Ages — off Sarjapur Road, Bangalore",
   description:
-    "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy. Divit MindSpace provides expert-led Clinical Assessments, Professional Counseling, Speech Therapy, and Occupational Therapy for children, teens, and adults off Sarjapur Road (Kasavanahalli).",
+    "Bangalore's leading center for Mental Health, Neurodevelopment & Physiotherapy. Expert Clinical Assessments, Therapies, Professional Counseling for Teenagers and Adults, Special Education, NIOS Support, Teacher & Parent Training, Physiotherapy (Pain Management, Pain Modalities, Post-Surgical Rehab, Gym & Sports Injury Sessions, Assistive Devices, Wheelchair Training) and Customized Workshops off Sarjapur Road (Kasavanahalli).",
   telephone: "+91-99016-66139",
   email: "divitmindspace@gmail.com",
   priceRange: "₹₹",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Aadeshwar Chambers, Kasavanahalli",
+    streetAddress: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road",
     addressLocality: "Bangalore",
     addressRegion: "Karnataka",
     postalCode: "560035",
@@ -116,6 +134,7 @@ const organizationJsonLd = {
     latitude: "12.9081",
     longitude: "77.6744"
   },
+  hasMap: "https://maps.google.com/?q=Aadeshwar+Chambers+Kasavanahalli+Bengaluru",
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -126,44 +145,54 @@ const organizationJsonLd = {
   ],
   areaServed: [
     { "@type": "City", name: "Bangalore" },
+    { "@type": "City", name: "Bengaluru" },
     { "@type": "Place", name: "Sarjapur Road" },
+    { "@type": "Place", name: "Kasavanahalli" },
     { "@type": "Place", name: "HSR Layout" },
     { "@type": "Place", name: "Bellandur" },
-    { "@type": "Place", name: "Kasavanahalli" },
     { "@type": "Place", name: "Koramangala" },
     { "@type": "Place", name: "Marathahalli" },
-    { "@type": "Place", name: "Electronic City" },
     { "@type": "Place", name: "Whitefield" },
+    { "@type": "Place", name: "Electronic City" },
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Clinical & Therapeutic Services",
+    name: "Clinical, Therapeutic, Educational & Physiotherapy Services",
+    // Every entry below is backed by a real document in Sanity — no orphan claims.
     itemListElement: [
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Clinical Psychological Assessments" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Adult ADHD Counseling & Support" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Autism Spectrum Disorder (ASD) Support" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Speech & Language Therapy" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Occupational Therapy" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Pediatric Physiotherapy" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Adult Physiotherapy & Pain Management" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Post-Surgical Rehabilitation" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Applied Behavior Analysis (ABA)" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cognitive Behavioral Therapy (CBT)" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Play Therapy" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Early Intervention Program" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Special Education & Remedial Teaching" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "NIOS Support & Academic Guidance" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "School Readiness Program" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sensory Integration Therapy" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Teen Counseling & Mental Health" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Parent Guidance & Counseling" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Family & Couples Therapy" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Individual Adult Counseling" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Behavioral Therapy" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Social Skills Training Groups" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Teacher Training Workshops" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Corporate Mental Wellness Programs" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Developmental Screening Camps" } }
+      // Assessments (2)
+      { "@type": "Offer", itemOffered: { "@type": "MedicalProcedure", name: "Psychometric Assessments", url: "https://divitmindspace.com/services/psychometric-assessments" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalProcedure", name: "Psychoeducational Assessments", url: "https://divitmindspace.com/services/psychoeducational-assessments" } },
+      // Therapy (8)
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Speech Therapy", url: "https://divitmindspace.com/services/speech-therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Occupational Therapy", url: "https://divitmindspace.com/services/occupational-therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Behavioral Therapy", url: "https://divitmindspace.com/services/behavioral-therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Cognitive Therapy", url: "https://divitmindspace.com/services/cognitive-therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Play Therapy", url: "https://divitmindspace.com/services/play-therapy" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Sensory Integration Therapy", url: "https://divitmindspace.com/services/sensory-integration-program" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Group Therapy Sessions", url: "https://divitmindspace.com/services/group-therapy-sessions" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Brain Gym", url: "https://divitmindspace.com/services/brain-gym" } },
+      // Guidance (3)
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Counselling (Child, Adolescent, Adult & Parent)", url: "https://divitmindspace.com/services/counselling" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Parental Training Program", url: "https://divitmindspace.com/services/parental-training-program" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Customized Workshops", url: "https://divitmindspace.com/services/customized-workshops" } },
+      // Programs (9)
+      { "@type": "Offer", itemOffered: { "@type": "EducationalOccupationalProgram", name: "Early Intervention Program", url: "https://divitmindspace.com/services/early-intervention-program" } },
+      { "@type": "Offer", itemOffered: { "@type": "EducationalOccupationalProgram", name: "School Readiness Program", url: "https://divitmindspace.com/services/school-readiness-program" } },
+      { "@type": "Offer", itemOffered: { "@type": "EducationalOccupationalProgram", name: "ECCE (Early Childhood Care and Education)", url: "https://divitmindspace.com/services/ecce-early-childhood-care-and-education" } },
+      { "@type": "Offer", itemOffered: { "@type": "EducationalOccupationalProgram", name: "Special Education & Remedial Sessions", url: "https://divitmindspace.com/services/special-education--remedial-sessions" } },
+      { "@type": "Offer", itemOffered: { "@type": "EducationalOccupationalProgram", name: "NIOS Support Program", url: "https://divitmindspace.com/services/nios-support-program" } },
+      { "@type": "Offer", itemOffered: { "@type": "EducationalOccupationalProgram", name: "Training Program (Shadow Teacher Training)", url: "https://divitmindspace.com/services/training-program-shadow-teacher-training-program" } },
+      { "@type": "Offer", itemOffered: { "@type": "Course", name: "Certificate in Special Education", url: "https://divitmindspace.com/services/certificate-in-special-education" } },
+      { "@type": "Offer", itemOffered: { "@type": "Course", name: "Diploma in Special Education", url: "https://divitmindspace.com/services/diploma-in-special-education" } },
+      { "@type": "Offer", itemOffered: { "@type": "Event", name: "Summer Camp", url: "https://divitmindspace.com/services/summer-camp" } },
+      // Physiotherapy (6)
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Physiotherapy — Pain Management", url: "https://divitmindspace.com/services/pain-management" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Physiotherapy — Pain Modalities", url: "https://divitmindspace.com/services/pain-modalities" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Post-Surgical Rehabilitation", url: "https://divitmindspace.com/services/post-surgical-rehabilitation" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Gym & Sports Injury Sessions", url: "https://divitmindspace.com/services/gym--sports-injury-sessions" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Assistive Devices", url: "https://divitmindspace.com/services/assistive-devices" } },
+      { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Wheelchair Training", url: "https://divitmindspace.com/services/wheelchair-training" } },
     ]
   },
   medicalSpecialty: [
@@ -171,15 +200,27 @@ const organizationJsonLd = {
     "Educational Psychology",
     "Physical Therapy",
     "Mental Health",
-    "Speech Pathology"
+    "Speech Pathology",
+    "Occupational Therapy",
+    "Rehabilitation"
   ],
   knowsAbout: [
     "Autism Spectrum Disorder",
+    "Adult Autism",
     "ADHD",
+    "Adult ADHD",
     "Learning Disabilities",
     "Neurodivergence",
     "Sensory Processing Disorder",
     "Developmental Delays",
+    "Stress",
+    "Anxiety",
+    "Depression",
+    "Pain Management",
+    "Post-Surgical Rehabilitation",
+    "Sports and Gym Injuries",
+    "Assistive Devices",
+    "Wheelchair Training",
     "Mental Wellness"
   ],
   founder: [
@@ -220,7 +261,7 @@ const organizationJsonLd = {
     },
     {
       "@type": "ContactPoint",
-      url: "https://wa.me/919902351393",
+      url: "https://wa.me/919901666139",
       contactType: "customer service",
       description: "WhatsApp for appointments and inquiries",
       areaServed: "IN",
@@ -229,7 +270,35 @@ const organizationJsonLd = {
   ],
   availableLanguage: ["English", "Hindi", "Kannada"],
   paymentAccepted: ["Cash", "Credit Card", "Debit Card", "UPI", "Bank Transfer"],
-  currenciesAccepted: "INR"
+  currenciesAccepted: "INR",
+  // Bookable action — Google shows "Book" buttons in local packs when this is declared.
+  potentialAction: {
+    "@type": "ReserveAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://wa.me/919901666139",
+      inLanguage: "en-IN",
+      actionPlatform: [
+        "http://schema.org/DesktopWebPlatform",
+        "http://schema.org/MobileWebPlatform",
+      ],
+    },
+    result: {
+      "@type": "Reservation",
+      name: "Free initial consultation at Divit MindSpace",
+    },
+  },
+  // Explicit free-consultation offer — answers "how much does a consultation cost" queries.
+  makesOffer: {
+    "@type": "Offer",
+    name: "Free initial consultation",
+    description:
+      "A free call or chat with Divit MindSpace to understand your needs and guide you on the right path.",
+    price: "0",
+    priceCurrency: "INR",
+    availability: "https://schema.org/InStock",
+    url: "https://wa.me/919901666139",
+  },
 };
 
 export default async function RootLayout({
@@ -242,7 +311,23 @@ export default async function RootLayout({
   });
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-IN" suppressHydrationWarning>
+      <head>
+        {/* DNS prefetch + preconnect for CDN hosts used by every page.
+            Saves ~100-300ms on first paint of above-the-fold images. */}
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Feed + LLM discovery files linked in <head> so browsers, readers, and AI clients find them. */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Divit MindSpace — Blog"
+          href="/feed.xml"
+        />
+        <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+      </head>
       <body className={`${inter.variable} ${cormorant.variable} bg-[#FAF9F5] antialiased`}>
         <ClarityInit />
         <script
@@ -251,6 +336,7 @@ export default async function RootLayout({
         />
         <SanityLive />
         <Provider siteSettings={siteSettings}>{children}</Provider>
+        {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
       </body>
     </html>
   );
