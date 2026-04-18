@@ -22,7 +22,7 @@ const DEFAULT_SERVICES = [
     },
     {
         id: "parent-guidance",
-        label: "Guidance",
+        label: "Counselling",
         icon: "compass" as const,
         outcome: "Know exactly how to help & see it work",
         route: "/services?category=guidance",

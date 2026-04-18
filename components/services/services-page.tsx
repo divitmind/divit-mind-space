@@ -38,7 +38,7 @@ const categories = [
   { id: "all", label: "All Services", icon: null },
   { id: "assessments", label: "Assessments", icon: ClipboardCheck },
   { id: "therapy", label: "Therapy", icon: Heart },
-  { id: "guidance", label: "Guidance", icon: Users },
+  { id: "guidance", label: "Counselling", icon: Users },
   { id: "programs", label: "Programs", icon: GraduationCap },
   { id: "physiotherapy", label: "Physiotherapy", icon: Activity },
 ];

@@ -26,7 +26,7 @@ import { cn } from "@/lib/utils";
 const serviceGroups = [
   { label: "Assessments", href: "/services?category=assessments", icon: FileText },
   { label: "Therapy", href: "/services?category=therapy", icon: Heart },
-  { label: "Guidance", href: "/services?category=guidance", icon: Users },
+  { label: "Counselling", href: "/services?category=guidance", icon: Users },
   { label: "Programs", href: "/services?category=programs", icon: GraduationCap },
   { label: "Physiotherapy", href: "/services?category=physiotherapy", icon: Activity },
 ];
