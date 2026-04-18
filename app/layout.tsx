@@ -226,20 +226,6 @@ const organizationJsonLd = {
   founder: [
     {
       "@type": "Person",
-      name: "Dr. Debarati Basak",
-      jobTitle:
-        "Psy.D · Founding Partner, Carpediem EdPsych Consultancy LLP · Chief Growth Officer, Divit MindSpace",
-      description:
-        "Clinical psychologist specializing in neurodevelopmental assessments, counselling, and mental health support for children, teens, and adults in Bangalore.",
-      url: "https://divitmindspace.com/specialists/debarati-basak",
-      hasCredential: [
-        { "@type": "EducationalOccupationalCredential", credentialCategory: "Degree", name: "Doctor of Psychology (Psy.D)" },
-        { "@type": "EducationalOccupationalCredential", credentialCategory: "Specialization", name: "Clinical Psychology" },
-        { "@type": "EducationalOccupationalCredential", credentialCategory: "Specialization", name: "Neurodevelopmental Assessments" },
-      ],
-    },
-    {
-      "@type": "Person",
       name: "Dr. Pavithra Lakshmi Narasimhan",
       jobTitle:
         "PhD · Clinical Psychologist · Child & Adolescent Behaviour Intervention Specialist · Certified Art Therapist · SEN (UK certified)",
@@ -251,6 +237,25 @@ const organizationJsonLd = {
         { "@type": "EducationalOccupationalCredential", credentialCategory: "Certification", name: "Certified Art Therapist" },
         { "@type": "EducationalOccupationalCredential", credentialCategory: "Certification", name: "Special Educational Needs (SEN) — UK Certified" },
         { "@type": "EducationalOccupationalCredential", credentialCategory: "Specialization", name: "Child & Adolescent Behaviour Intervention" },
+      ],
+    },
+  ],
+  employee: [
+    {
+      "@type": "Person",
+      name: "Dr. S. Mohamed Nowful",
+      jobTitle:
+        "B.O.Th. · Licensed Occupational Therapist · IOTR, NCAHP, AIOTA Life Member · USA certified BLS, ACLS & OPT-1, CLASI Sensory Integration, oromotor stimulation",
+      description:
+        "Licensed occupational therapist specializing in sensory integration, play therapy, and daily living skills for children and adults with ASD, ADHD, Cerebral Palsy, and developmental delays.",
+      url: "https://divitmindspace.com/specialists/mohamed-nowful",
+      hasCredential: [
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Degree", name: "Bachelor of Occupational Therapy (B.O.Th.)" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "License", name: "Indian Occupational Therapy Registration (IOTR)" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "License", name: "National Commission for Allied and Healthcare Professions (NCAHP)" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Membership", name: "AIOTA Life Member" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Certification", name: "CLASI Sensory Integration" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Certification", name: "USA BLS, ACLS & OPT-1" },
       ],
     },
   ],

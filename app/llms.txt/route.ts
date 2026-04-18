@@ -10,7 +10,8 @@ const content = `# Divit MindSpace
 > We serve children, teenagers, and adults off Sarjapur Road (Kasavanahalli), Bengaluru.
 
 ## About
-- Founded by Debarati Basak (Clinical Psychologist) and Pavithra Lakshmi (Behavioral Therapist)
+- Clinical lead: Dr. Pavithra Lakshmi Narasimhan, PhD (Clinical Psychologist · Child & Adolescent Behaviour Intervention Specialist · Certified Art Therapist · SEN UK)
+- Occupational therapy lead: Dr. S. Mohamed Nowful, B.O.Th. (Licensed Occupational Therapist · IOTR · NCAHP · AIOTA Life Member · CLASI Sensory Integration)
 - Multidisciplinary team: licensed psychologists, speech therapists, occupational therapists, special educators, behavioral therapists, and physiotherapists
 - Serving families across Kasavanahalli, HSR Layout, Bellandur, Sarjapur Road, Koramangala, Marathahalli, Whitefield, Electronic City, and Bengaluru
 - Hours: Monday–Saturday, 10:00 AM – 7:00 PM
