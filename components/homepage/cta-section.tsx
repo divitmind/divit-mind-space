@@ -29,7 +29,7 @@ export function CtaSection() {
                         {/* Original Text Wording */}
                         <div className="text-left">
                             <h2 className="text-xl md:text-4xl font-bold text-black font-[family-name:var(--font-cormorant)] italic mb-1 md:mb-2">
-                                We&apos;re Here When You&apos;re Ready
+                                Not ready to book?
                             </h2>
                             <p className="text-sm md:text-lg text-black/60 font-medium">
                                 Message us on WhatsApp. Ask us anything, we&apos;re here to help.

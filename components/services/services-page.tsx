@@ -267,7 +267,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
               </div>
               <div className="text-left">
                 <h2 className="text-xl md:text-4xl font-bold text-black font-[family-name:var(--font-cormorant)] italic mb-1 md:mb-2">
-                  We&apos;re Here When You&apos;re Ready
+                  Not ready to book?
                 </h2>
                 <p className="text-sm md:text-lg text-black/60 font-medium">
                   Message us on WhatsApp to book a free consultation.

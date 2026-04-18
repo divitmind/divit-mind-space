@@ -6,7 +6,7 @@ import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-lin
 // (no time-bound phrasing, no pressure framing).
 
 export function InlineCtaBlock({
-  heading = "We're Here When You're Ready",
+  heading = "Not ready to book?",
   subtext = "Message us on WhatsApp. Ask us anything, we're here to help.",
 }: {
   heading?: string;
