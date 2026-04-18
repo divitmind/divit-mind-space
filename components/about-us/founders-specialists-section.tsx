@@ -72,7 +72,7 @@ const PEOPLE: Person[] = [
     id: "akhila-r-n",
     name: "Akhila R N",
     title: "M.Sc. (Audiology & Speech-Language Pathology) · RCI Licensed Speech Language Pathologist",
-    image: "/akhila.png",
+    image: "/sitemap/akhila.png",
     experience: "8+ years",
     specialties: ["Autism", "Language Delays", "Apraxia", "Stuttering", "Speech Therapy"],
     teaser:
