@@ -1,19 +1,25 @@
 // Google Image Sitemap extension — https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps
 //
-// IMPORTANT: Google Image Sitemaps are stricter than regular sitemaps about cross-domain
-// image URLs. If an image is on a different host than the sitemap (e.g., Sanity CDN at
-// cdn.sanity.io), Google flags the entry as invalid unless the image-host domain is ALSO
-// verified in Search Console. We can't verify Sanity's CDN.
+// STRICT RULES this sitemap follows (learned from GSC errors):
 //
-// So this sitemap only references images on divitmindspace.com itself — specialist
-// photos, about-page photos, workshop photos from /public. That produces a clean,
-// valid image sitemap. Sanity-hosted service/blog images are still discoverable via
-// normal page crawling (Next.js <Image /> on each page has proper alt text).
+// 1. SAME DOMAIN — every <image:loc> must be on www.divitmindspace.com.
+//    Google needs to verify ownership of the image host; our Sanity CDN
+//    (cdn.sanity.io) can't be verified, so Sanity images go via normal
+//    page crawl, not this sitemap.
+//
+// 2. REAL PHOTOS ONLY — illustrations and designed graphics (about_pic*,
+//    welcome_to_neuroempower, child_development_journey_roadmap) are
+//    removed. Google Image Search ranks real photos of real places/people
+//    significantly higher. Illustrations dilute image-search authority.
+//
+// 3. FILE SIZE — each image is well under 1 MB (Google's sweet spot).
+//    Oversized files are excluded until they're compressed.
+//
+// 4. CANONICAL HOST — all page <loc> URLs use www.divitmindspace.com to
+//    match the GSC-verified property exactly (no redirect hops).
 
 import { NextResponse } from "next/server";
 
-// Canonical host — use www to match the GSC-verified property. The non-www version
-// redirects to www on Vercel, and GSC treats sitemap image URLs strictly by host.
 const CANON_HOST = "https://www.divitmindspace.com";
 
 type ImgEntry = {
@@ -25,107 +31,176 @@ type ImgEntry = {
   caption?: string;
 };
 
-// Curated list — ONLY files that exist in /public and appear on a public page.
-// All image paths are same-domain, so Google accepts them without cross-host verification.
 const ENTRIES: ImgEntry[] = [
-  // Homepage + About
+  // ==================================================================
+  // BRAND
+  // ==================================================================
   {
     pageUrl: `${CANON_HOST}/`,
     imgPath: "/divit-mindspace-logo.png",
     title: "Divit MindSpace",
     caption: "Divit MindSpace — Mental Health, Neurodevelopment & Physiotherapy Bangalore",
   },
+
+  // ==================================================================
+  // BUILDING & LOCATION (strongest for local SEO + "near me" queries)
+  // ==================================================================
   {
-    pageUrl: `${CANON_HOST}/about-us`,
-    imgPath: "/about_pic1.png",
-    title: "Divit MindSpace — Our Space",
-    caption: "Inside Divit MindSpace, Kasavanahalli, Off Sarjapur Road, Bangalore",
+    pageUrl: `${CANON_HOST}/contact-us`,
+    imgPath: "/sitemap/divit-building-exterior-main.jpg",
+    title: "Divit MindSpace — Building Exterior",
+    caption:
+      "Divit MindSpace clinic building at Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bangalore.",
   },
   {
-    pageUrl: `${CANON_HOST}/about-us`,
-    imgPath: "/about_pic2.png",
-    title: "Divit MindSpace — Care Environment",
-    caption: "Therapy environment at Divit MindSpace Bangalore",
+    pageUrl: `${CANON_HOST}/contact-us`,
+    imgPath: "/sitemap/divit-building-side-view.jpg",
+    title: "Divit MindSpace — Building Side View",
+    caption:
+      "Side view of the Divit MindSpace clinic building in Kasavanahalli, Bangalore.",
   },
   {
-    pageUrl: `${CANON_HOST}/about-us`,
-    imgPath: "/about_pic3.png",
-    title: "Divit MindSpace — Our Team at Work",
-    caption: "Clinical team at Divit MindSpace Bangalore",
+    pageUrl: `${CANON_HOST}/contact-us`,
+    imgPath: "/sitemap/divit-clinic-entrance.jpg",
+    title: "Divit MindSpace — Clinic Entrance",
+    caption: "Main entrance of Divit MindSpace, Aadeshwar Chambers, Kasavanahalli.",
   },
   {
-    pageUrl: `${CANON_HOST}/about-us`,
-    imgPath: "/about_pic4.png",
-    title: "Divit MindSpace — Session in Progress",
-    caption: "Therapy session at Divit MindSpace Bangalore",
-  },
-  {
-    pageUrl: `${CANON_HOST}/about-us`,
-    imgPath: "/about_pic5.png",
-    title: "Divit MindSpace — Welcoming Space",
-    caption: "Welcoming space at Divit MindSpace Kasavanahalli Bangalore",
+    pageUrl: `${CANON_HOST}/contact-us`,
+    imgPath: "/sitemap/divit-location-signboard.jpg",
+    title: "Divit MindSpace — Location Signboard",
+    caption:
+      "Divit MindSpace signboard at Aadeshwar Chambers, Kasavanahalli — Off Sarjapur Road, Bangalore.",
   },
 
-  // Specialist photos (each photo lives on /public, each has its own profile page)
+  // ==================================================================
+  // INTERIOR SPACES (hero + about + services context)
+  // ==================================================================
+  {
+    pageUrl: `${CANON_HOST}/about-us`,
+    imgPath: "/sitemap/divit-reception-area.jpg",
+    title: "Divit MindSpace — Reception Area",
+    caption: "Reception area at Divit MindSpace, Kasavanahalli, Bangalore.",
+  },
+  {
+    pageUrl: `${CANON_HOST}/services`,
+    imgPath: "/sitemap/divit-services-board.jpg",
+    title: "Divit MindSpace — Services Board",
+    caption: "Services offered at Divit MindSpace — Kasavanahalli, Bangalore.",
+  },
+  {
+    pageUrl: `${CANON_HOST}/about-us`,
+    imgPath: "/sitemap/divit-consultation-room-wide.jpg",
+    title: "Divit MindSpace — Consultation Space",
+    caption:
+      "Consultation space at Divit MindSpace — Kasavanahalli, Off Sarjapur Road, Bangalore.",
+  },
+
+  // ==================================================================
+  // CONSULTATION ROOMS (counselling, assessments)
+  // ==================================================================
+  {
+    pageUrl: `${CANON_HOST}/services/counselling`,
+    imgPath: "/sitemap/divit-consultation-room-1.jpg",
+    title: "Counselling Room — Divit MindSpace",
+    caption:
+      "Counselling room at Divit MindSpace Kasavanahalli — for children, teens, adults and parents.",
+  },
+  {
+    pageUrl: `${CANON_HOST}/services/cognitive-therapy`,
+    imgPath: "/sitemap/divit-consultation-room-2.jpg",
+    title: "Cognitive Therapy Room — Divit MindSpace",
+    caption:
+      "Cognitive therapy room at Divit MindSpace, Kasavanahalli, Bangalore.",
+  },
+  {
+    pageUrl: `${CANON_HOST}/services/psychometric-assessments`,
+    imgPath: "/sitemap/divit-consultation-room-3.jpg",
+    title: "Assessment Room — Divit MindSpace",
+    caption:
+      "Clinical assessment room for psychometric and psychoeducational assessments — Divit MindSpace, Bangalore.",
+  },
+
+  // ==================================================================
+  // CHILD & PLAY THERAPY SPACES
+  // ==================================================================
+  {
+    pageUrl: `${CANON_HOST}/services/play-therapy`,
+    imgPath: "/sitemap/divit-therapy-play-room.jpg",
+    title: "Play Therapy Room — Divit MindSpace",
+    caption:
+      "Play therapy room at Divit MindSpace Kasavanahalli — child-led therapy for neurodevelopmental and emotional support.",
+  },
+  {
+    pageUrl: `${CANON_HOST}/services/behavioral-therapy`,
+    imgPath: "/sitemap/divit-child-therapy-posters.jpg",
+    title: "Child Therapy Space — Divit MindSpace",
+    caption:
+      "Child therapy space with learning posters at Divit MindSpace, Bangalore.",
+  },
+  {
+    pageUrl: `${CANON_HOST}/services/speech-therapy`,
+    imgPath: "/sitemap/divit-child-therapy-wall.jpg",
+    title: "Speech Therapy Area — Divit MindSpace",
+    caption:
+      "Speech-language therapy area at Divit MindSpace, Kasavanahalli.",
+  },
+
+  // ==================================================================
+  // SPECIALIST HEADSHOTS (real, all under 1MB — compressed variants
+  // live in /sitemap/ where needed)
+  // ==================================================================
   {
     pageUrl: `${CANON_HOST}/specialists/debarati-basak`,
     imgPath: "/Debarati.jpeg",
     title: "Dr. Debarati Basak",
-    caption: "Dr. Debarati Basak, Psy.D · Founding Partner, Divit MindSpace Bangalore",
+    caption:
+      "Dr. Debarati Basak, Psy.D · Founding Partner, Carpediem EdPsych Consultancy LLP · Chief Growth Officer, Divit MindSpace.",
   },
   {
     pageUrl: `${CANON_HOST}/specialists/pavithra-lakshmi-narasimhan`,
     imgPath: "/pavithra-lakshmi.png",
     title: "Dr. Pavithra Lakshmi Narasimhan",
     caption:
-      "Dr. Pavithra Lakshmi Narasimhan, PhD Clinical Psychologist, Divit MindSpace Bangalore",
+      "Dr. Pavithra Lakshmi Narasimhan, PhD Clinical Psychologist · Child & Adolescent Behaviour Intervention Specialist · Certified Art Therapist, Divit MindSpace.",
   },
   {
     pageUrl: `${CANON_HOST}/specialists/dinesh-jayabalakrishnan`,
     imgPath: "/Dinesh.png",
     title: "Dinesh Jayabalakrishnan",
     caption:
-      "Dinesh Jayabalakrishnan, B.O.Th. · Occupational Therapist & Table Tennis Coach, Divit MindSpace",
+      "Dinesh Jayabalakrishnan, B.O.Th. · Occupational Therapist & Table Tennis Coach, Divit MindSpace.",
   },
   {
     pageUrl: `${CANON_HOST}/specialists/akhila-r-n`,
-    imgPath: "/akhila.png",
+    imgPath: "/sitemap/akhila.png",
     title: "Akhila R N",
-    caption: "Akhila R N, M.Sc. (ASLP) · RCI Licensed Speech Language Pathologist, Divit MindSpace",
+    caption:
+      "Akhila R N, M.Sc. (Audiology & Speech-Language Pathology) · RCI Licensed Speech Language Pathologist, Divit MindSpace.",
   },
   {
     pageUrl: `${CANON_HOST}/specialists/mohamed-nowful`,
     imgPath: "/mohmed.jpeg",
     title: "Dr. S. Mohamed Nowful",
-    caption: "Dr. S. Mohamed Nowful, B.O.Th. · Licensed Occupational Therapist, Divit MindSpace",
+    caption:
+      "Dr. S. Mohamed Nowful, B.O.Th. · Licensed Occupational Therapist · IOTR, NCAHP, AIOTA Life Member, Divit MindSpace.",
   },
 
-  // Awareness programs — confirmed past workshops
+  // ==================================================================
+  // AWARENESS WORKSHOP PHOTOS (real past events)
+  // ==================================================================
   {
     pageUrl: `${CANON_HOST}/awareness-program`,
     imgPath: "/awareness-jyoti-nivas.jpeg",
     title: "Awareness session at Jyoti Nivas College",
-    caption: "Free awareness session delivered by Divit MindSpace at Jyoti Nivas College, Bangalore",
+    caption:
+      "Free awareness session delivered by Divit MindSpace at Jyoti Nivas College, Bangalore.",
   },
   {
     pageUrl: `${CANON_HOST}/awareness-program`,
     imgPath: "/awareness-tisb.jpg",
     title: "Awareness session at TISB",
-    caption: "Free awareness session delivered by Divit MindSpace at TISB, Bangalore",
-  },
-
-  // Key visual assets used across the site
-  {
-    pageUrl: `${CANON_HOST}/about-us`,
-    imgPath: "/welcome_to_neuroempower.png",
-    title: "Welcome to Divit MindSpace",
-    caption: "Welcome to Divit MindSpace — empowering every journey",
-  },
-  {
-    pageUrl: `${CANON_HOST}/about-us`,
-    imgPath: "/child_development_journey_roadmap.png",
-    title: "Child development journey roadmap",
-    caption: "Divit MindSpace child development journey — Bangalore",
+    caption: "Free awareness session delivered by Divit MindSpace at TISB, Bangalore.",
   },
 ];
 
@@ -138,7 +213,7 @@ const esc = (s: string) =>
     .replace(/'/g, "&apos;");
 
 export async function GET() {
-  // Group by page URL — an image sitemap supports multiple <image:image> under one <url>.
+  // Group by page URL — the sitemap spec allows multiple <image:image> per <url>.
   const byPage = new Map<string, ImgEntry[]>();
   for (const e of ENTRIES) {
     const list = byPage.get(e.pageUrl) ?? [];
