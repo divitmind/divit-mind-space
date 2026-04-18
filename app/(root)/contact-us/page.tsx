@@ -93,8 +93,8 @@ const contactJsonLd = {
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "10:00",
-        closes: "19:00",
+        opens: "09:00",
+        closes: "18:00",
       },
     ],
     areaServed: [
@@ -130,7 +130,7 @@ const defaultFaqs: FAQ[] = [
   },
   {
     question: "How do I book an appointment at Divit MindSpace?",
-    answer: "Contact us via WhatsApp or call at +91 99016 66139 for a free consultation. We're open Monday to Saturday, 10 AM to 7 PM at Aadeshwar Chambers, Kasavanahalli, off Sarjapur Road, Bangalore.",
+    answer: "Contact us via WhatsApp or call at +91 99016 66139 for a free consultation. We're open Monday to Saturday, 9 AM to 6 PM at Aadeshwar Chambers, Kasavanahalli, off Sarjapur Road, Bangalore.",
   },
   {
     question: "Does Divit MindSpace provide therapy and assessments for adults?",

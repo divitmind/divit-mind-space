@@ -74,7 +74,7 @@ export const siteSettingsType = defineType({
           name: "workingHours",
           title: "🕐 [EDIT] Working Hours",
           type: "string",
-          description: "e.g., 'Monday - Saturday, 10:00 AM - 7:00 PM'",
+          description: "e.g., 'Monday - Saturday, 9:00 AM - 6:00 PM'",
         }),
       ],
     }),

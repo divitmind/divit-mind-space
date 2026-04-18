@@ -438,7 +438,7 @@ export default async function ConditionPage({ params }: PageProps) {
           </section>
         )}
 
-        {/* CTA — shared voice (We're Here When You're Ready) */}
+        {/* CTA — shared voice (Not ready to book?) */}
         <section className="pt-6 pb-12 lg:pt-8 lg:pb-16 bg-[#FAF9F5]">
           <div className="container mx-auto px-4">
             <InlineCtaBlock />

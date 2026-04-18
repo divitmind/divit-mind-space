@@ -14,7 +14,7 @@ const content = `# Divit MindSpace
 - Occupational therapy lead: Dr. S. Mohamed Nowful, B.O.Th. (Licensed Occupational Therapist · IOTR · NCAHP · AIOTA Life Member · CLASI Sensory Integration)
 - Multidisciplinary team: licensed psychologists, speech therapists, occupational therapists, special educators, behavioral therapists, and physiotherapists
 - Serving families across Kasavanahalli, HSR Layout, Bellandur, Sarjapur Road, Koramangala, Marathahalli, Whitefield, Electronic City, and Bengaluru
-- Hours: Monday–Saturday, 10:00 AM – 7:00 PM
+- Hours: Monday–Saturday, 9:00 AM – 6:00 PM
 - Contact: +91-99016-66139 · divitmindspace@gmail.com · https://wa.me/919901666139
 
 ## Services — Clinical Assessments

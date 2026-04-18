@@ -96,7 +96,7 @@ export async function GET() {
   lines.push("- **WhatsApp:** https://wa.me/919901666139");
   lines.push("- **Email:** divitmindspace@gmail.com");
   lines.push("- **Website:** https://www.divitmindspace.com");
-  lines.push("- **Hours:** Monday–Saturday, 10:00 AM – 7:00 PM (IST)");
+  lines.push("- **Hours:** Monday–Saturday, 9:00 AM – 6:00 PM (IST)");
   lines.push("- **Languages:** English, Hindi, Kannada");
   lines.push("- **Clinical lead:** Dr. Pavithra Lakshmi Narasimhan, PhD (Clinical Psychologist · Child & Adolescent Behaviour Intervention Specialist · Certified Art Therapist · SEN UK certified)");
   lines.push("- **Occupational therapy lead:** Dr. S. Mohamed Nowful, B.O.Th. (Licensed Occupational Therapist · IOTR · NCAHP · AIOTA Life Member · CLASI Sensory Integration)");
