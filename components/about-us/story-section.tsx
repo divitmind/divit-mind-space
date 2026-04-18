@@ -8,7 +8,7 @@ interface AboutUsStoryData {
 }
 
 const defaultParagraphs = [
-  "Divit MindSpace was born from a deeply personal journey. Our founder&apos;s experience raising a neurodivergent child revealed the gaps in accessible, compassionate care.",
+  "Divit MindSpace was born from a deeply personal journey. Firsthand experience raising a neurodivergent child revealed the gaps in accessible, compassionate care.",
   "What started as a search for answers became a mission: to create a space where every individual is seen for their potential, not their diagnosis.",
   "Today, we combine clinical expertise with genuine understanding—because we&apos;ve walked this path ourselves. Every family that comes to us is treated like our own."
 ];

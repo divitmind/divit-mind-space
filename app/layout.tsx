@@ -223,7 +223,10 @@ const organizationJsonLd = {
     "Wheelchair Training",
     "Mental Wellness"
   ],
-  founder: [
+  // We list active clinical leads under `employee` (schema.org recommended for
+  // practicing staff). `founder` is intentionally omitted — not a required
+  // field for MedicalBusiness, and listing it wrongly weakens E-E-A-T.
+  employee: [
     {
       "@type": "Person",
       name: "Dr. Pavithra Lakshmi Narasimhan",
@@ -239,8 +242,6 @@ const organizationJsonLd = {
         { "@type": "EducationalOccupationalCredential", credentialCategory: "Specialization", name: "Child & Adolescent Behaviour Intervention" },
       ],
     },
-  ],
-  employee: [
     {
       "@type": "Person",
       name: "Dr. S. Mohamed Nowful",
