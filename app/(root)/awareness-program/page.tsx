@@ -3,7 +3,12 @@ import { AwarenessPage } from "@/components/awareness/awareness-page";
 import { sanityFetch } from "@/sanity/lib/live";
 import { AWARENESS_QUERY } from "@/sanity/lib/queries";
 import { AwarenessQueryResult } from "@/sanity/types";
-import { ORGANIZATION_REF, SITE_URL } from "@/lib/seo";
+import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID } from "@/lib/seo";
+import {
+  AWARENESS_INSTITUTIONS,
+  AWARENESS_WORKSHOP_TITLES,
+  AWARENESS_FAQS,
+} from "@/lib/awareness-content";
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
@@ -121,9 +126,80 @@ export default async function AwarenessProgramRoute() {
     ],
   };
 
+  // ItemList of the 15+ institutions we've reached — named social proof that
+  // Google + LLMs can cite as concrete delivery evidence.
+  const institutionsListJsonLd = {
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/awareness-program#institutions`,
+    name: "Institutions where Divit MindSpace has conducted awareness programs",
+    numberOfItems: AWARENESS_INSTITUTIONS.length,
+    itemListElement: AWARENESS_INSTITUTIONS.map((name, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      item: { "@type": "EducationalOrganization", name },
+    })),
+  };
+
+  // Course schema per workshop topic — each is an eligible Google "Course"
+  // carousel entry for the specific topic phrase (Screen Time Management,
+  // Bullying Prevention, etc.). provider references the canonical Org via @id.
+  const workshopCoursesJsonLd = AWARENESS_WORKSHOP_TITLES.map((topicTitle, idx) => ({
+    "@type": "Course",
+    "@id": `${SITE_URL}/awareness-program#workshop-${idx}`,
+    name: topicTitle,
+    description: `Customised ${topicTitle} workshop delivered by Divit MindSpace for schools, colleges, corporates, hospitals, and apartment communities in Bangalore.`,
+    provider: ORGANIZATION_REF,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "INR", availability: "https://schema.org/InStock" },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "https://schema.org/OnSite",
+      inLanguage: SITE_LANGUAGE,
+    },
+  }));
+
+  // FAQPage schema — biggest AEO lever on this route; the Q&A answers are
+  // citation-ready for ChatGPT / Perplexity / Google AI Overviews. Speakable
+  // spec signals Google Assistant to read the Q/A aloud for voice search.
+  const faqPageJsonLd = {
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}/awareness-program#faq`,
+    inLanguage: SITE_LANGUAGE,
+    isPartOf: { "@id": WEBSITE_ID },
+    about: ORGANIZATION_REF,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["[data-speakable]", "h3", "h2"],
+    },
+    mainEntity: AWARENESS_FAQS.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+
+  // DefinedTerm — gives LLMs a clean semantic anchor for "awareness program"
+  // so when a user asks "what is an awareness program by Divit MindSpace"
+  // there's a ready-to-quote definition block.
+  const definedTermJsonLd = {
+    "@type": "DefinedTerm",
+    "@id": `${SITE_URL}/awareness-program#definition`,
+    name: "Awareness Program",
+    termCode: "awareness-program",
+    description:
+      "A complimentary session delivered by Divit MindSpace that empowers teachers, parents, and communities with knowledge about neurodivergence, early intervention, and mental health. Sessions are customised to the audience and always free of charge.",
+    inDefinedTermSet: ORGANIZATION_REF,
+  };
+
   const pageGraph = {
     "@context": "https://schema.org",
-    "@graph": [educationalOrgJsonLd, breadcrumbJsonLd].map((s) => {
+    "@graph": [
+      educationalOrgJsonLd,
+      breadcrumbJsonLd,
+      institutionsListJsonLd,
+      ...workshopCoursesJsonLd,
+      faqPageJsonLd,
+      definedTermJsonLd,
+    ].map((s) => {
       const clone: Record<string, unknown> = { ...(s as Record<string, unknown>) };
       delete clone["@context"];
       return clone;

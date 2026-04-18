@@ -10,18 +10,19 @@ interface AwarenessHeroProps {
 }
 
 const defaultHero = {
-  badge: "100% Free Sessions",
+  badge: "Always Free of Charge",
   title: "Awareness Programs for Schools & Communities",
-  description: "We conduct FREE sessions to help teachers, parents, and communities understand neurodivergence and early intervention.",
+  description:
+    "Awareness is a core pillar of our work. We conduct complimentary sessions that empower teachers, parents, and communities with knowledge about neurodivergence and the importance of early intervention.",
   stats: [
-    { label: "Sessions Done", value: "10+" },
-    { label: "People Reached", value: "500+" },
-    { label: "Always", value: "FREE" }
+    { label: "Organisations Reached", value: "15+" },
+    { label: "Workshop Topics", value: "8+" },
+    { label: "All Sessions", value: "FREE" },
   ],
   image: {
     asset: { url: "/awareness-jyoti-nivas.jpeg" },
-    alt: "Awareness session at Jyoti Nivas College - educators learning about early intervention"
-  }
+    alt: "Awareness session at Jyoti Nivas College - educators learning about early intervention",
+  },
 };
 
 export function AwarenessHero({ data }: AwarenessHeroProps) {
@@ -42,7 +43,7 @@ export function AwarenessHero({ data }: AwarenessHeroProps) {
   }
 
   return (
-    <section className="relative pt-6 pb-2 lg:pt-8 lg:pb-4 bg-[#FAF9F5] overflow-hidden">
+    <section className="relative pt-8 pb-10 lg:pt-12 lg:pb-14 bg-[#FAF9F5] overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
           {/* Left: Content */}
@@ -73,15 +74,37 @@ export function AwarenessHero({ data }: AwarenessHeroProps) {
               {hero.description}
             </p>
 
-            {/* Quick Stats */}
+            {/* Quick Stats — spring-in on load, then subtle pulse to feel alive */}
             {hero.stats && hero.stats.length > 0 && (
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-2">
                 {hero.stats.map((stat, idx) => (
                   <div key={idx} className="flex items-center gap-8">
-                    <div className="text-center group">
-                      <div className="text-2xl font-bold text-green group-hover:text-purple transition-colors">{stat.value}</div>
-                      <div className="text-[10px] text-black/50 font-bold uppercase tracking-widest">{stat.label}</div>
-                    </div>
+                    <motion.div
+                      className="text-center group"
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: 0.3 + idx * 0.15,
+                        type: "spring",
+                        stiffness: 180,
+                      }}
+                    >
+                      <motion.div
+                        className="text-2xl font-bold text-green group-hover:text-purple transition-colors"
+                        animate={{ scale: [1, 1.06, 1] }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: idx * 0.4,
+                        }}
+                      >
+                        {stat.value}
+                      </motion.div>
+                      <div className="text-[10px] text-black/50 font-bold uppercase tracking-widest">
+                        {stat.label}
+                      </div>
+                    </motion.div>
                     {idx < (hero.stats?.length || 0) - 1 && (
                       <div className="w-px h-8 bg-green/20 hidden sm:block" />
                     )}
