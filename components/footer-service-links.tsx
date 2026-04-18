@@ -19,7 +19,7 @@ const serviceLinks = [
 
 export function FooterServiceLinks() {
     return (
-        <ul className="space-y-3">
+        <ul className="grid grid-cols-2 gap-x-3 gap-y-3">
             {serviceLinks.map((link) => (
                 <li key={link.label}>
                     <Link
@@ -30,10 +30,10 @@ export function FooterServiceLinks() {
                     </Link>
                 </li>
             ))}
-            <li className="pt-1">
+            <li className="col-span-2 pt-1">
                 <Link
                     href="/services"
-                    className="text-[13px] text-green font-bold hover:underline underline-offset-4 flex items-center gap-1.5"
+                    className="text-[13px] text-green font-bold hover:underline underline-offset-4 inline-flex items-center gap-1.5"
                 >
                     View all services <span className="text-xs">→</span>
                 </Link>
