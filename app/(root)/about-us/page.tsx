@@ -67,7 +67,7 @@ const defaultAboutFaqs: FAQ[] = [
     question:
       "What makes Divit MindSpace different from other therapy centers in Bangalore?",
     answer:
-      "We combine clinical expertise with personal understanding — our founders have firsthand experience with neurodivergent families. Our strength-based, neuro-affirming approach focuses on each individual's strengths, not just challenges, and plans are tailored to age and goals. We also run free awareness sessions across schools and communities around Sarjapur Road, HSR Layout, and Bellandur.",
+      "We combine clinical expertise with personal understanding — our team has firsthand experience with neurodivergent families. Our strength-based, neuro-affirming approach focuses on each individual's strengths, not just challenges, and plans are tailored to age and goals. We also run free awareness sessions across schools and communities around Sarjapur Road, HSR Layout, and Bellandur.",
   },
   {
     question:

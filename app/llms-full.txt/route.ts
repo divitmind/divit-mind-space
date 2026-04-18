@@ -59,7 +59,11 @@ export async function GET() {
 
   // Dedupe in case drafts slipped through
   const services = Array.from(new Map(rawServices.map((s) => [s.slug, s])).values());
-  const specialists = Array.from(new Map(rawSpecialists.map((s) => [s.slug, s])).values());
+  // SEO/GEO/LLM allowlist — only Pavithra + Mohamed are surfaced as mapped clinical leads
+  // in external content. Other team members remain displayed on the about-us page only.
+  const SPECIALIST_ALLOWLIST = new Set(["pavithra-lakshmi-narasimhan", "mohamed-nowful"]);
+  const specialists = Array.from(new Map(rawSpecialists.map((s) => [s.slug, s])).values())
+    .filter((s) => SPECIALIST_ALLOWLIST.has(s.slug));
 
   // Group services by category for readability
   const servicesByCategory = services.reduce<Record<string, Service[]>>((acc, s) => {
@@ -94,7 +98,8 @@ export async function GET() {
   lines.push("- **Website:** https://www.divitmindspace.com");
   lines.push("- **Hours:** Monday–Saturday, 10:00 AM – 7:00 PM (IST)");
   lines.push("- **Languages:** English, Hindi, Kannada");
-  lines.push("- **Founded by:** Dr. Debarati Basak (Clinical Psychologist) and Dr. Pavithra Lakshmi Narasimhan (Clinical Psychologist)");
+  lines.push("- **Clinical lead:** Dr. Pavithra Lakshmi Narasimhan, PhD (Clinical Psychologist · Child & Adolescent Behaviour Intervention Specialist · Certified Art Therapist · SEN UK certified)");
+  lines.push("- **Occupational therapy lead:** Dr. S. Mohamed Nowful, B.O.Th. (Licensed Occupational Therapist · IOTR · NCAHP · AIOTA Life Member · CLASI Sensory Integration)");
   lines.push("- **Areas served in Bangalore:** Sarjapur Road, Kasavanahalli, HSR Layout, Bellandur, Koramangala, Whitefield, Marathahalli, Electronic City, and Bengaluru metro.");
   lines.push("");
   lines.push("---");

@@ -147,36 +147,16 @@ const ENTRIES: ImgEntry[] = [
   },
 
   // ==================================================================
-  // SPECIALIST HEADSHOTS (real, all under 1MB — compressed variants
-  // live in /sitemap/ where needed)
+  // SPECIALIST HEADSHOTS — only the two mapped clinical leads
+  // (Pavithra + Mohamed). Other team members appear on /about-us
+  // but are not surfaced in SEO/GEO/LLM mappings.
   // ==================================================================
-  {
-    pageUrl: `${CANON_HOST}/specialists/debarati-basak`,
-    imgPath: "/Debarati.jpeg",
-    title: "Dr. Debarati Basak",
-    caption:
-      "Dr. Debarati Basak, Psy.D · Founding Partner, Carpediem EdPsych Consultancy LLP · Chief Growth Officer, Divit MindSpace.",
-  },
   {
     pageUrl: `${CANON_HOST}/specialists/pavithra-lakshmi-narasimhan`,
     imgPath: "/pavithra-lakshmi.png",
     title: "Dr. Pavithra Lakshmi Narasimhan",
     caption:
       "Dr. Pavithra Lakshmi Narasimhan, PhD Clinical Psychologist · Child & Adolescent Behaviour Intervention Specialist · Certified Art Therapist, Divit MindSpace.",
-  },
-  {
-    pageUrl: `${CANON_HOST}/specialists/dinesh-jayabalakrishnan`,
-    imgPath: "/Dinesh.png",
-    title: "Dinesh Jayabalakrishnan",
-    caption:
-      "Dinesh Jayabalakrishnan, B.O.Th. · Occupational Therapist & Table Tennis Coach, Divit MindSpace.",
-  },
-  {
-    pageUrl: `${CANON_HOST}/specialists/akhila-r-n`,
-    imgPath: "/sitemap/akhila.png",
-    title: "Akhila R N",
-    caption:
-      "Akhila R N, M.Sc. (Audiology & Speech-Language Pathology) · RCI Licensed Speech Language Pathologist, Divit MindSpace.",
   },
   {
     pageUrl: `${CANON_HOST}/specialists/mohamed-nowful`,
