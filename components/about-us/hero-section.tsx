@@ -33,6 +33,13 @@ const SERVICE_CHIPS = [
   "Learning Disabilities",
   "Adult Autism",
   "Adult ADHD",
+  // Therapies
+  "Speech Therapy",
+  "Occupational Therapy",
+  "Behavioral Therapy",
+  "Cognitive Therapy",
+  "Play Therapy",
+  "Group Sessions",
   // Mental Health
   "Stress",
   "Anxiety",
