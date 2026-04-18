@@ -142,13 +142,12 @@ export default async function ConditionPage({ params }: PageProps) {
         "@id": `${pageUrl}#condition`,
         name: condition.name,
         // Enrich MedicalCondition with possibleTreatment links to real services.
-        // This creates a direct graph edge from the condition entity → each treatment service.
-        // Google's healthcare SERP widgets rely on this relationship.
+        // Link by @id (matches the `@id` each service page sets on its own
+        // schema) so Google treats this as one canonical entity graph instead
+        // of duplicating the MedicalTherapy node on every condition page.
         ...(services.length > 0 && {
           possibleTreatment: services.map((s) => ({
-            "@type": "MedicalTherapy",
-            name: s.title,
-            url: `${SITE_URL}/services/${s.slug}`,
+            "@id": `${SITE_URL}/services/${s.slug}#service`,
           })),
         }),
       },

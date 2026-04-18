@@ -154,6 +154,97 @@ export default async function ServicePage({ params }: PageProps) {
   };
   const schemaType = serviceTypeByCategory[service.category] || "MedicalService";
 
+  // Per-service medical-schema enrichment for YMYL E-E-A-T.
+  // medicineSystem: the broad discipline (Google uses this to classify healthcare results).
+  // relevantSpecialty: maps to schema.org MedicalSpecialty enum where a match exists.
+  // recognizingAuthority: the Indian regulatory or professional body that certifies providers.
+  const SERVICE_MEDICAL_META: Record<
+    string,
+    {
+      medicineSystem: string;
+      relevantSpecialty?: string;
+      recognizingAuthority?: { name: string; url: string };
+    }
+  > = {
+    // Therapies
+    "speech-therapy": {
+      medicineSystem: "Speech-Language Pathology",
+      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
+    },
+    "occupational-therapy": {
+      medicineSystem: "Occupational Therapy",
+      relevantSpecialty: "OccupationalTherapy",
+      recognizingAuthority: { name: "All India Occupational Therapists' Association (AIOTA)", url: "https://www.aiota.org/" },
+    },
+    "behavioral-therapy": {
+      medicineSystem: "Behavioral Health",
+      relevantSpecialty: "Psychiatric",
+      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
+    },
+    "cognitive-therapy": {
+      medicineSystem: "Clinical Psychology",
+      relevantSpecialty: "Psychiatric",
+      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
+    },
+    "play-therapy": {
+      medicineSystem: "Child Psychology",
+      relevantSpecialty: "Pediatric",
+      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
+    },
+    "group-therapy-sessions": {
+      medicineSystem: "Behavioral Health",
+      relevantSpecialty: "Psychiatric",
+      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
+    },
+    "sensory-integration-program": {
+      medicineSystem: "Occupational Therapy",
+      relevantSpecialty: "OccupationalTherapy",
+      recognizingAuthority: { name: "All India Occupational Therapists' Association (AIOTA)", url: "https://www.aiota.org/" },
+    },
+    "brain-gym": { medicineSystem: "Neurodevelopmental Therapy" },
+    // Assessments
+    "psychometric-assessments": {
+      medicineSystem: "Clinical Psychology",
+      relevantSpecialty: "Psychiatric",
+      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
+    },
+    "psychoeducational-assessments": {
+      medicineSystem: "Educational Psychology",
+      relevantSpecialty: "Pediatric",
+      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
+    },
+    // Counselling
+    counselling: {
+      medicineSystem: "Clinical Psychology",
+      relevantSpecialty: "Psychiatric",
+      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
+    },
+    // Physiotherapy
+    "pain-management": {
+      medicineSystem: "Physical Therapy",
+      relevantSpecialty: "PhysicalTherapy",
+      recognizingAuthority: { name: "Indian Association of Physiotherapists (IAP)", url: "https://physiotherapyindia.org/" },
+    },
+    "pain-modalities": {
+      medicineSystem: "Physical Therapy",
+      relevantSpecialty: "PhysicalTherapy",
+      recognizingAuthority: { name: "Indian Association of Physiotherapists (IAP)", url: "https://physiotherapyindia.org/" },
+    },
+    "post-surgical-rehabilitation": {
+      medicineSystem: "Physical Therapy",
+      relevantSpecialty: "PhysicalTherapy",
+      recognizingAuthority: { name: "Indian Association of Physiotherapists (IAP)", url: "https://physiotherapyindia.org/" },
+    },
+    "gym--sports-injury-sessions": {
+      medicineSystem: "Sports Medicine",
+      relevantSpecialty: "SportsMedicine",
+      recognizingAuthority: { name: "Indian Association of Physiotherapists (IAP)", url: "https://physiotherapyindia.org/" },
+    },
+    "assistive-devices": { medicineSystem: "Rehabilitation Medicine" },
+    "wheelchair-training": { medicineSystem: "Rehabilitation Medicine" },
+  };
+  const medicalMeta = SERVICE_MEDICAL_META[service.slug.current];
+
   // Main Service/Therapy/Procedure schema — provider references canonical Organization via @id.
   // Medical service types get lastReviewed/reviewedBy to meet YMYL signals Google weighs
   // heavily for healthcare content.
@@ -169,6 +260,22 @@ export default async function ServicePage({ params }: PageProps) {
     image: service.image?.asset?.url,
     provider: ORGANIZATION_REF,
     ...(isMedicalType ? MEDICAL_CONTENT_REVIEW_BLOCK : {}),
+    // YMYL enrichment — medicineSystem/relevantSpecialty/recognizingAuthority signal
+    // to Google and LLMs that this is a bona-fide healthcare service under a recognized
+    // Indian regulatory body. Only emitted when we have trusted mapping data for the slug.
+    ...(isMedicalType && medicalMeta
+      ? {
+          medicineSystem: medicalMeta.medicineSystem,
+          ...(medicalMeta.relevantSpecialty && { relevantSpecialty: medicalMeta.relevantSpecialty }),
+          ...(medicalMeta.recognizingAuthority && {
+            recognizingAuthority: {
+              "@type": "Organization",
+              name: medicalMeta.recognizingAuthority.name,
+              url: medicalMeta.recognizingAuthority.url,
+            },
+          }),
+        }
+      : {}),
     areaServed: [
       { "@type": "City", name: "Bangalore" },
       { "@type": "City", name: "Bengaluru" },

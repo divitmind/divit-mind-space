@@ -263,6 +263,8 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
       "ecce-early-childhood-care-and-education",
       "speech-therapy",
       "occupational-therapy",
+      "behavioral-therapy",
+      "group-therapy-sessions",
       "psychometric-assessments",
       "psychoeducational-assessments",
     ],
