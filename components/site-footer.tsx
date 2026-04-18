@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Phone, Mail, Briefcase, Clock, Calendar } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Calendar } from "lucide-react";
 import { FooterServiceLinks } from "@/components/footer-service-links";
 import { FooterConditionLinks } from "@/components/footer-condition-links";
 import { ContactClickLink } from "@/components/contact-click-link";
@@ -17,6 +17,7 @@ const quickLinks = [
     { label: "Reviews", href: "/reviews" },
     { label: "Blog", href: "/blogs" },
     { label: "Workshops", href: "/awareness-program" },
+    { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact-us" },
 ];
 
@@ -104,7 +105,6 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
     const socialLinksData = siteSettings?.socialLinks;
     const quickLinksData = siteSettings?.navigation?.quickLinks || quickLinks;
     const footerContent = siteSettings?.footer;
-    const joinTeamText = siteSettings?.navigation?.joinTeamText || "Join Our Team";
 
     // Contact info with explicit fallbacks (Sanity has flat strings, fallback has nested objects)
     const displayAddress = siteSettings?.contact?.address || contact.address;
@@ -275,24 +275,15 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
 
                 {/* Bottom Bar: CTAs left, legal links right */}
                 <div className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-6 lg:pt-8 mt-6 border-t border-black/5">
-                    <div className="flex flex-wrap justify-center items-center gap-3">
-                        <a
-                            href={contact.whatsapp}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-green rounded-full text-[10px] font-bold uppercase tracking-widest text-white hover:bg-green/90 transition-all duration-500 group"
-                        >
-                            <Calendar className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
-                            Book a Free Consultation
-                        </a>
-                        <Link
-                            href="/careers"
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-green/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-green hover:bg-green hover:text-white transition-all duration-500 group border border-green/10"
-                        >
-                            <Briefcase className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
-                            {joinTeamText}
-                        </Link>
-                    </div>
+                    <a
+                        href={contact.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-green rounded-full text-[10px] font-bold uppercase tracking-widest text-white hover:bg-green/90 transition-all duration-500 group"
+                    >
+                        <Calendar className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
+                        Book a Free Consultation
+                    </a>
                     <div className="flex flex-wrap justify-center items-center gap-3 lg:gap-5">
                         <p className="text-[10px] text-black/30 font-bold uppercase tracking-widest">
                             © {new Date().getFullYear()} Divit MindSpace
