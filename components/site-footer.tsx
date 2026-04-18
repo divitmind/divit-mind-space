@@ -31,14 +31,15 @@ const contact = {
     whatsapp: "https://wa.me/919901666139",
 };
 
-// Crisis helplines — India-specific YMYL best practice. All three here are
-// 24/7, free, and crisis-oriented. Verbatim numbers only, do not paraphrase.
-// Non-crisis emotional-support lines (e.g., iCall) belong on the Medical
-// Disclaimer page, not in a block labelled "in crisis".
+// Mental health helplines — India-specific YMYL best practice. Verbatim
+// numbers only, do not paraphrase. Tele-MANAS and Vandrevala are 24/7
+// crisis-capable; NIMHANS Centre for Wellbeing is the Bangalore clinical
+// line (office hours). Heading is broad enough ("needs mental health
+// support") to accommodate the latter without misrouting a crisis call.
 const crisisHelplines = [
-    { label: "Tele-MANAS (Govt of India)", number: "14416", tel: "tel:14416" },
-    { label: "Vandrevala Foundation", number: "1860-2662-345", tel: "tel:18602662345" },
-    { label: "AASRA", number: "+91 98204 66726", tel: "tel:+919820466726" },
+    { label: "Tele-MANAS (NIMHANS, 24/7)", number: "14416", tel: "tel:14416" },
+    { label: "Vandrevala Foundation (24/7)", number: "1860-2662-345", tel: "tel:18602662345" },
+    { label: "NIMHANS Centre for Wellbeing", number: "080 4611 0007", tel: "tel:08046110007" },
 ];
 
 const socialLinks = [
@@ -259,7 +260,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                 {/* Crisis helplines — YMYL safety signal, published on every page */}
                 <div className="mt-10 lg:mt-12 pt-6 border-t border-black/5">
                     <p className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-3">
-                        If you or someone you care for is in crisis
+                        If you or someone you care for needs mental health support
                     </p>
                     <div className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] text-black/60 font-medium">
                         {crisisHelplines.map((line) => (

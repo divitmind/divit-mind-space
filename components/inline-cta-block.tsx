@@ -7,7 +7,7 @@ import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-lin
 
 export function InlineCtaBlock({
   heading = "We're Here When You're Ready",
-  subtext = "Message us on WhatsApp — ask us anything, we'll answer your questions.",
+  subtext = "Message us on WhatsApp — ask us anything, we're here to help.",
 }: {
   heading?: string;
   subtext?: string;
