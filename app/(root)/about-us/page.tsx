@@ -207,8 +207,9 @@ export default async function AboutUsPage() {
   const specialists = (specialistsData.data as SpecialistsQueryResult) || [];
   const siteSettings = siteSettingsData.data;
 
-  // Build a chip-label → service-slug map so hero chips link to real service detail pages.
-  // Chip labels differ slightly from Sanity titles; aliases close the gap without fuzzy matching.
+  // Build a chip-label → href map so hero chips deep-link to real pages.
+  // Covers BOTH services (/services/...) and conditions (/conditions/...).
+  // Chip labels differ slightly from Sanity titles; aliases close the gap.
   type SanitySvc = { title: string; slug?: { current?: string }; category?: string };
   const allServices = (servicesData.data as SanitySvc[] | undefined) ?? [];
   const titleToSlug = new Map<string, string>();
@@ -222,13 +223,28 @@ export default async function AboutUsPage() {
     "teacher & parent training": "parental training program",
     "group sessions": "group therapy sessions",
   };
-  const serviceSlugByChipLabel: Record<string, string> = {};
+  // Condition chips route to /conditions/[slug]. Adult-variant chips share the
+  // parent condition page — the page copy covers both child + adult.
+  const chipConditionHref: Record<string, string> = {
+    autism: "/conditions/autism",
+    "adult autism": "/conditions/autism",
+    adhd: "/conditions/adhd",
+    "adult adhd": "/conditions/adhd",
+    "learning disabilities": "/conditions/learning-disabilities",
+    stress: "/conditions/stress-anxiety-depression",
+    anxiety: "/conditions/stress-anxiety-depression",
+    depression: "/conditions/stress-anxiety-depression",
+  };
+  const chipHrefByLabel: Record<string, string> = {};
   for (const [label, slug] of titleToSlug) {
-    serviceSlugByChipLabel[label] = slug;
+    chipHrefByLabel[label] = `/services/${slug}`;
   }
   for (const [alias, targetTitle] of Object.entries(chipAliasToTitle)) {
     const slug = titleToSlug.get(targetTitle.toLowerCase());
-    if (slug) serviceSlugByChipLabel[alias] = slug;
+    if (slug) chipHrefByLabel[alias] = `/services/${slug}`;
+  }
+  for (const [label, href] of Object.entries(chipConditionHref)) {
+    chipHrefByLabel[label] = href;
   }
 
   // Generate Person schemas for all specialists
@@ -282,7 +298,7 @@ export default async function AboutUsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageGraph) }}
       />
       <main className="min-h-screen">
-        <HeroSection data={aboutUs?.hero} metrics={siteSettings?.metrics} serviceSlugByChipLabel={serviceSlugByChipLabel} />
+        <HeroSection data={aboutUs?.hero} metrics={siteSettings?.metrics} chipHrefByLabel={chipHrefByLabel} />
         <StorySection data={aboutUs?.story} />
         <PhilosophySection data={aboutUs?.philosophy} />
         <FoundersSpecialistsSection specialists={specialists} />

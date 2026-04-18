@@ -62,11 +62,12 @@ const SERVICE_CHIPS = [
 export function HeroSection({
   data,
   metrics: sanityMetrics,
-  serviceSlugByChipLabel,
+  chipHrefByLabel,
 }: {
   data?: AboutUsHeroData;
   metrics?: TrustMetrics;
-  serviceSlugByChipLabel?: Record<string, string>;
+  /** Lowercased chip label → absolute href (e.g. "/services/speech-therapy" or "/conditions/adhd"). */
+  chipHrefByLabel?: Record<string, string>;
 }) {
   const metrics = {
     familiesCount: sanityMetrics?.familiesCount || DEFAULT_METRICS.familiesCount,
@@ -125,14 +126,14 @@ export function HeroSection({
             transition={{ delay: 0.25 }}
           >
             {SERVICE_CHIPS.map((chip) => {
-              const slug = serviceSlugByChipLabel?.[chip.toLowerCase()];
+              const href = chipHrefByLabel?.[chip.toLowerCase()];
               const chipClasses =
                 "px-3 py-1.5 rounded-full bg-white border border-black/5 text-[11px] font-semibold text-black/70 shadow-sm shadow-black/[0.02] tracking-wide transition-colors hover:bg-[#7A9A7D]/10 hover:border-[#7A9A7D]/30";
               return (
                 <li key={chip}>
-                  {slug ? (
+                  {href ? (
                     <Link
-                      href={`/services/${slug}`}
+                      href={href}
                       className={`${chipClasses} inline-block`}
                       title={`Learn more about ${chip}`}
                     >
