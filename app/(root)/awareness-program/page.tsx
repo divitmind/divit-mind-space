@@ -73,37 +73,24 @@ export default async function AwarenessProgramRoute() {
   const awareness = awarenessData.data as AwarenessQueryResult;
   const pastSessions: PastSession[] = (awareness?.pastSessions?.sessions as PastSession[]) ?? [];
 
-  // Dynamic EducationEvent schema per real past session from Sanity — no fabrication.
-  // If Sanity has no sessions, we skip the event[] block entirely.
-  const eventJsonLd = pastSessions.length > 0
-    ? pastSessions
-        .filter((s) => s.venue)
-        .map((s) => ({
-          "@type": "EducationEvent",
-          name: `Awareness Session at ${s.venue}`,
-          description: s.audience
-            ? `Free awareness session for ${s.audience} on early intervention, neurodivergence recognition, and community support — delivered by Divit MindSpace Bangalore.`
-            : "Free awareness session on early intervention and neurodivergence support by Divit MindSpace Bangalore.",
-          location: {
-            "@type": "Place",
-            name: s.venue,
-          },
-          organizer: ORGANIZATION_REF,
-          offers: {
-            "@type": "Offer",
-            price: "0",
-            priceCurrency: "INR",
-            availability: "https://schema.org/InStock",
-          },
-          ...(s.audience && {
-            audience: {
-              "@type": "EducationalAudience",
-              audienceType: s.audience,
-            },
-          }),
-          ...(s.image?.asset?.url && { image: s.image.asset.url }),
-        }))
-    : [];
+  // Past awareness sessions used to be emitted as EducationEvent schema, but Google's
+  // Rich Result validator flagged them as invalid for missing required `startDate` +
+  // `location` fields (Sanity's sessions don't store dates). Rather than synthesise
+  // dates, we surface them as ImageObject entries (visible content + proper schema,
+  // no Event-rich-result claim). When Sanity starts capturing real session dates in
+  // future, we can switch these back to EducationEvent with correct startDate/endDate.
+  const pastSessionsSchema = pastSessions
+    .filter((s) => s.venue)
+    .map((s) => ({
+      "@type": "ImageObject" as const,
+      contentUrl: s.image?.asset?.url,
+      name: `Awareness session at ${s.venue}`,
+      description: s.audience
+        ? `Free awareness session for ${s.audience} delivered by Divit MindSpace Bangalore.`
+        : `Free awareness session delivered by Divit MindSpace Bangalore.`,
+      creator: ORGANIZATION_REF,
+    }))
+    .filter((s) => s.contentUrl);
 
   const educationalOrgJsonLd = {
     "@context": "https://schema.org",
@@ -122,7 +109,7 @@ export default async function AwarenessProgramRoute() {
       postalCode: "560035",
       addressCountry: "IN",
     },
-    ...(eventJsonLd.length > 0 && { event: eventJsonLd }),
+    ...(pastSessionsSchema.length > 0 && { image: pastSessionsSchema }),
   };
 
   const breadcrumbJsonLd = {
