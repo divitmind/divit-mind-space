@@ -283,7 +283,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                             className="inline-flex items-center gap-2 px-6 py-3 bg-green rounded-full text-[10px] font-bold uppercase tracking-widest text-white hover:bg-green/90 transition-all duration-500 group"
                         >
                             <Calendar className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
-                            Book Appointment
+                            Book a Free Consultation
                         </a>
                         <Link
                             href="/careers"
