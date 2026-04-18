@@ -126,7 +126,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
 
                     {/* Services Column */}
                     <div className="col-span-1">
-                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-8">
+                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-5">
                             Our Services
                         </h4>
                         <FooterServiceLinks />
@@ -134,7 +134,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
 
                     {/* Quick Links Column */}
                     <div className="col-span-1">
-                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-8">
+                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-5">
                             Explore
                         </h4>
                         <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
@@ -153,7 +153,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
 
                     {/* Contact Column: Full width on mobile */}
                     <div className="col-span-2 lg:col-span-1 pt-4 lg:pt-0 border-t lg:border-none border-black/5">
-                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-6 lg:mb-8">
+                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-5">
                             Get in Touch
                         </h4>
                         <address className="not-italic space-y-4 text-[13px] text-black/60 font-medium">
