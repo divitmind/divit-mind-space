@@ -137,7 +137,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                         <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-8">
                             Explore
                         </h4>
-                        <ul className="space-y-4">
+                        <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
                             {quickLinksData.map((link) => (
                                 <li key={link.label}>
                                     <Link
