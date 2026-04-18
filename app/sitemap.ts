@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { client } from "@/sanity/lib/client";
 import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
 import { HOWTO_ARTICLES } from "@/lib/howto";
+import { COMPARISON_PAIRS } from "@/lib/condition-comparisons";
 
 const BASE_URL = "https://divitmindspace.com";
 
@@ -77,6 +78,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
+  // Condition-vs-Condition comparison pages — "is it X or Y?" queries.
+  const comparisonRoutes: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/compare`, lastModified: siteLastMod, changeFrequency: "monthly", priority: 0.7 },
+    ...COMPARISON_PAIRS.map((p) => ({
+      url: `${BASE_URL}/compare/${p.slug}`,
+      lastModified: siteLastMod,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
+
+  // Service × location matrix — 28 services × 6 locations = up to 168 pages.
+  // Uses per-service _updatedAt so lastmod tracks actual edits to each service doc.
+  const serviceLocationRoutes: MetadataRoute.Sitemap = [];
+  for (const s of serviceRows || []) {
+    for (const l of LOCATION_PIVOTS) {
+      serviceLocationRoutes.push({
+        url: `${BASE_URL}/services/${s.slug}/${l.slug}`,
+        lastModified: toDate(s.updatedAt),
+        changeFrequency: "monthly",
+        priority: 0.7,
+      });
+    }
+  }
+
   const conditionRoutes: MetadataRoute.Sitemap = CONDITION_PIVOTS.map((c) => ({
     url: `${BASE_URL}/conditions/${c.slug}`,
     lastModified: siteLastMod,
@@ -141,5 +167,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...locationRoutes,
     ...howtoRoutes,
     ...conditionLocationRoutes,
+    ...comparisonRoutes,
+    ...serviceLocationRoutes,
   ];
 }

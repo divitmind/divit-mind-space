@@ -88,6 +88,16 @@ const content = `# Divit MindSpace
 - Developmental Delays: https://divitmindspace.com/conditions/developmental-delays
 - Pain Management & Physiotherapy: https://divitmindspace.com/conditions/pain-management
 
+## Condition Comparison Pages (is it X or Y?)
+- Autism vs ADHD: https://divitmindspace.com/compare/autism-vs-adhd
+- Autism vs Sensory Processing: https://divitmindspace.com/compare/autism-vs-sensory-processing
+- Autism vs Developmental Delays: https://divitmindspace.com/compare/autism-vs-developmental-delays
+- Autism vs Learning Disabilities: https://divitmindspace.com/compare/autism-vs-learning-disabilities
+- ADHD vs Learning Disabilities: https://divitmindspace.com/compare/adhd-vs-learning-disabilities
+- ADHD vs Anxiety: https://divitmindspace.com/compare/adhd-vs-anxiety
+- ADHD vs Sensory Processing: https://divitmindspace.com/compare/adhd-vs-sensory-processing
+- LD vs Developmental Delays: https://divitmindspace.com/compare/learning-disabilities-vs-developmental-delays
+
 ## Neighborhood Landing Pages
 - Near Sarjapur Road: https://divitmindspace.com/near-me/sarjapur-road
 - Near Kasavanahalli: https://divitmindspace.com/near-me/kasavanahalli

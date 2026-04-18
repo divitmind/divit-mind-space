@@ -185,7 +185,7 @@ const organizationJsonLd = {
       { "@type": "Offer", itemOffered: { "@type": "EducationalOccupationalProgram", name: "Training Program (Shadow Teacher Training)", url: "https://divitmindspace.com/services/training-program-shadow-teacher-training-program" } },
       { "@type": "Offer", itemOffered: { "@type": "Course", name: "Certificate in Special Education", url: "https://divitmindspace.com/services/certificate-in-special-education" } },
       { "@type": "Offer", itemOffered: { "@type": "Course", name: "Diploma in Special Education", url: "https://divitmindspace.com/services/diploma-in-special-education" } },
-      { "@type": "Offer", itemOffered: { "@type": "Event", name: "Summer Camp", url: "https://divitmindspace.com/services/summer-camp" } },
+      { "@type": "Offer", itemOffered: { "@type": "Course", name: "Summer Camp", url: "https://divitmindspace.com/services/summer-camp" } },
       // Physiotherapy (6)
       { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Physiotherapy — Pain Management", url: "https://divitmindspace.com/services/pain-management" } },
       { "@type": "Offer", itemOffered: { "@type": "MedicalTherapy", name: "Physiotherapy — Pain Modalities", url: "https://divitmindspace.com/services/pain-modalities" } },
