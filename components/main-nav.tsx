@@ -38,7 +38,11 @@ export function MainNav() {
   };
 
   return (
-    <NavigationMenu className="hidden md:flex">
+    // viewport={false} disables Radix's shared left-anchored dropdown container
+    // and renders each NavigationMenuContent directly below its own trigger.
+    // Fixes UX issue where clicking any tab made the menu appear on the left
+    // edge of the navbar rather than under the clicked tab.
+    <NavigationMenu viewport={false} className="hidden md:flex">
       <NavigationMenuList className="gap-2">
         <NavigationMenuItem>
           <NavLink href="/" onClick={handleHomeClick}>Home</NavLink>
