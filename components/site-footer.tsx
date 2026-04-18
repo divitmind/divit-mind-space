@@ -6,17 +6,26 @@ import { FooterConditionLinks } from "@/components/footer-condition-links";
 import { ContactClickLink } from "@/components/contact-click-link";
 import type { SiteSettings } from "@/lib/types";
 
+// Explore column — 17 high-value internal links. Ordered so each 2-col row
+// pairs a higher-intent entry with a supporting one. Every link points to
+// a real, indexable page so the footer acts as a sitemap for internal link
+// equity (biggest single SEO lever on the site given footer renders on
+// every page).
 const quickLinks = [
     { label: "About Us", href: "/about-us" },
     { label: "Our Specialists", href: "/specialists" },
-    { label: "Conditions", href: "/conditions" },
     { label: "Near Me", href: "/near-me" },
+    { label: "Conditions", href: "/conditions" },
+    { label: "Compare", href: "/compare" },
     { label: "How-To Guides", href: "/howto" },
-    { label: "Glossary", href: "/glossary" },
-    { label: "All FAQs", href: "/faq" },
+    { label: "Mind Gym", href: "/mind-gym" },
     { label: "Reviews", href: "/reviews" },
+    { label: "All FAQs", href: "/faq" },
+    { label: "Glossary", href: "/glossary" },
     { label: "Blog", href: "/blogs" },
+    { label: "News", href: "/news" },
     { label: "Workshops", href: "/awareness-program" },
+    { label: "Gallery", href: "/gallery" },
     { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact-us" },
 ];
@@ -31,15 +40,15 @@ const contact = {
     whatsapp: "https://wa.me/919901666139",
 };
 
-// Mental health helplines — India-specific YMYL best practice. Verbatim
-// numbers only, do not paraphrase. Tele-MANAS and Vandrevala are 24/7
-// crisis-capable; NIMHANS Centre for Wellbeing is the Bangalore clinical
-// line (office hours). Heading is broad enough ("needs mental health
-// support") to accommodate the latter without misrouting a crisis call.
+// Crisis helplines — India-specific YMYL best practice. Each line here is
+// verified 24/7 and crisis-capable (suicide prevention, psychological
+// emergencies, risk-assessment protocols). Verbatim numbers only, do not
+// paraphrase. Non-crisis or office-hours lines belong on /medical-disclaimer
+// under a distinct "everyday support" heading, never in this block.
 const crisisHelplines = [
-    { label: "Tele-MANAS (NIMHANS, 24/7)", number: "14416", tel: "tel:14416" },
-    { label: "Vandrevala Foundation (24/7)", number: "1860-2662-345", tel: "tel:18602662345" },
-    { label: "NIMHANS Centre for Wellbeing", number: "080 4611 0007", tel: "tel:08046110007" },
+    { label: "Tele-MANAS (NIMHANS, 24/7, Kannada + 20 languages)", number: "14416", tel: "tel:14416" },
+    { label: "Vandrevala Foundation (24/7, Hindi/English)", number: "1860-2662-345", tel: "tel:18602662345" },
+    { label: "Kiran (Govt of India, 24/7, Kannada + 13 languages)", number: "1800-599-0019", tel: "tel:18005990019" },
 ];
 
 const socialLinks = [
@@ -258,9 +267,9 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                 </div>
 
                 {/* Crisis helplines — YMYL safety signal, published on every page */}
-                <div className="mt-10 lg:mt-12 pt-6 border-t border-black/5">
+                <div className="mt-6 lg:mt-8 pt-6 border-t border-black/5">
                     <p className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-3">
-                        If you or someone you care for needs mental health support
+                        If you or someone you care for is in crisis
                     </p>
                     <div className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] text-black/60 font-medium">
                         {crisisHelplines.map((line) => (
@@ -277,7 +286,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                 </div>
 
                 {/* Bottom Bar: CTAs left, legal links right */}
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-6 lg:pt-8 mt-6 border-t border-black/5">
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-6 lg:pt-8 mt-4 border-t border-black/5">
                     <a
                         href={contact.whatsapp}
                         target="_blank"
