@@ -120,7 +120,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                             </h3>
                         </div>
                         <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px]">
-                            {footerContent?.description || "Expert clinical assessments, therapies, professional counseling, and specialized education for all ages. Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and Bengaluru."}
+                            {footerContent?.description || "Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education and Physiotherapy. Serving children, teens, and adults across Bangalore."}
                         </p>
                     </div>
 
