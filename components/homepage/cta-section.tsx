@@ -32,7 +32,7 @@ export function CtaSection() {
                                 We&apos;re Here When You&apos;re Ready
                             </h2>
                             <p className="text-sm md:text-lg text-black/60 font-medium">
-                                Message us on WhatsApp — we&apos;re here to help.
+                                Message us on WhatsApp. Ask us anything, we&apos;re here to help.
                             </p>
                         </div>
                     </div>

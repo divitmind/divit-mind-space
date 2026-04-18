@@ -105,7 +105,10 @@ const ORG_ID = "https://divitmindspace.com/#organization";
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": ["MedicalBusiness", "EducationalOrganization"],
+  // MedicalClinic is a subtype of MedicalBusiness and the most specific
+  // schema.org type for a multi-specialty clinic. Google's healthcare SERP
+  // widgets and AEO crawlers weight more specific types over general ones.
+  "@type": ["MedicalClinic", "EducationalOrganization"],
   "@id": ORG_ID,
   name: "Divit MindSpace",
   alternateName: ["Divit Health", "Divit MindSpace Clinic"],

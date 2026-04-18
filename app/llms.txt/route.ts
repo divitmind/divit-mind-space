@@ -65,7 +65,6 @@ const content = `# Divit MindSpace
 - Near Me (Locations): https://divitmindspace.com/near-me
 - Contact: https://divitmindspace.com/contact-us
 - Awareness Program: https://divitmindspace.com/awareness-program
-- Affiliations: https://divitmindspace.com/affiliations
 - Reviews: https://divitmindspace.com/reviews
 - FAQs (all questions in one place): https://divitmindspace.com/faq
 - Glossary (clinical terms explained): https://divitmindspace.com/glossary
