@@ -31,12 +31,14 @@ const contact = {
     whatsapp: "https://wa.me/919901666139",
 };
 
-// Crisis helplines — India-specific YMYL best practice. Verbatim numbers only,
-// do not paraphrase. Labels kept short so the block fits at the footer base.
+// Crisis helplines — India-specific YMYL best practice. All three here are
+// 24/7, free, and crisis-oriented. Verbatim numbers only, do not paraphrase.
+// Non-crisis emotional-support lines (e.g., iCall) belong on the Medical
+// Disclaimer page, not in a block labelled "in crisis".
 const crisisHelplines = [
-    { label: "iCall (TISS)", number: "+91 91529 87821", tel: "tel:+919152987821" },
+    { label: "Tele-MANAS (Govt of India)", number: "14416", tel: "tel:14416" },
     { label: "Vandrevala Foundation", number: "1860-2662-345", tel: "tel:18602662345" },
-    { label: "NIMHANS Helpline", number: "080 4611 0007", tel: "tel:08046110007" },
+    { label: "AASRA", number: "+91 98204 66726", tel: "tel:+919820466726" },
 ];
 
 const socialLinks = [
