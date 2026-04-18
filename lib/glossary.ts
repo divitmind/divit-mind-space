@@ -194,6 +194,17 @@ export const GLOSSARY_ENTRIES: GlossaryEntry[] = [
     ],
   },
   {
+    term: "Group Therapy",
+    slug: "group-therapy",
+    shortDef:
+      "A clinician-led therapy format where a small cohort of individuals (typically 4–6) work together on shared goals — social skills, emotional regulation, anxiety management, or peer interaction. Peer dynamics become part of the therapeutic tool, complementing individual sessions.",
+    relatedPaths: [
+      { label: "Group Therapy Sessions", href: "/services/group-therapy-sessions" },
+      { label: "Stress, Anxiety & Depression — Bangalore", href: "/conditions/stress-anxiety-depression" },
+      { label: "Autism — Bangalore", href: "/conditions/autism" },
+    ],
+  },
+  {
     term: "Psychometric Assessment",
     slug: "psychometric-assessment",
     shortDef:
