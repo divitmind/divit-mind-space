@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Phone, Mail, Briefcase } from "lucide-react";
+import { MapPin, Phone, Mail, Briefcase, Clock, Calendar } from "lucide-react";
 import { FooterServiceLinks } from "@/components/footer-service-links";
+import { FooterConditionLinks } from "@/components/footer-condition-links";
 import { ContactClickLink } from "@/components/contact-click-link";
 import type { SiteSettings } from "@/lib/types";
 
@@ -19,11 +20,23 @@ const quickLinks = [
     { label: "Contact", href: "/contact-us" },
 ];
 
+// NAP values — must match schema.org PostalAddress in app/layout.tsx exactly.
+// Changing any of these silently is a local-SEO red flag; keep them synced.
 const contact = {
-    address: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bengaluru",
-    phone: { label: "+91 9901666139", href: "tel:+919901666139" },
+    address: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bangalore 560035",
+    hours: "Mon–Sat · 10:00 AM – 7:00 PM",
+    phone: { label: "+91 99016 66139", href: "tel:+919901666139" },
     email: { label: "divitmindspace@gmail.com", href: "mailto:divitmindspace@gmail.com" },
+    whatsapp: "https://wa.me/919901666139",
 };
+
+// Crisis helplines — India-specific YMYL best practice. Verbatim numbers only,
+// do not paraphrase. Labels kept short so the block fits at the footer base.
+const crisisHelplines = [
+    { label: "iCall (TISS)", number: "+91 91529 87821", tel: "tel:+919152987821" },
+    { label: "Vandrevala Foundation", number: "1860-2662-345", tel: "tel:18602662345" },
+    { label: "NIMHANS Helpline", number: "080 4611 0007", tel: "tel:08046110007" },
+];
 
 const socialLinks = [
     {
@@ -100,10 +113,10 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
     const displayEmail = siteSettings?.contact?.email || contact.email.label;
     const displayEmailLink = siteSettings?.contact?.email ? `mailto:${siteSettings.contact.email}` : contact.email.href;
     return (
-        <footer className="bg-[#FDFBF7] border-t border-black/5 pt-8 lg:pt-12 pb-6 lg:pb-10">
+        <footer className="bg-[#FDFBF7] border-t border-black/5 pt-8 lg:pt-12 pb-6 lg:pb-8">
             <div className="container">
-                {/* Top Grid: 2 columns on mobile, 4 on desktop */}
-                <div className="grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-x-8 gap-y-8 lg:gap-y-12">
+                {/* Top Grid: mobile stacks to 2 cols; desktop lays out 5 cols */}
+                <div className="grid grid-cols-2 lg:grid-cols-[1.25fr_1fr_1fr_1fr_1.2fr] gap-x-8 gap-y-8 lg:gap-y-12">
                     {/* Brand Column: Full width on mobile */}
                     <div className="col-span-2 lg:col-span-1">
                         <div className="flex items-start gap-4 mb-4">
@@ -119,8 +132,13 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                                 {footerContent?.tagline || "Bangalore's Leading Center for Mental Health, Neurodevelopment & Physiotherapy"}
                             </h3>
                         </div>
-                        <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px]">
+                        <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px] mb-4">
                             {footerContent?.description || "Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education and Physiotherapy. Serving children, teens, and adults across Bangalore."}
+                        </p>
+                        {/* Credential line — Indian YMYL trust signal. RCI regulates clinical
+                            psychologists; NCAHP covers speech, OT, and allied-health staff. */}
+                        <p className="text-[11px] text-black/40 font-medium leading-relaxed max-w-[360px]">
+                            Clinical psychologists registered under the Rehabilitation Council of India (RCI). Allied-health staff practice under the National Commission for Allied and Healthcare Professions (NCAHP).
                         </p>
                     </div>
 
@@ -132,8 +150,16 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                         <FooterServiceLinks />
                     </div>
 
-                    {/* Quick Links Column */}
+                    {/* Conditions Column — distinct from Services; links to /conditions pivots */}
                     <div className="col-span-1">
+                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-5">
+                            Conditions
+                        </h4>
+                        <FooterConditionLinks />
+                    </div>
+
+                    {/* Quick Links Column */}
+                    <div className="col-span-2 lg:col-span-1">
                         <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-5">
                             Explore
                         </h4>
@@ -156,17 +182,21 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                         <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-5">
                             Get in Touch
                         </h4>
-                        <address className="not-italic space-y-4 text-[13px] text-black/60 font-medium">
-                            <p className="flex items-start gap-4">
-                                <MapPin className="h-5 w-5 shrink-0 text-green/40" />
+                        <address className="not-italic space-y-3 text-[13px] text-black/60 font-medium">
+                            <p className="flex items-start gap-3">
+                                <MapPin className="h-4 w-4 shrink-0 text-green/40 mt-0.5" />
                                 <span className="leading-relaxed">{displayAddress}</span>
                             </p>
-                            <div className="flex flex-nowrap lg:flex-wrap gap-x-4 sm:gap-x-6 gap-y-2">
+                            <p className="flex items-start gap-3">
+                                <Clock className="h-4 w-4 shrink-0 text-green/40 mt-0.5" />
+                                <span className="leading-relaxed">{contact.hours}</span>
+                            </p>
+                            <div className="flex flex-col gap-2">
                                 <ContactClickLink
                                     href={displayPhoneLink}
                                     type="phone"
                                     source="footer_cta"
-                                    className="flex items-center gap-2 hover:text-green transition-colors group"
+                                    className="flex items-center gap-3 hover:text-green transition-colors group"
                                 >
                                     <Phone className="h-4 w-4 shrink-0 text-green/40 group-hover:text-green transition-colors" />
                                     {displayPhone}
@@ -175,7 +205,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                                     href={displayEmailLink}
                                     type="email"
                                     source="footer_cta"
-                                    className="flex items-center gap-2 hover:text-green transition-colors group"
+                                    className="flex items-center gap-3 hover:text-green transition-colors group"
                                 >
                                     <Mail className="h-4 w-4 shrink-0 text-green/40 group-hover:text-green transition-colors" />
                                     {displayEmail}
@@ -224,16 +254,46 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-4 lg:pt-8 mt-2 lg:mt-0 border-t border-black/5">
-                    <Link
-                        href="/careers"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-green/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-green hover:bg-green hover:text-white transition-all duration-500 group border border-green/10"
-                    >
-                        <Briefcase className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
-                        {joinTeamText}
-                    </Link>
-                    <div className="flex flex-wrap justify-center items-center gap-3 lg:gap-6">
+                {/* Crisis helplines — YMYL safety signal, published on every page */}
+                <div className="mt-10 lg:mt-12 pt-6 border-t border-black/5">
+                    <p className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-3">
+                        If you or someone you care for is in crisis
+                    </p>
+                    <div className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] text-black/60 font-medium">
+                        {crisisHelplines.map((line) => (
+                            <a
+                                key={line.label}
+                                href={line.tel}
+                                className="hover:text-green transition-colors"
+                            >
+                                <span className="text-black/40">{line.label}:</span>{" "}
+                                <span className="font-semibold">{line.number}</span>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Bottom Bar: CTAs left, legal links right */}
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-6 lg:pt-8 mt-6 border-t border-black/5">
+                    <div className="flex flex-wrap justify-center items-center gap-3">
+                        <a
+                            href={contact.whatsapp}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-green rounded-full text-[10px] font-bold uppercase tracking-widest text-white hover:bg-green/90 transition-all duration-500 group"
+                        >
+                            <Calendar className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
+                            Book Appointment
+                        </a>
+                        <Link
+                            href="/careers"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-green/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-green hover:bg-green hover:text-white transition-all duration-500 group border border-green/10"
+                        >
+                            <Briefcase className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
+                            {joinTeamText}
+                        </Link>
+                    </div>
+                    <div className="flex flex-wrap justify-center items-center gap-3 lg:gap-5">
                         <p className="text-[10px] text-black/30 font-bold uppercase tracking-widest">
                             © {new Date().getFullYear()} Divit MindSpace
                         </p>
@@ -243,6 +303,15 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                         </Link>
                         <Link href="/privacy" className="text-[10px] text-black/30 font-bold uppercase tracking-widest hover:text-green transition-colors">
                             Privacy
+                        </Link>
+                        <Link href="/medical-disclaimer" className="text-[10px] text-black/30 font-bold uppercase tracking-widest hover:text-green transition-colors">
+                            Medical Disclaimer
+                        </Link>
+                        <Link href="/sitemap.xml" className="text-[10px] text-black/30 font-bold uppercase tracking-widest hover:text-green transition-colors">
+                            Sitemap
+                        </Link>
+                        <Link href="/llms.txt" className="text-[10px] text-black/30 font-bold uppercase tracking-widest hover:text-green transition-colors">
+                            llms.txt
                         </Link>
                     </div>
                 </div>
