@@ -145,7 +145,17 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                             </h3>
                         </div>
                         <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px] mb-4">
-                            {footerContent?.description || "Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education and Physiotherapy. Serving children, teens, and adults across Bangalore."}
+                            {footerContent?.description ? (
+                                footerContent.description
+                            ) : (
+                                <>
+                                    Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education and Physiotherapy. Serving{" "}
+                                    <strong className="font-semibold text-black/70">children</strong>,{" "}
+                                    <strong className="font-semibold text-black/70">teens</strong>, and{" "}
+                                    <strong className="font-semibold text-black/70">adults</strong>{" "}
+                                    across Bangalore.
+                                </>
+                            )}
                         </p>
                         {/* Credential line — Indian YMYL trust signal. RCI regulates clinical
                             psychologists; NCAHP covers speech, OT, and allied-health staff. */}
