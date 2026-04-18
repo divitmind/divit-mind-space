@@ -264,7 +264,7 @@ export default async function ConditionInLocationPage({ params }: PageProps) {
                   <div className="font-bold text-[#7A9A7D] text-[10px] uppercase tracking-widest mb-2">Hours &amp; Contact</div>
                   <p className="text-black/70 font-medium leading-relaxed mb-3">
                     Monday – Saturday<br />
-                    10:00 AM – 7:00 PM
+                    9:00 AM – 6:00 PM
                   </p>
                   <a
                     href="tel:+919901666139"

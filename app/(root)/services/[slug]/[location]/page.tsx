@@ -308,7 +308,7 @@ export default async function ServiceLocationPage({ params }: PageProps) {
                 <div>
                   <div className="font-bold text-[#7A9A7D] text-[10px] uppercase tracking-widest mb-2">Hours &amp; Contact</div>
                   <p className="text-black/70 font-medium leading-relaxed mb-3">
-                    Monday – Saturday · 10 AM – 7 PM
+                    Monday – Saturday · 9 AM – 6 PM
                   </p>
                   <a href="tel:+919901666139" className="inline-flex items-center gap-2 text-sm text-[#7A9A7D] font-semibold">
                     <Phone className="w-4 h-4" /> +91 99016 66139

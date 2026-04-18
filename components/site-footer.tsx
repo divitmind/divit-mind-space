@@ -34,7 +34,7 @@ const quickLinks = [
 // Changing any of these silently is a local-SEO red flag; keep them synced.
 const contact = {
     address: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bangalore 560035",
-    hours: "Mon–Sat · 10:00 AM – 7:00 PM",
+    hours: "Mon–Sat · 9:00 AM – 6:00 PM",
     phone: { label: "+91 99016 66139", href: "tel:+919901666139" },
     email: { label: "divitmindspace@gmail.com", href: "mailto:divitmindspace@gmail.com" },
     whatsapp: "https://wa.me/919901666139",

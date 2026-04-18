@@ -65,7 +65,7 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
       {
         question: "How do I book an autism consultation near Sarjapur Road?",
         answer:
-          "Call +91-99016-66139 or WhatsApp https://wa.me/919901666139 to book. We're open Monday–Saturday, 10 AM–7 PM at Aadeshwar Chambers, Kasavanahalli.",
+          "Call +91-99016-66139 or WhatsApp https://wa.me/919901666139 to book. We're open Monday–Saturday, 9 AM–6 PM at Aadeshwar Chambers, Kasavanahalli.",
       },
     ],
     metaTitle: "Autism Assessment & Therapy in Bangalore | Divit MindSpace (Child + Adult)",

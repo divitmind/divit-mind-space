@@ -28,7 +28,7 @@ const contactDetails = [
     icon: MapPin,
     title: "Visit Our Center",
     value: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bengaluru",
-    description: "Open Monday - Saturday, 10:00 AM - 7:00 PM.",
+    description: "Open Monday - Saturday, 9:00 AM - 6:00 PM.",
     link: "https://maps.google.com/?q=Aadeshwar+Chambers+Kasavanahalli+Bengaluru",
     actionText: "Get directions",
     color: "bg-amber-100 text-amber-700",
