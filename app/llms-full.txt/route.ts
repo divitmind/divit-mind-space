@@ -133,7 +133,7 @@ export async function GET() {
   const CATEGORY_LABELS: Record<string, string> = {
     assessments: "Clinical Assessments",
     therapy: "Therapy",
-    guidance: "Guidance & Counseling",
+    guidance: "Counselling",
     programs: "Programs & Education",
     physiotherapy: "Physiotherapy",
   };
