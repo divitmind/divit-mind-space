@@ -220,6 +220,7 @@ export default async function AboutUsPage() {
     "counseling for teenagers & adults": "counselling (child, adolescent, adult & parent)",
     "nios support": "nios support program",
     "teacher & parent training": "parental training program",
+    "group sessions": "group therapy sessions",
   };
   const serviceSlugByChipLabel: Record<string, string> = {};
   for (const [label, slug] of titleToSlug) {
