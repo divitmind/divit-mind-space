@@ -1,9 +1,12 @@
 import Link from "next/link";
 
-// Top 10 services surfaced in footer — chosen for search volume + internal
-// link equity. Every link points to a real /services/[slug] page generated
-// from Sanity, so footer internal links flow ranking authority into the
-// money pages. Keep this list under 12 to avoid visual overload.
+// Footer Services — 8 strategic entry points. Chosen for search volume +
+// internal link equity. The 6 core therapies (user-strategic) + Counselling
+// (umbrella mental-health service) + Clinical Assessments (diagnostic entry).
+// Dropped from the previous 10: Sensory Integration (covered by OT page),
+// Pain Management (already surfaced in Conditions column). Keeping the list
+// at 8 items brings column height close to Conditions (7 items + View all)
+// for cleaner visual balance without needing 2-col wrapping tricks.
 const serviceLinks = [
     { label: "Speech Therapy", href: "/services/speech-therapy" },
     { label: "Occupational Therapy", href: "/services/occupational-therapy" },
@@ -12,14 +15,12 @@ const serviceLinks = [
     { label: "Play Therapy", href: "/services/play-therapy" },
     { label: "Group Therapy Sessions", href: "/services/group-therapy-sessions" },
     { label: "Counselling", href: "/services/counselling" },
-    { label: "Sensory Integration", href: "/services/sensory-integration-program" },
-    { label: "Pain Management", href: "/services/pain-management" },
     { label: "Clinical Assessments", href: "/services/psychometric-assessments" },
 ];
 
 export function FooterServiceLinks() {
     return (
-        <ul className="grid grid-cols-2 gap-x-3 gap-y-3">
+        <ul className="space-y-3">
             {serviceLinks.map((link) => (
                 <li key={link.label}>
                     <Link
@@ -30,7 +31,7 @@ export function FooterServiceLinks() {
                     </Link>
                 </li>
             ))}
-            <li className="col-span-2 pt-1">
+            <li className="pt-1">
                 <Link
                     href="/services"
                     className="text-[13px] text-green font-bold hover:underline underline-offset-4 inline-flex items-center gap-1.5"
