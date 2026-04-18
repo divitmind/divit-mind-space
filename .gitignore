@@ -50,3 +50,8 @@ components/gallery/Selected Pics For Website/
 *.jpeg
 *.jpg
 *.jpeg
+
+# Exception: office photos referenced by sitemap-images.xml must be tracked
+!public/sitemap/*.jpg
+!public/sitemap/*.jpeg
+!public/sitemap/*.JPG
