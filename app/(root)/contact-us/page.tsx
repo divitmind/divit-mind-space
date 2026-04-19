@@ -166,12 +166,12 @@ function generateFaqSchema(faqs: FAQ[]) {
       "@type": "SpeakableSpecification",
       cssSelector: ["h3"],
     },
-    mainEntity: faqs.map((faq) => ({
+    mainEntity: (Array.isArray(faqs) ? faqs : []).map((faq) => ({
       "@type": "Question",
-      name: faq.question,
+      name: faq.question || "",
       acceptedAnswer: {
         "@type": "Answer",
-        text: faq.answer,
+        text: faq.answer || "",
       },
     })),
   };
@@ -183,7 +183,7 @@ export default async function ContactUsPage() {
   });
 
   // Get FAQ data from Sanity with fallback
-  const contactFaqs = siteSettings?.contactPage?.faqs?.length ? siteSettings.contactPage.faqs : defaultFaqs;
+  const contactFaqs = siteSettings?.contactPage?.faqs || defaultFaqs;
   const faqTitle = siteSettings?.contactPage?.faqTitle || "Frequently Asked Questions";
 
   // Generate FAQ Schema dynamically

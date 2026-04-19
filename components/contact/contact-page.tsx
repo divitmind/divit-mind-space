@@ -28,21 +28,22 @@ const steps = [
   },
 ];
 
-export function ContactPage({ faqs = [], faqTitle = "Frequently Asked Questions", settings }: ContactPageProps) {
+export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions", settings }: ContactPageProps) {
   const workingHours = settings?.contact?.workingHours || "Mon - Sat, 9:00 AM - 6:00 PM";
   
   // Resolve QR code from Sanity or fallback to local file
   let qrCodeUrl = "/QR_divitmindspace.jpeg";
   if (settings?.contactPage?.qrCode?.asset) {
     try {
-      const builder = urlFor(settings.contactPage.qrCode);
-      if (builder) {
-        qrCodeUrl = builder.url();
-      }
+      const imgUrl = urlFor(settings.contactPage.qrCode).url();
+      if (imgUrl) qrCodeUrl = imgUrl;
     } catch (e) {
       console.error("Error generating QR code URL:", e);
     }
   }
+
+  // Ensure faqs is an array
+  const safeFaqs = Array.isArray(faqs) ? faqs : [];
 
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
@@ -105,14 +106,12 @@ export function ContactPage({ faqs = [], faqTitle = "Frequently Asked Questions"
 
               <div className="w-40 flex-shrink-0 text-center">
                 <div className="relative w-28 h-28 lg:w-32 lg:h-32 mx-auto bg-cream rounded-2xl p-2 border border-black/5 mb-3 group">
-                  {qrCodeUrl && (
-                    <Image 
-                      src={qrCodeUrl}
-                      alt="Scan to Connect"
-                      fill
-                      className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
-                    />
-                  )}
+                  <Image 
+                    src={qrCodeUrl}
+                    alt="Scan to Connect"
+                    fill
+                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
                 <p className="text-[9px] font-bold text-purple uppercase tracking-[0.2em]">Scan to Connect</p>
               </div>
@@ -299,7 +298,7 @@ export function ContactPage({ faqs = [], faqTitle = "Frequently Asked Questions"
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-            {faqs.map((faq, idx) => (
+            {safeFaqs.map((faq, idx) => (
               <motion.div 
                 key={idx} 
                 className="bg-white p-5 lg:p-6 rounded-[2rem] border border-black/5 shadow-xl shadow-black/[0.02]"
