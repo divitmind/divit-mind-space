@@ -6,7 +6,7 @@ import { SINGLE_SERVICE_QUERY, ALL_SERVICE_SLUGS_QUERY, RELATED_SERVICES_QUERY }
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { ServiceExperts } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
-import { Check } from "lucide-react";
+import { Check, Clock, MapPin } from "lucide-react";
 import type { Specialist } from "@/sanity/types";
 import { ORGANIZATION_REF, SITE_URL, MEDICAL_CONTENT_REVIEW_BLOCK, MEDICAL_CONTENT_LAST_REVIEWED, MEDICAL_CONTENT_REVIEWER_UI } from "@/lib/seo";
 import { ContentReviewBadge } from "@/components/content-review-badge";
@@ -419,6 +419,24 @@ export default async function ServicePage({ params }: PageProps) {
               <p className="text-lg text-black/70 mb-4 max-w-3xl font-medium">
                 {service.description}
               </p>
+
+              {(service.duration || service.format) && (
+                <div className="flex flex-wrap gap-4 mb-6">
+                  {service.duration && (
+                    <div className="flex items-center gap-2 text-sm font-bold text-green/60 uppercase tracking-widest bg-green/5 px-3 py-1.5 rounded-lg border border-green/5">
+                      <Clock className="w-4 h-4 text-green" />
+                      {service.duration}
+                    </div>
+                  )}
+                  {service.format && (
+                    <div className="flex items-center gap-2 text-sm font-bold text-green/60 uppercase tracking-widest bg-green/5 px-3 py-1.5 rounded-lg border border-green/5">
+                      <MapPin className="w-4 h-4 text-green" />
+                      {service.format}
+                    </div>
+                  )}
+                </div>
+              )}
+
               {isMedicalType && (
                 <ContentReviewBadge
                   lastReviewedDate={MEDICAL_CONTENT_LAST_REVIEWED}
