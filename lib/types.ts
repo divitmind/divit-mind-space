@@ -103,6 +103,9 @@ export interface ContactPageSettings {
   processSteps: ProcessStep[];
   faqTitle: string;
   faqs: FAQ[];
+  qrCode?: {
+    asset: { _ref: string };
+  };
 }
 
 export interface AboutPageSettings {
