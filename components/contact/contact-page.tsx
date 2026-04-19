@@ -63,7 +63,7 @@ export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions", set
             </h1>
             {/* AI-First Summary: Optimized for SGE/LLM/GEO */}
             <p className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto mb-6 leading-relaxed">
-              Bangalore&apos;s leading center for <span className="text-green font-bold">mental health, neurodevelopment, and physiotherapy</span>. Located in <span className="text-green font-bold">Aadeshwar Chambers</span> (same building as ICICI Bank), we provide neuro-affirming care including expert clinical assessments and specialized therapy for children, teens, and adults across Bangalore.
+              Bangalore&apos;s leading center for <span className="text-green font-bold">mental health, neurodevelopment, and physiotherapy</span>. Located in <span className="text-green font-bold">Aadeshwar Chambers</span> (same building as ICICI Bank), we provide neuro-affirming care including expert clinical assessments and specialized therapy for <span className="font-bold text-black">children, teens, and adults</span> across Bangalore.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 lg:gap-8">
