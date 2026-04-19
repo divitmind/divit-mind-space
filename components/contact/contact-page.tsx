@@ -67,12 +67,12 @@ export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions", set
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 lg:gap-8">
-              <div className="flex items-center gap-2 text-[10px] font-bold text-green/60 uppercase tracking-widest">
-                <ShieldCheck className="w-3.5 h-3.5 text-green" />
+              <div className="flex items-center gap-2 text-[9px] lg:text-[10px] font-bold text-green/60 uppercase tracking-widest max-w-[160px] lg:max-w-none">
+                <ShieldCheck className="w-3.5 h-3.5 text-green shrink-0" />
                 {trustBadge1}
               </div>
-              <div className="flex items-center gap-2 text-[10px] font-bold text-green/60 uppercase tracking-widest">
-                <Clock className="w-3.5 h-3.5 text-green" />
+              <div className="flex items-center gap-2 text-[9px] lg:text-[10px] font-bold text-green/60 uppercase tracking-widest max-w-[160px] lg:max-w-none">
+                <Clock className="w-3.5 h-3.5 text-green shrink-0" />
                 {trustBadge2}
               </div>
             </div>
