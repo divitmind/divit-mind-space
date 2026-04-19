@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Mail, MapPin, MessageCircle, CheckCircle2, ArrowRight } from "lucide-react";
+import { Mail, MapPin, MessageCircle, CheckCircle2, ArrowRight, QrCode, ShieldCheck, Clock, Navigation, ParkingCircle, ArrowUpCircle } from "lucide-react";
+import Image from "next/image";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import type { FAQ } from "@/lib/types";
 
@@ -27,7 +28,7 @@ const contactDetails = [
   {
     icon: MapPin,
     title: "Visit Our Center",
-    value: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bengaluru",
+    value: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bangalore 560035",
     description: "Open Monday - Saturday, 9:00 AM - 6:00 PM.",
     link: "https://maps.google.com/?q=Aadeshwar+Chambers+Kasavanahalli+Bengaluru",
     actionText: "Get directions",
@@ -59,118 +60,272 @@ export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions" }: C
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Section */}
-      <section className="pt-4 pb-6 lg:pt-8 lg:pb-10 px-4">
+      <section className="pt-4 pb-4 lg:pt-6 lg:pb-8 px-4">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif text-green mb-6 md:mb-8 leading-tight" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif text-green mb-4 md:mb-6 leading-tight" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               Let&apos;s Build Your <br className="hidden md:block" />
               <span className="italic text-purple font-serif">Unique Journey</span> Together
             </h1>
-            <p className="text-lg md:text-xl text-black/70 font-medium max-w-2xl mx-auto">
-              Mental health, neurodevelopment, and physiotherapy for children, teens, adults, and families.
+            {/* AI-First Summary: Optimized for SGE/LLM/GEO */}
+            <p className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto mb-6 leading-relaxed">
+              Bangalore&apos;s leading center for <span className="text-green font-bold">mental health, neurodevelopment, and physiotherapy</span>. Located in <span className="text-green font-bold">Aadeshwar Chambers</span> (same building as ICICI Bank), we provide neuro-affirming care including expert clinical assessments and specialized therapy for children, teens, and adults across Bangalore.
             </p>
+            
+            <div className="flex flex-wrap justify-center gap-4 lg:gap-8">
+              <div className="flex items-center gap-2 text-[10px] font-bold text-green/60 uppercase tracking-widest">
+                <ShieldCheck className="w-3.5 h-3.5 text-green" />
+                HIPAA-Grade Data Privacy & Patient Confidentiality
+              </div>
+              <div className="flex items-center gap-2 text-[10px] font-bold text-green/60 uppercase tracking-widest">
+                <Clock className="w-3.5 h-3.5 text-green" />
+                Response within 15 mins
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Contact Cards */}
-      <section className="pb-12 lg:pb-16 px-4">
+      {/* Contact Channels */}
+      <section className="pb-8 lg:pb-12 px-4">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {contactDetails.map((detail, idx) => (
-              <motion.a
-                key={idx}
-                href={detail.link}
-                target={detail.icon === MapPin ? "_blank" : undefined}
-                rel={detail.icon === MapPin ? "noopener noreferrer" : undefined}
-                className="bg-white p-8 lg:p-10 rounded-[2rem] border border-black/5 shadow-xl shadow-black/[0.02] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1 group flex flex-col items-center text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                <div className={`w-14 h-14 lg:w-16 lg:h-16 rounded-2xl ${detail.color} flex items-center justify-center mb-6 lg:mb-8 group-hover:scale-110 transition-transform`}>
-                  <detail.icon className="w-6 h-6 lg:w-8 lg:h-8" />
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
+            {/* Featured WhatsApp & QR Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="lg:col-span-2 bg-white p-6 lg:p-8 rounded-[2.5rem] border border-black/5 shadow-xl shadow-black/[0.02] flex flex-col md:flex-row gap-6 lg:gap-8 items-center"
+            >
+              <div className="flex-1 text-center md:text-left">
+                <div className="w-12 h-12 rounded-2xl bg-green/10 text-green flex items-center justify-center mb-4 mx-auto md:mx-0">
+                  <MessageCircle className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-green mb-2 lg:mb-3">{detail.title}</h3>
-                <p className="text-lg lg:text-xl font-medium text-black/80 mb-3 lg:mb-4">{detail.value}</p>
-                <p className="text-sm text-black/60 font-medium mb-6 lg:mb-8 max-w-[240px] leading-relaxed">{detail.description}</p>
-                <div className="mt-auto flex items-center gap-2 text-[10px] lg:text-xs font-bold text-green uppercase tracking-[0.2em] group-hover:gap-3 transition-all border-b border-green/20 pb-1">
-                  {detail.actionText} <ArrowRight className="w-3 h-3 lg:w-4 h-4" />
+                <h3 className="text-2xl font-bold text-green mb-1">WhatsApp & Call</h3>
+                <p className="text-lg lg:text-xl font-medium text-black/80 mb-3">+91 99016 66139</p>
+                <p className="text-xs text-black/60 font-medium mb-6 leading-relaxed max-w-xs">
+                  Best for quick inquiries, booking consultations, and instant support.
+                </p>
+                <WhatsAppConsultationLink className="dm-pill-button px-8">
+                  Chat with us <ArrowRight className="w-4 h-4 ml-2" />
+                </WhatsAppConsultationLink>
+              </div>
+              
+              <div className="w-full md:w-px h-px md:h-32 bg-black/5" />
+
+              <div className="w-40 flex-shrink-0 text-center">
+                <div className="relative w-28 h-28 lg:w-32 lg:h-32 mx-auto bg-cream rounded-2xl p-2 border border-black/5 mb-3 group">
+                  <Image 
+                    src="/QR_divitmindspace.jpeg"
+                    alt="Scan to Connect"
+                    fill
+                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
-              </motion.a>
-            ))}
+                <p className="text-[9px] font-bold text-purple uppercase tracking-[0.2em]">Scan to Connect</p>
+              </div>
+            </motion.div>
+
+            {/* Email Card */}
+            <motion.a
+              href="mailto:divitmindspace@gmail.com"
+              className="lg:col-span-1 bg-white p-6 lg:p-8 rounded-[2.5rem] border border-black/5 shadow-xl shadow-black/[0.02] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1 group flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="w-12 h-12 rounded-2xl bg-purple/10 text-purple flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Mail className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-green mb-1">Email Support</h3>
+              <p className="text-sm font-medium text-black/80 mb-3 break-all">divitmindspace@gmail.com</p>
+              <p className="text-xs text-black/60 font-medium mb-6 leading-relaxed">Send us your reports or detailed queries.</p>
+              <div className="mt-auto flex items-center gap-2 text-[10px] font-bold text-green uppercase tracking-[0.2em] group-hover:gap-3 transition-all border-b border-green/20 pb-1">
+                Send email <ArrowRight className="w-3 h-3" />
+              </div>
+            </motion.a>
+
+            {/* Visit Card */}
+            <motion.a
+              href="https://maps.google.com/?q=Aadeshwar+Chambers+Kasavanahalli+Bengaluru"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="lg:col-span-1 bg-white p-6 lg:p-8 rounded-[2.5rem] border border-black/5 shadow-xl shadow-black/[0.02] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1 group flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-green mb-1">Visit Center</h3>
+              <p className="text-xs font-medium text-black/80 mb-3 leading-relaxed">Aadeshwar Chambers, Kasavanahalli, Bangalore 560035</p>
+              <p className="text-[10px] text-black/60 font-medium mb-6 leading-relaxed uppercase tracking-wider">Mon - Sat, 9 AM - 6 PM</p>
+              <div className="mt-auto flex items-center gap-2 text-[10px] font-bold text-green uppercase tracking-[0.2em] group-hover:gap-3 transition-all border-b border-green/20 pb-1">
+                Directions <ArrowRight className="w-3 h-3" />
+              </div>
+            </motion.a>
+          </div>
+        </div>
+      </section>
+
+      {/* Map & Landmark Section: The GEO-Engine */}
+      <section className="pb-8 lg:pb-12 px-4">
+        <div className="container mx-auto">
+          <div className="bg-white rounded-[2.5rem] border border-black/5 shadow-2xl shadow-black/[0.02] overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="p-6 lg:p-12 border-b lg:border-b-0 lg:border-r border-black/5">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green/10 text-green text-[10px] font-bold uppercase tracking-widest mb-4">
+                  <Navigation className="w-3.5 h-3.5" />
+                  How to reach us
+                </div>
+                <h2 className="text-2xl lg:text-3xl font-serif text-green mb-6" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                  Find Us in the <br />
+                  <span className="italic text-purple">Heart of Kasavanahalli</span>
+                </h2>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-cream flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-green" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-green mb-0.5 text-base">Address Details</h4>
+                      <p className="text-xs text-black/60 font-medium leading-relaxed">
+                        <span className="text-purple font-bold">Aadeshwar Chambers</span>, Kasavanahalli, Off Sarjapur Road, Bangalore - 560035. Located on the 1st Cross Rd, IAS Layout area.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-cream flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-green" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-green mb-0.5 text-base">Key Landmarks</h4>
+                      <p className="text-xs text-black/60 font-medium">We are in the <span className="text-purple font-bold">same building as ICICI Bank</span>, opposite Aishwarya Value Mart and right next to La Casa Brewery + Kitchen.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-cream flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-green" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-green mb-0.5 text-base">Facility & Accessibility</h4>
+                      <div className="flex flex-wrap gap-4 mt-1">
+                        <div className="flex items-center gap-2 text-[10px] font-bold text-black/60 uppercase">
+                          <ParkingCircle className="w-4 h-4 text-purple" />
+                          Ample Basement Parking
+                        </div>
+                        <div className="flex items-center gap-2 text-[10px] font-bold text-black/60 uppercase">
+                          <ArrowUpCircle className="w-4 h-4 text-purple" />
+                          Lift Access Available
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-cream flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-green" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-green mb-0.5 text-base">Regional Coverage</h4>
+                      <p className="text-xs text-black/60 font-medium leading-relaxed">
+                        Serving <span className="text-purple font-bold">HSR Layout, Haralur Road, Bellandur, Carmelaram, Varthur</span>, and families within 2 hours from <span className="text-purple font-bold">Hosur, Anekal, Malur, Chandapura</span>, and <span className="text-purple font-bold">Sarjapur Town</span>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <a 
+                    href="https://maps.google.com/?q=Aadeshwar+Chambers+Kasavanahalli+Bengaluru" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="dm-pill-button px-8 inline-flex items-center gap-2"
+                  >
+                    Open in Google Maps <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+              
+              <div className="h-[300px] lg:h-auto min-h-[300px] bg-cream relative grayscale-[0.2] hover:grayscale-0 transition-all duration-700">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.947239121989!2d77.6744!3d12.9081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae13915f400001%3A0x6d2c4b0b1c0b0b0b!2sAadeshwar%20Chambers!5e0!3m2!1sen!2sin!4v1713500000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0"
+                  title="Divit MindSpace Location"
+                ></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* How We Support You Section */}
-      <section className="pt-6 lg:pt-10 pb-6 lg:pb-10 bg-cream px-4 border-y border-black/5">
+      <section className="pt-4 lg:pt-6 pb-6 lg:pb-8 bg-cream px-4 border-y border-black/5">
         <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center mb-10 lg:mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-green mb-4 lg:mb-6" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+          <div className="max-w-4xl mx-auto text-center mb-6 lg:mb-8">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-green mb-3 lg:mb-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               How We Support You <span className="italic text-purple">From Day 1</span>
             </h2>
-            <p className="text-lg text-black/70 font-medium max-w-2xl mx-auto">
+            <p className="text-sm text-black/70 font-medium max-w-2xl mx-auto">
               Taking the first step can feel overwhelming. Here is our simple process to ensure you get the best care.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 relative">
             {steps.map((step, idx) => (
               <motion.div 
                 key={idx} 
-                className="relative bg-white p-8 lg:p-10 rounded-[2rem] border border-black/5 shadow-lg shadow-black/[0.01]"
+                className="relative bg-white p-6 lg:p-8 rounded-[2rem] border border-black/5 shadow-lg shadow-black/[0.01]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.2 }}
               >
-                <div className="absolute -top-4 left-8 lg:left-10 bg-purple text-white w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center text-base lg:text-lg font-bold shadow-lg shadow-purple/20">
+                <div className="absolute -top-3 left-6 lg:left-8 bg-purple text-white w-7 h-7 lg:w-8 lg:h-8 rounded-full flex items-center justify-center text-sm lg:text-base font-bold shadow-lg shadow-purple/20">
                   {idx + 1}
                 </div>
-                <h3 className="text-xl font-bold text-green mt-2 lg:mt-4 mb-3 lg:mb-4">{step.title}</h3>
-                <p className="text-sm text-black/70 font-medium leading-relaxed">{step.description}</p>
+                <h3 className="text-lg font-bold text-green mt-1 lg:mt-2 mb-2 lg:mb-3">{step.title}</h3>
+                <p className="text-xs text-black/70 font-medium leading-relaxed">{step.description}</p>
               </motion.div>
             ))}
-          </div>
-
-          <div className="mt-8 lg:mt-12 text-center">
-            <WhatsAppConsultationLink className="dm-pill-button px-10">
-              Chat with Us
-            </WhatsAppConsultationLink>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="pt-6 lg:pt-10 pb-10 lg:pb-16 px-4">
+      <section className="pt-6 lg:pt-8 pb-8 lg:pb-12 px-4">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-6 lg:mb-8">
-            <h2 className="text-3xl md:text-4xl font-serif text-green" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+            <h2 className="text-2xl md:text-3xl font-serif text-green" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
               <span className="italic text-purple font-serif">{faqTitle}</span>
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
             {faqs.map((faq, idx) => (
               <motion.div 
                 key={idx} 
-                className="bg-white p-6 lg:p-8 rounded-[2rem] border border-black/5 shadow-xl shadow-black/[0.02]"
+                className="bg-white p-5 lg:p-6 rounded-[2rem] border border-black/5 shadow-xl shadow-black/[0.02]"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <div className="flex items-start gap-3 lg:gap-4 mb-3 lg:mb-4">
-                  <div className="w-6 h-6 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-1">
+                <div className="flex items-start gap-3 lg:gap-4 mb-2 lg:mb-3">
+                  <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <CheckCircle2 className="w-3 h-3 text-green" />
                   </div>
-                  <h4 className="text-lg font-bold text-green">{faq.question}</h4>
+                  <h4 className="text-base font-bold text-green">{faq.question}</h4>
                 </div>
-                <p className="text-sm text-black/70 font-medium leading-relaxed pl-9 lg:pl-10">{faq.answer}</p>
+                <p className="text-xs text-black/70 font-medium leading-relaxed pl-8 lg:pl-9">{faq.answer}</p>
               </motion.div>
             ))}
           </div>
@@ -180,5 +335,3 @@ export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions" }: C
     </div>
   );
 }
-
-
