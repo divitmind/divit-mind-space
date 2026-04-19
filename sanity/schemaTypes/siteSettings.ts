@@ -533,7 +533,7 @@ export const siteSettingsType = defineType({
         }),
         defineField({
           name: "faqs",
-          title: "❓ [SEO] Frequently Asked Questions",
+          title: "❓ [SEO/GEO] Contact FAQs",
           type: "array",
           description: "FAQs shown on contact page - important for SEO/GEO",
           of: [
@@ -548,6 +548,13 @@ export const siteSettingsType = defineType({
               },
             },
           ],
+        }),
+        defineField({
+          name: "qrCode",
+          title: "📱 [EDIT] WhatsApp QR Code",
+          type: "image",
+          description: "Upload your WhatsApp QR code here (optimized for previews)",
+          options: { hotspot: true },
         }),
       ],
     }),
