@@ -148,6 +148,14 @@ export const servicesType = defineType({
       validation: (rule) => rule.required().min(3).max(8),
     }),
     defineField({
+      name: 'whoIsItForTitle',
+      title: '📝 [EDIT] Section Title: Who Is It For',
+      type: 'string',
+      group: 'content',
+      description: 'Default: "Is This Right for You or Your Loved Ones?"',
+      initialValue: 'Is This Right for You or Your Loved Ones?',
+    }),
+    defineField({
       name: 'whoIsItFor',
       title: '👨‍👩‍👧 [EDIT] Who Is It For',
       type: 'array',

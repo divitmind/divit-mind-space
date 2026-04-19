@@ -29,6 +29,7 @@ interface ServiceData {
   overview?: string;
   benefits?: string[];
   whatToExpect?: string[];
+  whoIsItForTitle?: string;
   whoIsItFor?: string[];
   duration?: string;
   format?: string;
@@ -496,7 +497,7 @@ export default async function ServicePage({ params }: PageProps) {
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
                     style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
                   >
-                    Is This Right for You or Your Loved Ones?
+                    {service.whoIsItForTitle || "Is This Right for You or Your Loved Ones?"}
                   </h2>
                   <ul className="space-y-3">
                     {service.whoIsItFor.map((item, index) => (
