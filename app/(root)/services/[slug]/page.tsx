@@ -12,6 +12,8 @@ import { ORGANIZATION_REF, SITE_URL, MEDICAL_CONTENT_REVIEW_BLOCK, MEDICAL_CONTE
 import { ContentReviewBadge } from "@/components/content-review-badge";
 import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
 import { HOWTO_ARTICLES, SERVICE_TO_HOWTO } from "@/lib/howto";
+import { PortableText, type PortableTextBlock } from "next-sanity";
+import { portableTextComponents } from "@/components/portable-text-components";
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
@@ -31,6 +33,7 @@ interface ServiceData {
   whatToExpect?: string[];
   whoIsItForTitle?: string;
   whoIsItFor?: string[];
+  body?: PortableTextBlock[];
   duration?: string;
   format?: string;
   seo?: {
@@ -509,6 +512,16 @@ export default async function ServicePage({ params }: PageProps) {
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {/* Additional Rich Text Content */}
+              {service.body && service.body.length > 0 && (
+                <div className="mt-8 prose prose-green max-w-none prose-p:text-black/70 prose-p:font-medium prose-headings:font-serif prose-headings:text-green prose-li:text-black/70 prose-li:font-medium">
+                  <PortableText 
+                    value={service.body} 
+                    components={portableTextComponents} 
+                  />
                 </div>
               )}
             </div>

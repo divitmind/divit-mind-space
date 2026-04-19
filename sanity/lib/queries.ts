@@ -236,6 +236,7 @@ export const SINGLE_SERVICE_QUERY = `*[_type == "services" && slug.current == $s
   whatToExpect,
   whoIsItForTitle,
   whoIsItFor,
+  body,
   duration,
   format,
   seo,
