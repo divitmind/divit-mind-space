@@ -106,6 +106,8 @@ export interface ContactPageSettings {
   qrCode?: {
     asset: { _ref: string };
   };
+  trustBadge1?: string;
+  trustBadge2?: string;
 }
 
 export interface AboutPageSettings {

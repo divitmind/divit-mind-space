@@ -532,6 +532,18 @@ export const siteSettingsType = defineType({
           description: "e.g., 'Common Questions'",
         }),
         defineField({
+          name: "trustBadge1",
+          title: "🛡️ [EDIT] Trust Badge 1",
+          type: "string",
+          description: "e.g., 'HIPAA-Grade Data Privacy'",
+        }),
+        defineField({
+          name: "trustBadge2",
+          title: "⏱️ [EDIT] Trust Badge 2",
+          type: "string",
+          description: "e.g., 'Response within 15 mins'",
+        }),
+        defineField({
           name: "faqs",
           title: "❓ [SEO/GEO] Contact FAQs",
           type: "array",

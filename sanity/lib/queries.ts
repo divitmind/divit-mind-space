@@ -735,7 +735,9 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
       question,
       answer
     },
-    "qrCode": contactPage.qrCode
+    "qrCode": contactPage.qrCode,
+    "trustBadge1": contactPage.trustBadge1,
+    "trustBadge2": contactPage.trustBadge2
   },
   "aboutPage": {
     "faqs": aboutPage.faqs[]{
