@@ -204,7 +204,7 @@ export default async function ContactUsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageGraph) }}
       />
-      <ContactPage faqs={contactFaqs} faqTitle={faqTitle} />
+      <ContactPage faqs={contactFaqs} faqTitle={faqTitle} settings={siteSettings} />
     </>
   );
 }

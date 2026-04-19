@@ -4,59 +4,19 @@ import { motion } from "motion/react";
 import { Mail, MapPin, MessageCircle, CheckCircle2, ArrowRight, QrCode, ShieldCheck, Clock, Navigation, ParkingCircle, ArrowUpCircle } from "lucide-react";
 import Image from "next/image";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
-import type { FAQ } from "@/lib/types";
-
-const contactDetails = [
-  {
-    icon: MessageCircle,
-    title: "WhatsApp & Call",
-    value: "+91 99016 66139",
-    description: "Best for quick inquiries and booking consultations.",
-    link: "https://wa.me/919901666139",
-    actionText: "Chat with us",
-    color: "bg-green/10 text-green",
-  },
-  {
-    icon: Mail,
-    title: "Email Support",
-    value: "divitmindspace@gmail.com",
-    description: "Send us your reports or detailed queries.",
-    link: "mailto:divitmindspace@gmail.com",
-    actionText: "Send an email",
-    color: "bg-purple/10 text-purple",
-  },
-  {
-    icon: MapPin,
-    title: "Visit Our Center",
-    value: "Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bangalore 560035",
-    description: "Open Monday - Saturday, 9:00 AM - 6:00 PM.",
-    link: "https://maps.google.com/?q=Aadeshwar+Chambers+Kasavanahalli+Bengaluru",
-    actionText: "Get directions",
-    color: "bg-amber-100 text-amber-700",
-  },
-];
-
-const steps = [
-  {
-    title: "Initial Consultation",
-    description: "A free call or chat to understand your needs and guide you on the right path.",
-  },
-  {
-    title: "Comprehensive Evaluation",
-    description: "In-depth clinical or educational assessment by our expert team to identify strengths and needs.",
-  },
-  {
-    title: "Tailored Support Plan",
-    description: "A personalized roadmap with evidence-based interventions designed for your specific goals.",
-  },
-];
+import type { FAQ, SiteSettings } from "@/lib/types";
+import { urlFor } from "@/sanity/lib/image";
 
 interface ContactPageProps {
   faqs: FAQ[];
   faqTitle?: string;
+  settings?: SiteSettings;
 }
 
-export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions" }: ContactPageProps) {
+export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions", settings }: ContactPageProps) {
+  const workingHours = settings?.contact?.workingHours || "Mon - Sat, 9:00 AM - 6:00 PM";
+  const qrCodeUrl = settings?.contactPage?.qrCode ? urlFor(settings.contactPage.qrCode).url() : "/QR_divitmindspace.jpeg";
+
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Section */}
@@ -119,7 +79,7 @@ export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions" }: C
               <div className="w-40 flex-shrink-0 text-center">
                 <div className="relative w-28 h-28 lg:w-32 lg:h-32 mx-auto bg-cream rounded-2xl p-2 border border-black/5 mb-3 group">
                   <Image 
-                    src="/QR_divitmindspace.jpeg"
+                    src={qrCodeUrl}
                     alt="Scan to Connect"
                     fill
                     className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
@@ -163,7 +123,7 @@ export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions" }: C
               </div>
               <h3 className="text-lg font-bold text-green mb-1">Visit Center</h3>
               <p className="text-xs font-medium text-black/80 mb-3 leading-relaxed">Aadeshwar Chambers, Kasavanahalli, Bangalore 560035</p>
-              <p className="text-[10px] text-black/60 font-medium mb-6 leading-relaxed uppercase tracking-wider">Mon - Sat, 9 AM - 6 PM</p>
+              <p className="text-[10px] text-black/60 font-medium mb-6 leading-relaxed uppercase tracking-wider">{workingHours}</p>
               <div className="mt-auto flex items-center gap-2 text-[10px] font-bold text-green uppercase tracking-[0.2em] group-hover:gap-3 transition-all border-b border-green/20 pb-1">
                 Directions <ArrowRight className="w-3 h-3" />
               </div>
