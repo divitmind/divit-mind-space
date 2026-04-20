@@ -192,7 +192,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
           and mission so the "interactive, insightful, customisable" promise
           frames the entire page, not just the workshops section.
           data-speakable hints Google Assistant for voice search. */}
-      <section className="py-8 lg:py-10 bg-[#FAF9F5]">
+      <section className="py-1 lg:py-2 bg-[#FAF9F5]">
         <div className="container mx-auto px-4">
           <motion.blockquote
             className="relative max-w-5xl mx-auto"
@@ -212,7 +212,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
               transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
             />
 
-            <div className="relative rounded-[2.25rem] bg-gradient-to-br from-white via-cream to-green-lite/30 px-8 py-10 lg:px-14 lg:py-12 shadow-2xl">
+            <div className="relative rounded-[2.25rem] bg-gradient-to-br from-white via-cream to-green-lite/30 px-8 py-8 lg:px-14 lg:py-10 shadow-2xl">
               <motion.div
                 className="absolute -top-5 -left-3 lg:-top-8 lg:-left-6 text-[6rem] lg:text-[9rem] leading-none font-serif text-green/20 select-none pointer-events-none"
                 style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
@@ -233,7 +233,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
                 profile of your audience.
               </p>
 
-              <div className="relative z-10 mt-5 flex items-center justify-center gap-3">
+              <div className="relative z-10 mt-4 flex items-center justify-center gap-3">
                 <div className="h-px w-10 bg-green/30" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-green/60">
                   Divit MindSpace
@@ -246,19 +246,19 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
       </section>
 
       {/* Section 3 — 15+ Institutions Reached */}
-      <section className="py-12 lg:py-16 bg-[#FAF9F5]">
+      <section className="pt-4 pb-4 lg:pt-6 lg:pb-6 bg-[#FAF9F5]">
         <div className="container mx-auto px-4">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-10"
+            className="text-center max-w-3xl mx-auto mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple/10 text-purple text-[10px] font-bold uppercase tracking-widest mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple/10 text-purple text-[10px] font-bold uppercase tracking-widest mb-1">
               Real Impact
             </div>
             <h2
-              className="text-3xl lg:text-5xl font-serif text-green leading-tight mb-4"
+              className="text-3xl lg:text-5xl font-serif text-green leading-tight mb-2"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             >
               15+ Schools & Organisations Reached
@@ -310,32 +310,23 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
               </span>
             </motion.li>
           </ul>
-
-          <motion.p
-            className="text-center mt-8 text-sm lg:text-base font-bold text-green uppercase tracking-widest"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            All awareness sessions are offered free of charge.
-          </motion.p>
         </div>
       </section>
 
       {/* Section 4 — Real Sessions Gallery */}
-      <section className="py-12 lg:py-16 bg-cream">
+      <section className="pt-4 pb-6 lg:pt-6 lg:pb-8 bg-cream">
         <div className="container mx-auto px-4">
           <motion.div
-            className="text-center max-w-2xl mx-auto mb-10"
+            className="text-center max-w-2xl mx-auto mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow/30 text-black/70 text-[10px] font-bold uppercase tracking-widest mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow/30 text-black/70 text-[10px] font-bold uppercase tracking-widest mb-1">
               Moments from the Field
             </div>
             <h2
-              className="text-3xl lg:text-5xl font-serif text-green leading-tight mb-3"
+              className="text-3xl lg:text-5xl font-serif text-green leading-tight mb-1"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             >
               Real sessions, real classrooms
@@ -380,7 +371,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
           </div>
 
           <motion.div
-            className="text-center mt-10"
+            className="text-center mt-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -397,19 +388,19 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
       </section>
 
       {/* Section 5 — Customised Workshops */}
-      <section className="py-12 lg:py-16 bg-[#FAF9F5]">
+      <section className="pt-4 pb-6 lg:pt-6 lg:pb-8 bg-[#FAF9F5]">
         <div className="container mx-auto px-4">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-10"
+            className="text-center max-w-3xl mx-auto mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple/10 text-purple text-[10px] font-bold uppercase tracking-widest mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple/10 text-purple text-[10px] font-bold uppercase tracking-widest mb-1">
               Beyond Awareness
             </div>
             <h2
-              className="text-3xl lg:text-5xl font-serif text-green leading-tight mb-4"
+              className="text-3xl lg:text-5xl font-serif text-green leading-tight mb-2"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             >
               Customised Workshops
@@ -467,15 +458,15 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
       </section>
 
       {/* Section 6 — FAQ (AEO citation lever) */}
-      <section className="py-12 lg:py-16 bg-cream">
+      <section className="py-6 lg:py-10 bg-cream">
         <div className="container mx-auto px-4">
           <motion.div
-            className="max-w-3xl mx-auto mb-10 text-center"
+            className="max-w-3xl mx-auto mb-5 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green/10 text-green text-[10px] font-bold uppercase tracking-widest mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green/10 text-green text-[10px] font-bold uppercase tracking-widest mb-2">
               Frequently Asked
             </div>
             <h2
@@ -512,7 +503,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
       </section>
 
       {/* Section 7 — Bottom CTA (request a session) */}
-      <section className="pt-2 lg:pt-6 pb-10 lg:pb-14 bg-[#FAF9F5] px-4">
+      <section className="pt-6 pb-10 lg:pt-10 lg:pb-14 bg-[#FAF9F5] px-4">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -529,7 +520,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
               </div>
 
               <div className="text-left">
-                <h2 className="text-xl md:text-4xl font-bold text-black font-[family-name:var(--font-cormorant)] italic mb-1 md:mb-2">
+                <h2 className="text-xl md:text-4xl font-bold text-black font-[family-name:var(--font-cormorant)] italic mb-0.5 md:mb-1">
                   Want to host a session?
                 </h2>
                 <p className="text-sm md:text-lg text-black/60 font-medium">
@@ -552,4 +543,3 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
     </div>
   );
 }
-
