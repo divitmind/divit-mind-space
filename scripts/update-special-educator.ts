@@ -32,10 +32,15 @@ async function updateSpecialEducator() {
     }
 
     const patch = {
-      department: 'Clinical Services',
-      location: ['mumbai'],
+      department: 'Education',
+      location: ['bangalore'],
       employmentType: 'full-time',
       locationType: 'onsite',
+      salaryRange: {
+        min: '',
+        max: '',
+        note: 'Competitive and based on experience',
+      },
     }
 
     const result = await client.patch(id).set(patch).commit()
