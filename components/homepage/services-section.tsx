@@ -1,14 +1,13 @@
 import Link from "next/link";
-import { ArrowRight, FileText, Heart, Users, GraduationCap, Compass, ClipboardList } from "lucide-react";
+import { ArrowRight, FileText, Heart, Users, GraduationCap, Compass, ClipboardList, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { ServiceListItem } from "@/sanity/types";
 import type { ServiceCategoryCard } from "@/lib/types";
 
 // Default fallback services
 const DEFAULT_SERVICES = [
     {
         id: "assessments",
-        label: "Assessments",
+        label: "Assessments Hub",
         icon: "clipboard" as const,
         outcome: "Stop guessing. Get answers and a clear path forward",
         route: "/services?category=assessments",
@@ -28,6 +27,13 @@ const DEFAULT_SERVICES = [
         route: "/services?category=guidance",
     },
     {
+        id: "physiotherapy",
+        label: "Physiotherapy",
+        icon: "activity" as const,
+        outcome: "Expert care for movement, strength and recovery",
+        route: "/services?category=physiotherapy",
+    },
+    {
         id: "learning",
         label: "Programs",
         icon: "graduation" as const,
@@ -44,14 +50,14 @@ const iconMap = {
     graduation: GraduationCap,
     users: Users,
     filetext: FileText,
+    activity: Activity,
 };
 
 interface ServicesSectionProps {
-    therapyServices?: ServiceListItem[];
     serviceCategories?: ServiceCategoryCard[];
 }
 
-export function ServicesSection({ therapyServices = [], serviceCategories }: ServicesSectionProps) {
+export function ServicesSection({ serviceCategories }: ServicesSectionProps) {
     // Use Sanity data with fallback to defaults
     const services = serviceCategories?.length ? serviceCategories.map((cat, idx) => ({
         id: `cat-${idx}`,
@@ -62,11 +68,11 @@ export function ServicesSection({ therapyServices = [], serviceCategories }: Ser
     })) : DEFAULT_SERVICES;
 
     return (
-        <section className="pt-0 pb-6 lg:pb-10 bg-[#FDFBF7]">
+        <section className="pt-0 pb-4 lg:pb-8 bg-[#FDFBF7]">
             <div className="container">
 
                 {/* Bridge Text */}
-                <div className="flex items-center gap-4 mt-8 mb-8">
+                <div className="flex items-center gap-4 mt-4 mb-6 lg:mt-6 lg:mb-8">
                     <div className="flex-1 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                     <span className="text-black/40 text-[10px] font-bold uppercase tracking-widest">
                         Here&apos;s how we help
@@ -75,34 +81,38 @@ export function ServicesSection({ therapyServices = [], serviceCategories }: Ser
                 </div>
 
                 {/* Services Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {services.map((service) => {
+                <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 lg:gap-6">
+                    {services.map((service, idx) => {
                         const IconComponent = iconMap[service.icon as keyof typeof iconMap] || FileText;
+                        const isLastOnMobile = idx === services.length - 1;
                         return (
                             <Link
                                 key={service.id}
                                 href={service.route}
-                                className="group relative flex flex-col p-10 rounded-[2rem] border border-black/5 transition-all duration-500 bg-white hover:shadow-2xl hover:shadow-black/5 hover:border-black/10"
+                                className={cn(
+                                    "group relative flex flex-col p-5 lg:p-8 rounded-[1.5rem] lg:rounded-[2rem] border border-black/5 transition-all duration-500 bg-white hover:shadow-2xl hover:shadow-black/5 hover:border-black/10",
+                                    isLastOnMobile && "col-span-2 lg:col-span-1"
+                                )}
                             >
                                 {/* Icon */}
-                                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-8 transition-all group-hover:scale-105 bg-[#E8D5B7]">
-                                    <IconComponent className="h-6 w-6 text-[#7A9A7D]" />
+                                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl flex items-center justify-center mb-4 lg:mb-6 transition-all group-hover:scale-105 bg-[#E8D5B7]">
+                                    <IconComponent className="h-5 w-5 lg:h-6 lg:w-6 text-[#7A9A7D]" />
                                 </div>
 
                                 {/* Title (Serif Italic - Unified) */}
-                                <h3 className="text-2xl font-bold text-black mb-4 font-[family-name:var(--font-cormorant)] italic leading-tight">
+                                <h3 className="text-lg lg:text-xl font-bold text-black mb-2 lg:mb-3 font-[family-name:var(--font-cormorant)] italic leading-tight">
                                     {service.label}
                                 </h3>
 
                                 {/* Description (Outcome - Unified Sans) */}
-                                <p className="text-base text-black/60 font-medium leading-relaxed mb-8 flex-grow">
+                                <p className="text-[12px] lg:text-sm text-black/60 font-medium leading-relaxed mb-4 lg:mb-6 flex-grow line-clamp-3 lg:line-clamp-none">
                                     {service.outcome}
                                 </p>
 
                                 {/* Footer Link */}
-                                <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black/40 group-hover:text-black transition-colors">
+                                <span className="flex items-center gap-2 text-[9px] lg:text-[10px] font-bold uppercase tracking-widest text-black/40 group-hover:text-black transition-colors">
                                     Explore Service
-                                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                                    <ArrowRight className="h-3 w-3 lg:h-3.5 lg:w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                                 </span>
                             </Link>
                         );

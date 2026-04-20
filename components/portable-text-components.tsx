@@ -37,9 +37,9 @@ export const portableTextComponents: PortableTextComponents = {
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="list-decimal list-outside ml-6 my-4 space-y-2 text-green/80">
+      <ul className="list-disc list-outside ml-6 my-4 space-y-2 text-green/80">
         {children}
-      </ol>
+      </ul>
     ),
   },
   listItem: {

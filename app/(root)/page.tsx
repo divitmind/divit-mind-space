@@ -176,7 +176,7 @@ export default async function Page() {
       />
       <main>
         <HeroSection announcement={announcementData?.text} siteSettings={siteSettings} />
-        <ServicesSection therapyServices={therapyServicesData} serviceCategories={siteSettings?.homepage?.serviceCategories} />
+        <ServicesSection serviceCategories={siteSettings?.homepage?.serviceCategories} />
         <TestimonialsSection reviews={(reviews as ReviewsQueryResult) ?? []} />
         <WhoNeedsItSection
           title={siteSettings?.homepage?.whoNeedsItTitle}

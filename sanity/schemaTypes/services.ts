@@ -165,6 +165,44 @@ export const servicesType = defineType({
       validation: (rule) => rule.required().min(3).max(8),
     }),
     defineField({
+      name: 'additionalSections',
+      title: '➕ [EDIT] Additional Custom Blocks',
+      type: 'array',
+      group: 'content',
+      description: 'Add extra "What to Expect" style boxes with custom headers and dots.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'customBlock',
+          title: 'Custom Content Block',
+          fields: [
+            { name: 'title', type: 'string', title: 'Block Title', validation: (rule) => rule.required() },
+            { 
+              name: 'items', 
+              type: 'array', 
+              title: 'List Items (Dots)', 
+              of: [{ type: 'string' }],
+              validation: (rule) => rule.required().min(1)
+            },
+            {
+              name: 'color',
+              type: 'string',
+              title: 'Color Theme',
+              options: {
+                list: [
+                  { title: 'Green (Benefits)', value: 'green' },
+                  { title: 'Purple (Process)', value: 'purple' },
+                  { title: 'Yellow (Audience)', value: 'yellow' },
+                ],
+                layout: 'radio'
+              },
+              initialValue: 'green'
+            }
+          ]
+        })
+      ]
+    }),
+    defineField({
       name: 'body',
       title: '📄 [OPTIONAL] Additional Content',
       type: 'array',

@@ -57,21 +57,21 @@ export function TestimonialCard({ name, role, quote, initial, className }: Testi
     <>
       <div
         className={cn(
-          "relative w-[min(350px,calc(100vw-2rem))] sm:w-[420px] shrink-0 rounded-[2.5rem] bg-white p-10 shadow-sm hover:shadow-xl hover:shadow-green/5 transition-all duration-500 border border-black/5 group",
+          "relative w-[min(300px,calc(100vw-2rem))] sm:w-[380px] shrink-0 rounded-[1.5rem] lg:rounded-[2rem] bg-white p-6 lg:p-8 shadow-sm hover:shadow-xl hover:shadow-green/5 transition-all duration-500 border border-black/5 group",
           className
         )}
       >
         {/* Google Verified Badge (SVG) */}
-        <div className="absolute top-10 right-10">
+        <div className="absolute top-6 right-6 lg:top-8 lg:right-8">
           <GoogleBadge />
         </div>
 
         <StarsRow />
 
-        <div className="mb-8">
+        <div className="mb-6">
           <p
             ref={quoteRef}
-            className="text-black/60 leading-relaxed max-h-[120px] overflow-hidden font-medium text-sm italic"
+            className="text-black/60 leading-relaxed max-h-[100px] overflow-hidden font-medium text-sm italic"
           >
             &quot;{quote}&quot;
           </p>
@@ -91,13 +91,13 @@ export function TestimonialCard({ name, role, quote, initial, className }: Testi
           )}
         </div>
 
-        <div className="flex items-center gap-4 pt-6 border-t border-black/5">
+        <div className="flex items-center gap-3 pt-4 border-t border-black/5">
           <div className="h-12 w-12 rounded-full bg-green/5 text-green flex items-center justify-center font-serif italic text-xl border border-green/10">
             {initial}
           </div>
           <div>
-            <h4 className="font-bold text-black text-xs uppercase tracking-widest">{name}</h4>
-            <p className="text-[10px] text-black/40 font-bold uppercase tracking-widest mt-0.5">{role}</p>
+            <h4 className="font-bold text-black text-[10px] lg:text-xs uppercase tracking-widest">{name}</h4>
+            <p className="text-[9px] lg:text-[10px] text-black/40 font-bold uppercase tracking-widest mt-0.5">{role}</p>
           </div>
         </div>
       </div>

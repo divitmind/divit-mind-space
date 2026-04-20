@@ -6,7 +6,7 @@ import { SINGLE_SERVICE_QUERY, ALL_SERVICE_SLUGS_QUERY, RELATED_SERVICES_QUERY }
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { ServiceExperts } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
-import { Check, Clock, MapPin } from "lucide-react";
+import { Clock, MapPin } from "lucide-react";
 import type { Specialist } from "@/sanity/types";
 import { ORGANIZATION_REF, SITE_URL, MEDICAL_CONTENT_REVIEW_BLOCK } from "@/lib/seo";
 import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
@@ -47,6 +47,7 @@ interface ServiceData {
   };
   onDemand?: boolean;
   specialists?: Specialist[];
+  additionalSections?: { title: string; items: string[]; color: string }[];
 }
 
 interface PageProps {
@@ -471,14 +472,13 @@ export default async function ServicePage({ params }: PageProps) {
                   <ul className="space-y-3">
                     {service.benefits.map((benefit, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <Check className="w-3 h-3 text-green" />
+                        <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-1.5"> 
+                          <div className="w-1.5 h-1.5 rounded-full bg-green" />
                         </div>
                         <span className="text-black/70 font-medium">{benefit}</span>
                       </li>
                     ))}
-                  </ul>
-                </div>
+                  </ul>                </div>
               )}
 
               {/* What to Expect */}
@@ -493,10 +493,10 @@ export default async function ServicePage({ params }: PageProps) {
                   <div className="space-y-4">
                     {service.whatToExpect.map((item, index) => (
                       <div key={index} className="flex items-start gap-4">
-                        <div className="w-8 h-8 rounded-full bg-purple/10 flex items-center justify-center flex-shrink-0 text-purple font-semibold text-sm">
-                          {index + 1}
+                        <div className="w-5 h-5 rounded-full bg-purple/10 flex items-center justify-center flex-shrink-0 mt-1.5">
+                          <div className="w-1.5 h-1.5 rounded-full bg-purple" />
                         </div>
-                        <p className="text-black/70 pt-1 font-medium">{item}</p>
+                        <p className="text-black/70 font-medium">{item}</p>
                       </div>
                     ))}
                   </div>
@@ -515,8 +515,8 @@ export default async function ServicePage({ params }: PageProps) {
                   <ul className="space-y-3">
                     {service.whoIsItFor.map((item, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-yellow/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <Check className="w-3 h-3 text-yellow-700" />
+                        <div className="w-5 h-5 rounded-full bg-yellow/20 flex items-center justify-center flex-shrink-0 mt-1.5">
+                          <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
                         </div>
                         <span className="text-black/70 font-medium">{item}</span>
                       </li>
@@ -524,6 +524,46 @@ export default async function ServicePage({ params }: PageProps) {
                   </ul>
                 </div>
               )}
+
+              {/* Additional Sections */}
+              {service.additionalSections?.map((section, idx) => {
+                const colorClasses = {
+                  green: { outer: "bg-green/10", inner: "bg-green" },
+                  purple: { outer: "bg-purple/10", inner: "bg-purple" },
+                  yellow: { outer: "bg-yellow/20", inner: "bg-yellow-600" },
+                }[section.color as "green" | "purple" | "yellow"] || {
+                  outer: "bg-green/10",
+                  inner: "bg-green",
+                };
+
+                return (
+                  <div
+                    key={idx}
+                    className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10"
+                  >
+                    <h2
+                      className="text-2xl lg:text-3xl font-serif text-green mb-6"
+                      style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                    >
+                      {section.title}
+                    </h2>
+                    <ul className="space-y-3">
+                      {section.items.map((item, itemIdx) => (
+                        <li key={itemIdx} className="flex items-start gap-3">
+                          <div
+                            className={`w-5 h-5 rounded-full ${colorClasses.outer} flex items-center justify-center flex-shrink-0 mt-1.5`}
+                          >
+                            <div
+                              className={`w-1.5 h-1.5 rounded-full ${colorClasses.inner}`}
+                            />
+                          </div>
+                          <span className="text-black/70 font-medium">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
 
               {/* Additional Rich Text Content */}
               {service.body && service.body.length > 0 && (
