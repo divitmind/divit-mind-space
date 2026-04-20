@@ -111,9 +111,9 @@ export function CareersPage({ jobs }: CareersPageProps) {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             {/* Section Opening */}
-            <div className="max-w-3xl mx-auto text-center mb-10">
-              <motion.h2 
-                className="text-3xl md:text-5xl font-serif italic text-black mb-6"
+            <div className="max-w-3xl mx-auto text-center mb-5 md:mb-10">
+              <motion.h2
+                className="text-3xl md:text-5xl font-serif italic text-black mb-4 md:mb-6"
                 style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ export function CareersPage({ jobs }: CareersPageProps) {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {[
                 {
                   title: "Multidisciplinary Setup",
@@ -152,15 +152,15 @@ export function CareersPage({ jobs }: CareersPageProps) {
               ].map((item, idx) => (
                 <motion.div
                   key={idx}
-                  className="group p-7 rounded-[2rem] border border-black/5 bg-white hover:border-black/10 transition-all duration-500 hover:shadow-2xl hover:shadow-black/5"
+                  className="group p-5 md:p-7 rounded-[1.5rem] md:rounded-[2rem] border border-black/5 bg-white hover:border-black/10 transition-all duration-500 hover:shadow-2xl hover:shadow-black/5"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                 >
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center gap-3 mb-2 md:mb-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D] opacity-40 group-hover:opacity-100 transition-opacity" />
-                    <h3 className="text-xl font-bold text-black font-[family-name:var(--font-cormorant)] italic leading-tight">{item.title}</h3>
+                    <h3 className="text-lg md:text-xl font-bold text-black font-[family-name:var(--font-cormorant)] italic leading-tight">{item.title}</h3>
                   </div>
                   <p className="text-[13px] text-black/60 font-medium leading-relaxed pl-4.5">{item.desc}</p>
                 </motion.div>

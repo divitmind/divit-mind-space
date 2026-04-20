@@ -12,8 +12,8 @@ interface FaqSectionProps {
     subtitle?: string;
 }
 
-export function FaqSection({ faqs, title = "Frequently Asked Questions", subtitle = "Common Queries" }: FaqSectionProps) {
-    const [openId, setOpenId] = useState<number | null>(0);
+export function FaqSection({ faqs, title = "Frequently Asked Questions", subtitle = "" }: FaqSectionProps) {
+    const [openId, setOpenId] = useState<number | null>(null);
 
     return (
         <section className="pt-4 lg:pt-6 pb-4 lg:pb-6 bg-[#FDFBF7] relative overflow-hidden">

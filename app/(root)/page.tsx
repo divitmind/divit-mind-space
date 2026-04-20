@@ -159,7 +159,7 @@ export default async function Page() {
   // Get FAQ data from Sanity with fallback
   const homepageFaqs = siteSettings?.homepage?.faqs?.length ? siteSettings.homepage.faqs : defaultFaqs;
   const faqTitle = siteSettings?.homepage?.faqTitle || "Frequently Asked Questions";
-  const faqSubtitle = siteSettings?.homepage?.faqSubtitle || "Common Queries";
+  const faqSubtitle = siteSettings?.homepage?.faqSubtitle || "";
 
   // Generate FAQ Schema dynamically
   const faqJsonLd = generateFaqSchema(homepageFaqs);

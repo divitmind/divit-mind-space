@@ -249,9 +249,10 @@ export default async function CareersRoute({ searchParams }: PageProps) {
       ))}
       <CareersPage jobs={jobsList} initialFilter={params.type} />
       
-      <FaqSection 
-        faqs={careersFaqs} 
-        title="Frequently Asked Questions" 
+      <FaqSection
+        faqs={careersFaqs}
+        title="Frequently Asked Questions"
+        subtitle=""
       />
 
       {/* Bottom CTA - matching homepage style */}
