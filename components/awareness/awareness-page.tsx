@@ -271,11 +271,11 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
             </p>
           </motion.div>
 
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 max-w-5xl mx-auto">
+          <ul className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4 max-w-5xl mx-auto">
             {AWARENESS_INSTITUTIONS.map((name, idx) => (
               <motion.li
                 key={name}
-                className="flex items-center gap-3 px-5 py-4 rounded-2xl bg-white border border-black/5 shadow-sm hover:shadow-lg hover:border-green/30 hover:-translate-y-0.5 transition-all"
+                className="flex items-center gap-2 px-3 py-3 lg:px-5 lg:py-4 rounded-xl lg:rounded-2xl bg-white border border-black/5 shadow-sm hover:shadow-lg hover:border-green/30 hover:-translate-y-0.5 transition-all"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -283,7 +283,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
               >
                 {/* Pulsing green dot — subtle heartbeat that loops */}
                 <motion.div
-                  className="w-2 h-2 rounded-full bg-green shrink-0"
+                  className="w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full bg-green shrink-0"
                   animate={{ scale: [1, 1.4, 1], opacity: [0.7, 1, 0.7] }}
                   transition={{
                     duration: 2,
@@ -292,20 +292,20 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
                     delay: (idx % 4) * 0.3,
                   }}
                 />
-                <span className="text-sm lg:text-base font-semibold text-black/80">
+                <span className="text-[11px] lg:text-base font-semibold text-black/80 leading-tight">
                   {name}
                 </span>
               </motion.li>
             ))}
             <motion.li
-              className="flex items-center gap-3 px-5 py-4 rounded-2xl bg-green/5 border border-green/20"
+              className="flex items-center gap-2 px-3 py-3 lg:px-5 lg:py-4 rounded-xl lg:rounded-2xl bg-green/5 border border-green/20"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: AWARENESS_INSTITUTIONS.length * 0.04 }}
             >
-              <div className="w-2 h-2 rounded-full bg-green/60 shrink-0" />
-              <span className="text-sm lg:text-base font-semibold italic text-green/80">
+              <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full bg-green/60 shrink-0" />
+              <span className="text-[11px] lg:text-base font-semibold italic text-green/80">
                 …and many more
               </span>
             </motion.li>
@@ -413,7 +413,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5 max-w-6xl mx-auto">
             {AWARENESS_WORKSHOP_TITLES.map((title, idx) => {
               const meta = WORKSHOP_META[title];
               const Icon = meta?.icon ?? Users;
@@ -421,7 +421,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
               return (
                 <motion.div
                   key={title}
-                  className="group relative bg-white rounded-2xl p-5 lg:p-6 border border-black/5 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all overflow-hidden"
+                  className="group relative bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6 border border-black/5 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all overflow-hidden"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -432,7 +432,7 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
 
                   {/* Animated icon bubble — continuous loop keyed per topic */}
                   <motion.div
-                    className="relative w-11 h-11 rounded-xl bg-purple/10 flex items-center justify-center mb-3"
+                    className="relative w-9 h-9 lg:w-11 lg:h-11 rounded-lg lg:rounded-xl bg-purple/10 flex items-center justify-center mb-2 lg:mb-3"
                     animate={MOTION_PROFILES[motionKey]}
                     transition={{
                       duration: MOTION_DURATIONS[motionKey],
@@ -440,13 +440,13 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
                       ease: motionKey === "rotate" ? "linear" : "easeInOut",
                     }}
                   >
-                    <Icon className="w-5 h-5 text-purple" />
+                    <Icon className="w-4 h-4 lg:w-5 lg:h-5 text-purple" />
                   </motion.div>
 
-                  <h3 className="relative text-sm lg:text-base font-bold text-green mb-1 leading-tight">
+                  <h3 className="relative text-[11px] lg:text-base font-bold text-green mb-0.5 lg:mb-1 leading-tight">
                     {title}
                   </h3>
-                  <p className="relative text-xs text-black/60 font-medium leading-relaxed">
+                  <p className="relative text-[9px] lg:text-xs text-black/60 font-medium leading-relaxed line-clamp-2 lg:line-clamp-none">
                     {meta?.blurb}
                   </p>
                 </motion.div>
@@ -477,23 +477,25 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
             </h2>
           </motion.div>
 
-          <div className="max-w-3xl mx-auto space-y-4">
+          <div className="max-w-3xl mx-auto space-y-3">
             {AWARENESS_FAQS.map((faq, idx) => (
               <motion.details
                 key={faq.question}
-                className="group bg-white rounded-2xl border border-black/5 shadow-sm overflow-hidden"
+                className="group bg-white rounded-xl border border-black/5 shadow-sm overflow-hidden hover:border-green/20 transition-colors"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.05 }}
               >
-                <summary className="flex items-center justify-between p-5 lg:p-6 cursor-pointer list-none">
-                  <h3 className="font-bold text-black text-sm lg:text-base pr-4">
+                <summary className="flex items-center justify-between p-4 lg:p-5 cursor-pointer list-none select-none">
+                  <h3 className="font-bold text-black text-[13px] lg:text-base pr-4 leading-snug">
                     {faq.question}
                   </h3>
-                  <ChevronRight className="w-4 h-4 text-green shrink-0 transition-transform group-open:rotate-90" />
+                  <div className="w-6 h-6 rounded-full bg-green/5 flex items-center justify-center group-hover:bg-green/10 transition-colors">
+                    <ChevronRight className="w-3.5 h-3.5 text-green shrink-0 transition-transform group-open:rotate-90" />
+                  </div>
                 </summary>
-                <div className="px-5 lg:px-6 pb-5 lg:pb-6 text-black/70 font-medium text-sm lg:text-base leading-relaxed">
+                <div className="px-4 lg:px-5 pb-4 lg:pb-5 text-black/70 font-medium text-[12px] lg:text-base leading-relaxed border-t border-black/[0.03] pt-3">
                   {faq.answer}
                 </div>
               </motion.details>
