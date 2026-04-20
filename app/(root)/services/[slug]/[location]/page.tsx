@@ -19,10 +19,7 @@ import {
   SITE_LANGUAGE,
   WEBSITE_ID,
   MEDICAL_CONTENT_REVIEW_BLOCK,
-  MEDICAL_CONTENT_LAST_REVIEWED,
-  MEDICAL_CONTENT_REVIEWER_UI,
 } from "@/lib/seo";
-import { ContentReviewBadge } from "@/components/content-review-badge";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
 import { ArrowRight, MapPin, Phone, Check } from "lucide-react";
 
@@ -227,13 +224,6 @@ export default async function ServiceLocationPage({ params }: PageProps) {
               <p className="text-sm text-[#7A9A7D] font-bold uppercase tracking-widest mb-4">
                 {l.proximity} · Aadeshwar Chambers, Kasavanahalli
               </p>
-              {isMedicalType && (
-                <ContentReviewBadge
-                  lastReviewedDate={MEDICAL_CONTENT_LAST_REVIEWED}
-                  reviewer={MEDICAL_CONTENT_REVIEWER_UI}
-                  compact
-                />
-              )}
             </div>
           </div>
         </section>

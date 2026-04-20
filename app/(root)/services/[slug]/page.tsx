@@ -8,8 +8,7 @@ import { ServiceExperts } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { Check, Clock, MapPin } from "lucide-react";
 import type { Specialist } from "@/sanity/types";
-import { ORGANIZATION_REF, SITE_URL, MEDICAL_CONTENT_REVIEW_BLOCK, MEDICAL_CONTENT_LAST_REVIEWED, MEDICAL_CONTENT_REVIEWER_UI } from "@/lib/seo";
-import { ContentReviewBadge } from "@/components/content-review-badge";
+import { ORGANIZATION_REF, SITE_URL, MEDICAL_CONTENT_REVIEW_BLOCK } from "@/lib/seo";
 import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
 import { HOWTO_ARTICLES, SERVICE_TO_HOWTO } from "@/lib/howto";
 import { PortableText, type PortableTextBlock } from "next-sanity";
@@ -437,13 +436,6 @@ export default async function ServicePage({ params }: PageProps) {
                 </div>
               )}
 
-              {isMedicalType && (
-                <ContentReviewBadge
-                  lastReviewedDate={MEDICAL_CONTENT_LAST_REVIEWED}
-                  reviewer={MEDICAL_CONTENT_REVIEWER_UI}
-                  compact
-                />
-              )}
             </div>
           </div>
         </section>
