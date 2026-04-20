@@ -177,29 +177,14 @@ export const servicesType = defineType({
           title: 'Custom Content Block',
           fields: [
             { name: 'title', type: 'string', title: 'Block Title', validation: (rule) => rule.required() },
-            { 
-              name: 'items', 
-              type: 'array', 
-              title: 'List Items (Dots)', 
+            {
+              name: 'items',
+              type: 'array',
+              title: 'List Items (Dots)',
               of: [{ type: 'string' }],
               validation: (rule) => rule.required().min(1)
-            },
-            {
-              name: 'color',
-              type: 'string',
-              title: 'Color Theme',
-              options: {
-                list: [
-                  { title: 'Green (Benefits)', value: 'green' },
-                  { title: 'Purple (Process)', value: 'purple' },
-                  { title: 'Yellow (Audience)', value: 'yellow' },
-                ],
-                layout: 'radio'
-              },
-              initialValue: 'green'
             }
-          ]
-        })
+          ]        })
       ]
     }),
     defineField({

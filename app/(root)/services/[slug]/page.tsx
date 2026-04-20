@@ -493,8 +493,8 @@ export default async function ServicePage({ params }: PageProps) {
                   <div className="space-y-4">
                     {service.whatToExpect.map((item, index) => (
                       <div key={index} className="flex items-start gap-4">
-                        <div className="w-5 h-5 rounded-full bg-purple/10 flex items-center justify-center flex-shrink-0 mt-1.5">
-                          <div className="w-1.5 h-1.5 rounded-full bg-purple" />
+                        <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-1.5">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green" />
                         </div>
                         <p className="text-black/70 font-medium">{item}</p>
                       </div>
@@ -515,8 +515,8 @@ export default async function ServicePage({ params }: PageProps) {
                   <ul className="space-y-3">
                     {service.whoIsItFor.map((item, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-yellow/20 flex items-center justify-center flex-shrink-0 mt-1.5">
-                          <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
+                        <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-1.5">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green" />
                         </div>
                         <span className="text-black/70 font-medium">{item}</span>
                       </li>
@@ -526,44 +526,29 @@ export default async function ServicePage({ params }: PageProps) {
               )}
 
               {/* Additional Sections */}
-              {service.additionalSections?.map((section, idx) => {
-                const colorClasses = {
-                  green: { outer: "bg-green/10", inner: "bg-green" },
-                  purple: { outer: "bg-purple/10", inner: "bg-purple" },
-                  yellow: { outer: "bg-yellow/20", inner: "bg-yellow-600" },
-                }[section.color as "green" | "purple" | "yellow"] || {
-                  outer: "bg-green/10",
-                  inner: "bg-green",
-                };
-
-                return (
-                  <div
-                    key={idx}
-                    className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10"
+              {service.additionalSections?.map((section, idx) => (
+                <div
+                  key={idx}
+                  className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10"
+                >
+                  <h2
+                    className="text-2xl lg:text-3xl font-serif text-green mb-6"
+                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
                   >
-                    <h2
-                      className="text-2xl lg:text-3xl font-serif text-green mb-6"
-                      style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                    >
-                      {section.title}
-                    </h2>
-                    <ul className="space-y-3">
-                      {section.items.map((item, itemIdx) => (
-                        <li key={itemIdx} className="flex items-start gap-3">
-                          <div
-                            className={`w-5 h-5 rounded-full ${colorClasses.outer} flex items-center justify-center flex-shrink-0 mt-1.5`}
-                          >
-                            <div
-                              className={`w-1.5 h-1.5 rounded-full ${colorClasses.inner}`}
-                            />
-                          </div>
-                          <span className="text-black/70 font-medium">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              })}
+                    {section.title}
+                  </h2>
+                  <ul className="space-y-3">
+                    {section.items.map((item, itemIdx) => (
+                      <li key={itemIdx} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-1.5">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green" />
+                        </div>
+                        <span className="text-black/70 font-medium">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
 
               {/* Additional Rich Text Content */}
               {service.body && service.body.length > 0 && (
