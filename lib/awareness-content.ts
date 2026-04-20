@@ -3,10 +3,7 @@
 // client component (components/awareness/awareness-page.tsx) for rendering.
 // Text here is verbatim from public/awareness.txt; do not fabricate.
 
-export const AWARENESS_MISSION_PARAGRAPHS = [
-  "At Divit MindSpace, our mission is to support the mental well-being of individuals across all age groups and their families. From the very beginning, we believed that simply opening a mental health clinic is not enough. In a society where ignorance, myths, and stigma around mental health remain widespread, true change can only happen through awareness and education.",
-  "That is why awareness is a core pillar of our work. Without it, mental health support stays inaccessible and inclusivity remains a distant goal. With this conviction, Divit MindSpace is deeply committed to conducting complimentary awareness sessions that empower teachers, parents, and communities with knowledge about neurodivergence and the importance of early intervention.",
-];
+export const AWARENESS_MISSION_PARAGRAPHS: string[] = [];
 
 // Named institutions from awareness.txt — keep exact spellings.
 export const AWARENESS_INSTITUTIONS = [
