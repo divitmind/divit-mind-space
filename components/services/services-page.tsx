@@ -61,7 +61,33 @@ interface ServicesPageProps {
 export default function ServicesPage({ title: propTitle = "Our Services", services, siteSettings }: ServicesPageProps) {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("all");
-  const metrics = siteSettings?.metrics || DEFAULT_METRICS;
+
+  // Process services to handle manual category overrides
+  const processedServices = useMemo(() => {
+    return services.map(s => {
+      const updated = { ...s };
+      if (s.title === "Customized Workshops" || s.title === "Parental Training Program") {
+        updated.category = "programs";
+      }
+      // Specific renames for ranking match
+      if (s.title === "Teacher Training Program") {
+        updated.title = "Training Program (Shadow Teacher Training)";
+      }
+      if (s.title === "Physiotherapy — Pain Management") {
+        updated.title = "Pain Management";
+      }
+      if (s.title === "Physiotherapy for Gym and Sports Injuries") {
+        updated.title = "Gym & Sports Injury Sessions";
+      }
+      if (s.title === "Physiotherapy — Pain Modalities") {
+        updated.title = "Pain Modalities";
+      }
+      if (s.title === "Assistive Devices Assessment and Training") {
+        updated.title = "Assistive Devices";
+      }
+      return updated;
+    });
+  }, [services]);
 
   // Dynamic title based on category
   const dynamicTitle = useMemo(() => {
@@ -84,18 +110,89 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
   }, [searchParams]);
 
   const filteredServices = useMemo(() => {
-    if (activeCategory === "all") return services;
-    return services.filter((s) => s.category === activeCategory);
-  }, [activeCategory, services]);
+    const result = activeCategory === "all"
+      ? processedServices
+      : processedServices.filter((s) => s.category === activeCategory);
+
+    // Apply custom ranking for therapy category
+    if (activeCategory === "therapy") {
+      const therapyRanking = [
+        "Speech Therapy",
+        "Occupational Therapy",
+        "Cognitive Therapy",
+        "Behavioral Therapy",
+        "Sensory Integration Therapy",
+        "Group Therapy Sessions",
+        "Play Therapy",
+        "Brain Gym",
+      ];
+
+      return [...result].sort((a, b) => {
+        const indexA = therapyRanking.indexOf(a.title);
+        const indexB = therapyRanking.indexOf(b.title);
+
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
+        return a.title.localeCompare(b.title);
+      });
+    }
+
+    // Apply custom ranking for programs category
+    if (activeCategory === "programs") {
+      const programsRanking = [
+        "Training Program (Shadow Teacher Training)",
+        "School Readiness Program",
+        "Early Intervention Program",
+        "NIOS Support Program",
+        "Certificate in Special Education",
+        "Diploma in Special Education",
+      ];
+
+      return [...result].sort((a, b) => {
+        const indexA = programsRanking.indexOf(a.title);
+        const indexB = programsRanking.indexOf(b.title);
+
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
+        return a.title.localeCompare(b.title);
+      });
+    }
+
+    // Apply custom ranking for physiotherapy category
+    if (activeCategory === "physiotherapy") {
+      const physioRanking = [
+        "Pain Management",
+        "Gym & Sports Injury Sessions",
+        "Post-Surgical Rehabilitation",
+        "Wheelchair Training",
+        "Pain Modalities",
+        "Assistive Devices",
+      ];
+
+      return [...result].sort((a, b) => {
+        const indexA = physioRanking.indexOf(a.title);
+        const indexB = physioRanking.indexOf(b.title);
+
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
+        return a.title.localeCompare(b.title);
+      });
+    }
+
+    return result;
+  }, [activeCategory, processedServices]);
 
   // Count services per category
   const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: services.length };
-    services.forEach((s) => {
+    const counts: Record<string, number> = { all: processedServices.length };
+    processedServices.forEach((s) => {
       counts[s.category] = (counts[s.category] || 0) + 1;
     });
     return counts;
-  }, [services]);
+  }, [processedServices]);
 
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
