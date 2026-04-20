@@ -114,6 +114,22 @@ export const careerType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'responsibilities',
+      type: 'array',
+      title: 'Key Responsibilities',
+      of: [{type: 'string'}],
+      description: 'Add each responsibility as a separate point',
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: 'requirements',
+      type: 'array',
+      title: 'Requirements',
+      of: [{type: 'string'}],
+      description: 'Add each requirement as a separate point',
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
       name: 'additionalAdvantage',
       type: 'array',
       title: 'Additional Advantage',
@@ -132,14 +148,6 @@ export const careerType = defineType({
           type: 'block',
         }),
       ],
-    }),
-    defineField({
-      name: 'requirements',
-      type: 'array',
-      title: 'Role Requirements',
-      of: [{type: 'string'}],
-      description: 'Add each requirement as a separate point',
-      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: 'skills',
@@ -162,19 +170,27 @@ export const careerType = defineType({
       title: 'Posted Date',
       initialValue: () => new Date().toISOString(),
     }),
-  ],
-  preview: {
+    defineField({
+      name: 'order',
+      type: 'number',
+      title: 'Display Order',
+      description: 'Lower numbers appear first',
+      initialValue: 10,
+    }),
+    ],
+    preview: {
     select: {
       title: 'title',
       department: 'department',
       employmentType: 'employmentType',
       isActive: 'isActive',
+      order: 'order',
     },
-    prepare({ title, department, employmentType, isActive }) {
+    prepare({ title, department, employmentType, isActive, order }) {
       return {
-        title: title,
-        subtitle: `${department} • ${employmentType} • ${isActive ? 'Active' : 'Inactive'}`,
+        title: `${order ? `[${order}] ` : ''}${title}`,
+        subtitle: `${department} â€¢ ${employmentType} â€¢ ${isActive ? 'Active' : 'Inactive'}`,
       }
     },
-  },
-})
+    },
+    })

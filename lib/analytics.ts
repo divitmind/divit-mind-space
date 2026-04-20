@@ -18,6 +18,7 @@ export type ConversionSource =
   | "glossary_cta"
   | "404_cta"
   | "inline_cta"
+  | "career_apply_bottom"
   | "other";
 
 type ConversionPayload = {

@@ -326,7 +326,7 @@ export const ALL_GALLERY_IMAGES_QUERY = `*[_type == "gallery"] | order(uploadedA
  * - Orders by postedDate (most recent first)
  * - Minimal projections for listing page
  */
-export const ALL_CAREERS_QUERY = `*[_type == "career" && isActive == true] | order(postedDate desc) {
+export const ALL_CAREERS_QUERY = `*[_type == "career" && isActive == true] | order(order asc, postedDate desc) {
   _id,
   title,
   slug,
@@ -335,6 +335,12 @@ export const ALL_CAREERS_QUERY = `*[_type == "career" && isActive == true] | ord
   employmentType,
   locationType,
   salaryRange,
+  aboutRole,
+  responsibilities,
+  additionalAdvantage,
+  whatWeOffer,
+  requirements,
+  skills,
   postedDate
 }`;
 
@@ -342,7 +348,7 @@ export const ALL_CAREERS_QUERY = `*[_type == "career" && isActive == true] | ord
  * Query to fetch careers filtered by employment type
  * Used when navigating from filtered links
  */
-export const CAREERS_BY_TYPE_QUERY = `*[_type == "career" && isActive == true && employmentType == $employmentType] | order(postedDate desc) {
+export const CAREERS_BY_TYPE_QUERY = `*[_type == "career" && isActive == true && employmentType == $employmentType] | order(order asc, postedDate desc) {
   _id,
   title,
   slug,
@@ -351,6 +357,12 @@ export const CAREERS_BY_TYPE_QUERY = `*[_type == "career" && isActive == true &&
   employmentType,
   locationType,
   salaryRange,
+  aboutRole,
+  responsibilities,
+  additionalAdvantage,
+  whatWeOffer,
+  requirements,
+  skills,
   postedDate
 }`;
 
@@ -368,6 +380,9 @@ export const SINGLE_CAREER_QUERY = `*[_type == "career" && slug.current == $slug
   locationType,
   salaryRange,
   aboutRole,
+  responsibilities,
+  additionalAdvantage,
+  whatWeOffer,
   requirements,
   skills,
   postedDate
