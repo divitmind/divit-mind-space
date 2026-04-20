@@ -223,6 +223,9 @@ export interface Career {
     note?: string;
   };
   aboutRole: PortableTextBlock[];
+  responsibilities: string[];
+  additionalAdvantage?: PortableTextBlock[];
+  whatWeOffer?: PortableTextBlock[];
   requirements: string[];
   skills: string[];
   isActive: boolean;
