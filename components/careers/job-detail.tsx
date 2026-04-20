@@ -36,22 +36,30 @@ export function JobDetail({ job }: JobDetailProps) {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl p-6 border border-green/10 sticky top-8">
               <div className="space-y-6">
-                <div>
-                  <h3 className="text-sm font-semibold text-green/60 mb-2">Location</h3>
-                  <p className="text-green capitalize">{job.location.join(', ')}</p>
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-green/60 mb-2">Employment Type</h3>
-                  <p className="text-green capitalize">{job.employmentType.replace('-', ' ')}</p>
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-green/60 mb-2">Location Type</h3>
-                  <p className="text-green capitalize">{job.locationType}</p>
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-green/60 mb-2">Department</h3>
-                  <p className="text-green">{job.department}</p>
-                </div>
+                {job.location && job.location.length > 0 && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-green/60 mb-2">Location</h3>
+                    <p className="text-green capitalize">{job.location.join(', ')}</p>
+                  </div>
+                )}
+                {job.employmentType && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-green/60 mb-2">Employment Type</h3>
+                    <p className="text-green capitalize">{job.employmentType.replace('-', ' ')}</p>
+                  </div>
+                )}
+                {job.locationType && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-green/60 mb-2">Location Type</h3>
+                    <p className="text-green capitalize">{job.locationType}</p>
+                  </div>
+                )}
+                {job.department && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-green/60 mb-2">Department</h3>
+                    <p className="text-green">{job.department}</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
