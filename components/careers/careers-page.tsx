@@ -69,15 +69,22 @@ export function CareersPage({ jobs }: CareersPageProps) {
               Join Our Team
             </motion.h1>
 
-            {/* Description */}
-            <div className="text-base md:text-lg text-black/70 mb-6 max-w-3xl mx-auto font-medium leading-relaxed">
-              <span className="text-green font-bold block mb-2">Bangalore&apos;s Leading Center for Mental Health, Neurodevelopment & Physiotherapy</span>
-              <p className="mb-2 text-sm lg:text-base">
-                Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
-              </p>
-              <p className="text-sm lg:text-base italic">
-                Helping <span className="font-bold text-black">Children</span>, <span className="font-bold text-black">Teens</span>, & <span className="font-bold text-black">Adults</span> of all ages.
-              </p>
+            {/* Description - Unified Premium Style */}
+            <div className="text-base md:text-lg text-black/70 mb-6 max-w-4xl mx-auto font-medium leading-relaxed text-center">
+              <div className="inline-block text-center md:text-left">
+                <span className="text-green font-bold block mb-2">
+                  Bangalore&apos;s Leading Center for <span className="md:whitespace-nowrap">Mental Health,</span> <span className="md:whitespace-nowrap">Neurodevelopment &</span> <span className="md:whitespace-nowrap">Physiotherapy</span>
+                </span>
+                <p className="mb-3 text-sm lg:text-base leading-relaxed">
+                  Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play <br className="hidden md:block" /> Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
+                </p>
+                <div className="mt-6 flex items-center justify-center md:justify-start gap-3">
+                  <div className="h-px w-8 bg-black/10 hidden md:block" />
+                  <p className="text-sm lg:text-base italic text-black font-semibold">
+                    Helping <span className="text-green">Children</span>, <span className="text-green">Teens</span>, & <span className="text-green">Adults</span> of all ages.
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Quick Stats */}
