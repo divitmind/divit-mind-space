@@ -420,20 +420,12 @@ export default async function ServicePage({ params }: PageProps) {
                 {service.description}
               </p>
 
-              {(service.duration || service.format) && (
+              {service.duration && (
                 <div className="flex flex-wrap gap-4 mb-6">
-                  {service.duration && (
-                    <div className="flex items-center gap-2 text-sm font-bold text-green/60 uppercase tracking-widest bg-green/5 px-3 py-1.5 rounded-lg border border-green/5">
-                      <Clock className="w-4 h-4 text-green" />
-                      {service.duration}
-                    </div>
-                  )}
-                  {service.format && (
-                    <div className="flex items-center gap-2 text-sm font-bold text-green/60 uppercase tracking-widest bg-green/5 px-3 py-1.5 rounded-lg border border-green/5">
-                      <MapPin className="w-4 h-4 text-green" />
-                      {service.format}
-                    </div>
-                  )}
+                  <div className="flex items-center gap-2 text-sm font-bold text-green/60 uppercase tracking-widest bg-green/5 px-3 py-1.5 rounded-lg border border-green/5">
+                    <Clock className="w-4 h-4 text-green" />
+                    {service.duration}
+                  </div>
                 </div>
               )}
 
