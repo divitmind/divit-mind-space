@@ -61,15 +61,22 @@ export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions", set
               Let&apos;s Build Your <br className="hidden md:block" />
               <span className="italic text-purple font-serif">Unique Journey</span> Together
             </h1>
-            {/* AI-First Summary: Optimized for SGE/LLM/GEO */}
-            <div className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto mb-8 leading-relaxed">
-              <span className="text-green font-bold block mb-2">Bangalore&apos;s Leading Center for Mental Health, Neurodevelopment & Physiotherapy</span>
-              <p className="mb-2 text-sm lg:text-base">
-                Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
-              </p>
-              <p className="text-sm lg:text-base italic">
-                Helping <span className="font-bold text-black">Children</span>, <span className="font-bold text-black">Teens</span>, & <span className="font-bold text-black">Adults</span> of all ages.
-              </p>
+            {/* AI-First Summary: Optimized for SGE/LLM/GEO - Unified Premium Style */}
+            <div className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto mb-8 leading-relaxed text-center">
+              <div className="inline-block text-center md:text-left">
+                <span className="text-green font-bold block mb-2">
+                  Bangalore&apos;s Leading Center for <span className="md:whitespace-nowrap">Mental Health,</span> <span className="md:whitespace-nowrap">Neurodevelopment &</span> <span className="md:whitespace-nowrap">Physiotherapy</span>
+                </span>
+                <p className="mb-3 text-sm lg:text-base leading-relaxed">
+                  Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play <br className="hidden md:block" /> Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
+                </p>
+                <div className="mt-6 flex items-center justify-center md:justify-start gap-3">
+                  <div className="h-px w-8 bg-black/10 hidden md:block" />
+                  <p className="text-sm lg:text-base italic text-black font-semibold">
+                    Helping <span className="text-green">Children</span>, <span className="text-green">Teens</span>, & <span className="text-green">Adults</span> of all ages.
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

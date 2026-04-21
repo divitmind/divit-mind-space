@@ -78,16 +78,21 @@ export function HeroSection({
   // SEO Ranking Hack Strategy
   const seoTitle = "Leading Mental Health, Neurodevelopment & Physiotherapy Center in Bangalore";
   const seoLead = (
-    <div className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto leading-relaxed">
-      <span className="text-green font-bold block mb-2 text-center">
-        Bangalore&apos;s Leading Center for <span className="md:whitespace-nowrap">Mental Health,</span> <span className="md:whitespace-nowrap">Neurodevelopment &</span> <span className="md:whitespace-nowrap">Physiotherapy</span>
-      </span>
-      <p className="mb-2 text-sm lg:text-base text-center">
-        Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
-      </p>
-      <p className="text-sm lg:text-base italic text-center">
-        Helping <span className="font-bold text-black">Children</span>, <span className="font-bold text-black">Teens</span>, & <span className="font-bold text-black">Adults</span> of all ages.
-      </p>
+    <div className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto leading-relaxed text-center">
+      <div className="inline-block text-center md:text-left">
+        <span className="text-green font-bold block mb-2">
+          Bangalore&apos;s Leading Center for <span className="md:whitespace-nowrap">Mental Health,</span> <span className="md:whitespace-nowrap">Neurodevelopment &</span> <span className="md:whitespace-nowrap">Physiotherapy</span>
+        </span>
+        <p className="mb-3 text-sm lg:text-base leading-relaxed">
+          Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play <br className="hidden md:block" /> Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
+        </p>
+        <div className="mt-6 flex items-center justify-center md:justify-start gap-3">
+          <div className="h-px w-8 bg-black/10 hidden md:block" />
+          <p className="text-sm lg:text-base italic text-black font-semibold">
+            Helping <span className="text-green">Children</span>, <span className="text-green">Teens</span>, & <span className="text-green">Adults</span> of all ages.
+          </p>
+        </div>
+      </div>
     </div>
   );
   const seoLocation = "Located off Sarjapur Road, we provide trusted care for families in Kasavanahalli, HSR Layout, Bellandur, and Bengaluru.";
@@ -107,7 +112,7 @@ export function HeroSection({
 
     <section className="pt-2 pb-8 lg:pt-4 lg:pb-6 bg-[#FAF9F5]">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           {/* Title - Matched to Services Scale */}
           <motion.h1
             className="text-4xl md:text-5xl lg:text-6xl font-serif text-black mb-6 leading-tight italic"
@@ -119,14 +124,14 @@ export function HeroSection({
           </motion.h1>
 
           {/* Description - Matched to Services Scale */}
-          <motion.p
-            className="text-lg text-black/70 mb-6 max-w-2xl mx-auto font-medium"
+          <motion.div
+            className="text-lg text-black/70 mb-6 max-w-4xl mx-auto font-medium"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
             {description}
-          </motion.p>
+          </motion.div>
 
           {/* Service Chips - Entity-rich, scannable keyword list for SEO + LLM */}
           <motion.ul

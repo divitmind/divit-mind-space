@@ -45,14 +45,21 @@ const categories = [
 
 const categoryDescriptions: Record<string, React.ReactNode> = {
   all: (
-    <div className="text-base md:text-lg text-black/70 font-medium max-w-3xl mx-auto leading-relaxed">
-      <span className="text-green font-bold block mb-2 text-center">Bangalore&apos;s Leading Center for Mental Health, Neurodevelopment & Physiotherapy</span>
-      <p className="mb-2 text-sm lg:text-base text-center">
-        Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
-      </p>
-      <p className="text-sm lg:text-base italic text-center">
-        Helping <span className="font-bold text-black">Children</span>, <span className="font-bold text-black">Teens</span>, & <span className="font-bold text-black">Adults</span> of all ages.
-      </p>
+    <div className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto leading-relaxed text-center">
+      <div className="inline-block text-center md:text-left">
+        <span className="text-green font-bold block mb-2">
+          Bangalore&apos;s Leading Center for <span className="md:whitespace-nowrap">Mental Health,</span> <span className="md:whitespace-nowrap">Neurodevelopment &</span> <span className="md:whitespace-nowrap">Physiotherapy</span>
+        </span>
+        <p className="mb-3 text-sm lg:text-base leading-relaxed">
+          Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play <br className="hidden md:block" /> Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
+        </p>
+        <div className="mt-6 flex items-center justify-center md:justify-start gap-3">
+          <div className="h-px w-8 bg-black/10 hidden md:block" />
+          <p className="text-sm lg:text-base italic text-black font-semibold">
+            Helping <span className="text-green">Children</span>, <span className="text-green">Teens</span>, & <span className="text-green">Adults</span> of all ages.
+          </p>
+        </div>
+      </div>
     </div>
   ),
   assessments: "ADHD, autism, learning disability, and psychoeducational assessments for children, teens, and adults. Comprehensive clinical evaluations at our Sarjapur Road center in Bangalore.",
@@ -232,14 +239,14 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
             </motion.h1>
 
             {/* Description */}
-            <motion.p
-              className="text-lg text-black/70 mb-6 max-w-2xl mx-auto font-medium"
+            <motion.div
+              className="text-lg text-black/70 mb-6 max-w-4xl mx-auto font-medium"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
               {categoryDescriptions[activeCategory]}
-            </motion.p>
+            </motion.div>
 
             {/* Quick Stats Bar - Matching About Us style */}
             <motion.div

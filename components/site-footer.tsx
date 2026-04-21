@@ -150,9 +150,9 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                             ) : (
                                 <>
                                     Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy. Helping{" "}
-                                    <strong className="font-bold text-black/80">Children</strong>,{" "}
-                                    <strong className="font-bold text-black/80">Teens</strong>, &{" "}
-                                    <strong className="font-bold text-black/80">Adults</strong> of all ages.
+                                    <strong className="font-bold text-green">Children</strong>,{" "}
+                                    <strong className="font-bold text-green">Teens</strong>, &{" "}
+                                    <strong className="font-bold text-green">Adults</strong> of all ages.
                                 </>
                             )}
                         </p>
