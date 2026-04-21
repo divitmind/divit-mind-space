@@ -396,7 +396,7 @@ export default async function ServicePage({ params }: PageProps) {
         </div>
 
         {/* Hero Section */}
-        <section className="pt-8 pb-4 lg:pt-10 lg:pb-6">
+        <section className="pt-8 pb-0 lg:pt-10 lg:pb-0">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {/* Category Badge */}
@@ -442,7 +442,7 @@ export default async function ServicePage({ params }: PageProps) {
         </section>
 
         {/* Content Section */}
-        <section className="py-6 lg:py-8 bg-cream">
+        <section className="pt-4 pb-6 lg:pt-6 lg:pb-8 bg-cream">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {/* Overview */}
@@ -462,28 +462,31 @@ export default async function ServicePage({ params }: PageProps) {
 
               {/* Benefits */}
               {service.benefits && service.benefits.length > 0 && (
-                <div className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10">
+                <div className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
                   <h2
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
                     style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
                   >
                     What You&apos;ll Gain
                   </h2>
-                  <ul className="space-y-3">
+                  <ul className="space-y-4">
                     {service.benefits.map((benefit, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-1.5"> 
-                          <div className="w-1.5 h-1.5 rounded-full bg-green" />
+                        <div className="flex-shrink-0 mt-1">
+                          <svg className="w-5 h-5 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
                         </div>
-                        <span className="text-black/70 font-medium">{benefit}</span>
+                        <span className="text-black/70 font-medium leading-relaxed">{benefit}</span>
                       </li>
                     ))}
-                  </ul>                </div>
+                  </ul>
+                </div>
               )}
 
               {/* What to Expect */}
               {service.whatToExpect && service.whatToExpect.length > 0 && (
-                <div className="mb-8">
+                <div className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
                   <h2
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
                     style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
@@ -493,10 +496,8 @@ export default async function ServicePage({ params }: PageProps) {
                   <div className="space-y-4">
                     {service.whatToExpect.map((item, index) => (
                       <div key={index} className="flex items-start gap-4">
-                        <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-1.5">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green" />
-                        </div>
-                        <p className="text-black/70 font-medium">{item}</p>
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D] flex-shrink-0 mt-[10px]" />
+                        <p className="text-black/70 font-medium leading-relaxed">{item}</p>
                       </div>
                     ))}
                   </div>
@@ -505,31 +506,33 @@ export default async function ServicePage({ params }: PageProps) {
 
               {/* Who Is It For */}
               {service.whoIsItFor && service.whoIsItFor.length > 0 && (
-                <div className="mb-0 bg-white rounded-2xl p-6 lg:p-8 border border-green/10">
+                <div className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
                   <h2
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
                     style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
                   >
                     {service.whoIsItForTitle || "Is This Right for You or Your Loved Ones?"}
                   </h2>
-                  <ul className="space-y-3">
+                  <ul className="space-y-4">
                     {service.whoIsItFor.map((item, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-1.5">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green" />
+                        <div className="flex-shrink-0 mt-1">
+                          <svg className="w-5 h-5 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
                         </div>
-                        <span className="text-black/70 font-medium">{item}</span>
+                        <span className="text-black/70 font-medium leading-relaxed">{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               )}
 
-              {/* Additional Sections */}
+              {/* Additional Sections - Dynamic blocks from Sanity */}
               {service.additionalSections?.map((section, idx) => (
                 <div
                   key={idx}
-                  className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10"
+                  className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm"
                 >
                   <h2
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
@@ -537,13 +540,11 @@ export default async function ServicePage({ params }: PageProps) {
                   >
                     {section.title}
                   </h2>
-                  <ul className="space-y-3">
+                  <ul className="space-y-4">
                     {section.items.map((item, itemIdx) => (
-                      <li key={itemIdx} className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-green/10 flex items-center justify-center flex-shrink-0 mt-1.5">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green" />
-                        </div>
-                        <span className="text-black/70 font-medium">{item}</span>
+                      <li key={itemIdx} className="flex items-start gap-4">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D] flex-shrink-0 mt-[10px]" />
+                        <span className="text-black/70 font-medium leading-relaxed">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -552,7 +553,7 @@ export default async function ServicePage({ params }: PageProps) {
 
               {/* Additional Rich Text Content */}
               {service.body && service.body.length > 0 && (
-                <div className="mt-8 prose prose-green max-w-none prose-p:text-black/70 prose-p:font-medium prose-headings:font-serif prose-headings:text-green prose-li:text-black/70 prose-li:font-medium">
+                <div className="mt-12 prose prose-green max-w-none prose-p:text-black/70 prose-p:font-medium prose-headings:font-serif prose-headings:text-green prose-li:text-black/70 prose-li:font-medium prose-strong:text-black prose-strong:font-bold">
                   <PortableText 
                     value={service.body} 
                     components={portableTextComponents} 

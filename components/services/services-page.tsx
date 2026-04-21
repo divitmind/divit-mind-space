@@ -43,8 +43,18 @@ const categories = [
   { id: "physiotherapy", label: "Physiotherapy", icon: Activity },
 ];
 
-const categoryDescriptions: Record<string, string> = {
-  all: "Mental health, neurodevelopment, and physiotherapy for children, teens, and adults - all under one roof. Serving families across HSR Layout, Bellandur, Kasavanahalli, and Bengaluru.",
+const categoryDescriptions: Record<string, React.ReactNode> = {
+  all: (
+    <div className="text-base md:text-lg text-black/70 font-medium max-w-3xl mx-auto leading-relaxed">
+      <span className="text-green font-bold block mb-2 text-center">Bangalore&apos;s Leading Center for Mental Health, Neurodevelopment & Physiotherapy</span>
+      <p className="mb-2 text-sm lg:text-base text-center">
+        Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
+      </p>
+      <p className="text-sm lg:text-base italic text-center">
+        Helping <span className="font-bold text-black">Children</span>, <span className="font-bold text-black">Teens</span>, & <span className="font-bold text-black">Adults</span> of all ages.
+      </p>
+    </div>
+  ),
   assessments: "ADHD, autism, learning disability, and psychoeducational assessments for children, teens, and adults. Comprehensive clinical evaluations at our Sarjapur Road center in Bangalore.",
   therapy: "Speech therapy, occupational therapy, ABA, sensory integration, and play therapy for all ages. Expert neurodevelopmental care at our Kasavanahalli center, Bangalore.",
   guidance: "Child, adolescent, and adult counseling plus parent guidance programs. Professional mental health support for families in HSR Layout, Bellandur, and Bangalore.",
