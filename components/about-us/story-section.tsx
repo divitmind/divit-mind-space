@@ -18,10 +18,10 @@ export function StorySection({ data }: { data?: AboutUsStoryData }) {
   const paragraphs = data?.paragraphs || defaultParagraphs;
 
   return (
-    <section className="py-8 lg:py-6 bg-[#FAF9F5]">
+    <section className="pb-8 lg:pb-6 bg-[#FAF9F5]">
       <div className="container mx-auto px-4">
         <motion.div
-          className="max-w-3xl mx-auto space-y-8 text-center"
+          className="max-w-3xl mx-auto space-y-4 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -29,7 +29,6 @@ export function StorySection({ data }: { data?: AboutUsStoryData }) {
           <div className="space-y-4">
             <h2
               className="text-4xl lg:text-5xl font-serif text-black leading-tight"
-              style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             >
               {title}
             </h2>
@@ -42,22 +41,24 @@ export function StorySection({ data }: { data?: AboutUsStoryData }) {
             {paragraphs.map((p, i) => (
               <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
             ))}
-
-            <div className="p-8 bg-white rounded-3xl border border-black/5 shadow-xl shadow-black/[0.02]">
-              <p className="text-black font-semibold text-xl mb-3">Local Care for Bangalore Families</p>
-              <p className="text-base">
-                Located off <span className="text-[#7A9A7D]">Sarjapur Road</span>, we provide trusted care for families across <span className="font-bold">Kasavanahalli, HSR Layout, Bellandur, and Bengaluru</span>. Our center is a safe haven designed for neurodivergent individuals and families across all ages.
-              </p>
-            </div>
           </div>
 
-          <div className="pt-8 border-t border-black/5">
-            <div className="flex items-center justify-center gap-6">
-              <div className="w-1.5 h-14 bg-[#7A9A7D]/20 rounded-full" />
-              <div className="flex flex-col text-left">
-                <span className="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-1">Our Core Mission</span>
-                <span className="text-xl font-serif italic text-black">Empowering potential through compassionate, evidence-based care.</span>
-              </div>
+          {/* Unified Mission & Location Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+            {/* Mission Card - Sage Green Accent */}
+            <div className="group p-8 lg:p-10 bg-[#7A9A7D] rounded-[2rem] text-white text-left flex flex-col justify-center shadow-xl shadow-[#7A9A7D]/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#7A9A7D]/20 hover:bg-[#6B8B6E]">
+              <span className="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-80 group-hover:opacity-100 transition-opacity">Our Core Mission</span>
+              <p className="text-2xl lg:text-3xl font-serif italic leading-tight">
+                Empowering potential through compassionate, evidence-based care.
+              </p>
+            </div>
+
+            {/* Location Card - Matches Philosophy style */}
+            <div className="group p-8 lg:p-10 bg-white rounded-[2rem] border border-black/5 text-left flex flex-col justify-center shadow-xl shadow-black/[0.02] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5 hover:border-[#7A9A7D]/20">
+              <p className="text-black font-serif italic text-xl mb-3 group-hover:text-[#7A9A7D] transition-colors">Local Care for Bangalore Families</p>
+              <p className="text-base text-black/60 font-medium leading-relaxed">
+                Located off <span className="text-[#7A9A7D] font-bold">Sarjapur Road</span>, we provide trusted care for families across <span className="text-black font-bold">Kasavanahalli, HSR Layout, Bellandur, and surrounding areas</span>.
+              </p>
             </div>
           </div>
         </motion.div>

@@ -62,19 +62,14 @@ export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions", set
               <span className="italic text-purple font-serif">Unique Journey</span> Together
             </h1>
             {/* AI-First Summary: Optimized for SGE/LLM/GEO */}
-            <p className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto mb-6 leading-relaxed">
-              Bangalore&apos;s leading center for <span className="text-green font-bold">mental health, neurodevelopment, and physiotherapy</span>. Located in <span className="text-green font-bold">Aadeshwar Chambers</span> (same building as ICICI Bank), we provide neuro-affirming care including expert clinical assessments and specialized therapy for <span className="font-bold text-black">children, teens, and adults</span> across Bangalore.
-            </p>
-            
-            <div className="flex flex-wrap justify-center gap-4 lg:gap-8">
-              <div className="flex items-center gap-2 text-[9px] lg:text-[10px] font-bold text-green/60 uppercase tracking-widest max-w-[160px] lg:max-w-none">
-                <ShieldCheck className="w-3.5 h-3.5 text-green shrink-0" />
-                {trustBadge1}
-              </div>
-              <div className="flex items-center gap-2 text-[9px] lg:text-[10px] font-bold text-green/60 uppercase tracking-widest max-w-[160px] lg:max-w-none">
-                <Clock className="w-3.5 h-3.5 text-green shrink-0" />
-                {trustBadge2}
-              </div>
+            <div className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto mb-8 leading-relaxed">
+              <span className="text-green font-bold block mb-2">Bangalore&apos;s Leading Center for Mental Health, Neurodevelopment & Physiotherapy</span>
+              <p className="mb-2 text-sm lg:text-base">
+                Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
+              </p>
+              <p className="text-sm lg:text-base italic">
+                Helping <span className="font-bold text-black">Children</span>, <span className="font-bold text-black">Teens</span>, & <span className="font-bold text-black">Adults</span> of all ages.
+              </p>
             </div>
           </motion.div>
         </div>

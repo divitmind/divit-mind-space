@@ -144,7 +144,7 @@ export function MainNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavLink href="/contact-us">Contact</NavLink>
+          <NavLink href="/contact-us">Contact Us</NavLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>

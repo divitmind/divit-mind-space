@@ -70,15 +70,15 @@ export function CareersPage({ jobs }: CareersPageProps) {
             </motion.h1>
 
             {/* Description */}
-            <motion.p
-              className="text-lg text-black/70 mb-6 max-w-2xl mx-auto font-medium leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              Join Bangalore&apos;s leading center for mental health, neurodevelopment, and physiotherapy.
-              Serving families across Kasavanahalli, HSR Layout, Bellandur, and Bengaluru.
-            </motion.p>
+            <div className="text-base md:text-lg text-black/70 mb-6 max-w-3xl mx-auto font-medium leading-relaxed">
+              <span className="text-green font-bold block mb-2">Bangalore&apos;s Leading Center for Mental Health, Neurodevelopment & Physiotherapy</span>
+              <p className="mb-2 text-sm lg:text-base">
+                Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
+              </p>
+              <p className="text-sm lg:text-base italic">
+                Helping <span className="font-bold text-black">Children</span>, <span className="font-bold text-black">Teens</span>, & <span className="font-bold text-black">Adults</span> of all ages.
+              </p>
+            </div>
 
             {/* Quick Stats */}
             <motion.div

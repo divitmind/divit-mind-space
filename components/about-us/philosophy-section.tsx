@@ -84,7 +84,7 @@ export function PhilosophySection({ data }: { data?: AboutUsPhilosophyData }) {
     <section className="py-8 lg:pt-6 lg:pb-6 bg-white">
       <div className="container mx-auto px-4">
         <motion.div
-          className="text-center mb-8 lg:mb-10"
+          className="text-center mb-6 lg:mb-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -93,7 +93,6 @@ export function PhilosophySection({ data }: { data?: AboutUsPhilosophyData }) {
 
           <h2
             className="text-4xl lg:text-5xl font-serif text-black mb-4"
-            style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
           >
             {title}
           </h2>
@@ -103,23 +102,32 @@ export function PhilosophySection({ data }: { data?: AboutUsPhilosophyData }) {
         </motion.div>
 
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {points.map((reason, idx) => {
             const IconComponent = iconMap[reason.icon] || Sparkles;
             return (
               <motion.div
                 key={idx}
-                className="bg-[#FAF9F5] rounded-[2rem] p-10 border border-black/5 shadow-xl shadow-black/[0.01] hover:shadow-2xl hover:shadow-black/5 transition-all hover:-translate-y-1"
+                className="group relative flex flex-col p-6 lg:p-8 rounded-[1.5rem] lg:rounded-[2rem] border border-black/5 transition-all duration-500 bg-white hover:shadow-2xl hover:shadow-black/5 hover:border-black/10 hover:-translate-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#7A9A7D]/10 flex items-center justify-center mb-8">
-                  <IconComponent className="w-7 h-7 text-[#7A9A7D]" />
+                {/* Icon Container - Matching Services Hub style */}
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl flex items-center justify-center mb-4 lg:mb-6 transition-transform group-hover:scale-105 bg-[#E8D5B7]">
+                  <IconComponent className="h-5 w-5 lg:h-6 lg:w-6 text-[#7A9A7D]" />
                 </div>
-                <h3 className="text-2xl font-bold text-black mb-4">{reason.title}</h3>
-                <p className="text-base text-black/60 font-medium leading-relaxed">{reason.description}</p>
+
+                {/* Title - Unified Serif Italic */}
+                <h3 className="text-lg lg:text-xl font-bold text-black mb-2 lg:mb-3 font-serif italic leading-tight">
+                  {reason.title}
+                </h3>
+
+                {/* Description - Unified Sans */}
+                <p className="text-[13px] lg:text-sm text-black/60 font-medium leading-relaxed">
+                  {reason.description}
+                </p>
               </motion.div>
             );
           })}

@@ -148,7 +148,7 @@ export function MobileNav() {
             </Accordion>
 
             <div className="space-y-0">
-                <MobileNavItem href="/contact-us" label="Contact" setOpen={setOpen} />
+                <MobileNavItem href="/contact-us" label="Contact Us" setOpen={setOpen} />
                 <MobileNavItem href="/careers" label="Careers" setOpen={setOpen} />
             </div>
 

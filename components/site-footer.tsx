@@ -144,29 +144,27 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                                 {footerContent?.tagline || "Bangalore's Leading Center for Mental Health, Neurodevelopment & Physiotherapy"}
                             </h3>
                         </div>
-                        <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px] mb-4">
+                        <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px] mb-6">
                             {footerContent?.description ? (
                                 footerContent.description
                             ) : (
                                 <>
-                                    Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy. Serving{" "}
-                                    <strong className="font-semibold text-black/70">children</strong>,{" "}
-                                    <strong className="font-semibold text-black/70">teens</strong>, and{" "}
-                                    <strong className="font-semibold text-black/70">adults</strong>{" "}
-                                    across Bangalore.
+                                    Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy. Helping{" "}
+                                    <strong className="font-bold text-black/80">Children</strong>,{" "}
+                                    <strong className="font-bold text-black/80">Teens</strong>, &{" "}
+                                    <strong className="font-bold text-black/80">Adults</strong> of all ages.
                                 </>
                             )}
                         </p>
                         {/* Credential line — Indian YMYL trust signal. RCI regulates clinical
                             psychologists; NCAHP covers speech, OT, and allied-health staff. */}
-                        <p className="text-[11px] text-black/40 font-medium leading-relaxed max-w-[360px]">
-                            Clinical psychologists registered under the Rehabilitation Council of India (RCI). Allied-health staff practice under the National Commission for Allied and Healthcare Professions (NCAHP).
-                        </p>
-                    </div>
+                        <p className="text-[11px] text-black/40 font-medium leading-relaxed max-w-[360px] mt-4 border-t border-black/5 pt-4">
+                            RCI Registered Clinical Psychologists. Allied-health staff practice under NCAHP standards.
+                        </p>                    </div>
 
                     {/* Services Column */}
                     <div className="col-span-1">
-                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-5">
+                        <h4 className="text-xs font-bold text-black/50 uppercase tracking-[0.2em] mb-5">
                             Our Services
                         </h4>
                         <FooterServiceLinks />
@@ -174,7 +172,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
 
                     {/* Conditions Column — distinct from Services; links to /conditions pivots */}
                     <div className="col-span-1">
-                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-5">
+                        <h4 className="text-xs font-bold text-black/50 uppercase tracking-[0.2em] mb-5">
                             Conditions
                         </h4>
                         <FooterConditionLinks />
@@ -182,7 +180,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
 
                     {/* Quick Links Column */}
                     <div className="col-span-2 lg:col-span-1">
-                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-5">
+                        <h4 className="text-xs font-bold text-black/50 uppercase tracking-[0.2em] mb-5">
                             Explore
                         </h4>
                         <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
@@ -201,7 +199,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
 
                     {/* Contact Column: Full width on mobile */}
                     <div className="col-span-2 lg:col-span-1 pt-4 lg:pt-0 border-t lg:border-none border-black/5">
-                        <h4 className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em] mb-5">
+                        <h4 className="text-xs font-bold text-black/50 uppercase tracking-[0.2em] mb-5">
                             Get in Touch
                         </h4>
                         <address className="not-italic space-y-3 text-[13px] text-black/60 font-medium">
