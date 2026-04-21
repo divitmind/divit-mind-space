@@ -76,16 +76,25 @@ export function HeroSection({
     googleRating: sanityMetrics?.googleRating || DEFAULT_METRICS.googleRating,
   };
   // SEO Ranking Hack Strategy
-  const seoTitle = "Leading Mental Health, Neurodevelopment & Physiotherapy Center in Bangalore";
+  const seoTitle = "About Divit MindSpace";
   const seoLead = (
-    <div className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto leading-relaxed text-center">
-      <div className="inline-block text-center md:text-left">
-        <p className="mb-3 text-sm lg:text-base leading-relaxed">
-          Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play <br className="hidden md:block" /> Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
+    <div className="max-w-5xl mx-auto text-center md:text-left">
+      <div className="inline-block">
+        <h1 
+          className="text-3xl md:text-5xl lg:text-6xl font-serif italic text-green mb-6 leading-[1.1] tracking-tight"
+          style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+        >
+          <span className="lg:whitespace-nowrap">Bangalore&apos;s Leading Center for Mental Health,</span><br className="hidden lg:block" />
+          Neurodevelopment & Physiotherapy
+        </h1>
+        
+        <p className="mb-6 text-base md:text-lg lg:text-xl leading-relaxed text-black/60 max-w-3xl font-medium">
+          Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
         </p>
-        <div className="mt-6 flex items-center justify-center md:justify-start gap-3">
-          <div className="h-px w-8 bg-black/10 hidden md:block" />
-          <p className="text-sm lg:text-base italic text-black font-semibold">
+
+        <div className="mt-10 flex items-center justify-center md:justify-start gap-5">
+          <div className="h-px w-12 bg-black/10 hidden md:block" />
+          <p className="text-base md:text-lg italic text-black font-semibold tracking-tight">
             Helping <span className="text-green">Children</span>, <span className="text-green">Teens</span>, & <span className="text-green">Adults</span> of all ages.
           </p>
         </div>
@@ -107,25 +116,15 @@ export function HeroSection({
   return (
 
 
-    <section className="pt-2 pb-8 lg:pt-4 lg:pb-6 bg-[#FAF9F5]">
+    <section className="pt-8 pb-8 lg:pt-12 lg:pb-10 bg-[#FAF9F5]">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Title - Matched to Services Scale */}
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-serif text-black mb-6 leading-tight italic"
+          {/* Authority Statement as the primary entry point */}
+          <motion.div
+            className="text-lg text-black/70 mb-8 max-w-4xl mx-auto font-medium"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-          >
-            {title}
-          </motion.h1>
-
-          {/* Description - Matched to Services Scale */}
-          <motion.div
-            className="text-lg text-black/70 mb-6 max-w-4xl mx-auto font-medium"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
           >
             {description}
           </motion.div>
