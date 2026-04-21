@@ -80,9 +80,6 @@ export function HeroSection({
   const seoLead = (
     <div className="text-base md:text-lg text-black/70 font-medium max-w-4xl mx-auto leading-relaxed text-center">
       <div className="inline-block text-center md:text-left">
-        <span className="text-green font-bold block mb-2">
-          Bangalore&apos;s Leading Center for <span className="md:whitespace-nowrap">Mental Health,</span> <span className="md:whitespace-nowrap">Neurodevelopment &</span> <span className="md:whitespace-nowrap">Physiotherapy</span>
-        </span>
         <p className="mb-3 text-sm lg:text-base leading-relaxed">
           Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play <br className="hidden md:block" /> Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy.
         </p>
