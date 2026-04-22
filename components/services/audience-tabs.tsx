@@ -27,33 +27,35 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
 
   return (
     <div className="space-y-6 lg:space-y-8">
-      {/* Refined Inset Pill Switcher (Best-in-Class UX) */}
-      <div className="flex justify-center">
-        <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-w-lg shadow-inner">
-          {sections.map((section) => {
-            const isActive = activeTab === section.audienceType;
-            return (
-              <button
-                key={section.audienceType}
-                onClick={() => setActiveTab(section.audienceType)}
-                className={`
-                  relative flex-1 py-2.5 lg:py-3 rounded-full text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300 z-10
-                  ${isActive ? "text-green" : "text-green/40 hover:text-green/60"}
-                `}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activePill"
-                    className="absolute inset-0 bg-white rounded-full shadow-md border border-green/5 -z-10"
-                    transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
-                  />
-                )}
-                {section.audienceType}
-              </button>
-            );
-          })}
+      {/* Refined Inset Pill Switcher (Only visible if 2+ audiences exist) */}
+      {sections.length > 1 && (
+        <div className="flex justify-center">
+          <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-w-lg shadow-inner">
+            {sections.map((section) => {
+              const isActive = activeTab === section.audienceType;
+              return (
+                <button
+                  key={section.audienceType}
+                  onClick={() => setActiveTab(section.audienceType)}
+                  className={`
+                    relative flex-1 py-2.5 lg:py-3 rounded-full text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300 z-10
+                    ${isActive ? "text-green" : "text-green/40 hover:text-green/60"}
+                  `}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activePill"
+                      className="absolute inset-0 bg-white rounded-full shadow-md border border-green/5 -z-10"
+                      transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
+                    />
+                  )}
+                  {section.audienceType}
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -65,7 +67,7 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
           className="space-y-6 lg:space-y-8"
         >
           {/* Clinical Overview Block */}
-          <div className="bg-white rounded-[2rem] p-6 lg:p-10 border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+          <div className="bg-white rounded-[2rem] pt-4 pb-6 px-6 lg:pt-6 lg:pb-10 lg:px-10 border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
               <div className="flex-1">
                 <p className="text-black/70 text-base lg:text-xl leading-relaxed font-medium italic whitespace-pre-wrap">
@@ -74,8 +76,8 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
               </div>
               
               {activeData.shortDescription && (
-                <div className="w-full lg:w-80 shrink-0">
-                  <div className="bg-white p-6 lg:p-8 rounded-[2rem] border border-black/[0.03] shadow-[0_20px_50px_rgba(0,0,0,0.04)] relative overflow-hidden group">
+                <div className="w-full lg:w-80 shrink-0 lg:-mt-4">
+                  <div className="bg-white pt-4 pb-6 px-6 lg:pt-6 lg:pb-8 lg:px-8 rounded-[2rem] border border-black/[0.03] shadow-[0_20px_50px_rgba(0,0,0,0.04)] relative overflow-hidden group">
                     <div className="flex items-center gap-2 mb-4">
                       <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green opacity-75"></span>
