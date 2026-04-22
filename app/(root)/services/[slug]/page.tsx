@@ -457,7 +457,7 @@ export default async function ServicePage({ params }: PageProps) {
 
       {/* Related Services */}
       {related.length > 0 && (
-        <section className="py-6 lg:py-8 bg-cream">
+        <section className="pt-6 pb-0 lg:pt-8 lg:pb-0 bg-cream">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2
@@ -490,7 +490,7 @@ export default async function ServicePage({ params }: PageProps) {
       )}
 
       {/* Bottom CTA */}
-      <section className="pt-6 pb-8 lg:pt-8 lg:pb-10 bg-[#FAF9F5]">
+      <section className="pt-2 pb-2 lg:pt-4 lg:pb-4 bg-[#FAF9F5]">
         <div className="container mx-auto px-4">
           <InlineCtaBlock 
             heading={service.ctaOverride?.title || "Not ready to book?"}

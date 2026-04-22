@@ -13,12 +13,12 @@ export function InlineCtaBlock({
   subtext?: string;
 }) {
   return (
-    <div className="max-w-5xl mx-auto bg-white rounded-[2rem] md:rounded-[2.5rem] border border-black/5 p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 shadow-2xl shadow-black/[0.03]">
-      <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 text-center md:text-left">
+    <div className="max-w-5xl mx-auto bg-white rounded-[2rem] md:rounded-[2.5rem] border border-black/5 p-5 md:p-10 flex flex-col md:flex-row items-center justify-between gap-5 md:gap-10 shadow-2xl shadow-black/[0.03]">
+      <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
         {/* High Contrast Logo/Icon Circle */}
-        <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#7A9A7D] flex items-center justify-center shrink-0 shadow-lg">
+        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-[#7A9A7D] flex items-center justify-center shrink-0 shadow-lg">
           <svg
-            className="w-7 h-7 md:w-10 md:h-10 text-white"
+            className="w-6 h-6 md:w-10 md:h-10 text-white"
             viewBox="0 0 24 24"
             fill="currentColor"
           >
@@ -28,12 +28,12 @@ export function InlineCtaBlock({
 
         <div className="flex-1">
           <h2
-            className="text-2xl lg:text-3xl font-serif italic text-black mb-2"
+            className="text-xl lg:text-3xl font-serif italic text-black mb-1 lg:mb-2"
             style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
           >
             {heading}
           </h2>
-          <p className="text-black/60 font-medium text-sm md:text-base">{subtext}</p>
+          <p className="text-black/60 font-medium text-[13px] md:text-base">{subtext}</p>
         </div>
       </div>
 

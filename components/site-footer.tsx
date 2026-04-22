@@ -125,7 +125,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
     const displayEmail = siteSettings?.contact?.email || contact.email.label;
     const displayEmailLink = siteSettings?.contact?.email ? `mailto:${siteSettings.contact.email}` : contact.email.href;
     return (
-        <footer className="bg-[#FDFBF7] border-t border-black/5 pt-8 lg:pt-12 pb-6 lg:pb-8">
+        <footer className="bg-[#FDFBF7] border-t border-black/5 pt-3 lg:pt-4 pb-6 lg:pb-8">
             <div className="container">
                 {/* Top Grid: mobile stacks to 2 cols; desktop lays out 5 cols */}
                 <div className="grid grid-cols-2 lg:grid-cols-[1.25fr_1fr_1fr_1fr_1.2fr] gap-x-8 gap-y-8 lg:gap-y-12">
@@ -294,7 +294,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                 </div>
 
                 {/* Bottom Bar: CTAs left, legal links right */}
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-6 lg:pt-8 mt-4 border-t border-black/5">
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-4 lg:pt-4 mt-2 border-t border-black/5">
                     <a
                         href={contact.whatsapp}
                         target="_blank"
