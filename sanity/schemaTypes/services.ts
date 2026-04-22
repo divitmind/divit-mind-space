@@ -153,7 +153,18 @@ export const servicesType = defineType({
               validation: (rule) => rule.required()
             },
             { name: 'title', type: 'string', title: 'Section Title (e.g., "For Children & Teens")' },
-            { name: 'overview', type: 'text', title: 'Overview' },
+            {
+              name: 'overview',
+              type: 'text',
+              title: 'Overview'
+            },
+            {
+              name: 'whoIsItFor',
+              type: 'array',
+              title: 'Who Is It For',
+              description: 'Specific checklist for this audience (e.g., "Frequent meltdowns", "Work stress").',
+              of: [{ type: 'string' }]
+            },
             {
               name: 'benefits',
               type: 'array',

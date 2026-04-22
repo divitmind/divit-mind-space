@@ -42,13 +42,13 @@ interface ServiceData {
   };
   faqs?: { question: string; answer: string }[];
   audienceSections?: {
-    audienceType: "children" | "teens" | "adults";
-    title?: string;
-    overview?: string;
-    benefits?: string[];
-    expectations?: string[];
-  }[];
-  ctaOverride?: {
+  audienceType: "children" | "teens" | "adults";
+  title?: string;
+  overview?: string;
+  whoIsItFor?: string[];
+  benefits?: string[];
+  expectations?: string[];
+  }[];  ctaOverride?: {
     title?: string;
     description?: string;
     buttonText?: string;
@@ -576,6 +576,24 @@ export default async function ServicePage({ params }: PageProps) {
                           <p className="text-black/70 font-medium leading-relaxed">
                             {section.overview}
                           </p>
+                        </div>
+                      )}
+
+                      {section.whoIsItFor && section.whoIsItFor.length > 0 && (
+                        <div className="mb-8 p-6 bg-green/5 rounded-xl border border-green/10">
+                          <h3 className="font-serif text-xl text-green mb-4">Is This Right for You?</h3>
+                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8">
+                            {section.whoIsItFor.map((item, i) => (
+                              <li key={i} className="flex items-start gap-3">
+                                <div className="flex-shrink-0 mt-1">
+                                  <svg className="w-4 h-4 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                  </svg>
+                                </div>
+                                <span className="text-sm text-black/70 font-medium">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       )}
 

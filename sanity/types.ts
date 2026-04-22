@@ -157,6 +157,7 @@ export interface Service {
     audienceType: "children" | "teens" | "adults";
     title?: string;
     overview?: string;
+    whoIsItFor?: string[];
     benefits?: string[];
     expectations?: string[];
   }[];
