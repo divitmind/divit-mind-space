@@ -5,15 +5,15 @@ export const servicesType = defineType({
   title: 'Services',
   type: 'document',
   groups: [
-    { name: 'basic', title: '1. Basic Info', default: true },
-    { name: 'content', title: '2. Service Details' },
-    { name: 'experts', title: '3. Experts & FAQ' },
-    { name: 'cta', title: '4. CTA Override' },
-    { name: 'seo', title: '5. SEO (Optional)' },
+    { name: 'basic', title: '1. Service Content', default: true },
+    { name: 'experts', title: '2. Experts & FAQ' },
+    { name: 'extra', title: '3. Additional Blocks' },
+    { name: 'config', title: '4. Settings & SEO' },
+    { name: 'legacy', title: '5. Legacy Content (Fallback)' },
   ],
   fields: [
     // ============================================================
-    // BASIC INFO - Required fields for service listing
+    // BASIC INFO - Global across all audiences
     // ============================================================
     defineField({
       name: 'title',
@@ -34,43 +34,6 @@ export const servicesType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'description',
-      title: 'Short Description',
-      type: 'text',
-      group: 'basic',
-      description: 'Brief overview for service cards (1-2 sentences).',
-      validation: (rule) => rule.required().max(200),
-    }),
-    defineField({
-      name: 'image',
-      title: 'Service Image',
-      type: 'image',
-      group: 'basic',
-      options: { hotspot: true },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-        },
-      ],
-    }),
-    defineField({
-      name: 'popular',
-      title: 'Featured / Popular',
-      type: 'boolean',
-      group: 'basic',
-      initialValue: false,
-    }),
-    defineField({
-      name: 'isTherapy',
-      title: 'Is Therapy?',
-      type: 'boolean',
-      group: 'basic',
-      description: 'Used for homepage grouping.',
-      initialValue: false,
-    }),
-    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
@@ -86,54 +49,39 @@ export const servicesType = defineType({
       },
       validation: (rule) => rule.required(),
     }),
-
-    // ============================================================
-    // CONTENT - Rich content for the detail page
-    // ============================================================
+    defineField({
+      name: 'description',
+      title: 'Short Description (for Cards)',
+      type: 'text',
+      group: 'basic',
+      description: '1-2 sentences for the services listing page.',
+      validation: (rule) => rule.required().max(200),
+    }),
     defineField({
       name: 'overview',
-      title: 'Overview',
+      title: 'Global Overview',
       type: 'text',
-      group: 'content',
-      description: 'Detailed introductory paragraph for the service page.',
+      group: 'basic',
+      description: 'Main introductory paragraph for the service page (shows for all audiences).',
     }),
     defineField({
-      name: 'benefits',
-      title: 'What You\'ll Gain',
-      type: 'array',
-      group: 'content',
-      of: [{ type: 'string' }],
-      description: 'List of benefits or outcomes. Each item appears as a bullet.',
+      name: 'image',
+      title: 'Service Image',
+      type: 'image',
+      group: 'basic',
+      options: { hotspot: true },
+      fields: [{ name: 'alt', type: 'string', title: 'Alt Text' }],
     }),
-    defineField({
-      name: 'whatToExpect',
-      title: 'What to Expect',
-      type: 'array',
-      group: 'content',
-      of: [{ type: 'string' }],
-      description: 'List of steps or process details. Each item appears as a bullet.',
-    }),
-    defineField({
-      name: 'whoIsItForTitle',
-      title: 'Who Is It For Title',
-      type: 'string',
-      group: 'content',
-      initialValue: 'Is This Right for You or Your Loved Ones?',
-    }),
-    defineField({
-      name: 'whoIsItFor',
-      title: 'Who Is It For',
-      type: 'array',
-      group: 'content',
-      of: [{ type: 'string' }],
-      description: 'Describe who benefits from this service.',
-    }),
+
+    // ============================================================
+    // AUDIENCE SECTIONS - Specific to Child, Teen, Adult
+    // ============================================================
     defineField({
       name: 'audienceSections',
-      title: 'Audience-Specific Details',
+      title: 'Audience-Specific Details (Children, Teens, Adults)',
       type: 'array',
-      group: 'content',
-      description: 'Add specific sections for Children, Teens, or Adults if this service caters differently to them.',
+      group: 'basic',
+      description: 'Add specific content for different age groups here.',
       of: [
         defineArrayMember({
           type: 'object',
@@ -154,27 +102,22 @@ export const servicesType = defineType({
             },
             { name: 'title', type: 'string', title: 'Section Title (e.g., "For Children & Teens")' },
             {
-              name: 'overview',
-              type: 'text',
-              title: 'Overview'
-            },
-            {
               name: 'whoIsItFor',
               type: 'array',
-              title: 'Who Is It For',
-              description: 'Specific checklist for this audience (e.g., "Frequent meltdowns", "Work stress").',
+              title: '1. Is This Right for You or Your Loved Ones?',
+              description: 'Checklist of symptoms or needs.',
               of: [{ type: 'string' }]
             },
             {
               name: 'benefits',
               type: 'array',
-              title: 'What You\'ll Gain',
+              title: '2. What You\'ll Gain (Benefits)',
               of: [{ type: 'string' }]
             },
             {
               name: 'expectations',
               type: 'array',
-              title: 'What to Expect',
+              title: '3. What to Expect (Process)',
               of: [{ type: 'string' }]
             }
           ],
@@ -182,72 +125,40 @@ export const servicesType = defineType({
             select: { title: 'title', audience: 'audienceType' },
             prepare({ title, audience }) {
               return {
-                title: title || audience.charAt(0).toUpperCase() + audience.slice(1),
-                subtitle: `Specific details for ${audience}`
+                title: title || (audience ? audience.charAt(0).toUpperCase() + audience.slice(1) : ''),
+                subtitle: `Specific content for ${audience}`
               }
             }
           }
         })
       ]
     }),
+
+    // ============================================================
+    // SETTINGS & SEO
+    // ============================================================
     defineField({
-      name: 'duration',
-      title: 'Duration',
-      type: 'string',
-      group: 'content',
-      description: 'e.g., "45-minute sessions", "2-hour workshop"',
+      name: 'popular',
+      title: 'Featured / Popular',
+      type: 'boolean',
+      group: 'config',
+      initialValue: false,
     }),
     defineField({
-      name: 'format',
-      title: 'Format / Location',
-      type: 'string',
-      group: 'content',
-      description: 'e.g., "In-person at our center", "Online sessions available"',
+      name: 'isTherapy',
+      title: 'Is Therapy?',
+      type: 'boolean',
+      group: 'config',
+      initialValue: false,
     }),
     defineField({
-      name: 'additionalSections',
-      title: 'Additional Custom Blocks',
-      type: 'array',
-      group: 'content',
-      description: 'Add extra "What to Expect" style boxes with custom headers and dots.',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'customBlock',
-          title: 'Custom Content Block',
-          fields: [
-            { name: 'title', type: 'string', title: 'Block Title', validation: (rule) => rule.required() },
-            {
-              name: 'items',
-              type: 'array',
-              title: 'List Items (Dots)',
-              of: [{ type: 'string' }],
-              validation: (rule) => rule.required().min(1)
-            },
-            {
-              name: 'color',
-              type: 'string',
-              title: 'Bullet Color (Hex)',
-              description: 'Hex code for the dots (e.g., #7A9A7D). Defaults to brand green if empty.',
-              initialValue: '#7A9A7D'
-            }
-          ]
-        })
-      ]
-    }),
-    defineField({
-      name: 'body',
-      title: 'Additional Content',
-      type: 'array',
-      group: 'content',
-      of: [
-        defineArrayMember({
-          type: 'block',
-        }),
-        defineArrayMember({
-          type: 'image',
-          options: {hotspot: true},
-        }),
+      name: 'seo',
+      title: 'SEO Settings',
+      type: 'object',
+      group: 'config',
+      fields: [
+        { name: 'metaTitle', type: 'string', title: 'Meta Title' },
+        { name: 'metaDescription', type: 'text', title: 'Meta Description' },
       ],
     }),
 
@@ -278,28 +189,101 @@ export const servicesType = defineType({
     }),
 
     // ============================================================
-    // CTA & SEO
+    // EXTRA BLOCKS
     // ============================================================
+    defineField({
+      name: 'duration',
+      title: 'Duration',
+      type: 'string',
+      group: 'extra',
+    }),
+    defineField({
+      name: 'format',
+      title: 'Format / Location',
+      type: 'string',
+      group: 'extra',
+    }),
+    defineField({
+      name: 'additionalSections',
+      title: 'Additional Custom Blocks',
+      type: 'array',
+      group: 'extra',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'customBlock',
+          fields: [
+            { name: 'title', type: 'string', title: 'Block Title', validation: (rule) => rule.required() },
+            { name: 'items', type: 'array', title: 'Items', of: [{ type: 'string' }], validation: (rule) => rule.required() },
+            { name: 'color', type: 'string', title: 'Bullet Color (Hex)', initialValue: '#7A9A7D' }
+          ]
+        })
+      ]
+    }),
+    defineField({
+      name: 'body',
+      title: 'Additional Content (Rich Text)',
+      type: 'array',
+      group: 'extra',
+      of: [defineArrayMember({ type: 'block' }), defineArrayMember({ type: 'image' })],
+    }),
+
+    // ============================================================
+    // LEGACY (Fallback fields)
+    // ============================================================
+    defineField({
+      name: 'benefits',
+      title: 'What You\'ll Gain (Legacy)',
+      type: 'array',
+      group: 'legacy',
+      of: [{ type: 'string' }],
+      hidden: ({ document }) => {
+        const sections = document?.audienceSections as unknown[];
+        return Array.isArray(sections) && sections.length > 0;
+      },
+    }),
+    defineField({
+      name: 'whatToExpect',
+      title: 'What to Expect (Legacy)',
+      type: 'array',
+      group: 'legacy',
+      of: [{ type: 'string' }],
+      hidden: ({ document }) => {
+        const sections = document?.audienceSections as unknown[];
+        return Array.isArray(sections) && sections.length > 0;
+      },
+    }),
+    defineField({
+      name: 'whoIsItForTitle',
+      title: 'Who Is It For Title (Legacy)',
+      type: 'string',
+      group: 'legacy',
+      hidden: ({ document }) => {
+        const sections = document?.audienceSections as unknown[];
+        return Array.isArray(sections) && sections.length > 0;
+      },
+    }),
+    defineField({
+      name: 'whoIsItFor',
+      title: 'Who Is It For (Legacy)',
+      type: 'array',
+      group: 'legacy',
+      of: [{ type: 'string' }],
+      hidden: ({ document }) => {
+        const sections = document?.audienceSections as unknown[];
+        return Array.isArray(sections) && sections.length > 0;
+      },
+    }),
     defineField({
       name: 'ctaOverride',
       title: 'CTA Override',
       type: 'object',
-      group: 'cta',
+      group: 'extra',
       fields: [
         { name: 'title', type: 'string', title: 'CTA Title' },
         { name: 'description', type: 'text', title: 'CTA Description' },
         { name: 'buttonText', type: 'string', title: 'Button Text' }
       ]
-    }),
-    defineField({
-      name: 'seo',
-      title: 'SEO Settings',
-      type: 'object',
-      group: 'seo',
-      fields: [
-        { name: 'metaTitle', type: 'string', title: 'Meta Title' },
-        { name: 'metaDescription', type: 'text', title: 'Meta Description' },
-      ],
     }),
   ],
   preview: {
