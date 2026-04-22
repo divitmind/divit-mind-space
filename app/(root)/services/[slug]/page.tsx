@@ -184,6 +184,8 @@ export default async function ServicePage({ params }: PageProps) {
     programs: "EducationalOccupationalProgram",
   };
   const schemaType = serviceTypeByCategory[service.category] || "MedicalService";
+  
+  const hasAudienceSections = service.audienceSections && service.audienceSections.length > 0;
 
   // Per-service medical-schema enrichment for YMYL E-E-A-T.
   // medicineSystem: the broad discipline (Google uses this to classify healthcare results).
@@ -479,8 +481,8 @@ export default async function ServicePage({ params }: PageProps) {
                 </div>
               )}
 
-              {/* Benefits */}
-              {service.benefits && service.benefits.length > 0 && (
+              {/* Benefits - Only show if NO audience sections exist */}
+              {!hasAudienceSections && service.benefits && service.benefits.length > 0 && (
                 <div className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
                   <h2
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
@@ -503,8 +505,8 @@ export default async function ServicePage({ params }: PageProps) {
                 </div>
               )}
 
-              {/* What to Expect */}
-              {service.whatToExpect && service.whatToExpect.length > 0 && (
+              {/* What to Expect - Only show if NO audience sections exist */}
+              {!hasAudienceSections && service.whatToExpect && service.whatToExpect.length > 0 && (
                 <div className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
                   <h2
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
@@ -523,8 +525,8 @@ export default async function ServicePage({ params }: PageProps) {
                 </div>
               )}
 
-              {/* Who Is It For */}
-              {service.whoIsItFor && service.whoIsItFor.length > 0 && (
+              {/* Who Is It For - Only show if NO audience sections exist */}
+              {!hasAudienceSections && service.whoIsItFor && service.whoIsItFor.length > 0 && (
                 <div className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
                   <h2
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
