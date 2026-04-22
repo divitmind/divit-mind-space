@@ -140,19 +140,19 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                                     className="object-contain"
                                 />
                             </div>
-                            <h3 className="font-serif italic text-lg lg:text-xl text-green leading-tight pt-1" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                            <h3 className="font-serif italic text-lg lg:text-xl text-black leading-tight pt-1" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
                                 {footerContent?.tagline || "Bangalore's Leading Center for Mental Health, Neurodevelopment & Physiotherapy"}
                             </h3>
                         </div>
-                        <p className="text-[13px] text-black/50 font-medium leading-relaxed max-w-[360px] mb-6">
+                        <p className="text-[13px] text-black font-medium leading-relaxed max-w-[360px] mb-6">
                             {footerContent?.description ? (
                                 footerContent.description
                             ) : (
                                 <>
                                     Neuro-affirming care covering Clinical Assessments, Speech, Occupational, Behavioral, Cognitive and Play Therapy, Group Sessions, Counselling, Special Education, NIOS Support and Physiotherapy. Helping{" "}
-                                    <strong className="font-bold text-green">Children</strong>,{" "}
-                                    <strong className="font-bold text-green">Teens</strong>, &{" "}
-                                    <strong className="font-bold text-green">Adults</strong> of all ages.
+                                    <span className="font-bold text-green">Children</span>,{" "}
+                                    <span className="font-bold text-green">Teens</span>, &{" "}
+                                    <span className="font-bold text-green">Adults</span> of all ages.
                                 </>
                             )}
                         </p>
