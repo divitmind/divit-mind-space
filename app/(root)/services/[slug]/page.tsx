@@ -187,6 +187,22 @@ export default async function ServicePage({ params }: PageProps) {
   
   const hasAudienceSections = service.audienceSections && service.audienceSections.length > 0;
 
+  // Tailored Logic: If we have audience sections but NO "children" section, 
+  // we treat the global/legacy fields as the "Children" section to prevent data loss.
+  const displaySections = [...(service.audienceSections || [])];
+  const hasChildrenSection = displaySections.some(s => s.audienceType === 'children');
+  
+  if (hasAudienceSections && !hasChildrenSection && (service.benefits?.length || service.whoIsItFor?.length)) {
+    displaySections.unshift({
+      audienceType: 'children',
+      title: 'For Children & Teens', // Professional default for your existing content
+      overview: '', // Overview is already shown globally
+      benefits: service.benefits,
+      expectations: service.whatToExpect,
+      whoIsItFor: service.whoIsItFor
+    });
+  }
+
   // Per-service medical-schema enrichment for YMYL E-E-A-T.
   // medicineSystem: the broad discipline (Google uses this to classify healthcare results).
   // relevantSpecialty: maps to schema.org MedicalSpecialty enum where a match exists.
@@ -466,8 +482,8 @@ export default async function ServicePage({ params }: PageProps) {
         <section className="pt-4 pb-6 lg:pt-6 lg:pb-8 bg-cream">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              {/* Overview */}
-              {service.overview && (
+              {/* Overview - Only show if NO audience sections exist */}
+              {!hasAudienceSections && service.overview && (
                 <div className="mb-8">
                   <h2
                     className="text-2xl lg:text-3xl font-serif text-green mb-4"
