@@ -81,7 +81,7 @@ export const servicesType = defineType({
       title: 'Audience-Specific Details (Children, Teens, Adults)',
       type: 'array',
       group: 'basic',
-      description: 'Add specific content for different age groups here.',
+      description: 'Add specific content for different age groups here. On the website, these appear as selectable tabs.',
       of: [
         defineArrayMember({
           type: 'object',
@@ -100,24 +100,35 @@ export const servicesType = defineType({
               },
               validation: (rule) => rule.required()
             },
-            { name: 'title', type: 'string', title: 'Section Title (e.g., "For Children & Teens")' },
+            { 
+              name: 'title', 
+              type: 'string', 
+              title: 'Section Title (Internal)',
+              description: 'e.g., "For Children & Teens". Used for tabs on the website.'
+            },
+            {
+              name: 'overview',
+              type: 'text',
+              title: '1. Specific Overview',
+              description: 'Optional. Brief context specific to this age group.'
+            },
             {
               name: 'whoIsItFor',
               type: 'array',
-              title: '1. Is This Right for You or Your Loved Ones?',
+              title: '2. Is This Right for You or Your Loved Ones?',
               description: 'Checklist of symptoms or needs.',
               of: [{ type: 'string' }]
             },
             {
               name: 'benefits',
               type: 'array',
-              title: '2. What You\'ll Gain (Benefits)',
+              title: '3. What You\'ll Gain (Benefits)',
               of: [{ type: 'string' }]
             },
             {
               name: 'expectations',
               type: 'array',
-              title: '3. What to Expect (Process)',
+              title: '4. What to Expect (Process)',
               of: [{ type: 'string' }]
             }
           ],
@@ -125,8 +136,8 @@ export const servicesType = defineType({
             select: { title: 'title', audience: 'audienceType' },
             prepare({ title, audience }) {
               return {
-                title: title || (audience ? audience.charAt(0).toUpperCase() + audience.slice(1) : ''),
-                subtitle: `Specific content for ${audience}`
+                title: title || (audience ? audience.charAt(0).toUpperCase() + audience.slice(1) : 'New Audience Section'),
+                subtitle: `Specific content for ${audience || 'unspecified'}`
               }
             }
           }
