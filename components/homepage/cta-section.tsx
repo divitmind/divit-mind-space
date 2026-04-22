@@ -5,20 +5,20 @@ import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-lin
 
 export function CtaSection() {
     return (
-        <section className="pt-2 lg:pt-6 pb-6 lg:pb-10 bg-[#FDFBF7] px-4">
+        <section className="pt-2 pb-2 lg:pt-4 lg:pb-4 bg-[#FDFBF7] px-4">
             <div className="container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="bg-white rounded-[2rem] md:rounded-[2.5rem] border border-black/5 p-5 md:p-10 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-10 shadow-2xl shadow-black/5"
+                    className="max-w-5xl mx-auto bg-white rounded-[2rem] md:rounded-[2.5rem] border border-black/5 p-5 md:p-10 flex flex-col md:flex-row items-center justify-between gap-5 md:gap-10 shadow-2xl shadow-black/[0.03]"
                 >
-                    <div className="flex flex-row md:flex-row items-center gap-4 md:gap-8">
-                        {/* High Contrast Logo/Icon Circle */}
-                        <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#7A9A7D] flex items-center justify-center shrink-0 shadow-lg">
+                    <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
+                        {/* High Contrast Logo/Icon Circle - Hidden on mobile */}
+                        <div className="hidden md:flex w-20 h-20 rounded-full bg-[#7A9A7D] items-center justify-center shrink-0 shadow-lg">
                             <svg
-                                className="w-7 h-7 md:w-10 md:h-10 text-white"
+                                className="w-10 h-10 text-white"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
                             >
@@ -26,18 +26,18 @@ export function CtaSection() {
                             </svg>
                         </div>
 
-                        {/* Original Text Wording */}
-                        <div className="text-left">
-                            <h2 className="text-xl md:text-4xl font-bold text-black font-[family-name:var(--font-cormorant)] italic mb-1 md:mb-2">
+                        {/* Text Wording */}
+                        <div className="flex-1">
+                            <h2 className="text-xl lg:text-3xl font-serif italic text-black mb-1 lg:mb-2" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
                                 Not ready to book?
                             </h2>
-                            <p className="text-sm md:text-lg text-black/60 font-medium">
+                            <p className="text-black/60 font-medium text-[13px] md:text-base">
                                 Message us on WhatsApp. Ask us anything, we&apos;re here to help.
                             </p>
                         </div>
                     </div>
 
-                    <WhatsAppConsultationLink className="dm-pill-button dm-pill-button-primary w-full md:w-auto md:scale-125 whitespace-nowrap">
+                    <WhatsAppConsultationLink className="dm-pill-button dm-pill-button-primary w-full md:w-auto md:scale-110 whitespace-nowrap">
                         <svg
                             className="w-5 h-5"
                             viewBox="0 0 24 24"
