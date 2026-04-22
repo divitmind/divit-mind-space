@@ -51,18 +51,42 @@ export const servicesType = defineType({
     }),
     defineField({
       name: 'description',
-      title: 'Short Description (for Cards)',
+      title: 'Global Short Description (Primary Outcome)',
       type: 'text',
       group: 'basic',
-      description: '1-2 sentences for the services listing page.',
-      validation: (rule) => rule.required().max(200),
+      description: 'The high-impact "Outcome Label" that defines the identity of this service. (e.g., "Mastery of Social Confidence")',
+      validation: (rule) => rule.max(400),
     }),
     defineField({
       name: 'overview',
       title: 'Global Overview',
       type: 'text',
       group: 'basic',
-      description: 'Main introductory paragraph for the service page (shows for all audiences).',
+      description: 'Main introductory paragraph for the service page. Preserves line breaks.',
+    }),
+    defineField({
+      name: 'benefits',
+      title: 'Universal: What You\'ll Gain',
+      type: 'array',
+      group: 'basic',
+      description: 'Use this for service-wide benefits if audience bifurcation is not needed.',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'whatToExpect',
+      title: 'Universal: What to Expect',
+      type: 'array',
+      group: 'basic',
+      description: 'Use this for service-wide process details.',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'whoIsItFor',
+      title: 'Universal: Is This Right for You?',
+      type: 'array',
+      group: 'basic',
+      description: 'Use this for service-wide eligibility/needs.',
+      of: [{ type: 'string' }],
     }),
     defineField({
       name: 'image',
@@ -81,7 +105,7 @@ export const servicesType = defineType({
       title: 'Audience-Specific Details (Children, Teens, Adults)',
       type: 'array',
       group: 'basic',
-      description: 'Add specific content for different age groups here.',
+      description: 'Add specific content for different age groups here. On the website, these appear as selectable tabs.',
       of: [
         defineArrayMember({
           type: 'object',
@@ -90,7 +114,8 @@ export const servicesType = defineType({
             {
               name: 'audienceType',
               type: 'string',
-              title: 'Audience Type',
+              title: 'Primary Audience (Internal Selection)',
+              description: 'Used for internal categorization.',
               options: {
                 list: [
                   { title: 'Children', value: 'children' },
@@ -100,13 +125,24 @@ export const servicesType = defineType({
               },
               validation: (rule) => rule.required()
             },
-            { name: 'title', type: 'string', title: 'Section Title (e.g., "For Children & Teens")' },
+            { 
+              name: 'title', 
+              type: 'string', 
+              title: 'Display Title (e.g., "Children & Teens")',
+              description: 'The label used for the tab on the website.',
+              validation: (rule) => rule.required()
+            },
             {
-              name: 'whoIsItFor',
-              type: 'array',
-              title: '1. Is This Right for You or Your Loved Ones?',
-              description: 'Checklist of symptoms or needs.',
-              of: [{ type: 'string' }]
+              name: 'shortDescription',
+              type: 'text',
+              title: 'Audience-Specific Short Description',
+              description: 'A brief summary specific to this audience. No strict length limit.',
+            },
+            {
+              name: 'overview',
+              type: 'text',
+              title: '1. Specific Overview',
+              description: 'Detailed introductory paragraph for this specific age group.'
             },
             {
               name: 'benefits',
@@ -119,14 +155,21 @@ export const servicesType = defineType({
               type: 'array',
               title: '3. What to Expect (Process)',
               of: [{ type: 'string' }]
+            },
+            {
+              name: 'whoIsItFor',
+              type: 'array',
+              title: '4. Is This Right for You or Your Loved Ones?',
+              description: 'Checklist of symptoms or needs.',
+              of: [{ type: 'string' }]
             }
           ],
           preview: {
             select: { title: 'title', audience: 'audienceType' },
             prepare({ title, audience }) {
               return {
-                title: title || (audience ? audience.charAt(0).toUpperCase() + audience.slice(1) : ''),
-                subtitle: `Specific content for ${audience}`
+                title: title || (audience ? audience.charAt(0).toUpperCase() + audience.slice(1) : 'New Audience Section'),
+                subtitle: `Internal Category: ${audience || 'unspecified'}`
               }
             }
           }
@@ -192,12 +235,6 @@ export const servicesType = defineType({
     // EXTRA BLOCKS
     // ============================================================
     defineField({
-      name: 'duration',
-      title: 'Duration',
-      type: 'string',
-      group: 'extra',
-    }),
-    defineField({
       name: 'format',
       title: 'Format / Location',
       type: 'string',
@@ -228,52 +265,6 @@ export const servicesType = defineType({
       of: [defineArrayMember({ type: 'block' }), defineArrayMember({ type: 'image' })],
     }),
 
-    // ============================================================
-    // LEGACY (Fallback fields)
-    // ============================================================
-    defineField({
-      name: 'benefits',
-      title: 'What You\'ll Gain (Legacy)',
-      type: 'array',
-      group: 'legacy',
-      of: [{ type: 'string' }],
-      hidden: ({ document }) => {
-        const sections = document?.audienceSections as unknown[];
-        return Array.isArray(sections) && sections.length > 0;
-      },
-    }),
-    defineField({
-      name: 'whatToExpect',
-      title: 'What to Expect (Legacy)',
-      type: 'array',
-      group: 'legacy',
-      of: [{ type: 'string' }],
-      hidden: ({ document }) => {
-        const sections = document?.audienceSections as unknown[];
-        return Array.isArray(sections) && sections.length > 0;
-      },
-    }),
-    defineField({
-      name: 'whoIsItForTitle',
-      title: 'Who Is It For Title (Legacy)',
-      type: 'string',
-      group: 'legacy',
-      hidden: ({ document }) => {
-        const sections = document?.audienceSections as unknown[];
-        return Array.isArray(sections) && sections.length > 0;
-      },
-    }),
-    defineField({
-      name: 'whoIsItFor',
-      title: 'Who Is It For (Legacy)',
-      type: 'array',
-      group: 'legacy',
-      of: [{ type: 'string' }],
-      hidden: ({ document }) => {
-        const sections = document?.audienceSections as unknown[];
-        return Array.isArray(sections) && sections.length > 0;
-      },
-    }),
     defineField({
       name: 'ctaOverride',
       title: 'CTA Override',

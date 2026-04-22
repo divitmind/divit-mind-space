@@ -3,17 +3,18 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
 import { SINGLE_SERVICE_QUERY, ALL_SERVICE_SLUGS_QUERY, RELATED_SERVICES_QUERY } from "@/sanity/lib/queries";
-import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { ServiceExperts } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
-import { Clock } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import type { Specialist } from "@/sanity/types";
-import { ORGANIZATION_REF, SITE_URL, MEDICAL_CONTENT_REVIEW_BLOCK } from "@/lib/seo";
+import { SITE_URL } from "@/lib/seo";
 import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
 import { HOWTO_ARTICLES, SERVICE_TO_HOWTO } from "@/lib/howto";
 import { PortableText, type PortableTextBlock } from "next-sanity";
 import { portableTextComponents } from "@/components/portable-text-components";
 import { getServiceBySlug } from "@/lib/services-data";
+import { AudienceTabs } from "@/components/services/audience-tabs";
+import { InlineCtaBlock } from "@/components/inline-cta-block";
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
@@ -42,13 +43,15 @@ interface ServiceData {
   };
   faqs?: { question: string; answer: string }[];
   audienceSections?: {
-  audienceType: "children" | "teens" | "adults";
-  title?: string;
-  overview?: string;
-  whoIsItFor?: string[];
-  benefits?: string[];
-  expectations?: string[];
-  }[];  ctaOverride?: {
+    audienceType: "children" | "teens" | "adults";
+    title?: string;
+    shortDescription?: string;
+    overview?: string;
+    whoIsItFor?: string[];
+    benefits?: string[];
+    expectations?: string[];
+  }[];
+  ctaOverride?: {
     title?: string;
     description?: string;
     buttonText?: string;
@@ -91,8 +94,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const serviceUrl = `https://divitmindspace.com/services/${service.slug.current}`;
   const title = service.seo?.metaTitle || service.title;
   const description = service.seo?.metaDescription || service.description;
-  // Prefer the service's own image as the OG preview — much higher social/LLM
-  // click-through than a generic logo. Fall back to logo only if unset.
   const ogImage = service.image?.asset?.url || "https://divitmindspace.com/divit-mindspace-logo.png";
   const ogAlt = service.image?.alt || `${service.title} at Divit MindSpace`;
 
@@ -132,26 +133,19 @@ export default async function ServicePage({ params }: PageProps) {
     notFound();
   }
 
-  // Merge with static data to get high-intent FAQs and other metadata
+  // Merge with static data
   const staticService = getServiceBySlug(slug);
   if (staticService) {
-    // If Sanity faqs are empty or missing, use the static high-intent ones
-    // Use type assertion or safe check for the static content structure
     const staticContent = staticService.content as { faqs?: { question: string; answer: string }[]; duration?: string; format?: string };
     if (!service.faqs || service.faqs.length === 0) {
       if (staticContent.faqs) {
         service.faqs = staticContent.faqs;
       }
     }
-    // Fallback for duration/format if not in Sanity
     if (!service.duration) service.duration = staticContent.duration;
     if (!service.format) service.format = staticContent.format;
-    
-    // Ensure we keep additionalSections from Sanity if they exist
-    // They are already in the `service` object from sanityFetch
   }
 
-  // Sibling services from the same category — powers the internal-linking entity graph.
   const { data: relatedData } = (await sanityFetch({
     query: RELATED_SERVICES_QUERY,
     params: { category: service.category, currentSlug: service.slug.current },
@@ -159,228 +153,16 @@ export default async function ServicePage({ params }: PageProps) {
   })) as { data: { _id: string; title: string; slug: string; description: string; category: string }[] | null };
   const related = relatedData ?? [];
 
-  // Find condition-pivot pages that list this service — powers "Conditions this addresses"
-  // internal linking + closes the bidirectional entity graph (condition ↔ service).
   const addressedConditions = CONDITION_PIVOTS.filter((c) =>
     c.serviceSlugs.includes(service.slug.current),
   );
 
-  // Matching preparation guide — rendered as a "Preparation Guide" callout on service pages.
   const howtoSlug = SERVICE_TO_HOWTO[service.slug.current];
   const howtoArticle = howtoSlug
     ? HOWTO_ARTICLES.find((a) => a.slug === howtoSlug)
     : undefined;
 
   const serviceUrl = `${SITE_URL}/services/${service.slug.current}`;
-
-  // Map category → richest schema type. Physiotherapy and therapies are MedicalTherapy;
-  // assessments are MedicalProcedure; guidance/workshops are Service; programs are
-  // EducationalOccupationalProgram. Using the most specific type improves LLM matching.
-  const serviceTypeByCategory: Record<string, string> = {
-    assessments: "MedicalProcedure",
-    therapy: "MedicalTherapy",
-    physiotherapy: "MedicalTherapy",
-    guidance: "Service",
-    programs: "EducationalOccupationalProgram",
-  };
-  const schemaType = serviceTypeByCategory[service.category] || "MedicalService";
-  
-  const hasAudienceSections = service.audienceSections && service.audienceSections.length > 0;
-
-  // Tailored Logic: If we have audience sections but NO "children" section, 
-  // we treat the global/legacy fields as the "Children" section to prevent data loss.
-  const displaySections = [...(service.audienceSections || [])];
-  const hasChildrenSection = displaySections.some(s => s.audienceType === 'children');
-  
-  if (hasAudienceSections && !hasChildrenSection && (service.benefits?.length || service.whoIsItFor?.length)) {
-    displaySections.unshift({
-      audienceType: 'children',
-      title: 'For Children & Teens', // Professional default for your existing content
-      overview: '', // Overview is already shown globally
-      benefits: service.benefits,
-      expectations: service.whatToExpect,
-      whoIsItFor: service.whoIsItFor
-    });
-  }
-
-  // Per-service medical-schema enrichment for YMYL E-E-A-T.
-  // medicineSystem: the broad discipline (Google uses this to classify healthcare results).
-  // relevantSpecialty: maps to schema.org MedicalSpecialty enum where a match exists.
-  // recognizingAuthority: the Indian regulatory or professional body that certifies providers.
-  const SERVICE_MEDICAL_META: Record<
-    string,
-    {
-      medicineSystem: string;
-      relevantSpecialty?: string;
-      recognizingAuthority?: { name: string; url: string };
-    }
-  > = {
-    // Therapies
-    "speech-therapy": {
-      medicineSystem: "Speech-Language Pathology",
-      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
-    },
-    "occupational-therapy": {
-      medicineSystem: "Occupational Therapy",
-      relevantSpecialty: "OccupationalTherapy",
-      recognizingAuthority: { name: "All India Occupational Therapists' Association (AIOTA)", url: "https://www.aiota.org/" },
-    },
-    "behavioral-therapy": {
-      medicineSystem: "Behavioral Health",
-      relevantSpecialty: "Psychiatric",
-      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
-    },
-    "cognitive-therapy": {
-      medicineSystem: "Clinical Psychology",
-      relevantSpecialty: "Psychiatric",
-      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
-    },
-    "play-therapy": {
-      medicineSystem: "Child Psychology",
-      relevantSpecialty: "Pediatric",
-      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
-    },
-    "group-therapy-sessions": {
-      medicineSystem: "Behavioral Health",
-      relevantSpecialty: "Psychiatric",
-      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
-    },
-    "sensory-integration-program": {
-      medicineSystem: "Occupational Therapy",
-      relevantSpecialty: "OccupationalTherapy",
-      recognizingAuthority: { name: "All India Occupational Therapists' Association (AIOTA)", url: "https://www.aiota.org/" },
-    },
-    "brain-gym": { medicineSystem: "Neurodevelopmental Therapy" },
-    // Assessments
-    "psychometric-assessments": {
-      medicineSystem: "Clinical Psychology",
-      relevantSpecialty: "Psychiatric",
-      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
-    },
-    "psychoeducational-assessments": {
-      medicineSystem: "Educational Psychology",
-      relevantSpecialty: "Pediatric",
-      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
-    },
-    // Counselling
-    counselling: {
-      medicineSystem: "Clinical Psychology",
-      relevantSpecialty: "Psychiatric",
-      recognizingAuthority: { name: "Rehabilitation Council of India (RCI)", url: "https://www.rehabcouncil.nic.in/" },
-    },
-    // Physiotherapy
-    "pain-management": {
-      medicineSystem: "Physical Therapy",
-      relevantSpecialty: "PhysicalTherapy",
-      recognizingAuthority: { name: "Indian Association of Physiotherapists (IAP)", url: "https://physiotherapyindia.org/" },
-    },
-    "pain-modalities": {
-      medicineSystem: "Physical Therapy",
-      relevantSpecialty: "PhysicalTherapy",
-      recognizingAuthority: { name: "Indian Association of Physiotherapists (IAP)", url: "https://physiotherapyindia.org/" },
-    },
-    "post-surgical-rehabilitation": {
-      medicineSystem: "Physical Therapy",
-      relevantSpecialty: "PhysicalTherapy",
-      recognizingAuthority: { name: "Indian Association of Physiotherapists (IAP)", url: "https://physiotherapyindia.org/" },
-    },
-    "gym--sports-injury-sessions": {
-      medicineSystem: "Sports Medicine",
-      relevantSpecialty: "SportsMedicine",
-      recognizingAuthority: { name: "Indian Association of Physiotherapists (IAP)", url: "https://physiotherapyindia.org/" },
-    },
-    "assistive-devices": { medicineSystem: "Rehabilitation Medicine" },
-    "wheelchair-training": { medicineSystem: "Rehabilitation Medicine" },
-  };
-  const medicalMeta = SERVICE_MEDICAL_META[service.slug.current];
-
-  // Main Service/Therapy/Procedure schema — provider references canonical Organization via @id.
-  // Medical service types get lastReviewed/reviewedBy to meet YMYL signals Google weighs
-  // heavily for healthcare content.
-  const isMedicalType =
-    schemaType === "MedicalTherapy" || schemaType === "MedicalProcedure" || schemaType === "MedicalService";
-  const serviceJsonLd: Record<string, unknown> = {
-    "@context": "https://schema.org",
-    "@type": schemaType,
-    "@id": `${serviceUrl}#service`,
-    name: service.title,
-    description: service.description,
-    url: serviceUrl,
-    image: service.image?.asset?.url,
-    provider: ORGANIZATION_REF,
-    ...(isMedicalType ? MEDICAL_CONTENT_REVIEW_BLOCK : {}),
-    // YMYL enrichment — medicineSystem/relevantSpecialty/recognizingAuthority signal
-    // to Google and LLMs that this is a bona-fide healthcare service under a recognized
-    // Indian regulatory body. Only emitted when we have trusted mapping data for the slug.
-    ...(isMedicalType && medicalMeta
-      ? {
-          medicineSystem: medicalMeta.medicineSystem,
-          ...(medicalMeta.relevantSpecialty && { relevantSpecialty: medicalMeta.relevantSpecialty }),
-          ...(medicalMeta.recognizingAuthority && {
-            recognizingAuthority: {
-              "@type": "Organization",
-              name: medicalMeta.recognizingAuthority.name,
-              url: medicalMeta.recognizingAuthority.url,
-            },
-          }),
-        }
-      : {}),
-    areaServed: [
-      { "@type": "City", name: "Bangalore" },
-      { "@type": "City", name: "Bengaluru" },
-      { "@type": "Place", name: "Sarjapur Road" },
-      { "@type": "Place", name: "Kasavanahalli" },
-      { "@type": "Place", name: "HSR Layout" },
-      { "@type": "Place", name: "Bellandur" },
-      { "@type": "Place", name: "Koramangala" },
-      { "@type": "Place", name: "Whitefield" },
-      { "@type": "Place", name: "Electronic City" },
-    ],
-    ...(service.duration && { termsOfService: service.duration }),
-    ...(service.format && {
-      availableChannel: {
-        "@type": "ServiceChannel",
-        serviceLocation: { "@type": "Place", name: service.format },
-      },
-    }),
-    // For programs / educational entries, add audience hint.
-    ...(schemaType === "EducationalOccupationalProgram" && {
-      educationalProgramMode: "onsite",
-    }),
-    // Cross-link sibling services in same category — entity graph signal for LLMs
-    // ("what else does Divit MindSpace offer in this area?").
-    ...(related.length > 0 && {
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: `Related ${service.category} services`,
-        itemListElement: related.map((r) => ({
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: r.title,
-            url: `${SITE_URL}/services/${r.slug}`,
-          },
-        })),
-      },
-    }),
-  };
-
-  // Dedicated FAQPage schema — Google recommends separate block over nesting in mainEntity.
-  const faqPageJsonLd =
-    service.faqs && service.faqs.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: service.faqs.map((faq) => ({
-            "@type": "Question",
-            name: faq.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: faq.answer,
-            },
-          })),
-        }
-      : null;
 
   const categoryLabels: Record<string, string> = {
     assessments: "Assessment",
@@ -390,445 +172,332 @@ export default async function ServicePage({ params }: PageProps) {
     physiotherapy: "Physiotherapy",
   };
 
-  // Breadcrumb
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
-      { "@type": "ListItem", position: 3, name: service.title, item: serviceUrl },
-    ],
-  };
+  const hasAudienceSections = service.audienceSections && service.audienceSections.length > 0;
+  const hasUniversalContent = (service.benefits?.length || service.whatToExpect?.length || service.whoIsItFor?.length);
 
   return (
-    <>
-      {/* Single @graph — Google recommends this over multiple independent blocks. */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-              ...[serviceJsonLd, breadcrumbJsonLd, ...(faqPageJsonLd ? [faqPageJsonLd] : [])].map(
-                (s) => {
-                  const clone: Record<string, unknown> = { ...(s as Record<string, unknown>) };
-                  delete clone["@context"];
-                  return clone;
-                },
-              ),
-            ],
-          }),
-        }}
-      />
+    <div className="bg-[#FAF9F5] min-h-screen">
+      {/* Breadcrumb - Absolute Tightness */}
+      <div className="bg-cream/50 border-b border-green/10">
+        <div className="container mx-auto px-4 py-0.5 lg:py-1">
+          <nav className="flex items-center gap-2 text-[9px] lg:text-[10px] text-green/60 uppercase tracking-[0.2em] font-bold">
+            <Link href="/" className="hover:text-green transition-colors">
+              Home
+            </Link>
+            <span className="text-green/20">/</span>
+            <Link href="/services" className="hover:text-green transition-colors">
+              Services
+            </Link>
+            <span className="text-green/20">/</span>
+            <span className="text-green">{service.title}</span>
+          </nav>
+        </div>
+      </div>
 
-      <div className="bg-[#FAF9F5] min-h-screen">
-        {/* Breadcrumb */}
-        <div className="bg-cream/50 border-b border-green/10">
-          <div className="container mx-auto px-4 py-4">
-            <nav className="flex items-center gap-2 text-sm text-green/60">
-              <Link href="/" className="hover:text-green transition-colors">
-                Home
-              </Link>
-              <span>/</span>
-              <Link href="/services" className="hover:text-green transition-colors">
-                Services
-              </Link>
-              <span>/</span>
-              <span className="text-green font-medium">{service.title}</span>
-            </nav>
+      {/* Hero Section - Zero Top Padding */}
+      <section className="pt-0 pb-2 lg:pt-0 lg:pb-4">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h1
+              className="text-3xl md:text-4xl lg:text-5xl font-serif text-green mt-1 lg:mt-2 mb-1 lg:mb-2 leading-tight"
+              style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+            >
+              {service.title}
+            </h1>
+
+            <p className="text-base lg:text-lg text-black/70 mb-0 max-w-3xl font-medium leading-relaxed">
+              {service.description}
+            </p>
           </div>
         </div>
+      </section>
 
-        {/* Hero Section */}
-        <section className="pt-8 pb-0 lg:pt-10 lg:pb-0">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              {/* Category Badge */}
-              {service.category && (
-                <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-purple/10 text-purple text-xs font-bold uppercase tracking-widest">
-                  <span className="w-2 h-2 rounded-full bg-purple" />
-                  {categoryLabels[service.category] || service.category}
-                </div>
-              )}
-
-              {/* Title */}
-              <h1
-                className="text-3xl md:text-4xl lg:text-5xl font-serif text-green mb-4 leading-tight"
-                style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-              >
-                {service.title}
-              </h1>
-
-              {/* Description */}
-              <p className="text-lg text-black/70 mb-4 max-w-3xl font-medium">
-                {service.description}
-              </p>
-
-              {service.duration && (
-                <div className="flex flex-wrap gap-4 mb-6">
-                  <div className="flex items-center gap-2 text-sm font-bold text-green/60 uppercase tracking-widest bg-green/5 px-3 py-1.5 rounded-lg border border-green/5">
-                    <Clock className="w-4 h-4 text-green" />
-                    {service.duration}
-                  </div>
-                </div>
-              )}
-
-            </div>
-          </div>
-        </section>
-
-        {/* Content Section */}
-        <section className="pt-4 pb-6 lg:pt-6 lg:pb-8 bg-cream">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              {/* Overview - Global */}
-              {service.overview && (
-                <div className="mb-8">
-                  <h2
-                    className="text-2xl lg:text-3xl font-serif text-green mb-4"
-                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                  >
-                    Overview
-                  </h2>
-                  <p className="text-black/70 leading-relaxed font-medium">
-                    {service.overview}
-                  </p>
-                </div>
-              )}
-
-              {/* Benefits - Only show if NO audience sections exist */}
-              {!hasAudienceSections && service.benefits && service.benefits.length > 0 && (
-                <div className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
-                  <h2
-                    className="text-2xl lg:text-3xl font-serif text-green mb-6"
-                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                  >
-                    What You&apos;ll Gain
-                  </h2>
-                  <ul className="space-y-4">
-                    {service.benefits.map((benefit, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 mt-1">
-                          <svg className="w-5 h-5 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        <span className="text-black/70 font-medium leading-relaxed">{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* What to Expect - Only show if NO audience sections exist */}
-              {!hasAudienceSections && service.whatToExpect && service.whatToExpect.length > 0 && (
-                <div className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
-                  <h2
-                    className="text-2xl lg:text-3xl font-serif text-green mb-6"
-                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                  >
-                    What to Expect
-                  </h2>
-                  <div className="space-y-4">
-                    {service.whatToExpect.map((item, index) => (
-                      <div key={index} className="flex items-start gap-4">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D] flex-shrink-0 mt-[10px]" />
-                        <p className="text-black/70 font-medium leading-relaxed">{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Who Is It For - Only show if NO audience sections exist */}
-              {!hasAudienceSections && service.whoIsItFor && service.whoIsItFor.length > 0 && (
-                <div className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
-                  <h2
-                    className="text-2xl lg:text-3xl font-serif text-green mb-6"
-                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                  >
-                    {service.whoIsItForTitle || "Is This Right for You or Your Loved Ones?"}
-                  </h2>
-                  <ul className="space-y-4">
-                    {service.whoIsItFor.map((item, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 mt-1">
-                          <svg className="w-5 h-5 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        <span className="text-black/70 font-medium leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Audience Specific Sections */}
-              {service.audienceSections && service.audienceSections.length > 0 && (
-                <div className="mb-12">
-                  <h2
-                    className="text-3xl lg:text-4xl font-serif text-green mb-8 text-center"
-                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                  >
-                    Audience-Specific Details
-                  </h2>
-                  {service.audienceSections.map((section, idx) => (
-                    <div key={idx} className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="px-3 py-1 rounded-full bg-green/10 text-green text-[10px] font-bold uppercase tracking-widest">
-                          {section.audienceType}
-                        </div>
-                        <h2
-                          className="text-2xl lg:text-3xl font-serif text-green"
-                          style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                        >
-                          {section.title || `For ${section.audienceType.charAt(0).toUpperCase() + section.audienceType.slice(1)}`}
-                        </h2>
-                      </div>
-
-                      {section.whoIsItFor && section.whoIsItFor.length > 0 && (
-                        <div className="mb-8 p-6 bg-green/5 rounded-xl border border-green/10">
-                          <h3 className="font-serif text-xl text-green mb-4">Is This Right for You or Your Loved Ones?</h3>
-                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8">
-                            {section.whoIsItFor.map((item, i) => (
-                              <li key={i} className="flex items-start gap-3">
-                                <div className="flex-shrink-0 mt-1">
-                                  <svg className="w-4 h-4 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                  </svg>
-                                </div>
-                                <span className="text-sm text-black/70 font-medium">{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {section.benefits && section.benefits.length > 0 && (
-                          <div>
-                            <h3 className="font-serif text-xl text-green mb-4">What You&apos;ll Gain</h3>
-                            <ul className="space-y-3">
-                              {section.benefits.map((benefit, i) => (
-                                <li key={i} className="flex items-start gap-3">
-                                  <div className="flex-shrink-0 mt-1">
-                                    <svg className="w-4 h-4 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                  </div>
-                                  <span className="text-sm text-black/70 font-medium">{benefit}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                        
-                        {section.expectations && section.expectations.length > 0 && (
-                          <div>
-                            <h3 className="font-serif text-xl text-green mb-4">What to Expect</h3>
-                            <ul className="space-y-3">
-                              {section.expectations.map((item, i) => (
-                                <li key={i} className="flex items-start gap-3">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D] flex-shrink-0 mt-2" />
-                                  <span className="text-sm text-black/70 font-medium">{item}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Additional Sections - Dynamic blocks from Sanity */}
-              {service.additionalSections?.map((section, idx) => (
-                <div
-                  key={idx}
-                  className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm"
-                >
-                  <h2
-                    className="text-2xl lg:text-3xl font-serif text-green mb-6"
-                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                  >
-                    {section.title}
-                  </h2>
-                  <ul className="space-y-4">
-                    {section.items.map((item, itemIdx) => (
-                      <li key={itemIdx} className="flex items-start gap-4">
-                        <div 
-                          className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[10px]" 
-                          style={{ backgroundColor: section.color || '#7A9A7D' }}
-                        />
-                        <span className="text-black/70 font-medium leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-
-              {/* Additional Rich Text Content */}
-              {service.body && service.body.length > 0 && (
-                <div className="mt-12 prose prose-green max-w-none prose-p:text-black/70 prose-p:font-medium prose-headings:font-serif prose-headings:text-green prose-li:text-black/70 prose-li:font-medium prose-strong:text-black prose-strong:font-bold">
-                  <PortableText 
-                    value={service.body} 
-                    components={portableTextComponents} 
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* Dynamic Experts Section */}
-        <ServiceExperts 
-          specialists={service.specialists || []} 
-          onDemand={service.onDemand} 
-        />
-
-        {/* Dynamic FAQ Section */}
-        <ServiceFAQ faqs={service.faqs || []} />
-
-        {/* Preparation guide (if a matching HowTo article exists) — closes service ↔ HowTo graph */}
-        {howtoArticle && (
-          <section className="py-6 lg:py-8 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="max-w-3xl mx-auto">
-                <Link
-                  href={`/howto/${howtoArticle.slug}`}
-                  className="group flex items-center justify-between gap-4 p-6 rounded-2xl bg-[#FAF9F5] border border-green/10 hover:border-green/30 hover:shadow-lg transition-all"
-                >
-                  <div className="flex-1 min-w-0">
-                    <div className="font-bold text-green/60 text-[10px] uppercase tracking-widest mb-2">
-                      Preparation Guide
-                    </div>
-                    <div className="font-semibold text-green group-hover:text-green/80 transition-colors mb-1">
-                      {howtoArticle.title}
-                    </div>
-                    <p className="text-sm text-black/60 line-clamp-2">{howtoArticle.lead}</p>
-                  </div>
-                  <span className="text-green text-sm font-semibold whitespace-nowrap">
-                    Read guide →
-                  </span>
-                </Link>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Conditions this service addresses — internal linking for condition-first search intent */}
-        {addressedConditions.length > 0 && (
-          <section className="py-8 lg:py-10 bg-[#FAF9F5]">
-            <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto">
+      {/* Content Section - Near Zero Gap */}
+      <section className="pt-0.5 pb-0 lg:pt-1 lg:pb-0 bg-cream">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Global Overview */}
+            {service.overview && (
+              <div className="mb-6 lg:mb-8">
                 <h2
-                  className="text-2xl lg:text-3xl font-serif text-green mb-6 text-center"
+                  className="text-2xl lg:text-3xl font-serif text-green mb-3 lg:mb-4"
                   style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
                 >
-                  Conditions This Helps With
+                  Overview
                 </h2>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {addressedConditions.map((c) => (
-                    <Link
-                      key={c.slug}
-                      href={`/conditions/${c.slug}`}
-                      className="px-4 py-2 rounded-full bg-white border border-green/10 text-sm font-semibold text-green hover:bg-green hover:text-white transition-all"
-                    >
-                      {c.name} →
-                    </Link>
-                  ))}
+                <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
+                  {service.overview}
+                </p>
+              </div>
+            )}
+
+            {/* Main Content Flow: Audience Sections (Tabs) */}
+            {hasAudienceSections && (
+              <div className="mb-12">
+                <AudienceTabs sections={service.audienceSections || []} />
+              </div>
+            )}
+
+            {/* Universal Content (Non-tabbed or fallback) */}
+            {hasUniversalContent && !hasAudienceSections && (
+              <div className="bg-white rounded-2xl pt-4 pb-5 px-5 lg:pt-6 lg:pb-8 lg:px-8 border border-green/10 shadow-sm mb-12">
+                {/* Expert Summary with Primary Outcome */}
+                <div className="flex flex-col lg:flex-row gap-6 mb-8">
+                  <div className="flex-1">
+                    <p className="text-black/70 text-sm lg:text-base leading-[1.6] font-medium max-w-2xl whitespace-pre-wrap">
+                      Select specific details for your audience below or review our universal program highlights.
+                    </p>
+                  </div>
+                  
+                  <div className="w-full lg:w-72 shrink-0">
+                    {service.description && (
+                      <div className="bg-green p-5 lg:p-6 rounded-xl text-white shadow-lg shadow-green/5 relative overflow-hidden group">
+                        <div className="absolute -right-2 -bottom-2 opacity-10 group-hover:scale-110 transition-transform duration-500">
+                          <CheckCircle2 className="w-20 h-20" />
+                        </div>
+                        <p className="text-[9px] font-bold uppercase tracking-[0.2em] mb-3 opacity-70">Primary Outcome</p>
+                        <p className="text-lg font-serif italic leading-snug font-bold relative z-10">
+                          {service.description}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Benefits Grid */}
+                {service.benefits && service.benefits.length > 0 && (
+                  <div className="mb-10">
+                    <div className="flex items-center gap-4 mb-6">
+                      <h3 className="font-serif text-xl lg:text-2xl text-green">Universal Benefits</h3>
+                      <div className="flex-1 h-px bg-green/10" />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {service.benefits.map((benefit, i) => (
+                        <div key={i} className="h-full p-5 lg:p-6 rounded-xl bg-white border border-green/5 shadow-sm hover:shadow-md hover:border-green/20 transition-all group flex flex-col items-start text-left">
+                          <div className="w-9 h-9 rounded-full bg-green/5 flex items-center justify-center mb-4 group-hover:bg-green group-hover:text-white transition-all duration-300">
+                            <CheckCircle2 className="w-5 h-5" />
+                          </div>
+                          <p className="text-sm lg:text-base text-black/70 font-medium leading-relaxed">
+                            {benefit}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Process & Profile Comparison */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-6 border-t border-green/10 items-stretch">
+                  {service.whatToExpect && service.whatToExpect.length > 0 && (
+                    <div className="bg-white px-6 pb-6 pt-1 lg:px-8 lg:pb-8 lg:pt-2 rounded-2xl border border-green/10 flex flex-col">
+                      <h3 className="font-serif text-xl text-green mb-6 flex items-center gap-3">
+                        <div className="w-1 h-5 bg-green/20 rounded-full" />
+                        What to Expect
+                      </h3>
+                      <div className="space-y-4 flex-1">
+                        {service.whatToExpect.map((item, i) => (
+                          <div key={i} className="flex gap-3 group">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                            <p className="text-sm lg:text-base text-black/70 font-medium leading-relaxed">
+                              {item}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {service.whoIsItFor && service.whoIsItFor.length > 0 && (
+                    <div className="bg-green/5 px-6 pb-6 pt-1 lg:px-8 lg:pb-8 lg:pt-2 rounded-2xl border border-green/10 flex flex-col">
+                      <h3 className="font-serif text-xl text-green mb-6">Is This Right for You?</h3>
+                      <div className="space-y-3 flex-1">
+                        {service.whoIsItFor.map((item, i) => (
+                          <div key={i} className="flex items-start gap-3">
+                            <div className="w-4 h-4 rounded-full bg-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                              <svg className="w-2.5 h-2.5 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <span className="text-sm lg:text-base text-black/70 font-medium leading-snug">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-          </section>
-        )}
+            )}
 
-        {/* Available near — closes service ↔ location entity graph */}
-        <section className="py-8 lg:py-10 bg-white">
+            {/* Additional Sections */}
+            {service.additionalSections?.map((section, idx) => (
+              <div
+                key={idx}
+                className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm"
+              >
+                <h2
+                  className="text-2xl lg:text-3xl font-serif text-green mb-6"
+                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                >
+                  {section.title}
+                </h2>
+                <ul className="space-y-4">
+                  {section.items.map((item, itemIdx) => (
+                    <li key={itemIdx} className="flex items-start gap-4">
+                      <div
+                        className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[10px]"
+                        style={{ backgroundColor: section.color || '#7A9A7D' }}
+                      />
+                      <span className="text-black/70 font-medium leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+
+            {/* Rich Text Body */}
+            {service.body && service.body.length > 0 && (
+              <div className="mt-12 prose prose-green max-w-none prose-p:text-black/70 prose-p:font-medium prose-headings:font-serif prose-headings:text-green prose-li:text-black/70 prose-li:font-medium prose-strong:text-black prose-strong:font-bold">
+                <PortableText
+                  value={service.body}
+                  components={portableTextComponents}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Specialist Oversight */}
+      <ServiceExperts
+        specialists={service.specialists || []}
+        onDemand={service.onDemand}
+      />
+
+      {/* FAQ Section */}
+      <ServiceFAQ faqs={service.faqs || []} />
+
+      {/* Preparation Guide */}
+      {howtoArticle && (
+        <section className="py-5 lg:py-7 bg-white border-y border-green/5">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <Link
+                href={`/howto/${howtoArticle.slug}`}
+                className="group flex items-center justify-between gap-4 p-5 lg:p-6 rounded-2xl bg-[#FAF9F5] border border-green/10 hover:border-green/30 hover:shadow-lg transition-all"
+              >
+                <div className="flex-1 min-w-0">
+                  <div className="font-bold text-green/60 text-[10px] uppercase tracking-widest mb-1.5">
+                    Preparation Guide
+                  </div>
+                  <div className="text-lg font-serif text-green group-hover:text-green/80 transition-colors mb-1">
+                    {howtoArticle.title}
+                  </div>
+                  <p className="text-sm text-black/60 line-clamp-2">{howtoArticle.lead}</p>
+                </div>
+                <span className="text-green text-sm font-bold whitespace-nowrap">
+                  Read guide →
+                </span>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Related Conditions */}
+      {addressedConditions.length > 0 && (
+        <section className="py-6 lg:py-8 bg-[#FAF9F5]">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2
-                className="text-2xl lg:text-3xl font-serif text-green mb-6 text-center"
+                className="text-2xl lg:text-3xl font-serif text-green mb-5 text-center"
                 style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
               >
-                Available for families near
+                Conditions This Helps With
               </h2>
-              <div className="flex flex-wrap justify-center gap-3">
-                {LOCATION_PIVOTS.map((l) => (
+              <div className="flex flex-wrap justify-center gap-2.5">
+                {addressedConditions.map((c) => (
                   <Link
-                    key={l.slug}
-                    href={`/near-me/${l.slug}`}
-                    className="px-4 py-2 rounded-full bg-[#FAF9F5] border border-black/5 text-sm font-semibold text-black/70 hover:bg-green hover:text-white hover:border-green transition-all"
+                    key={c.slug}
+                    href={`/conditions/${c.slug}`}
+                    className="px-4 py-1.5 rounded-full bg-white border border-green/10 text-sm font-semibold text-green hover:bg-green hover:text-white transition-all shadow-sm"
                   >
-                    {l.name} →
+                    {c.name} →
                   </Link>
                 ))}
               </div>
             </div>
           </div>
         </section>
+      )}
 
-        {/* Related services — internal linking boost for SEO + entity graph for LLMs */}
-        {related.length > 0 && (
-          <section className="py-8 lg:py-10 bg-cream">
-            <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto">
-                <h2
-                  className="text-2xl lg:text-3xl font-serif text-green mb-6 text-center"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+      {/* Location PIVOTS */}
+      <section className="py-6 lg:py-8 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2
+              className="text-2xl lg:text-3xl font-serif text-green mb-5 text-center"
+              style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+            >
+              Available for families near
+            </h2>
+            <div className="flex flex-wrap justify-center gap-2.5">
+              {LOCATION_PIVOTS.map((l) => (
+                <Link
+                  key={l.slug}
+                  href={`/near-me/${l.slug}`}
+                  className="px-4 py-1.5 rounded-full bg-[#FAF9F5] border border-black/5 text-sm font-semibold text-black/70 hover:bg-green hover:text-white hover:border-green transition-all shadow-sm"
                 >
-                  Related {categoryLabels[service.category] || "Services"}
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {related.map((r) => (
-                    <Link
-                      key={r._id}
-                      href={`/services/${r.slug}`}
-                      className="block p-5 bg-white rounded-2xl border border-green/10 hover:border-green/30 hover:shadow-lg transition-all group"
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-green group-hover:text-green/80 transition-colors mb-1">
-                            {r.title}
-                          </h3>
-                          <p className="text-sm text-black/60 line-clamp-2">{r.description}</p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
+                  {l.name} →
+                </Link>
+              ))}
             </div>
-          </section>
-        )}
+          </div>
+        </div>
+      </section>
 
-        {/* Bottom CTA */}
-        <section className="pt-6 pb-8 lg:pt-8 lg:pb-10 bg-[#FAF9F5]">
+      {/* Related Services */}
+      {related.length > 0 && (
+        <section className="py-6 lg:py-8 bg-cream">
           <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto text-center bg-white rounded-2xl p-8 lg:p-10 border border-green/10 shadow-sm">
+            <div className="max-w-4xl mx-auto">
               <h2
-                className="text-2xl lg:text-3xl font-serif text-green mb-4"
+                className="text-2xl lg:text-3xl font-serif text-green mb-5 text-center"
                 style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
               >
-                {service.ctaOverride?.title || "Take the Next Step Toward Your Wellbeing"}
+                Related {categoryLabels[service.category] || "Services"}
               </h2>
-              <p className="text-green/70 mb-6 font-medium">
-                {service.ctaOverride?.description || 
-                  `Book a free consultation to explore how ${service.title} can help you achieve your clinical goals. Our multidisciplinary experts provide the clarity and support needed for individuals of all ages.`}
-              </p>
-              <WhatsAppConsultationLink className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-green text-white font-semibold hover:bg-green/90 transition-colors">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                </svg>
-                {service.ctaOverride?.buttonText || "Book Free Consultation"}
-              </WhatsAppConsultationLink>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {related.map((r) => (
+                  <Link
+                    key={r._id}
+                    href={`/services/${r.slug}`}
+                    className="block p-5 bg-white rounded-2xl border border-green/10 hover:border-green/30 hover:shadow-md transition-all group"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-green group-hover:text-green/80 transition-colors mb-1">
+                          {r.title}
+                        </h3>
+                        <p className="text-sm text-black/60 line-clamp-2">{r.description}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </section>
-      </div>
-    </>
+      )}
+
+      {/* Bottom CTA */}
+      <section className="pt-6 pb-8 lg:pt-8 lg:pb-10 bg-[#FAF9F5]">
+        <div className="container mx-auto px-4">
+          <InlineCtaBlock 
+            heading={service.ctaOverride?.title || "Not ready to book?"}
+            subtext={service.ctaOverride?.description || "Message us on WhatsApp. Ask us anything, we're here to help."}
+          />
+        </div>
+      </section>
+    </div>
   );
 }

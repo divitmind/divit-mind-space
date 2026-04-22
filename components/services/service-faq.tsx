@@ -1,11 +1,17 @@
 "use client";
 
 import { motion } from "motion/react";
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, Plus, Minus } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface FAQItem {
   question: string;
-  answer: string;
+  answer: string;  
 }
 
 interface ServiceFAQProps {
@@ -16,10 +22,11 @@ export function ServiceFAQ({ faqs }: ServiceFAQProps) {
   if (!faqs || faqs.length === 0) return null;
 
   return (
-    <section className="py-12 bg-[#FAF9F5]">
+    <section className="pt-4 pb-2 bg-[#FAF9F5]">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-3 mb-8">
+          {/* Header */}
+          <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-green/10 flex items-center justify-center">
               <HelpCircle className="w-6 h-6 text-green" />
             </div>
@@ -31,25 +38,28 @@ export function ServiceFAQ({ faqs }: ServiceFAQProps) {
             </h2>
           </div>
 
-          <div className="space-y-6">
+          {/* Accordion List */}
+          <Accordion type="single" collapsible className="w-full space-y-4">
             {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm hover:shadow-md transition-shadow"
+              <AccordionItem 
+                key={index} 
+                value={`item-${index}`}
+                className="bg-white rounded-2xl border border-green/10 shadow-sm hover:shadow-md transition-all overflow-hidden border-none"
               >
-                <h3 className="text-lg font-serif text-green mb-3 leading-tight italic">
-                  {faq.question}
-                </h3>
-                <p className="text-black/70 leading-relaxed font-medium">
-                  {faq.answer}
-                </p>
-              </motion.div>
+                <AccordionTrigger className="px-6 lg:px-8 py-5 hover:no-underline group focus:outline-none border-none">
+                  <span className="text-lg lg:text-xl font-serif text-green text-left leading-tight italic pr-8">
+                    {faq.question}
+                  </span>
+                  {/* Custom icons to override default chevrons if needed, but we'll use a wrapper style */}
+                </AccordionTrigger>
+                <AccordionContent className="px-6 lg:px-8 pb-6 lg:pb-8">
+                  <p className="text-black/70 text-sm lg:text-base leading-relaxed font-medium">
+                    {faq.answer}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
         </div>
       </div>
     </section>
