@@ -482,8 +482,8 @@ export default async function ServicePage({ params }: PageProps) {
         <section className="pt-4 pb-6 lg:pt-6 lg:pb-8 bg-cream">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              {/* Overview - Only show if NO audience sections exist */}
-              {!hasAudienceSections && service.overview && (
+              {/* Overview - Global */}
+              {service.overview && (
                 <div className="mb-8">
                   <h2
                     className="text-2xl lg:text-3xl font-serif text-green mb-4"
@@ -548,7 +548,7 @@ export default async function ServicePage({ params }: PageProps) {
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
                     style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
                   >
-                    {service.whoIsItForTitle || "Who Is It For"}
+                    {service.whoIsItForTitle || "Is This Right for You or Your Loved Ones?"}
                   </h2>
                   <ul className="space-y-4">
                     {service.whoIsItFor.map((item, index) => (
@@ -587,19 +587,10 @@ export default async function ServicePage({ params }: PageProps) {
                           {section.title || `For ${section.audienceType.charAt(0).toUpperCase() + section.audienceType.slice(1)}`}
                         </h2>
                       </div>
-                      
-                      {section.overview && (
-                        <div className="mb-6">
-                          <h3 className="font-serif text-xl text-green mb-2">Overview</h3>
-                          <p className="text-black/70 font-medium leading-relaxed">
-                            {section.overview}
-                          </p>
-                        </div>
-                      )}
 
                       {section.whoIsItFor && section.whoIsItFor.length > 0 && (
                         <div className="mb-8 p-6 bg-green/5 rounded-xl border border-green/10">
-                          <h3 className="font-serif text-xl text-green mb-4">Is This Right for You?</h3>
+                          <h3 className="font-serif text-xl text-green mb-4">Is This Right for You or Your Loved Ones?</h3>
                           <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8">
                             {section.whoIsItFor.map((item, i) => (
                               <li key={i} className="flex items-start gap-3">
