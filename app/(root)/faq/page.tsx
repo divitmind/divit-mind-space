@@ -250,12 +250,11 @@ export default async function FaqAggregatorPage() {
         </section>
 
         {/* CTA — shared voice */}
-        <section className="pb-12 lg:pb-16">
+        <section className="pt-2 pb-2 lg:pt-4 lg:pb-4 bg-[#FAF9F5]">
           <div className="container mx-auto px-4">
             <InlineCtaBlock heading="Question not answered here?" />
           </div>
-        </section>
-      </div>
+        </section>      </div>
     </>
   );
 }
