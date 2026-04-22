@@ -134,15 +134,39 @@ export interface Service {
   slug: {
     current: string;
   };
-  description?: string;
+  description: string;
+  category: string;
   image?: SanityImage;
-  popular: boolean;
+  popular?: boolean;
+  isTherapy?: boolean;
+  overview?: string;
+  benefits?: string[];
+  whatToExpect?: string[];
+  whoIsItForTitle?: string;
+  whoIsItFor?: string[];
   body: PortableTextBlock[];
+  duration?: string;
+  format?: string;
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
     ogImage?: SanityImage;
   };
+  faqs?: { question: string; answer: string }[];
+  audienceSections?: {
+    audienceType: "children" | "teens" | "adults";
+    title?: string;
+    overview?: string;
+    benefits?: string[];
+    expectations?: string[];
+  }[];
+  additionalSections?: { title: string; items: string[]; color?: string }[];
+  ctaOverride?: {
+    title?: string;
+    description?: string;
+    buttonText?: string;
+  };
+  onDemand?: boolean;
 }
 
 // Simplified Service for Listing Pages

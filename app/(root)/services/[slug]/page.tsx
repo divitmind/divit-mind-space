@@ -6,13 +6,14 @@ import { SINGLE_SERVICE_QUERY, ALL_SERVICE_SLUGS_QUERY, RELATED_SERVICES_QUERY }
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { ServiceExperts } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
-import { Clock, MapPin } from "lucide-react";
+import { Clock } from "lucide-react";
 import type { Specialist } from "@/sanity/types";
 import { ORGANIZATION_REF, SITE_URL, MEDICAL_CONTENT_REVIEW_BLOCK } from "@/lib/seo";
 import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
 import { HOWTO_ARTICLES, SERVICE_TO_HOWTO } from "@/lib/howto";
 import { PortableText, type PortableTextBlock } from "next-sanity";
 import { portableTextComponents } from "@/components/portable-text-components";
+import { getServiceBySlug } from "@/lib/services-data";
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
@@ -40,6 +41,13 @@ interface ServiceData {
     metaDescription?: string;
   };
   faqs?: { question: string; answer: string }[];
+  audienceSections?: {
+    audienceType: "children" | "teens" | "adults";
+    title?: string;
+    overview?: string;
+    benefits?: string[];
+    expectations?: string[];
+  }[];
   ctaOverride?: {
     title?: string;
     description?: string;
@@ -122,6 +130,25 @@ export default async function ServicePage({ params }: PageProps) {
 
   if (!service) {
     notFound();
+  }
+
+  // Merge with static data to get high-intent FAQs and other metadata
+  const staticService = getServiceBySlug(slug);
+  if (staticService) {
+    // If Sanity faqs are empty or missing, use the static high-intent ones
+    // Use type assertion or safe check for the static content structure
+    const staticContent = staticService.content as { faqs?: { question: string; answer: string }[]; duration?: string; format?: string };
+    if (!service.faqs || service.faqs.length === 0) {
+      if (staticContent.faqs) {
+        service.faqs = staticContent.faqs;
+      }
+    }
+    // Fallback for duration/format if not in Sanity
+    if (!service.duration) service.duration = staticContent.duration;
+    if (!service.format) service.format = staticContent.format;
+    
+    // Ensure we keep additionalSections from Sanity if they exist
+    // They are already in the `service` object from sanityFetch
   }
 
   // Sibling services from the same category — powers the internal-linking entity graph.
@@ -503,7 +530,7 @@ export default async function ServicePage({ params }: PageProps) {
                     className="text-2xl lg:text-3xl font-serif text-green mb-6"
                     style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
                   >
-                    {service.whoIsItForTitle || "Is This Right for You or Your Loved Ones?"}
+                    {service.whoIsItForTitle || "Who Is It For"}
                   </h2>
                   <ul className="space-y-4">
                     {service.whoIsItFor.map((item, index) => (
@@ -517,6 +544,76 @@ export default async function ServicePage({ params }: PageProps) {
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {/* Audience Specific Sections */}
+              {service.audienceSections && service.audienceSections.length > 0 && (
+                <div className="mb-12">
+                  <h2
+                    className="text-3xl lg:text-4xl font-serif text-green mb-8 text-center"
+                    style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                  >
+                    Audience-Specific Details
+                  </h2>
+                  {service.audienceSections.map((section, idx) => (
+                    <div key={idx} className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="px-3 py-1 rounded-full bg-green/10 text-green text-[10px] font-bold uppercase tracking-widest">
+                          {section.audienceType}
+                        </div>
+                        <h2
+                          className="text-2xl lg:text-3xl font-serif text-green"
+                          style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                        >
+                          {section.title || `For ${section.audienceType.charAt(0).toUpperCase() + section.audienceType.slice(1)}`}
+                        </h2>
+                      </div>
+                      
+                      {section.overview && (
+                        <div className="mb-6">
+                          <h3 className="font-serif text-xl text-green mb-2">Overview</h3>
+                          <p className="text-black/70 font-medium leading-relaxed">
+                            {section.overview}
+                          </p>
+                        </div>
+                      )}
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {section.benefits && section.benefits.length > 0 && (
+                          <div>
+                            <h3 className="font-serif text-xl text-green mb-4">What You&apos;ll Gain</h3>
+                            <ul className="space-y-3">
+                              {section.benefits.map((benefit, i) => (
+                                <li key={i} className="flex items-start gap-3">
+                                  <div className="flex-shrink-0 mt-1">
+                                    <svg className="w-4 h-4 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                  </div>
+                                  <span className="text-sm text-black/70 font-medium">{benefit}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        {section.expectations && section.expectations.length > 0 && (
+                          <div>
+                            <h3 className="font-serif text-xl text-green mb-4">What to Expect</h3>
+                            <ul className="space-y-3">
+                              {section.expectations.map((item, i) => (
+                                <li key={i} className="flex items-start gap-3">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D] flex-shrink-0 mt-2" />
+                                  <span className="text-sm text-black/70 font-medium">{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )}
 
@@ -535,7 +632,10 @@ export default async function ServicePage({ params }: PageProps) {
                   <ul className="space-y-4">
                     {section.items.map((item, itemIdx) => (
                       <li key={itemIdx} className="flex items-start gap-4">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D] flex-shrink-0 mt-[10px]" />
+                        <div 
+                          className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[10px]" 
+                          style={{ backgroundColor: section.color || '#7A9A7D' }}
+                        />
                         <span className="text-black/70 font-medium leading-relaxed">{item}</span>
                       </li>
                     ))}

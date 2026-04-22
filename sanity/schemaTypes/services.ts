@@ -1,5 +1,4 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
-import { ImageWithPreview } from '../components/ImageWithPreview'
 
 export const servicesType = defineType({
   name: 'services',
@@ -18,35 +17,64 @@ export const servicesType = defineType({
     // ============================================================
     defineField({
       name: 'title',
-      title: '📝 [EDIT] Service Title',
+      title: 'Service Title',
       type: 'string',
       group: 'basic',
-      description: 'The main title shown on cards and page headers',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'slug',
-      title: '🔗 [AUTO] URL Slug',
+      title: 'Slug',
       type: 'slug',
       group: 'basic',
-      description: 'Auto-generated from title. Click "Generate" after entering title.',
       options: {
         source: 'title',
-        slugify: (input) =>
-          input
-            .toLowerCase()
-            .replace(/\s+/g, '-')
-            .replace(/[^\w-]+/g, '')
-            .slice(0, 96),
+        maxLength: 96,
       },
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'category',
-      type: 'string',
-      title: '📂 [REQUIRED] Category',
+      name: 'description',
+      title: 'Short Description',
+      type: 'text',
       group: 'basic',
-      description: 'Determines where this service appears on the website',
+      description: 'Brief overview for service cards (1-2 sentences).',
+      validation: (rule) => rule.required().max(200),
+    }),
+    defineField({
+      name: 'image',
+      title: 'Service Image',
+      type: 'image',
+      group: 'basic',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+        },
+      ],
+    }),
+    defineField({
+      name: 'popular',
+      title: 'Featured / Popular',
+      type: 'boolean',
+      group: 'basic',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'isTherapy',
+      title: 'Is Therapy?',
+      type: 'boolean',
+      group: 'basic',
+      description: 'Used for homepage grouping.',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      group: 'basic',
       options: {
         list: [
           { title: 'Assessments', value: 'assessments' },
@@ -55,118 +83,119 @@ export const servicesType = defineType({
           { title: 'Programs', value: 'programs' },
           { title: 'Physiotherapy', value: 'physiotherapy' },
         ],
-        layout: 'radio',
       },
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: 'description',
-      type: 'text',
-      title: '📝 [EDIT] Card Description',
-      group: 'basic',
-      rows: 3,
-      description: 'Short summary shown on service cards (max 200 characters)',
-      validation: (rule) => rule.required().max(200),
-    }),
-    defineField({
-      name: 'image',
-      title: '🖼️ [OPTIONAL] Service Image',
-      type: 'image',
-      group: 'basic',
-      description: '📐 RECOMMENDED: 800×600px (4:3 ratio) or larger. Use hotspot on faces/key areas so cropping looks good.',
-      options: {hotspot: true},
-      components: {
-        input: ImageWithPreview,
-      },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alt Text (for accessibility)',
-        },
-      ],
-    }),
-    defineField({
-      name: 'popular',
-      type: 'boolean',
-      title: '⭐ [TOGGLE] Featured Service',
-      group: 'basic',
-      description: 'Enable to show this service at the top of listings',
-      initialValue: false,
-    }),
-    defineField({
-      name: 'isTherapy',
-      type: 'boolean',
-      title: '💜 [TOGGLE] Therapy Badge',
-      group: 'basic',
-      description: 'Enable to show the therapy badge on this service',
-      initialValue: false,
-    }),
 
     // ============================================================
-    // SERVICE DETAILS - Content shown on service detail page
+    // CONTENT - Rich content for the detail page
     // ============================================================
     defineField({
-      name: 'duration',
-      title: '⏱️ [EDIT] Duration',
+      name: 'overview',
+      title: 'Overview',
+      type: 'text',
+      group: 'content',
+      description: 'Detailed introductory paragraph for the service page.',
+    }),
+    defineField({
+      name: 'benefits',
+      title: 'What You\'ll Gain',
+      type: 'array',
+      group: 'content',
+      of: [{ type: 'string' }],
+      description: 'List of benefits or outcomes. Each item appears as a bullet.',
+    }),
+    defineField({
+      name: 'whatToExpect',
+      title: 'What to Expect',
+      type: 'array',
+      group: 'content',
+      of: [{ type: 'string' }],
+      description: 'List of steps or process details. Each item appears as a bullet.',
+    }),
+    defineField({
+      name: 'whoIsItForTitle',
+      title: 'Who Is It For Title',
       type: 'string',
       group: 'content',
-      description: 'e.g., "45-minute sessions", "2-hour workshop", "6-week program"',
+      initialValue: 'Is This Right for You or Your Loved Ones?',
+    }),
+    defineField({
+      name: 'whoIsItFor',
+      title: 'Who Is It For',
+      type: 'array',
+      group: 'content',
+      of: [{ type: 'string' }],
+      description: 'Describe who benefits from this service.',
+    }),
+    defineField({
+      name: 'audienceSections',
+      title: 'Audience-Specific Details',
+      type: 'array',
+      group: 'content',
+      description: 'Add specific sections for Children, Teens, or Adults if this service caters differently to them.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'audienceBlock',
+          fields: [
+            {
+              name: 'audienceType',
+              type: 'string',
+              title: 'Audience Type',
+              options: {
+                list: [
+                  { title: 'Children', value: 'children' },
+                  { title: 'Teens', value: 'teens' },
+                  { title: 'Adults', value: 'adults' },
+                ]
+              },
+              validation: (rule) => rule.required()
+            },
+            { name: 'title', type: 'string', title: 'Section Title (e.g., "For Children & Teens")' },
+            { name: 'overview', type: 'text', title: 'Overview' },
+            {
+              name: 'benefits',
+              type: 'array',
+              title: 'What You\'ll Gain',
+              of: [{ type: 'string' }]
+            },
+            {
+              name: 'expectations',
+              type: 'array',
+              title: 'What to Expect',
+              of: [{ type: 'string' }]
+            }
+          ],
+          preview: {
+            select: { title: 'title', audience: 'audienceType' },
+            prepare({ title, audience }) {
+              return {
+                title: title || audience.charAt(0).toUpperCase() + audience.slice(1),
+                subtitle: `Specific details for ${audience}`
+              }
+            }
+          }
+        })
+      ]
+    }),
+    defineField({
+      name: 'duration',
+      title: 'Duration',
+      type: 'string',
+      group: 'content',
+      description: 'e.g., "45-minute sessions", "2-hour workshop"',
     }),
     defineField({
       name: 'format',
-      title: '📍 [EDIT] Format / Location',
+      title: 'Format / Location',
       type: 'string',
       group: 'content',
       description: 'e.g., "In-person at our center", "Online sessions available"',
     }),
     defineField({
-      name: 'overview',
-      title: '📝 [EDIT] Overview',
-      type: 'text',
-      group: 'content',
-      rows: 5,
-      description: 'Detailed description shown at the top of the service page (min 50 characters)',
-      validation: (rule) => rule.required().min(50),
-    }),
-    defineField({
-      name: 'benefits',
-      title: '✅ [EDIT] Benefits (What You\'ll Gain)',
-      type: 'array',
-      group: 'content',
-      of: [{ type: 'string' }],
-      description: 'List 4-6 key benefits. Each item appears as a bullet point.',
-      validation: (rule) => rule.required().min(3).max(8),
-    }),
-    defineField({
-      name: 'whatToExpect',
-      title: '📋 [EDIT] What to Expect',
-      type: 'array',
-      group: 'content',
-      of: [{ type: 'string' }],
-      description: 'List the process steps. Each item appears as a numbered step.',
-      validation: (rule) => rule.required().min(3).max(8),
-    }),
-    defineField({
-      name: 'whoIsItForTitle',
-      title: '📝 [EDIT] Section Title: Who Is It For',
-      type: 'string',
-      group: 'content',
-      description: 'Default: "Is This Right for You or Your Loved Ones?"',
-      initialValue: 'Is This Right for You or Your Loved Ones?',
-    }),
-    defineField({
-      name: 'whoIsItFor',
-      title: '👨‍👩‍👧 [EDIT] Who Is It For',
-      type: 'array',
-      group: 'content',
-      of: [{ type: 'string' }],
-      description: 'Describe who benefits from this service. Each item appears as a bullet.',
-      validation: (rule) => rule.required().min(3).max(8),
-    }),
-    defineField({
       name: 'additionalSections',
-      title: '➕ [EDIT] Additional Custom Blocks',
+      title: 'Additional Custom Blocks',
       type: 'array',
       group: 'content',
       description: 'Add extra "What to Expect" style boxes with custom headers and dots.',
@@ -183,135 +212,82 @@ export const servicesType = defineType({
               title: 'List Items (Dots)',
               of: [{ type: 'string' }],
               validation: (rule) => rule.required().min(1)
+            },
+            {
+              name: 'color',
+              type: 'string',
+              title: 'Bullet Color (Hex)',
+              description: 'Hex code for the dots (e.g., #7A9A7D). Defaults to brand green if empty.',
+              initialValue: '#7A9A7D'
             }
-          ]        })
+          ]
+        })
       ]
     }),
     defineField({
       name: 'body',
-      title: '📄 [OPTIONAL] Additional Content',
+      title: 'Additional Content',
       type: 'array',
       group: 'content',
-      description: 'Rich text content for detailed information (FAQs, extra details, etc.)',
       of: [
         defineArrayMember({
           type: 'block',
-          styles: [
-            {title: 'Normal', value: 'normal'},
-            {title: 'H1', value: 'h1'},
-            {title: 'H2', value: 'h2'},
-            {title: 'H3', value: 'h3'},
-            {title: 'Quote', value: 'blockquote'},
-          ],
-          lists: [
-            {title: 'Bullet', value: 'bullet'},
-            {title: 'Number', value: 'number'},
-          ],
-          marks: {
-            decorators: [
-              {title: 'Strong', value: 'strong'},
-              {title: 'Emphasis', value: 'em'},
-              {title: 'Underline', value: 'underline'},
-            ],
-            annotations: [
-              {
-                name: 'link',
-                title: 'URL',
-                type: 'object',
-                fields: [
-                  {
-                    name: 'href',
-                    title: 'URL',
-                    type: 'url',
-                  },
-                ],
-              },
-            ],
-          },
         }),
         defineArrayMember({
           type: 'image',
           options: {hotspot: true},
-          fields: [
-            {
-              name: 'alt',
-              type: 'string',
-              title: 'Alternative text',
-            },
-          ],
         }),
       ],
     }),
 
     // ============================================================
-    // EXPERTS & FAQ - GEO/LLM Optimization
+    // EXPERTS & FAQ
     // ============================================================
     defineField({
       name: 'onDemand',
-      title: '📅 [TOGGLE] On-Demand Service',
+      title: 'On-Demand Service',
       type: 'boolean',
       group: 'experts',
-      description: 'If enabled, shows "Clinical Leadership" fallback instead of specific specialists.',
       initialValue: false,
     }),
     defineField({
       name: 'faqs',
-      title: '❓ [GEO] Frequently Asked Questions',
+      title: 'FAQs',
       type: 'array',
       group: 'experts',
-      description: 'Critical for LLM clipping. Add 3-5 high-intent questions and answers.',
       of: [
         defineArrayMember({
           type: 'object',
           fields: [
             { name: 'question', type: 'string', title: 'Question' },
-            { name: 'answer', type: 'text', title: 'Answer', rows: 3 },
-          ],
-        }),
-      ],
+            { name: 'answer', type: 'text', title: 'Answer' }
+          ]
+        })
+      ]
     }),
 
     // ============================================================
-    // CTA OVERRIDE - Tailored Conversion
+    // CTA & SEO
     // ============================================================
     defineField({
       name: 'ctaOverride',
-      title: '🎯 [OPTIONAL] Tailored CTA',
+      title: 'CTA Override',
       type: 'object',
       group: 'cta',
-      description: 'Leave blank to use the global "All Ages" CTA.',
       fields: [
-        { name: 'title', type: 'string', title: 'CTA Title', description: 'e.g., "Ready for Your Diagnostic Assessment?"' },
-        { name: 'description', type: 'text', title: 'CTA Description', rows: 3 },
-        { name: 'buttonText', type: 'string', title: 'Button Label', initialValue: 'Book Free Consultation' },
-      ],
+        { name: 'title', type: 'string', title: 'CTA Title' },
+        { name: 'description', type: 'text', title: 'CTA Description' },
+        { name: 'buttonText', type: 'string', title: 'Button Text' }
+      ]
     }),
-
     defineField({
       name: 'seo',
+      title: 'SEO Settings',
       type: 'object',
-      title: '🔍 SEO Settings',
       group: 'seo',
-      description: 'Leave blank to use auto-generated SEO from title and description',
       fields: [
-        {
-          name: 'metaTitle',
-          type: 'string',
-          title: '✨ [AUTO] Meta Title',
-          description: 'Leave blank to use service title. Custom: 50-60 characters.',
-        },
-        {
-          name: 'metaDescription',
-          type: 'string',
-          title: '✨ [AUTO] Meta Description',
-          description: 'Leave blank to use card description. Custom: 150-160 characters.',
-        },
-        {
-          name: 'ogImage',
-          type: 'image',
-          title: '🖼️ [OPTIONAL] Social Share Image',
-          description: 'Custom image for Facebook/Twitter sharing. Falls back to service image.',
-        },
+        { name: 'metaTitle', type: 'string', title: 'Meta Title' },
+        { name: 'metaDescription', type: 'text', title: 'Meta Description' },
       ],
     }),
   ],
@@ -319,19 +295,12 @@ export const servicesType = defineType({
     select: {
       title: 'title',
       category: 'category',
-      popular: 'popular',
-      isTherapy: 'isTherapy',
       media: 'image',
     },
-    prepare({ title, category, popular, isTherapy, media }) {
-      const badges = [];
-      if (popular) badges.push('⭐');
-      if (isTherapy) badges.push('💜');
-      const categoryLabel = category ? category.charAt(0).toUpperCase() + category.slice(1) : 'No category';
-
+    prepare({ title, category, media }) {
       return {
-        title: `${badges.join(' ')} ${title}`.trim(),
-        subtitle: categoryLabel,
+        title: title,
+        subtitle: category,
         media: media,
       }
     },

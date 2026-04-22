@@ -241,6 +241,8 @@ export const SINGLE_SERVICE_QUERY = `*[_type == "services" && slug.current == $s
   format,
   seo,
   faqs,
+  audienceSections,
+  additionalSections,
   ctaOverride,
   onDemand,
   "specialists": *[_type == "specialist" && references(^._id)] | order(order desc, name asc) {
