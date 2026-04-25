@@ -1,0 +1,417 @@
+import { PortableTextBlock } from "next-sanity";
+
+// Author Types
+export interface Author {
+  _id: string;
+  _type: "author";
+  name: string;
+  title?: string;
+  slug: {
+    current: string;
+  };
+  image?: {
+    asset: {
+      _id: string;
+      url: string;
+    };
+  };
+  bio?: PortableTextBlock[];
+  email?: string;
+  social?: {
+    twitter?: string;
+    linkedin?: string;
+    github?: string;
+  };
+}
+
+// Simplified Author for Post References
+export interface AuthorReference {
+  name: string;
+  title?: string;
+  slug: {
+    current: string;
+  };
+  image?: string;
+  bio?: PortableTextBlock[];
+  social?: {
+    twitter?: string;
+    linkedin?: string;
+    github?: string;
+  };
+}
+
+// Post Image Types
+export interface SanityImageAsset {
+  _id: string;
+  url: string;
+}
+
+export interface SanityImage {
+  asset: SanityImageAsset;
+  alt?: string;
+  caption?: string;
+  hotspot?: {
+    x: number;
+    y: number;
+    height: number;
+    width: number;
+  };
+}
+
+// Full Post Type
+export interface Post {
+  _id: string;
+  _type: "post";
+  title: string;
+  slug: {
+    current: string;
+  };
+  contentType: "blog" | "news";
+  excerpt?: string;
+  mainImage?: SanityImage;
+  author: AuthorReference;
+  categories?: string[];
+  publishedAt: string;
+  readTime?: number;
+  featured?: boolean;
+  postFormat: "standard" | "external" | "event";
+  externalUrl?: string;
+  sourceName?: string;
+  body: PortableTextBlock[];
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    ogImage?: SanityImage;
+  };
+}
+
+// Simplified Post for Listing Pages
+export interface PostListItem {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  contentType: "blog" | "news";
+  excerpt?: string;
+  publishedAt: string;
+  readTime?: number;
+  featured?: boolean;
+  postFormat: "standard" | "external" | "event";
+  externalUrl?: string;
+  sourceName?: string;
+  mainImage?: {
+    asset: {
+      url: string;
+    };
+    alt?: string;
+    hotspot?: {
+      x: number;
+      y: number;
+      height: number;
+      width: number;
+    };
+  };
+  author: {
+    name: string;
+    slug: {
+      current: string;
+    };
+    image?: string;
+  };
+  categories?: string[];
+}
+
+// Query Result Types
+export type PostsQueryResult = PostListItem[];
+export type SinglePostQueryResult = Post | null;
+
+// Service Types
+export interface Service {
+  _id: string;
+  _type: "services";
+  title: string;
+  slug: {
+    current: string;
+  };
+  description: string;
+  category: string;
+  image?: SanityImage;
+  popular?: boolean;
+  isTherapy?: boolean;
+  overview?: string;
+  benefits?: string[];
+  whatToExpect?: string[];
+  whoIsItForTitle?: string;
+  whoIsItFor?: string[];
+  body: PortableTextBlock[];
+  duration?: string;
+  format?: string;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    ogImage?: SanityImage;
+  };
+  faqs?: { question: string; answer: string }[];
+  audienceSections?: {
+    audienceType: "children" | "teens" | "adults";
+    title?: string;
+    overview?: string;
+    whoIsItFor?: string[];
+    benefits?: string[];
+    expectations?: string[];
+  }[];
+  additionalSections?: { title: string; items: string[]; color?: string }[];
+  ctaOverride?: {
+    title?: string;
+    description?: string;
+    buttonText?: string;
+  };
+  onDemand?: boolean;
+}
+
+// Simplified Service for Listing Pages
+export interface ServiceListItem {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  description?: string;
+  image?: {
+    asset: {
+      url: string;
+    };
+    alt?: string;
+  };
+  popular: boolean;
+  isTherapy?: boolean;
+}
+
+// Service Navigation Item
+export interface ServiceNavItem {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+}
+
+// Service Query Result Types
+export type ServicesQueryResult = ServiceListItem[];
+export type SingleServiceQueryResult = Service | null;
+export type ServiceNavQueryResult = ServiceNavItem[];
+
+// Gallery Types
+export interface GalleryItem {
+  _id: string;
+  image: {
+    asset: {
+      url: string;
+    };
+    alt: string;
+  };
+  title: string;
+  locationEvent?: string;
+  story: string;
+  tag?: string;
+  categories: string[];
+  isFeatured?: boolean;
+  publishedAt: string;
+}
+
+export type GalleryQueryResult = GalleryItem[];
+
+export interface GalleryCategory {
+  _id: string;
+  title: string;
+  slug: string;
+}
+
+export type GalleryCategoriesQueryResult = GalleryCategory[];
+
+// Career Types
+export interface Career {
+  _id: string;
+  _type: "career";
+  title: string;
+  slug: {
+    current: string;
+  };
+  department: string;
+  location: string[];
+  employmentType: string;
+  locationType: string;
+  salaryRange?: {
+    min?: string;
+    max?: string;
+    note?: string;
+  };
+  aboutRole: PortableTextBlock[];
+  responsibilities: string[];
+  additionalAdvantage?: PortableTextBlock[];
+  whatWeOffer?: PortableTextBlock[];
+  requirements: string[];
+  skills: string[];
+  isActive: boolean;
+  postedDate: string;
+}
+
+export interface CareerListItem {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  department: string;
+  location: string[];
+  employmentType: string;
+  locationType: string;
+  salaryRange?: {
+    min?: number;
+    max?: number;
+    note?: string;
+  };
+  postedDate?: string;
+}
+
+export type CareersQueryResult = CareerListItem[];
+export type SingleCareerQueryResult = Career | null;
+
+// Review Types
+export interface Review {
+  _id: string;
+  _type: "review";
+  name: string;
+  role?: string;
+  quote: string;
+  rating?: number;
+  publishedAt?: string;
+  featured?: boolean;
+}
+
+export interface ReviewListItem {
+  _id: string;
+  name: string;
+  role?: string;
+  quote: string;
+  rating?: number;
+  publishedAt?: string;
+}
+
+export type ReviewsQueryResult = ReviewListItem[];
+
+// Specialist / Team Types
+export interface Specialist {
+  _id: string;
+  name: string;
+  slug: { current: string };
+  title: string;
+  image: SanityImage;
+  experience?: string;
+  specialties?: string[];
+  teaser: string;
+  fullBio: PortableTextBlock[];
+  order?: number;
+}
+
+export type SpecialistsQueryResult = Specialist[];
+
+// About Us Page Singleton Type
+export interface AboutUs {
+  hero?: {
+    title?: string;
+    italicSubtitle?: string;
+    description?: string;
+    images?: SanityImage[];
+  };
+  philosophy?: {
+    title?: string;
+    description?: string;
+    points?: {
+      title: string;
+      description: string;
+      icon: string;
+    }[];
+  };
+  story?: {
+    title?: string;
+    paragraphs?: string[];
+    image?: SanityImage;
+  };
+}
+
+export type AboutUsQueryResult = AboutUs | null;
+
+// Awareness Page Singleton Type
+export interface Awareness {
+  hero?: {
+    badge?: string;
+    title?: string;
+    description?: string;
+    stats?: {
+      label: string;
+      value: string;
+    }[];
+    image?: SanityImage;
+  };
+  benefits?: {
+    title?: string;
+    subtitle?: string;
+    items?: {
+      title: string;
+      description: string;
+      icon: string;
+    }[];
+  };
+  highlights?: {
+    title?: string;
+    description?: string;
+    items?: string[];
+    image?: SanityImage;
+  };
+  pastSessions?: {
+    title?: string;
+    subtitle?: string;
+    sessions?: {
+      venue: string;
+      audience: string;
+      image: SanityImage;
+    }[];
+  };
+  cta?: {
+    title?: string;
+    description?: string;
+    buttonText?: string;
+  };
+}
+
+export type AwarenessQueryResult = Awareness | null;
+
+// Announcement Types
+export interface Announcement {
+  text: string;
+}
+
+export type AnnouncementQueryResult = Announcement | null;
+
+// Mind Gym Types
+export interface MindGymItem {
+  _id: string;
+  title: string;
+  slug: string;
+  ageGroup: string;
+  focusArea: string;
+  shortDescription: string;
+  coverImage?: {
+    asset: {
+      url: string;
+    };
+    alt?: string;
+  };
+  scienceBehindIt?: PortableTextBlock[];
+  quickTips?: string[];
+}
+
+export type MindGymQueryResult = MindGymItem[];
+export type SingleMindGymQueryResult = MindGymItem | null;

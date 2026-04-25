@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage Preview - Divit MindSpace</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --linen: #FAF9F5;
+      --linen-light: #FDFBF7;
+      --green: #004540;
+      --purple: #52154E;
+      --yellow: #FFE175;
+      --green-lite: #89A09E;
+      --cream: #F1EEE4;
+      --blue: #ADBDFF;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--linen);
+      color: var(--green);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+    @media (min-width: 1024px) { .container { padding: 0 4rem; } }
+
+    /* ===== HERO ===== */
+    .hero { min-height: auto; display: flex; align-items: center; padding: 0.25rem 0 2rem; }
+    @media (min-width: 1024px) { .hero { min-height: calc(100vh - 140px); padding: 0.5rem 0 2.5rem; } }
+
+    .hero-content { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+    @media (min-width: 1024px) { .hero-content { flex-direction: row; align-items: center; gap: 1rem; } }
+
+    .hero-text { flex: 1.2; text-align: center; }
+    @media (min-width: 1024px) { .hero-text { text-align: left; } }
+
+    .hero-visual { flex: 1; width: 100%; max-width: 22rem; }
+    @media (min-width: 1024px) { .hero-visual { max-width: 32rem; } }
+
+    /* Badge */
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.25rem 0.75rem; border-radius: 9999px;
+      background-color: #FFFBEB; border: 1px solid rgba(217, 119, 6, 0.2);
+      color: var(--purple); font-size: 0.625rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    @media (min-width: 640px) { .badge { font-size: 0.75rem; } }
+
+    .badge-dot { position: relative; width: 0.5rem; height: 0.5rem; }
+    .badge-dot::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background-color: var(--purple);
+      animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    .badge-dot::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background-color: var(--purple);
+    }
+    @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
+
+    /* Headline Lockup */
+    .headline-lockup {
+      display: flex; flex-direction: column; width: 100%; max-width: 580px;
+      margin: 1.75rem auto 1rem;
+    }
+    @media (min-width: 1024px) { .headline-lockup { margin: 1.75rem 0 1rem; } }
+
+    .headline-wrapper { display: flex; flex-direction: column; color: var(--green); line-height: 1; }
+
+    .headline-line1 {
+      position: relative; display: flex; justify-content: space-between; align-items: baseline;
+      width: 100%; font-family: 'Inter', sans-serif;
+      font-size: clamp(0.9rem, 2.2vw, 1.6rem); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      padding: 0.25rem 0.5rem; margin-bottom: 0.75rem;
+    }
+    /* Multiple overlapping strokes - like a kid colored it */
+    .headline-line1::before,
+    .headline-line1::after {
+      content: ''; position: absolute; inset: 0; border-radius: 0.125rem; z-index: -1;
+    }
+    .headline-line1::before {
+      background-color: rgba(255, 225, 117, 0.35);
+      transform: rotate(-1.5deg) scaleX(1.08) translateX(-2px);
+    }
+    .headline-line1::after {
+      background-color: rgba(255, 225, 117, 0.4);
+      transform: rotate(0.8deg) scaleX(1.04) translateY(1px);
+    }
+    .highlight-layer {
+      position: absolute; inset: 0; border-radius: 0.125rem; z-index: -2;
+      background-color: rgba(255, 225, 117, 0.25);
+      transform: rotate(-0.5deg) scaleX(1.06) scaleY(1.15) translateY(-1px);
+    }
+    .headline-line1 span { display: inline-block; }
+    .word-gap { margin-left: 0.375rem; }
+
+    .headline-line2 {
+      display: flex; align-items: baseline; gap: 0.75rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 6vw, 4rem); font-weight: 500; font-style: italic;
+      color: var(--purple); line-height: 0.9; margin-top: -0.25rem;
+    }
+    @media (min-width: 640px) { .headline-line2 { gap: 1rem; } }
+    .crossed-out {
+      position: relative; color: #999; opacity: 0.5;
+    }
+    .crossed-out::after {
+      content: ''; position: absolute;
+      left: -4%; right: -4%; top: 50%;
+      height: 3px; background: #999;
+      transform: rotate(-3deg);
+    }
+    .word-unique { color: var(--purple); }
+    .word-journey { }
+
+    .subheading { max-width: 36rem; font-size: 1rem; color: rgba(0, 69, 64, 0.9); line-height: 1.75; font-weight: 500; margin: 0 auto 1rem; }
+    @media (min-width: 1024px) { .subheading { font-size: 1.125rem; margin: 0 0 1rem; } }
+
+    .button-group { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 0.75rem; }
+    @media (min-width: 640px) { .button-group { flex-direction: row; justify-content: center; } }
+    @media (min-width: 1024px) { .button-group { justify-content: flex-start; } }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; height: 2.75rem; padding: 0 1.5rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.2s ease; cursor: pointer; border: none; }
+    .btn-primary { background-color: var(--green); color: white; box-shadow: 0 4px 12px -2px rgba(0, 69, 64, 0.2); }
+    .btn-primary:hover { background-color: #003835; }
+    .btn-primary svg { width: 1rem; height: 1rem; }
+    .text-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; font-weight: 600; color: var(--green); text-decoration: none; transition: all 0.2s ease; }
+    .text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .proof-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.875rem; color: rgba(0, 69, 64, 0.7); font-weight: 500; margin-top: 1rem; }
+    @media (min-width: 1024px) { .proof-line { justify-content: flex-start; } }
+    .proof-highlight { color: var(--purple); font-weight: 700; }
+
+    .trust-metrics { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+    @media (min-width: 1024px) { .trust-metrics { justify-content: flex-start; } }
+    .metric { display: flex; flex-direction: column; align-items: center; }
+    @media (min-width: 1024px) { .metric { align-items: flex-start; } }
+    .metric-value { font-size: 1.25rem; font-weight: 700; color: var(--green); display: flex; align-items: center; gap: 0.25rem; }
+    @media (min-width: 1024px) { .metric-value { font-size: 1.5rem; } }
+    .metric-label { font-size: 0.625rem; font-weight: 700; color: rgba(0, 69, 64, 0.6); text-transform: uppercase; letter-spacing: 0.1em; }
+    .metric-divider { width: 1px; height: 1.5rem; background-color: rgba(0, 69, 64, 0.1); display: none; }
+    @media (min-width: 640px) { .metric-divider { display: block; } }
+    .star { width: 1rem; height: 1rem; color: #FACC15; fill: currentColor; }
+
+    .hero-visual { position: relative; }
+    .hero-offset-shadow-1 { position: absolute; inset: 0; background: #E8DFD0; border-radius: 1rem; transform: rotate(2deg) translate(8px, 8px); opacity: 0.6; }
+    .hero-offset-shadow-2 { position: absolute; inset: 0; background: #D4C9B8; border-radius: 1rem; transform: rotate(-1deg) translate(4px, 12px); opacity: 0.4; }
+    .hero-image-frame { position: relative; border-radius: 1rem; overflow: hidden; box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.12); margin: 0 auto; max-width: 340px; aspect-ratio: 5/4; border: 4px solid white; }
+    @media (min-width: 1024px) { .hero-image-frame { margin-left: auto; margin-right: 0; max-width: 100%; } }
+    .hero-image-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 8%; transform: scale(1.12); }
+    .hero-image-placeholder { width: 100%; aspect-ratio: 3/4; background: linear-gradient(135deg, var(--green-lite) 0%, var(--cream) 100%); display: flex; align-items: center; justify-content: center; color: var(--green); font-size: 0.875rem; text-align: center; padding: 2rem; }
+
+    /* ===== SERVICES ===== */
+    .services { padding: 2rem 0 4rem; }
+    @media (min-width: 1024px) { .services { padding: 1.5rem 0 5rem; } }
+    .services-bridge { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; color: rgba(0, 69, 64, 0.5); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; }
+    .services-bridge::before, .services-bridge::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(0, 69, 64, 0.15), transparent); }
+
+    .services-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .service-card { position: relative; display: flex; flex-direction: column; padding: 1.5rem; border-radius: 1rem; text-decoration: none; transition: all 0.3s ease; overflow: hidden; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15); }
+    .service-card--teal { background-color: var(--green); }
+    .service-card--blue { background-color: var(--blue); }
+    .service-card--yellow { background-color: var(--yellow); }
+    .service-card--purple { background-color: var(--purple); }
+
+    .service-icon { width: 2.5rem; height: 2.5rem; border-radius: 0.625rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+    .service-card--teal .service-icon, .service-card--purple .service-icon { background-color: rgba(255, 255, 255, 0.15); }
+    .service-card--blue .service-icon, .service-card--yellow .service-icon { background-color: rgba(0, 69, 64, 0.1); }
+    .service-icon svg { width: 1.25rem; height: 1.25rem; }
+    .service-card--teal .service-icon svg, .service-card--purple .service-icon svg { color: white; stroke: white; }
+    .service-card--blue .service-icon svg, .service-card--yellow .service-icon svg { color: var(--green); stroke: var(--green); }
+
+    .service-outcome { font-size: 1rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.75rem; flex-grow: 1; }
+    .service-card--teal .service-outcome, .service-card--purple .service-outcome { color: white; }
+    .service-card--blue .service-outcome, .service-card--yellow .service-outcome { color: var(--purple); }
+
+    .service-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; }
+    .service-card--teal .service-label, .service-card--purple .service-label { color: white; }
+    .service-card--blue .service-label, .service-card--yellow .service-label { color: var(--purple); }
+    .service-arrow { width: 1rem; height: 1rem; transition: transform 0.3s ease; }
+    .service-card:hover .service-arrow { transform: translateX(4px); }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials { padding: 1.5rem 0 2rem; background-color: var(--linen-light); }
+    @media (min-width: 1024px) { .testimonials { padding: 1.5rem 0 2.5rem; } }
+
+    .section-label { display: block; text-align: center; color: var(--purple); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .section-title { font-size: 1.875rem; font-weight: 700; color: var(--green); margin-bottom: 1rem; letter-spacing: -0.025em; text-align: center; }
+    @media (min-width: 1024px) { .section-title { font-size: 3rem; } }
+
+    .testimonials-header { margin-bottom: 3rem; }
+
+    .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .testimonial-card { background: white; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05); }
+    .testimonial-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .testimonial-avatar { width: 3rem; height: 3rem; border-radius: 50%; background-color: var(--cream); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--green); font-size: 1.25rem; }
+    .testimonial-info h4 { font-weight: 700; color: var(--green); font-size: 0.875rem; }
+    .testimonial-info p { font-size: 0.75rem; color: rgba(0,69,64,0.6); }
+    .testimonial-quote { font-size: 0.9375rem; color: rgba(0,69,64,0.8); line-height: 1.6; font-style: italic; }
+    .testimonials-cta { text-align: center; margin-top: 2.5rem; }
+
+    /* ===== FAQ ===== */
+    .faq { padding: 1rem 0 1.5rem; background-color: var(--cream); }
+    @media (min-width: 1024px) { .faq { padding: 1rem 0 2rem; } }
+    .faq-header { text-align: center; margin-bottom: 2rem; }
+    .faq-list { max-width: 56rem; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 768px) { .faq-list { grid-template-columns: repeat(2, 1fr); } }
+    .faq-item { background: white; border-radius: 1rem; overflow: hidden; cursor: pointer; transition: all 0.3s ease; }
+    .faq-item:hover { background: var(--linen-light); }
+    .faq-item.active { background: var(--linen-light); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .faq-question { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.5rem; }
+    .faq-question h3 { font-size: 1.125rem; font-weight: 700; color: #222; }
+    .faq-toggle { width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; background-color: var(--cream); color: var(--green); flex-shrink: 0; transition: all 0.3s ease; }
+    .faq-item.active .faq-toggle { background-color: var(--green); color: white; }
+    .faq-answer { display: none; padding: 0 1.5rem 1.5rem; color: #666; line-height: 1.6; }
+    .faq-item.active .faq-answer { display: block; }
+
+    /* ===== WHO WE SERVE ===== */
+    .who-we-serve { padding: 1.5rem 0 1.5rem; background-color: var(--cream); }
+    @media (min-width: 1024px) { .who-we-serve { padding: 1.5rem 0 2rem; } }
+    .who-we-serve-bridge { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; color: rgba(0, 69, 64, 0.5); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; }
+    .who-we-serve-bridge::before, .who-we-serve-bridge::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(0, 69, 64, 0.15), transparent); }
+    .who-we-serve-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 64rem; margin: 0 auto; }
+    @media (min-width: 768px) { .who-we-serve-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .serve-card { background: white; border-radius: 1.5rem; padding: 2rem; border: 2px solid transparent; transition: all 0.3s ease; }
+    .serve-card:hover { border-color: var(--green-lite); box-shadow: 0 8px 24px -8px rgba(0,0,0,0.1); transform: translateY(-4px); }
+    .serve-icon { width: 3.5rem; height: 3.5rem; border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+    .serve-icon svg { width: 1.5rem; height: 1.5rem; }
+    .serve-icon--light { background-color: var(--cream); }
+    .serve-icon--light svg { color: var(--green); stroke: var(--green); }
+    .serve-icon--dark { background-color: var(--green); }
+    .serve-icon--dark svg { color: white; stroke: white; }
+    .serve-title { font-size: 1.25rem; font-weight: 700; color: var(--green); margin-bottom: 0.75rem; }
+    .serve-outcome { font-size: 1rem; color: rgba(0, 69, 64, 0.8); font-weight: 500; line-height: 1.6; }
+
+    /* ===== CTA ===== */
+    .cta { padding: 1rem; background-color: var(--linen-light); }
+    @media (min-width: 1024px) { .cta { padding: 1.25rem 0 1.5rem; } }
+    .cta-box { max-width: 72rem; margin: 0 auto; background-color: white; border-radius: 1rem; padding: 1rem 1.25rem; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; gap: 1rem; }
+    @media (min-width: 768px) { .cta-box { padding: 1rem 2rem; gap: 1.5rem; } }
+    .cta-content { display: flex; align-items: center; gap: 1rem; }
+    @media (min-width: 768px) { .cta-content { gap: 1.5rem; } }
+    .cta-whatsapp-icon { width: 2rem; height: 2rem; color: #25D366; flex-shrink: 0; }
+    .cta-text { text-align: left; }
+    .cta-title { font-size: 1rem; font-weight: 700; color: var(--green); line-height: 1.3; }
+    @media (min-width: 768px) { .cta-title { font-size: 1.125rem; } }
+    .cta-subtitle { font-size: 0.8125rem; color: rgba(0,69,64,0.6); display: none; }
+    @media (min-width: 768px) { .cta-subtitle { display: block; } }
+    .cta-button { display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem; height: 2.25rem; padding: 0 1rem; border-radius: 9999px; background-color: #25D366; color: white; font-weight: 600; font-size: 0.8125rem; text-decoration: none; transition: all 0.2s ease; flex-shrink: 0; }
+    .cta-button:hover { background-color: #20BD5A; }
+    .cta-button svg { width: 0.875rem; height: 0.875rem; }
+
+    /* ===== FOOTER ===== */
+    .footer { background: white; border-top: 1px solid rgba(0,0,0,0.05); padding: 3rem 0 1.5rem; }
+    .footer-top { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+    @media (min-width: 768px) { .footer-top { grid-template-columns: 1.5fr 1fr 1fr 1.2fr; } }
+
+    .footer-brand { }
+    .footer-logo { width: 3.5rem; height: 3.5rem; margin-bottom: 1rem; opacity: 0.9; }
+    .footer-tagline { font-size: 0.875rem; color: #666; line-height: 1.6; max-width: 280px; }
+
+    .footer-col h4 { font-size: 0.75rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.625rem; }
+    .footer-col a { font-size: 0.875rem; color: #666; text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--green); }
+
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.875rem; color: #666; margin-bottom: 0.75rem; }
+    .footer-contact-item svg { width: 1rem; height: 1rem; color: var(--green); flex-shrink: 0; margin-top: 0.125rem; }
+    .footer-contact-item a { color: #666; text-decoration: none; }
+    .footer-contact-item a:hover { color: var(--green); }
+
+    .footer-careers { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; padding: 0.5rem 1rem; background: var(--cream); border-radius: 0.5rem; font-size: 0.875rem; font-weight: 600; color: var(--green); text-decoration: none; transition: all 0.2s; }
+    .footer-careers:hover { background: var(--green); color: white; }
+    .footer-careers svg { width: 1rem; height: 1rem; }
+
+    .footer-bottom { display: flex; flex-direction: column; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.05); }
+    @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
+    .footer-copyright { font-size: 0.8125rem; color: #999; }
+    .footer-bottom-links { display: flex; align-items: center; gap: 1.5rem; }
+    .footer-bottom-links a { font-size: 0.8125rem; color: #999; text-decoration: none; }
+    .footer-bottom-links a:hover { color: var(--green); }
+    .footer-socials { display: flex; gap: 0.75rem; }
+    .footer-social { width: 2rem; height: 2rem; border-radius: 50%; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666; transition: all 0.2s; }
+    .footer-social:hover { background: var(--green); color: white; }
+    .footer-social svg { width: 1rem; height: 1rem; }
+
+    /* Dev guide toggle */
+    .guide-toggle { position: fixed; bottom: 1rem; right: 1rem; padding: 0.5rem 1rem; background: var(--purple); color: white; border: none; border-radius: 0.5rem; font-size: 0.75rem; cursor: pointer; z-index: 100; }
+    .show-guides section { outline: 2px dashed rgba(255, 0, 0, 0.3); }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="badge"><span class="badge-dot"></span> Limited Seats: Summer Explorers Camp Registration Open</div>
+          <div class="headline-lockup">
+            <h1 class="headline-wrapper">
+              <span class="headline-line1">
+                <span class="highlight-layer"></span>
+                <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
+                <span class="word-gap">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
+                <span class="word-gap">C</span><span>H</span><span>I</span><span>L</span><span>D</span><span>'</span><span>S</span>
+              </span>
+              <span class="headline-line2">
+                <span class="crossed-out">Different</span>
+                <span class="word-unique">Unique</span>
+                <span class="word-journey">Journey.</span>
+              </span>
+            </h1>
+          </div>
+          <p class="subheading">Professional therapy and developmental support for neurodiverse children. Helping them build confidence, focus, and essential life skills in a warm, expert-led environment.</p>
+          <div class="button-group">
+            <a href="#" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Book a Free Consultation
+            </a>
+            <a href="#" class="text-link">Host a Free Workshop →</a>
+          </div>
+          <div class="proof-line"><span>Conducting awareness programs at</span><span class="proof-highlight">TISB, Jyoti Nivas & more</span></div>
+          <div class="trust-metrics">
+            <div class="metric"><span class="metric-value">100+</span><span class="metric-label">Families Served</span></div>
+            <div class="metric-divider"></div>
+            <div class="metric"><span class="metric-value">6+</span><span class="metric-label">Expert Therapists</span></div>
+            <div class="metric-divider"></div>
+            <div class="metric"><span class="metric-value">4.9/5 <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span><span class="metric-label">Parent Rating</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-offset-shadow-1"></div>
+          <div class="hero-offset-shadow-2"></div>
+          <div class="hero-image-frame"><img src="public/hero-triptych.png" alt="Mother, child, and therapist triptych"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <div class="container">
+      <div class="services-bridge">Here's how we help</div>
+      <div class="services-grid">
+        <a href="#" class="service-card service-card--teal">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
+          <p class="service-outcome">Get clear answers about your child's needs</p>
+          <span class="service-label">Assessments <svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+        </a>
+        <a href="#" class="service-card service-card--blue">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+          <p class="service-outcome">Help your child build confidence and coping skills</p>
+          <span class="service-label">Therapy <svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+        </a>
+        <a href="#" class="service-card service-card--yellow">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+          <p class="service-outcome">Gain practical parenting strategies that work</p>
+          <span class="service-label">Guidance <svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+        </a>
+        <a href="#" class="service-card service-card--purple">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></div>
+          <p class="service-outcome">Find learning approaches tailored to your child</p>
+          <span class="service-label">Programs <svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <div class="section-label">Parent Stories</div>
+        <h2 class="section-title">Why Families Trust Us</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-header"><div class="testimonial-avatar">P</div><div class="testimonial-info"><h4>Priya M.</h4><p>Parent of 8-year-old with ADHD</p></div></div>
+          <p class="testimonial-quote">"For the first time, someone truly understood my son. The team didn't try to 'fix' him—they helped us see his strengths. Now he's thriving."</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-header"><div class="testimonial-avatar">R</div><div class="testimonial-info"><h4>Rahul & Sneha K.</h4><p>Parents of 6-year-old with Autism</p></div></div>
+          <p class="testimonial-quote">"We were so lost before finding Divit MindSpace. The assessment gave us clarity, and the ongoing support has been life-changing."</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-header"><div class="testimonial-avatar">A</div><div class="testimonial-info"><h4>Anita S.</h4><p>Parent of 10-year-old</p></div></div>
+          <p class="testimonial-quote">"The parent guidance sessions helped me stop feeling guilty and start feeling empowered. I now have real strategies that work."</p>
+        </div>
+      </div>
+      <div class="testimonials-cta"><a href="#" class="btn btn-primary">See all reviews</a></div>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section class="who-we-serve">
+    <div class="container">
+      <div class="who-we-serve-bridge">Here's who we're here for</div>
+      <div class="who-we-serve-grid">
+        <div class="serve-card">
+          <div class="serve-icon serve-icon--light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3 class="serve-title">Families</h3>
+          <p class="serve-outcome">Understand your child's needs and get strategies that actually work at home.</p>
+        </div>
+        <div class="serve-card">
+          <div class="serve-icon serve-icon--dark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </div>
+          <h3 class="serve-title">Schools</h3>
+          <p class="serve-outcome">Train your educators to create truly inclusive classrooms.</p>
+        </div>
+        <div class="serve-card">
+          <div class="serve-icon serve-icon--dark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <h3 class="serve-title">Professionals</h3>
+          <p class="serve-outcome">Grow your expertise with certifications built for working therapists.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="faq-header">
+        <div class="section-label">Common Questions</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item active" onclick="this.classList.toggle('active')">
+          <div class="faq-question"><h3>Do I need a diagnosis or referral before booking?</h3><div class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div></div>
+          <div class="faq-answer">No referral or prior diagnosis is needed. You can book directly with us. If you have any existing reports from schools or doctors, bring them along—but they're not required to get started.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+          <div class="faq-question"><h3>My child is very young. Is it too early to seek help?</h3><div class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div></div>
+          <div class="faq-answer">Early intervention is one of the most effective ways to support development. If you have concerns, it's never too early to consult. We work with children as young as 18 months.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+          <div class="faq-question"><h3>How soon will I see progress with therapy?</h3><div class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div></div>
+          <div class="faq-answer">Every child is different. Some families notice changes within weeks, while others see gradual progress over months. We set realistic milestones together and keep you informed throughout the journey.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+          <div class="faq-question"><h3>What if my child doesn't cooperate during sessions?</h3><div class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div></div>
+          <div class="faq-answer">This is completely normal and expected. Our therapists are trained to work with children at their own pace. We use play-based and child-led approaches to build trust before diving into structured activities.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-box">
+        <div class="cta-content">
+          <svg class="cta-whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          <div class="cta-text">
+            <div class="cta-title">We're Here When You're Ready</div>
+            <div class="cta-subtitle">Whenever you'd like to talk, we're just a message away.</div>
+          </div>
+        </div>
+        <a href="https://wa.me/919902351393" class="cta-button">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Chat With Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <div class="footer-logo" style="width:56px;height:56px;background:var(--cream);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;color:var(--green);">Logo</div>
+          <p class="footer-tagline">Empowering neurodivergent children and their families through expert care and education.</p>
+          <a href="#" class="footer-careers">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            We're Hiring
+          </a>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Assessments</a></li>
+            <li><a href="#">Therapy</a></li>
+            <li><a href="#">Guidance</a></li>
+            <li><a href="#">Programs</a></li>
+            <li><a href="#">View all →</a></li>
+          </ul>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Host a Free Workshop</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Aadeshwar Chambers, Kasavanahalli, Off Sarjapur Road, Bengaluru</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <a href="tel:+919901666139">+91 9901666139</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <a href="mailto:divitmindspace@gmail.com">divitmindspace@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2025 Divit MindSpace. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+        </div>
+        <div class="footer-socials">
+          <a href="#" class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+          <a href="#" class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="#" class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+          <a href="#" class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="guide-toggle" onclick="document.body.classList.toggle('show-guides')">Toggle Guides</button>
+</body>
+</html>

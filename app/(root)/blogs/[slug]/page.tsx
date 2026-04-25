@@ -1,0 +1,233 @@
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import { PortableText } from "next-sanity";
+import { BlogHeader } from "@/components/blogs/blog-header";
+import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
+import { ALL_POST_SLUGS_QUERY, SINGLE_POST_QUERY } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
+import type { Post } from "@/sanity/types";
+import { portableTextComponents } from "@/components/portable-text-components";
+import { FeaturesShowcaseSection } from "@/components/homepage/features-showcase-section";
+
+// Force dynamic rendering - always fetch fresh data from Sanity
+export const dynamic = "force-dynamic";
+import { CtaSection } from "@/components/homepage/cta-section";
+import { AuthorBio } from "@/components/blogs/author-bio";
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+// Generate static params for all blog posts at build time
+export async function generateStaticParams() {
+  const posts = await client.fetch<{ slug: string }[]>(ALL_POST_SLUGS_QUERY);
+
+  return posts?.map((post) => ({
+    slug: post.slug,
+  })) || [];
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const { data: post } = await sanityFetch({
+    query: SINGLE_POST_QUERY,
+    params: { slug },
+    tags: ["post"],
+  });
+
+  const postData = post as Post;
+
+  if (!postData) {
+    return {
+      title: "Post Not Found",
+    };
+  }
+
+  const title = postData.seo?.metaTitle || postData.title;
+  const description = postData.seo?.metaDescription || postData.excerpt || "";
+  const ogImage = postData.seo?.ogImage || postData.mainImage;
+  const ogImageUrl = ogImage ? urlFor(ogImage)?.width(1200).height(630).url() : null;
+  const postUrl = `https://divitmindspace.com/blogs/${postData.slug.current}`;
+
+  return {
+    title: `${title} | Divit MindSpace`,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: postUrl,
+      publishedTime: postData.publishedAt,
+      authors: [postData.author.name],
+      images: ogImageUrl ? [{ url: ogImageUrl, width: 1200, height: 630, alt: title }] : [],
+      siteName: "Divit MindSpace",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ogImageUrl ? [ogImageUrl] : [],
+    },
+    alternates: {
+      canonical: postUrl,
+    },
+  };
+}
+
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
+
+  const { data: post } = await sanityFetch({
+    query: SINGLE_POST_QUERY,
+    params: { slug },
+    tags: ["post"],
+  });
+
+  const postData = post as Post;
+
+  if (!postData) {
+    notFound();
+  }
+
+  // Format date for display
+  const formattedDate = new Date(postData.publishedAt).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+  // Get main image URL
+  const mainImageUrl = postData.mainImage
+    ? urlFor(postData.mainImage)?.width(1200).height(675).url()
+    : null;
+
+  // Get author avatar URL
+  const authorAvatar = postData.author.image || "";
+
+  // Get primary category
+  const primaryCategory = postData.categories?.[0] || "Blog";
+
+  // JSON-LD structured data for SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: postData.title,
+    description: postData.excerpt || "",
+    image: mainImageUrl || "",
+    datePublished: postData.publishedAt,
+    dateModified: postData.publishedAt,
+    author: {
+      "@type": "Person",
+      name: postData.author.name,
+      url: `https://divitmindspace.com/authors/${postData.author.slug.current}`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Divit MindSpace",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://divitmindspace.com/divit-mindspace-logo.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://divitmindspace.com/blogs/${postData.slug.current}`,
+    },
+    keywords: postData.categories?.join(", ") || "",
+    articleSection: primaryCategory,
+    wordCount: postData.readTime ? postData.readTime * 200 : undefined,
+    timeRequired: postData.readTime ? `PT${postData.readTime}M` : undefined,
+  };
+
+  return (
+    <>
+      {/* JSON-LD structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <div className="bg-[#FDFBF7] min-h-screen">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 py-6 lg:py-10">
+          {/* Blog Header */}
+          <BlogHeader
+            category={primaryCategory}
+            title={postData.title}
+            author={{
+              name: postData.author.name,
+              avatar: authorAvatar,
+            }}
+            publishedDate={formattedDate}
+          />
+
+          {/* Main Image */}
+          {mainImageUrl && (
+            <div className="mt-6 lg:mt-8 overflow-hidden rounded-xl">
+              <Image
+                src={mainImageUrl}
+                alt={postData.mainImage?.alt || postData.title}
+                width={1200}
+                height={675}
+                className="w-full h-auto object-cover"
+                priority
+              />
+              {postData.mainImage?.caption && (
+                <p className="mt-2 text-sm text-muted-foreground text-center italic">
+                  {postData.mainImage.caption}
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* Blog Content with PortableText */}
+          <article className="mt-6 lg:mt-8 max-w-none">
+            {Array.isArray(postData.body) && (
+              <PortableText
+                value={postData.body}
+                components={portableTextComponents}
+              />
+            )}
+          </article>
+
+          {/* Read Time */}
+          {postData.readTime && (
+            <p className="mt-8 text-sm text-muted-foreground">
+              Estimated read time: {postData.readTime} {postData.readTime === 1 ? "minute" : "minutes"}
+            </p>
+          )}
+
+          {/* Categories/Tags */}
+          {postData.categories && postData.categories.length > 0 && (
+            <div className="mt-8 flex flex-wrap gap-2">
+              <span className="text-sm text-muted-foreground">Tags:</span>
+              {postData.categories.map((category: string) => (
+                <span
+                  key={category}
+                  className="px-3 py-1 text-sm bg-green/10 text-green rounded-full"
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
+          )}
+          {/* Author Bio */}
+          <AuthorBio
+            author={{
+              name: postData.author.name,
+              title: postData.author.title,
+              bio: postData.author.bio,
+              image: authorAvatar,
+              social: postData.author.social,
+            }}
+          />
+        </div>
+      </div>
+      <FeaturesShowcaseSection />
+      <CtaSection />
+    </>
+  );
+}
