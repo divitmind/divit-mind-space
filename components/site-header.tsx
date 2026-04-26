@@ -48,23 +48,15 @@ export function SiteHeader() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    {/* Desktop CTA */}
+                    {/* Unified CTA - premium outline button */}
                     <Link
                         href="/about-us#specialists"
                         onClick={handleSpecialistsClick}
-                        className="hidden md:inline-flex h-12 items-center justify-center gap-3 rounded-full bg-green px-8 text-[10px] font-bold uppercase tracking-[0.2em] text-white hover:bg-green/90 transition-all duration-500 shadow-xl shadow-green/20 hover:shadow-2xl hover:shadow-green/30 hover:-translate-y-1 active:scale-95 group"
+                        className="inline-flex h-9 md:h-11 items-center justify-center gap-2 rounded-full border-2 border-[#7A9A7D] px-4 md:px-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] text-[#7A9A7D] shadow-md shadow-[#7A9A7D]/10 hover:bg-[#7A9A7D] hover:text-white hover:shadow-lg hover:shadow-[#7A9A7D]/20 transition-all duration-300 group active:scale-95"
                     >
-                        <Users className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        Meet Our Specialists
-                    </Link>
-
-                    {/* Mobile CTA - premium outline button */}
-                    <Link
-                        href="/about-us#specialists"
-                        onClick={handleSpecialistsClick}
-                        className="md:hidden inline-flex h-8 items-center justify-center rounded-full border-2 border-[#7A9A7D] px-4 text-xs font-medium tracking-wide text-[#7A9A7D] shadow-md shadow-[#7A9A7D]/15 hover:bg-[#7A9A7D] hover:text-white hover:shadow-lg hover:shadow-[#7A9A7D]/25 transition-all"
-                    >
-                        Get Help
+                        <Users className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:scale-110 transition-transform" />
+                        <span className="hidden sm:inline">Meet Our Specialists</span>
+                        <span className="sm:hidden">Specialists</span>
                     </Link>
 
                     <MobileNav />
