@@ -12,6 +12,10 @@ interface AudienceSection {
   whoIsItFor?: string[];
   benefits?: string[];
   expectations?: string[];
+  supportedItems?: string[];
+  approachItems?: string[];
+  whyChooseItems?: string[];
+  additionalSections?: { title: string; items: string[]; color?: string }[];
 }
 
 interface AudienceTabsProps {
@@ -24,6 +28,48 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
   const activeData = sections.find((s) => s.audienceType === activeTab);
 
   if (!activeData) return null;
+
+  // Helper to render a dedicated list block
+  const renderListBlock = (title: string, items?: string[], color: string = '#7A9A7D') => {
+    if (!items || items.length === 0) return null;
+    
+    return (
+      <div className="bg-white rounded-[2.5rem] p-6 lg:p-10 border border-black/[0.03] shadow-sm">
+        <h3 className="text-lg lg:text-2xl font-serif text-green mb-6 flex items-center gap-3">
+          <div className="w-1 h-5 bg-green/20 rounded-full" />
+          {title}
+        </h3>
+        <ul className="space-y-4">
+          {items.map((item, itemIdx) => {
+            const hasColon = item.includes(':');
+            const colonIndex = item.indexOf(':');
+            const [label, content] = colonIndex !== -1 
+              ? [item.slice(0, colonIndex), item.slice(colonIndex + 1)] 
+              : [null, item];
+            
+            return (
+              <li key={itemIdx} className="flex items-start gap-4">
+                <div
+                  className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[10px]"
+                  style={{ backgroundColor: color }}
+                />
+                <span className="text-[13px] lg:text-base text-black/70 font-medium leading-relaxed">
+                  {hasColon ? (
+                    <>
+                      <strong className="text-black font-bold">{label}:</strong>
+                      {content}
+                    </>
+                  ) : (
+                    item
+                  )}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  };
 
   return (
     <div className="space-y-6 lg:space-y-8">
@@ -67,51 +113,59 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
           className="space-y-6 lg:space-y-8"
         >
           {/* Clinical Overview Block */}
-          <div className="bg-white rounded-[2rem] pt-4 pb-6 px-6 lg:pt-6 lg:pb-10 lg:px-10 border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-              <div className="flex-1">
-                <p className="text-black/70 text-base lg:text-xl leading-relaxed font-medium italic whitespace-pre-wrap">
-                  {activeData.overview}
-                </p>
-              </div>
-              
-              {activeData.shortDescription && (
-                <div className="w-full lg:w-80 shrink-0 lg:-mt-4">
-                  <div className="bg-white pt-4 pb-6 px-6 lg:pt-6 lg:pb-8 lg:px-8 rounded-[2rem] border border-black/[0.03] shadow-[0_20px_50px_rgba(0,0,0,0.04)] relative overflow-hidden group">
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-green"></span>
-                      </span>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-green/60">Primary Outcome</p>
-                    </div>
-                    <p className="text-xl lg:text-2xl font-serif italic leading-tight font-bold text-green">
-                      {activeData.shortDescription}
+          {(activeData.overview || activeData.shortDescription) && (
+            <div className={`
+              ${activeData.overview 
+                ? "bg-white rounded-[2rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] pt-4 pb-6 px-6 lg:pt-6 lg:pb-10 lg:px-10" 
+                : "relative w-full flex justify-center"}
+            `}>
+              <div className={`flex flex-col lg:flex-row gap-8 lg:gap-12 w-full ${activeData.overview ? "items-start" : "items-center justify-center"}`}>
+                {activeData.overview && (
+                  <div className="flex-1">
+                    <p className="text-black/70 text-base lg:text-xl leading-relaxed font-medium italic whitespace-pre-wrap">
+                      {activeData.overview}
                     </p>
                   </div>
-                </div>
-              )}
+                )}
+
+                {activeData.shortDescription && (
+                  <div className={`w-full ${activeData.overview ? "lg:w-96 shrink-0 lg:-mt-2" : "max-w-2xl"}`}>
+                    <div className="bg-white pt-5 pb-5 px-6 lg:pt-8 lg:pb-8 lg:px-10 rounded-[2rem] border border-black/[0.04] shadow-[0_15px_45px_rgba(0,0,0,0.03)] relative overflow-hidden group">
+                      <div className="flex items-center gap-2 mb-3 lg:mb-4">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-green"></span>
+                        </span>
+                        <p className="text-[9px] lg:text-[10px] font-bold uppercase tracking-[0.2em] text-green/60">Primary Outcome</p>
+                      </div>
+                      <p className="text-lg lg:text-2xl font-serif italic leading-[1.4] font-bold text-green">
+                        {activeData.shortDescription}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* High-Density Benefits Grid */}
           {activeData.benefits && activeData.benefits.length > 0 && (
             <div className="space-y-6">
               <h3 className="text-lg lg:text-xl font-serif text-green flex items-center gap-3">
                 <div className="w-1 h-5 bg-green/20 rounded-full" />
-                What You&apos;ll Gain
+                What Your Child Will Gain
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
                 {activeData.benefits.map((benefit, i) => (
                   <div 
                     key={i} 
-                    className="p-6 lg:p-8 rounded-[1.5rem] bg-white border border-black/[0.03] shadow-sm hover:shadow-md transition-all"
+                    className="p-5 lg:p-6 rounded-[1.5rem] bg-white border border-black/[0.03] shadow-sm hover:shadow-md transition-all"
                   >
                     <div className="flex items-start gap-4">
                       <div className="w-5 h-5 rounded-full bg-green/5 flex items-center justify-center shrink-0 mt-0.5">
-                        <CheckCircle2 className="w-3 h-3 text-green" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-green" />
                       </div>
-                      <p className="text-sm lg:text-base text-black/70 font-medium leading-relaxed">
+                      <p className="text-[13px] lg:text-base text-black/70 font-medium leading-relaxed">
                         {benefit}
                       </p>
                     </div>
@@ -124,19 +178,19 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
           {/* Methodology Split: Expectations vs Is it right? */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             {activeData.expectations && activeData.expectations.length > 0 && (
-              <div className="bg-white p-6 lg:p-10 rounded-[2rem] border border-black/[0.03] shadow-sm relative overflow-hidden">
-                <h3 className="text-lg lg:text-xl font-serif text-green mb-8 flex items-center gap-3">
+              <div className="bg-white p-6 lg:p-10 rounded-[2.5rem] border border-black/[0.03] shadow-sm relative overflow-hidden">
+                <h3 className="text-lg lg:text-xl font-serif text-green mb-6 lg:mb-8 flex items-center gap-3">
                   <div className="w-1 h-5 bg-green/20 rounded-full" />
                   What to Expect
                 </h3>
-                <div className="space-y-6 relative">
+                <div className="space-y-5 lg:space-y-6 relative">
                   {/* Subtle Process Line */}
                   <div className="absolute left-[3px] top-2 bottom-2 w-px bg-green/10" />
                   
                   {activeData.expectations.map((item, i) => (
                     <div key={i} className="flex gap-4 relative z-10">
                       <div className="w-1.5 h-1.5 rounded-full bg-green mt-2.5 shrink-0 ring-4 ring-white" />
-                      <p className="text-sm lg:text-base text-black/60 font-medium leading-relaxed">
+                      <p className="text-[13px] lg:text-base text-black/60 font-medium leading-relaxed">
                         {item}
                       </p>
                     </div>
@@ -146,18 +200,18 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
             )}
 
             {activeData.whoIsItFor && activeData.whoIsItFor.length > 0 && (
-              <div className="bg-white p-6 lg:p-10 rounded-[2rem] border border-black/[0.03] shadow-sm">
-                <h3 className="text-lg lg:text-xl font-serif text-green mb-8 flex items-center gap-3">
+              <div className="bg-white p-6 lg:p-10 rounded-[2.5rem] border border-black/[0.03] shadow-sm">
+                <h3 className="text-lg lg:text-xl font-serif text-green mb-6 lg:mb-8 flex items-center gap-3">
                   <div className="w-1 h-5 bg-green/20 rounded-full" />
-                  Is This Right for You?
+                  Is This the Right Space for Your Child?
                 </h3>
                 <div className="space-y-4">
                   {activeData.whoIsItFor.map((item, i) => (
                     <div key={i} className="flex items-start gap-4 group">
                       <div className="w-5 h-5 rounded-full bg-green/5 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-green group-hover:text-white transition-all">
-                        <CheckCircle2 className="w-3 h-3 text-green" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-green group-hover:text-white" />
                       </div>
-                      <span className="text-sm lg:text-base text-black/70 font-medium leading-relaxed">
+                      <span className="text-[13px] lg:text-base text-black/70 font-medium leading-relaxed">
                         {item}
                       </span>
                     </div>
@@ -166,6 +220,52 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
               </div>
             )}
           </div>
+
+          {/* Dedicated Blocks */}
+          {renderListBlock("Individuals We Support", activeData.supportedItems)}
+          {renderListBlock("Our Approach", activeData.approachItems)}
+          {renderListBlock("Why Families Choose Us", activeData.whyChooseItems)}
+
+          {/* Legacy/Custom Additional Blocks (if any) */}
+          {activeData.additionalSections?.map((section, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-[2.5rem] p-6 lg:p-10 border border-black/[0.03] shadow-sm"
+            >
+              <h3 className="text-lg lg:text-2xl font-serif text-green mb-6 flex items-center gap-3">
+                <div className="w-1 h-5 bg-green/20 rounded-full" />
+                {section.title}
+              </h3>
+              <ul className="space-y-4">
+                {section.items.map((item, itemIdx) => {
+                  const hasColon = item.includes(':');
+                  const colonIndex = item.indexOf(':');
+            const [label, content] = colonIndex !== -1 
+              ? [item.slice(0, colonIndex), item.slice(colonIndex + 1)] 
+              : [null, item];
+                  
+                  return (
+                    <li key={itemIdx} className="flex items-start gap-4">
+                      <div
+                        className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[10px]"
+                        style={{ backgroundColor: section.color || '#7A9A7D' }}
+                      />
+                      <span className="text-[13px] lg:text-base text-black/70 font-medium leading-relaxed">
+                        {hasColon ? (
+                          <>
+                            <strong className="text-black font-bold">{label}:</strong>
+                            {content}
+                          </>
+                        ) : (
+                          item
+                        )}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
         </motion.div>
       </AnimatePresence>
     </div>
