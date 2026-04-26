@@ -52,10 +52,10 @@ export function SiteHeader() {
                     <Link
                         href="/about-us#specialists"
                         onClick={handleSpecialistsClick}
-                        className="inline-flex h-9 md:h-11 items-center justify-center gap-2 rounded-full border-2 border-[#7A9A7D] px-4 md:px-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] text-[#7A9A7D] shadow-md shadow-[#7A9A7D]/10 hover:bg-[#7A9A7D] hover:text-white hover:shadow-lg hover:shadow-[#7A9A7D]/20 transition-all duration-300 group active:scale-95"
+                        className="inline-flex h-8 md:h-11 items-center justify-center md:gap-2 rounded-full border-2 border-[#7A9A7D] px-4 md:px-6 text-xs md:text-[10px] font-medium md:font-bold tracking-wide md:tracking-[0.15em] text-[#7A9A7D] shadow-md shadow-[#7A9A7D]/10 hover:bg-[#7A9A7D] hover:text-white hover:shadow-lg hover:shadow-[#7A9A7D]/20 transition-all duration-300 group active:scale-95"
                     >
-                        <Users className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:scale-110 transition-transform" />
-                        <span className="hidden sm:inline">Meet Our Specialists</span>
+                        <Users className="hidden md:block w-4 h-4 group-hover:scale-110 transition-transform" />
+                        <span className="hidden sm:inline uppercase">Meet Our Specialists</span>
                         <span className="sm:hidden">Get Help</span>
                     </Link>
 
