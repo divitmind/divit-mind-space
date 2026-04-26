@@ -9,7 +9,6 @@ export const servicesType = defineType({
     { name: 'experts', title: '2. Experts & FAQ' },
     { name: 'extra', title: '3. Additional Blocks' },
     { name: 'config', title: '4. Settings & SEO' },
-    { name: 'legacy', title: '5. Legacy Content (Fallback)' },
   ],
   fields: [
     // ============================================================
@@ -51,42 +50,18 @@ export const servicesType = defineType({
     }),
     defineField({
       name: 'description',
-      title: 'Global Short Description (Primary Outcome)',
+      title: 'Global Meta Description',
       type: 'text',
       group: 'basic',
-      description: 'The high-impact "Outcome Label" that defines the identity of this service. (e.g., "Mastery of Social Confidence")',
-      validation: (rule) => rule.max(400),
+      description: 'Used for search engines and social sharing.',
+      validation: (rule) => rule.max(200),
     }),
     defineField({
       name: 'overview',
       title: 'Global Overview',
       type: 'text',
       group: 'basic',
-      description: 'Main introductory paragraph for the service page. Preserves line breaks.',
-    }),
-    defineField({
-      name: 'benefits',
-      title: 'Universal: What You\'ll Gain',
-      type: 'array',
-      group: 'basic',
-      description: 'Use this for service-wide benefits if audience bifurcation is not needed.',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'whatToExpect',
-      title: 'Universal: What to Expect',
-      type: 'array',
-      group: 'basic',
-      description: 'Use this for service-wide process details.',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'whoIsItFor',
-      title: 'Universal: Is This Right for You?',
-      type: 'array',
-      group: 'basic',
-      description: 'Use this for service-wide eligibility/needs.',
-      of: [{ type: 'string' }],
+      description: 'Main introductory paragraph that appears at the top of the page.',
     }),
     defineField({
       name: 'image',
@@ -98,14 +73,14 @@ export const servicesType = defineType({
     }),
 
     // ============================================================
-    // AUDIENCE SECTIONS - Specific to Child, Teen, Adult
+    // AUDIENCE SECTIONS - THE PRIMARY CONTAINER
     // ============================================================
     defineField({
       name: 'audienceSections',
       title: 'Audience-Specific Details (Children, Teens, Adults)',
       type: 'array',
       group: 'basic',
-      description: 'Add specific content for different age groups here. On the website, these appear as selectable tabs.',
+      description: 'Everything for a specific audience (Children, Teens, or Adults) goes here.',
       of: [
         defineArrayMember({
           type: 'object',
@@ -115,7 +90,6 @@ export const servicesType = defineType({
               name: 'audienceType',
               type: 'string',
               title: 'Primary Audience (Internal Selection)',
-              description: 'Used for internal categorization.',
               options: {
                 list: [
                   { title: 'Children', value: 'children' },
@@ -128,39 +102,62 @@ export const servicesType = defineType({
             { 
               name: 'title', 
               type: 'string', 
-              title: 'Display Title (e.g., "Children & Teens")',
-              description: 'The label used for the tab on the website.',
+              title: 'Tab Label (e.g., "Children")',
               validation: (rule) => rule.required()
             },
             {
               name: 'shortDescription',
               type: 'text',
-              title: 'Audience-Specific Short Description',
-              description: 'A brief summary specific to this audience. No strict length limit.',
+              title: 'Primary Outcome Statement',
+              description: 'The high-impact philosophical line that appears in the centered box.',
             },
             {
               name: 'overview',
               type: 'text',
-              title: '1. Specific Overview',
-              description: 'Detailed introductory paragraph for this specific age group.'
+              title: 'Specific Overview',
+              description: 'Appears next to the primary outcome (if both provided).'
             },
             {
               name: 'benefits',
               type: 'array',
-              title: '2. What You\'ll Gain (Benefits)',
+              title: 'Section 1: What You\'ll Gain',
+              description: 'List of 6 bullet points for the top grid.',
               of: [{ type: 'string' }]
             },
             {
               name: 'expectations',
               type: 'array',
-              title: '3. What to Expect (Process)',
+              title: 'Section 2: What to Expect',
+              description: 'The process-focused checklist.',
               of: [{ type: 'string' }]
             },
             {
               name: 'whoIsItFor',
               type: 'array',
-              title: '4. Is This Right for You or Your Loved Ones?',
-              description: 'Checklist of symptoms or needs.',
+              title: 'Section 3: Is This the Right Space?',
+              description: 'The needs-focused checklist.',
+              of: [{ type: 'string' }]
+            },
+            // Dedicated Dedicated Blocks as requested
+            {
+              name: 'supportedItems',
+              type: 'array',
+              title: 'Section 4: Individuals We Support',
+              description: 'e.g., "Speech Clarity Difficulties: Challenges with..."',
+              of: [{ type: 'string' }]
+            },
+            {
+              name: 'approachItems',
+              type: 'array',
+              title: 'Section 5: Our Approach',
+              description: 'e.g., "Child-Led, Relationship-Based: We follow..."',
+              of: [{ type: 'string' }]
+            },
+            {
+              name: 'whyChooseItems',
+              type: 'array',
+              title: 'Section 6: Why Families Choose Us',
+              description: 'List of reasons why families trust Divit MindSpace.',
               of: [{ type: 'string' }]
             }
           ],
@@ -169,7 +166,7 @@ export const servicesType = defineType({
             prepare({ title, audience }) {
               return {
                 title: title || (audience ? audience.charAt(0).toUpperCase() + audience.slice(1) : 'New Audience Section'),
-                subtitle: `Internal Category: ${audience || 'unspecified'}`
+                subtitle: `Audience: ${audience || 'unspecified'}`
               }
             }
           }
@@ -178,42 +175,14 @@ export const servicesType = defineType({
     }),
 
     // ============================================================
-    // SETTINGS & SEO
-    // ============================================================
-    defineField({
-      name: 'popular',
-      title: 'Featured / Popular',
-      type: 'boolean',
-      group: 'config',
-      initialValue: false,
-    }),
-    defineField({
-      name: 'isTherapy',
-      title: 'Is Therapy?',
-      type: 'boolean',
-      group: 'config',
-      initialValue: false,
-    }),
-    defineField({
-      name: 'seo',
-      title: 'SEO Settings',
-      type: 'object',
-      group: 'config',
-      fields: [
-        { name: 'metaTitle', type: 'string', title: 'Meta Title' },
-        { name: 'metaDescription', type: 'text', title: 'Meta Description' },
-      ],
-    }),
-
-    // ============================================================
     // EXPERTS & FAQ
     // ============================================================
     defineField({
-      name: 'onDemand',
-      title: 'On-Demand Service',
-      type: 'boolean',
+      name: 'specialists',
+      title: 'Assigned Specialists',
+      type: 'array',
       group: 'experts',
-      initialValue: false,
+      of: [{ type: 'reference', to: [{ type: 'specialist' }] }]
     }),
     defineField({
       name: 'faqs',
@@ -232,7 +201,7 @@ export const servicesType = defineType({
     }),
 
     // ============================================================
-    // EXTRA BLOCKS
+    // EXTRA & SEO
     // ============================================================
     defineField({
       name: 'format',
@@ -241,54 +210,21 @@ export const servicesType = defineType({
       group: 'extra',
     }),
     defineField({
-      name: 'additionalSections',
-      title: 'Additional Custom Blocks',
-      type: 'array',
-      group: 'extra',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'customBlock',
-          fields: [
-            { name: 'title', type: 'string', title: 'Block Title', validation: (rule) => rule.required() },
-            { name: 'items', type: 'array', title: 'Items', of: [{ type: 'string' }], validation: (rule) => rule.required() },
-            { name: 'color', type: 'string', title: 'Bullet Color (Hex)', initialValue: '#7A9A7D' }
-          ]
-        })
-      ]
-    }),
-    defineField({
       name: 'body',
-      title: 'Additional Content (Rich Text)',
+      title: 'Bottom Page Content (Rich Text)',
       type: 'array',
       group: 'extra',
       of: [defineArrayMember({ type: 'block' }), defineArrayMember({ type: 'image' })],
     }),
-
     defineField({
-      name: 'ctaOverride',
-      title: 'CTA Override',
+      name: 'seo',
+      title: 'SEO Settings',
       type: 'object',
-      group: 'extra',
+      group: 'config',
       fields: [
-        { name: 'title', type: 'string', title: 'CTA Title' },
-        { name: 'description', type: 'text', title: 'CTA Description' },
-        { name: 'buttonText', type: 'string', title: 'Button Text' }
-      ]
+        { name: 'metaTitle', type: 'string', title: 'Meta Title' },
+        { name: 'metaDescription', type: 'text', title: 'Meta Description' },
+      ],
     }),
   ],
-  preview: {
-    select: {
-      title: 'title',
-      category: 'category',
-      media: 'image',
-    },
-    prepare({ title, category, media }) {
-      return {
-        title: title,
-        subtitle: category,
-        media: media,
-      }
-    },
-  },
 })

@@ -7,12 +7,11 @@ import { ServiceExperts } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { CheckCircle2 } from "lucide-react";
 import type { Specialist } from "@/sanity/types";
-import { SITE_URL } from "@/lib/seo";
 import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
 import { HOWTO_ARTICLES, SERVICE_TO_HOWTO } from "@/lib/howto";
 import { PortableText, type PortableTextBlock } from "next-sanity";
 import { portableTextComponents } from "@/components/portable-text-components";
-import { getServiceBySlug } from "@/lib/services-data";
+import { getServiceBySlug, type ServiceData as StaticServiceData } from "@/lib/services-data";
 import { AudienceTabs } from "@/components/services/audience-tabs";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
 
@@ -50,6 +49,10 @@ interface ServiceData {
     whoIsItFor?: string[];
     benefits?: string[];
     expectations?: string[];
+    supportedItems?: string[];
+    approachItems?: string[];
+    whyChooseItems?: string[];
+    additionalSections?: { title: string; items: string[]; color?: string }[];
   }[];
   ctaOverride?: {
     title?: string;
@@ -58,7 +61,7 @@ interface ServiceData {
   };
   onDemand?: boolean;
   specialists?: Specialist[];
-  additionalSections?: { title: string; items: string[]; color: string }[];
+  additionalSections?: { title: string; items: string[]; color?: string }[];
 }
 
 interface PageProps {
@@ -136,14 +139,25 @@ export default async function ServicePage({ params }: PageProps) {
   // Merge with static data
   const staticService = getServiceBySlug(slug);
   if (staticService) {
-    const staticContent = staticService.content as { faqs?: { question: string; answer: string }[]; duration?: string; format?: string };
-    if (!service.faqs || service.faqs.length === 0) {
-      if (staticContent.faqs) {
-        service.faqs = staticContent.faqs;
+    const staticContent = staticService.content as StaticServiceData["content"];
+    
+    // For speech-therapy, we want the static content (from the txt file) to take priority
+    // while maintaining the existing structure.
+    if (slug === 'speech-therapy') {
+      service.overview = staticContent.overview;
+      service.benefits = staticContent.benefits;
+      service.whatToExpect = staticContent.whatToExpect;
+      service.whoIsItFor = staticContent.whoIsItFor;
+      service.audienceSections = staticContent.audienceSections;
+      service.additionalSections = staticContent.additionalSections;
+    } else {
+      // Standard fallback merge for other services
+      if (!service.faqs || service.faqs.length === 0) {
+        if (staticContent.faqs) service.faqs = staticContent.faqs;
       }
+      if (!service.duration) service.duration = staticContent.duration;
+      if (!service.format) service.format = staticContent.format;
     }
-    if (!service.duration) service.duration = staticContent.duration;
-    if (!service.format) service.format = staticContent.format;
   }
 
   const { data: relatedData } = (await sanityFetch({
@@ -161,8 +175,6 @@ export default async function ServicePage({ params }: PageProps) {
   const howtoArticle = howtoSlug
     ? HOWTO_ARTICLES.find((a) => a.slug === howtoSlug)
     : undefined;
-
-  const serviceUrl = `${SITE_URL}/services/${service.slug.current}`;
 
   const categoryLabels: Record<string, string> = {
     assessments: "Assessment",
@@ -195,7 +207,7 @@ export default async function ServicePage({ params }: PageProps) {
       </div>
 
       {/* Hero Section - Zero Top Padding */}
-      <section className="pt-0 pb-2 lg:pt-0 lg:pb-4">
+      <section className="pt-0 pb-1 lg:pt-0 lg:pb-2">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h1
@@ -213,12 +225,12 @@ export default async function ServicePage({ params }: PageProps) {
       </section>
 
       {/* Content Section - Near Zero Gap */}
-      <section className="pt-0.5 pb-0 lg:pt-1 lg:pb-0 bg-cream">
+      <section className="pt-0 pb-0 lg:pt-0 lg:pb-0 bg-cream">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Global Overview */}
             {service.overview && (
-              <div className="mb-6 lg:mb-8">
+              <div className="mb-8 lg:mb-10">
                 <h2
                   className="text-2xl lg:text-3xl font-serif text-green mb-3 lg:mb-4"
                   style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
@@ -233,14 +245,14 @@ export default async function ServicePage({ params }: PageProps) {
 
             {/* Main Content Flow: Audience Sections (Tabs) */}
             {hasAudienceSections && (
-              <div className="mb-12">
+              <div className="mb-10 lg:mb-12">
                 <AudienceTabs sections={service.audienceSections || []} />
               </div>
             )}
 
             {/* Universal Content (Non-tabbed or fallback) */}
             {hasUniversalContent && !hasAudienceSections && (
-              <div className="bg-white rounded-2xl pt-4 pb-5 px-5 lg:pt-6 lg:pb-8 lg:px-8 border border-green/10 shadow-sm mb-12">
+              <div className="bg-white rounded-2xl p-6 lg:p-10 border border-green/10 shadow-sm mb-10 lg:mb-12">
                 {/* Expert Summary with Primary Outcome */}
                 <div className="flex flex-col lg:flex-row gap-6 mb-8">
                   <div className="flex-1">
@@ -251,7 +263,7 @@ export default async function ServicePage({ params }: PageProps) {
                   
                   <div className="w-full lg:w-72 shrink-0">
                     {service.description && (
-                      <div className="bg-green p-5 lg:p-6 rounded-xl text-white shadow-lg shadow-green/5 relative overflow-hidden group">
+                      <div className="bg-green p-6 lg:p-8 rounded-xl text-white shadow-lg shadow-green/5 relative overflow-hidden group">
                         <div className="absolute -right-2 -bottom-2 opacity-10 group-hover:scale-110 transition-transform duration-500">
                           <CheckCircle2 className="w-20 h-20" />
                         </div>
@@ -328,35 +340,9 @@ export default async function ServicePage({ params }: PageProps) {
               </div>
             )}
 
-            {/* Additional Sections */}
-            {service.additionalSections?.map((section, idx) => (
-              <div
-                key={idx}
-                className="mb-8 bg-white rounded-2xl p-6 lg:p-8 border border-green/10 shadow-sm"
-              >
-                <h2
-                  className="text-2xl lg:text-3xl font-serif text-green mb-6"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                >
-                  {section.title}
-                </h2>
-                <ul className="space-y-4">
-                  {section.items.map((item, itemIdx) => (
-                    <li key={itemIdx} className="flex items-start gap-4">
-                      <div
-                        className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[10px]"
-                        style={{ backgroundColor: section.color || '#7A9A7D' }}
-                      />
-                      <span className="text-black/70 font-medium leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-
             {/* Rich Text Body */}
             {service.body && service.body.length > 0 && (
-              <div className="mt-12 prose prose-green max-w-none prose-p:text-black/70 prose-p:font-medium prose-headings:font-serif prose-headings:text-green prose-li:text-black/70 prose-li:font-medium prose-strong:text-black prose-strong:font-bold">
+              <div className="mt-10 lg:mt-12 prose prose-green max-w-none prose-p:text-black/70 prose-p:font-medium prose-headings:font-serif prose-headings:text-green prose-li:text-black/70 prose-li:font-medium prose-strong:text-black prose-strong:font-bold">
                 <PortableText
                   value={service.body}
                   components={portableTextComponents}

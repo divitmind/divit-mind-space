@@ -517,6 +517,3 @@ export function AwarenessPage({ data }: AwarenessPageProps) {
     </div>
   );
 }
-    </div>
-  );
-}
