@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Sparkles } from "lucide-react";
 
 interface AudienceSection {
   audienceType: "children" | "teens" | "adults";
@@ -13,6 +13,8 @@ interface AudienceSection {
   benefits?: string[];
   expectations?: string[];
   supportedItems?: string[];
+  supportedItemsTitle?: string;
+  supportedItemsIntro?: string;
   approachItems?: string[];
   whyChooseItems?: string[];
   additionalSections?: { title: string; items: string[]; color?: string }[];
@@ -20,9 +22,10 @@ interface AudienceSection {
 
 interface AudienceTabsProps {
   sections: AudienceSection[];
+  globalOverview?: string;
 }
 
-export function AudienceTabs({ sections }: AudienceTabsProps) {
+export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
   const [activeTab, setActiveTab] = useState(sections[0]?.audienceType || "children");
 
   const activeData = sections.find((s) => s.audienceType === activeTab);
@@ -30,17 +33,36 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
   if (!activeData) return null;
 
   // Helper to render a dedicated list block
-  const renderListBlock = (title: string, items?: string[], color: string = '#7A9A7D') => {
+  const renderListBlock = (title: string, items?: string[], color: string = '#7A9A7D', intro?: string) => {
     if (!items || items.length === 0) return null;
     
     return (
       <div className="bg-white rounded-[2.5rem] p-6 lg:p-12 border border-black/[0.03] shadow-sm">
-        <h3 className="text-lg lg:text-xl font-serif text-green mb-8 lg:mb-10 flex items-center gap-3">
-          <div className="w-1 h-5 bg-green/20 rounded-full" />
-          {title}
-        </h3>
+        <div className="flex flex-col mb-8 lg:mb-10">
+          <h3 className="text-lg lg:text-xl font-serif text-green">
+            {title}
+          </h3>
+          {intro && (
+            <p className="mt-4 text-black/60 text-[14px] lg:text-[16px] font-medium leading-relaxed">
+              {intro}
+            </p>
+          )}
+        </div>
+        
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
           {items.map((item, itemIdx) => {
+            // Check for Group Header (starts with ##)
+            if (item.startsWith('##')) {
+              return (
+                <li key={itemIdx} className="col-span-full mt-4 first:mt-0">
+                  <h4 className="text-[13px] lg:text-[14px] font-bold uppercase tracking-[0.2em] text-[#7A9A7D] mb-2">
+                    {item.replace('##', '').trim()}
+                  </h4>
+                  <div className="h-px w-12 bg-[#7A9A7D]/20 mb-4" />
+                </li>
+              );
+            }
+
             const hasColon = item.includes(':');
             const colonIndex = item.indexOf(':');
             const [label, content] = colonIndex !== -1 
@@ -72,7 +94,7 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
   };
 
   return (
-    <div className="space-y-6 lg:space-y-8">
+    <div className="space-y-8 lg:space-y-12">
       {/* Refined Inset Pill Switcher (Only visible if 2+ audiences exist) */}
       {sections.length > 1 && (
         <div className="flex justify-center">
@@ -110,49 +132,51 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
-          className="space-y-6 lg:space-y-8"
+          className="space-y-8 lg:space-y-12"
         >
-          {/* Clinical Overview Block */}
-          {(activeData.overview || activeData.shortDescription) && (
-            <div className={`
-              ${activeData.overview 
-                ? "bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12" 
-                : "relative w-full flex justify-center"}
-            `}>
-              <div className={`flex flex-col gap-10 w-full ${activeData.overview ? "items-start" : "items-center justify-center"}`}>
-                {activeData.overview && (
-                  <div className="w-full">
-                    <p className="text-black/70 text-base lg:text-xl leading-relaxed font-medium italic whitespace-pre-wrap">
-                      {activeData.overview}
-                    </p>
+          {/* Duo-Section: Primary Outcome (WIIFM) & Philosophy (Overview) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+            {/* 1. Primary Outcome - High Contrast Hook (Left) */}
+            <div className="lg:col-span-5 flex">
+              <div className="bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col w-full">
+                <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
+                  <Sparkles className="w-48 h-48 text-white" />
+                </div>
+                
+                <div className="relative z-10 pt-1">
+                  <div className="mb-6">
+                    <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
                   </div>
-                )}
-
-                {activeData.shortDescription && (
-                  <div className={`w-full ${activeData.overview ? "" : "max-w-4xl"}`}>
-                    <div className="bg-white p-6 lg:p-12 rounded-[2.5rem] border border-black/[0.04] shadow-[0_15px_45px_rgba(0,0,0,0.03)] relative overflow-hidden group">
-                      <div className="flex items-center gap-3 mb-4 lg:mb-6">
-                        <span className="relative flex h-2 w-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-green"></span>
-                        </span>
-                        <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-green/60">Primary Outcome</p>
-                      </div>
-                      <p className="text-xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-green">
-                        {activeData.shortDescription}
-                      </p>
-                    </div>
-                  </div>
-                )}
+                  
+                  <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white">
+                    {activeData.shortDescription}
+                  </p>
+                </div>
               </div>
             </div>
-          )}
+
+            {/* 2. Philosophy - Context & Methodology (Right) */}
+            {(activeData.overview?.trim() || (globalOverview && globalOverview.trim())) && (
+              <div className="lg:col-span-7 flex">
+                <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 flex flex-col w-full relative overflow-hidden">
+                  <div className="relative z-10 pt-1">
+                    <div className="mb-6">
+                      <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
+                    </div>
+                    
+                    <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
+                      {activeData.overview?.trim() ? activeData.overview : globalOverview}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* High-Density Benefits Grid */}
           {activeData.benefits && activeData.benefits.length > 0 && (
-            <div className="space-y-6">
-              <h3 className="text-lg lg:text-xl font-serif text-green flex items-center gap-3">
-                <div className="w-1 h-5 bg-green/20 rounded-full" />
+            <div className="space-y-8 px-6 lg:px-12">
+              <h3 className="text-lg lg:text-xl font-serif text-green">
                 What Your Child Will Gain
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
@@ -179,8 +203,7 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
           <div className="grid grid-cols-1 gap-6 lg:gap-8">
             {activeData.expectations && activeData.expectations.length > 0 && (
               <div className="bg-white p-6 lg:p-12 rounded-[2.5rem] border border-black/[0.03] shadow-sm relative overflow-hidden">
-                <h3 className="text-lg lg:text-xl font-serif text-green mb-8 lg:mb-10 flex items-center gap-3">
-                  <div className="w-1 h-5 bg-green/20 rounded-full" />
+                <h3 className="text-lg lg:text-xl font-serif text-green mb-8 lg:mb-10">
                   What to Expect
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 relative">
@@ -201,8 +224,7 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
 
             {activeData.whoIsItFor && activeData.whoIsItFor.length > 0 && (
               <div className="bg-white p-6 lg:p-12 rounded-[2.5rem] border border-black/[0.03] shadow-sm">
-                <h3 className="text-lg lg:text-xl font-serif text-green mb-8 lg:mb-10 flex items-center gap-3">
-                  <div className="w-1 h-5 bg-green/20 rounded-full" />
+                <h3 className="text-lg lg:text-xl font-serif text-green mb-8 lg:mb-10">
                   Is This the Right Space for Your Child?
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
@@ -222,7 +244,12 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
           </div>
 
           {/* Dedicated Blocks */}
-          {renderListBlock("Individuals We Support", activeData.supportedItems)}
+          {renderListBlock(
+            activeData.supportedItemsTitle || "Individuals We Support", 
+            activeData.supportedItems,
+            undefined,
+            activeData.supportedItemsIntro
+          )}
           {renderListBlock("Our Approach", activeData.approachItems)}
           {renderListBlock("Why Families Choose Us", activeData.whyChooseItems)}
 
@@ -230,10 +257,9 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
           {activeData.additionalSections?.map((section, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-[2.5rem] p-6 lg:p-10 border border-black/[0.03] shadow-sm"
+              className="bg-white rounded-[2.5rem] p-6 lg:p-12 border border-black/[0.03] shadow-sm"
             >
-              <h3 className="text-lg lg:text-2xl font-serif text-green mb-6 flex items-center gap-3">
-                <div className="w-1 h-5 bg-green/20 rounded-full" />
+              <h3 className="text-lg lg:text-2xl font-serif text-green mb-8 lg:mb-10">
                 {section.title}
               </h3>
               <ul className="space-y-4">

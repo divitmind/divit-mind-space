@@ -5,9 +5,7 @@ import {
   SITE_LANGUAGE,
   WEBSITE_ID,
   ORGANIZATION_REF,
-  MEDICAL_CONTENT_LAST_REVIEWED,
   MEDICAL_CONTENT_REVIEW_BLOCK,
-  MEDICAL_CONTENT_REVIEWER_UI,
 } from "@/lib/seo";
 
 const pageUrl = `${SITE_URL}/medical-disclaimer`;
@@ -75,20 +73,11 @@ export default function MedicalDisclaimerPage() {
 
           <div className="max-w-3xl">
             <h1
-              className="text-4xl lg:text-5xl font-serif text-green mb-3"
+              className="text-4xl lg:text-5xl font-serif text-green mb-8"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
             >
               Medical Disclaimer
             </h1>
-            <p className="text-xs text-black/50 uppercase tracking-widest font-bold mb-8">
-              Last reviewed · {MEDICAL_CONTENT_LAST_REVIEWED} · Reviewed by{" "}
-              <Link
-                href={`/specialists/${MEDICAL_CONTENT_REVIEWER_UI.slug}`}
-                className="text-green hover:underline"
-              >
-                {MEDICAL_CONTENT_REVIEWER_UI.name}
-              </Link>
-            </p>
 
             <div className="prose prose-lg prose-green space-y-6 text-black/70 font-medium leading-relaxed">
               <p>
@@ -127,24 +116,6 @@ export default function MedicalDisclaimerPage() {
                 content on this website describes those services at a high level so
                 families can understand what to expect; it does not constitute the
                 services themselves.
-              </p>
-
-              <h2 className="text-2xl font-serif text-green pt-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-                Editorial process and reviewer
-              </h2>
-              <p>
-                Medical, mental-health and neurodevelopmental content on this site
-                is reviewed by{" "}
-                <Link
-                  href={`/specialists/${MEDICAL_CONTENT_REVIEWER_UI.slug}`}
-                  className="text-green underline"
-                >
-                  Dr. Pavithra Lakshmi Narasimhan, PhD (Clinical Psychologist)
-                </Link>
-                . The most recent review date for the core clinical library is shown
-                at the top of this page and on individual condition and service
-                pages. Content is reviewed on an ongoing basis and updated when
-                evidence-based guidance changes.
               </p>
 
               <h2 className="text-2xl font-serif text-green pt-4" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>

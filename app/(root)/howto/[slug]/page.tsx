@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { HOWTO_ARTICLES, type HowToArticle } from "@/lib/howto";
-import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID, MEDICAL_CONTENT_REVIEW_BLOCK, MEDICAL_CONTENT_LAST_REVIEWED, MEDICAL_CONTENT_REVIEWER_UI } from "@/lib/seo";
-import { ContentReviewBadge } from "@/components/content-review-badge";
+import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID, MEDICAL_CONTENT_REVIEW_BLOCK } from "@/lib/seo";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
 import { ArrowRight, Clock } from "lucide-react";
 
@@ -120,10 +119,6 @@ export default async function HowToPage({ params }: PageProps) {
               <p className="text-lg text-black/70 font-medium leading-relaxed">
                 {a.lead}
               </p>
-              <ContentReviewBadge
-                lastReviewedDate={MEDICAL_CONTENT_LAST_REVIEWED}
-                reviewer={MEDICAL_CONTENT_REVIEWER_UI}
-              />
             </div>
           </div>
         </section>
