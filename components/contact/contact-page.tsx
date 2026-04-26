@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { InlineCtaBlock } from "@/components/inline-cta-block";
 import { Mail, MapPin, MessageCircle, CheckCircle2, ArrowRight, ShieldCheck, Clock, Navigation, ParkingCircle, ArrowUpCircle } from "lucide-react";
 import Image from "next/image";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
@@ -321,6 +322,13 @@ export function ContactPage({ faqs, faqTitle = "Frequently Asked Questions", set
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA - brand standard */}
+      <section className="pt-2 pb-2 lg:pt-4 lg:pb-4 bg-[#FAF9F5] px-4">
+        <div className="container mx-auto">
+          <InlineCtaBlock />
         </div>
       </section>
 
