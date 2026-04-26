@@ -22,6 +22,8 @@ export interface ServiceData {
       benefits?: string[];
       expectations?: string[];
       supportedItems?: string[];
+      supportedItemsTitle?: string;
+      supportedItemsIntro?: string;
       approachItems?: string[];
       whyChooseItems?: string[];
     }[];
@@ -166,21 +168,24 @@ export const services: ServiceData[] = [
             "Practical tools and home strategies for everyday communication.",
             "A collaborative approach with other therapies or schools, if applicable."
           ],
-          whoIsItFor: [
-            "Speech delays or limited speech for their age.",
-            "Difficulty being understood by people outside the family.",
-            "Struggling to follow simple instructions or understand questions.",
-            "Repeating words or sounds (stuttering) or avoiding talking.",
-            "Difficulty initiating or sustaining communication with peers.",
-            "Neurodivergent children (Autism/ADHD) needing communication support."
-          ],
+          whoIsItFor: [],
+          supportedItemsTitle: "Communication Needs We Support",
+          supportedItemsIntro: "Our Speech Therapy program supports children with a range of communication needs, including:",
           supportedItems: [
-            "Speech Clarity Difficulties: Challenges with clear sound production (articulation) and speech patterns that make understanding difficult.",
-            "Language Delays: Difficulty understanding or expressing words, ideas, or sentences.",
-            "Fluency Challenges: Stuttering, repetitions, or interruptions in speech flow.",
-            "Autism & Social Communication Differences: Support in building verbal and non-verbal communication and strengthening connection and interaction with others.",
-            "Hearing-Related Communication Needs: Supporting speech and language development in children with hearing differences.",
-            "Developmental Differences: Including Down syndrome, cerebral palsy, and other conditions that may impact communication."
+            "## Speech & Language Development",
+            "Speech delays, limited speech, or unclear pronunciation",
+            "Difficulty understanding or expressing words, ideas, or sentences",
+            "Challenges forming complete or grammatically correct sentences",
+            "## Communication & Interaction",
+            "Difficulty initiating or sustaining communication",
+            "Social communication challenges (verbal and non-verbal)",
+            "Communication differences associated with autism",
+            "## Fluency & Expression",
+            "Stuttering, repetitions, or interruptions in speech flow",
+            "## Diverse Communication Needs",
+            "Non-verbal or minimally verbal children",
+            "Children with hearing-related communication needs",
+            "Developmental differences such as Down syndrome, cerebral palsy, and related conditions",
           ],
           approachItems: [
             "Child-Led, Relationship-Based: We follow the child’s interests to create meaningful communication opportunities.",

@@ -14,10 +14,7 @@ import {
   SITE_LANGUAGE,
   WEBSITE_ID,
   MEDICAL_CONTENT_REVIEW_BLOCK,
-  MEDICAL_CONTENT_LAST_REVIEWED,
-  MEDICAL_CONTENT_REVIEWER_UI,
 } from "@/lib/seo";
-import { ContentReviewBadge } from "@/components/content-review-badge";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
@@ -184,13 +181,6 @@ export default async function ComparisonPage({ params }: PageProps) {
               <p className="text-lg text-black/70 font-medium leading-relaxed">
                 {p.lead}
               </p>
-              <div className="max-w-2xl mx-auto mt-6">
-                <ContentReviewBadge
-                  lastReviewedDate={MEDICAL_CONTENT_LAST_REVIEWED}
-                  reviewer={MEDICAL_CONTENT_REVIEWER_UI}
-                  compact
-                />
-              </div>
             </div>
           </div>
         </section>

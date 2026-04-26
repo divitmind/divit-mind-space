@@ -140,9 +140,9 @@ export default async function ServicePage({ params }: PageProps) {
   const staticService = getServiceBySlug(slug);
   if (staticService) {
     const staticContent = staticService.content as StaticServiceData["content"];
-    
-    // For speech-therapy, we want the static content (from the txt file) to take priority
-    // while maintaining the existing structure.
+
+    // For speech-therapy, we want the static content (from the txt file) to take absolute priority
+    // to match the exact wording on production.
     if (slug === 'speech-therapy') {
       service.overview = staticContent.overview;
       service.benefits = staticContent.benefits;
@@ -155,6 +155,11 @@ export default async function ServicePage({ params }: PageProps) {
       if (!service.faqs || service.faqs.length === 0) {
         if (staticContent.faqs) service.faqs = staticContent.faqs;
       }
+      if (!service.overview) service.overview = staticContent.overview;
+      if (!service.benefits || service.benefits.length === 0) service.benefits = staticContent.benefits;
+      if (!service.whatToExpect || service.whatToExpect.length === 0) service.whatToExpect = staticContent.whatToExpect;
+      if (!service.whoIsItFor || service.whoIsItFor.length === 0) service.whoIsItFor = staticContent.whoIsItFor;
+      if (!service.audienceSections || service.audienceSections.length === 0) service.audienceSections = staticContent.audienceSections;
       if (!service.duration) service.duration = staticContent.duration;
       if (!service.format) service.format = staticContent.format;
     }
@@ -209,7 +214,7 @@ export default async function ServicePage({ params }: PageProps) {
       {/* Hero Section - Zero Top Padding */}
       <section className="pt-0 pb-1 lg:pt-0 lg:pb-2">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <h1
               className="text-3xl md:text-4xl lg:text-5xl font-serif text-green mt-1 lg:mt-2 mb-1 lg:mb-2 leading-tight"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
@@ -227,28 +232,14 @@ export default async function ServicePage({ params }: PageProps) {
       {/* Content Section - Near Zero Gap */}
       <section className="pt-0 pb-0 lg:pt-0 lg:pb-0 bg-cream">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            {/* Global Overview */}
-            {service.overview && (
-              <div className="mb-8 lg:mb-10">
-                <h2
-                  className="text-2xl lg:text-3xl font-serif text-green mb-3 lg:mb-4"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                >
-                  Overview
-                </h2>
-                <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
-                  {service.overview}
-                </p>
-              </div>
-            )}
-
-            {/* Main Content Flow: Audience Sections (Tabs) */}
-            {hasAudienceSections && (
-              <div className="mb-10 lg:mb-12">
-                <AudienceTabs sections={service.audienceSections || []} />
-              </div>
-            )}
+          <div className="max-w-6xl mx-auto">
+            {/* Main Content Flow: Philosophy & Vision Duo-Section */}
+            <div className="mb-12 lg:mb-16">
+              <AudienceTabs 
+                sections={service.audienceSections || []} 
+                globalOverview={service.overview}
+              />
+            </div>
 
             {/* Universal Content (Non-tabbed or fallback) */}
             {hasUniversalContent && !hasAudienceSections && (
@@ -260,11 +251,11 @@ export default async function ServicePage({ params }: PageProps) {
                       Select specific details for your audience below or review our universal program highlights.
                     </p>
                   </div>
-                  
+
                   <div className="w-full lg:w-72 shrink-0">
                     {service.description && (
                       <div className="bg-green p-6 lg:p-8 rounded-xl text-white shadow-lg shadow-green/5 relative overflow-hidden group">
-                        <div className="absolute -right-2 -bottom-2 opacity-10 group-hover:scale-110 transition-transform duration-500">
+                        <div className="absolute -right-2 -bottom-2 opacity-10 group-hover:scale-110 transition-transform duration-500"> 
                           <CheckCircle2 className="w-20 h-20" />
                         </div>
                         <p className="text-[9px] font-bold uppercase tracking-[0.2em] mb-3 opacity-70">Primary Outcome</p>
@@ -301,7 +292,7 @@ export default async function ServicePage({ params }: PageProps) {
                 {/* Process & Profile Comparison */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-6 border-t border-green/10 items-stretch">
                   {service.whatToExpect && service.whatToExpect.length > 0 && (
-                    <div className="bg-white px-6 pb-6 pt-1 lg:px-8 lg:pb-8 lg:pt-2 rounded-2xl border border-green/10 flex flex-col">
+                    <div className="bg-white px-6 pb-6 pt-1 lg:px-8 lg:pb-8 lg:pt-2 rounded-2xl border border-green/10 flex flex-col">   
                       <h3 className="font-serif text-xl text-green mb-6 flex items-center gap-3">
                         <div className="w-1 h-5 bg-green/20 rounded-full" />
                         What to Expect
@@ -320,12 +311,12 @@ export default async function ServicePage({ params }: PageProps) {
                   )}
 
                   {service.whoIsItFor && service.whoIsItFor.length > 0 && (
-                    <div className="bg-green/5 px-6 pb-6 pt-1 lg:px-8 lg:pb-8 lg:pt-2 rounded-2xl border border-green/10 flex flex-col">
+                    <div className="bg-green/5 px-6 pb-6 pt-1 lg:px-8 lg:pb-8 lg:pt-2 rounded-2xl border border-green/10 flex flex-col"> 
                       <h3 className="font-serif text-xl text-green mb-6">Is This Right for You?</h3>
                       <div className="space-y-3 flex-1">
                         {service.whoIsItFor.map((item, i) => (
                           <div key={i} className="flex items-start gap-3">
-                            <div className="w-4 h-4 rounded-full bg-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                            <div className="w-4 h-4 rounded-full bg-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">   
                               <svg className="w-2.5 h-2.5 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={5}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                               </svg>
@@ -393,7 +384,7 @@ export default async function ServicePage({ params }: PageProps) {
       {addressedConditions.length > 0 && (
         <section className="py-6 lg:py-8 bg-[#FAF9F5]">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-6xl mx-auto">
               <h2
                 className="text-2xl lg:text-3xl font-serif text-green mb-5 text-center"
                 style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
@@ -419,7 +410,7 @@ export default async function ServicePage({ params }: PageProps) {
       {/* Location PIVOTS */}
       <section className="py-6 lg:py-8 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <h2
               className="text-2xl lg:text-3xl font-serif text-green mb-5 text-center"
               style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
@@ -445,7 +436,7 @@ export default async function ServicePage({ params }: PageProps) {
       {related.length > 0 && (
         <section className="pt-6 pb-0 lg:pt-8 lg:pb-0 bg-cream">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-6xl mx-auto">
               <h2
                 className="text-2xl lg:text-3xl font-serif text-green mb-5 text-center"
                 style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
@@ -478,7 +469,7 @@ export default async function ServicePage({ params }: PageProps) {
       {/* Bottom CTA */}
       <section className="pt-2 pb-2 lg:pt-4 lg:pb-4 bg-[#FAF9F5]">
         <div className="container mx-auto px-4">
-          <InlineCtaBlock 
+          <InlineCtaBlock
             heading={service.ctaOverride?.title || "Not ready to book?"}
             subtext={service.ctaOverride?.description || "Message us on WhatsApp. Ask us anything, we're here to help."}
           />
