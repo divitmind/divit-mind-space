@@ -222,7 +222,7 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
           </div>
 
           {/* Dedicated Blocks */}
-          {renderListBlock("Individuals We Support", activeData.supportedItems)}
+          {renderListBlock(`${activeData.audienceType.charAt(0).toUpperCase() + activeData.audienceType.slice(1)} We Support`, activeData.supportedItems)}
           {renderListBlock("Our Approach", activeData.approachItems)}
           {renderListBlock("Why Families Choose Us", activeData.whyChooseItems)}
 
