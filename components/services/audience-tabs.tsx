@@ -48,7 +48,7 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
               : [null, item];
             
             return (
-              <li key={itemIdx} className="flex items-start gap-4">
+              <li key={itemIdx} className="flex items-start gap-5">
                 <div
                   className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[10px]"
                   style={{ backgroundColor: color }}
@@ -161,9 +161,9 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
                     key={i} 
                     className="p-5 lg:p-7 rounded-[1.5rem] bg-white border border-black/[0.03] shadow-sm hover:shadow-md transition-all w-full"
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="w-5 h-5 rounded-full bg-green/5 flex items-center justify-center shrink-0 mt-0.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-green" />
+                    <div className="flex items-start gap-5">
+                      <div className="w-6 h-6 rounded-full bg-green/5 flex items-center justify-center shrink-0 mt-0.5">
+                        <CheckCircle2 className="w-4 h-4 text-green" />
                       </div>
                       <p className="text-[14px] lg:text-[17px] text-black/70 font-medium leading-relaxed">
                         {benefit}
@@ -184,12 +184,12 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
                   What to Expect
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 relative">
-                  {/* Subtle Process Line */}
-                  <div className="hidden md:block absolute left-1/2 top-2 bottom-2 w-px bg-green/10" />
+                  {/* Subtle Process Line - only on larger screens where it makes sense */}
+                  <div className="hidden md:block absolute left-1/2 top-2 bottom-2 w-px bg-green/5" />
                   
                   {activeData.expectations.map((item, i) => (
-                    <div key={i} className="flex gap-4 relative z-10">
-                      <div className="w-1.5 h-1.5 rounded-full bg-green mt-2.5 shrink-0 ring-4 ring-white" />
+                    <div key={i} className="flex gap-5 relative z-10">
+                      <div className="w-2 h-2 rounded-full bg-green mt-2.5 shrink-0 ring-4 ring-green/5" />
                       <p className="text-[14px] lg:text-[17px] text-black/60 font-medium leading-relaxed">
                         {item}
                       </p>
@@ -207,9 +207,9 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
                   {activeData.whoIsItFor.map((item, i) => (
-                    <div key={i} className="flex items-start gap-4 group">
-                      <div className="w-5 h-5 rounded-full bg-green/5 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-green group-hover:text-white transition-all">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-green group-hover:text-white" />
+                    <div key={i} className="flex items-start gap-5 group">
+                      <div className="w-6 h-6 rounded-full bg-green/5 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-green group-hover:text-white transition-all">
+                        <CheckCircle2 className="w-4 h-4 text-green group-hover:text-white" />
                       </div>
                       <span className="text-[14px] lg:text-[17px] text-black/70 font-medium leading-relaxed">
                         {item}
@@ -222,7 +222,7 @@ export function AudienceTabs({ sections }: AudienceTabsProps) {
           </div>
 
           {/* Dedicated Blocks */}
-          {renderListBlock(`${activeData.audienceType.charAt(0).toUpperCase() + activeData.audienceType.slice(1)} We Support`, activeData.supportedItems)}
+          {renderListBlock("Individuals We Support", activeData.supportedItems)}
           {renderListBlock("Our Approach", activeData.approachItems)}
           {renderListBlock("Why Families Choose Us", activeData.whyChooseItems)}
 
