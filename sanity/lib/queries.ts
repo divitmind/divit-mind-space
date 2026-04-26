@@ -248,10 +248,12 @@ export const SINGLE_SERVICE_QUERY = `*[_type == "services" && slug.current == $s
     whoIsItFor,
     benefits,
     expectations,
+    supportedItemsTitle,
+    supportedItemsIntro,
     supportedItems,
     approachItems,
     whyChooseItems,
-    additionalSections {
+    additionalSections[] {
       title,
       items,
       color

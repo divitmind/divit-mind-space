@@ -49,6 +49,8 @@ interface ServiceData {
     whoIsItFor?: string[];
     benefits?: string[];
     expectations?: string[];
+    supportedItemsTitle?: string;
+    supportedItemsIntro?: string;
     supportedItems?: string[];
     approachItems?: string[];
     whyChooseItems?: string[];

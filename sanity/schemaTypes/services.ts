@@ -140,10 +140,22 @@ export const servicesType = defineType({
             },
             // Dedicated Dedicated Blocks as requested
             {
+              name: 'supportedItemsTitle',
+              type: 'string',
+              title: 'Section 4: Custom Heading',
+              description: 'Defaults to "Individuals We Support" if left empty.'
+            },
+            {
+              name: 'supportedItemsIntro',
+              type: 'text',
+              title: 'Section 4: Intro Text',
+              description: 'Brief paragraph appearing below the heading.'
+            },
+            {
               name: 'supportedItems',
               type: 'array',
-              title: 'Section 4: Individuals We Support',
-              description: 'e.g., "Speech Clarity Difficulties: Challenges with..."',
+              title: 'Section 4: List Items',
+              description: 'Start with ## for group headers (e.g. "## Speech Development").',
               of: [{ type: 'string' }]
             },
             {
@@ -159,6 +171,22 @@ export const servicesType = defineType({
               title: 'Section 6: Why Families Choose Us',
               description: 'List of reasons why families trust Divit MindSpace.',
               of: [{ type: 'string' }]
+            },
+            {
+              name: 'additionalSections',
+              type: 'array',
+              title: 'Custom Additional Sections',
+              description: 'Extra blocks for unique service needs.',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  fields: [
+                    { name: 'title', type: 'string', title: 'Section Title' },
+                    { name: 'items', type: 'array', title: 'List Items', of: [{ type: 'string' }] },
+                    { name: 'color', type: 'string', title: 'Dot Color (Hex)', initialValue: '#7A9A7D' }
+                  ]
+                })
+              ]
             }
           ],
           preview: {
