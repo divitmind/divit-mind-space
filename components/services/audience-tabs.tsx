@@ -33,7 +33,7 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
   if (!activeData) return null;
 
   // Helper to render a dedicated list block
-  const renderListBlock = (title: string, items?: string[], color: string = '#7A9A7D', intro?: string) => {
+  const renderListBlock = (title: string, items?: string[], color: string = '#7A9A7D', intro?: string, icon?: React.ReactNode) => {
     if (!items || items.length === 0) return null;
     
     return (
@@ -71,10 +71,16 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
             
             return (
               <li key={itemIdx} className="flex items-start gap-5">
-                <div
-                  className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[10px]"
-                  style={{ backgroundColor: color }}
-                />
+                {icon ? (
+                  <div className="mt-0.5 flex-shrink-0">
+                    {icon}
+                  </div>
+                ) : (
+                  <div
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[10px]"
+                    style={{ backgroundColor: color }}
+                  />
+                )}
                 <span className="text-[14px] lg:text-[17px] text-black/70 font-medium leading-relaxed">
                   {hasColon ? (
                     <>
@@ -98,7 +104,7 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
       {/* Refined Inset Pill Switcher (Only visible if 2+ audiences exist) */}
       {sections.length > 1 && (
         <div className="flex justify-center">
-          <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-w-lg shadow-inner">
+          <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-lg shadow-inner">
             {sections.map((section) => {
               const isActive = activeTab === section.audienceType;
               return (
@@ -173,29 +179,14 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
             )}
           </div>
 
-          {/* High-Density Benefits Grid */}
-          {activeData.benefits && activeData.benefits.length > 0 && (
-            <div className="space-y-8 px-6 lg:px-12">
-              <h3 className="text-lg lg:text-xl font-serif text-green">
-                What Your Child Will Gain
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                {activeData.benefits.map((benefit, i) => (
-                  <div 
-                    key={i} 
-                    className="p-5 lg:p-7 rounded-[1.5rem] bg-white border border-black/[0.03] shadow-sm hover:shadow-md transition-all w-full"
-                  >
-                    <div className="flex items-start gap-5">
-                      <div className="w-6 h-6 rounded-full bg-green/5 flex items-center justify-center shrink-0 mt-0.5">
-                        <CheckCircle2 className="w-4 h-4 text-green" />
-                      </div>
-                      <p className="text-[14px] lg:text-[17px] text-black/70 font-medium leading-relaxed">
-                        {benefit}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          {/* Unified Benefits Block */}
+          {renderListBlock(
+            "What Your Child Will Gain", 
+            activeData.benefits, 
+            undefined, 
+            undefined,
+            <div className="w-6 h-6 rounded-full bg-green/5 flex items-center justify-center">
+              <CheckCircle2 className="w-4 h-4 text-green" />
             </div>
           )}
 
