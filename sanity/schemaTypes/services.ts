@@ -206,5 +206,22 @@ export const servicesType = defineType({
         { name: 'metaDescription', type: 'text', title: 'Meta Description' },
       ],
     }),
+    defineField({
+      name: 'additionalSections',
+      title: 'Additional Full-Width Sections',
+      type: 'array',
+      group: 'basic',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            { name: 'title', type: 'string', title: 'Section Title' },
+            { name: 'intro', type: 'text', title: 'Intro Text', rows: 2 },
+            { name: 'items', type: 'array', title: 'List Items', of: [{ type: 'string' }] },
+            { name: 'color', type: 'string', title: 'Background Style', options: { list: [{title: 'White', value: 'white'}, {title: 'Sage', value: 'sage'}] }, initialValue: 'white' }
+          ]
+        })
+      ]
+    }),
   ],
 })

@@ -16,11 +16,19 @@ export interface ServiceData {
     audienceSections?: {
       audienceType: "children" | "teens" | "adults";
       title: string;
+      hero?: {
+        shortDescription?: string;
+        overview?: string;
+      };
+      contentBlocks?: Record<string, unknown>[];
+      // Legacy Fallbacks
       shortDescription?: string;
       overview?: string;
       whoIsItFor?: string[];
+      whoIsItForIntro?: string;
       benefits?: string[];
       expectations?: string[];
+      expectationsIntro?: string;
       supportedItems?: string[];
       supportedItemsTitle?: string;
       supportedItemsIntro?: string;
@@ -29,6 +37,7 @@ export interface ServiceData {
     }[];
     additionalSections?: {
       title: string;
+      intro?: string;
       items: string[];
       color?: string;
     }[];
@@ -150,8 +159,50 @@ export const services: ServiceData[] = [
         {
           audienceType: "children",
           title: "Speech Therapy for Children",
-          shortDescription: "At Divit MindSpace, we see communication as more than a skill—it is a child’s way of connecting with the world, expressing emotions, and building relationships.",
-          overview: "",
+          hero: {
+            shortDescription: "At Divit MindSpace, we see communication as more than a skill—it is a child’s way of connecting with the world, expressing emotions, and building relationships.",
+            overview: "",
+          },
+          contentBlocks: [
+            {
+              _type: "clinicalIndexBlock",
+              _key: "supported-needs",
+              title: "Communication Needs We Support",
+              intro: "Our Speech Therapy program supports children with a range of communication needs, including:",
+              groups: [
+                {
+                  heading: "Speech & Language Development",
+                  items: [
+                    "Speech delays, limited speech, or unclear pronunciation",
+                    "Difficulty understanding or expressing words, ideas, or sentences",
+                    "Challenges forming complete or grammatically correct sentences"
+                  ]
+                },
+                {
+                  heading: "Communication & Interaction",
+                  items: [
+                    "Difficulty initiating or sustaining communication",
+                    "Social communication challenges (verbal and non-verbal)",
+                    "Communication differences associated with autism"
+                  ]
+                },
+                {
+                  heading: "Fluency & Expression",
+                  items: [
+                    "Stuttering, repetitions, or interruptions in speech flow"
+                  ]
+                },
+                {
+                  heading: "Diverse Communication Needs",
+                  items: [
+                    "Non-verbal or minimally verbal children",
+                    "Children with hearing-related communication needs",
+                    "Developmental differences such as Down syndrome, cerebral palsy, and related conditions"
+                  ]
+                }
+              ]
+            }
+          ],
           benefits: [
             "Confident communication across home, school, and social settings.",
             "Clearer speech that is easily understood by family, peers, and teachers.",
@@ -161,46 +212,47 @@ export const services: ServiceData[] = [
             "A foundation for better reading, writing, and academic success."
           ],
           expectations: [
-            "A gentle, observation-based initial assessment of your child’s communication profile.",
-            "Individualized goals aligned with your child’s readiness and unique strengths.",
-            "Play-based, interaction-driven therapy sessions that feel like fun, not \"work.\"",
-            "Ongoing parent guidance and support to help you understand your child’s progress.",
-            "Practical tools and home strategies for everyday communication.",
-            "A collaborative approach with other therapies or schools, if applicable."
+            "Clinical Profile — A gentle, observation-based initial assessment of your child’s communication profile.",
+            "Individualized Goals — Goals aligned with your child’s readiness and unique strengths.",
+            "Meaningful Interaction — Play-based, interaction-driven therapy sessions that feel like fun, not \"work.\"",
+            "Parent Partnership — Ongoing guidance and support to help you understand your child’s progress.",
+            "Daily Tools — Practical tools and home strategies for everyday communication.",
+            "Collaboration — A collaborative approach with other therapies or schools, if applicable."
           ],
-          whoIsItFor: [],
-          supportedItemsTitle: "Communication Needs We Support",
-          supportedItemsIntro: "Our Speech Therapy program supports children with a range of communication needs, including:",
-          supportedItems: [
-            "## Speech & Language Development",
-            "Speech delays, limited speech, or unclear pronunciation",
-            "Difficulty understanding or expressing words, ideas, or sentences",
-            "Challenges forming complete or grammatically correct sentences",
-            "## Communication & Interaction",
-            "Difficulty initiating or sustaining communication",
-            "Social communication challenges (verbal and non-verbal)",
-            "Communication differences associated with autism",
-            "## Fluency & Expression",
-            "Stuttering, repetitions, or interruptions in speech flow",
-            "## Diverse Communication Needs",
-            "Non-verbal or minimally verbal children",
-            "Children with hearing-related communication needs",
-            "Developmental differences such as Down syndrome, cerebral palsy, and related conditions",
+          expectationsIntro: "Our Speech Therapy program follows a structured yet flexible approach to support your child’s journey:",
+          whoIsItFor: [
+            "Speech delays or limited speech for their age.",
+            "Difficulty being understood by people outside the family.",
+            "Struggling to follow simple instructions or understand questions.",
+            "Repeating words or sounds (stuttering) or avoiding talking.",
+            "Difficulty initiating or sustaining communication with peers.",
+            "Neurodivergent children (Autism/ADHD) needing communication support."
           ],
           approachItems: [
             "Child-Led, Relationship-Based: We follow the child’s interests to create meaningful communication opportunities.",
             "Play as a Medium: Communication is built through play, interaction, and shared experiences.",
-            "Emotional Safety First: A regulated child communicates better—so we prioritize comfort and trust.",
-            "Parent as a Partner: We support parents with practical strategies for everyday communication.",
-            "Integrated Development: We work on communication alongside attention, regulation, and social connection."
+            "Neurodiversity-Affirming: We honor each child's unique communication style and pace.",
+            "Family-Centered: We empower parents with tools to support communication in daily life."
           ],
           whyChooseItems: [
-            "Warm, non-judgmental, and accepting environment",
-            "Therapists who combine expertise with empathy",
-            "Focus on long-term communication, not quick fixes",
-            "Respect for each child’s individuality and pace",
-            "A space where children feel seen, heard, and understood"
-          ]
+            "Personalized Care: Strategies tailored to your child's specific profile.",
+            "Expert Therapists: Experienced professionals specializing in neurodevelopment.",
+            "Natural Environment: Therapy that feels like play in a comfortable setting.",
+            "Evidence-Based: Using proven methods like Hanen and Social Thinking."
+          ],
+        }
+      ],
+      additionalSections: [
+        {
+          title: "Why Communication Matters",
+          intro: "Communication is the heartbeat of human connection. It's how we share our world, express our needs, and build relationships.",
+          items: [
+            "Emotional Regulation: Giving words to feelings reduces frustration.",
+            "Academic Foundation: Strong language skills are essential for reading and writing.",
+            "Social Connection: Communication is the key to making and keeping friends.",
+            "Confidence & Autonomy: Being understood empowers a child to navigate their world."
+          ],
+          color: "sage"
         }
       ],
     },

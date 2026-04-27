@@ -145,29 +145,21 @@ export default async function ServicePage({ params }: PageProps) {
   if (staticService) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
-    // For speech-therapy, we want the static content (from the txt file) to take absolute priority
-    // to match the exact wording on production.
-    if (slug === 'speech-therapy') {
-      service.overview = staticContent.overview;
-      service.benefits = staticContent.benefits;
-      service.whatToExpect = staticContent.whatToExpect;
-      service.whoIsItFor = staticContent.whoIsItFor;
+    // Fallback logic: prefer Sanity, but use static data if Sanity is empty
+    if (!service.overview) service.overview = staticContent.overview;
+    if (!service.benefits || service.benefits.length === 0) service.benefits = staticContent.benefits;
+    if (!service.whatToExpect || service.whatToExpect.length === 0) service.whatToExpect = staticContent.whatToExpect;
+    if (!service.whoIsItFor || service.whoIsItFor.length === 0) service.whoIsItFor = staticContent.whoIsItFor;
+    if (!service.audienceSections || service.audienceSections.length === 0) {
       service.audienceSections = staticContent.audienceSections;
+    }
+    if (!service.duration) service.duration = staticContent.duration;
+    if (!service.format) service.format = staticContent.format;
+    if (!service.additionalSections || service.additionalSections.length === 0) {
       service.additionalSections = staticContent.additionalSections;
-    } else {
-      // Standard fallback merge for other services
-      // If Sanity content exists, it will take priority.
-      if (!service.faqs || service.faqs.length === 0) {
-        if (staticContent.faqs) service.faqs = staticContent.faqs;
-      }
-      if (!service.overview) service.overview = staticContent.overview;
-      if (!service.benefits || service.benefits.length === 0) service.benefits = staticContent.benefits;
-      if (!service.whatToExpect || service.whatToExpect.length === 0) service.whatToExpect = staticContent.whatToExpect;
-      if (!service.whoIsItFor || service.whoIsItFor.length === 0) service.whoIsItFor = staticContent.whoIsItFor;
-      if (!service.audienceSections || service.audienceSections.length === 0) service.audienceSections = staticContent.audienceSections;
-      if (!service.duration) service.duration = staticContent.duration;
-      if (!service.format) service.format = staticContent.format;
-      if (!service.additionalSections || service.additionalSections.length === 0) service.additionalSections = staticContent.additionalSections;
+    }
+    if (!service.faqs || service.faqs.length === 0) {
+      if (staticContent.faqs) service.faqs = staticContent.faqs;
     }
   }
 

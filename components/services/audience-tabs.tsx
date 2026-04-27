@@ -40,6 +40,7 @@ interface AudienceSection {
   supportedItemsIntro?: string;
   approachItems?: string[];
   whyChooseItems?: string[];
+  additionalSections?: { title: string; intro?: string; items: string[]; color?: string }[];
 }
 
 interface AudienceTabsProps {
@@ -53,14 +54,28 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
 
   if (!activeData) return null;
 
-  // Helper: Smart Bold Parsing (Before Colon)
+  // Helper: Smart Bold Parsing (Before Colon or Em-Dash)
   const renderItemText = (text: string) => {
+    // Look for first occurrence of ":" or "—"
     const colonIndex = text.indexOf(':');
-    if (colonIndex === -1) return text;
+    const dashIndex = text.indexOf('—');
+    
+    // Find which one comes first (and is not -1)
+    let separatorIndex = -1;
+    if (colonIndex !== -1 && dashIndex !== -1) {
+      separatorIndex = Math.min(colonIndex, dashIndex);
+    } else if (colonIndex !== -1) {
+      separatorIndex = colonIndex;
+    } else if (dashIndex !== -1) {
+      separatorIndex = dashIndex;
+    }
+
+    if (separatorIndex === -1) return text;
+
     return (
       <>
-        <strong className="text-black font-bold">{text.slice(0, colonIndex + 1)}</strong>
-        {text.slice(colonIndex + 1)}
+        <strong className="text-black font-bold">{text.slice(0, separatorIndex + 1)}</strong>
+        {text.slice(separatorIndex + 1)}
       </>
     );
   };
@@ -190,10 +205,14 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
 
               case 'clinicalIndexBlock':
                 return (
-                  <div key={block._key} className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-sm p-6 lg:p-12">
-                    <div className="mb-8 lg:mb-10">
-                      <h3 className="text-lg lg:text-xl font-serif text-green">{block.title}</h3>
-                      {block.intro && <p className="mt-4 text-black/60 text-sm lg:text-base font-medium">{block.intro}</p>}
+                  <div key={block._key} className={`rounded-[2.5rem] border border-black/[0.03] shadow-sm p-6 lg:p-12 ${block.backgroundColor === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white'}`}>
+                    <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6 flex flex-col lg:flex-row lg:items-baseline gap-4 lg:gap-10">
+                      <h3 className="text-lg lg:text-xl font-serif text-green shrink-0">{block.title}</h3>
+                      {block.intro && (
+                        <p className="text-black/60 text-[13px] lg:text-[15px] font-medium leading-relaxed max-w-3xl">
+                          {block.intro}
+                        </p>
+                      )}
                     </div>
                     <div className="flex flex-col gap-y-10">
                       {block.groups?.map((group, idx) => (
@@ -269,29 +288,49 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
 
               {activeData.supportedItems && activeData.supportedItems.length > 0 && (
                 <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-sm p-6 lg:p-12">
-                  <h3 className="text-lg lg:text-xl font-serif text-green mb-10">{activeData.supportedItemsTitle || "Clinical Index"}</h3>
+                  <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6 flex flex-col lg:flex-row lg:items-baseline gap-2 lg:gap-3">
+                    <h3 className="text-lg lg:text-xl font-serif text-green shrink-0">{activeData.supportedItemsTitle || "Clinical Index"}</h3>
+                    {activeData.supportedItemsIntro && (
+                      <p className="text-black/70 text-[14px] lg:text-[16px] font-medium leading-relaxed max-w-3xl">
+                        <span className="text-black/20 mr-2">—</span>
+                        {activeData.supportedItemsIntro}
+                      </p>
+                    )}
+                  </div>
                   <div className="flex flex-col gap-y-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-                      <div className="lg:col-span-3 lg:sticky lg:top-12 h-fit pt-5">
-                        <div className="flex items-start gap-4">
-                          <div className="w-px h-12 bg-green/20 shrink-0" />
-                          <h4 className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.2em] text-green/80 leading-relaxed">Details</h4>
+                    {(() => {
+                      const groups: { heading: string; items: string[] }[] = [];
+                      activeData.supportedItems.forEach((item) => {
+                        const text = typeof item === 'string' ? item : item.items.join(', ');
+                        if (text.startsWith('## ')) {
+                          groups.push({ heading: text.replace('## ', ''), items: [] });
+                        } else {
+                          if (groups.length === 0) groups.push({ heading: 'Details', items: [] });
+                          groups[groups.length - 1].items.push(text);
+                        }
+                      });
+
+                      return groups.map((group, idx) => (
+                        <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+                          <div className="lg:col-span-3 lg:sticky lg:top-12 h-fit pt-5">
+                            <div className="flex items-start gap-4">
+                              <div className="w-px h-12 bg-green/20 shrink-0" />
+                              <h4 className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.2em] text-green/80 leading-relaxed">{group.heading}</h4>
+                            </div>
+                          </div>
+                          <div className="lg:col-span-9">
+                            <ul className="grid grid-cols-1 bg-white/40 rounded-3xl border border-green/5 overflow-hidden shadow-sm">
+                              {group.items.map((item, i) => (
+                                <li key={i} className={`flex items-start gap-4 px-5 py-5 lg:px-8 lg:py-6 hover:bg-white/60 group/item transition-all duration-300 ${i !== group.items.length - 1 ? 'border-b border-green/[0.03]' : ''}`}>
+                                  <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
+                                  <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed group-hover/item:text-black">{renderItemText(item)}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
-                      </div>
-                      <div className="lg:col-span-9">
-                        <ul className="grid grid-cols-1 bg-white/40 rounded-3xl border border-green/5 overflow-hidden shadow-sm">
-                          {activeData.supportedItems.map((item, i) => {
-                            const text = typeof item === 'string' ? item : item.items.join(', ');
-                            return (
-                              <li key={i} className={`flex items-start gap-4 px-5 py-5 lg:px-8 lg:py-6 hover:bg-white/60 group/item transition-all duration-300 ${i !== activeData.supportedItems!.length - 1 ? 'border-b border-green/[0.03]' : ''}`}>
-                                <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
-                                <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed group-hover/item:text-black">{renderItemText(text)}</span>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </div>
-                    </div>
+                      ));
+                    })()}
                   </div>
                 </div>
               )}
@@ -302,8 +341,27 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
               </div>
             </>
           )}
+
+          {/* Additional Sections (Common to both Modular & Legacy) */}
+          {activeData.additionalSections?.map((section, idx) => (
+            <div key={idx} className={`rounded-[2.5rem] border border-black/[0.03] p-6 lg:p-12 ${section.color === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white shadow-sm'}`}>
+              <h3 className="text-lg lg:text-xl font-serif text-green mb-8">{section.title}</h3>
+              {section.intro && <p className="mb-8 text-black/60 text-sm lg:text-base font-medium leading-relaxed">{section.intro}</p>}
+              <div className="flex flex-col gap-y-4">
+                {section.items?.map((item, i) => (
+                  <div key={i} className="flex items-start gap-5 group">
+                    <div className="w-6 h-6 rounded-full bg-green/5 flex items-center justify-center shrink-0 mt-0.5">
+                      <CheckCircle2 className="w-4 h-4 text-green" />
+                    </div>
+                    <span className="text-[14px] lg:text-[17px] text-black/70 font-medium leading-relaxed">{renderItemText(item)}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </motion.div>
       </AnimatePresence>
     </div>
   );
 }
+
