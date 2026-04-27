@@ -7,9 +7,9 @@ export interface ServiceData {
   image: string;
   content: {
     overview: string;
-    benefits: string[];
-    whatToExpect: string[];
-    whoIsItFor: string[];
+    benefits?: string[];
+    whatToExpect?: string[];
+    whoIsItFor?: string[];
     duration?: string;
     format?: string;
     faqs?: { question: string; answer: string }[];
@@ -24,6 +24,7 @@ export interface ServiceData {
       // Legacy Fallbacks
       shortDescription?: string;
       overview?: string;
+      whoIsItForTitle?: string;
       whoIsItFor?: string[];
       whoIsItForIntro?: string;
       benefits?: string[];
@@ -261,31 +262,225 @@ export const services: ServiceData[] = [
     id: "4",
     title: "Occupational Therapy",
     slug: "occupational-therapy",
-    description: "Every child needs essential daily life skills to grow with confidence and independence. When a child struggles with motor skills, coordination, sensory processing, or routine activities, occupational therapy can help.",
+    description: "Occupational therapy helps children, adolescents, and adults build motor skills, improve sensory processing, and gain independence—supporting confidence in daily activities, school, work, and life.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Every child needs essential daily life skills to grow with confidence and independence. When a child struggles with motor skills, coordination, sensory processing, or routine activities, it can impact their ability to participate fully in school and daily life. Our Occupational Therapy services help children develop the skills they need for everyday success through engaging, play-based activities.",
-      benefits: [
-        "Improved fine motor skills and hand strength",
-        "Better sensory regulation and processing",
-        "Enhanced handwriting and school readiness",
-        "Greater independence in self-care tasks",
-        "Improved attention and focus for learning",
+      overview: "Occupational therapy helps children, adolescents, and adults build motor skills, improve sensory processing, and gain independence—supporting confidence in daily activities, school, work, and life. At Divit MindSpace, we see independence as more than a skill—it is a person’s ability to engage with the world, participate in daily life, and feel confident in their own abilities.",
+      audienceSections: [
+        {
+          audienceType: "children",
+          title: "OT For Children",
+          hero: {
+            shortDescription: "Play-based, engaging activities that make learning feel natural and enjoyable—while building foundational motor, sensory, and self-care skills.",
+            overview: "We focus not just on what a person can or cannot do, but on how they experience everyday activities, what may be holding them back, and how we can make these experiences meaningful and achievable.\n\nWe look at development as a whole, including:\n• Fine motor skills (hand use, writing, precision)\n• Gross motor coordination (balance, movement, strength)\n• Sensory processing (how the body understands and responds to input)\n• Daily living skills (self-care, routines, independence)",
+          },
+          contentBlocks: [
+            {
+              _type: "duoGridBlock",
+              _key: "ot-children-benefits-expectations",
+              leftColumn: {
+                title: "What Your Child Will Gain",
+                items: [
+                  "Improved strength, coordination, and motor control",
+                  "Better sensory regulation and body awareness",
+                  "Increased independence in daily activities",
+                  "Enhanced focus, planning, and task completion",
+                  "Greater participation in school, work, and play",
+                  "Reduced frustration in everyday tasks",
+                  "Stronger confidence and self-reliance"
+                ],
+                style: "tick"
+              },
+              rightColumn: {
+                title: "What to Expect",
+                kicker: "A structured yet flexible journey",
+                items: [
+                  "A comprehensive, observation-based assessment",
+                  "Individualized goals aligned with developmental needs",
+                  "Activity-based, engaging therapy sessions",
+                  "Practical strategies for home and daily routines",
+                  "Ongoing parent and caregiver guidance",
+                  "Collaboration with other therapies (if applicable)"
+                ],
+                style: "tick"
+              }
+            },
+            {
+              _type: "clinicalIndexBlock",
+              _key: "ot-needs-support",
+              title: "Needs We Support",
+              intro: "Our Occupational Therapy program supports individuals across age groups with a wide range of needs:",
+              groups: [
+                {
+                  heading: "Motor Development",
+                  items: [
+                    "Difficulty with fine motor skills (writing, buttoning, grip)",
+                    "Challenges with balance, coordination, or physical movement",
+                    "Delays in motor milestones"
+                  ]
+                },
+                {
+                  heading: "Sensory Processing",
+                  items: [
+                    "Over- or under-sensitivity to sounds, textures, or movement",
+                    "Difficulty staying regulated or attentive",
+                    "Sensory-seeking or sensory-avoidant behaviors"
+                  ]
+                },
+                {
+                  heading: "Daily Living & Independence",
+                  items: [
+                    "Challenges with dressing, grooming, feeding, or toileting",
+                    "Difficulty managing routines and everyday tasks",
+                    "Delays in age-appropriate independence"
+                  ]
+                },
+                {
+                  heading: "Attention & Regulation",
+                  items: [
+                    "Difficulty with focus, planning, and task completion",
+                    "Impulse control and executive functioning challenges",
+                    "Emotional and behavioral regulation difficulties"
+                  ]
+                },
+                {
+                  heading: "Developmental Differences",
+                  items: [
+                    "Autism Spectrum differences",
+                    "ADHD",
+                    "Learning challenges",
+                    "Conditions such as Down syndrome, cerebral palsy, and related needs"
+                  ]
+                }
+              ]
+            }
+          ],
+          whoIsItForTitle: "Is This the Right Support for You?",
+          whoIsItForIntro: "Occupational therapy is ideal for children facing these specific challenges:",
+          whoIsItFor: [
+            "Fine Motor — Difficulty with buttons, zippers, scissors, or weak grip",
+            "Gross Motor — Poor balance, frequent falls, or trouble climbing or jumping",
+            "Developmental Skills — Delays in toileting, dressing, feeding, or play skills",
+            "Sensory Processing — Over-sensitivity to sounds/textures or difficulty sitting still"
+          ],
+          approachItems: [
+            "Individualized & Functional: We tailor therapy to real-life goals that matter in everyday routines.",
+            "Learning Through Doing: Skills are built through meaningful activities, not isolated drills.",
+            "Sensory-Informed Care: We understand how sensory experiences impact behavior, attention, and participation.",
+            "Building Independence Gradually: We support step-by-step progress toward autonomy.",
+            "Caregiver as a Partner: We equip families with practical tools to support progress beyond sessions."
+          ],
+          whyChooseItems: [
+            "Warm, supportive, and non-judgmental environment",
+            "Therapists who combine expertise with empathy",
+            "Focus on long-term independence, not quick fixes",
+            "Respect for each individual’s pace and journey",
+            "A space where every individual feels capable and empowered"
+          ]
+        },
+        {
+          audienceType: "teens",
+          title: "OT For Adolescents",
+          hero: {
+            shortDescription: "Practical, real-life skill building focused on independence, organization, social participation, and transition readiness.",
+            overview: "Adolescence is a time of transition. Our OT for adolescents focuses on the practical skills needed to navigate secondary school, social relationships, and the first steps toward adulthood.",
+          },
+          contentBlocks: [
+            {
+              _type: "clinicalIndexBlock",
+              _key: "ot-teens-needs",
+              title: "Focus Areas for Teens",
+              intro: "We support adolescents with a range of transition-focused needs:",
+              groups: [
+                {
+                  heading: "Daily Living Skills",
+                  items: ["Challenges with time management, organization, or meal preparation"]
+                },
+                {
+                  heading: "Academic & Social",
+                  items: ["Sensory sensitivities affecting school or peer interaction"]
+                },
+                {
+                  heading: "Executive Functioning",
+                  items: ["Difficulties with planning, attention, or impulse control"]
+                },
+                {
+                  heading: "Transitions",
+                  items: ["Building readiness for pre-vocational tasks and independent living"]
+                }
+              ]
+            }
+          ],
+          approachItems: [
+            "Practical & Real-Life: Skills are built in context of actual tasks.",
+            "Transition Readiness: Focus on the next stage of life.",
+            "Collaborative: We work with the teen to set their own goals."
+          ]
+        },
+        {
+          audienceType: "adults",
+          title: "OT For Adults",
+          hero: {
+            shortDescription: "Goal-oriented, functional therapy to enhance daily productivity, independence, and quality of life.",
+            overview: "Our adult OT services help individuals manage the demands of daily life, work, and personal care with greater confidence and efficiency.",
+          },
+          contentBlocks: [
+            {
+              _type: "clinicalIndexBlock",
+              _key: "ot-adults-needs",
+              title: "Support for Adults",
+              intro: "We help adults navigate functional challenges across environments:",
+              groups: [
+                {
+                  heading: "Daily Functioning",
+                  items: ["Difficulty managing routines, self-care, or household tasks"]
+                },
+                {
+                  heading: "Work & Productivity",
+                  items: ["Challenges with focus, organization, or task completion"]
+                },
+                {
+                  heading: "Physical & Sensory",
+                  items: [
+                    "Regaining strength, coordination, or function",
+                    "Managing overwhelm, fatigue, or sensory sensitivities"
+                  ]
+                },
+                {
+                  heading: "Quality of Life",
+                  items: ["Building confidence in personal, social, and work environments"]
+                }
+              ]
+            }
+          ],
+        }
       ],
-      whatToExpect: [
-        "Comprehensive OT evaluation",
-        "Sensory profile assessment if needed",
-        "Individualized therapy plan with specific goals",
-        "Fun, engaging therapy sessions",
-        "Home program with activities to practice",
-      ],
-      whoIsItFor: [
-        "Children with sensory processing difficulties",
-        "Children struggling with handwriting",
-        "Children with fine motor delays",
-        "Children needing help with self-care skills",
-        "Children with coordination difficulties",
+      additionalSections: [
+        {
+          title: "Services We Offer",
+          intro: "Occupational Therapy at Divit MindSpace includes a wide range of services to address various developmental and functional challenges:",
+          items: [
+            "Sensory Integration Therapy",
+            "Fine Motor Skill Development",
+            "Gross Motor Skill Development",
+            "Self-Care & Independence Training",
+            "Social & Emotional Skill Support",
+            "Adaptive Strategies & Modifications",
+            "Parent & Caregiver Guidance"
+          ],
+          color: "white"
+        },
+        {
+          title: "Beyond Therapy — Building Independence",
+          intro: "At Divit MindSpace, our goal is not just to improve skills, but to help individuals participate more fully in their daily lives.",
+          items: [
+            "Building Capability: When a person feels capable, independence naturally follows.",
+            "Meaningful Participation: Focusing on what matters to the individual.",
+            "Lasting Change: Creating foundations for a lifetime of independence."
+          ],
+          color: "sage"
+        }
       ],
       duration: "45-minute sessions, typically weekly",
       format: "In-person at our sensory-equipped center",
