@@ -24,6 +24,7 @@ interface ServiceData {
   slug: { current: string };
   description: string;
   category: string;
+  demographics?: string[];
   image?: {
     asset?: { url: string };
     alt?: string;
@@ -190,6 +191,10 @@ export default async function ServicePage({ params }: PageProps) {
   const hasAudienceSections = service.audienceSections && service.audienceSections.length > 0;
   const hasUniversalContent = (service.benefits?.length || service.whatToExpect?.length || service.whoIsItFor?.length);
 
+  const demographics = service.demographics && service.demographics.length > 0 
+    ? service.demographics 
+    : ["Children", "Adolescents", "Adults"];
+
   return (
     <div className="bg-[#FAF9F5] min-h-screen">
       {/* Breadcrumb - Absolute Tightness */}
@@ -213,12 +218,31 @@ export default async function ServicePage({ params }: PageProps) {
       <section className="pt-0 pb-1 lg:pt-0 lg:pb-2">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h1
-              className="text-3xl md:text-4xl lg:text-5xl font-serif text-green mt-1 lg:mt-2 mb-1 lg:mb-2 leading-tight"
-              style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-            >
-              {service.title}
-            </h1>
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-2">
+              <h1
+                className="text-3xl md:text-4xl lg:text-5xl font-serif text-green mt-1 lg:mt-2 leading-tight"
+                style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+              >
+                {service.title}
+              </h1>
+              
+              <div className="flex items-center gap-2 mb-1.5 lg:mb-2">
+                <div className="px-3 py-1.5 lg:px-5 lg:py-2 bg-green/[0.03] border border-green/10 rounded-full flex items-center gap-3 group hover:bg-green/[0.08] hover:border-green/20 hover:scale-[1.02] transition-all duration-500 cursor-default shadow-sm shadow-green/5">
+                  <div className="relative flex items-center justify-center">
+                    <div className="absolute w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full bg-green/40 animate-ping" />
+                    <div className="relative w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full bg-green animate-pulse" />
+                  </div>
+                  <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.25em] text-green/70 whitespace-nowrap flex items-center gap-2">
+                    <span className="text-green/40 font-medium lowercase italic tracking-normal normal-case text-[12px] lg:text-[13px] mr-1">Helping</span>
+                    {demographics.map((d, i) => (
+                      <span key={d}>
+                        {d} {i !== demographics.length - 1 && <span className="text-green/20 mx-0.5">•</span>}
+                      </span>
+                    ))}
+                  </span>
+                </div>
+              </div>
+            </div>
 
             <p className="text-base lg:text-lg text-black/70 mb-0 max-w-3xl font-medium leading-relaxed">
               {service.description}

@@ -206,13 +206,11 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
               case 'clinicalIndexBlock':
                 return (
                   <div key={block._key} className={`rounded-[2.5rem] border border-black/[0.03] shadow-sm p-6 lg:p-12 ${block.backgroundColor === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white'}`}>
-                    <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6 flex flex-col lg:flex-row lg:items-baseline gap-4 lg:gap-10">
-                      <h3 className="text-lg lg:text-xl font-serif text-green shrink-0">{block.title}</h3>
-                      {block.intro && (
-                        <p className="text-black/60 text-[13px] lg:text-[15px] font-medium leading-relaxed max-w-3xl">
-                          {block.intro}
-                        </p>
-                      )}
+                    <div className="-mt-6 lg:-mt-10 mb-6 lg:mb-8">
+                      <p className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                        <strong className="text-black font-bold">{block.title} — </strong>
+                        {block.intro}
+                      </p>
                     </div>
                     <div className="flex flex-col gap-y-10">
                       {block.groups?.map((group, idx) => (
@@ -288,14 +286,11 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
 
               {activeData.supportedItems && activeData.supportedItems.length > 0 && (
                 <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-sm p-6 lg:p-12">
-                  <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6 flex flex-col lg:flex-row lg:items-baseline gap-2 lg:gap-3">
-                    <h3 className="text-lg lg:text-xl font-serif text-green shrink-0">{activeData.supportedItemsTitle || "Clinical Index"}</h3>
-                    {activeData.supportedItemsIntro && (
-                      <p className="text-black/70 text-[14px] lg:text-[16px] font-medium leading-relaxed max-w-3xl">
-                        <span className="text-black/20 mr-2">—</span>
-                        {activeData.supportedItemsIntro}
-                      </p>
-                    )}
+                  <div className="-mt-6 lg:-mt-10 mb-6 lg:mb-8">
+                    <p className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed max-w-3xl">
+                      <strong className="text-black font-bold">{activeData.supportedItemsTitle || "Clinical Index"} — </strong>
+                      {activeData.supportedItemsIntro}
+                    </p>
                   </div>
                   <div className="flex flex-col gap-y-10">
                     {(() => {

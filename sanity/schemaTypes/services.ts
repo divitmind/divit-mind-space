@@ -99,7 +99,7 @@ export const servicesType = defineType({
                       fields: [
                         { name: 'title', type: 'string', title: 'Header' },
                         { name: 'kicker', type: 'string', title: 'Inline Kicker' },
-                        { name: 'items', type: 'array', title: 'List Items', of: [{ type: 'string' }] },
+                        { name: 'items', type: 'array', title: 'List Items', description: "Use 'Title — Description' or 'Title: Description' to bold the prefix automatically.", of: [{ type: 'string' }] },
                         { name: 'style', type: 'string', title: 'Bullet Style', options: { list: ['tick', 'number'] }, initialValue: 'tick' }
                       ]
                     },
@@ -109,7 +109,7 @@ export const servicesType = defineType({
                       fields: [
                         { name: 'title', type: 'string', title: 'Header' },
                         { name: 'kicker', type: 'string', title: 'Inline Kicker' },
-                        { name: 'items', type: 'array', title: 'List Items', of: [{ type: 'string' }] },
+                        { name: 'items', type: 'array', title: 'List Items', description: "Use 'Title — Description' or 'Title: Description' to bold the prefix automatically.", of: [{ type: 'string' }] },
                         { name: 'style', type: 'string', title: 'Bullet Style', options: { list: ['tick', 'number'] }, initialValue: 'tick' }
                       ]
                     }
@@ -207,6 +207,21 @@ export const servicesType = defineType({
       ],
     }),
     defineField({
+      name: 'demographics',
+      title: 'Target Demographics',
+      description: 'Select which groups this service helps (e.g. Children, Adults)',
+      type: 'array',
+      group: 'basic',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Children', value: 'Children' },
+          { title: 'Adolescents', value: 'Adolescents' },
+          { title: 'Adults', value: 'Adults' },
+        ]
+      }
+    }),
+    defineField({
       name: 'additionalSections',
       title: 'Additional Full-Width Sections',
       type: 'array',
@@ -217,7 +232,7 @@ export const servicesType = defineType({
           fields: [
             { name: 'title', type: 'string', title: 'Section Title' },
             { name: 'intro', type: 'text', title: 'Intro Text', rows: 2 },
-            { name: 'items', type: 'array', title: 'List Items', of: [{ type: 'string' }] },
+            { name: 'items', type: 'array', title: 'List Items', description: "Use 'Title — Description' or 'Title: Description' to bold the prefix automatically.", of: [{ type: 'string' }] },
             { name: 'color', type: 'string', title: 'Background Style', options: { list: [{title: 'White', value: 'white'}, {title: 'Sage', value: 'sage'}] }, initialValue: 'white' }
           ]
         })

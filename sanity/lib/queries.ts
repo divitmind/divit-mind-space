@@ -223,6 +223,7 @@ export const SINGLE_SERVICE_QUERY = `*[_type == "services" && slug.current == $s
   slug,
   description,
   category,
+  demographics,
   "image": image{
     asset->{url},
     alt,
