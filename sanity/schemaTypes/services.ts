@@ -7,13 +7,9 @@ export const servicesType = defineType({
   groups: [
     { name: 'basic', title: '1. Service Content', default: true },
     { name: 'experts', title: '2. Experts & FAQ' },
-    { name: 'extra', title: '3. Additional Blocks' },
     { name: 'config', title: '4. Settings & SEO' },
   ],
   fields: [
-    // ============================================================
-    // BASIC INFO - Global across all audiences
-    // ============================================================
     defineField({
       name: 'title',
       title: 'Service Title',
@@ -49,21 +45,6 @@ export const servicesType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'description',
-      title: 'Global Meta Description',
-      type: 'text',
-      group: 'basic',
-      description: 'Used for search engines and social sharing.',
-      validation: (rule) => rule.max(200),
-    }),
-    defineField({
-      name: 'overview',
-      title: 'Global Overview',
-      type: 'text',
-      group: 'basic',
-      description: 'Main introductory paragraph that appears at the top of the page.',
-    }),
-    defineField({
       name: 'image',
       title: 'Service Image',
       type: 'image',
@@ -73,138 +54,125 @@ export const servicesType = defineType({
     }),
 
     // ============================================================
-    // AUDIENCE SECTIONS - THE PRIMARY CONTAINER
+    // MODULAR AUDIENCE SECTIONS
     // ============================================================
     defineField({
       name: 'audienceSections',
-      title: 'Audience-Specific Details (Children, Teens, Adults)',
+      title: 'Audience Tabs (Children, Teens, Adults)',
       type: 'array',
       group: 'basic',
-      description: 'Everything for a specific audience (Children, Teens, or Adults) goes here.',
       of: [
         defineArrayMember({
           type: 'object',
           name: 'audienceBlock',
           fields: [
+            { name: 'audienceType', type: 'string', title: 'Internal ID', options: { list: ['children', 'teens', 'adults'] }, validation: (rule) => rule.required() },
+            { name: 'title', type: 'string', title: 'Tab Label', validation: (rule) => rule.required() },
+            
+            // Hero Section (Philosophy)
             {
-              name: 'audienceType',
-              type: 'string',
-              title: 'Primary Audience (Internal Selection)',
-              options: {
-                list: [
-                  { title: 'Children', value: 'children' },
-                  { title: 'Teens', value: 'teens' },
-                  { title: 'Adults', value: 'adults' },
-                ]
-              },
-              validation: (rule) => rule.required()
+              name: 'hero',
+              type: 'object',
+              title: 'Tab Hero (Top Section)',
+              fields: [
+                { name: 'shortDescription', type: 'text', title: 'Primary Outcome (Green Box)', rows: 3 },
+                { name: 'overview', type: 'text', title: 'Clinical Overview (White Box)', rows: 3 },
+              ]
             },
-            { 
-              name: 'title', 
-              type: 'string', 
-              title: 'Tab Label (e.g., "Children")',
-              validation: (rule) => rule.required()
-            },
+
+            // The Content Blocks Array - FULL FLEXIBILITY
             {
-              name: 'shortDescription',
-              type: 'text',
-              title: 'Primary Outcome Statement',
-              description: 'The high-impact philosophical line that appears in the centered box.',
-            },
-            {
-              name: 'overview',
-              type: 'text',
-              title: 'Specific Overview',
-              description: 'Appears next to the primary outcome (if both provided).'
-            },
-            {
-              name: 'benefits',
+              name: 'contentBlocks',
               type: 'array',
-              title: 'Section 1: What You\'ll Gain',
-              description: 'List of 6 bullet points for the top grid.',
-              of: [{ type: 'string' }]
-            },
-            {
-              name: 'expectations',
-              type: 'array',
-              title: 'Section 2: What to Expect',
-              description: 'The process-focused checklist.',
-              of: [{ type: 'string' }]
-            },
-            {
-              name: 'whoIsItFor',
-              type: 'array',
-              title: 'Section 3: Is This the Right Space?',
-              description: 'The needs-focused checklist.',
-              of: [{ type: 'string' }]
-            },
-            // Dedicated Dedicated Blocks as requested
-            {
-              name: 'supportedItemsTitle',
-              type: 'string',
-              title: 'Section 4: Custom Heading',
-              description: 'Defaults to "Individuals We Support" if left empty.'
-            },
-            {
-              name: 'supportedItemsIntro',
-              type: 'text',
-              title: 'Section 4: Intro Text',
-              description: 'Brief paragraph appearing below the heading.'
-            },
-            {
-              name: 'supportedItems',
-              type: 'array',
-              title: 'Section 4: List Items',
-              description: 'Start with ## for group headers (e.g. "## Speech Development").',
-              of: [{ type: 'string' }]
-            },
-            {
-              name: 'approachItems',
-              type: 'array',
-              title: 'Section 5: Our Approach',
-              description: 'e.g., "Child-Led, Relationship-Based: We follow..."',
-              of: [{ type: 'string' }]
-            },
-            {
-              name: 'whyChooseItems',
-              type: 'array',
-              title: 'Section 6: Why Families Choose Us',
-              description: 'List of reasons why families trust Divit MindSpace.',
-              of: [{ type: 'string' }]
-            },
-            {
-              name: 'additionalSections',
-              type: 'array',
-              title: 'Custom Additional Sections',
-              description: 'Extra blocks for unique service needs.',
+              title: 'Page Content Blocks',
+              description: 'Add, reorder, or delete sections. Use Duo-Grids for side-by-side lists or Clinical Index for the wide ledger style.',
               of: [
+                // 1. DUO-GRID BLOCK (Side-by-side lists)
                 defineArrayMember({
+                  name: 'duoGridBlock',
                   type: 'object',
+                  title: 'Duo-Grid (Two Columns)',
                   fields: [
-                    { name: 'title', type: 'string', title: 'Section Title' },
-                    { name: 'items', type: 'array', title: 'List Items', of: [{ type: 'string' }] },
-                    { name: 'color', type: 'string', title: 'Dot Color (Hex)', initialValue: '#7A9A7D' }
-                  ]
+                    {
+                      name: 'leftColumn',
+                      type: 'object',
+                      fields: [
+                        { name: 'title', type: 'string', title: 'Header' },
+                        { name: 'kicker', type: 'string', title: 'Inline Kicker' },
+                        { name: 'items', type: 'array', title: 'List Items', of: [{ type: 'string' }] },
+                        { name: 'style', type: 'string', title: 'Bullet Style', options: { list: ['tick', 'number'] }, initialValue: 'tick' }
+                      ]
+                    },
+                    {
+                      name: 'rightColumn',
+                      type: 'object',
+                      fields: [
+                        { name: 'title', type: 'string', title: 'Header' },
+                        { name: 'kicker', type: 'string', title: 'Inline Kicker' },
+                        { name: 'items', type: 'array', title: 'List Items', of: [{ type: 'string' }] },
+                        { name: 'style', type: 'string', title: 'Bullet Style', options: { list: ['tick', 'number'] }, initialValue: 'tick' }
+                      ]
+                    }
+                  ],
+                  preview: {
+                    select: { t1: 'leftColumn.title', t2: 'rightColumn.title' },
+                    prepare({ t1, t2 }) { return { title: `Duo-Grid: ${t1} & ${t2}` } }
+                  }
+                }),
+
+                // 2. CLINICAL INDEX BLOCK (The Wide Ledger)
+                defineArrayMember({
+                  name: 'clinicalIndexBlock',
+                  type: 'object',
+                  title: 'Clinical Index (Ledger Style)',
+                  fields: [
+                    { name: 'title', type: 'string', title: 'Section Header' },
+                    { name: 'intro', type: 'text', title: 'Intro Text (Optional)', rows: 2 },
+                    {
+                      name: 'groups',
+                      type: 'array',
+                      title: 'Categories',
+                      of: [
+                        defineArrayMember({
+                          type: 'object',
+                          fields: [
+                            { name: 'heading', type: 'string', title: 'Category Name' },
+                            { name: 'items', type: 'array', title: 'Items', of: [{ type: 'string' }] }
+                          ]
+                        })
+                      ]
+                    }
+                  ],
+                  preview: {
+                    select: { title: 'title' },
+                    prepare({ title }) { return { title: `Clinical Index: ${title}` } }
+                  }
+                }),
+
+                // 3. FULL WIDTH CHECKLIST
+                defineArrayMember({
+                  name: 'fullWidthListBlock',
+                  type: 'object',
+                  title: 'Full Width Checklist',
+                  fields: [
+                    { name: 'title', type: 'string', title: 'Header' },
+                    { name: 'intro', type: 'text', title: 'Intro Text', rows: 2 },
+                    { name: 'items', type: 'array', title: 'Items', of: [{ type: 'string' }] },
+                    { name: 'backgroundColor', type: 'string', title: 'Style', options: { list: [{title: 'White Surface', value: 'white'}, {title: 'Sage Tint', value: 'sage'}] }, initialValue: 'white' }
+                  ],
+                  preview: {
+                    select: { title: 'title' },
+                    prepare({ title }) { return { title: `List: ${title}` } }
+                  }
                 })
               ]
             }
-          ],
-          preview: {
-            select: { title: 'title', audience: 'audienceType' },
-            prepare({ title, audience }) {
-              return {
-                title: title || (audience ? audience.charAt(0).toUpperCase() + audience.slice(1) : 'New Audience Section'),
-                subtitle: `Audience: ${audience || 'unspecified'}`
-              }
-            }
-          }
+          ]
         })
       ]
     }),
 
-    // ============================================================
     // EXPERTS & FAQ
-    // ============================================================
     defineField({
       name: 'specialists',
       title: 'Assigned Specialists',
@@ -228,22 +196,6 @@ export const servicesType = defineType({
       ]
     }),
 
-    // ============================================================
-    // EXTRA & SEO
-    // ============================================================
-    defineField({
-      name: 'format',
-      title: 'Format / Location',
-      type: 'string',
-      group: 'extra',
-    }),
-    defineField({
-      name: 'body',
-      title: 'Bottom Page Content (Rich Text)',
-      type: 'array',
-      group: 'extra',
-      of: [defineArrayMember({ type: 'block' }), defineArrayMember({ type: 'image' })],
-    }),
     defineField({
       name: 'seo',
       title: 'SEO Settings',

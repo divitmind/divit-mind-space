@@ -43,18 +43,20 @@ interface ServiceData {
   faqs?: { question: string; answer: string }[];
   audienceSections?: {
     audienceType: "children" | "teens" | "adults";
-    title?: string;
+    title: string;
     shortDescription?: string;
     overview?: string;
+    whoIsItForIntro?: string;
     whoIsItFor?: string[];
     benefits?: string[];
+    expectationsIntro?: string;
     expectations?: string[];
     supportedItemsTitle?: string;
     supportedItemsIntro?: string;
-    supportedItems?: string[];
+    supportedItems?: (string | { heading?: string; items: string[] })[];
     approachItems?: string[];
     whyChooseItems?: string[];
-    additionalSections?: { title: string; items: string[]; color?: string }[];
+    additionalSections?: { title: string; intro?: string; items: string[]; color?: string }[];
   }[];
   ctaOverride?: {
     title?: string;
@@ -143,28 +145,19 @@ export default async function ServicePage({ params }: PageProps) {
   if (staticService) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
-    // For speech-therapy, we want the static content (from the txt file) to take absolute priority
-    // to match the exact wording on production.
-    if (slug === 'speech-therapy') {
-      service.overview = staticContent.overview;
-      service.benefits = staticContent.benefits;
-      service.whatToExpect = staticContent.whatToExpect;
-      service.whoIsItFor = staticContent.whoIsItFor;
-      service.audienceSections = staticContent.audienceSections;
-      service.additionalSections = staticContent.additionalSections;
-    } else {
-      // Standard fallback merge for other services
-      if (!service.faqs || service.faqs.length === 0) {
-        if (staticContent.faqs) service.faqs = staticContent.faqs;
-      }
-      if (!service.overview) service.overview = staticContent.overview;
-      if (!service.benefits || service.benefits.length === 0) service.benefits = staticContent.benefits;
-      if (!service.whatToExpect || service.whatToExpect.length === 0) service.whatToExpect = staticContent.whatToExpect;
-      if (!service.whoIsItFor || service.whoIsItFor.length === 0) service.whoIsItFor = staticContent.whoIsItFor;
-      if (!service.audienceSections || service.audienceSections.length === 0) service.audienceSections = staticContent.audienceSections;
-      if (!service.duration) service.duration = staticContent.duration;
-      if (!service.format) service.format = staticContent.format;
+    // Standard fallback merge for all services
+    // If Sanity content exists, it will take priority.
+    if (!service.faqs || service.faqs.length === 0) {
+      if (staticContent.faqs) service.faqs = staticContent.faqs;
     }
+    if (!service.overview) service.overview = staticContent.overview;
+    if (!service.benefits || service.benefits.length === 0) service.benefits = staticContent.benefits;
+    if (!service.whatToExpect || service.whatToExpect.length === 0) service.whatToExpect = staticContent.whatToExpect;
+    if (!service.whoIsItFor || service.whoIsItFor.length === 0) service.whoIsItFor = staticContent.whoIsItFor;
+    if (!service.audienceSections || service.audienceSections.length === 0) service.audienceSections = staticContent.audienceSections;
+    if (!service.duration) service.duration = staticContent.duration;
+    if (!service.format) service.format = staticContent.format;
+    if (!service.additionalSections || service.additionalSections.length === 0) service.additionalSections = staticContent.additionalSections;
   }
 
   const { data: relatedData } = (await sanityFetch({

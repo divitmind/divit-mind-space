@@ -243,20 +243,33 @@ export const SINGLE_SERVICE_QUERY = `*[_type == "services" && slug.current == $s
   audienceSections[] {
     audienceType,
     title,
+    hero {
+      shortDescription,
+      overview
+    },
+    // Legacy fallbacks
     shortDescription,
     overview,
-    whoIsItFor,
     benefits,
     expectations,
+    expectationsIntro,
+    whoIsItFor,
+    whoIsItForIntro,
     supportedItemsTitle,
     supportedItemsIntro,
     supportedItems,
     approachItems,
     whyChooseItems,
-    additionalSections[] {
+    contentBlocks[] {
+      _type,
+      _key,
+      leftColumn { title, kicker, items, style },
+      rightColumn { title, kicker, items, style },
       title,
+      intro,
+      groups[] { heading, items },
       items,
-      color
+      backgroundColor
     }
   },
   additionalSections,

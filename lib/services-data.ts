@@ -15,7 +15,7 @@ export interface ServiceData {
     faqs?: { question: string; answer: string }[];
     audienceSections?: {
       audienceType: "children" | "teens" | "adults";
-      title?: string;
+      title: string;
       shortDescription?: string;
       overview?: string;
       whoIsItFor?: string[];
