@@ -24,7 +24,6 @@ export interface ServiceData {
       // Legacy Fallbacks
       shortDescription?: string;
       overview?: string;
-      whoIsItForTitle?: string;
       whoIsItFor?: string[];
       whoIsItForIntro?: string;
       benefits?: string[];
@@ -262,23 +261,23 @@ export const services: ServiceData[] = [
     id: "4",
     title: "Occupational Therapy",
     slug: "occupational-therapy",
-    description: "Occupational therapy helps children, adolescents, and adults build motor skills, improve sensory processing, and gain independence—supporting confidence in daily activities, school, work, and life.",
+    description: "Every child needs essential daily life skills to grow with confidence and independence. When a child struggles with motor skills, coordination, sensory processing, or routine activities, occupational therapy can help.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Occupational therapy helps children, adolescents, and adults build motor skills, improve sensory processing, and gain independence—supporting confidence in daily activities, school, work, and life. At Divit MindSpace, we see independence as more than a skill—it is a person’s ability to engage with the world, participate in daily life, and feel confident in their own abilities.",
+      overview: "Occupational therapy helps children, adolescents, and adults build motor skills, improve sensory processing, and gain independence—supporting confidence in daily activities, school, work, and life. At Divit MindSpace, we see independence as more than a skill—it is a person’s ability to engage with the world, participate in daily life, and feel confident in their own abilities.\n\nWe focus not just on what a person can or cannot do, but on how they experience everyday activities, what may be holding them back, and how we can make these experiences meaningful and achievable.\n\nWe look at development as a whole, including:\n• Fine motor skills (hand use, writing, precision)\n• Gross motor coordination (balance, movement, strength)\n• Sensory processing (how the body understands and responds to input)\n• Daily living skills (self-care, routines, independence)\n\nOur approach integrates these areas naturally into play, real-life tasks, and meaningful activities—rather than isolating them into repetitive exercises.",
       audienceSections: [
         {
           audienceType: "children",
           title: "OT For Children",
           hero: {
             shortDescription: "Play-based, engaging activities that make learning feel natural and enjoyable—while building foundational motor, sensory, and self-care skills.",
-            overview: "We focus not just on what a person can or cannot do, but on how they experience everyday activities, what may be holding them back, and how we can make these experiences meaningful and achievable.\n\nWe look at development as a whole, including:\n• Fine motor skills (hand use, writing, precision)\n• Gross motor coordination (balance, movement, strength)\n• Sensory processing (how the body understands and responds to input)\n• Daily living skills (self-care, routines, independence)",
+            overview: "We look at development as a whole, including:\n• Fine motor skills (hand use, writing, precision)\n• Gross motor coordination (balance, movement, strength)\n• Sensory processing (how the body understands and responds to input)\n• Daily living skills (self-care, routines, independence)",
           },
           contentBlocks: [
             {
               _type: "duoGridBlock",
-              _key: "ot-children-benefits-expectations",
+              _key: "ot-children-gain-expectations",
               leftColumn: {
                 title: "What Your Child Will Gain",
                 items: [
@@ -294,7 +293,6 @@ export const services: ServiceData[] = [
               },
               rightColumn: {
                 title: "What to Expect",
-                kicker: "A structured yet flexible journey",
                 items: [
                   "A comprehensive, observation-based assessment",
                   "Individualized goals aligned with developmental needs",
@@ -345,7 +343,7 @@ export const services: ServiceData[] = [
                   ]
                 },
                 {
-                  heading: "Developmental Differences",
+                  heading: "Developmental & Neurological Differences",
                   items: [
                     "Autism Spectrum differences",
                     "ADHD",
@@ -356,20 +354,19 @@ export const services: ServiceData[] = [
               ]
             }
           ],
-          whoIsItForTitle: "Is This the Right Support for You?",
-          whoIsItForIntro: "Occupational therapy is ideal for children facing these specific challenges:",
           whoIsItFor: [
             "Fine Motor — Difficulty with buttons, zippers, scissors, or weak grip",
             "Gross Motor — Poor balance, frequent falls, or trouble climbing or jumping",
             "Developmental Skills — Delays in toileting, dressing, feeding, or play skills",
             "Sensory Processing — Over-sensitivity to sounds/textures or difficulty sitting still"
           ],
+          whoIsItForIntro: "OT for Children is ideal for those facing challenges with:",
           approachItems: [
             "Individualized & Functional: We tailor therapy to real-life goals that matter in everyday routines.",
             "Learning Through Doing: Skills are built through meaningful activities, not isolated drills.",
             "Sensory-Informed Care: We understand how sensory experiences impact behavior, attention, and participation.",
             "Building Independence Gradually: We support step-by-step progress toward autonomy.",
-            "Caregiver as a Partner: We equip families with practical tools to support progress beyond sessions."
+            "Parent and Caregiver as a Partner: We equip families with practical tools to support progress beyond sessions."
           ],
           whyChooseItems: [
             "Warm, supportive, and non-judgmental environment",
@@ -384,38 +381,59 @@ export const services: ServiceData[] = [
           title: "OT For Adolescents",
           hero: {
             shortDescription: "Practical, real-life skill building focused on independence, organization, social participation, and transition readiness.",
-            overview: "Adolescence is a time of transition. Our OT for adolescents focuses on the practical skills needed to navigate secondary school, social relationships, and the first steps toward adulthood.",
+            overview: "At Divit MindSpace, we see independence as more than a skill—it is a person’s ability to engage with the world, participate in daily life, and feel confident in their own abilities.",
           },
           contentBlocks: [
             {
-              _type: "clinicalIndexBlock",
-              _key: "ot-teens-needs",
-              title: "Focus Areas for Teens",
-              intro: "We support adolescents with a range of transition-focused needs:",
-              groups: [
-                {
-                  heading: "Daily Living Skills",
-                  items: ["Challenges with time management, organization, or meal preparation"]
-                },
-                {
-                  heading: "Academic & Social",
-                  items: ["Sensory sensitivities affecting school or peer interaction"]
-                },
-                {
-                  heading: "Executive Functioning",
-                  items: ["Difficulties with planning, attention, or impulse control"]
-                },
-                {
-                  heading: "Transitions",
-                  items: ["Building readiness for pre-vocational tasks and independent living"]
-                }
-              ]
+              _type: "duoGridBlock",
+              _key: "ot-teens-gain-expectations",
+              leftColumn: {
+                title: "What You Will Gain",
+                items: [
+                  "Improved coordination and motor control",
+                  "Better sensory regulation and body awareness",
+                  "Increased independence in daily activities",
+                  "Enhanced focus, planning, and task completion",
+                  "Greater participation in school, social, and work life",
+                  "Reduced frustration in everyday tasks",
+                  "Stronger confidence and self-reliance"
+                ],
+                style: "tick"
+              },
+              rightColumn: {
+                title: "What to Expect",
+                items: [
+                  "A comprehensive, observation-based assessment",
+                  "Individualized goals aligned with developmental needs",
+                  "Activity-based, engaging therapy sessions",
+                  "Practical strategies for home and daily routines",
+                  "Ongoing guidance and transition support",
+                  "Collaboration with schools and vocational training"
+                ],
+                style: "tick"
+              }
             }
           ],
+          whoIsItFor: [
+            "Daily Living Skills — Challenges with time management, organization, or meal preparation",
+            "Academic & Social Participation — Sensory sensitivities affecting school or peer interaction",
+            "Executive Functioning — Difficulties with planning, attention, or impulse control",
+            "Transitions — Building readiness for pre-vocational tasks and independent living"
+          ],
+          whoIsItForIntro: "OT for Adolescents is designed for those experiencing:",
           approachItems: [
-            "Practical & Real-Life: Skills are built in context of actual tasks.",
-            "Transition Readiness: Focus on the next stage of life.",
-            "Collaborative: We work with the teen to set their own goals."
+            "Individualized & Functional: We tailor therapy to real-life goals that matter in everyday routines.",
+            "Learning Through Doing: Skills are built through meaningful activities, not isolated drills.",
+            "Sensory-Informed Care: We understand how sensory experiences impact behavior, attention, and participation.",
+            "Building Independence Gradually: We support step-by-step progress toward autonomy.",
+            "Transition-Focused: Equipping teens for the next stage of growth."
+          ],
+          whyChooseItems: [
+            "Warm, supportive, and non-judgmental environment",
+            "Therapists who combine expertise with empathy",
+            "Focus on long-term independence, not quick fixes",
+            "Respect for each individual’s pace and journey",
+            "A space where every individual feels capable and empowered"
           ]
         },
         {
@@ -423,37 +441,61 @@ export const services: ServiceData[] = [
           title: "OT For Adults",
           hero: {
             shortDescription: "Goal-oriented, functional therapy to enhance daily productivity, independence, and quality of life.",
-            overview: "Our adult OT services help individuals manage the demands of daily life, work, and personal care with greater confidence and efficiency.",
+            overview: "We focus not just on what a person can or cannot do, but on how they experience everyday activities, what may be holding them back, and how we can make these experiences meaningful and achievable.",
           },
           contentBlocks: [
             {
-              _type: "clinicalIndexBlock",
-              _key: "ot-adults-needs",
-              title: "Support for Adults",
-              intro: "We help adults navigate functional challenges across environments:",
-              groups: [
-                {
-                  heading: "Daily Functioning",
-                  items: ["Difficulty managing routines, self-care, or household tasks"]
-                },
-                {
-                  heading: "Work & Productivity",
-                  items: ["Challenges with focus, organization, or task completion"]
-                },
-                {
-                  heading: "Physical & Sensory",
-                  items: [
-                    "Regaining strength, coordination, or function",
-                    "Managing overwhelm, fatigue, or sensory sensitivities"
-                  ]
-                },
-                {
-                  heading: "Quality of Life",
-                  items: ["Building confidence in personal, social, and work environments"]
-                }
-              ]
+              _type: "duoGridBlock",
+              _key: "ot-adults-gain-expectations",
+              leftColumn: {
+                title: "What You Will Gain",
+                items: [
+                  "Improved coordination and motor control",
+                  "Better sensory regulation and body awareness",
+                  "Increased independence in daily activities",
+                  "Enhanced focus, planning, and task completion",
+                  "Greater participation in work and social life",
+                  "Reduced frustration in everyday tasks",
+                  "Stronger confidence and self-reliance"
+                ],
+                style: "tick"
+              },
+              rightColumn: {
+                title: "What to Expect",
+                items: [
+                  "A comprehensive, observation-based assessment",
+                  "Individualized goals aligned with functional needs",
+                  "Functional, activity-based therapy sessions",
+                  "Practical strategies for work and daily routines",
+                  "Guidance for sensory and stress regulation",
+                  "Focus on long-term quality of life"
+                ],
+                style: "tick"
+              }
             }
           ],
+          whoIsItFor: [
+            "Daily Functioning — Difficulty managing routines, self-care, or household tasks",
+            "Work & Productivity — Challenges with focus, organization, or task completion",
+            "Physical Recovery — Regaining strength, coordination, or function after injury",
+            "Sensory & Stress Regulation — Managing overwhelm, fatigue, or sensory sensitivities",
+            "Independence & Quality of Life — Building confidence in personal, social, and work environments"
+          ],
+          whoIsItForIntro: "OT for Adults supports those facing challenges with:",
+          approachItems: [
+            "Individualized & Functional: We tailor therapy to real-life goals that matter in everyday routines.",
+            "Learning Through Doing: Skills are built through meaningful activities, not isolated drills.",
+            "Sensory-Informed Care: We understand how sensory experiences impact behavior, attention, and participation.",
+            "Building Independence Gradually: We support step-by-step progress toward autonomy.",
+            "Quality of Life Focus: Enhancing productivity and participation."
+          ],
+          whyChooseItems: [
+            "Warm, supportive, and non-judgmental environment",
+            "Therapists who combine expertise with empathy",
+            "Focus on long-term independence, not quick fixes",
+            "Respect for each individual’s pace and journey",
+            "A space where every individual feels capable and empowered"
+          ]
         }
       ],
       additionalSections: [
@@ -475,9 +517,9 @@ export const services: ServiceData[] = [
           title: "Beyond Therapy — Building Independence",
           intro: "At Divit MindSpace, our goal is not just to improve skills, but to help individuals participate more fully in their daily lives.",
           items: [
-            "Building Capability: When a person feels capable, independence naturally follows.",
-            "Meaningful Participation: Focusing on what matters to the individual.",
-            "Lasting Change: Creating foundations for a lifetime of independence."
+            "Building Independence: When a person feels capable, independence naturally follows.",
+            "Participate Fully: Helping individuals engage with their world.",
+            "Meaningful Outcomes: Focusing on goals that matter in real life."
           ],
           color: "sage"
         }
