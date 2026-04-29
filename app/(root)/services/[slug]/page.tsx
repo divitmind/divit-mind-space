@@ -227,18 +227,19 @@ export default async function ServicePage({ params }: PageProps) {
               </h1>
               
               <div className="flex items-center gap-2 mb-1.5 lg:mb-2">
-                <div className="px-3 py-1.5 lg:px-5 lg:py-2 bg-green/[0.03] border border-green/10 rounded-full flex items-center gap-3 group hover:bg-green/[0.08] hover:border-green/20 hover:scale-[1.02] transition-all duration-500 cursor-default shadow-sm shadow-green/5">
-                  <div className="relative flex items-center justify-center">
-                    <div className="absolute w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full bg-green/40 animate-ping" />
-                    <div className="relative w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full bg-green animate-pulse" />
-                  </div>
-                  <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.25em] text-green/70 whitespace-nowrap flex items-center gap-2">
-                    <span className="text-green/40 font-medium lowercase italic tracking-normal normal-case text-[12px] lg:text-[13px] mr-1">Helping</span>
-                    {demographics.map((d, i) => (
-                      <span key={d}>
-                        {d} {i !== demographics.length - 1 && <span className="text-green/20 mx-0.5">•</span>}
-                      </span>
-                    ))}
+                <div className="px-4 py-2 lg:px-6 lg:py-2.5 bg-gradient-to-r from-green/[0.04] to-green/[0.01] border border-green/10 rounded-full flex items-center gap-4 group hover:bg-green/[0.08] hover:border-green/20 transition-all duration-500 cursor-default shadow-sm shadow-green/5">
+                  <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.25em] text-green/80 whitespace-nowrap flex items-center gap-2">
+                    <span className="text-green/50 font-serif italic tracking-normal normal-case text-[13px] lg:text-[14px] mr-1.5 border-r border-green/10 pr-3 py-0.5">Helping</span>
+                    <div className="flex items-center gap-2.5">
+                      {demographics.map((d, i) => (
+                        <div key={d} className="flex items-center gap-2.5">
+                          <span className="text-black/70 group-hover:text-green transition-colors duration-300">{d}</span>
+                          {i !== demographics.length - 1 && (
+                            <div className="w-1 h-1 rounded-full bg-green/20 shrink-0" />
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </span>
                 </div>
               </div>
