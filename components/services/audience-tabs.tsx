@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { CheckCircle2, Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ContentBlock {
   _type: string;
@@ -56,11 +57,9 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
 
   // Helper: Smart Bold Parsing (Before Colon or Em-Dash)
   const renderItemText = (text: string) => {
-    // Look for first occurrence of ":" or "—"
     const colonIndex = text.indexOf(':');
     const dashIndex = text.indexOf('—');
     
-    // Find which one comes first (and is not -1)
     let separatorIndex = -1;
     if (colonIndex !== -1 && dashIndex !== -1) {
       separatorIndex = Math.min(colonIndex, dashIndex);
@@ -80,35 +79,60 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
     );
   };
 
-  // Generic List Renderer
-  const renderList = (title?: string, items?: string[], kicker?: string, style: 'tick' | 'number' = 'tick', isCompact = false) => {
+  /**
+   * Renders a clean list without any surrounding boxes, backgrounds, or borders.
+   * Used for "Our Approach" and "Why Families Choose Us".
+   */
+  const renderCleanList = (title: string, items?: string[], isGrid = false) => {
     if (!items || items.length === 0) return null;
 
     return (
-      <div className={`rounded-[2.5rem] flex flex-col h-full ${
-        isCompact 
-          ? 'bg-[#7A9A7D]/5 border border-[#7A9A7D]/10 px-5 py-8 lg:px-10 lg:py-12' 
-          : 'bg-white border border-black/[0.03] shadow-sm p-6 lg:p-12'
-      }`}>
-        <div className={`flex flex-col ${isCompact ? '-mt-6 lg:-mt-10 mb-4 lg:mb-6' : 'mb-8 lg:mb-10'}`}>
+      <div className="flex flex-col w-full pt-0 pb-4 lg:pb-6">
+        <div className="mb-6 lg:mb-8 border-l-2 border-green/20 pl-4">
+          <h3 className="text-xl lg:text-2xl font-serif text-green italic">
+            {title}
+          </h3>
+        </div>
+
+        <ul className={cn(
+          isGrid ? "grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4" : "flex flex-col gap-y-4"
+        )}>
+          {items.map((item, i) => (
+            <li key={i} className="flex items-start gap-3 py-1">
+              <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
+              <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                {renderItemText(item)}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
+  /**
+   * Renders a boxed list with a background and border.
+   * Used for "What Your Child Will Gain" and "What to Expect".
+   */
+  const renderBoxedList = (title?: string, items?: string[], kicker?: string, style: 'tick' | 'number' = 'tick') => {
+    if (!items || items.length === 0) return null;
+
+    return (
+      <div className="rounded-[2.5rem] flex flex-col h-full bg-[#7A9A7D]/5 border border-[#7A9A7D]/10 px-5 py-8 lg:px-10 lg:py-12">
+        <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6 flex flex-col">
           <h3 className="text-lg lg:text-xl font-serif text-green flex items-baseline flex-wrap gap-x-3">
             <span>{title}</span>
-            {kicker && isCompact && (
+            {kicker && (
               <span className="text-black/40 text-[11px] lg:text-[13px] font-sans font-medium italic">
                 — {kicker}
               </span>
             )}
           </h3>
-          {kicker && !isCompact && (
-            <p className="mt-4 text-black/60 text-[14px] lg:text-[16px] font-medium leading-relaxed">
-              {kicker}
-            </p>
-          )}
         </div>
 
         <ul className="flex flex-col gap-y-3 flex-1">
           {items.map((item, i) => (
-            <li key={i} className={`flex items-start h-fit ${isCompact ? 'bg-white/50 backdrop-blur-sm pl-3 pr-4 py-4 lg:pl-3 lg:pr-4 lg:py-4 rounded-2xl border border-green/5 gap-2.5' : 'gap-5'}`}>
+            <li key={i} className="flex items-start bg-white/50 backdrop-blur-sm pl-3 pr-4 py-4 lg:pl-3 lg:pr-4 lg:py-4 rounded-2xl border border-green/5 gap-2.5 h-fit">
               {style === 'tick' ? (
                 <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
               ) : (
@@ -138,7 +162,7 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
                 <button
                   key={section.audienceType}
                   onClick={() => setActiveTab(section.audienceType)}
-                  className={`relative flex-1 py-2.5 lg:py-3 rounded-full text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300 z-10 ${isActive ? "text-green" : "text-green/40 hover:text-green/60"}`}
+                  className={`relative flex-1 py-2.5 lg:py-3 rounded-full text-[11px] lg:text-[11px] font-bold uppercase tracking-[0.22em] transition-all duration-300 z-10 ${isActive ? "text-green" : "text-green/40 hover:text-green/60"}`}
                 >
                   {isActive && (
                     <motion.div layoutId="activePill" className="absolute inset-0 bg-white rounded-full shadow-md border border-green/5 -z-10" transition={{ type: "spring", bounce: 0.15, duration: 0.6 }} />
@@ -158,7 +182,7 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
-          className="space-y-2 lg:space-y-4"
+          className="space-y-4 lg:space-y-6"
         >
           {/* Hero Section */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
@@ -168,7 +192,7 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
                   <Sparkles className="w-48 h-48 text-white" />
                 </div>
                 <div className="relative z-10">
-                  <div className="-mt-4 lg:-mt-6 mb-6">
+                  <div className="lg:-mt-6 mb-6">
                     <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
                   </div>
                   <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white">
@@ -181,7 +205,7 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
             <div className="lg:col-span-7 flex">
               <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 flex flex-col w-full relative overflow-hidden">
                 <div className="relative z-10">
-                  <div className="-mt-4 lg:-mt-6 mb-6">
+                  <div className="lg:-mt-6 mb-6">
                     <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                   </div>
                   <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
@@ -196,37 +220,71 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
           {activeData.contentBlocks?.map((block) => {
             switch (block._type) {
               case 'duoGridBlock':
+                // Audit: Check if this duo block contains Approach or Why Choose Us
+                const isApproachDuo = block.leftColumn?.title?.toLowerCase().includes("approach") || block.rightColumn?.title?.toLowerCase().includes("approach");
+                const isWhyChooseDuo = block.leftColumn?.title?.toLowerCase().includes("choose") || block.rightColumn?.title?.toLowerCase().includes("choose");
+
+                if (isApproachDuo || isWhyChooseDuo) {
+                  return (
+                    <div key={block._key} className="flex flex-col gap-8 lg:gap-12 py-4">
+                      {isApproachDuo && (
+                        renderCleanList(
+                          block.leftColumn?.title?.toLowerCase().includes("approach") ? block.leftColumn.title : block.rightColumn?.title || "",
+                          block.leftColumn?.title?.toLowerCase().includes("approach") ? block.leftColumn.items : block.rightColumn?.items,
+                          true
+                        )
+                      )}
+                      {isWhyChooseDuo && (
+                        renderCleanList(
+                          block.leftColumn?.title?.toLowerCase().includes("choose") ? block.leftColumn.title : block.rightColumn?.title || "",
+                          block.leftColumn?.title?.toLowerCase().includes("choose") ? block.leftColumn.items : block.rightColumn?.items,
+                          true
+                        )
+                      )}
+                    </div>
+                  );
+                }
+
                 return (
                   <div key={block._key} className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
-                    {renderList(block.leftColumn?.title, block.leftColumn?.items, block.leftColumn?.kicker, block.leftColumn?.style, true)}
-                    {renderList(block.rightColumn?.title, block.rightColumn?.items, block.rightColumn?.kicker, block.rightColumn?.style, true)}
+                    {renderBoxedList(block.leftColumn?.title, block.leftColumn?.items, block.leftColumn?.kicker, block.leftColumn?.style)}
+                    {renderBoxedList(block.rightColumn?.title, block.rightColumn?.items, block.rightColumn?.kicker, block.rightColumn?.style)}
                   </div>
                 );
 
               case 'clinicalIndexBlock':
+                // Audit: Check if this index block is Approach or Why Choose
+                if (block.title?.toLowerCase().includes("approach") || block.title?.toLowerCase().includes("choose")) {
+                  return (
+                    <div key={block._key} className="py-4">
+                      {renderCleanList(block.title, block.groups?.flatMap(g => g.items), block.title.toLowerCase().includes("approach"))}
+                    </div>
+                  );
+                }
+
                 return (
-                  <div key={block._key} className={`rounded-[2.5rem] border border-black/[0.03] shadow-sm p-6 lg:p-12 ${block.backgroundColor === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white'}`}>
-                    <div className="-mt-6 lg:-mt-10 mb-6 lg:mb-8">
+                  <div key={block._key} className={`rounded-[2.5rem] border border-black/[0.03] shadow-sm px-5 py-8 lg:p-12 ${block.backgroundColor === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white'}`}>
+                    <div className="-mt-2 lg:-mt-10 mb-6 lg:mb-8">
                       <p className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
                         <strong className="text-black font-bold">{block.title} — </strong>
                         {block.intro}
                       </p>
                     </div>
-                    <div className="flex flex-col gap-y-10">
+                    <div className="flex flex-col gap-y-8 lg:gap-y-10">
                       {block.groups?.map((group, idx) => (
-                        <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-                          <div className="lg:col-span-3 lg:sticky lg:top-12 h-fit pt-5">
+                        <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-1 lg:gap-8">
+                          <div className="lg:col-span-3 lg:sticky lg:top-12 h-fit lg:pt-5">
                             <div className="flex items-start gap-4">
-                              <div className="w-px h-12 bg-green/20 shrink-0" />
-                              <h4 className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.2em] text-green/80 leading-relaxed">{group.heading}</h4>
+                              <div className="w-px h-8 lg:h-12 bg-green/20 shrink-0" />
+                              <h4 className="text-[13px] lg:text-[13px] font-bold uppercase tracking-[0.2em] text-green/80 leading-relaxed">{group.heading}</h4>
                             </div>
                           </div>
                           <div className="lg:col-span-9">
-                            <ul className="grid grid-cols-1 bg-white/40 rounded-3xl border border-green/5 overflow-hidden shadow-sm">
+                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12">
                               {group.items.map((item, i) => (
-                                <li key={i} className={`flex items-start gap-4 px-5 py-5 lg:px-8 lg:py-6 hover:bg-white/60 group/item transition-all duration-300 ${i !== group.items.length - 1 ? 'border-b border-green/[0.03]' : ''}`}>
-                                  <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
-                                  <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed group-hover/item:text-black">{renderItemText(item)}</span>
+                                <li key={i} className="flex items-start gap-3 py-2 lg:py-3 border-b border-green/[0.05] last:border-0 md:[&:nth-last-child(2)]:border-0 md:last:border-0">
+                                  <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-70" />
+                                  <span className="text-[14px] lg:text-[15px] text-black/70 font-medium leading-relaxed">{renderItemText(item)}</span>
                                 </li>
                               ))}
                             </ul>
@@ -238,6 +296,15 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
                 );
 
               case 'fullWidthListBlock':
+                // Audit: Check if full width list is Approach or Why Choose
+                if (block.title?.toLowerCase().includes("approach") || block.title?.toLowerCase().includes("choose")) {
+                  return (
+                    <div key={block._key} className="py-4">
+                      {renderCleanList(block.title, block.items, block.title.toLowerCase().includes("approach"))}
+                    </div>
+                  );
+                }
+
                 return (
                   <div key={block._key} className={`rounded-[2.5rem] border border-black/[0.03] p-6 lg:p-12 ${block.backgroundColor === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white'}`}>
                     <h3 className="text-lg lg:text-xl font-serif text-green mb-8">{block.title}</h3>
@@ -263,8 +330,8 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
           {!activeData.contentBlocks && (
             <>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
-                {renderList("What Your Child Will Gain", activeData.benefits, undefined, 'tick', true)}
-                {renderList("What to Expect", activeData.expectations, activeData.expectationsIntro, 'tick', true)}
+                {renderBoxedList("What Your Child Will Gain", activeData.benefits)}
+                {renderBoxedList("What to Expect", activeData.expectations, activeData.expectationsIntro)}
               </div>
 
               {activeData.whoIsItFor && activeData.whoIsItFor.length > 0 && (
@@ -285,17 +352,17 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
               )}
 
               {activeData.supportedItems && activeData.supportedItems.length > 0 && (
-                <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-sm p-6 lg:p-12">
-                  <div className="-mt-6 lg:-mt-10 mb-6 lg:mb-8">
+                <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-sm px-5 py-8 lg:p-12">
+                  <div className="-mt-2 lg:-mt-10 mb-6 lg:mb-8">
                     <p className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed max-w-3xl">
                       <strong className="text-black font-bold">{activeData.supportedItemsTitle || "Clinical Index"} — </strong>
                       {activeData.supportedItemsIntro}
                     </p>
                   </div>
-                  <div className="flex flex-col gap-y-10">
+                  <div className="flex flex-col gap-y-8 lg:gap-y-10">
                     {(() => {
                       const groups: { heading: string; items: string[] }[] = [];
-                      activeData.supportedItems.forEach((item) => {
+                      activeData.supportedItems?.forEach((item) => {
                         const text = typeof item === 'string' ? item : item.items.join(', ');
                         if (text.startsWith('## ')) {
                           groups.push({ heading: text.replace('## ', ''), items: [] });
@@ -306,19 +373,19 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
                       });
 
                       return groups.map((group, idx) => (
-                        <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-                          <div className="lg:col-span-3 lg:sticky lg:top-12 h-fit pt-5">
+                        <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-1 lg:gap-8">
+                          <div className="lg:col-span-3 lg:sticky lg:top-12 h-fit lg:pt-5">
                             <div className="flex items-start gap-4">
-                              <div className="w-px h-12 bg-green/20 shrink-0" />
-                              <h4 className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.2em] text-green/80 leading-relaxed">{group.heading}</h4>
+                              <div className="w-px h-8 lg:h-12 bg-green/20 shrink-0" />
+                              <h4 className="text-[13px] lg:text-[13px] font-bold uppercase tracking-[0.2em] text-green/80 leading-relaxed">{group.heading}</h4>
                             </div>
                           </div>
                           <div className="lg:col-span-9">
-                            <ul className="grid grid-cols-1 bg-white/40 rounded-3xl border border-green/5 overflow-hidden shadow-sm">
+                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12">
                               {group.items.map((item, i) => (
-                                <li key={i} className={`flex items-start gap-4 px-5 py-5 lg:px-8 lg:py-6 hover:bg-white/60 group/item transition-all duration-300 ${i !== group.items.length - 1 ? 'border-b border-green/[0.03]' : ''}`}>
-                                  <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
-                                  <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed group-hover/item:text-black">{renderItemText(item)}</span>
+                                <li key={i} className="flex items-start gap-3 py-2 lg:py-3 border-b border-green/[0.05] last:border-0 md:[&:nth-last-child(2)]:border-0 md:last:border-0">
+                                  <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-70" />
+                                  <span className="text-[14px] lg:text-[15px] text-black/70 font-medium leading-relaxed">{renderItemText(item)}</span>
                                 </li>
                               ))}
                             </ul>
@@ -329,13 +396,14 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
                   </div>
                 </div>
               )}
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {renderList("Our Approach", activeData.approachItems, undefined, 'tick', true)}
-                {renderList("Why Families Choose Us", activeData.whyChooseItems, undefined, 'tick', true)}
-              </div>
             </>
           )}
+
+          {/* Core Sections (Always Visible) - Clean Layout (No Boxes) */}
+          <div className="flex flex-col gap-2 lg:gap-4">
+            {renderCleanList("Our Approach", activeData.approachItems, true)}
+            {renderCleanList("Why Families Choose Us", activeData.whyChooseItems, true)}
+          </div>
 
           {/* Additional Sections (Common to both Modular & Legacy) */}
           {activeData.additionalSections?.map((section, idx) => (
@@ -359,4 +427,3 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
     </div>
   );
 }
-
