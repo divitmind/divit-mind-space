@@ -269,7 +269,7 @@ export const services: ServiceData[] = [
       audienceSections: [
         {
           audienceType: "children",
-          title: "OT For Children",
+          title: "Occupational Therapy for Children",
           hero: {
             shortDescription: "Play-based, engaging activities that make learning feel natural and enjoyable—while building foundational motor, sensory, and self-care skills.",
             overview: "We look at development as a whole, including:\n• Fine motor skills (hand use, writing, precision)\n• Gross motor coordination (balance, movement, strength)\n• Sensory processing (how the body understands and responds to input)\n• Daily living skills (self-care, routines, independence)",
@@ -378,7 +378,7 @@ export const services: ServiceData[] = [
         },
         {
           audienceType: "teens",
-          title: "OT For Adolescents",
+          title: "Occupational Therapy for Adolescents",
           hero: {
             shortDescription: "Practical, real-life skill building focused on independence, organization, social participation, and transition readiness.",
             overview: "At Divit MindSpace, we see independence as more than a skill—it is a person’s ability to engage with the world, participate in daily life, and feel confident in their own abilities.",
@@ -438,7 +438,7 @@ export const services: ServiceData[] = [
         },
         {
           audienceType: "adults",
-          title: "OT For Adults",
+          title: "Occupational Therapy for Adults",
           hero: {
             shortDescription: "Goal-oriented, functional therapy to enhance daily productivity, independence, and quality of life.",
             overview: "We focus not just on what a person can or cannot do, but on how they experience everyday activities, what may be holding them back, and how we can make these experiences meaningful and achievable.",
