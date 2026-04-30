@@ -64,6 +64,10 @@ export function AudienceTabs({
 
   if (!activeData) return null;
 
+  // Extract "Is This the Right Support for You?" block to show in header
+  const rightSupportBlock = activeData.contentBlocks?.find(b => b.title?.toLowerCase().includes("right support"));
+  const remainingBlocks = activeData.contentBlocks?.filter(b => b !== rightSupportBlock);
+
   // Helper to render text with markdown-style bold (**text**)
   const renderTextWithBold = (text: string) => {
     if (!text) return null;
@@ -176,7 +180,7 @@ export function AudienceTabs({
       {/* Tab Switcher & Audience-Specific Focus */}
       {sections.length > 1 && (
         <div className="space-y-6 lg:space-y-8">
-          <div className="flex justify-start">
+          <div className="flex justify-center">
             <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-w-md shadow-inner">
               {sections.map((section) => {
                 const isActive = activeTab === section.audienceType;
@@ -213,6 +217,18 @@ export function AudienceTabs({
               </p>
             </div>
           </motion.div>
+
+          {/* Audience-Specific "Is This the Right Support for You?" - Placed in Header */}
+          {rightSupportBlock && (
+            <motion.div
+              key={`${activeTab}-right-support`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="pt-2"
+            >
+              {renderCleanList(rightSupportBlock.title || "Is This the Right Support for You?", rightSupportBlock.items, true)}
+            </motion.div>
+          )}
         </div>
       )}
 
@@ -268,7 +284,7 @@ export function AudienceTabs({
           )}
 
           {/* Dynamic Blocks */}
-          {activeData.contentBlocks?.map((block) => {
+          {remainingBlocks?.map((block) => {
             switch (block._type) {
               case 'duoGridBlock':
                 // Audit: Check if this duo block contains Approach or Why Choose Us
