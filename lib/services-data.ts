@@ -35,6 +35,8 @@ export interface ServiceData {
       approachItems?: string[];
       whyChooseItems?: string[];
     }[];
+    approachItems?: string[];
+    whyChooseItems?: string[];
     additionalSections?: {
       title: string;
       intro?: string;
@@ -261,49 +263,36 @@ export const services: ServiceData[] = [
     id: "4",
     title: "Occupational Therapy",
     slug: "occupational-therapy",
-    description: "Every child needs essential daily life skills to grow with confidence and independence. When a child struggles with motor skills, coordination, sensory processing, or routine activities, occupational therapy can help.",
+    description: "At Divit MindSpace, we see independence as more than a skill—it is a person’s ability to engage with the world, participate in daily life, and feel confident in their own abilities.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Occupational therapy helps children, adolescents, and adults build motor skills, improve sensory processing, and gain independence—supporting confidence in daily activities, school, work, and life. At Divit MindSpace, we see independence as more than a skill—it is a person’s ability to engage with the world, participate in daily life, and feel confident in their own abilities.\n\nWe focus not just on what a person can or cannot do, but on how they experience everyday activities, what may be holding them back, and how we can make these experiences meaningful and achievable.\n\nWe look at development as a whole, including:\n\nFine motor skills (hand use, writing, precision)\nGross motor coordination (balance, movement, strength)\nSensory processing (how the body understands and responds to input)\nDaily living skills (self-care, routines, independence)\n\nOur approach integrates these areas naturally into play, real-life tasks, and meaningful activities—rather than isolating them into repetitive exercises.",
+      overview: "Occupational therapy helps children, adolescents, and adults build motor skills, improve sensory processing, and gain independence—supporting confidence in daily activities, school, work, and life.\n\nWe focus not just on what a person can or cannot do, but on how they experience everyday activities, what may be holding them back, and how we can make these experiences meaningful and achievable.\n\nWe look at development as a whole, including:\n\nFine motor skills (hand use, writing, precision)\nGross motor coordination (balance, movement, strength)\nSensory processing (how the body understands and responds to input)\nDaily living skills (self-care, routines, independence)\n\nOur approach integrates these areas naturally into play, real-life tasks, and meaningful activities—rather than isolating them into repetitive exercises.",
+      benefits: [
+        "Improved strength, coordination, and motor control",
+        "Better sensory regulation and body awareness",
+        "Increased independence in daily activities",
+        "Enhanced focus, planning, and task completion",
+        "Greater participation in school, work, and play",
+        "Reduced frustration in everyday tasks",
+        "Stronger confidence and self-reliance"
+      ],
+      whatToExpect: [
+        "A comprehensive, observation-based assessment",
+        "Individualized goals aligned with developmental needs",
+        "Activity-based, engaging therapy sessions",
+        "Practical strategies for home and daily routines",
+        "Ongoing parent and caregiver guidance",
+        "Collaboration with other therapies (if applicable)"
+      ],
       audienceSections: [
         {
           audienceType: "children",
           title: "Children",
           hero: {
             shortDescription: "Play-based, engaging activities that make learning feel natural and enjoyable—while building foundational motor, sensory, and self-care skills.",
-            overview: "We look at development as a whole, including:\n\nFine motor skills (hand use, writing, precision)\nGross motor coordination (balance, movement, strength)\nSensory processing (how the body understands and responds to input)\nDaily living skills (self-care, routines, independence)",
           },
           contentBlocks: [
-            {
-              _type: "duoGridBlock",
-              _key: "ot-children-gain-expectations",
-              leftColumn: {
-                title: "What You Will Gain",
-                items: [
-                  "Improved strength, coordination, and motor control",
-                  "Better sensory regulation and body awareness",
-                  "Increased independence in daily activities",
-                  "Enhanced focus, planning, and task completion",
-                  "Greater participation in school, work, and play",
-                  "Reduced frustration in everyday tasks",
-                  "Stronger confidence and self-reliance"
-                ],
-                style: "tick"
-              },
-              rightColumn: {
-                title: "What to Expect",
-                items: [
-                  "A comprehensive, observation-based assessment",
-                  "Individualized goals aligned with developmental needs",
-                  "Activity-based, engaging therapy sessions",
-                  "Practical strategies for home and daily routines",
-                  "Ongoing parent and caregiver guidance",
-                  "Collaboration with other therapies (if applicable)"
-                ],
-                style: "tick"
-              }
-            },
             {
               _type: "fullWidthListBlock",
               _key: "ot-children-right-support",
@@ -315,70 +304,7 @@ export const services: ServiceData[] = [
                 "Developmental Skills: Delays in toileting, dressing, feeding, or play skills",
                 "Sensory Processing: Over-sensitivity to sounds/textures or difficulty sitting still"
               ]
-            },
-            {
-              _type: "clinicalIndexBlock",
-              _key: "ot-needs-support",
-              title: "Needs We Support",
-              intro: "Our Occupational Therapy program supports individuals across age groups with a wide range of needs:",
-              groups: [
-                {
-                  heading: "Motor Development",
-                  items: [
-                    "Difficulty with fine motor skills (writing, buttoning, grip)",
-                    "Challenges with balance, coordination, or physical movement",
-                    "Delays in motor milestones"
-                  ]
-                },
-                {
-                  heading: "Sensory Processing",
-                  items: [
-                    "Over- or under-sensitivity to sounds, textures, or movement",
-                    "Difficulty staying regulated or attentive",
-                    "Sensory-seeking or sensory-avoidant behaviors"
-                  ]
-                },
-                {
-                  heading: "Daily Living & Independence",
-                  items: [
-                    "Challenges with dressing, grooming, feeding, or toileting",
-                    "Difficulty managing routines and everyday tasks",
-                    "Delays in age-appropriate independence"
-                  ]
-                },
-                {
-                  heading: "Attention & Regulation",
-                  items: [
-                    "Difficulty with focus, planning, and task completion",
-                    "Impulse control and executive functioning challenges",
-                    "Emotional and behavioral regulation difficulties"
-                  ]
-                },
-                {
-                  heading: "Developmental & Neurological Differences",
-                  items: [
-                    "Autism Spectrum differences",
-                    "ADHD",
-                    "Learning challenges",
-                    "Conditions such as Down syndrome, cerebral palsy, and related needs"
-                  ]
-                }
-              ]
             }
-          ],
-          approachItems: [
-            "Individualized & Functional: We tailor therapy to real-life goals that matter in everyday routines.",
-            "Learning Through Doing: Skills are built through meaningful activities, not isolated drills.",
-            "Sensory-Informed Care: We understand how sensory experiences impact behavior, attention, and participation.",
-            "Building Independence Gradually: We support step-by-step progress toward autonomy.",
-            "Parent and Caregiver as a Partner: We equip families with practical tools to support progress beyond sessions."
-          ],
-          whyChooseItems: [
-            "Warm, supportive, and non-judgmental environment",
-            "Therapists who combine expertise with empathy",
-            "Focus on long-term independence, not quick fixes",
-            "Respect for each individual’s pace and journey",
-            "A space where every individual feels capable and empowered"
           ]
         },
         {
@@ -386,38 +312,8 @@ export const services: ServiceData[] = [
           title: "Adolescents",
           hero: {
             shortDescription: "Practical, real-life skill building focused on independence, organization, social participation, and transition readiness.",
-            overview: "At Divit MindSpace, we see independence as more than a skill—it is a person’s ability to engage with the world, participate in daily life, and feel confident in their own abilities.",
           },
           contentBlocks: [
-            {
-              _type: "duoGridBlock",
-              _key: "ot-teens-gain-expectations",
-              leftColumn: {
-                title: "What You Will Gain",
-                items: [
-                  "Improved strength, coordination, and motor control",
-                  "Better sensory regulation and body awareness",
-                  "Increased independence in daily activities",
-                  "Enhanced focus, planning, and task completion",
-                  "Greater participation in school, work, and play",
-                  "Reduced frustration in everyday tasks",
-                  "Stronger confidence and self-reliance"
-                ],
-                style: "tick"
-              },
-              rightColumn: {
-                title: "What to Expect",
-                items: [
-                  "A comprehensive, observation-based assessment",
-                  "Individualized goals aligned with developmental needs",
-                  "Activity-based, engaging therapy sessions",
-                  "Practical strategies for home and daily routines",
-                  "Ongoing parent and caregiver guidance",
-                  "Collaboration with other therapies (if applicable)"
-                ],
-                style: "tick"
-              }
-            },
             {
               _type: "fullWidthListBlock",
               _key: "ot-teens-right-support",
@@ -430,20 +326,6 @@ export const services: ServiceData[] = [
                 "Transitions: Building readiness for pre-vocational tasks and independent living"
               ]
             }
-          ],
-          approachItems: [
-            "Individualized & Functional: We tailor therapy to real-life goals that matter in everyday routines.",
-            "Learning Through Doing: Skills are built through meaningful activities, not isolated drills.",
-            "Sensory-Informed Care: We understand how sensory experiences impact behavior, attention, and participation.",
-            "Building Independence Gradually: We support step-by-step progress toward autonomy.",
-            "Parent and Caregiver as a Partner: We equip families with practical tools to support progress beyond sessions."
-          ],
-          whyChooseItems: [
-            "Warm, supportive, and non-judgmental environment",
-            "Therapists who combine expertise with empathy",
-            "Focus on long-term independence, not quick fixes",
-            "Respect for each individual’s pace and journey",
-            "A space where every individual feels capable and empowered"
           ]
         },
         {
@@ -451,38 +333,8 @@ export const services: ServiceData[] = [
           title: "Adults",
           hero: {
             shortDescription: "Goal-oriented, functional therapy to enhance daily productivity, independence, and quality of life.",
-            overview: "We focus not just on what a person can or cannot do, but on how they experience everyday activities, what may be holding them back, and how we can make these experiences meaningful and achievable.",
           },
           contentBlocks: [
-            {
-              _type: "duoGridBlock",
-              _key: "ot-adults-gain-expectations",
-              leftColumn: {
-                title: "What You Will Gain",
-                items: [
-                  "Improved strength, coordination, and motor control",
-                  "Better sensory regulation and body awareness",
-                  "Increased independence in daily activities",
-                  "Enhanced focus, planning, and task completion",
-                  "Greater participation in school, work, and play",
-                  "Reduced frustration in everyday tasks",
-                  "Stronger confidence and self-reliance"
-                ],
-                style: "tick"
-              },
-              rightColumn: {
-                title: "What to Expect",
-                items: [
-                  "A comprehensive, observation-based assessment",
-                  "Individualized goals aligned with developmental needs",
-                  "Activity-based, engaging therapy sessions",
-                  "Practical strategies for home and daily routines",
-                  "Ongoing parent and caregiver guidance",
-                  "Collaboration with other therapies (if applicable)"
-                ],
-                style: "tick"
-              }
-            },
             {
               _type: "fullWidthListBlock",
               _key: "ot-adults-right-support",
@@ -496,24 +348,51 @@ export const services: ServiceData[] = [
                 "Independence & Quality of Life: Building confidence in personal, social, and work environments"
               ]
             }
-          ],
-          approachItems: [
-            "Individualized & Functional: We tailor therapy to real-life goals that matter in everyday routines.",
-            "Learning Through Doing: Skills are built through meaningful activities, not isolated drills.",
-            "Sensory-Informed Care: We understand how sensory experiences impact behavior, attention, and participation.",
-            "Building Independence Gradually: We support step-by-step progress toward autonomy.",
-            "Parent and Caregiver as a Partner: We equip families with practical tools to support progress beyond sessions."
-          ],
-          whyChooseItems: [
-            "Warm, supportive, and non-judgmental environment",
-            "Therapists who combine expertise with empathy",
-            "Focus on long-term independence, not quick fixes",
-            "Respect for each individual’s pace and journey",
-            "A space where every individual feels capable and empowered"
           ]
         }
       ],
+      approachItems: [
+        "Individualized & Functional: We tailor therapy to real-life goals that matter in everyday routines.",
+        "Learning Through Doing: Skills are built through meaningful activities, not isolated drills.",
+        "Sensory-Informed Care: We understand how sensory experiences impact behavior, attention, and participation.",
+        "Building Independence Gradually: We support step-by-step progress toward autonomy.",
+        "Parent and Caregiver as a Partner: We equip families with practical tools to support progress beyond sessions."
+      ],
+      whyChooseItems: [
+        "Warm, supportive, and non-judgmental environment",
+        "Therapists who combine expertise with empathy",
+        "Focus on long-term independence, not quick fixes",
+        "Respect for each individual’s pace and journey",
+        "A space where every individual feels capable and empowered"
+      ],
       additionalSections: [
+        {
+          title: "Needs We Support",
+          intro: "Our Occupational Therapy program supports individuals across age groups with a wide range of needs:",
+          items: [
+            "## Motor Development",
+            "Difficulty with fine motor skills (writing, buttoning, grip)",
+            "Challenges with balance, coordination, or physical movement",
+            "Delays in motor milestones",
+            "## Sensory Processing",
+            "Over- or under-sensitivity to sounds, textures, or movement",
+            "Difficulty staying regulated or attentive",
+            "Sensory-seeking or sensory-avoidant behaviors",
+            "## Daily Living & Independence",
+            "Challenges with dressing, grooming, feeding, or toileting",
+            "Difficulty managing routines and everyday tasks",
+            "Delays in age-appropriate independence",
+            "## Attention & Regulation",
+            "Difficulty with focus, planning, and task completion",
+            "Impulse control and executive functioning challenges",
+            "Emotional and behavioral regulation difficulties",
+            "## Developmental & Neurological Differences",
+            "Autism Spectrum differences",
+            "ADHD",
+            "Learning challenges",
+            "Conditions such as Down syndrome, cerebral palsy, and related needs"
+          ]
+        },
         {
           title: "Services We Offer",
           intro: "Occupational Therapy at Divit MindSpace includes a wide range of services to address various developmental and functional challenges:",
