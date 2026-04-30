@@ -271,10 +271,10 @@ export default async function ServicePage({ params }: PageProps) {
             {/* Global Overview Section (Shown for multi-audience services) */}
             {hasAudienceSections && service.audienceSections!.length > 1 && service.overview && (
               <div className="mb-0 lg:mb-2 pt-0 lg:pt-0">
-                {/* Duo-Grid Style Consistency - Side-by-Side Grid with 5:7 Ratio for better text balance */}
+                {/* Duo-Grid Style Consistency - Side-by-Side Grid with 4:8 Ratio for better vertical balance */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 mb-10 lg:mb-12 items-stretch">
                   {/* Primary Outcome (Green Box) */}
-                  <div className="lg:col-span-5 bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col h-full">
+                  <div className="lg:col-span-4 bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col h-full">
                     <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
                       <Sparkles className="w-48 h-48 text-white" />
                     </div>
@@ -289,7 +289,7 @@ export default async function ServicePage({ params }: PageProps) {
                   </div>
 
                   {/* Overview (White Box) */}
-                  <div className="lg:col-span-7 bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 relative overflow-hidden flex flex-col h-full">
+                  <div className="lg:col-span-8 bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 relative overflow-hidden flex flex-col h-full">
                     <div className="relative z-10 flex flex-col h-full">
                       <div className="lg:-mt-6 mb-6">
                         <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
