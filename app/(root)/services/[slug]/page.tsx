@@ -196,6 +196,18 @@ export default async function ServicePage({ params }: PageProps) {
     ? service.demographics 
     : ["Children", "Adolescents", "Adults"];
 
+  // Helper to render text with markdown-style bold (**text**)
+  const renderTextWithBold = (text: string) => {
+    if (!text) return null;
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} className="text-black font-bold">{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+  };
+
   return (
     <div className="bg-[#FAF9F5] min-h-screen">
       {/* Breadcrumb - Absolute Tightness */}
@@ -259,68 +271,34 @@ export default async function ServicePage({ params }: PageProps) {
             {/* Global Overview Section (Shown for multi-audience services) */}
             {hasAudienceSections && service.audienceSections!.length > 1 && service.overview && (
               <div className="mb-0 lg:mb-2 pt-0 lg:pt-0">
-                {/* Duo-Grid Style Consistency - Vertical Stack for rich content */}
-                <div className="flex flex-col gap-4 lg:gap-5 mb-10 lg:mb-12">
+                {/* Duo-Grid Style Consistency - Side-by-Side Grid with 5:7 Ratio for better text balance */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 mb-10 lg:mb-12 items-stretch">
                   {/* Primary Outcome (Green Box) */}
-                  <div className="bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group">
+                  <div className="lg:col-span-5 bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col h-full">
                     <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
                       <Sparkles className="w-48 h-48 text-white" />
                     </div>
-                    <div className="relative z-10">
+                    <div className="relative z-10 flex flex-col h-full">
                       <div className="lg:-mt-6 mb-6">
                         <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
                       </div>
-                      <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white max-w-4xl">
+                      <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white">
                         {service.description}
                       </p>
                     </div>
                   </div>
 
                   {/* Overview (White Box) */}
-                  <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 relative overflow-hidden">
-                    <div className="relative z-10">
+                  <div className="lg:col-span-7 bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 relative overflow-hidden flex flex-col h-full">
+                    <div className="relative z-10 flex flex-col h-full">
                       <div className="lg:-mt-6 mb-6">
                         <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                       </div>
-                      <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
-                        {service.overview}
+                      <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap flex-1">
+                        {renderTextWithBold(service.overview)}
                       </p>
                     </div>
                   </div>
-                </div>
-
-                {/* Universal Value Props (Gains & Expectations) for Multi-Audience */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 mb-10 lg:mb-12">
-                  {service.benefits && service.benefits.length > 0 && (
-                    <div className="rounded-[2.5rem] flex flex-col h-full bg-[#7A9A7D]/5 border border-[#7A9A7D]/10 px-5 py-8 lg:px-10 lg:py-12">
-                      <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6">
-                        <h3 className="text-lg lg:text-xl font-serif text-green italic">What You Will Gain</h3>
-                      </div>
-                      <ul className="flex flex-col gap-y-3 flex-1">
-                        {service.benefits.map((benefit, i) => (
-                          <li key={i} className="flex items-start bg-white/50 backdrop-blur-sm pl-3 pr-4 py-4 rounded-2xl border border-green/5 gap-2.5 h-fit">
-                            <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
-                            <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {service.whatToExpect && service.whatToExpect.length > 0 && (
-                    <div className="rounded-[2.5rem] flex flex-col h-full bg-[#7A9A7D]/5 border border-[#7A9A7D]/10 px-5 py-8 lg:px-10 lg:py-12">
-                      <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6">
-                        <h3 className="text-lg lg:text-xl font-serif text-green italic">What to Expect</h3>
-                      </div>
-                      <ul className="flex flex-col gap-y-3 flex-1">
-                        {service.whatToExpect.map((item, i) => (
-                          <li key={i} className="flex items-start bg-white/50 backdrop-blur-sm pl-3 pr-4 py-4 rounded-2xl border border-green/5 gap-2.5 h-fit">
-                            <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
-                            <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
                 </div>
               </div>
             )}
@@ -331,6 +309,8 @@ export default async function ServicePage({ params }: PageProps) {
                 sections={service.audienceSections || []} 
                 globalOverview={service.overview}
                 isMultiAudience={hasAudienceSections && service.audienceSections!.length > 1}
+                universalBenefits={service.benefits}
+                universalExpectations={service.whatToExpect}
               />
             </div>
 

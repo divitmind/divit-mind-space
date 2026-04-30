@@ -48,13 +48,33 @@ interface AudienceTabsProps {
   sections: AudienceSection[];
   globalOverview?: string;
   isMultiAudience?: boolean;
+  universalBenefits?: string[];
+  universalExpectations?: string[];
 }
 
-export function AudienceTabs({ sections, globalOverview, isMultiAudience }: AudienceTabsProps) {
+export function AudienceTabs({ 
+  sections, 
+  globalOverview, 
+  isMultiAudience,
+  universalBenefits,
+  universalExpectations
+}: AudienceTabsProps) {
   const [activeTab, setActiveTab] = useState(sections[0]?.audienceType || "children");
   const activeData = sections.find((s) => s.audienceType === activeTab);
 
   if (!activeData) return null;
+
+  // Helper to render text with markdown-style bold (**text**)
+  const renderTextWithBold = (text: string) => {
+    if (!text) return null;
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} className="text-black font-bold">{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+  };
 
   // Helper: Smart Bold Parsing (Before Colon or Em-Dash)
   const renderItemText = (text: string) => {
@@ -153,28 +173,56 @@ export function AudienceTabs({ sections, globalOverview, isMultiAudience }: Audi
 
   return (
     <div className="space-y-6 lg:space-y-8">
-      {/* Tab Switcher */}
+      {/* Tab Switcher & Audience-Specific Focus */}
       {sections.length > 1 && (
-        <div className="flex justify-start">
-          <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-w-md shadow-inner">
-            {sections.map((section) => {
-              const isActive = activeTab === section.audienceType;
-              return (
-                <button
-                  key={section.audienceType}
-                  onClick={() => setActiveTab(section.audienceType)}
-                  className={`relative flex-1 py-2.5 lg:py-3 rounded-full text-[11px] lg:text-[11px] font-bold uppercase tracking-[0.22em] transition-all duration-300 z-10 ${isActive ? "text-green" : "text-green/40 hover:text-green/60"}`}
-                >
-                  {isActive && (
-                    <motion.div layoutId="activePill" className="absolute inset-0 bg-white rounded-full shadow-md border border-green/5 -z-10" transition={{ type: "spring", bounce: 0.15, duration: 0.6 }} />
-                  )}
-                  {section.title}
-                </button>
-              );
-            })}
+        <div className="space-y-6 lg:space-y-8">
+          <div className="flex justify-start">
+            <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-w-md shadow-inner">
+              {sections.map((section) => {
+                const isActive = activeTab === section.audienceType;
+                return (
+                  <button
+                    key={section.audienceType}
+                    onClick={() => setActiveTab(section.audienceType)}
+                    className={`relative flex-1 py-2.5 lg:py-3 rounded-full text-[11px] lg:text-[11px] font-bold uppercase tracking-[0.22em] transition-all duration-300 z-10 ${isActive ? "text-green" : "text-green/40 hover:text-green/60"}`}
+                  >
+                    {isActive && (
+                      <motion.div layoutId="activePill" className="absolute inset-0 bg-white rounded-full shadow-md border border-green/5 -z-10" transition={{ type: "spring", bounce: 0.15, duration: 0.6 }} />
+                    )}
+                    {section.title}
+                  </button>
+                );
+              })}
+            </div>
           </div>
+
+          {/* Audience-Specific Primary Outcome Description */}
+          <motion.div 
+            key={`${activeTab}-desc`}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-start gap-4 lg:gap-6 bg-white/40 backdrop-blur-sm p-5 lg:p-7 rounded-[2rem] border border-green/5 max-w-4xl"
+          >
+            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-green/10 flex items-center justify-center shrink-0">
+              <Sparkles className="w-5 h-5 lg:w-6 lg:h-6 text-green" />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-green/60">Support Focus</span>
+              <p className="text-base lg:text-lg text-black/80 font-serif italic font-medium leading-relaxed">
+                {activeData.hero?.shortDescription || activeData.shortDescription}
+              </p>
+            </div>
+          </motion.div>
         </div>
       )}
+
+      {/* Universal Value Props (Gains & Expectations) for Multi-Audience - Placed BEFORE specific content */}
+      {isMultiAudience && (universalBenefits?.length || universalExpectations?.length) ? (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 mb-4 lg:mb-6">
+          {renderBoxedList("What You Will Gain", universalBenefits)}
+          {renderBoxedList("What to Expect", universalExpectations)}
+        </div>
+      ) : null}
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -185,28 +233,25 @@ export function AudienceTabs({ sections, globalOverview, isMultiAudience }: Audi
           transition={{ duration: 0.3 }}
           className="space-y-4 lg:space-y-6"
         >
-          {/* Hero Section - Conditional for Multi-Audience */}
-          <div className={cn(
-            "grid grid-cols-1 gap-6 lg:gap-8 items-stretch",
-            isMultiAudience ? "lg:grid-cols-1" : "lg:grid-cols-12"
-          )}>
-            <div className={cn(isMultiAudience ? "w-full" : "lg:col-span-5 flex")}>
-              <div className="bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col w-full">
-                <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
-                  <Sparkles className="w-48 h-48 text-white" />
-                </div>
-                <div className="relative z-10">
-                  <div className="lg:-mt-6 mb-6">
-                    <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Support Focus</p>
+          {/* Hero Section - Shown only for single-audience services (Multi-audience has global overview) */}
+          {!isMultiAudience && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+              <div className="lg:col-span-5 flex">
+                <div className="bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col w-full">
+                  <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
+                    <Sparkles className="w-48 h-48 text-white" />
                   </div>
-                  <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white max-w-2xl">
-                    {activeData.hero?.shortDescription}
-                  </p>
+                  <div className="relative z-10">
+                    <div className="lg:-mt-6 mb-6">
+                      <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Primary Outcome</p>
+                    </div>
+                    <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white max-w-2xl">
+                      {activeData.hero?.shortDescription}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {!isMultiAudience && (
               <div className="lg:col-span-7 flex">
                 <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 flex flex-col w-full relative overflow-hidden">
                   <div className="relative z-10">
@@ -219,8 +264,8 @@ export function AudienceTabs({ sections, globalOverview, isMultiAudience }: Audi
                   </div>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Dynamic Blocks */}
           {activeData.contentBlocks?.map((block) => {
