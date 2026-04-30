@@ -47,9 +47,10 @@ interface AudienceSection {
 interface AudienceTabsProps {
   sections: AudienceSection[];
   globalOverview?: string;
+  isMultiAudience?: boolean;
 }
 
-export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
+export function AudienceTabs({ sections, globalOverview, isMultiAudience }: AudienceTabsProps) {
   const [activeTab, setActiveTab] = useState(sections[0]?.audienceType || "children");
   const activeData = sections.find((s) => s.audienceType === activeTab);
 
@@ -154,8 +155,8 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
     <div className="space-y-6 lg:space-y-8">
       {/* Tab Switcher */}
       {sections.length > 1 && (
-        <div className="flex justify-center">
-          <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-lg shadow-inner">
+        <div className="flex justify-start">
+          <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-w-md shadow-inner">
             {sections.map((section) => {
               const isActive = activeTab === section.audienceType;
               return (
@@ -184,36 +185,41 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
           transition={{ duration: 0.3 }}
           className="space-y-4 lg:space-y-6"
         >
-          {/* Hero Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-            <div className="lg:col-span-5 flex">
+          {/* Hero Section - Conditional for Multi-Audience */}
+          <div className={cn(
+            "grid grid-cols-1 gap-6 lg:gap-8 items-stretch",
+            isMultiAudience ? "lg:grid-cols-1" : "lg:grid-cols-12"
+          )}>
+            <div className={cn(isMultiAudience ? "w-full" : "lg:col-span-5 flex")}>
               <div className="bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col w-full">
                 <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
                   <Sparkles className="w-48 h-48 text-white" />
                 </div>
                 <div className="relative z-10">
                   <div className="lg:-mt-6 mb-6">
-                    <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
+                    <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Support Focus</p>
                   </div>
-                  <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white">
+                  <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white max-w-2xl">
                     {activeData.hero?.shortDescription}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-7 flex">
-              <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 flex flex-col w-full relative overflow-hidden">
-                <div className="relative z-10">
-                  <div className="lg:-mt-6 mb-6">
-                    <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
+            {!isMultiAudience && (
+              <div className="lg:col-span-7 flex">
+                <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 flex flex-col w-full relative overflow-hidden">
+                  <div className="relative z-10">
+                    <div className="lg:-mt-6 mb-6">
+                      <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
+                    </div>
+                    <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
+                      {activeData.hero?.overview || globalOverview}
+                    </p>
                   </div>
-                  <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
-                    {activeData.hero?.overview || globalOverview}
-                  </p>
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Dynamic Blocks */}
@@ -296,17 +302,17 @@ export function AudienceTabs({ sections, globalOverview }: AudienceTabsProps) {
                 );
 
               case 'fullWidthListBlock':
-                // Audit: Check if full width list is Approach or Why Choose
-                if (block.title?.toLowerCase().includes("approach") || block.title?.toLowerCase().includes("choose")) {
+                // Audit: Check if full width list is Approach or Why Choose or Right Support
+                if (block.title?.toLowerCase().includes("approach") || block.title?.toLowerCase().includes("choose") || block.title?.toLowerCase().includes("right support")) {
                   return (
                     <div key={block._key} className="py-4">
-                      {renderCleanList(block.title, block.items, block.title.toLowerCase().includes("approach"))}
+                      {renderCleanList(block.title, block.items, true)}
                     </div>
                   );
                 }
 
                 return (
-                  <div key={block._key} className={`rounded-[2.5rem] border border-black/[0.03] p-6 lg:p-12 ${block.backgroundColor === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white'}`}>
+                  <div key={block._key} className={`rounded-[2.5rem] border border-black/[0.03] shadow-sm p-6 lg:p-12 ${block.backgroundColor === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white'}`}>
                     <h3 className="text-lg lg:text-xl font-serif text-green mb-8">{block.title}</h3>
                     {block.intro && <p className="mb-8 text-black/60 text-sm lg:text-base font-medium leading-relaxed">{block.intro}</p>}
                     <div className="flex flex-col gap-y-4">

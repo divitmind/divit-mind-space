@@ -5,7 +5,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { SINGLE_SERVICE_QUERY, ALL_SERVICE_SLUGS_QUERY, RELATED_SERVICES_QUERY } from "@/sanity/lib/queries";
 import { ServiceExperts } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Sparkles } from "lucide-react";
 import type { Specialist } from "@/sanity/types";
 import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
 import { HOWTO_ARTICLES, SERVICE_TO_HOWTO } from "@/lib/howto";
@@ -147,6 +147,7 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // Fallback logic: prefer Sanity, but use static data if Sanity is empty
+    if (!service.description) service.description = staticService.description;
     if (!service.overview) service.overview = staticContent.overview;
     if (!service.benefits || service.benefits.length === 0) service.benefits = staticContent.benefits;
     if (!service.whatToExpect || service.whatToExpect.length === 0) service.whatToExpect = staticContent.whatToExpect;
@@ -215,7 +216,7 @@ export default async function ServicePage({ params }: PageProps) {
       </div>
 
       {/* Hero Section - Zero Top Padding */}
-      <section className="pt-0 pb-1 lg:pt-0 lg:pb-2">
+      <section className="pt-0 pb-0 lg:pt-0 lg:pb-0">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-2">
@@ -226,28 +227,27 @@ export default async function ServicePage({ params }: PageProps) {
                 {service.title}
               </h1>
               
-              <div className="flex items-center gap-2 mb-1.5 lg:mb-2">
-                <div className="px-4 py-2 lg:px-6 lg:py-2.5 bg-gradient-to-r from-green/[0.04] to-green/[0.01] border border-green/10 rounded-full flex items-center gap-4 group hover:bg-green/[0.08] hover:border-green/20 transition-all duration-500 cursor-default shadow-sm shadow-green/5">
-                  <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.25em] text-green/80 whitespace-nowrap flex items-center gap-2">
-                    <span className="text-green/50 font-serif italic tracking-normal normal-case text-[13px] lg:text-[14px] mr-1.5 border-r border-green/10 pr-3 py-0.5">Helping</span>
-                    <div className="flex items-center gap-2.5">
-                      {demographics.map((d, i) => (
-                        <div key={d} className="flex items-center gap-2.5">
-                          <span className="text-black/70 group-hover:text-green transition-colors duration-300">{d}</span>
-                          {i !== demographics.length - 1 && (
-                            <div className="w-1 h-1 rounded-full bg-green/20 shrink-0" />
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </span>
+              {/* Smart Tagging: Hide badge if we have multiple audience tabs below */}
+              {(service.audienceSections?.length || 0) <= 1 && (
+                <div className="flex items-center gap-2 mb-1.5 lg:mb-2">
+                  <div className="px-4 py-2 lg:px-6 lg:py-2.5 bg-gradient-to-r from-green/[0.04] to-green/[0.01] border border-green/10 rounded-full flex items-center gap-4 group hover:bg-green/[0.08] hover:border-green/20 transition-all duration-500 cursor-default shadow-sm shadow-green/5">
+                    <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.25em] text-green/80 whitespace-nowrap flex items-center gap-2">
+                      <span className="text-green/50 font-serif italic tracking-normal normal-case text-[13px] lg:text-[14px] mr-1.5 border-r border-green/10 pr-3 py-0.5">Helping</span>
+                      <div className="flex items-center gap-2.5">
+                        {demographics.map((d, i) => (
+                          <div key={d} className="flex items-center gap-2.5">
+                            <span className="text-black/70 group-hover:text-green transition-colors duration-300">{d}</span>
+                            {i !== demographics.length - 1 && (
+                              <div className="w-1 h-1 rounded-full bg-green/20 shrink-0" />
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </span>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
-
-            <p className="text-base lg:text-lg text-black/70 mb-0 max-w-3xl font-medium leading-relaxed">
-              {service.description}
-            </p>
           </div>
         </div>
       </section>
@@ -256,11 +256,81 @@ export default async function ServicePage({ params }: PageProps) {
       <section className="pt-0 pb-0 lg:pt-0 lg:pb-0 bg-cream">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {/* Main Content Flow: Philosophy & Vision Duo-Section */}
+            {/* Global Overview Section (Shown for multi-audience services) */}
+            {hasAudienceSections && service.audienceSections!.length > 1 && service.overview && (
+              <div className="mb-0 lg:mb-2 pt-0 lg:pt-0">
+                {/* Duo-Grid Style Consistency - Vertical Stack for rich content */}
+                <div className="flex flex-col gap-4 lg:gap-5 mb-10 lg:mb-12">
+                  {/* Primary Outcome (Green Box) */}
+                  <div className="bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group">
+                    <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
+                      <Sparkles className="w-48 h-48 text-white" />
+                    </div>
+                    <div className="relative z-10">
+                      <div className="lg:-mt-6 mb-6">
+                        <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
+                      </div>
+                      <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white max-w-4xl">
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Overview (White Box) */}
+                  <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 relative overflow-hidden">
+                    <div className="relative z-10">
+                      <div className="lg:-mt-6 mb-6">
+                        <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
+                      </div>
+                      <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
+                        {service.overview}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Universal Value Props (Gains & Expectations) for Multi-Audience */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 mb-10 lg:mb-12">
+                  {service.benefits && service.benefits.length > 0 && (
+                    <div className="rounded-[2.5rem] flex flex-col h-full bg-[#7A9A7D]/5 border border-[#7A9A7D]/10 px-5 py-8 lg:px-10 lg:py-12">
+                      <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6">
+                        <h3 className="text-lg lg:text-xl font-serif text-green italic">What You Will Gain</h3>
+                      </div>
+                      <ul className="flex flex-col gap-y-3 flex-1">
+                        {service.benefits.map((benefit, i) => (
+                          <li key={i} className="flex items-start bg-white/50 backdrop-blur-sm pl-3 pr-4 py-4 rounded-2xl border border-green/5 gap-2.5 h-fit">
+                            <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
+                            <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {service.whatToExpect && service.whatToExpect.length > 0 && (
+                    <div className="rounded-[2.5rem] flex flex-col h-full bg-[#7A9A7D]/5 border border-[#7A9A7D]/10 px-5 py-8 lg:px-10 lg:py-12">
+                      <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6">
+                        <h3 className="text-lg lg:text-xl font-serif text-green italic">What to Expect</h3>
+                      </div>
+                      <ul className="flex flex-col gap-y-3 flex-1">
+                        {service.whatToExpect.map((item, i) => (
+                          <li key={i} className="flex items-start bg-white/50 backdrop-blur-sm pl-3 pr-4 py-4 rounded-2xl border border-green/5 gap-2.5 h-fit">
+                            <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
+                            <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Main Content Flow: Audience-Specific Tabs */}
             <div className="mb-12 lg:mb-16">
               <AudienceTabs 
                 sections={service.audienceSections || []} 
                 globalOverview={service.overview}
+                isMultiAudience={hasAudienceSections && service.audienceSections!.length > 1}
               />
             </div>
 
