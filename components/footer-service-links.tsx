@@ -15,7 +15,7 @@ const serviceLinks = [
     { label: "Play Therapy", href: "/services/play-therapy" },
     { label: "Group Therapy Sessions", href: "/services/group-therapy-sessions" },
     { label: "Counselling", href: "/services/counselling" },
-    { label: "Clinical Assessments", href: "/services/psychometric-assessments" },
+    { label: "Assessments Hub", href: "/services/psychometric-assessments" },
 ];
 
 export function FooterServiceLinks() {

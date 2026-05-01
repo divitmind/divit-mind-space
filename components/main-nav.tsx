@@ -20,7 +20,7 @@ import { services } from "@/lib/services-data";
 const navServices = services.slice(0, 6);
 
 const serviceCategories = [
-  { id: "assessments", label: "Assessments", href: "/services?category=assessments", icon: FileText },
+  { id: "assessments", label: "Assessments Hub", href: "/services?category=assessments", icon: FileText },
   { id: "therapy", label: "Therapy", href: "/services?category=therapy", icon: Heart },
   { id: "guidance", label: "Counselling", href: "/services?category=guidance", icon: Users },
   { id: "programs", label: "Programs", href: "/services?category=programs", icon: GraduationCap },

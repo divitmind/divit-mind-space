@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
-import { ClipboardCheck, Heart, Users, GraduationCap, Activity } from "lucide-react";
+import { ClipboardCheck, Heart, Users, GraduationCap, Activity, CheckCircle2 } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
 import type { SiteSettings, TrustMetrics } from "@/lib/types";
 
@@ -36,7 +36,7 @@ const DEFAULT_METRICS: TrustMetrics = {
 
 const categories = [
   { id: "all", label: "All Services", icon: null },
-  { id: "assessments", label: "Assessments", icon: ClipboardCheck },
+  { id: "assessments", label: "Assessments Hub", icon: ClipboardCheck },
   { id: "therapy", label: "Therapy", icon: Heart },
   { id: "guidance", label: "Counselling", icon: Users },
   { id: "programs", label: "Programs", icon: GraduationCap },
@@ -56,17 +56,37 @@ const categoryDescriptions: Record<string, React.ReactNode> = {
         <div className="mt-6 flex items-center justify-center md:justify-start gap-3">
           <div className="h-px w-8 bg-black/10 hidden md:block" />
           <p className="text-sm lg:text-base italic text-black font-semibold">
-            Helping <span className="text-green">Children</span>, <span className="text-green">Teens</span>, & <span className="text-green">Adults</span> of all ages.
+            Helping <strong>Children</strong>, <strong>Teens</strong>, & <strong>Adults</strong> of all ages.
           </p>
         </div>
       </div>
     </div>
   ),
-  assessments: "ADHD, autism, learning disability, and psychoeducational assessments for children, teens, and adults. Comprehensive clinical evaluations at our Sarjapur Road center in Bangalore.",
-  therapy: "Speech therapy, occupational therapy, ABA, sensory integration, and play therapy for all ages. Expert neurodevelopmental care at our Kasavanahalli center, Bangalore.",
-  guidance: "Child, adolescent, and adult counseling plus parent guidance programs. Professional mental health support for families in HSR Layout, Bellandur, and Bangalore.",
-  programs: "Early intervention, special education, school readiness, and NIOS support programs. Structured developmental programs at our center off Sarjapur Road, Bangalore.",
-  physiotherapy: "Pain Management, Pain Modalities, Post-Surgical Rehabilitation, Gym & Sports Injury Sessions, Assistive Devices, and Wheelchair Training. Expert physical therapy at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+  assessments: (
+    <>
+      ADHD, autism, learning disability, and psychoeducational assessments for <strong>Children</strong>, <strong>Teens</strong>, and <strong>Adults</strong>. Comprehensive clinical evaluations at our Sarjapur Road center in Bangalore.
+    </>
+  ),
+  therapy: (
+    <>
+      Speech therapy, occupational therapy, ABA, sensory integration, and play therapy for <strong>Children</strong>, <strong>Teens</strong>, and <strong>Adults</strong>. Expert neurodevelopmental care at our Kasavanahalli center, Bangalore.
+    </>
+  ),
+  guidance: (
+    <>
+      Professional mental health support for <strong>Children</strong>, <strong>Teens</strong>, and <strong>Adults</strong> including adolescent counseling and parent guidance programs. Available at our HSR Layout and Bellandur centers, Bangalore.
+    </>
+  ),
+  programs: (
+    <>
+      Early intervention, special education, school readiness, and NIOS support programs for <strong>Children</strong>, <strong>Teens</strong>, and <strong>Adults</strong>. Structured developmental programs at our center off Sarjapur Road, Bangalore.
+    </>
+  ),
+  physiotherapy: (
+    <>
+      Pain Management, Gym & Sports Injury Sessions, and Rehabilitation for <strong>Children</strong>, <strong>Teens</strong>, and <strong>Adults</strong>. Expert physical therapy at our Kasavanahalli center off Sarjapur Road, Bangalore.
+    </>
+  ),
 };
 
 interface ServicesPageProps {
@@ -214,19 +234,9 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Section - Matched to About Us rhythm */}
-      <section className="relative pt-4 lg:pt-8 pb-6 lg:pb-10 bg-[#FDFBF7]">
+      <section className="relative pt-2 lg:pt-4 pb-6 lg:pb-10 bg-[#FDFBF7]">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            {/* Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-black/5 text-black text-[10px] font-bold uppercase tracking-widest"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D]" />
-              Sarjapur Road, Bengaluru
-            </motion.div>
-
             {/* Title - Dynamic and Elegant */}
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-serif text-black mb-6 leading-tight italic"
@@ -327,6 +337,160 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
       {/* Services Grid */}
       <section className="pt-4 lg:pt-6 pb-4 lg:pb-6 bg-[#FDFBF7]">
         <div className="container mx-auto px-4">
+          {/* Assessment Hub Foundational Info - Shown only for Assessments Hub category */}
+          {activeCategory === "assessments" && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-6xl mx-auto mb-10 space-y-8"
+            >
+              {/* Intro Banner - Optimized for horizontal space with 5:7 split */}
+              <div className="bg-white rounded-[2.5rem] border border-black/5 p-6 lg:p-12 shadow-sm relative overflow-hidden">
+                <div className="absolute -right-8 -top-8 w-64 h-64 bg-green/5 rounded-full blur-3xl opacity-60" />
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                  <div className="lg:col-span-5">
+                    <h2 className="text-3xl lg:text-4xl font-serif text-black leading-tight italic">
+                      Assessment Hub: <br className="hidden lg:block" />
+                      Mapping Your Unique Blueprint
+                    </h2>
+                  </div>
+                  <div className="lg:col-span-7">
+                    <p className="text-lg lg:text-xl text-black/70 font-medium leading-relaxed border-l-2 border-green/10 pl-6 lg:pl-8 py-2">
+                      An assessment is more than a diagnosis — it is a compassionate roadmap to understanding your inner world. By combining evidence-based clinical tools with an empathetic, neuro-affirming approach, we identify your strengths and pinpoint the precise support you need to thrive.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Two Column Section: Children & Adults - Balanced with 5:7 Ratio */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+                {/* Children & Adolescents */}
+                <div className="lg:col-span-5 flex flex-col gap-6">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
+                      <Users className="w-6 h-6 text-green" />
+                    </div>
+                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Assessment for Children & Adolescents</h3>
+                  </div>
+                  
+                  {/* Top Box: Core Features */}
+                  <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm">
+                    <div className="lg:min-h-[420px] flex flex-col">
+                      <p className="text-black/70 font-medium leading-relaxed mb-5 italic border-l-2 border-green/10 pl-6">
+                        We take a holistic view of a child’s cognitive, emotional, and social development. We translate complex behaviors into clear, actionable insights that support success at home and school.
+                      </p>
+                      <ul className="space-y-6 flex-grow">
+                        {[
+                          { title: "Autism", text: "Beyond surface symptoms, we explore social communication, sensory profiles, and special interests to help the child feel truly seen and understood." },
+                          { title: "ADHD & Executive Function", text: "We look beyond hyperactivity to assess attention, organization, impulse control, and emotional regulation, while differentiating ADHD from anxiety or learning differences." },
+                          { title: "Learning Disabilities (LD)", text: "Focused evaluations for reading, writing, and math to uncover the root causes of academic struggles." }
+                        ].map((item) => (
+                          <li key={item.title} className="flex gap-4">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                            <p className="text-[15px] text-black/70 leading-relaxed">
+                              <strong className="text-black font-bold">{item.title}:</strong> {item.text}
+                            </p>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-auto pt-5 border-t border-black/5">
+                        <p className="text-green font-bold italic tracking-wide text-sm">Goal: To foster self-understanding, secure appropriate school accommodations, and create a personalized educational roadmap.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Box: When to Reach Out */}
+                  <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm h-full">
+                    <h4 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-8 px-1">When to Reach Out:</h4>
+                    <ul className="space-y-6">
+                      {[
+                        { title: "Developmental gaps", text: "missed milestones in speech, social interaction, or motor skills" },
+                        { title: "Academic roadblocks", text: "high effort with low results or increasing resistance to school" },
+                        { title: "Emotional volatility", text: "frequent intense meltdowns or sudden withdrawal from hobbies and friends" },
+                        { title: "Behavioral puzzles", text: "repetitive behaviors, sensory sensitivities, or actions that are hard to understand" },
+                        { title: "School Recommendations", text: "teacher or caregiver requests for additional learning support or accommodations" }
+                      ].map((item, i) => (
+                        <li key={i} className="flex gap-4">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <p className="text-[15px] text-black/70 leading-relaxed">
+                            <strong className="text-black font-bold">{item.title}:</strong> {item.text}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Adults & Geriatrics */}
+                <div className="lg:col-span-7 flex flex-col gap-6">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
+                      <GraduationCap className="w-6 h-6 text-green" />
+                    </div>
+                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Assessment for Adults & Geriatrics</h3>
+                  </div>
+
+                  {/* Top Box: Core Features */}
+                  <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm">
+                    <div className="lg:min-h-[420px] flex flex-col">
+                      <p className="text-black/70 font-medium leading-relaxed mb-5 italic border-l-2 border-green/10 pl-6">
+                        Understanding your past to empower your future.
+                      </p>
+                      <ul className="grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-6 flex-grow">
+                        {[
+                          { title: "Stress", text: "We identify your specific triggers and help your nervous system move from survival mode to sustainable balance." },
+                          { title: "Anxiety", text: "Support for OCD, Panic Disorder, Social Anxiety, and other patterns — providing clarity and practical regulation tools." },
+                          { title: "Depression", text: "Compassionate support through depressive episodes and burnout, including specialized maternal mental health screening and postpartum guidance." },
+                          { title: "Adult Autism & Adult ADHD", text: "Neuro-affirming assessments for late-identified individuals, helping differentiate neurodivergence from burnout or anxiety." },
+                          { title: "Trauma & Grief", text: "Safe, trauma-informed evaluations that respect your pace and support recovery." },
+                          { title: "Substance Use & Addiction", text: "Non-judgmental assessments to understand underlying patterns and co-occurring needs." },
+                          { title: "Geriatric Care (55+)", text: "Dignified assessment of memory, mood, cognitive changes, and functional abilities to support independence and emotional well-being." }
+                        ].map((item) => (
+                          <li key={item.title} className="flex gap-4">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                            <p className="text-[15px] text-black/70 leading-relaxed">
+                              <strong className="text-black font-bold">{item.title}:</strong> {item.text}
+                            </p>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-auto pt-5 border-t border-black/5">
+                        <p className="text-green font-bold italic tracking-wide text-sm">Goal: To promote radical self-acceptance, develop effective workplace or daily strategies, and create personalized plans for long-term emotional well-being.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Box: When to Reach Out */}
+                  <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm h-full">
+                    <h4 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-8 px-1">When to Reach Out:</h4>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                      {[
+                        { title: "Trauma & Grief", text: "ready to process past experiences at your own pace" },
+                        { title: "Persistent anxiety", text: "intrusive thoughts, panic, or social fears that limit daily life" },
+                        { title: "Habit awareness", text: "wanting to understand substance use or addictive patterns without judgment" },
+                        { title: "Chronic burnout", text: "feeling stuck in survival mode where stress outweighs coping ability" },
+                        { title: "Late-life clarity", text: "seeking to understand lifelong patterns of Adult ADHD or Autism" },
+                        { title: "Cognitive changes (55+)", text: "noticing shifts in memory, mood, or independence" }
+                      ].map((item, i) => (
+                        <li key={i} className="flex gap-4">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <p className="text-[15px] text-black/70 leading-relaxed">
+                            <strong className="text-black font-bold">{item.title}:</strong> {item.text}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bridge Text before Grid */}
+              <div className="text-center pt-4 border-t border-black/5">
+                <h4 className="text-2xl font-serif text-black italic">Explore our Specialized Assessments</h4>
+              </div>
+            </motion.div>
+          )}
+
           {filteredServices.length > 0 ? (
             <motion.div
               className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
@@ -373,13 +537,8 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
             transition={{ duration: 0.6 }}
             className="bg-white rounded-[2rem] md:rounded-[2.5rem] border border-black/5 p-5 md:p-10 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-10 shadow-2xl shadow-black/5"
           >
-            <div className="flex flex-row md:flex-row items-center gap-4 md:gap-8">
-              <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#7A9A7D] flex items-center justify-center shrink-0 shadow-lg">
-                <svg className="w-7 h-7 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                </svg>
-              </div>
-              <div className="text-left">
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+              <div className="text-center md:text-left">
                 <h2 className="text-xl md:text-4xl font-bold text-black font-[family-name:var(--font-cormorant)] italic mb-1 md:mb-2">
                   Not ready to book?
                 </h2>

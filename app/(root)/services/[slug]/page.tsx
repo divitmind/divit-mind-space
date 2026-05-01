@@ -182,7 +182,7 @@ export default async function ServicePage({ params }: PageProps) {
     : undefined;
 
   const categoryLabels: Record<string, string> = {
-    assessments: "Assessment",
+    assessments: "Assessments Hub",
     therapy: "Therapy",
     guidance: "Counselling",
     programs: "Program",

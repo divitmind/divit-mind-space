@@ -38,7 +38,7 @@ const servicesFaqs = [
   {
     question: "What categories of services does Divit MindSpace offer?",
     answer:
-      "Divit MindSpace organizes its 28+ services into five categories: Assessments (psychometric, psychoeducational, condition-specific), Therapy (speech, occupational, behavioral, cognitive, play, sensory integration, group, Brain Gym), Guidance (counseling and family support), Programs (early intervention, special education, NIOS, school readiness, certificate and diploma courses), and Physiotherapy (pain management, post-surgical rehab, sports injury, assistive devices, wheelchair training).",
+      "Divit MindSpace organizes its 28+ services into five categories: Assessments Hub (psychometric, psychoeducational, condition-specific), Therapy (speech, occupational, behavioral, cognitive, play, sensory integration, group, Brain Gym), Guidance (counseling and family support), Programs (early intervention, special education, NIOS, school readiness, certificate and diploma courses), and Physiotherapy (pain management, post-surgical rehab, sports injury, assistive devices, wheelchair training).",
   },
   {
     question: "Do I need a referral to book a service at Divit MindSpace?",

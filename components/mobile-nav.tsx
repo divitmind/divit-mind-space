@@ -24,7 +24,7 @@ import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-lin
 import { cn } from "@/lib/utils";
 
 const serviceGroups = [
-  { label: "Assessments", href: "/services?category=assessments", icon: FileText },
+  { label: "Assessments Hub", href: "/services?category=assessments", icon: FileText },
   { label: "Therapy", href: "/services?category=therapy", icon: Heart },
   { label: "Counselling", href: "/services?category=guidance", icon: Users },
   { label: "Programs", href: "/services?category=programs", icon: GraduationCap },
