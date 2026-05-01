@@ -192,8 +192,8 @@ export default async function ServicePage({ params }: PageProps) {
   if (staticService) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
-    // SPECIAL CASE: For Group Therapy & Psychoeducational Assessments, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments") {
+    // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments & CBT, prioritize static data for audience tabs and layout
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy") {
       service.description = staticService.description;
       service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;
@@ -271,7 +271,7 @@ export default async function ServicePage({ params }: PageProps) {
     const parts = text.split(/(\*\*.*?\*\*)/g);
     return parts.map((part, i) => {
       if (part.startsWith('**') && part.endsWith('**')) {
-        return <strong key={i} className="text-black font-bold">{part.slice(2, -2)}</strong>;
+        return <strong key={i} className="font-bold">{part.slice(2, -2)}</strong>;
       }
       return part;
     });
@@ -352,7 +352,7 @@ export default async function ServicePage({ params }: PageProps) {
                         <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
                       </div>
                       <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white">
-                        {service.description}
+                        {renderTextWithBold(service.description)}
                       </p>
                     </div>
                   </div>
@@ -405,7 +405,7 @@ export default async function ServicePage({ params }: PageProps) {
                         </div>
                         <p className="text-[9px] font-bold uppercase tracking-[0.2em] mb-3 opacity-70">Primary Outcome</p>
                         <p className="text-lg font-serif italic leading-snug font-bold relative z-10">
-                          {service.description}
+                          {renderTextWithBold(service.description)}
                         </p>
                       </div>
                     )}

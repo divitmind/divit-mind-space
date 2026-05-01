@@ -100,7 +100,7 @@ export const services: ServiceData[] = [
     category: "assessments",
     image: "/Psychoeducational Assessments.jpeg",
     content: {
-      overview: "Psychoeducational assessments play a pivotal role in supporting **children and adolescents** — those with learning differences such as ADHD, dyslexia, dyscalculia, dysgraphia, or autism spectrum conditions. At Divit MindSpace, we go beyond simple diagnosis to create a clear, actionable roadmap that helps **children** and **teenagers** understand their unique learning profile and thrive academically and emotionally.\n\nUsing a combination of evidence-based tools and a neuro-affirming approach, we identify strengths, uncover specific learning challenges, and provide practical recommendations tailored to the individual's needs.",
+      overview: "Psychoeducational assessments play a pivotal role in supporting **children and adolescents** — those with learning differences such as ADHD, dyslexia, dyscalculia, dysgraphia, or autism spectrum conditions. At Divit MindSpace, we go beyond simple diagnosis to create a clear, actionable roadmap that helps children and teenagers understand their unique learning profile and thrive academically and emotionally.\n\nUsing a combination of evidence-based tools and a neuro-affirming approach, we identify strengths, uncover specific learning challenges, and provide practical recommendations tailored to the individual's needs.",
       benefits: [
         "Identification of specific learning disabilities (dyslexia, dyscalculia, dysgraphia)",
         "Detailed academic skill profile across reading, writing, and math",
@@ -424,32 +424,123 @@ export const services: ServiceData[] = [
   },
   {
     id: "6",
-    title: "CBT (Cognitive Behavioral Therapy)",
+    title: "Cognitive Behavioral Therapy (CBT)",
     slug: "cbt-cognitive-behavioral-therapy",
-    description: "Thoughts, feelings, and behaviors are all connected. CBT helps individuals identify and change negative thought patterns to improve emotional regulation and develop personal coping strategies.",
+    description: "Cognitive Behavioral Therapy (CBT) is a practical, goal-oriented, and evidence-based approach that explores the connection between thoughts, feelings, and behaviors.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Cognitive Behavioral Therapy (CBT) is a structured, goal-oriented form of psychotherapy that helps individuals understand the connection between their thoughts, feelings, and behaviors. By identifying and challenging unhelpful thought patterns, individuals can learn more balanced ways of thinking and develop practical coping strategies for managing stress, anxiety, and daily challenges. At Divit MindSpace, we offer neurodiversity-affirming CBT tailored to each individual's unique cognitive profile.",
-      benefits: [
-        "Identification of negative thought patterns",
-        "Development of practical coping strategies",
-        "Improved emotional regulation skills",
-        "Reduced anxiety and stress levels",
-        "Greater self-awareness and problem-solving abilities",
-      ],
+      overview: "Cognitive Behavioral Therapy (CBT) is a practical, goal-oriented, and evidence-based approach that explores the connection between thoughts, feelings, and behaviors. At Divit MindSpace, we offer CBT that is tailored for both neurotypical and neurodivergent individuals (ADHD/Autism). We don’t aim to change who you are — we equip you with effective tools to navigate life with greater confidence, clarity, and calm.",
       whatToExpect: [
-        "Goal-oriented, collaborative sessions",
-        "Identification of specific challenges and triggers",
-        "Learning and practicing new cognitive tools",
-        "Home-based tasks to reinforce learning",
-        "Evidence-based therapeutic techniques",
+        "Initial assessment to understand specific needs and goals",
+        "Personalized, practical skill-building sessions",
+        "Fun, engaging activities for **children** and **teens**",
+        "Solution-focused techniques and real-life practice for **adults**",
+        "Homework or simple practice exercises between sessions",
+        "Regular progress reviews with parent involvement (for **children**)",
+        "Collaborative adjustments to the therapy plan"
       ],
-      whoIsItFor: [
-        "Teenagers and adults with anxiety or depression",
-        "Individuals struggling with stress management",
-        "Anyone experiencing negative thought patterns",
-        "Neurodivergent individuals facing social or daily life challenges",
+      audienceSections: [
+        {
+          audienceType: "children",
+          title: "Children",
+          hero: {
+            shortDescription: "We use age-appropriate language, play, and engaging activities to help younger minds understand their emotions and build resilience in a fun, supportive way.",
+          },
+          benefits: [
+            "Better understanding of thoughts and emotions",
+            "Simple, effective coping strategies for anxiety and stress",
+            "Improved emotional regulation and self-control",
+            "Stronger problem-solving skills and self-confidence",
+            "Healthy ways to manage big emotions and school pressure"
+          ],
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "cbt-children-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "CBT for **Children** & **Teens**",
+              items: [
+                "Anxiety, worry, or school-related stress",
+                "Frequent meltdowns or emotional outbursts",
+                "Difficulty with emotional regulation or self-control",
+                "Challenges related to ADHD or Autism",
+                "Low self-confidence or persistent negative thinking"
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "teens",
+          title: "Adolescents",
+          hero: {
+            shortDescription: "Supporting teenagers in understanding the link between thoughts and behaviors, providing them with tools to manage stress and build academic and social resilience.",
+          },
+          benefits: [
+            "Better understanding of thoughts and emotions",
+            "Simple, effective coping strategies for anxiety and stress",
+            "Improved emotional regulation and self-control",
+            "Stronger problem-solving skills and self-confidence",
+            "Healthy ways to manage big emotions and school pressure"
+          ],
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "cbt-teens-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "CBT for **Children** & **Teens**",
+              items: [
+                "Anxiety, worry, or school-related stress",
+                "Frequent meltdowns or emotional outbursts",
+                "Difficulty with emotional regulation or self-control",
+                "Challenges related to ADHD or Autism",
+                "Low self-confidence or persistent negative thinking"
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "adults",
+          title: "Adults",
+          hero: {
+            shortDescription: "Practical, solution-focused strategies to manage work stress, relationship challenges, persistent negative thinking, and the mental loops that impact daily life.",
+          },
+          benefits: [
+            "Deeper awareness of unhelpful thought patterns",
+            "Effective tools for managing anxiety, stress, and overwhelm",
+            "Better emotional regulation and resilience",
+            "Improved decision-making and overall well-being",
+            "Neuro-affirming strategies for ADHD and Autism-related challenges"
+          ],
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "cbt-adults-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "CBT for **Adults**",
+              items: [
+                "Burnout, work stress, or overwhelming life pressures",
+                "Panic attacks, persistent anxiety, or negative thought patterns",
+                "Relationship difficulties or interpersonal challenges",
+                "Need for neuro-affirming coping strategies (ADHD/Autism)",
+                "Desire to build resilience, emotional regulation, and long-term well-being"
+              ]
+            }
+          ]
+        }
+      ],
+      approachItems: [
+        "Evidence-based and practical CBT techniques",
+        "Neuro-affirming and individualized therapy",
+        "Age-appropriate methods that make learning natural and engaging",
+        "Focus on building real-life skills, not just insight",
+        "Strong collaboration with parents for **children** and **teens**"
+      ],
+      whyChooseItems: [
+        "Warm, supportive, and non-judgmental environment",
+        "Therapists experienced in working with both neurotypical and neurodivergent clients",
+        "Practical tools that create meaningful, lasting change",
+        "Personalized care that respects each person’s unique needs and pace"
       ],
       duration: "50-60 minute sessions, typically weekly",
       format: "In-person or online",

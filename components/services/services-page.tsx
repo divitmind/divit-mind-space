@@ -122,6 +122,9 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
       if (s.title === "Physiotherapy — Pain Modalities") {
         updated.title = "Pain Modalities";
       }
+      if (s.title === "Cognitive Therapy") {
+        updated.title = "Cognitive Behavioral Therapy (CBT)";
+      }
       if (s.title === "Assistive Devices Assessment and Training") {
         updated.title = "Assistive Devices";
       }

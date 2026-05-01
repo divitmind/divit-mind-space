@@ -74,8 +74,27 @@ export function AudienceTabs({
   const rightSupportBlock = activeData.contentBlocks?.find(b => b.title?.toLowerCase().includes("right support"));
   const remainingBlocks = activeData.contentBlocks?.filter(b => b !== rightSupportBlock);
 
-  // Helper: Smart Bold Parsing (Before Colon or Em-Dash)
+  // Helper: render text with markdown-style bold (**text**)
+  const renderTextWithBold = (text: string) => {
+    if (!text) return null;
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} className="font-bold">{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+  };
+
+  // Helper: Smart Bold Parsing (Before Colon or Em-Dash) + Markdown Bold
   const renderItemText = (text: string) => {
+    if (!text) return null;
+    
+    // First, check for markdown bold since it's explicit
+    if (text.includes('**')) {
+      return renderTextWithBold(text);
+    }
+
     const colonIndex = text.indexOf(':');
     const dashIndex = text.indexOf('—');
     
@@ -115,7 +134,7 @@ export function AudienceTabs({
 
         {intro && (
           <p className="mb-6 text-[15px] lg:text-[16px] text-black/60 font-medium leading-relaxed italic">
-            {intro}
+            {renderTextWithBold(intro)}
           </p>
         )}
 
@@ -219,7 +238,7 @@ export function AudienceTabs({
             <div className="flex flex-col gap-1.5">
               <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-green/60">Support Focus</span>
               <p className="text-base lg:text-lg text-black/80 font-serif italic font-medium leading-relaxed">
-                {activeData.hero?.shortDescription || activeData.shortDescription}
+                {renderTextWithBold(activeData.hero?.shortDescription || activeData.shortDescription || "")}
               </p>
             </div>
           </motion.div>
@@ -291,7 +310,7 @@ export function AudienceTabs({
                       <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                     </div>
                     <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
-                      {activeData.hero?.overview || globalOverview}
+                      {renderTextWithBold(activeData.hero?.overview || globalOverview || "")}
                     </p>
                   </div>
                 </div>
@@ -362,7 +381,7 @@ export function AudienceTabs({
                     <div className="-mt-2 lg:-mt-10 mb-6 lg:mb-8">
                       <p className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
                         <strong className="text-black font-bold">{block.title} — </strong>
-                        {block.intro}
+                        {renderTextWithBold(block.intro || "")}
                       </p>
                     </div>
                     <div className="flex flex-col gap-y-8 lg:gap-y-10">
@@ -403,7 +422,7 @@ export function AudienceTabs({
                 return (
                   <div key={block._key} className={`rounded-[2.5rem] border border-black/[0.03] shadow-sm p-6 lg:p-12 ${block.backgroundColor === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white'}`}>
                     <h3 className="text-lg lg:text-xl font-serif text-green mb-8">{block.title}</h3>
-                    {block.intro && <p className="mb-8 text-black/60 text-sm lg:text-base font-medium leading-relaxed">{block.intro}</p>}
+                    {block.intro && <p className="mb-8 text-black/60 text-sm lg:text-base font-medium leading-relaxed">{renderTextWithBold(block.intro)}</p>}
                     <div className="flex flex-col gap-y-4">
                       {block.items?.map((item, i) => (
                         <div key={i} className="flex items-start gap-5 group">
@@ -427,7 +446,7 @@ export function AudienceTabs({
               {activeData.whoIsItFor && activeData.whoIsItFor.length > 0 && (
                 <div className="bg-white p-6 lg:p-12 rounded-[2.5rem] border border-black/[0.03] shadow-sm">
                   <h3 className="text-lg lg:text-xl font-serif text-green mb-8">Is This the Right Space?</h3>
-                  {activeData.whoIsItForIntro && <p className="mb-8 text-black/60 text-sm lg:text-base font-medium">{activeData.whoIsItForIntro}</p>}
+                  {activeData.whoIsItForIntro && <p className="mb-8 text-black/60 text-sm lg:text-base font-medium">{renderTextWithBold(activeData.whoIsItForIntro)}</p>}
                   <div className="flex flex-col gap-y-4">
                     {activeData.whoIsItFor.map((item, i) => (
                       <div key={i} className="flex items-start gap-5 group">
@@ -446,7 +465,7 @@ export function AudienceTabs({
                   <div className="-mt-2 lg:-mt-10 mb-6 lg:mb-8">
                     <p className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed max-w-3xl">
                       <strong className="text-black font-bold">{activeData.supportedItemsTitle || "Clinical Index"} — </strong>
-                      {activeData.supportedItemsIntro}
+                      {renderTextWithBold(activeData.supportedItemsIntro || "")}
                     </p>
                   </div>
                   <div className="flex flex-col gap-y-8 lg:gap-y-10">
@@ -493,7 +512,7 @@ export function AudienceTabs({
           {activeData.additionalSections?.map((section, idx) => (
             <div key={idx} className={`rounded-[2.5rem] border border-black/[0.03] p-6 lg:p-12 ${section.color === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white shadow-sm'}`}>
               <h3 className="text-lg lg:text-xl font-serif text-green mb-8">{section.title}</h3>
-              {section.intro && <p className="mb-8 text-black/60 text-sm lg:text-base font-medium leading-relaxed">{section.intro}</p>}
+              {section.intro && <p className="mb-8 text-black/60 text-sm lg:text-base font-medium leading-relaxed">{renderTextWithBold(section.intro)}</p>}
               <div className="flex flex-col gap-y-4">
                 {section.items?.map((item, i) => (
                   <div key={i} className="flex items-start gap-5 group">
