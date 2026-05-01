@@ -40,7 +40,7 @@ const categories = [
   { id: "therapy", label: "Therapy", icon: Heart },
   { id: "guidance", label: "Counselling", icon: Users },
   { id: "programs", label: "Programs", icon: GraduationCap },
-  { id: "physiotherapy", label: "Physiotherapy HUB", icon: Activity },
+  { id: "physiotherapy", label: "Physiotherapy", icon: Activity },
 ];
 
 const categoryDescriptions: Record<string, React.ReactNode> = {

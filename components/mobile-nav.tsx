@@ -28,7 +28,7 @@ const serviceGroups = [
   { label: "Therapy", href: "/services?category=therapy", icon: Heart },
   { label: "Counselling", href: "/services?category=guidance", icon: Users },
   { label: "Programs", href: "/services?category=programs", icon: GraduationCap },
-  { label: "Physiotherapy HUB", href: "/services?category=physiotherapy", icon: Activity },
+  { label: "Physiotherapy", href: "/services?category=physiotherapy", icon: Activity },
 ];
 
 const popularServices = [

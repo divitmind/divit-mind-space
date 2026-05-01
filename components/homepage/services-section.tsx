@@ -27,7 +27,7 @@ const DEFAULT_SERVICES = [
     },
     {
         id: "physiotherapy",
-        label: "Physiotherapy HUB",
+        label: "Physiotherapy",
         icon: "activity" as const,
         outcome: "Expert care for movement, strength and recovery",
         route: "/services?category=physiotherapy",
