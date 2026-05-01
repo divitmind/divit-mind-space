@@ -7,7 +7,7 @@ import type { ServiceCategoryCard } from "@/lib/types";
 const DEFAULT_SERVICES = [
     {
         id: "assessments",
-        label: "Assessments Hub",
+        label: "Assessments HUB",
         icon: "clipboard" as const,
         outcome: "Stop guessing. Get answers and a clear path forward",
         route: "/services?category=assessments",
@@ -28,7 +28,7 @@ const DEFAULT_SERVICES = [
     },
     {
         id: "physiotherapy",
-        label: "Physiotherapy",
+        label: "Physiotherapy HUB",
         icon: "activity" as const,
         outcome: "Expert care for movement, strength and recovery",
         route: "/services?category=physiotherapy",

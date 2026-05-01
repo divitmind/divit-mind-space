@@ -52,6 +52,7 @@ interface AudienceTabsProps {
   universalExpectations?: string[];
   globalApproachItems?: string[];
   globalWhyChooseItems?: string[];
+  globalAdditionalSections?: { title: string; intro?: string; items: string[]; color?: string }[];
 }
 
 export function AudienceTabs({ 
@@ -61,7 +62,8 @@ export function AudienceTabs({
   universalBenefits,
   universalExpectations,
   globalApproachItems,
-  globalWhyChooseItems
+  globalWhyChooseItems,
+  globalAdditionalSections
 }: AudienceTabsProps) {
   const [activeTab, setActiveTab] = useState(sections[0]?.audienceType || "children");
   const activeData = sections.find((s) => s.audienceType === activeTab);
@@ -185,7 +187,7 @@ export function AudienceTabs({
                 // Normalize Label: Only show Children, Teens, Adults
                 let displayTitle = section.title;
                 if (displayTitle.toLowerCase().includes("children")) displayTitle = "Children";
-                else if (displayTitle.toLowerCase().includes("teen") || displayTitle.toLowerCase().includes("adolescent")) displayTitle = "Teens";
+                else if (displayTitle.toLowerCase().includes("teen") || displayTitle.toLowerCase().includes("adolescent")) displayTitle = "Adolescents";
                 else if (displayTitle.toLowerCase().includes("adult")) displayTitle = "Adults";
 
                 return (
@@ -508,10 +510,16 @@ export function AudienceTabs({
       </AnimatePresence>
 
       {/* Global Core Sections (Always Visible) - Clean Layout (No Boxes) */}
-      {(globalApproachItems?.length || globalWhyChooseItems?.length) && (
-        <div className="flex flex-col gap-2 lg:gap-4 mt-8 pt-8 border-t border-green/5">
+      {(globalApproachItems?.length || globalWhyChooseItems?.length || globalAdditionalSections?.length) && (
+        <div className="flex flex-col gap-6 lg:gap-10 mt-8 pt-8 border-t border-green/5">
           {renderCleanList("Our Approach", globalApproachItems, true)}
           {renderCleanList("Why Families Choose Us", globalWhyChooseItems, true)}
+          
+          {globalAdditionalSections?.map((section, idx) => (
+            <div key={idx} className="pt-2">
+              {renderCleanList(section.title, section.items, true, section.intro)}
+            </div>
+          ))}
         </div>
       )}
     </div>

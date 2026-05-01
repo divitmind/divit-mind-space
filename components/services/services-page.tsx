@@ -36,11 +36,11 @@ const DEFAULT_METRICS: TrustMetrics = {
 
 const categories = [
   { id: "all", label: "All Services", icon: null },
-  { id: "assessments", label: "Assessments Hub", icon: ClipboardCheck },
+  { id: "assessments", label: "Assessments HUB", icon: ClipboardCheck },
   { id: "therapy", label: "Therapy", icon: Heart },
   { id: "guidance", label: "Counselling", icon: Users },
   { id: "programs", label: "Programs", icon: GraduationCap },
-  { id: "physiotherapy", label: "Physiotherapy", icon: Activity },
+  { id: "physiotherapy", label: "Physiotherapy HUB", icon: Activity },
 ];
 
 const categoryDescriptions: Record<string, React.ReactNode> = {
@@ -64,7 +64,10 @@ const categoryDescriptions: Record<string, React.ReactNode> = {
   ),
   assessments: (
     <>
-      Comprehensive clinical assessments for <strong>ADHD</strong>, <strong>Autism</strong>, <strong>Learning Disabilities</strong>, <strong>Anxiety</strong>, <strong>Depression</strong>, <strong>Stress</strong>, <strong>Addiction</strong>, and other psychological & psychoeducational evaluations for <strong>Children</strong>, <strong>Adolescents</strong> and <strong>Adults</strong>.
+      <span className="text-green font-bold block mb-3 uppercase tracking-widest text-xs lg:text-sm">
+        <strong>Mapping Your Unique Blueprint</strong>
+      </span>
+      Comprehensive clinical assessments for <strong>ADHD</strong>, <strong>Autism</strong>, <strong>Learning Disabilities</strong>, <strong>Anxiety</strong>, <strong>Depression</strong>, <strong>Stress</strong>, <strong>Addiction</strong>, and other wide range of psychological & psychoeducational evaluations for <strong>Children</strong>, <strong>Adolescents</strong> and <strong>Adults</strong>.
     </>
   ),
   therapy: (
@@ -350,8 +353,8 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                 <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                   <div className="lg:col-span-5">
                     <h2 className="text-3xl lg:text-4xl font-serif text-black leading-tight italic">
-                      Assessment Hub: <br className="hidden lg:block" />
-                      Mapping Your Unique Blueprint
+                      Assessment HUB: <br className="hidden lg:block" />
+                      <strong>Mapping Your Unique Blueprint</strong>
                     </h2>
                   </div>
                   <div className="lg:col-span-7">
@@ -487,6 +490,147 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
               {/* Bridge Text before Grid */}
               <div className="text-center pt-4 border-t border-black/5">
                 <h4 className="text-2xl font-serif text-black italic">Explore our Specialized Assessments</h4>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Physiotherapy HUB Foundational Info - Shown only for Physiotherapy category */}
+          {activeCategory === "physiotherapy" && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-6xl mx-auto mb-10 space-y-8"
+            >
+              {/* Intro Banner - Optimized for horizontal space with 5:7 split */}
+              <div className="bg-white rounded-[2.5rem] border border-black/5 p-6 lg:p-12 shadow-sm relative overflow-hidden">
+                <div className="absolute -right-8 -top-8 w-64 h-64 bg-green/5 rounded-full blur-3xl opacity-60" />
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                  <div className="lg:col-span-5">
+                    <h2 className="text-3xl lg:text-4xl font-serif text-black leading-tight italic">
+                      Physiotherapy: <br className="hidden lg:block" />
+                      <strong>Move Better. Live Stronger. Feel Healthier.</strong>
+                    </h2>
+                  </div>
+                  <div className="lg:col-span-7">
+                    <p className="text-lg lg:text-xl text-black/70 font-medium leading-relaxed border-l-2 border-green/10 pl-6 lg:pl-8 py-2">
+                      Physiotherapy helps children, adolescents, and adults restore movement, reduce pain, improve strength and balance, and regain independence after injury, surgery, or developmental challenges. At Divit MindSpace, we view physiotherapy as more than treatment — it is about helping individuals move better, participate fully in daily life, and feel stronger and more confident.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Two Column Section: Children & Adolescents/Adults - Balanced with 5:7 Ratio */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+                {/* Physiotherapy for Children */}
+                <div className="lg:col-span-5 flex flex-col gap-6">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
+                      <Users className="w-6 h-6 text-green" />
+                    </div>
+                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Physiotherapy For Children</h3>
+                  </div>
+                  
+                  {/* Top Box: Core Features */}
+                  <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm">
+                    <div className="lg:min-h-[300px] flex flex-col">
+                      <p className="text-black/70 font-medium leading-relaxed mb-5 italic border-l-2 border-green/10 pl-6">
+                        Play-based, fun sessions that build gross motor skills, strength, balance, and coordination while supporting developmental milestones in a motivating environment.
+                      </p>
+                      <ul className="space-y-6 flex-grow">
+                        {[
+                          { title: "Gross Motor Milestones", text: "Supporting children who are delayed in rolling, sitting, crawling, or walking." },
+                          { title: "Coordination & Balance", text: "Helping children who may appear clumsy, frequent falls, or have trouble with physical activities." },
+                          { title: "Developmental Delays", text: "Specialized support for conditions such as cerebral palsy or other movement challenges." }
+                        ].map((item) => (
+                          <li key={item.title} className="flex gap-4">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                            <p className="text-[15px] text-black/70 leading-relaxed">
+                              <strong className="text-black font-bold">{item.title}:</strong> {item.text}
+                            </p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Bottom Box: When to Reach Out */}
+                  <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm h-full">
+                    <h4 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-8 px-1">Is This the Right Support?</h4>
+                    <ul className="space-y-6">
+                      {[
+                        "Delayed gross motor milestones or coordination difficulties",
+                        "Poor balance, frequent falls, or clumsiness",
+                        "Muscle weakness or postural issues",
+                        "Recovery after injury, fracture, or surgery",
+                        "Conditions affecting movement such as cerebral palsy"
+                      ].map((item, i) => (
+                        <li key={i} className="flex gap-4">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <p className="text-[15px] text-black/70 leading-relaxed">{item}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Physiotherapy for Adolescents & Adults */}
+                <div className="lg:col-span-7 flex flex-col gap-6">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
+                      <GraduationCap className="w-6 h-6 text-green" />
+                    </div>
+                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Physiotherapy For Adolescents & Adults</h3>
+                  </div>
+
+                  {/* Top Box: Core Features */}
+                  <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm">
+                    <div className="lg:min-h-[300px] flex flex-col">
+                      <p className="text-black/70 font-medium leading-relaxed mb-5 italic border-l-2 border-green/10 pl-6">
+                        Targeted therapy to address sports injuries, gym-related pain, posture issues, and practical, goal-oriented rehabilitation.
+                      </p>
+                      <ul className="grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-6 flex-grow">
+                        {[
+                          { title: "Pain Management", text: "Advanced and effective therapy to reduce pain and improve daily comfort." },
+                          { title: "Gym Pain Therapy", text: "Addressing gym-related pain and injuries, helping you train safely and effectively." },
+                          { title: "Post-Surgical Rehabilitation", text: "Structured recovery programs after surgery to regain strength, mobility, and function." },
+                          { title: "Balance & Coordination", text: "Specialized training to improve stability, prevent falls, and enhance movement control." },
+                          { title: "Sports Injury Rehab", text: "Helping athletes and active individuals return to their sports safely." }
+                        ].map((item) => (
+                          <li key={item.title} className="flex gap-4">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                            <p className="text-[15px] text-black/70 leading-relaxed">
+                              <strong className="text-black font-bold">{item.title}:</strong> {item.text}
+                            </p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Bottom Box: Key Areas */}
+                  <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm h-full">
+                    <h4 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-8 px-1">Our Approach:</h4>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                      {[
+                        "Individualized & Functional plans tailored to real-life goals",
+                        "Evidence-Based & Hands-On techniques",
+                        "Play-Based methods for children to make therapy enjoyable",
+                        "Holistic Focus on pain, strength, and mobility",
+                        "Family Partnership and caregiver guidance"
+                      ].map((item, i) => (
+                        <li key={i} className="flex gap-4">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <p className="text-[15px] text-black/70 leading-relaxed">{item}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bridge Text before Grid */}
+              <div className="text-center pt-4 border-t border-black/5">
+                <h4 className="text-2xl font-serif text-black italic">Explore our Specialized Physiotherapy Services</h4>
               </div>
             </motion.div>
           )}

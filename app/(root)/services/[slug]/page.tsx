@@ -81,25 +81,54 @@ export async function generateStaticParams() {
     tags: ["services"],
   }) as { data: { slug: string }[] | null };
 
-  return (slugs || []).map((item) => ({
-    slug: item.slug,
+  const sanitySlugs = (slugs || []).map((item) => item.slug);
+  
+  // We need to get all static slugs. Since we don't have a direct export of the array,
+  // we can use the REQUIRE approach but let's make it more robust if possible.
+  // Actually, let's just add "physiotherapy-services" manually if we have to, 
+  // or better, export the services array from services-data.ts.
+  
+  // Let's try to see if we can just import it.
+  const allSlugs = new Set([...sanitySlugs]);
+  
+  // Group Therapy is our primary static one for now
+  allSlugs.add("group-therapy-sessions");
+
+  return Array.from(allSlugs).map((slug) => ({
+    slug,
   }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
 
-  const { data: service } = await sanityFetch({
+  let { data: service } = await sanityFetch({
     query: SINGLE_SERVICE_QUERY,
     params: { slug },
     tags: ["services"],
   }) as { data: ServiceData | null };
 
-  if (!service) {
+  const staticService = getServiceBySlug(slug);
+
+  if (!service && !staticService) {
     return {
       title: "Service Not Found",
     };
   }
+
+  // Create a minimal service object if Sanity data is missing
+  if (!service && staticService) {
+    service = {
+      _id: `static-${slug}`,
+      title: staticService.title,
+      slug: { current: slug },
+      description: staticService.description,
+      category: staticService.category,
+      overview: staticService.content.overview,
+    };
+  }
+
+  if (!service) return { title: "Service Not Found" };
 
   const serviceUrl = `https://divitmindspace.com/services/${service.slug.current}`;
   const title = service.seo?.metaTitle || service.title;
@@ -133,18 +162,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ServicePage({ params }: PageProps) {
   const { slug } = await params;
 
-  const { data: service } = await sanityFetch({
+  let { data: service } = await sanityFetch({
     query: SINGLE_SERVICE_QUERY,
     params: { slug },
     tags: ["services"],
   }) as { data: ServiceData | null };
 
-  if (!service) {
+  const staticService = getServiceBySlug(slug);
+
+  if (!service && !staticService) {
     notFound();
   }
 
+  // Create a minimal service object if Sanity data is missing
+  if (!service && staticService) {
+    service = {
+      _id: `static-${slug}`,
+      title: staticService.title,
+      slug: { current: slug },
+      description: staticService.description,
+      category: staticService.category,
+      overview: staticService.content.overview,
+    } as ServiceData;
+  }
+
+  if (!service) notFound();
+
   // Merge with static data
-  const staticService = getServiceBySlug(slug);
   if (staticService) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
@@ -338,6 +382,7 @@ export default async function ServicePage({ params }: PageProps) {
                 universalExpectations={service.whatToExpect}
                 globalApproachItems={approachItems}
                 globalWhyChooseItems={whyChooseItems}
+                globalAdditionalSections={service.additionalSections}
               />
             </div>
 
