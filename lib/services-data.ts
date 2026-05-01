@@ -417,7 +417,7 @@ export const services: ServiceData[] = [
       audienceSections: [
         {
           audienceType: "children",
-          title: "Children, Adolescents & Teens",
+          title: "Children & Teens",
           hero: {
             shortDescription: "Creative, play-based, and engaging sessions designed to help young minds build essential social-emotional skills, communication, and confidence in a fun and validating environment.",
           },
@@ -426,7 +426,7 @@ export const services: ServiceData[] = [
               _type: "fullWidthListBlock",
               _key: "bt-children-right-support",
               title: "Is This the Right Support for You?",
-              intro: "For **Children, Adolescents & Teens**:",
+              intro: "For **Children & Teens**:",
               items: [
                 "Challenges with emotional regulation or frequent meltdowns",
                 "Difficulty with social communication or peer interactions",
@@ -599,6 +599,95 @@ export const services: ServiceData[] = [
       ],
       duration: "50-60 minute sessions, typically weekly",
       format: "In-person or online",
+    },
+  },
+  {
+    id: "22",
+    title: "Cognitive Therapy",
+    slug: "cognitive-therapy",
+    description: "Cognitive Therapy offers a collaborative and supportive space to explore the deep connection between your thoughts, emotions, and actions — helping **children**, **teens**, and **adults** understand these cognitive processes, gain greater clarity, and build emotional resilience and confidence.",
+    category: "therapy",
+    image: "/features-service-card/therapy-services.png",
+    content: {
+      overview: "Our minds are powerful storytellers, but sometimes the scripts we follow can hold us back.\n\nCognitive Therapy offers a collaborative and supportive space to explore the deep connection between your thoughts, emotions, and actions — helping **children, teens, and adults** understand these cognitive processes, gain greater clarity, and build emotional resilience and confidence.",
+      benefits: [
+        "Greater awareness of thought patterns and their impact on emotions and behavior",
+        "Practical tools to reframe unhelpful or negative thinking",
+        "Improved emotional regulation and resilience",
+        "Reduced anxiety, self-doubt, and overwhelm",
+        "Stronger problem-solving and decision-making skills",
+        "Increased self-confidence and a healthier inner dialogue",
+        "Personalized strategies that respect your unique cognitive style"
+      ],
+      whatToExpect: [
+        "A safe, collaborative, and neuro-affirming therapeutic environment",
+        "Initial assessment to understand your specific thought patterns and goals",
+        "Personalized sessions tailored to your age and needs",
+        "Creative and expressive techniques alongside traditional cognitive methods",
+        "Practical tools and real-world strategies to practice between sessions",
+        "Regular progress reviews and adjustments to the therapy plan"
+      ],
+      audienceSections: [
+        {
+          audienceType: "children",
+          title: "Children & Teens",
+          hero: {
+            shortDescription: "We use age-appropriate, engaging methods to help young minds understand their thoughts and emotions, build healthy inner narratives, and develop strong emotional foundations.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "ct-children-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "Cognitive Therapy for **Children & Teens**:",
+              items: [
+                "Difficulty understanding or managing big emotions",
+                "Negative self-talk or low self-confidence",
+                "Anxiety, worry, or school-related stress",
+                "Challenges with emotional regulation or rigid thinking",
+                "Need for support in building healthy thought patterns early in life"
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "adults",
+          title: "Adults",
+          hero: {
+            shortDescription: "Practical, insightful support for identifying unhelpful thought patterns and reframing them, especially during life transitions, stress, anxiety, or self-doubt.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "ct-adults-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "Cognitive Therapy for **Adults**:",
+              items: [
+                "Persistent negative or unhelpful thought patterns",
+                "Struggles with anxiety, self-doubt, or overwhelming stress",
+                "Difficulty managing life transitions or burnout",
+                "Desire for neuro-affirming cognitive support",
+                "Wanting practical tools to improve emotional well-being and resilience"
+              ]
+            }
+          ]
+        }
+      ],
+      approachItems: [
+        "Neuro-affirming and individualized cognitive therapy",
+        "Gentle exploration and reframing of thought patterns",
+        "Integration of expressive and creative methods when helpful",
+        "Focus on practical, actionable toolkits for daily life",
+        "Respect for different cognitive processing styles"
+      ],
+      whyChooseItems: [
+        "A validating and empowering space for all types of minds",
+        "Experienced therapists who honor neurodiversity",
+        "Practical strategies that create real, lasting change",
+        "Therapy adapted thoughtfully for every age and stage"
+      ],
+      duration: "45-60 minute sessions, typically weekly",
+      format: "In-person at our center",
     },
   },
   {
@@ -1285,7 +1374,9 @@ export const services: ServiceData[] = [
 ];
 
 export function getServiceBySlug(slug: string): ServiceData | undefined {
-  return services.find((service) => service.slug === slug);
+  // Normalize slug for CBT specifically
+  const normalizedSlug = (slug === "cognitive-behavioral-therapy-cbt") ? "cbt-cognitive-behavioral-therapy" : slug;
+  return services.find((service) => service.slug === normalizedSlug);
 }
 
 export function getServicesByCategory(category: string): ServiceData[] {

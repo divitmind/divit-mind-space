@@ -205,7 +205,7 @@ export function AudienceTabs({
                 const isActive = activeTab === section.audienceType;
                 // Normalize Label: Only show Children, Teens, Adults, unless custom label provided
                 let displayTitle = section.title;
-                if (displayTitle.toLowerCase().includes("children") && displayTitle.toLowerCase().includes("adolescent")) displayTitle = "Children & Adolescents";
+                if (displayTitle.toLowerCase().includes("children") && (displayTitle.toLowerCase().includes("teen") || displayTitle.toLowerCase().includes("adolescent"))) displayTitle = "Children & Teens";
                 else if (displayTitle.toLowerCase().includes("children")) displayTitle = "Children";
                 else if (displayTitle.toLowerCase().includes("teen") || displayTitle.toLowerCase().includes("adolescent")) displayTitle = "Adolescents";
                 else if (displayTitle.toLowerCase().includes("adult")) displayTitle = "Adults";
@@ -281,7 +281,7 @@ export function AudienceTabs({
                   <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
                     <Sparkles className="w-48 h-48 text-white" />
                   </div>
-                  <div className="relative z-10">
+                  <div className="relative z-10 flex flex-col h-full justify-between">
                     <div className="lg:-mt-6 mb-6">
                       <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Primary Outcome</p>
                     </div>
@@ -294,11 +294,11 @@ export function AudienceTabs({
 
               <div className="lg:col-span-6 flex">
                 <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 flex flex-col w-full relative overflow-hidden">
-                  <div className="relative z-10">
+                  <div className="relative z-10 flex flex-col h-full justify-between">
                     <div className="lg:-mt-6 mb-6">
                       <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                     </div>
-                    <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
+                    <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap flex-1">
                       {renderTextWithBold(activeData.hero?.overview || globalOverview || "")}
                     </p>
                   </div>

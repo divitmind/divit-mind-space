@@ -193,7 +193,7 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT, Counselling & Behavioral Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "counselling" || slug === "behavioral-therapy") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy") {
       service.description = staticService.description;
       service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;
