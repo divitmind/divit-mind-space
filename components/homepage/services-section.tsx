@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, FileText, Heart, Users, GraduationCap, Compass, ClipboardList, Activity } from "lucide-react";
-import { cn } from "@/lib/utils";
 import type { ServiceCategoryCard } from "@/lib/types";
 
 // Default fallback services
@@ -28,7 +27,7 @@ const DEFAULT_SERVICES = [
     },
     {
         id: "physiotherapy",
-        label: "Physiotherapy HUB",
+        label: "Physiotherapy",
         icon: "activity" as const,
         outcome: "Expert care for movement, strength and recovery",
         route: "/services?category=physiotherapy",
@@ -80,19 +79,15 @@ export function ServicesSection({ serviceCategories }: ServicesSectionProps) {
                     <div className="flex-1 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                 </div>
 
-                {/* Services Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 lg:gap-6">
+                {/* Services Grid - Optimized for Tablet Stability (3 cols on tablets, 5 on desktop) */}
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 lg:gap-6">
                     {services.map((service, idx) => {
                         const IconComponent = iconMap[service.icon as keyof typeof iconMap] || FileText;
-                        const isLastOnMobile = idx === services.length - 1;
                         return (
                             <Link
                                 key={service.id}
                                 href={service.route}
-                                className={cn(
-                                    "group relative flex flex-col p-5 lg:p-8 rounded-[1.5rem] lg:rounded-[2rem] border border-black/5 transition-all duration-500 bg-white hover:shadow-2xl hover:shadow-black/5 hover:border-black/10",
-                                    isLastOnMobile && "col-span-2 lg:col-span-1"
-                                )}
+                                className="group relative flex flex-col p-4 lg:p-6 xl:p-8 rounded-[1.5rem] lg:rounded-[2rem] border border-black/5 transition-all duration-500 bg-white hover:shadow-2xl hover:shadow-black/5 hover:border-black/10"
                             >
                                 {/* Icon */}
                                 <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl flex items-center justify-center mb-4 lg:mb-6 transition-all group-hover:scale-105 bg-[#E8D5B7]">

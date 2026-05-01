@@ -15,16 +15,22 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { services } from "@/lib/services-data";
-
-const navServices = services.slice(0, 6);
 
 const serviceCategories = [
-  { id: "assessments", label: "Assessments Hub", href: "/services?category=assessments", icon: FileText },
-  { id: "therapy", label: "Therapy", href: "/services?category=therapy", icon: Heart },
-  { id: "guidance", label: "Counselling", href: "/services?category=guidance", icon: Users },
-  { id: "programs", label: "Programs", href: "/services?category=programs", icon: GraduationCap },
-  { id: "physiotherapy", label: "Physiotherapy", href: "/services?category=physiotherapy", icon: Activity },
+  { id: "assessments", label: "Assessments", hub: true,  href: "/services?category=assessments", icon: FileText },
+  { id: "therapy",     label: "Therapy",     hub: false, href: "/services?category=therapy",      icon: Heart },
+  { id: "guidance",    label: "Counselling", hub: false, href: "/services?category=guidance",     icon: Users },
+  { id: "programs",    label: "Programs",    hub: false, href: "/services?category=programs",     icon: GraduationCap },
+  { id: "physiotherapy", label: "Physiotherapy", hub: false, href: "/services?category=physiotherapy", icon: Activity },
+];
+
+const popularServices = [
+  { label: "Speech Therapy",        href: "/services/speech-therapy" },
+  { label: "Occupational Therapy",  href: "/services/occupational-therapy" },
+  { label: "Behavioral Therapy",    href: "/services/behavioral-therapy" },
+  { label: "Cognitive Therapy",     href: "/services/cognitive-therapy" },
+  { label: "Group Therapy",         href: "/services/group-therapy-sessions" },
+  { label: "Assessments",           href: "/services/psychoeducational-assessments" },
 ];
 
 export function MainNav() {
@@ -54,32 +60,42 @@ export function MainNav() {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="w-[400px] p-6 md:w-[500px] lg:w-[600px] bg-white rounded-[2.5rem] shadow-2xl border border-black/5">
-              {/* Category Links */}
-              <div className="grid grid-cols-4 gap-3 mb-6">
+              {/* Category Links — all 5 in one row */}
+              <div className="grid grid-cols-5 gap-2 mb-6">
                 {serviceCategories.map((cat) => (
                   <Link
                     key={cat.id}
                     href={cat.href}
-                    className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-black/5 hover:border-green/20 hover:bg-green/5 transition-all group"
+                    className="flex flex-col items-center gap-2 p-3 rounded-2xl border border-black/5 hover:border-green/20 hover:bg-green/5 transition-all group"
                   >
                     <cat.icon className="w-5 h-5 text-black/30 group-hover:text-green transition-colors" />
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-black/50 group-hover:text-green transition-colors">
+                    <span className="text-[8px] font-bold uppercase tracking-widest text-black/50 group-hover:text-green transition-colors text-center leading-tight">
                       {cat.label}
                     </span>
+                    {cat.hub && (
+                      <span className="text-[7px] font-black uppercase tracking-widest text-green/60 bg-green/8 px-1.5 py-0.5 rounded-full border border-green/15 group-hover:bg-green/15 transition-colors">
+                        HUB
+                      </span>
+                    )}
                   </Link>
                 ))}
               </div>
 
-              {/* Individual Services */}
-              <ul className="grid gap-2 md:grid-cols-2 border-t border-black/5 pt-4">
-                {navServices.map((service) => (
-                  <ListItem
-                    key={service.id}
-                    title={service.title}
-                    href={`/services/${service.slug}`}
-                  />
-                ))}
-              </ul>
+              {/* Popular Services */}
+              <div className="border-t border-black/5 pt-4">
+                <h4 className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-black/20">Popular Services</h4>
+                <div className="flex flex-wrap gap-2">
+                  {popularServices.map((service) => (
+                    <Link
+                      key={service.label}
+                      href={service.href}
+                      className="px-4 py-2 rounded-full bg-green/5 border border-green/10 text-[11px] font-bold text-green hover:bg-green/10 transition-colors uppercase tracking-wider"
+                    >
+                      {service.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
 
               <div className="border-t border-black/5 pt-4 mt-4">
                 <Link

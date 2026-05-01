@@ -298,7 +298,7 @@ export function AudienceTabs({
                     <div className="lg:-mt-6 mb-6">
                       <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                     </div>
-                    <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap flex-1">
+                    <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap flex-1 text-editorial-dropcap">
                       {renderTextWithBold(activeData.hero?.overview || globalOverview || "")}
                     </p>
                   </div>

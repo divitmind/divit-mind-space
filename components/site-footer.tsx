@@ -128,7 +128,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
         <footer className="bg-[#FDFBF7] border-t border-black/5 pt-3 lg:pt-4 pb-6 lg:pb-8">
             <div className="container">
                 {/* Top Grid: mobile stacks to 2 cols; desktop lays out 5 cols */}
-                <div className="grid grid-cols-2 lg:grid-cols-[1.25fr_1fr_1fr_1fr_1.2fr] gap-x-8 gap-y-8 lg:gap-y-12">
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-[1.25fr_1fr_1fr_1fr_1.2fr] gap-x-8 gap-y-8 lg:gap-y-12">
                     {/* Brand Column: Full width on mobile */}
                     <div className="col-span-2 lg:col-span-1">
                         <div className="flex items-start gap-4 mb-4">
@@ -137,6 +137,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                                     src="/divit-mindspace-logo.png"
                                     alt="Divit MindSpace Logo"
                                     fill
+                                    sizes="48px"
                                     className="object-contain"
                                 />
                             </div>

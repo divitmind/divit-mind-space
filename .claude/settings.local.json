@@ -18,7 +18,12 @@
       "Bash(copy:*)",
       "Bash(cmd /c copy:*)",
       "Bash(cmd /c dir \"D:\\\\plus_ev_code_base\\\\divit-mind-space\\\\public\\\\child_development_journey_roadmap.png\")",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "Bash(Get-ChildItem -Path \"D:\\\\experiments\\\\divit-mind-space\" -Force)",
+      "Bash(Select-Object -Property Name, PSIsContainer)",
+      "Bash(dir \"D:\\\\experiments\\\\divit-mind-space\\\\app\" -Recurse)",
+      "Bash(Select-Object -Property FullName)",
+      "PowerShell(Get-ChildItem -Path \"D:\\\\experiments\\\\divit-mind-space\\\\app\" -Recurse | Select-Object -Property FullName | Where-Object {$_.FullName -match '\\\\.\\(tsx|ts|json\\)$'})"
     ]
   }
 }

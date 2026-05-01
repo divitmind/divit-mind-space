@@ -1,5 +1,8 @@
+"use client";
+
+import * as React from "react";
 import Link from "next/link";
-import { Marquee } from "@/components/ui/marquee";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TestimonialCard } from "@/components/homepage/testimonial-card";
 import type { ReviewListItem } from "@/sanity/types";
 
@@ -41,10 +44,58 @@ interface TestimonialsSectionProps {
   reviews: ReviewListItem[];
 }
 
+// Card width matches TestimonialCard's sm:w-[380px]; gap-5 = 20px
+const DESKTOP_CARD_W = 380;
+const DESKTOP_GAP = 20;
+const DESKTOP_STEP = DESKTOP_CARD_W + DESKTOP_GAP;
+
 export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
   const top10 = reviews.slice(0, 10);
   const cards = top10.length > 0 ? top10.map(reviewToCard) : FALLBACK_TESTIMONIALS;
-  const marqueeItems = [...cards, ...cards];
+
+  // Triple the array — shared by both carousels
+  const tripled = [...cards, ...cards, ...cards];
+
+  const mobileRef = React.useRef<HTMLDivElement>(null);
+  const desktopRef = React.useRef<HTMLDivElement>(null);
+  const [mobileIndex, setMobileIndex] = React.useState(0);
+  const [desktopIndex, setDesktopIndex] = React.useState(0);
+
+  // Scroll both carousels to the middle set on mount
+  React.useEffect(() => {
+    if (mobileRef.current) {
+      const step = mobileRef.current.offsetWidth * 0.8 + 16;
+      mobileRef.current.scrollLeft = cards.length * step;
+    }
+    if (desktopRef.current) {
+      desktopRef.current.scrollLeft = cards.length * DESKTOP_STEP;
+    }
+  }, [cards.length]);
+
+  const handleMobileScroll = () => {
+    const el = mobileRef.current;
+    if (!el) return;
+    const step = el.offsetWidth * 0.8 + 16;
+    const raw = Math.round(el.scrollLeft / step);
+    setMobileIndex(((raw % cards.length) + cards.length) % cards.length);
+    if (el.scrollLeft <= 0) el.scrollLeft = cards.length * step;
+    else if (el.scrollLeft + el.offsetWidth >= el.scrollWidth) el.scrollLeft = cards.length * step;
+  };
+
+  const handleDesktopScroll = () => {
+    const el = desktopRef.current;
+    if (!el) return;
+    const raw = Math.round(el.scrollLeft / DESKTOP_STEP);
+    setDesktopIndex(((raw % cards.length) + cards.length) % cards.length);
+    if (el.scrollLeft <= 0) el.scrollLeft = cards.length * DESKTOP_STEP;
+    else if (el.scrollLeft + el.offsetWidth >= el.scrollWidth) el.scrollLeft = cards.length * DESKTOP_STEP;
+  };
+
+  const scrollDesktop = (dir: "prev" | "next") => {
+    const el = desktopRef.current;
+    if (!el) return;
+    el.scrollLeft += dir === "next" ? DESKTOP_STEP : -DESKTOP_STEP;
+  };
 
   return (
     <section className="pt-6 lg:pt-10 pb-10 lg:pb-16 bg-[#FDFBF7] overflow-hidden">
@@ -53,7 +104,7 @@ export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
         <div className="inline-flex items-center justify-center text-black/40 text-[10px] font-bold tracking-widest uppercase mb-4">
           Parent Stories
         </div>
-        <h2 className="text-3xl lg:text-5xl font-bold text-black mb-6 tracking-tight font-[family-name:var(--font-cormorant)] italic">   
+        <h2 className="text-3xl lg:text-5xl font-bold text-black mb-6 tracking-tight font-[family-name:var(--font-cormorant)] italic">
           Why Families Trust Us
         </h2>
         <div className="flex flex-col items-center gap-2">
@@ -79,17 +130,84 @@ export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
                 <span className="text-2xl font-serif italic text-green leading-none" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>4.9 / 5</span>
             </div>
             <span className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em]">Top Rated on Google</span>
-        </div>      </div>
-
-      <div className="relative w-full">
-        <Marquee pauseOnHover className="pb-2">
-          {marqueeItems.map((t, i) => (
-            <TestimonialCard key={`t1-${i}`} {...t} />
-          ))}
-        </Marquee>
+        </div>
       </div>
 
-      <div className="container mt-4 text-center">
+      <div className="relative w-full">
+
+        {/* ── Desktop Snap Carousel ── */}
+        <div className="hidden md:block">
+          <div className="relative">
+            <button
+              onClick={() => scrollDesktop("prev")}
+              aria-label="Previous testimonial"
+              className="absolute left-4 top-[42%] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-black/10 shadow-md flex items-center justify-center text-black/40 hover:text-green hover:border-green/30 transition-all active:scale-95"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            <div
+              ref={desktopRef}
+              onScroll={handleDesktopScroll}
+              className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-5 px-16 pb-8"
+            >
+              {tripled.map((t, i) => (
+                <div key={`d-${i}`} className="flex-shrink-0 snap-center">
+                  <TestimonialCard {...t} />
+                </div>
+              ))}
+            </div>
+
+            <button
+              onClick={() => scrollDesktop("next")}
+              aria-label="Next testimonial"
+              className="absolute right-4 top-[42%] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-black/10 shadow-md flex items-center justify-center text-black/40 hover:text-green hover:border-green/30 transition-all active:scale-95"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Desktop dot pagination */}
+          <div className="flex justify-center gap-2 mt-2">
+            {cards.map((_, i) => (
+              <div
+                key={`ddot-${i}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === desktopIndex ? "bg-green w-4" : "bg-black/10 w-1.5"}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* ── Mobile Infinite Snap Carousel ── */}
+        <div className="md:hidden">
+          <div
+            ref={mobileRef}
+            onScroll={handleMobileScroll}
+            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide px-10 gap-4 pb-8"
+          >
+            {tripled.map((t, i) => (
+              <div key={`m-${i}`} className="w-[80vw] flex-shrink-0 snap-center">
+                <TestimonialCard {...t} />
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile dot pagination */}
+          <div className="flex flex-col items-center gap-3 -mt-2">
+            <div className="flex justify-center gap-2">
+              {cards.map((_, i) => (
+                <div
+                  key={`dot-${i}`}
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === mobileIndex ? "bg-green w-4" : "bg-black/10"}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div className="container mt-6 text-center">
         <Link
           href="/reviews"
           className="inline-flex items-center justify-center rounded-full border border-black/10 text-black/60 px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#7A9A7D] hover:text-white hover:border-[#7A9A7D] transition-all duration-300"
