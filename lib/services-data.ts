@@ -425,11 +425,11 @@ export const services: ServiceData[] = [
     id: "6",
     title: "Cognitive Behavioral Therapy (CBT)",
     slug: "cbt-cognitive-behavioral-therapy",
-    description: "Cognitive Behavioral Therapy (CBT) is a practical, goal-oriented, and evidence-based approach that explores the connection between thoughts, feelings, and behaviors.",
+    description: "Cognitive Behavioral Therapy (CBT) is a practical, goal-oriented, and evidence-based approach that helps individuals understand the connection between their **thoughts, feelings, and behaviors**.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Cognitive Behavioral Therapy (CBT) is a practical, goal-oriented, and evidence-based approach that explores the connection between thoughts, feelings, and behaviors. At Divit MindSpace, we offer CBT that is tailored for both neurotypical and neurodivergent individuals (ADHD/Autism). We don’t aim to change who you are — we equip you with effective tools to navigate life with greater confidence, clarity, and calm.",
+      overview: "Cognitive Behavioral Therapy (CBT) is a practical, goal-oriented, and evidence-based approach that helps individuals understand the connection between their **thoughts, feelings, and behaviors**. At Divit MindSpace, we offer CBT tailored for **children, adolescents, and adults**, including both **neurotypical and neurodivergent individuals** (such as ADHD and Autism). We don’t aim to change who you are — instead, we equip you with effective, personalized tools to navigate everyday challenges with greater **confidence, clarity, and calm**, across every stage of life.",
       whatToExpect: [
         "Initial assessment to understand specific needs and goals",
         "Personalized, practical skill-building sessions",
