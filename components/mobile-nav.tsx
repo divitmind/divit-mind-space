@@ -87,10 +87,10 @@ export function MobileNav() {
                         key={group.label}
                         href={group.href}
                         onClick={() => setOpen(false)}
-                        className="flex flex-col gap-3 p-5 rounded-2xl bg-white border border-black/5 active:scale-95 transition-all shadow-sm shadow-black/[0.02]"
+                        className="flex flex-col gap-3 p-4 rounded-2xl bg-white border border-black/5 active:scale-95 transition-all shadow-sm shadow-black/[0.02]"
                       >
                         <group.icon className="h-5 w-5 text-green/60" />
-                        <span className="text-[13px] text-black/70 font-medium italic">{group.label}</span>
+                        <span className="text-[12px] text-black/70 font-medium italic leading-snug">{group.label}</span>
                       </Link>
                     ))}
                   </div>
