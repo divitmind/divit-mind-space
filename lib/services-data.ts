@@ -62,11 +62,11 @@ export const services: ServiceData[] = [
     id: "1",
     title: "Psychometric Assessments",
     slug: "psychometric-assessments",
-    description: "Our psychometric assessments are designed to gently and accurately understand your child's learning style, strengths, and areas where they may need additional support.",
+    description: "Our psychometric assessments are designed to gently and accurately understand your **child**'s learning style, strengths, and areas where they may need additional support.",
     category: "assessments",
     image: "/features-service-card/child-autism-assessment.png",
     content: {
-      overview: "Our psychometric assessments are designed to gently and accurately understand your child's learning style, strengths, and areas where they may need additional support. These assessments help identify cognitive abilities, emotional patterns, and developmental needs to create a clear roadmap for your child's growth.",
+      overview: "Our psychometric assessments are designed to gently and accurately understand your **child**'s learning style, strengths, and areas where they may need additional support. These assessments help identify cognitive abilities, emotional patterns, and developmental needs to create a clear roadmap for your **child**'s growth.",
       benefits: [
         "Clear understanding of your child's cognitive strengths and challenges",
         "Detailed written report with actionable recommendations",
@@ -96,11 +96,11 @@ export const services: ServiceData[] = [
     id: "2",
     title: "Psychoeducational Assessments",
     slug: "psychoeducational-assessments",
-    description: "Psychoeducational assessments play a pivotal role in supporting neurodivergent children and adolescents — those with learning differences such as ADHD, dyslexia, or autism spectrum conditions.",
+    description: "Psychoeducational assessments play a pivotal role in supporting neurodivergent **children** and **adolescents** — those with learning differences such as ADHD, dyslexia, or autism spectrum conditions.",
     category: "assessments",
     image: "/Psychoeducational Assessments.jpeg",
     content: {
-      overview: "Psychoeducational assessments play a pivotal role in supporting **children and adolescents** — those with learning differences such as ADHD, dyslexia, dyscalculia, dysgraphia, or autism spectrum conditions. At Divit MindSpace, we go beyond simple diagnosis to create a clear, actionable roadmap that helps children and teenagers understand their unique learning profile and thrive academically and emotionally.\n\nUsing a combination of evidence-based tools and a neuro-affirming approach, we identify strengths, uncover specific learning challenges, and provide practical recommendations tailored to the individual's needs.",
+      overview: "Psychoeducational assessments play a pivotal role in supporting **children and adolescents** — those with learning differences such as ADHD, dyslexia, dyscalculia, dysgraphia, or autism spectrum conditions. At Divit MindSpace, we go beyond simple diagnosis to create a clear, actionable roadmap that helps **children** and **teenagers** understand their unique learning profile and thrive academically and emotionally.\n\nUsing a combination of evidence-based tools and a neuro-affirming approach, we identify strengths, uncover specific learning challenges, and provide practical recommendations tailored to the individual's needs.",
       benefits: [
         "Identification of specific learning disabilities (dyslexia, dyscalculia, dysgraphia)",
         "Detailed academic skill profile across reading, writing, and math",
@@ -192,11 +192,11 @@ export const services: ServiceData[] = [
     id: "3",
     title: "Speech Therapy",
     slug: "speech-therapy",
-    description: "At Divit MindSpace, we see communication as more than a skill—it is a child’s way of connecting with the world, expressing emotions, and building relationships.",
+    description: "At Divit MindSpace, we see communication as more than a skill—it is a **child**’s way of connecting with the world, expressing emotions, and building relationships.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "We focus not just on how a child speaks, but on why they communicate, how they feel while doing so, and how communication can become meaningful for them. Our approach integrates speech clarity, language understanding, fluency, and social communication naturally into play, interaction, and everyday experiences—rather than isolating them into rigid drills.\n\nBy blending therapeutic expertise with a relationship-based, child-led approach, we help children move from pressure to comfort, and from hesitation to confident expression.",
+      overview: "We focus not just on how a **child** speaks, but on why they communicate, how they feel while doing so, and how communication can become meaningful for them. Our approach integrates speech clarity, language understanding, fluency, and social communication naturally into play, interaction, and everyday experiences—rather than isolating them into rigid drills.\n\nBy blending therapeutic expertise with a relationship-based, **child**-led approach, we help **children** move from pressure to comfort, and from hesitation to confident expression.",
       benefits: [
         "Confident communication across home, school, and social settings.",
         "Clearer speech that is easily understood by family, peers, and teachers.",
@@ -392,11 +392,11 @@ export const services: ServiceData[] = [
     id: "5",
     title: "Behavioral Therapy",
     slug: "behavioral-therapy",
-    description: "Every child expresses emotions differently. Sometimes, challenging behaviors are not defiance — but a way of communicating unmet needs, frustration, or difficulty coping.",
+    description: "Every **child** expresses emotions differently. Sometimes, challenging behaviors are not defiance — but a way of communicating unmet needs, frustration, or difficulty coping.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Every child expresses emotions differently. Sometimes, challenging behaviors are not defiance — but a way of communicating unmet needs, frustration, or difficulty coping. Our Behavioral Therapy program is designed to help children develop positive behaviors, emotional regulation skills, and healthier responses to everyday situations. At Divit MindSpace, we focus on understanding the reason behind the behavior — not just correcting it.",
+      overview: "Every **child** expresses emotions differently. Sometimes, challenging behaviors are not defiance — but a way of communicating unmet needs, frustration, or difficulty coping. Our Behavioral Therapy program is designed to help **children** develop positive behaviors, emotional regulation skills, and healthier responses to everyday situations. At Divit MindSpace, we focus on understanding the reason behind the behavior — not just correcting it.",
       benefits: [
         "Reduction in challenging behaviors",
         "Development of emotional regulation skills",
@@ -459,7 +459,7 @@ export const services: ServiceData[] = [
     id: "13",
     title: "Group Therapy Sessions",
     slug: "group-therapy-sessions",
-    description: "Group therapy helps children and adults develop essential social, emotional, and communication skills through guided peer interactions in a safe, supportive, and confidential environment.",
+    description: "Group therapy helps **children** and **adults** develop essential social, emotional, and communication skills through guided peer interactions in a safe, supportive, and confidential environment.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
@@ -564,11 +564,11 @@ export const services: ServiceData[] = [
     id: "8",
     title: "Play Therapy",
     slug: "play-therapy",
-    description: "Play is the natural language of children. Through guided play, neurodivergent children explore emotions, develop social skills, and process experiences in a safe, affirming environment.",
+    description: "Play is the natural language of **children**. Through guided play, neurodivergent **children** explore emotions, develop social skills, and process experiences in a safe, affirming environment.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Play is the natural language of all children, regardless of diagnosis or developmental differences. At Divit MindSpace, our Play Therapy services provide a safe, affirming space where neurodivergent children can express thoughts and feelings that may be difficult to put into words. Through child-led play, sand tray therapy, creative arts, and structured activities, children develop emotional regulation, social skills, and self-expression — all while doing what comes naturally: playing.",
+      overview: "Play is the natural language of all **children**, regardless of diagnosis or developmental differences. At Divit MindSpace, our Play Therapy services provide a safe, affirming space where neurodivergent **children** can express thoughts and feelings that may be difficult to put into words. Through **child**-led play, sand tray therapy, creative arts, and structured activities, **children** develop emotional regulation, social skills, and self-expression — all while doing what comes naturally: playing.",
       benefits: [
         "Safe expression of difficult emotions through play",
         "Improved emotional regulation and self-awareness",
@@ -602,7 +602,7 @@ export const services: ServiceData[] = [
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Many neurodivergent individuals experience the world differently through their senses — sounds may feel overwhelming, textures uncomfortable, or movement either calming or distressing. Our Sensory Integration Program, led by trained occupational therapists, helps children and adults better process and respond to sensory information. Using specialized equipment in our sensory gym, we work on improving sensory modulation, body awareness, and adaptive responses for better daily functioning.",
+      overview: "Many neurodivergent individuals experience the world differently through their senses — sounds may feel overwhelming, textures uncomfortable, or movement either calming or distressing. Our Sensory Integration Program, led by trained occupational therapists, helps **children** and **adults** better process and respond to sensory information. Using specialized equipment in our sensory gym, we work on improving sensory modulation, body awareness, and adaptive responses for better daily functioning.",
       benefits: [
         "Improved ability to process sensory information",
         "Better regulation of sensory seeking or avoiding behaviors",
@@ -670,11 +670,11 @@ export const services: ServiceData[] = [
     id: "7",
     title: "Counselling (Child, Adolescent, Adult & Parent)",
     slug: "counselling",
-    description: "Neurodiversity-affirming counselling for every stage of life — supporting children, teenagers, adults, and parents in navigating emotions, relationships, and the unique challenges of neurodivergent experiences.",
+    description: "Neurodiversity-affirming counselling for every stage of life — supporting **children**, **teenagers**, **adults**, and parents in navigating emotions, relationships, and the unique challenges of neurodivergent experiences.",
     category: "guidance",
     image: "/features-service-card/adult-counseling.png",
     content: {
-      overview: "At Divit MindSpace, we offer neurodiversity-affirming counselling services for individuals and families across all life stages. Whether you're a child learning to understand your emotions, a teenager navigating academic and social pressures, an adult managing life's complexities, or a parent seeking support — our trained counsellors provide a safe, confidential space to explore feelings, develop coping strategies, and build emotional resilience. We don't aim to change who you are; we help you thrive as yourself.",
+      overview: "At Divit MindSpace, we offer neurodiversity-affirming counselling services for individuals and families across all life stages. Whether you're a **child** learning to understand your emotions, a **teenager** navigating academic and social pressures, an **adult** managing life's complexities, or a parent seeking support — our trained counsellors provide a safe, confidential space to explore feelings, develop coping strategies, and build emotional resilience. We don't aim to change who you are; we help you thrive as yourself.",
       benefits: [
         "Safe, non-judgmental space to express emotions",
         "Neurodiversity-affirming therapeutic approaches",
@@ -704,11 +704,11 @@ export const services: ServiceData[] = [
     id: "8",
     title: "Training Program (Shadow Teacher Training)",
     slug: "training-program-shadow-teacher-training-program",
-    description: "We believe every child deserves the right support in mainstream classrooms. Our Shadow Teacher Training Program is a comprehensive certification course designed for educators and caregivers.",
+    description: "We believe every **child** deserves the right support in mainstream classrooms. Our Shadow Teacher Training Program is a comprehensive certification course designed for educators and caregivers.",
     category: "programs",
     image: "/features-service-card/parent-education.png",
     content: {
-      overview: "We believe every child deserves the right support in mainstream classrooms. Our Shadow Teacher Training Program is a comprehensive certification course designed for educators, special educators, and caregivers who want to effectively support neurodivergent children in school settings. This program equips participants with practical skills and strategies for inclusive education.",
+      overview: "We believe every **child** deserves the right support in mainstream classrooms. Our Shadow Teacher Training Program is a comprehensive certification course designed for educators, special educators, and caregivers who want to effectively support neurodivergent **children** in school settings. This program equips participants with practical skills and strategies for inclusive education.",
       benefits: [
         "Comprehensive understanding of neurodevelopmental conditions",
         "Practical classroom support strategies",
@@ -742,11 +742,11 @@ export const services: ServiceData[] = [
     id: "9",
     title: "Early Intervention Program",
     slug: "early-intervention-program",
-    description: "The early years of a child's life are critical for brain development. When developmental delays or early signs of learning differences are identified and addressed promptly, outcomes improve significantly.",
+    description: "The early years of a **child**'s life are critical for brain development. When developmental delays or early signs of learning differences are identified and addressed promptly, outcomes improve significantly.",
     category: "programs",
     image: "/about_pic1.png",
     content: {
-      overview: "The early years of a child's life are critical for brain development. When developmental delays or early signs of learning differences are identified and addressed promptly, outcomes improve significantly. Our Early Intervention Program provides comprehensive support for young children (0-6 years) showing developmental concerns, helping them build a strong foundation for future learning.",
+      overview: "The early years of a **child**'s life are critical for brain development. When developmental delays or early signs of learning differences are identified and addressed promptly, outcomes improve significantly. Our Early Intervention Program provides comprehensive support for young **children** (0-6 years) showing developmental concerns, helping them build a strong foundation for future learning.",
       benefits: [
         "Early identification of developmental concerns",
         "Improved developmental outcomes",
@@ -776,11 +776,11 @@ export const services: ServiceData[] = [
     id: "10",
     title: "Special Education & Remedial Sessions",
     slug: "special-education--remedial-sessions",
-    description: "Our Special Education and Remedial Sessions are designed to support children who experience learning difficulties, developmental delays, or academic challenges.",
+    description: "Our Special Education and Remedial Sessions are designed to support **children** who experience learning difficulties, developmental delays, or academic challenges.",
     category: "programs",
     image: "/about_pic2.png",
     content: {
-      overview: "Our Special Education and Remedial Sessions are designed to support children who experience learning difficulties, developmental delays, or academic challenges. Using specialized teaching methods and individualized attention, we help children build academic skills at their own pace while addressing underlying learning differences.",
+      overview: "Our Special Education and Remedial Sessions are designed to support **children** who experience learning difficulties, developmental delays, or academic challenges. Using specialized teaching methods and individualized attention, we help **children** build academic skills at their own pace while addressing underlying learning differences.",
       benefits: [
         "Individualized education plan (IEP) for each child",
         "Specialized teaching methods and materials",
@@ -810,11 +810,11 @@ export const services: ServiceData[] = [
     id: "11",
     title: "School Readiness Program",
     slug: "school-readiness-program",
-    description: "Starting school is a major milestone in a child's life. For many children, especially those with developmental or learning challenges, the transition can feel overwhelming.",
+    description: "Starting school is a major milestone in a **child**'s life. For many **children**, especially those with developmental or learning challenges, the transition can feel overwhelming.",
     category: "programs",
     image: "/about_pic3.png",
     content: {
-      overview: "Starting school is a major milestone in a child's life. For many children, especially those with developmental or learning challenges, the transition can feel overwhelming. Our School Readiness Program prepares children for this important step by building the foundational skills they need to thrive in a classroom environment.",
+      overview: "Starting school is a major milestone in a **child**'s life. For many **children**, especially those with developmental or learning challenges, the transition can feel overwhelming. Our School Readiness Program prepares **children** for this important step by building the foundational skills they need to thrive in a classroom environment.",
       benefits: [
         "Smooth transition to formal schooling",
         "Development of pre-academic skills",
@@ -844,11 +844,11 @@ export const services: ServiceData[] = [
     id: "16",
     title: "Parental Training Program",
     slug: "parental-training-program",
-    description: "Parenting a neurodivergent child doesn't come with a guide — we help families build one that works. Evidence-based strategies for understanding your child's unique wiring and needs.",
+    description: "Parenting a neurodivergent **child** doesn't come with a guide — we help families build one that works. Evidence-based strategies for understanding your **child**'s unique wiring and needs.",
     category: "programs",
     image: "/features-service-card/parent-education.png",
     content: {
-      overview: "Parenting a neurodivergent child is a journey that requires understanding, patience, and the right strategies. Our Parental Training Program empowers parents and caregivers with evidence-based knowledge and practical skills to support their child's unique needs. Through structured sessions, we help you understand your child's wiring, manage challenging behaviors, support emotional regulation, and advocate effectively — so you can parent with confidence, not confusion.",
+      overview: "Parenting a neurodivergent **child** is a journey that requires understanding, patience, and the right strategies. Our Parental Training Program empowers parents and caregivers with evidence-based knowledge and practical skills to support their **child**'s unique needs. Through structured sessions, we help you understand your **child**'s wiring, manage challenging behaviors, support emotional regulation, and advocate effectively — so you can parent with confidence, not confusion.",
       benefits: [
         "Deep understanding of your child's neurodivergent profile",
         "Practical behavior management strategies that work",
@@ -878,11 +878,11 @@ export const services: ServiceData[] = [
     id: "17",
     title: "ECCE (Early Childhood Care and Education)",
     slug: "ecce-early-childhood-care-and-education",
-    description: "Foundational early learning program for children aged 3-6, with specialized support for neurodivergent learners — building school readiness through play-based, developmentally appropriate education.",
+    description: "Foundational early learning program for **children** aged 3-6, with specialized support for neurodivergent learners — building school readiness through play-based, developmentally appropriate education.",
     category: "programs",
     image: "/about_pic1.png",
     content: {
-      overview: "The early years are the foundation for lifelong learning. Our ECCE program provides developmentally appropriate, play-based education for children aged 3-6, with specialized support for neurodivergent learners. Aligned with the National Education Policy 2020 framework, we focus on foundational literacy, numeracy, social-emotional development, and school readiness — all in a sensory-friendly, inclusive environment that honors each child's unique pace and learning style.",
+      overview: "The early years are the foundation for lifelong learning. Our ECCE program provides developmentally appropriate, play-based education for **children** aged 3-6, with specialized support for neurodivergent learners. Aligned with the National Education Policy 2020 framework, we focus on foundational literacy, numeracy, social-emotional development, and school readiness — all in a sensory-friendly, inclusive environment that honors each **child**'s unique pace and learning style.",
       benefits: [
         "Strong foundation in early literacy and numeracy",
         "Social-emotional skill development",
@@ -946,7 +946,7 @@ export const services: ServiceData[] = [
     id: "19",
     title: "Diploma in Special Education",
     slug: "diploma-in-special-education",
-    description: "Comprehensive two-year professional qualification preparing special educators to work with neurodivergent children and adults across educational and therapeutic settings.",
+    description: "Comprehensive two-year professional qualification preparing special educators to work with neurodivergent **children** and **adults** across educational and therapeutic settings.",
     category: "programs",
     image: "/features-service-card/parent-education.png",
     content: {
@@ -1014,11 +1014,11 @@ export const services: ServiceData[] = [
     id: "21",
     title: "Summer Camp",
     slug: "summer-camp",
-    description: "A structured, fun-filled program where neurodivergent children and teens build confidence, friendships, and life skills through therapeutic recreation and peer connection.",
+    description: "A structured, fun-filled program where neurodivergent **children** and **teens** build confidence, friendships, and life skills through therapeutic recreation and peer connection.",
     category: "programs",
     image: "/about_pic3.png",
     content: {
-      overview: "Summer should be a time of growth, connection, and fun — for every child. Our Summer Camp is designed specifically for neurodivergent children and teens, providing a structured yet joyful environment where they can build social skills, make genuine friendships, and develop confidence through therapeutic recreation. With low staff-to-camper ratios, sensory-friendly activities, and trained facilitators, we create a space where neurodivergent kids can truly be themselves while learning essential life skills.",
+      overview: "Summer should be a time of growth, connection, and fun — for every **child**. Our Summer Camp is designed specifically for neurodivergent **children** and **teens**, providing a structured yet joyful environment where they can build social skills, make genuine friendships, and develop confidence through therapeutic recreation. With low staff-to-camper ratios, sensory-friendly activities, and trained facilitators, we create a space where neurodivergent kids can truly be themselves while learning essential life skills.",
       benefits: [
         "Social skill development in a supportive peer environment",
         "Genuine friendships with like-minded peers",

@@ -77,7 +77,7 @@ const categoryDescriptions: Record<string, React.ReactNode> = {
   ),
   guidance: (
     <>
-      Professional mental health support for <strong>Children</strong>, <strong>Teens</strong>, and <strong>Adults</strong> including adolescent counseling and parent guidance programs. Available at our HSR Layout and Bellandur centers, Bangalore.
+      Professional mental health support for <strong>Children</strong>, <strong>Teens</strong>, and <strong>Adults</strong> including <strong>adolescent</strong> counseling and parent guidance programs. Available at our HSR Layout and Bellandur centers, Bangalore.
     </>
   ),
   programs: (
@@ -373,18 +373,18 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                     <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
                       <Users className="w-6 h-6 text-green" />
                     </div>
-                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Assessment for Children & Adolescents</h3>
+                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Assessment for <strong>Children</strong> & <strong>Adolescents</strong></h3>
                   </div>
                   
                   {/* Top Box: Core Features */}
                   <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm">
                     <div className="lg:min-h-[420px] flex flex-col">
                       <p className="text-black/70 font-medium leading-relaxed mb-5 italic border-l-2 border-green/10 pl-6">
-                        We take a holistic view of a child’s cognitive, emotional, and social development. We translate complex behaviors into clear, actionable insights that support success at home and school.
+                        We take a holistic view of a <strong>child</strong>’s cognitive, emotional, and social development. We translate complex behaviors into clear, actionable insights that support success at home and school.
                       </p>
                       <ul className="space-y-6 flex-grow">
                         {[
-                          { title: "Autism", text: "Beyond surface symptoms, we explore social communication, sensory profiles, and special interests to help the child feel truly seen and understood." },
+                          { title: "Autism", text: "Beyond surface symptoms, we explore social communication, sensory profiles, and special interests to help the <strong>child</strong> feel truly seen and understood." },
                           { title: "ADHD & Executive Function", text: "We look beyond hyperactivity to assess attention, organization, impulse control, and emotional regulation, while differentiating ADHD from anxiety or learning differences." },
                           { title: "Learning Disabilities (LD)", text: "Focused evaluations for reading, writing, and math to uncover the root causes of academic struggles." }
                         ].map((item) => (
@@ -430,7 +430,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                     <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
                       <GraduationCap className="w-6 h-6 text-green" />
                     </div>
-                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Assessment for Adults & Geriatrics</h3>
+                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Assessment for <strong>Adults</strong> & Geriatrics</h3>
                   </div>
 
                   {/* Top Box: Core Features */}
@@ -444,7 +444,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                           { title: "Stress", text: "We identify your specific triggers and help your nervous system move from survival mode to sustainable balance." },
                           { title: "Anxiety", text: "Support for OCD, Panic Disorder, Social Anxiety, and other patterns — providing clarity and practical regulation tools." },
                           { title: "Depression", text: "Compassionate support through depressive episodes and burnout, including specialized maternal mental health screening and postpartum guidance." },
-                          { title: "Adult Autism & Adult ADHD", text: "Neuro-affirming assessments for late-identified individuals, helping differentiate neurodivergence from burnout or anxiety." },
+                          { title: "<strong>Adult</strong> Autism & <strong>Adult</strong> ADHD", text: "Neuro-affirming assessments for late-identified individuals, helping differentiate neurodivergence from burnout or anxiety." },
                           { title: "Trauma & Grief", text: "Safe, trauma-informed evaluations that respect your pace and support recovery." },
                           { title: "Substance Use & Addiction", text: "Non-judgmental assessments to understand underlying patterns and co-occurring needs." },
                           { title: "Geriatric Care (55+)", text: "Dignified assessment of memory, mood, cognitive changes, and functional abilities to support independence and emotional well-being." }
@@ -472,7 +472,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                         { title: "Persistent anxiety", text: "intrusive thoughts, panic, or social fears that limit daily life" },
                         { title: "Habit awareness", text: "wanting to understand substance use or addictive patterns without judgment" },
                         { title: "Chronic burnout", text: "feeling stuck in survival mode where stress outweighs coping ability" },
-                        { title: "Late-life clarity", text: "seeking to understand lifelong patterns of Adult ADHD or Autism" },
+                        { title: "Late-life clarity", text: "seeking to understand lifelong patterns of <strong>Adult</strong> ADHD or Autism" },
                         { title: "Cognitive changes (55+)", text: "noticing shifts in memory, mood, or independence" }
                       ].map((item, i) => (
                         <li key={i} className="flex gap-4">
@@ -513,7 +513,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                   </div>
                   <div className="lg:col-span-7">
                     <p className="text-lg lg:text-xl text-black/70 font-medium leading-relaxed border-l-2 border-green/10 pl-6 lg:pl-8 py-2">
-                      Physiotherapy helps children, adolescents, and adults restore movement, reduce pain, improve strength and balance, and regain independence after injury, surgery, or developmental challenges. At Divit MindSpace, we view physiotherapy as more than treatment — it is about helping individuals move better, participate fully in daily life, and feel stronger and more confident.
+                      Physiotherapy helps <strong>children</strong>, <strong>adolescents</strong>, and <strong>adults</strong> restore movement, reduce pain, improve strength and balance, and regain independence after injury, surgery, or developmental challenges. At Divit MindSpace, we view physiotherapy as more than treatment — it is about helping individuals move better, participate fully in daily life, and feel stronger and more confident.
                     </p>
                   </div>
                 </div>
@@ -527,7 +527,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                     <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
                       <Users className="w-6 h-6 text-green" />
                     </div>
-                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Physiotherapy For Children</h3>
+                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Physiotherapy For <strong>Children</strong></h3>
                   </div>
                   
                   {/* Top Box: Core Features */}
@@ -538,8 +538,8 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                       </p>
                       <ul className="space-y-6 flex-grow">
                         {[
-                          { title: "Gross Motor Milestones", text: "Supporting children who are delayed in rolling, sitting, crawling, or walking." },
-                          { title: "Coordination & Balance", text: "Helping children who may appear clumsy, frequent falls, or have trouble with physical activities." },
+                          { title: "Gross Motor Milestones", text: "Supporting <strong>children</strong> who are delayed in rolling, sitting, crawling, or walking." },
+                          { title: "Coordination & Balance", text: "Helping <strong>children</strong> who may appear clumsy, frequent falls, or have trouble with physical activities." },
                           { title: "Developmental Delays", text: "Specialized support for conditions such as cerebral palsy or other movement challenges." }
                         ].map((item) => (
                           <li key={item.title} className="flex gap-4">
@@ -579,7 +579,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                     <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
                       <GraduationCap className="w-6 h-6 text-green" />
                     </div>
-                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Physiotherapy For Adolescents & Adults</h3>
+                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">Physiotherapy For <strong>Adolescents</strong> & <strong>Adults</strong></h3>
                   </div>
 
                   {/* Top Box: Core Features */}
