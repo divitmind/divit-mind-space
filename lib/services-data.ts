@@ -1,3 +1,5 @@
+import { type Specialist } from "@/sanity/types";
+
 export interface ServiceData {
   id: string;
   title: string;
@@ -29,11 +31,17 @@ export interface ServiceData {
       benefits?: string[];
       expectations?: string[];
       expectationsIntro?: string;
-      supportedItems?: string[];
+      supportedItems?: (string | { heading?: string; items: string[] })[];
       supportedItemsTitle?: string;
       supportedItemsIntro?: string;
       approachItems?: string[];
       whyChooseItems?: string[];
+      additionalSections?: {
+        title: string;
+        intro?: string;
+        items: string[];
+        color?: string;
+      }[];
     }[];
     approachItems?: string[];
     whyChooseItems?: string[];
@@ -156,107 +164,7 @@ export const services: ServiceData[] = [
         "Neurodivergent children (Autism/ADHD) needing communication support."
       ],
       duration: "45-minute sessions, typically weekly",
-      format: "In-person or online options available",
-      audienceSections: [
-        {
-          audienceType: "children",
-          title: "Speech Therapy for Children",
-          hero: {
-            shortDescription: "At Divit MindSpace, we see communication as more than a skill—it is a child’s way of connecting with the world, expressing emotions, and building relationships.",
-            overview: "",
-          },
-          contentBlocks: [
-            {
-              _type: "clinicalIndexBlock",
-              _key: "supported-needs",
-              title: "Communication Needs We Support",
-              intro: "Our Speech Therapy program supports children with a range of communication needs, including:",
-              groups: [
-                {
-                  heading: "Speech & Language Development",
-                  items: [
-                    "Speech delays, limited speech, or unclear pronunciation",
-                    "Difficulty understanding or expressing words, ideas, or sentences",
-                    "Challenges forming complete or grammatically correct sentences"
-                  ]
-                },
-                {
-                  heading: "Communication & Interaction",
-                  items: [
-                    "Difficulty initiating or sustaining communication",
-                    "Social communication challenges (verbal and non-verbal)",
-                    "Communication differences associated with autism"
-                  ]
-                },
-                {
-                  heading: "Fluency & Expression",
-                  items: [
-                    "Stuttering, repetitions, or interruptions in speech flow"
-                  ]
-                },
-                {
-                  heading: "Diverse Communication Needs",
-                  items: [
-                    "Non-verbal or minimally verbal children",
-                    "Children with hearing-related communication needs",
-                    "Developmental differences such as Down syndrome, cerebral palsy, and related conditions"
-                  ]
-                }
-              ]
-            }
-          ],
-          benefits: [
-            "Confident communication across home, school, and social settings.",
-            "Clearer speech that is easily understood by family, peers, and teachers.",
-            "Enhanced ability to follow instructions and process language.",
-            "Stronger social skills, helping them build meaningful friendships.",
-            "Reduced frustration by giving them alternative ways to express needs.",
-            "A foundation for better reading, writing, and academic success."
-          ],
-          expectations: [
-            "Clinical Profile — A gentle, observation-based initial assessment of your child’s communication profile.",
-            "Individualized Goals — Goals aligned with your child’s readiness and unique strengths.",
-            "Meaningful Interaction — Play-based, interaction-driven therapy sessions that feel like fun, not \"work.\"",
-            "Parent Partnership — Ongoing guidance and support to help you understand your child’s progress.",
-            "Daily Tools — Practical tools and home strategies for everyday communication.",
-            "Collaboration — A collaborative approach with other therapies or schools, if applicable."
-          ],
-          expectationsIntro: "Our Speech Therapy program follows a structured yet flexible approach to support your child’s journey:",
-          whoIsItFor: [
-            "Speech delays or limited speech for their age.",
-            "Difficulty being understood by people outside the family.",
-            "Struggling to follow simple instructions or understand questions.",
-            "Repeating words or sounds (stuttering) or avoiding talking.",
-            "Difficulty initiating or sustaining communication with peers.",
-            "Neurodivergent children (Autism/ADHD) needing communication support."
-          ],
-          approachItems: [
-            "Child-Led, Relationship-Based: We follow the child’s interests to create meaningful communication opportunities.",
-            "Play as a Medium: Communication is built through play, interaction, and shared experiences.",
-            "Neurodiversity-Affirming: We honor each child's unique communication style and pace.",
-            "Family-Centered: We empower parents with tools to support communication in daily life."
-          ],
-          whyChooseItems: [
-            "Personalized Care: Strategies tailored to your child's specific profile.",
-            "Expert Therapists: Experienced professionals specializing in neurodevelopment.",
-            "Natural Environment: Therapy that feels like play in a comfortable setting.",
-            "Evidence-Based: Using proven methods like Hanen and Social Thinking."
-          ],
-        }
-      ],
-      additionalSections: [
-        {
-          title: "Why Communication Matters",
-          intro: "Communication is the heartbeat of human connection. It's how we share our world, express our needs, and build relationships.",
-          items: [
-            "Emotional Regulation: Giving words to feelings reduces frustration.",
-            "Academic Foundation: Strong language skills are essential for reading and writing.",
-            "Social Connection: Communication is the key to making and keeping friends.",
-            "Confidence & Autonomy: Being understood empowers a child to navigate their world."
-          ],
-          color: "sage"
-        }
-      ],
+      format: "In-person at our center",
     },
   },
   {
@@ -448,75 +356,40 @@ export const services: ServiceData[] = [
       whoIsItFor: [
         "Children with frequent tantrums or meltdowns",
         "Children struggling with anger management",
-        "Children displaying aggressive behavior",
-        "Children finding it hard to follow rules",
-        "Children diagnosed with ADHD, Autism, or developmental conditions",
+        "Children with difficulty following rules or instructions",
+        "Children with autism or ADHD exhibiting challenging behaviors",
+        "Families seeking positive parenting strategies",
       ],
-      duration: "45-60 minute sessions",
-      format: "In-person, home-based, or center-based",
+      duration: "45-60 minute sessions, typically weekly",
+      format: "In-person at our center",
     },
   },
   {
     id: "6",
-    title: "Group Therapy Sessions",
-    slug: "group-therapy-sessions",
-    description: "Our Group Therapy Sessions are designed to help children develop essential social, emotional, and communication skills in a structured and supportive group setting.",
+    title: "CBT (Cognitive Behavioral Therapy)",
+    slug: "cbt-cognitive-behavioral-therapy",
+    description: "Thoughts, feelings, and behaviors are all connected. CBT helps individuals identify and change negative thought patterns to improve emotional regulation and develop personal coping strategies.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Our Group Therapy Sessions are designed to help children develop essential social, emotional, and communication skills in a structured and supportive group setting. Children learn best when they interact with peers, and group therapy provides the perfect environment for practicing real-world social skills with guidance from trained therapists.",
+      overview: "Cognitive Behavioral Therapy (CBT) is a structured, goal-oriented form of psychotherapy that helps individuals understand the connection between their thoughts, feelings, and behaviors. By identifying and challenging unhelpful thought patterns, individuals can learn more balanced ways of thinking and develop practical coping strategies for managing stress, anxiety, and daily challenges. At Divit MindSpace, we offer neurodiversity-affirming CBT tailored to each individual's unique cognitive profile.",
       benefits: [
-        "Practice social skills with same-age peers",
-        "Learn friendship and conversation skills",
-        "Build confidence in social situations",
-        "Develop perspective-taking abilities",
-        "Make genuine peer connections",
-      ],
-      whatToExpect: [
-        "Small groups of 4-6 children",
-        "Structured curriculum targeting specific skills",
-        "Fun, engaging activities and games",
-        "Practice opportunities with peer feedback",
-        "Parent updates on skills being learned",
-      ],
-      whoIsItFor: [
-        "Children with autism spectrum disorder",
-        "Children struggling to make friends",
-        "Children with social anxiety",
-        "Children who misread social cues",
-        "Children needing peer interaction practice",
-      ],
-      duration: "60-minute weekly sessions (8-12 week programs)",
-      format: "In-person small group at our center",
-    },
-  },
-  {
-    id: "12",
-    title: "Cognitive Therapy",
-    slug: "cognitive-therapy",
-    description: "Cognitive therapy helps neurodivergent individuals recognize the connection between thoughts, feelings, and behaviors — building practical coping skills for anxiety, emotional regulation, and daily challenges.",
-    category: "therapy",
-    image: "/features-service-card/therapy-services.png",
-    content: {
-      overview: "Cognitive therapy helps neurodivergent individuals understand and reshape the connection between their thoughts, feelings, and behaviors. At Divit MindSpace, we use adapted, neurodiversity-affirming approaches that are concrete, experiential, and tailored to each individual's unique way of processing the world. Our goal isn't to change who you are — it's to help you develop practical skills for managing anxiety, regulating emotions, and navigating daily challenges with confidence.",
-      benefits: [
-        "Better understanding of thought-feeling-behavior connections",
-        "Practical coping strategies for anxiety and stress",
+        "Identification of negative thought patterns",
+        "Development of practical coping strategies",
         "Improved emotional regulation skills",
-        "Enhanced problem-solving abilities",
-        "Greater self-awareness and self-compassion",
+        "Reduced anxiety and stress levels",
+        "Greater self-awareness and problem-solving abilities",
       ],
       whatToExpect: [
-        "Initial assessment of current challenges and goals",
-        "Concrete, visual, and experiential therapeutic techniques",
-        "Practical skill-building exercises adapted for neurodivergent minds",
-        "Homework activities to practice skills between sessions",
-        "Regular progress review and goal adjustment",
+        "Goal-oriented, collaborative sessions",
+        "Identification of specific challenges and triggers",
+        "Learning and practicing new cognitive tools",
+        "Home-based tasks to reinforce learning",
+        "Evidence-based therapeutic techniques",
       ],
       whoIsItFor: [
-        "Children, teens, and adults with anxiety",
-        "Individuals with autism seeking coping strategies",
-        "Those with ADHD struggling with emotional regulation",
+        "Teenagers and adults with anxiety or depression",
+        "Individuals struggling with stress management",
         "Anyone experiencing negative thought patterns",
         "Neurodivergent individuals facing social or daily life challenges",
       ],
@@ -526,6 +399,111 @@ export const services: ServiceData[] = [
   },
   {
     id: "13",
+    title: "Group Therapy Sessions",
+    slug: "group-therapy-sessions",
+    description: "Group therapy helps children and adults develop essential social, emotional, and communication skills through guided peer interactions in a safe, supportive, and confidential environment.",
+    category: "therapy",
+    image: "/features-service-card/therapy-services.png",
+    content: {
+      overview: "Group therapy helps **children and adults** develop essential social, emotional, and communication skills through guided peer interactions in a safe, supportive, and confidential environment.\n\nAt Divit MindSpace, we believe real growth happens in connection with others. We look at connection as a whole, including:\n• Social communication (understanding cues and interaction)\n• Emotional regulation (managing feelings in a group)\n• Friendship skills (building and maintaining connections)\n• Personal growth (gaining confidence and resilience)\n\nWe create meaningful group experiences where individuals can practice skills, receive gentle feedback, and build confidence while feeling accepted and understood.",
+      audienceSections: [
+        {
+          audienceType: "children",
+          title: "Children",
+          hero: {
+            shortDescription: "Play-based and engaging sessions that help children build social communication, emotional regulation, and friendship skills through fun activities and guided peer interactions.",
+          },
+          benefits: [
+            "Improved social and communication skills",
+            "Better understanding and interpretation of social cues",
+            "Increased confidence in group settings and peer interactions",
+            "Enhanced friendship-building and conversation skills",
+            "Better emotional regulation and cooperation abilities"
+          ],
+          expectations: [
+            "Small, carefully balanced groups (4–6 participants)",
+            "Structured sessions with clear goals and themes",
+            "Age-appropriate activities, games, and role-play",
+            "Real-time feedback from experienced therapists",
+            "Regular progress updates and home strategies",
+            "Safe, confidential, and non-judgmental environment"
+          ],
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "group-therapy-children-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "Group Therapy for Children",
+              items: [
+                "Children with autism spectrum conditions needing social communication support",
+                "Difficulty making or maintaining friendships",
+                "Social anxiety or discomfort in group settings",
+                "Challenges in understanding or responding to social cues",
+                "Need for structured practice in peer interactions and turn-taking",
+                "Limited social exposure or delayed social skills"
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "adults",
+          title: "Adults",
+          hero: {
+            shortDescription: "Supportive and confidential groups focused on addiction recovery, emotional regulation, interpersonal skills, and personal growth — offering peer support and practical tools for lasting change.",
+          },
+          benefits: [
+            "Greater awareness of addiction triggers and healthier coping strategies",
+            "Stronger relapse prevention skills and craving management",
+            "Improved emotional regulation and stress management",
+            "Enhanced interpersonal and communication skills",
+            "Reduced feelings of shame, guilt, and isolation through peer support",
+            "Increased self-confidence and motivation for long-term recovery"
+          ],
+          expectations: [
+            "Small, carefully balanced groups (4–6 participants)",
+            "Structured sessions with clear goals and themes",
+            "Guided discussions and skill-building exercises",
+            "Real-time feedback from experienced therapists",
+            "Safe, confidential, and non-judgmental environment"
+          ],
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "group-therapy-adults-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "Group Therapy for Adults",
+              items: [
+                "Individuals seeking support for addiction recovery and relapse prevention",
+                "Challenges with emotional regulation and stress management",
+                "Difficulty in interpersonal relationships or setting healthy boundaries",
+                "Feelings of isolation, shame, or guilt related to personal struggles",
+                "Need for peer support and shared experiences in a safe space",
+                "Support for family dynamics and rebuilding a balanced life"
+              ]
+            }
+          ]
+        }
+      ],
+      approachItems: [
+        "Small, intentionally formed groups for meaningful interaction",
+        "Skill-building through real-life practice and guided feedback",
+        "Safe, inclusive, and neuro-affirming environment",
+        "Focus on connection, acceptance, and personal growth",
+        "Collaboration with individual therapists when needed"
+      ],
+      whyChooseItems: [
+        "Warm, supportive, and confidential setting",
+        "Experienced therapists who combine expertise with empathy",
+        "Practical, real-world skills rather than theory alone",
+        "Emphasis on building genuine connections and confidence",
+        "A space where every participant feels valued and understood"
+      ],
+      duration: "60-minute sessions, typically weekly",
+      format: "In-person at our supportive therapy center",
+    },
+  },
+  {
+    id: "8",
     title: "Play Therapy",
     slug: "play-therapy",
     description: "Play is the natural language of children. Through guided play, neurodivergent children explore emotions, develop social skills, and process experiences in a safe, affirming environment.",

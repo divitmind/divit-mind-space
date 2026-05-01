@@ -66,6 +66,8 @@ interface ServiceData {
   };
   onDemand?: boolean;
   specialists?: Specialist[];
+  approachItems?: string[];
+  whyChooseItems?: string[];
   additionalSections?: { title: string; items: string[]; color?: string }[];
 }
 
@@ -146,22 +148,33 @@ export default async function ServicePage({ params }: PageProps) {
   if (staticService) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
-    // Fallback logic: prefer Sanity, but use static data if Sanity is empty
-    if (!service.description) service.description = staticService.description;
-    if (!service.overview) service.overview = staticContent.overview;
-    if (!service.benefits || service.benefits.length === 0) service.benefits = staticContent.benefits;
-    if (!service.whatToExpect || service.whatToExpect.length === 0) service.whatToExpect = staticContent.whatToExpect;
-    if (!service.whoIsItFor || service.whoIsItFor.length === 0) service.whoIsItFor = staticContent.whoIsItFor;
-    if (!service.audienceSections || service.audienceSections.length === 0) {
+    // SPECIAL CASE: For Group Therapy, prioritize static data for audience tabs and layout
+    if (slug === "group-therapy-sessions") {
+      service.description = staticService.description;
+      service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;
-    }
-    if (!service.duration) service.duration = staticContent.duration;
-    if (!service.format) service.format = staticContent.format;
-    if (!service.additionalSections || service.additionalSections.length === 0) {
+      service.benefits = staticContent.benefits;
+      service.whatToExpect = staticContent.whatToExpect;
       service.additionalSections = staticContent.additionalSections;
-    }
-    if (!service.faqs || service.faqs.length === 0) {
-      if (staticContent.faqs) service.faqs = staticContent.faqs;
+      service.faqs = staticContent.faqs || service.faqs;
+    } else {
+      // Fallback logic for other services: prefer Sanity, but use static data if Sanity is empty
+      if (!service.description) service.description = staticService.description;
+      if (!service.overview) service.overview = staticContent.overview;
+      if (!service.benefits || service.benefits.length === 0) service.benefits = staticContent.benefits;
+      if (!service.whatToExpect || service.whatToExpect.length === 0) service.whatToExpect = staticContent.whatToExpect;
+      if (!service.whoIsItFor || service.whoIsItFor.length === 0) service.whoIsItFor = staticContent.whoIsItFor;
+      if (!service.audienceSections || service.audienceSections.length === 0) {
+        service.audienceSections = staticContent.audienceSections;
+      }
+      if (!service.duration) service.duration = staticContent.duration;
+      if (!service.format) service.format = staticContent.format;
+      if (!service.additionalSections || service.additionalSections.length === 0) {
+        service.additionalSections = staticContent.additionalSections;
+      }
+      if (!service.faqs || service.faqs.length === 0) {
+        if (staticContent.faqs) service.faqs = staticContent.faqs;
+      }
     }
   }
 
@@ -192,9 +205,21 @@ export default async function ServicePage({ params }: PageProps) {
   const hasAudienceSections = service.audienceSections && service.audienceSections.length > 0;
   const hasUniversalContent = (service.benefits?.length || service.whatToExpect?.length || service.whoIsItFor?.length);
 
-  const demographics = service.demographics && service.demographics.length > 0 
+  // Extract approach and why choose from first audience section if not at top level (for Sanity compatibility)
+  const approachItems = service.approachItems || service.audienceSections?.[0]?.approachItems;
+  const whyChooseItems = service.whyChooseItems || service.audienceSections?.[0]?.whyChooseItems;
+
+  let demographics = service.demographics && service.demographics.length > 0 
     ? service.demographics 
     : ["Children", "Adolescents", "Adults"];
+
+  // FORCE REMOVAL OF TEENS for Group Therapy Sessions
+  if (slug === "group-therapy-sessions") {
+    if (service.audienceSections) {
+      service.audienceSections = service.audienceSections.filter(s => s.audienceType !== "teens");
+    }
+    demographics = demographics.filter(d => !d.toLowerCase().includes("teen") && !d.toLowerCase().includes("adolescent"));
+  }
 
   // Helper to render text with markdown-style bold (**text**)
   const renderTextWithBold = (text: string) => {
@@ -311,6 +336,8 @@ export default async function ServicePage({ params }: PageProps) {
                 isMultiAudience={hasAudienceSections && service.audienceSections!.length > 1}
                 universalBenefits={service.benefits}
                 universalExpectations={service.whatToExpect}
+                globalApproachItems={approachItems}
+                globalWhyChooseItems={whyChooseItems}
               />
             </div>
 

@@ -64,7 +64,7 @@ const categoryDescriptions: Record<string, React.ReactNode> = {
   ),
   assessments: (
     <>
-      ADHD, autism, learning disability, and psychoeducational assessments for <strong>Children</strong>, <strong>Teens</strong>, and <strong>Adults</strong>. Comprehensive clinical evaluations at our Sarjapur Road center in Bangalore.
+      Comprehensive clinical assessments for <strong>ADHD</strong>, <strong>Autism</strong>, <strong>Learning Disabilities</strong>, <strong>Anxiety</strong>, <strong>Depression</strong>, <strong>Stress</strong>, <strong>Addiction</strong>, and other psychological & psychoeducational evaluations for <strong>Children</strong>, <strong>Adolescents</strong> and <strong>Adults</strong>.
     </>
   ),
   therapy: (

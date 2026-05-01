@@ -50,6 +50,8 @@ interface AudienceTabsProps {
   isMultiAudience?: boolean;
   universalBenefits?: string[];
   universalExpectations?: string[];
+  globalApproachItems?: string[];
+  globalWhyChooseItems?: string[];
 }
 
 export function AudienceTabs({ 
@@ -57,7 +59,9 @@ export function AudienceTabs({
   globalOverview, 
   isMultiAudience,
   universalBenefits,
-  universalExpectations
+  universalExpectations,
+  globalApproachItems,
+  globalWhyChooseItems
 }: AudienceTabsProps) {
   const [activeTab, setActiveTab] = useState(sections[0]?.audienceType || "children");
   const activeData = sections.find((s) => s.audienceType === activeTab);
@@ -67,18 +71,6 @@ export function AudienceTabs({
   // Extract "Is This the Right Support for You?" block to show in header
   const rightSupportBlock = activeData.contentBlocks?.find(b => b.title?.toLowerCase().includes("right support"));
   const remainingBlocks = activeData.contentBlocks?.filter(b => b !== rightSupportBlock);
-
-  // Helper to render text with markdown-style bold (**text**)
-  const renderTextWithBold = (text: string) => {
-    if (!text) return null;
-    const parts = text.split(/(\*\*.*?\*\*)/g);
-    return parts.map((part, i) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        return <strong key={i} className="text-black font-bold">{part.slice(2, -2)}</strong>;
-      }
-      return part;
-    });
-  };
 
   // Helper: Smart Bold Parsing (Before Colon or Em-Dash)
   const renderItemText = (text: string) => {
@@ -106,9 +98,9 @@ export function AudienceTabs({
 
   /**
    * Renders a clean list without any surrounding boxes, backgrounds, or borders.
-   * Used for "Our Approach" and "Why Families Choose Us".
+   * Used for "Our Approach", "Why Families Choose Us", and "Is This Right for You?".
    */
-  const renderCleanList = (title: string, items?: string[], isGrid = false) => {
+  const renderCleanList = (title: string, items?: string[], isGrid = false, intro?: string) => {
     if (!items || items.length === 0) return null;
 
     return (
@@ -118,6 +110,12 @@ export function AudienceTabs({
             {title}
           </h3>
         </div>
+
+        {intro && (
+          <p className="mb-6 text-[15px] lg:text-[16px] text-black/60 font-medium leading-relaxed italic">
+            {intro}
+          </p>
+        )}
 
         <ul className={cn(
           isGrid ? "grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4" : "flex flex-col gap-y-4"
@@ -184,6 +182,12 @@ export function AudienceTabs({
             <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-w-md shadow-inner">
               {sections.map((section) => {
                 const isActive = activeTab === section.audienceType;
+                // Normalize Label: Only show Children, Teens, Adults
+                let displayTitle = section.title;
+                if (displayTitle.toLowerCase().includes("children")) displayTitle = "Children";
+                else if (displayTitle.toLowerCase().includes("teen") || displayTitle.toLowerCase().includes("adolescent")) displayTitle = "Teens";
+                else if (displayTitle.toLowerCase().includes("adult")) displayTitle = "Adults";
+
                 return (
                   <button
                     key={section.audienceType}
@@ -193,7 +197,7 @@ export function AudienceTabs({
                     {isActive && (
                       <motion.div layoutId="activePill" className="absolute inset-0 bg-white rounded-full shadow-md border border-green/5 -z-10" transition={{ type: "spring", bounce: 0.15, duration: 0.6 }} />
                     )}
-                    {section.title}
+                    {displayTitle}
                   </button>
                 );
               })}
@@ -226,14 +230,24 @@ export function AudienceTabs({
               animate={{ opacity: 1, y: 0 }}
               className="pt-2"
             >
-              {renderCleanList(rightSupportBlock.title || "Is This the Right Support for You?", rightSupportBlock.items, true)}
+              {renderCleanList(
+                rightSupportBlock.title || "Is This the Right Support for You?", 
+                rightSupportBlock.items, 
+                true,
+                rightSupportBlock.intro
+              )}
             </motion.div>
           )}
         </div>
       )}
 
       {/* Universal Value Props (Gains & Expectations) for Multi-Audience - Placed BEFORE specific content */}
-      {isMultiAudience && (universalBenefits?.length || universalExpectations?.length) ? (
+      {/* Only show universal if active tab doesn't have its own specific benefits/expectations */}
+      {isMultiAudience && (
+        (!activeData.benefits || activeData.benefits.length === 0) && 
+        (!activeData.expectations || activeData.expectations.length === 0) && 
+        (universalBenefits?.length || universalExpectations?.length)
+      ) ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 mb-4 lg:mb-6">
           {renderBoxedList("What You Will Gain", universalBenefits)}
           {renderBoxedList("What to Expect", universalExpectations)}
@@ -282,6 +296,18 @@ export function AudienceTabs({
               </div>
             </div>
           )}
+
+          {/* Tab-Specific Benefits & Expectations (Dynamic) */}
+          {/* Shown if provided in the audience section, regardless of modular blocks */}
+          {(activeData.benefits?.length || activeData.expectations?.length) ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
+              {renderBoxedList(
+                activeData.audienceType === "children" ? "What Your Child Will Gain" : "What You Will Gain", 
+                activeData.benefits
+              )}
+              {renderBoxedList("What to Expect", activeData.expectations, activeData.expectationsIntro)}
+            </div>
+          ) : null}
 
           {/* Dynamic Blocks */}
           {remainingBlocks?.map((block) => {
@@ -396,11 +422,6 @@ export function AudienceTabs({
           {/* Legacy Fallbacks (Visible only if no Modular Blocks exist) */}
           {!activeData.contentBlocks && (
             <>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
-                {renderBoxedList("What Your Child Will Gain", activeData.benefits)}
-                {renderBoxedList("What to Expect", activeData.expectations, activeData.expectationsIntro)}
-              </div>
-
               {activeData.whoIsItFor && activeData.whoIsItFor.length > 0 && (
                 <div className="bg-white p-6 lg:p-12 rounded-[2.5rem] border border-black/[0.03] shadow-sm">
                   <h3 className="text-lg lg:text-xl font-serif text-green mb-8">Is This the Right Space?</h3>
@@ -466,12 +487,6 @@ export function AudienceTabs({
             </>
           )}
 
-          {/* Core Sections (Always Visible) - Clean Layout (No Boxes) */}
-          <div className="flex flex-col gap-2 lg:gap-4">
-            {renderCleanList("Our Approach", activeData.approachItems, true)}
-            {renderCleanList("Why Families Choose Us", activeData.whyChooseItems, true)}
-          </div>
-
           {/* Additional Sections (Common to both Modular & Legacy) */}
           {activeData.additionalSections?.map((section, idx) => (
             <div key={idx} className={`rounded-[2.5rem] border border-black/[0.03] p-6 lg:p-12 ${section.color === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white shadow-sm'}`}>
@@ -491,6 +506,14 @@ export function AudienceTabs({
           ))}
         </motion.div>
       </AnimatePresence>
+
+      {/* Global Core Sections (Always Visible) - Clean Layout (No Boxes) */}
+      {(globalApproachItems?.length || globalWhyChooseItems?.length) && (
+        <div className="flex flex-col gap-2 lg:gap-4 mt-8 pt-8 border-t border-green/5">
+          {renderCleanList("Our Approach", globalApproachItems, true)}
+          {renderCleanList("Why Families Choose Us", globalWhyChooseItems, true)}
+        </div>
+      )}
     </div>
   );
 }
