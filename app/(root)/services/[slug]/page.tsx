@@ -192,8 +192,8 @@ export default async function ServicePage({ params }: PageProps) {
   if (staticService) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
-    // SPECIAL CASE: For Group Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions") {
+    // SPECIAL CASE: For Group Therapy & Psychoeducational Assessments, prioritize static data for audience tabs and layout
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments") {
       service.description = staticService.description;
       service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;

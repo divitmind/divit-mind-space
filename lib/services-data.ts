@@ -96,31 +96,89 @@ export const services: ServiceData[] = [
     id: "2",
     title: "Psychoeducational Assessments",
     slug: "psychoeducational-assessments",
-    description: "Psychoeducational assessments play a pivotal role in supporting neurodivergent children — those with learning differences such as ADHD, dyslexia, or autism spectrum disorders.",
+    description: "Psychoeducational assessments play a pivotal role in supporting neurodivergent children and adolescents — those with learning differences such as ADHD, dyslexia, or autism spectrum conditions.",
     category: "assessments",
     image: "/Psychoeducational Assessments.jpeg",
     content: {
-      overview: "Psychoeducational assessments play a pivotal role in supporting neurodivergent children — those with learning differences such as ADHD, dyslexia, or autism spectrum disorders. These comprehensive evaluations examine both cognitive abilities and academic achievement to identify specific learning disabilities and create targeted intervention plans.",
+      overview: "Psychoeducational assessments play a pivotal role in supporting **children and adolescents** — those with learning differences such as ADHD, dyslexia, dyscalculia, dysgraphia, or autism spectrum conditions. At Divit MindSpace, we go beyond simple diagnosis to create a clear, actionable roadmap that helps children and teenagers understand their unique learning profile and thrive academically and emotionally.\n\nUsing a combination of evidence-based tools and a neuro-affirming approach, we identify strengths, uncover specific learning challenges, and provide practical recommendations tailored to the individual's needs.",
       benefits: [
         "Identification of specific learning disabilities (dyslexia, dyscalculia, dysgraphia)",
-        "Detailed academic skill profile across subjects",
-        "Customized learning strategies and accommodations",
-        "Recommendations for school support and IEP planning",
-        "Clear roadmap for academic improvement",
+        "Detailed academic skill profile across reading, writing, and math",
+        "Clear understanding of cognitive strengths and weaknesses",
+        "Customized learning strategies and classroom accommodations",
+        "Recommendations for school support and IEP/504 planning",
+        "A comprehensive roadmap for academic improvement and self-understanding"
       ],
       whatToExpect: [
         "Review of school records and previous assessments",
         "Parent and teacher questionnaires",
-        "Direct assessment of reading, writing, and math skills",
-        "Cognitive and achievement testing",
-        "Comprehensive report with grade-level comparisons",
+        "Direct, age-appropriate assessment of reading, writing, and math skills",
+        "Cognitive and achievement testing using standardized tools",
+        "Comprehensive, easy-to-understand report with grade-level comparisons",
+        "Detailed recommendations for home and school support"
       ],
-      whoIsItFor: [
-        "Children struggling with reading or writing",
-        "Students with persistent math difficulties",
-        "Children whose grades don't reflect their effort",
-        "Students needing school accommodations documentation",
-        "Children with suspected ADHD, dyslexia, or autism",
+      audienceSections: [
+        {
+          audienceType: "children",
+          title: "Children",
+          hero: {
+            shortDescription: "Helping children understand their unique learning profile and thrive academically through neuro-affirming evaluations and actionable roadmaps.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "psychoed-children-right-support",
+              title: "Is This the Right Support for Your Child?",
+              intro: "This assessment is ideal for children facing any of the following challenges:",
+              items: [
+                "Struggling with reading, writing, or spelling (suspected dyslexia)",
+                "Persistent difficulties with math (suspected dyscalculia)",
+                "Challenges with handwriting or written expression (suspected dysgraphia)",
+                "Grades that don’t reflect their true effort or potential",
+                "Difficulty sustaining attention, organizing work, or completing tasks (suspected ADHD)",
+                "Suspected autism spectrum conditions affecting learning and academics",
+                "Need for formal documentation to request school accommodations or support"
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "teens",
+          title: "Adolescents",
+          hero: {
+            shortDescription: "Supporting teenagers in navigating academic challenges, secondary school accommodations, and self-understanding through specialized learning profile evaluations.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "psychoed-adolescents-right-support",
+              title: "Is This the Right Support for Your Teenager?",
+              intro: "This assessment is ideal for adolescents facing any of the following challenges:",
+              items: [
+                "Struggling with complex reading, writing, or higher-level math",
+                "Difficulty managing high school academic workload or exam preparation",
+                "Persistent challenges with executive functions (planning, organization, deadlines)",
+                "Academic performance that has plateaued or declined despite increased effort",
+                "Seeking clarity on learning style before transitioning to college or university",
+                "Need for updated documentation for Board Exam accommodations (IB, IGCSE, CBSE, NIOS)",
+                "Desire for self-understanding of their neurodivergent learning profile"
+              ]
+            }
+          ]
+        }
+      ],
+      approachItems: [
+        "Neuro-affirming and strengths-based perspective",
+        "Holistic evaluation of cognitive, academic, and emotional factors",
+        "Clear, practical, and actionable recommendations",
+        "Collaborative process involving parents, teachers, and the child/teen",
+        "Focus on empowering the individual with self-understanding and tools for success"
+      ],
+      whyChooseItems: [
+        "Compassionate, age-appropriate assessment process",
+        "Experienced clinicians who combine clinical expertise with empathy",
+        "Detailed reports that schools and parents can easily understand and implement",
+        "Support beyond assessment — guidance for next steps and ongoing collaboration"
       ],
       duration: "3-4 sessions (60-90 minutes each)",
       format: "In-person at our center",
