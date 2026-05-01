@@ -32,11 +32,12 @@ const serviceGroups = [
 ];
 
 const popularServices = [
-  { label: "Speech Therapy", href: "/services/speech-therapy" },
+  { label: "Speech Therapy",       href: "/services/speech-therapy" },
   { label: "Occupational Therapy", href: "/services/occupational-therapy" },
-  { label: "Behavioral Therapy", href: "/services/behavioral-therapy" },
-  { label: "Cognitive Therapy", href: "/services/cognitive-therapy" },
-  { label: "Assessments", href: "/services/psychoeducational-assessments" },
+  { label: "Behavioral Therapy",   href: "/services/behavioral-therapy" },
+  { label: "Cognitive Therapy",    href: "/services/cognitive-therapy" },
+  { label: "Group Therapy",        href: "/services/group-therapy-sessions" },
+  { label: "Assessments",          href: "/services/psychoeducational-assessments" },
 ];
 
 export function MobileNav() {

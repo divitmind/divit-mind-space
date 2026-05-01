@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/about-us/hero-section";
 import { PhilosophySection } from "@/components/about-us/philosophy-section";
 import { StorySection } from "@/components/about-us/story-section";
 import { FoundersSpecialistsSection } from "@/components/about-us/founders-specialists-section";
+import { JourneyTimeline } from "@/components/about-us/journey-timeline";
 import { CtaSection } from "@/components/homepage/cta-section";
 import { FaqSection } from "@/components/homepage/faq-section";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -301,6 +302,7 @@ export default async function AboutUsPage() {
         <HeroSection data={aboutUs?.hero} metrics={siteSettings?.metrics} chipHrefByLabel={chipHrefByLabel} />
         <StorySection data={aboutUs?.story} />
         <PhilosophySection data={aboutUs?.philosophy} />
+        <JourneyTimeline />
         <FoundersSpecialistsSection specialists={specialists} />
         <FaqSection faqs={aboutFaqs} title="Frequently Asked Questions" subtitle="" />
         <CtaSection />
