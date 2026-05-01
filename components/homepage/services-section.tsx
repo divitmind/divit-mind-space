@@ -80,8 +80,8 @@ export function ServicesSection({ serviceCategories }: ServicesSectionProps) {
                     <div className="flex-1 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                 </div>
 
-                {/* Services Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 lg:gap-6">
+                {/* Services Grid - Optimized for Tablet Stability (3 cols on tablets, 5 on desktop) */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-6">
                     {services.map((service, idx) => {
                         const IconComponent = iconMap[service.icon as keyof typeof iconMap] || FileText;
                         const isLastOnMobile = idx === services.length - 1;
@@ -91,7 +91,7 @@ export function ServicesSection({ serviceCategories }: ServicesSectionProps) {
                                 href={service.route}
                                 className={cn(
                                     "group relative flex flex-col p-5 lg:p-8 rounded-[1.5rem] lg:rounded-[2rem] border border-black/5 transition-all duration-500 bg-white hover:shadow-2xl hover:shadow-black/5 hover:border-black/10",
-                                    isLastOnMobile && "col-span-2 lg:col-span-1"
+                                    isLastOnMobile && "col-span-2 md:col-span-1 lg:col-span-1"
                                 )}
                             >
                                 {/* Icon */}

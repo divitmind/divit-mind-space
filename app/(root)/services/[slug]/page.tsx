@@ -365,7 +365,7 @@ export default async function ServicePage({ params }: PageProps) {
                       <div className="lg:-mt-6 mb-6">
                         <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                       </div>
-                      <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap flex-1">
+                      <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap flex-1 text-editorial-dropcap">
                         {renderTextWithBold(service.overview)}
                       </p>
                     </div>
@@ -619,6 +619,7 @@ export default async function ServicePage({ params }: PageProps) {
           <InlineCtaBlock
             heading={service.ctaOverride?.title || "Not ready to book?"}
             subtext={service.ctaOverride?.description || "Message us on WhatsApp. Ask us anything, we're here to help."}
+            whatsappMessage={`Interested in learning more about ${service.title}`}
           />
         </div>
       </section>

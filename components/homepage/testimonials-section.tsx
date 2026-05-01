@@ -1,3 +1,6 @@
+"use client";
+
+import * as React from "react";
 import Link from "next/link";
 import { Marquee } from "@/components/ui/marquee";
 import { TestimonialCard } from "@/components/homepage/testimonial-card";
@@ -44,7 +47,41 @@ interface TestimonialsSectionProps {
 export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
   const top10 = reviews.slice(0, 10);
   const cards = top10.length > 0 ? top10.map(reviewToCard) : FALLBACK_TESTIMONIALS;
+
+  // For desktop marquee
   const marqueeItems = [...cards, ...cards];
+
+  // For mobile infinite loop - Triple the array for buffer
+  const mobileCards = [...cards, ...cards, ...cards];
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = React.useState(0);
+
+  // Initialize scroll position to the middle set
+  React.useEffect(() => {
+    if (scrollRef.current) {
+      const cardWidth = scrollRef.current.offsetWidth * 0.8; // 80vw for peeking
+      scrollRef.current.scrollLeft = cards.length * (cardWidth + 16);
+    }
+  }, [cards.length]);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, offsetWidth, scrollWidth } = scrollRef.current;
+    const cardWidth = offsetWidth * 0.8 + 16;
+
+    // Calculate active dot index (0 to cards.length - 1)
+    const totalItems = cards.length;
+    const currentAbsoluteIndex = Math.round(scrollLeft / cardWidth);
+    const normalizedIndex = currentAbsoluteIndex % totalItems;
+    setActiveIndex(normalizedIndex);
+
+    // Infinite Loop Logic
+    if (scrollLeft <= 0) {
+      scrollRef.current.scrollLeft = totalItems * cardWidth;
+    } else if (scrollLeft + offsetWidth >= scrollWidth) {
+      scrollRef.current.scrollLeft = totalItems * cardWidth;
+    }
+  };
 
   return (
     <section className="pt-6 lg:pt-10 pb-10 lg:pb-16 bg-[#FDFBF7] overflow-hidden">
@@ -82,14 +119,44 @@ export function TestimonialsSection({ reviews }: TestimonialsSectionProps) {
         </div>      </div>
 
       <div className="relative w-full">
-        <Marquee pauseOnHover className="pb-2">
-          {marqueeItems.map((t, i) => (
-            <TestimonialCard key={`t1-${i}`} {...t} />
-          ))}
-        </Marquee>
+        {/* Desktop Marquee */}
+        <div className="hidden md:block">
+          <Marquee pauseOnHover className="pb-2">
+            {marqueeItems.map((t, i) => (
+              <TestimonialCard key={`t1-${i}`} {...t} />
+            ))}
+          </Marquee>
+        </div>
+
+        {/* Mobile Infinite Snap Carousel */}
+        <div className="md:hidden">
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide px-10 gap-4 pb-8"
+          >
+            {mobileCards.map((t, i) => (
+              <div key={`m-${i}`} className="w-[80vw] flex-shrink-0 snap-center">
+                <TestimonialCard {...t} />
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Pagination Info */}
+          <div className="flex flex-col items-center gap-3 -mt-2">
+            <div className="flex justify-center gap-2">
+              {cards.map((_, i) => (
+                <div
+                  key={`dot-${i}`}
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === activeIndex ? "bg-green w-4" : "bg-black/10"}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="container mt-4 text-center">
+      <div className="container mt-6 text-center">
         <Link
           href="/reviews"
           className="inline-flex items-center justify-center rounded-full border border-black/10 text-black/60 px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#7A9A7D] hover:text-white hover:border-[#7A9A7D] transition-all duration-300"

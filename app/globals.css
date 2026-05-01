@@ -4,6 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -47,14 +52,14 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  /* Marquee animations */
+  /* Seamless Marquee animations */
   @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-25%); }
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - var(--gap))); }
   }
   @keyframes marquee-vertical {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-25%); }
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(-100% - var(--gap))); }
   }
   @keyframes rolling-text {
     0% { transform: translateY(0); }
@@ -101,6 +106,95 @@
   --input: rgba(0, 0, 0, 0.08);
   --ring: #000000;
   --radius: 0.625rem;
+
+  /* Category Signature Pastels */
+  --color-assessments: #E2E8E4; /* Sage */
+  --color-therapy: #E9E4ED;     /* Lavender */
+  --color-guidance: #FDF4E3;     /* Cream/Yellow */
+  --color-programs: #F7E9D7;     /* Peach/Ochre */
+  --color-physio: #E3EBF2;       /* Soft Blue */
+}
+
+@layer base {
+  body {
+    position: relative;
+  }
+
+  /* Subtle Linen Grain Overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .text-editorial-dropcap::first-letter {
+    float: left;
+    font-size: 4rem;
+    line-height: 0.8;
+    margin-top: 0.5rem;
+    margin-right: 0.75rem;
+    font-family: var(--font-serif), serif;
+    color: #7A9A7D; /* Using site green */
+  }
+
+  .tracking-editorial {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+  }
+}
+
+/* Neuro-Friendly Accessibility Mode */
+.neuro-friendly {
+  /* Stop all animations and transitions */
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Mute colors and increase contrast */
+  body {
+    background-color: #FFFFFF !important;
+    color: #1A1A1A !important;
+  }
+
+  /* Simplify fonts for readability */
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-inter), system-ui, sans-serif !important;
+    font-style: normal !important;
+    letter-spacing: normal !important;
+    font-weight: 700 !important;
+  }
+
+  /* Mute brand colors to neutral tones */
+  .bg-green, .bg-sage, .dm-pill-button, .bg-linen {
+    background-color: #333333 !important;
+    color: #FFFFFF !important;
+    box-shadow: none !important;
+  }
+
+  .text-green, .text-sage {
+    color: #000000 !important;
+  }
+
+  /* Remove decorative grain */
+  body::before {
+    display: none !important;
+  }
+
+  /* Remove complex accents */
+  svg.absolute {
+    display: none !important;
+  }
 }
 
 .dark {

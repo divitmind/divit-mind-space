@@ -24,11 +24,19 @@ import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-lin
 import { cn } from "@/lib/utils";
 
 const serviceGroups = [
-  { label: "Assessments Hub", href: "/services?category=assessments", icon: FileText },
+  { label: "Assessments HUB", href: "/services?category=assessments", icon: FileText },
   { label: "Therapy", href: "/services?category=therapy", icon: Heart },
   { label: "Counselling", href: "/services?category=guidance", icon: Users },
   { label: "Programs", href: "/services?category=programs", icon: GraduationCap },
-  { label: "Physiotherapy", href: "/services?category=physiotherapy", icon: Activity },
+  { label: "Physiotherapy HUB", href: "/services?category=physiotherapy", icon: Activity },
+];
+
+const popularServices = [
+  { label: "Speech Therapy", href: "/services/speech-therapy" },
+  { label: "Occupational Therapy", href: "/services/occupational-therapy" },
+  { label: "Behavioral Therapy", href: "/services/behavioral-therapy" },
+  { label: "Cognitive Therapy", href: "/services/cognitive-therapy" },
+  { label: "Assessments", href: "/services/psychoeducational-assessments" },
 ];
 
 export function MobileNav() {
@@ -45,7 +53,7 @@ export function MobileNav() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden text-black/60 hover:bg-green/5 transition-colors h-12 w-12 rounded-full border border-black/5">
+        <Button variant="ghost" size="icon" className="xl:hidden text-black/60 hover:bg-green/5 transition-colors h-12 w-12 rounded-full border border-black/5">
           <Menu className="h-6 w-6" />
           <span className="sr-only">Toggle menu</span>
         </Button>
@@ -71,18 +79,37 @@ export function MobileNav() {
                 <AccordionTrigger className="px-6 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 hover:text-green hover:no-underline hover:bg-green/5 rounded-[1.5rem] transition-all duration-500">
                   Services
                 </AccordionTrigger>
-                <AccordionContent className="flex flex-col gap-2 p-4 pt-2">
-                  {serviceGroups.map((group) => (
-                    <MobileLink
-                      key={group.label}
-                      href={group.href}
-                      setOpen={setOpen}
-                      icon={<group.icon className="h-4 w-4" />}
-                      className="px-6 py-4 rounded-2xl bg-white border border-black/5 text-black/60 font-medium italic"
-                    >
-                      {group.label}
-                    </MobileLink>
-                  ))}
+                <AccordionContent className="flex flex-col gap-6 p-4 pt-2">
+                  <div className="grid grid-cols-2 gap-3">
+                    {serviceGroups.map((group) => (
+                      <Link
+                        key={group.label}
+                        href={group.href}
+                        onClick={() => setOpen(false)}
+                        className="flex flex-col gap-3 p-5 rounded-2xl bg-white border border-black/5 active:scale-95 transition-all shadow-sm shadow-black/[0.02]"
+                      >
+                        <group.icon className="h-5 w-5 text-green/60" />
+                        <span className="text-[13px] text-black/70 font-medium italic">{group.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="px-2 text-[9px] font-bold uppercase tracking-[0.2em] text-black/20">Popular Services</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {popularServices.map((service) => (
+                        <Link
+                          key={service.label}
+                          href={service.href}
+                          onClick={() => setOpen(false)}
+                          className="px-4 py-2 rounded-full bg-green/5 border border-green/10 text-[11px] font-bold text-green hover:bg-green/10 transition-colors uppercase tracking-wider"
+                        >
+                          {service.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
                   <Link
                     href="/services"
                     onClick={() => setOpen(false)}

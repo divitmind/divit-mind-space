@@ -43,7 +43,7 @@ export function SiteHeader() {
                 </Link>
 
                 {/* Desktop Nav */}
-                <div className="hidden md:block">
+                <div className="hidden xl:block">
                     <MainNav />
                 </div>
 
@@ -54,12 +54,14 @@ export function SiteHeader() {
                         onClick={handleSpecialistsClick}
                         className="inline-flex h-8 md:h-11 items-center justify-center md:gap-2 rounded-full border-2 border-[#7A9A7D] px-4 md:px-6 text-xs md:text-[10px] font-medium md:font-bold tracking-wide md:tracking-[0.15em] text-[#7A9A7D] shadow-md shadow-[#7A9A7D]/10 hover:bg-[#7A9A7D] hover:text-white hover:shadow-lg hover:shadow-[#7A9A7D]/20 transition-all duration-300 group active:scale-95"
                     >
-                        <Users className="hidden md:block w-4 h-4 group-hover:scale-110 transition-transform" />
-                        <span className="hidden sm:inline uppercase">Meet Our Specialists</span>
-                        <span className="sm:hidden">Get Help</span>
+                        <Users className="hidden xl:block w-4 h-4 group-hover:scale-110 transition-transform" />
+                        <span className="hidden xl:inline uppercase">Meet Our Specialists</span>
+                        <span className="xl:hidden">Get Help</span>
                     </Link>
 
-                    <MobileNav />
+                    <div className="xl:hidden">
+                        <MobileNav />
+                    </div>
                 </div>
             </div>
         </header>
