@@ -43,7 +43,7 @@ interface ServiceData {
   };
   faqs?: { question: string; answer: string }[];
   audienceSections?: {
-    audienceType: "children" | "teens" | "adults";
+    audienceType: "children" | "teens" | "adults" | "geriatrics";
     title: string;
     shortDescription?: string;
     overview?: string;
@@ -192,8 +192,8 @@ export default async function ServicePage({ params }: PageProps) {
   if (staticService) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
-    // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments & CBT, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy") {
+    // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT & Counselling, prioritize static data for audience tabs and layout
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "counselling") {
       service.description = staticService.description;
       service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;

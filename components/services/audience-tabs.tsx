@@ -21,7 +21,7 @@ interface ContentBlock {
 }
 
 interface AudienceSection {
-  audienceType: "children" | "teens" | "adults";
+  audienceType: "children" | "teens" | "adults" | "geriatrics";
   title: string;
   hero?: {
     shortDescription?: string;
@@ -205,7 +205,8 @@ export function AudienceTabs({
                 const isActive = activeTab === section.audienceType;
                 // Normalize Label: Only show Children, Teens, Adults, unless custom label provided
                 let displayTitle = section.title;
-                if (displayTitle.toLowerCase().includes("children")) displayTitle = "Children";
+                if (displayTitle.toLowerCase().includes("children") && displayTitle.toLowerCase().includes("adolescent")) displayTitle = "Children & Adolescents";
+                else if (displayTitle.toLowerCase().includes("children")) displayTitle = "Children";
                 else if (displayTitle.toLowerCase().includes("teen") || displayTitle.toLowerCase().includes("adolescent")) displayTitle = "Adolescents";
                 else if (displayTitle.toLowerCase().includes("adult")) displayTitle = "Adults";
                 else if (displayTitle.toLowerCase().includes("geriatric") || displayTitle.toLowerCase().includes("late-life")) displayTitle = "Geriatrics";
@@ -527,7 +528,7 @@ export function AudienceTabs({
         <div className="flex flex-col gap-8 lg:gap-12 mt-8 pt-8 border-t border-green/5">
           {globalApproachItems?.length ? renderCleanList("Our Approach", globalApproachItems, true) : null}
           {globalWhyChooseItems?.length ? renderCleanList(
-            activeTab === "adults" ? "Why Families & Individuals Choose Divit MindSpace" : "Why Families Choose Us", 
+            (activeTab === "adults" || activeTab === "geriatrics") ? "Why Families & Individuals Choose Divit MindSpace" : "Why Families Choose Us", 
             globalWhyChooseItems, 
             true
           ) : null}

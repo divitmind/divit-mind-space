@@ -16,9 +16,8 @@ export interface ServiceData {
     format?: string;
     faqs?: { question: string; answer: string }[];
     audienceSections?: {
-      audienceType: "children" | "teens" | "adults";
-      title: string;
-      hero?: {
+    audienceType: "children" | "teens" | "adults" | "geriatrics";
+    title: string;      hero?: {
         shortDescription?: string;
         overview?: string;
       };
@@ -829,7 +828,7 @@ export const services: ServiceData[] = [
           ]
         },
         {
-          audienceType: "adults", // Using adults type but will label as Geriatrics
+          audienceType: "geriatrics",
           title: "Geriatrics / Late-Life Support",
           hero: {
             shortDescription: "Compassionate care addressing aging, grief, loss, cognitive changes, and emotional well-being in the golden years.",
@@ -869,11 +868,11 @@ export const services: ServiceData[] = [
           title: "Group Therapy: The Power of Shared Experience",
           intro: "In addition to individual sessions, we offer group programs to foster connection and growth:",
           items: [
-            "## Support Groups",
+            "Support Groups",
             "Targeted groups for specific concerns such as postpartum challenges or neurodivergent **adults**.",
-            "## Process Groups",
+            "Process Groups",
             "Focused on interpersonal growth, relational patterns, and emotional processing.",
-            "## Skill-Building Groups",
+            "Skill-Building Groups",
             "Practical groups teaching DBT skills or social-emotional learning."
           ],
           color: "sage"
