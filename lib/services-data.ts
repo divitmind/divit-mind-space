@@ -391,31 +391,87 @@ export const services: ServiceData[] = [
     id: "5",
     title: "Behavioral Therapy",
     slug: "behavioral-therapy",
-    description: "Every **child** expresses emotions differently. Sometimes, challenging behaviors are not defiance — but a way of communicating unmet needs, frustration, or difficulty coping.",
+    description: "Every individual navigates the world differently. Our neuro-affirming behavioural therapy honors these differences by focusing on building meaningful skills, fostering emotional regulation, and empowering **children, adolescents, teens** and **adults** to thrive authentically — on their own terms.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Every **child** expresses emotions differently. Sometimes, challenging behaviors are not defiance — but a way of communicating unmet needs, frustration, or difficulty coping. Our Behavioral Therapy program is designed to help **children** develop positive behaviors, emotional regulation skills, and healthier responses to everyday situations. At Divit MindSpace, we focus on understanding the reason behind the behavior — not just correcting it.",
+      overview: "Every individual navigates the world differently. Our neuro-affirming behavioural therapy honors these differences by focusing on building meaningful skills, fostering emotional regulation, and empowering **children, adolescents, teens and adults** to thrive authentically — on their own terms.\n\nWe move beyond traditional rigid approaches to offer therapy that is deeply empathetic, highly individualized, and rooted in neurodiversity-affirming practices. Instead of encouraging masking, we provide practical tools and support to help unlock each person’s unique potential.",
       benefits: [
-        "Reduction in challenging behaviors",
-        "Development of emotional regulation skills",
-        "Improved impulse control",
-        "Better social behaviors and interactions",
-        "Parent guidance and training for consistency",
+        "Improved emotional regulation and self-awareness",
+        "Better coping strategies for stress, anxiety, and overwhelm",
+        "Enhanced social communication and interaction skills",
+        "Stronger executive functioning and daily living skills",
+        "Increased confidence and self-acceptance",
+        "Practical tools that respect your unique way of thinking and processing",
+        "Greater ability to navigate school, work, and relationships authentically"
       ],
       whatToExpect: [
-        "Identifying triggers and behavioral patterns",
-        "Teaching emotional awareness",
-        "Building coping mechanisms",
-        "Positive reinforcement strategies",
-        "Consistent progress monitoring",
+        "A safe, validating, and neuro-affirming therapeutic space",
+        "Comprehensive initial assessment of strengths and support needs",
+        "Individualized goals created collaboratively with you or your family",
+        "Creative and engaging therapy methods, including play and expressive techniques",
+        "Practical, real-life strategies that can be easily applied at home or work",
+        "Regular progress reviews with clear feedback and adjustments",
+        "Active involvement of parents (for **children, adolescents and teens**)"
       ],
-      whoIsItFor: [
-        "Children with frequent tantrums or meltdowns",
-        "Children struggling with anger management",
-        "Children with difficulty following rules or instructions",
-        "Children with autism or ADHD exhibiting challenging behaviors",
-        "Families seeking positive parenting strategies",
+      audienceSections: [
+        {
+          audienceType: "children",
+          title: "Children, Adolescents & Teens",
+          hero: {
+            shortDescription: "Creative, play-based, and engaging sessions designed to help young minds build essential social-emotional skills, communication, and confidence in a fun and validating environment.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "bt-children-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "For **Children, Adolescents & Teens**:",
+              items: [
+                "Challenges with emotional regulation or frequent meltdowns",
+                "Difficulty with social communication or peer interactions",
+                "Executive functioning difficulties (organization, attention, impulse control)",
+                "Need for early developmental support in a neuro-affirming way",
+                "Anxiety, stress, or behavioural challenges related to neurodivergence"
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "adults",
+          title: "Adults",
+          hero: {
+            shortDescription: "Personalized support focused on emotional regulation, executive functioning, and developing practical strategies that align with your neurodivergent strengths and daily life needs.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "bt-adults-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "For **Adults**:",
+              items: [
+                "Struggling with emotional regulation, burnout, or overwhelm",
+                "Challenges with executive functioning in daily or work life",
+                "Desire for neuro-affirming support for ADHD or Autism",
+                "Difficulty with masking and wanting to build authentic coping strategies",
+                "Need for personalized tools to navigate relationships and life transitions"
+              ]
+            }
+          ]
+        }
+      ],
+      approachItems: [
+        "Deeply neuro-affirming and individualized care",
+        "Integration of creative, expressive, and play-based methods",
+        "Focus on strengths rather than deficits",
+        "Collaborative goal-setting with individuals and families",
+        "Practical strategies that support real-life success without masking"
+      ],
+      whyChooseItems: [
+        "A safe and validating space for neurodivergent individuals",
+        "Experienced therapists who truly understand neurodiversity",
+        "Engaging therapy that respects each person’s unique pace and style",
+        "Emphasis on empowerment, self-acceptance, and long-term growth"
       ],
       duration: "45-60 minute sessions, typically weekly",
       format: "In-person at our center",

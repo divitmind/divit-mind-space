@@ -276,7 +276,7 @@ export function AudienceTabs({
           {/* Hero Section - Shown only for single-audience services (Multi-audience has global overview) */}
           {!isMultiAudience && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-              <div className="lg:col-span-5 flex">
+              <div className="lg:col-span-6 flex">
                 <div className="bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col w-full">
                   <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
                     <Sparkles className="w-48 h-48 text-white" />
@@ -292,7 +292,7 @@ export function AudienceTabs({
                 </div>
               </div>
 
-              <div className="lg:col-span-7 flex">
+              <div className="lg:col-span-6 flex">
                 <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 flex flex-col w-full relative overflow-hidden">
                   <div className="relative z-10">
                     <div className="lg:-mt-6 mb-6">
