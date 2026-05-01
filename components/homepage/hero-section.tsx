@@ -56,10 +56,10 @@ export function HeroSection({ announcement, siteSettings }: HeroSectionProps) {
               </div>
             )}
 
-            <div className="flex flex-col w-full max-w-[540px] mx-auto md:mx-0 mt-3 sm:mt-4">
+            <div className="flex flex-col w-full max-w-[580px] mx-auto md:mx-0 mt-3 sm:mt-4">
               <h1 className="flex flex-col tracking-tight text-black leading-none">
                 {/* Line 1: EMPOWERING EVERY CHILD'S with overlapping yellow strokes */}
-                <span className="relative flex justify-center md:justify-start items-center md:items-baseline text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
+                <span className="relative flex justify-between items-baseline w-full text-[clamp(0.9rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.12em] mb-3 py-1 px-2">
                   {/* Multiple overlapping highlight strokes - Light Gold */}
                   <span className="absolute inset-0 bg-[#E8D5B7]/50 -z-10 rounded-sm transform -rotate-[1.5deg] scale-x-[1.08] -translate-x-0.5" />
                   <span className="absolute inset-0 bg-[#E8D5B7]/60 -z-10 rounded-sm transform rotate-[0.8deg] scale-x-[1.04] translate-y-px" />
@@ -67,7 +67,7 @@ export function HeroSection({ announcement, siteSettings }: HeroSectionProps) {
                   <span>E</span><span>M</span><span>P</span><span>O</span><span>W</span><span>E</span><span>R</span><span>I</span><span>N</span><span>G</span>
                   <span className="ml-1.5">E</span><span>V</span><span>E</span><span>R</span><span>Y</span>
                   {/* Rolling audience: CHILD'S → TEEN'S → ADULT'S → FAMILY'S */}
-                  <span className="ml-1.5 relative inline-flex">
+                  <span className="ml-1.5 relative inline-flex translate-y-[1px] md:translate-y-[2px]">
                    <span className="animate-hero-crossfade" style={{ animationDelay: '0s' }}>CHILD&apos;S</span>
                    <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '2s' }}>TEEN&apos;S</span>
                    <span className="absolute left-0 animate-hero-crossfade" style={{ animationDelay: '4s' }}>ADULT&apos;S</span>
