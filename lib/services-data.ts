@@ -759,35 +759,127 @@ export const services: ServiceData[] = [
   // ============================================================================
   {
     id: "7",
-    title: "Counselling (Child, Adolescent, Adult & Parent)",
+    title: "Counselling Services",
     slug: "counselling",
-    description: "Neurodiversity-affirming counselling for every stage of life — supporting **children**, **teenagers**, **adults**, and parents in navigating emotions, relationships, and the unique challenges of neurodivergent experiences.",
+    description: "At Divit MindSpace, our counselling services support individuals across all age groups in navigating life’s challenges with greater clarity, resilience, and emotional well-being.",
     category: "guidance",
     image: "/features-service-card/adult-counseling.png",
     content: {
-      overview: "At Divit MindSpace, we offer neurodiversity-affirming counselling services for individuals and families across all life stages. Whether you're a **child** learning to understand your emotions, a **teenager** navigating academic and social pressures, an **adult** managing life's complexities, or a parent seeking support — our trained counsellors provide a safe, confidential space to explore feelings, develop coping strategies, and build emotional resilience. We don't aim to change who you are; we help you thrive as yourself.",
+      overview: "At Divit MindSpace, our counselling services support individuals across all age groups in navigating life’s challenges with greater clarity, resilience, and emotional well-being. We offer personalized, evidence-based therapy in a safe, compassionate, and neuro-affirming environment.\n\nWhether you are seeking support for developmental concerns, life transitions, emotional difficulties, or personal growth, our integrated approach addresses the whole person — mind, body, and spirit.",
       benefits: [
-        "Safe, non-judgmental space to express emotions",
-        "Neurodiversity-affirming therapeutic approaches",
-        "Improved emotional regulation and coping skills",
-        "Better understanding of self and relationships",
-        "Support for the entire family system",
+        "Improved emotional regulation and stress management",
+        "Greater self-awareness and resilience",
+        "Healthier coping strategies for anxiety, depression, and overwhelm",
+        "Stronger relationships and interpersonal skills",
+        "Enhanced self-confidence and sense of inner security",
+        "Tools for navigating life transitions and neurodivergent challenges",
+        "A deeper connection to yourself and a more balanced life"
       ],
       whatToExpect: [
-        "Age-appropriate counselling approaches (play-based for children)",
-        "Confidential individual or family sessions",
-        "Evidence-based, neurodiversity-affirming techniques",
-        "Collaborative goal-setting and progress tracking",
-        "Parent coaching and family involvement as needed",
+        "A warm, confidential, and non-judgmental space",
+        "Comprehensive initial assessment of your needs and goals",
+        "Personalized therapy plan using evidence-based approaches",
+        "Regular progress reviews and collaborative adjustments",
+        "Practical tools and strategies for real-life application",
+        "Optional integration of somatic awareness and expressive arts therapy"
       ],
-      whoIsItFor: [
-        "Children struggling with emotions, anxiety, or transitions",
-        "Teenagers facing academic, social, or identity challenges",
-        "Adults managing stress, relationships, or neurodivergent experiences",
-        "Parents needing support in raising neurodivergent children",
-        "Families seeking to improve communication and connection",
+      audienceSections: [
+        {
+          audienceType: "children",
+          title: "Children & Adolescents",
+          hero: {
+            shortDescription: "Focused on developmental milestones, school-related stress, emotional regulation, and neurodevelopmental support to help **children** and **teens** thrive at home and school.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "counselling-children-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "We provide specialized support for the following concerns in **children** and **teens**:",
+              items: [
+                "Neurodivergence Support: Neuro-affirming care that honors unique brain wiring, strengthens executive functioning, and helps build an authentic life.",
+                "Anxiety & Stress Management: Breaking the cycle of chronic worry, school-related stress, or high-functioning burnout.",
+                "Depression: Gentle, compassionate support to process feelings of heaviness and isolation while rebuilding connection.",
+                "Trauma: Trauma-informed, safety-focused therapy that incorporates somatic awareness to process past experiences.",
+                "Expressive Arts Therapy: Creative healing through art and movement — ideal when words alone are not enough."
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "adults",
+          title: "Adults",
+          hero: {
+            shortDescription: "Support for life transitions, career burnout, relationship dynamics, stress management, and personal growth.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "counselling-adults-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "We provide specialized support for **adults** facing:",
+              items: [
+                "Neurodivergence Support (ADHD, Autism): Neuro-affirming care that honors unique wiring and strengthens executive functioning.",
+                "Anxiety & Stress Management: Breaking the cycle of chronic worry or high-functioning burnout using CBT and mindfulness.",
+                "Depression: Compassionate support to process feelings of heaviness while rebuilding purpose.",
+                "Trauma: Trauma-informed therapy incorporating somatic awareness to restore inner security.",
+                "Expressive Arts Therapy: Creative healing through art and movement for emotional exploration and release."
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "adults", // Using adults type but will label as Geriatrics
+          title: "Geriatrics / Late-Life Support",
+          hero: {
+            shortDescription: "Compassionate care addressing aging, grief, loss, cognitive changes, and emotional well-being in the golden years.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "counselling-geriatrics-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "Our Late-Life Support addresses concerns such as:",
+              items: [
+                "Aging & Life Transitions: Navigating the emotional complexities of aging.",
+                "Grief & Loss: Compassionate support for processing the loss of loved ones or life changes.",
+                "Cognitive Changes: Support for managing the emotional impact of cognitive shifts.",
+                "Emotional Well-being: Rebuilding connection and purpose in the golden years.",
+                "Trauma-Informed Care: Safety-focused therapy to restore inner security."
+              ]
+            }
+          ]
+        }
       ],
-      duration: "45-60 minute sessions (varies by age)",
+      approachItems: [
+        "Evidence-Based Foundations: Rooted in scientifically validated frameworks including CBT, DBT, and ACT.",
+        "Integrated Approach: We combine traditional talk therapy with somatic awareness and expressive arts therapy.",
+        "Holistic Healing: Addressing the mind, body, and spirit for lasting transformation.",
+        "Neuro-Affirming: We honor your unique brain wiring and support you in building an authentic life."
+      ],
+      whyChooseItems: [
+        "Compassionate, neuro-affirming, and holistic approach",
+        "Experienced therapists offering both evidence-based and creative modalities",
+        "Personalized care tailored to your unique life stage and needs",
+        "A safe space where you feel truly heard, understood, and supported",
+        "Integration of mind, body, and creative expression for deeper healing"
+      ],
+      additionalSections: [
+        {
+          title: "Group Therapy: The Power of Shared Experience",
+          intro: "In addition to individual sessions, we offer group programs to foster connection and growth:",
+          items: [
+            "## Support Groups",
+            "Targeted groups for specific concerns such as postpartum challenges or neurodivergent **adults**.",
+            "## Process Groups",
+            "Focused on interpersonal growth, relational patterns, and emotional processing.",
+            "## Skill-Building Groups",
+            "Practical groups teaching DBT skills or social-emotional learning."
+          ],
+          color: "sage"
+        }
+      ],
+      duration: "45-60 minute sessions, typically weekly",
       format: "In-person or online",
     },
   },

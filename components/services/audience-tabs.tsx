@@ -203,11 +203,12 @@ export function AudienceTabs({
             <div className="inline-flex p-1.5 bg-cream/50 border border-green/5 rounded-full relative w-full max-w-md shadow-inner">
               {sections.map((section) => {
                 const isActive = activeTab === section.audienceType;
-                // Normalize Label: Only show Children, Teens, Adults
+                // Normalize Label: Only show Children, Teens, Adults, unless custom label provided
                 let displayTitle = section.title;
                 if (displayTitle.toLowerCase().includes("children")) displayTitle = "Children";
                 else if (displayTitle.toLowerCase().includes("teen") || displayTitle.toLowerCase().includes("adolescent")) displayTitle = "Adolescents";
                 else if (displayTitle.toLowerCase().includes("adult")) displayTitle = "Adults";
+                else if (displayTitle.toLowerCase().includes("geriatric") || displayTitle.toLowerCase().includes("late-life")) displayTitle = "Geriatrics";
 
                 return (
                   <button
