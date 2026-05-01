@@ -199,6 +199,8 @@ export default async function ServicePage({ params }: PageProps) {
       service.audienceSections = staticContent.audienceSections;
       service.benefits = staticContent.benefits;
       service.whatToExpect = staticContent.whatToExpect;
+      service.approachItems = staticContent.approachItems;
+      service.whyChooseItems = staticContent.whyChooseItems;
       service.additionalSections = staticContent.additionalSections;
       service.faqs = staticContent.faqs || service.faqs;
     } else {

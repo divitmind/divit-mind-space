@@ -262,19 +262,6 @@ export function AudienceTabs({
         </div>
       )}
 
-      {/* Universal Value Props (Gains & Expectations) for Multi-Audience - Placed BEFORE specific content */}
-      {/* Only show universal if active tab doesn't have its own specific benefits/expectations */}
-      {isMultiAudience && (
-        (!activeData.benefits || activeData.benefits.length === 0) && 
-        (!activeData.expectations || activeData.expectations.length === 0) && 
-        (universalBenefits?.length || universalExpectations?.length)
-      ) ? (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 mb-4 lg:mb-6">
-          {renderBoxedList("What You Will Gain", universalBenefits)}
-          {renderBoxedList("What to Expect", universalExpectations)}
-        </div>
-      ) : null}
-
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}
@@ -318,15 +305,21 @@ export function AudienceTabs({
             </div>
           )}
 
-          {/* Tab-Specific Benefits & Expectations (Dynamic) */}
-          {/* Shown if provided in the audience section, regardless of modular blocks */}
-          {(activeData.benefits?.length || activeData.expectations?.length) ? (
+          {/* Benefits & Expectations Duo-Grid (Priority: Specific > Universal) */}
+          {((activeData.benefits?.length || universalBenefits?.length) || (activeData.expectations?.length || universalExpectations?.length)) ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
-              {renderBoxedList(
+              {/* Benefits Column */}
+              {(activeData.benefits?.length || universalBenefits?.length) ? renderBoxedList(
                 activeData.audienceType === "children" ? "What Your Child Will Gain" : "What You Will Gain", 
-                activeData.benefits
-              )}
-              {renderBoxedList("What to Expect", activeData.expectations, activeData.expectationsIntro)}
+                activeData.benefits || universalBenefits
+              ) : null}
+              
+              {/* Expectations Column */}
+              {(activeData.expectations?.length || universalExpectations?.length) ? renderBoxedList(
+                "What to Expect", 
+                activeData.expectations || universalExpectations, 
+                activeData.expectationsIntro
+              ) : null}
             </div>
           ) : null}
 
@@ -530,9 +523,13 @@ export function AudienceTabs({
 
       {/* Global Core Sections (Always Visible) - Clean Layout (No Boxes) */}
       {(globalApproachItems?.length || globalWhyChooseItems?.length || globalAdditionalSections?.length) && (
-        <div className="flex flex-col gap-6 lg:gap-10 mt-8 pt-8 border-t border-green/5">
-          {renderCleanList("Our Approach", globalApproachItems, true)}
-          {renderCleanList("Why Families Choose Us", globalWhyChooseItems, true)}
+        <div className="flex flex-col gap-8 lg:gap-12 mt-8 pt-8 border-t border-green/5">
+          {globalApproachItems?.length ? renderCleanList("Our Approach", globalApproachItems, true) : null}
+          {globalWhyChooseItems?.length ? renderCleanList(
+            activeTab === "adults" ? "Why Families & Individuals Choose Divit MindSpace" : "Why Families Choose Us", 
+            globalWhyChooseItems, 
+            true
+          ) : null}
           
           {globalAdditionalSections?.map((section, idx) => (
             <div key={idx} className="pt-2">
