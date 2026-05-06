@@ -23,7 +23,20 @@
       "Bash(Select-Object -Property Name, PSIsContainer)",
       "Bash(dir \"D:\\\\experiments\\\\divit-mind-space\\\\app\" -Recurse)",
       "Bash(Select-Object -Property FullName)",
-      "PowerShell(Get-ChildItem -Path \"D:\\\\experiments\\\\divit-mind-space\\\\app\" -Recurse | Select-Object -Property FullName | Where-Object {$_.FullName -match '\\\\.\\(tsx|ts|json\\)$'})"
+      "PowerShell(Get-ChildItem -Path \"D:\\\\experiments\\\\divit-mind-space\\\\app\" -Recurse | Select-Object -Property FullName | Where-Object {$_.FullName -match '\\\\.\\(tsx|ts|json\\)$'})",
+      "PowerShell(Get-ChildItem -Path \"D:\\\\experiments\\\\divit-mind-space\\\\app\" -Recurse -Directory | Sort-Object FullName | Select-Object @{Name=\"Path\";Expression={$_.FullName.Replace\\(\"D:\\\\experiments\\\\divit-mind-space\\\\app\\\\\",\"\"\\)}} | Format-Table -AutoSize)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(git *)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "PowerShell(Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/divitmind/divit-mind-space/bikram_changes/components/homepage/local-authority-section.tsx\" -UseBasicParsing | Select-Object -ExpandProperty Content)",
+      "PowerShell(Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/divitmind/divit-mind-space/bikram_changes/components/about-us/journey-timeline.tsx\" -UseBasicParsing | Select-Object -ExpandProperty Content)",
+      "PowerShell(Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/divitmind/divit-mind-space/bikram_changes/components/ui/specialist-card.tsx\" -UseBasicParsing | Select-Object -ExpandProperty Content)",
+      "Bash(gh api *)",
+      "Bash(curl -s \"https://api.github.com/repos/divitmind/divit-mind-space/contents/components/site-footer.tsx?ref=bikram_changes\")",
+      "Bash(python3 -c \"import sys,json,base64; d=json.load\\(sys.stdin\\); print\\(base64.b64decode\\(d['content']\\).decode\\('utf-8'\\)\\)\")",
+      "PowerShell(gh api *)",
+      "PowerShell($response = Invoke-RestMethod -Uri \"https://api.github.com/repos/divitmind/divit-mind-space/contents/components/site-footer.tsx?ref=bikram_changes\" -Headers @{ \"User-Agent\" = \"Mozilla/5.0\" }; [System.Text.Encoding]::UTF8.GetString\\([System.Convert]::FromBase64String\\($response.content -replace \"`n\",\"\"\\)\\))",
+      "WebFetch(domain:www.divitmindspace.com)"
     ]
   }
 }

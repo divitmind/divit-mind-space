@@ -64,9 +64,6 @@ const categoryDescriptions: Record<string, React.ReactNode> = {
   ),
   assessments: (
     <>
-      <span className="text-green font-bold block mb-3 uppercase tracking-widest text-xs lg:text-sm">
-        <strong>Mapping Your Unique Blueprint</strong>
-      </span>
       Comprehensive clinical assessments for <strong>ADHD</strong>, <strong>Autism</strong>, <strong>Learning Disabilities</strong>, <strong>Anxiety</strong>, <strong>Depression</strong>, <strong>Stress</strong>, <strong>Addiction</strong>, and other wide range of psychological & psychoeducational evaluations for <strong>Children</strong>, <strong>Adolescents</strong> and <strong>Adults</strong>.
     </>
   ),
@@ -87,7 +84,7 @@ const categoryDescriptions: Record<string, React.ReactNode> = {
   ),
   physiotherapy: (
     <>
-      Pain Management, Gym & Sports Injury Sessions, and Rehabilitation for <strong>Children</strong>, <strong>Teens</strong>, and <strong>Adults</strong>. Expert physical therapy at our Kasavanahalli center off Sarjapur Road, Bangalore.
+      Pain Management, Gym & Sports Injury Sessions, and Rehabilitation for <strong>Children</strong>, <strong>Teens</strong>, and <strong>Adults</strong>.
     </>
   ),
 };
@@ -253,7 +250,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
 
             {/* Description */}
             <motion.div
-              className="text-lg text-black/70 mb-6 max-w-4xl mx-auto font-medium"
+              className="text-lg text-black/70 mb-6 max-w-5xl mx-auto font-medium"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -353,8 +350,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                 <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                   <div className="lg:col-span-5">
                     <h2 className="text-3xl lg:text-4xl font-serif text-black leading-tight italic">
-                      Assessment HUB: <br className="hidden lg:block" />
-                      <strong>Mapping Your Unique Blueprint</strong>
+                      Assessment HUB
                     </h2>
                   </div>
                   <div className="lg:col-span-7">
@@ -384,7 +380,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                       </p>
                       <ul className="space-y-6 flex-grow">
                         {[
-                          { title: "Autism", text: "Beyond surface symptoms, we explore social communication, sensory profiles, and special interests to help the <strong>child</strong> feel truly seen and understood." },
+                          { title: "Autism", text: "Beyond surface symptoms, we explore social communication, sensory profiles, and special interests to help the child feel truly seen and understood." },
                           { title: "ADHD & Executive Function", text: "We look beyond hyperactivity to assess attention, organization, impulse control, and emotional regulation, while differentiating ADHD from anxiety or learning differences." },
                           { title: "Learning Disabilities (LD)", text: "Focused evaluations for reading, writing, and math to uncover the root causes of academic struggles." }
                         ].map((item) => (
@@ -538,8 +534,8 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                       </p>
                       <ul className="space-y-6 flex-grow">
                         {[
-                          { title: "Gross Motor Milestones", text: "Supporting <strong>children</strong> who are delayed in rolling, sitting, crawling, or walking." },
-                          { title: "Coordination & Balance", text: "Helping <strong>children</strong> who may appear clumsy, frequent falls, or have trouble with physical activities." },
+                          { title: "Gross Motor Milestones", text: "Supporting children who are delayed in rolling, sitting, crawling, or walking." },
+                          { title: "Coordination & Balance", text: "Helping children who may appear clumsy, frequent falls, or have trouble with physical activities." },
                           { title: "Developmental Delays", text: "Specialized support for conditions such as cerebral palsy or other movement challenges." }
                         ].map((item) => (
                           <li key={item.title} className="flex gap-4">

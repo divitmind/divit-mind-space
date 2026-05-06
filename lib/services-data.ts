@@ -95,7 +95,7 @@ export const services: ServiceData[] = [
     id: "2",
     title: "Psychoeducational Assessments",
     slug: "psychoeducational-assessments",
-    description: "Psychoeducational assessments play a pivotal role in supporting neurodivergent **children** and **adolescents** — those with learning differences such as ADHD, dyslexia, or autism spectrum conditions.",
+    description: "Create a clear, actionable roadmap to help children understand their unique learning profile and thrive academically and emotionally.",
     category: "assessments",
     image: "/Psychoeducational Assessments.jpeg",
     content: {
@@ -694,11 +694,11 @@ export const services: ServiceData[] = [
     id: "13",
     title: "Group Therapy Sessions",
     slug: "group-therapy-sessions",
-    description: "Group therapy helps **children** and **adults** develop essential social, emotional, and communication skills through guided peer interactions in a safe, supportive, and confidential environment.",
+    description: "Build essential social and communication skills through meaningful peer connection and guided support.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Group therapy helps **children and adults** develop essential social, emotional, and communication skills through guided peer interactions in a safe, supportive, and confidential environment.\n\nAt Divit MindSpace, we believe real growth happens in connection with others. We look at connection as a whole, including:\n• Social communication (understanding cues and interaction)\n• Emotional regulation (managing feelings in a group)\n• Friendship skills (building and maintaining connections)\n• Personal growth (gaining confidence and resilience)\n\nWe create meaningful group experiences where individuals can practice skills, receive gentle feedback, and build confidence while feeling accepted and understood.",
+      overview: "Group therapy helps children and adults develop essential social, emotional, and communication skills through guided peer interactions in a safe, supportive, and confidential environment.\n\nAt Divit MindSpace, we believe real growth happens in connection with others. We look at connection as a whole, including:\n• Social communication (understanding cues and interaction)\n• Emotional regulation (managing feelings in a group)\n• Friendship skills (building and maintaining connections)\n• Personal growth (gaining confidence and resilience)\n\nWe create meaningful group experiences where individuals can practice skills, receive gentle feedback, and build confidence while feeling accepted and understood.",
       audienceSections: [
         {
           audienceType: "children",
@@ -905,7 +905,7 @@ export const services: ServiceData[] = [
     id: "7",
     title: "Counselling Services",
     slug: "counselling",
-    description: "At Divit MindSpace, our counselling services support individuals across all age groups in navigating life’s challenges with greater clarity, resilience, and emotional well-being.",
+    description: "Navigate life’s challenges with greater clarity, resilience, and emotional well-being through personalized, integrated therapy.",
     category: "guidance",
     image: "/features-service-card/adult-counseling.png",
     content: {

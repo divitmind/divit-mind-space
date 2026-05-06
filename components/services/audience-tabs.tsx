@@ -142,7 +142,7 @@ export function AudienceTabs({
         )}
 
         <ul className={cn(
-          isGrid ? "grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4" : "flex flex-col gap-y-4"
+          isGrid ? "grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4" : "flex flex-col gap-y-4"
         )}>
           {items.map((item, i) => (
             <li key={i} className="flex items-start gap-3 py-1">
@@ -390,7 +390,7 @@ export function AudienceTabs({
                             </div>
                           </div>
                           <div className="lg:col-span-9">
-                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12">
+                            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12">
                               {group.items.map((item, i) => (
                                 <li key={i} className="flex items-start gap-3 py-2 lg:py-3 border-b border-green/[0.05] last:border-0 md:[&:nth-last-child(2)]:border-0 md:last:border-0">
                                   <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-70" />
@@ -489,7 +489,7 @@ export function AudienceTabs({
                             </div>
                           </div>
                           <div className="lg:col-span-9">
-                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12">
+                            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-2 lg:gap-x-12">
                               {group.items.map((item, i) => (
                                 <li key={i} className="flex items-start gap-3 py-2 lg:py-3 border-b border-green/[0.05] last:border-0 md:[&:nth-last-child(2)]:border-0 md:last:border-0">
                                   <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-70" />
