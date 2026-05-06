@@ -391,7 +391,7 @@ export const services: ServiceData[] = [
     id: "5",
     title: "Behavioral Therapy",
     slug: "behavioral-therapy",
-    description: "Every individual navigates the world differently. Our neuro-affirming behavioural therapy honors these differences by focusing on building meaningful skills, fostering emotional regulation, and empowering **children, adolescents, teens** and **adults** to thrive authentically — on their own terms.",
+    description: "Empowering children and adults to build meaningful skills and thrive authentically through neuro-affirming support.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
@@ -481,11 +481,11 @@ export const services: ServiceData[] = [
     id: "6",
     title: "Cognitive Behavioral Therapy (CBT)",
     slug: "cbt-cognitive-behavioral-therapy",
-    description: "Cognitive Behavioral Therapy (CBT) is a practical, goal-oriented, and evidence-based approach that helps individuals understand the connection between their **thoughts, feelings, and behaviors** .",
+    description: "Practical, solution-focused support helping children and adults navigate life with greater confidence, clarity, and calm.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "At Divit MindSpace, we offer CBT tailored for **children, adolescents, and adults**, including both Cognitive Behavioral Therapy (CBT) is a practical, goal-oriented, and evidence-based approach that helps individuals understand the connection between their **thoughts, feelings, and behaviors**. At Divit MindSpace, we offer CBT tailored for **children, adolescents, and adults**, including both **neurotypical and neurodivergent individuals** (such as ADHD and Autism). We don’t aim to change who you are — instead, we equip you with effective, personalized tools to navigate everyday challenges with greater **confidence, clarity, and calm**, across every stage of life.",
+      overview: "Cognitive Behavioral Therapy (CBT) is a practical, goal-oriented, and evidence-based approach that explores the connection between thoughts, feelings, and behaviors. At Divit MindSpace, we offer CBT that is tailored for both neurotypical and neurodivergent individuals (ADHD/Autism). We don’t aim to change who you are — we equip you with effective tools to navigate life with greater confidence, clarity, and calm.",
       whatToExpect: [
         "Initial assessment to understand specific needs and goals",
         "Personalized, practical skill-building sessions",
@@ -605,7 +605,7 @@ export const services: ServiceData[] = [
     id: "22",
     title: "Cognitive Therapy",
     slug: "cognitive-therapy",
-    description: "Cognitive Therapy offers a collaborative and supportive space to explore the deep connection between your thoughts, emotions, and actions — helping **children**, **teens**, and **adults** understand these cognitive processes, gain greater clarity, and build emotional resilience and confidence.",
+    description: "Build emotional resilience and confidence through a collaborative space that explores the connection between thoughts, emotions, and actions.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {

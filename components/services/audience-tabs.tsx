@@ -89,14 +89,17 @@ export function AudienceTabs({
   // Helper: Smart Bold Parsing (Before Colon or Em-Dash) + Markdown Bold
   const renderItemText = (text: string) => {
     if (!text) return null;
+
+    // First, strip markdown header artifacts if they exist
+    const cleanText = text.replace(/^#+\s*/, '');
     
-    // First, check for markdown bold since it's explicit
-    if (text.includes('**')) {
-      return renderTextWithBold(text);
+    // Check for markdown bold since it's explicit
+    if (cleanText.includes('**')) {
+      return renderTextWithBold(cleanText);
     }
 
-    const colonIndex = text.indexOf(':');
-    const dashIndex = text.indexOf('—');
+    const colonIndex = cleanText.indexOf(':');
+    const dashIndex = cleanText.indexOf('—');
     
     let separatorIndex = -1;
     if (colonIndex !== -1 && dashIndex !== -1) {
@@ -107,12 +110,12 @@ export function AudienceTabs({
       separatorIndex = dashIndex;
     }
 
-    if (separatorIndex === -1) return text;
+    if (separatorIndex === -1) return cleanText;
 
     return (
       <>
-        <strong className="text-black font-bold">{text.slice(0, separatorIndex + 1)}</strong>
-        {text.slice(separatorIndex + 1)}
+        <strong className="text-black font-bold">{cleanText.slice(0, separatorIndex + 1)}</strong>
+        {cleanText.slice(separatorIndex + 1)}
       </>
     );
   };
@@ -276,32 +279,30 @@ export function AudienceTabs({
           {/* Hero Section - Shown only for single-audience services (Multi-audience has global overview) */}
           {!isMultiAudience && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-              <div className="lg:col-span-6 flex">
+              <div className="lg:col-span-4 flex">
                 <div className="bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col w-full">
                   <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
                     <Sparkles className="w-48 h-48 text-white" />
                   </div>
-                  <div className="relative z-10 flex flex-col h-full justify-between">
+                  <div className="relative z-10 flex flex-col">
                     <div className="lg:-mt-6 mb-6">
                       <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Primary Outcome</p>
                     </div>
                     <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white max-w-2xl">
-                      {activeData.hero?.shortDescription}
+                      {activeData.hero?.shortDescription || activeData.shortDescription}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="lg:col-span-6 flex">
-                <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 flex flex-col w-full relative overflow-hidden">
-                  <div className="relative z-10 flex flex-col h-full justify-between">
-                    <div className="lg:-mt-6 mb-6">
-                      <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
-                    </div>
-                    <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap flex-1 text-editorial-dropcap">
-                      {renderTextWithBold(activeData.hero?.overview || globalOverview || "")}
-                    </p>
+              <div className="lg:col-span-8 bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 flex flex-col w-full relative overflow-hidden">
+                <div className="relative z-10 flex flex-col">
+                  <div className="lg:-mt-6 mb-6">
+                    <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                   </div>
+                  <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
+                    {renderTextWithBold(activeData.hero?.overview || activeData.overview || globalOverview || "")}
+                  </p>
                 </div>
               </div>
             </div>
@@ -468,8 +469,11 @@ export function AudienceTabs({
                       const groups: { heading: string; items: string[] }[] = [];
                       activeData.supportedItems?.forEach((item) => {
                         const text = typeof item === 'string' ? item : item.items.join(', ');
-                        if (text.startsWith('## ')) {
-                          groups.push({ heading: text.replace('## ', ''), items: [] });
+                        if (text.startsWith('## ') || text.startsWith('#### ')) {
+                          groups.push({ 
+                            heading: text.replace(/^#+\s*/, ''), 
+                            items: [] 
+                          });
                         } else {
                           if (groups.length === 0) groups.push({ heading: 'Details', items: [] });
                           groups[groups.length - 1].items.push(text);
