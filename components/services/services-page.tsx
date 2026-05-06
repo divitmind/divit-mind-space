@@ -352,6 +352,9 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                     <h2 className="text-3xl lg:text-4xl font-serif text-black leading-tight italic">
                       Assessment HUB
                     </h2>
+                    <p className="text-green font-bold uppercase tracking-widest text-xs lg:text-sm mt-3">
+                      Mapping Your Unique Blueprint
+                    </p>
                   </div>
                   <div className="lg:col-span-7">
                     <p className="text-lg lg:text-xl text-black/70 font-medium leading-relaxed border-l-2 border-green/10 pl-6 lg:pl-8 py-2">
@@ -440,7 +443,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                           { title: "Stress", text: "We identify your specific triggers and help your nervous system move from survival mode to sustainable balance." },
                           { title: "Anxiety", text: "Support for OCD, Panic Disorder, Social Anxiety, and other patterns — providing clarity and practical regulation tools." },
                           { title: "Depression", text: "Compassionate support through depressive episodes and burnout, including specialized maternal mental health screening and postpartum guidance." },
-                          { title: "<strong>Adult</strong> Autism & <strong>Adult</strong> ADHD", text: "Neuro-affirming assessments for late-identified individuals, helping differentiate neurodivergence from burnout or anxiety." },
+                          { title: "Adult Autism & Adult ADHD", text: "Neuro-affirming assessments for late-identified individuals, helping differentiate neurodivergence from burnout or anxiety." },
                           { title: "Trauma & Grief", text: "Safe, trauma-informed evaluations that respect your pace and support recovery." },
                           { title: "Substance Use & Addiction", text: "Non-judgmental assessments to understand underlying patterns and co-occurring needs." },
                           { title: "Geriatric Care (55+)", text: "Dignified assessment of memory, mood, cognitive changes, and functional abilities to support independence and emotional well-being." }
