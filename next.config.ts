@@ -49,6 +49,20 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      { source: "/blog", destination: "/blogs", permanent: true },
+      { source: "/our-advisors", destination: "/specialists", permanent: true },
+      { source: "/philosophy", destination: "/about-us", permanent: true },
+      { source: "/special-education-sessions-for-children", destination: "/services", permanent: true },
+      { source: "/training-programs-for-parents-teachers-therapists", destination: "/awareness-program", permanent: true },
+      { source: "/training-courses", destination: "/awareness-program", permanent: true },
+      { source: "/founders-specialists", destination: "/specialists", permanent: true },
+      { source: "/elementor-hf/:path*", destination: "/", permanent: true },
+      { source: "/wp-content/:path*", destination: "/", permanent: true },
+      { source: "/wp-admin/:path*", destination: "/", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
