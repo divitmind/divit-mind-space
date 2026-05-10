@@ -867,37 +867,44 @@ export const services: ServiceData[] = [
     id: "15",
     title: "Brain Gym",
     slug: "brain-gym",
-    description: "Movement-based exercises that integrate brain-body connections — improving focus, coordination, memory, and learning readiness through simple, targeted activities.",
+    description: "It is a fun, active, and evidence-based way to unlock a **child**'s full potential, bridging the gap between physical movement and cognitive function.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Brain Gym uses 26 specially designed movement exercises that support brain-body integration, helping individuals improve focus, coordination, memory, and learning readiness. Based on Educational Kinesiology principles, these simple activities — including cross-lateral movements, lazy eights, and PACE exercises — help activate both hemispheres of the brain and support primitive reflex integration. At Divit MindSpace, we incorporate Brain Gym as part of a holistic approach to supporting neurodivergent learners.",
+      overview: "Brain Gym is a dynamic, movement-based program designed to supercharge a **child**'s learning, focus, and cognitive development. By using specific, purposeful physical activities, Brain Gym stimulates neural pathways, helping the brain and body work together in perfect harmony.",
       benefits: [
-        "Improved focus, concentration, and attention",
-        "Better hand-eye coordination and motor skills",
-        "Enhanced reading, writing, and learning readiness",
-        "Reduced stress and improved emotional regulation",
-        "Support for primitive reflex integration",
+        "Enhanced Focus & Concentration: Better attention spans for academic tasks and daily routines.",
+        "Improved Motor Skills: Greater physical coordination, balance, and spatial awareness.",
+        "Emotional Regulation: Practical tools to manage stress, anxiety, and sensory overload.",
+        "Boosted Academic Performance: Targeted support for reading, writing, and memory retention.",
+        "Increased Confidence: A stronger sense of self-awareness, independence, and capability."
       ],
       whatToExpect: [
-        "Assessment of coordination and learning challenges",
-        "Introduction to core Brain Gym movements",
-        "PACE exercises for learning readiness",
-        "Fun, engaging movement sessions",
-        "Take-home exercises for daily practice",
+        "Expect a vibrant, active environment! Our Brain Gym sessions feel more like play than work.",
+        "Your child will be gently guided through a series of specialized, cross-lateral movements and engaging exercises tailored to their specific developmental needs.",
+        "Sessions are structured yet flexible, ensuring a positive experience that keeps kids motivated, moving, and having fun while they learn."
       ],
       whoIsItFor: [
-        "Children with learning difficulties or dyslexia",
-        "Individuals with ADHD or attention challenges",
-        "Those with coordination or motor planning difficulties",
-        "Children struggling with reading or writing",
-        "Anyone seeking to improve focus through movement",
+        "Struggles with focus, attention, or sitting still in a classroom setting.",
+        "Experiences challenges with handwriting, reading comprehension, or physical coordination.",
+        "Needs gentle, effective support with sensory processing or emotional regulation.",
+        "Would benefit from a highly engaging, movement-based approach to building cognitive skills."
       ],
       duration: "30-45 minute sessions",
       format: "In-person, individual or small group",
+      additionalSections: [
+        {
+          title: "Why Choose Divit Mindspace",
+          intro: "At Divit Mindspace, we believe in holistic, neuro-inclusive care that celebrates every child's unique developmental journey.",
+          items: [
+            "We don't just guide children through physical exercises; we integrate these movements with our deep understanding of child psychology, expressive arts, and early childhood development.",
+            "Our compassionate team creates a safe, affirming space where your child can thrive, blending evidence-based techniques with a playful atmosphere to foster real, lasting growth."
+          ],
+          color: "sage"
+        }
+      ]
     },
   },
-
   // ============================================================================
   // GUIDANCE
   // ============================================================================

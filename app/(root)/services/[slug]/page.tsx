@@ -279,6 +279,40 @@ export default async function ServicePage({ params }: PageProps) {
     });
   };
 
+  // Helper: Smart Bold Parsing (Before Colon or Em-Dash) + Markdown Bold
+  const renderItemText = (text: string) => {
+    if (!text) return null;
+
+    // First, strip markdown header artifacts if they exist
+    const cleanText = text.replace(/^#+\s*/, '');
+    
+    // Check for markdown bold since it's explicit
+    if (cleanText.includes('**')) {
+      return renderTextWithBold(cleanText);
+    }
+
+    const colonIndex = cleanText.indexOf(':');
+    const dashIndex = cleanText.indexOf('—');
+    
+    let separatorIndex = -1;
+    if (colonIndex !== -1 && dashIndex !== -1) {
+      separatorIndex = Math.min(colonIndex, dashIndex);
+    } else if (colonIndex !== -1) {
+      separatorIndex = colonIndex;
+    } else if (dashIndex !== -1) {
+      separatorIndex = dashIndex;
+    }
+
+    if (separatorIndex === -1) return cleanText;
+
+    return (
+      <>
+        <strong className="text-black font-bold">{cleanText.slice(0, separatorIndex + 1)}</strong>
+        {cleanText.slice(separatorIndex + 1)}
+      </>
+    );
+  };
+
   return (
     <div className="bg-[#FAF9F5] min-h-screen">
       {/* Breadcrumb - Absolute Tightness */}
@@ -375,108 +409,193 @@ export default async function ServicePage({ params }: PageProps) {
             )}
 
             {/* Main Content Flow: Audience-Specific Tabs */}
-            <div className="mb-12 lg:mb-16">
-              <AudienceTabs 
-                sections={service.audienceSections || []} 
-                globalOverview={service.overview}
-                isMultiAudience={hasAudienceSections && service.audienceSections!.length > 1}
-                universalBenefits={service.benefits}
-                universalExpectations={service.whatToExpect}
-                globalApproachItems={approachItems}
-                globalWhyChooseItems={whyChooseItems}
-                globalAdditionalSections={service.additionalSections}
-              />
-            </div>
-
-            {/* Universal Content (Non-tabbed or fallback) */}
-            {hasUniversalContent && !hasAudienceSections && (
-              <div className="bg-white rounded-2xl p-6 lg:p-10 border border-green/10 shadow-sm mb-10 lg:mb-12">
-                {/* Expert Summary with Primary Outcome */}
-                <div className="flex flex-col lg:flex-row gap-6 mb-8">
-                  <div className="flex-1">
-                    <p className="text-black/70 text-sm lg:text-base leading-[1.6] font-medium max-w-2xl whitespace-pre-wrap">
-                      Select specific details for your audience below or review our universal program highlights.
-                    </p>
+            {hasAudienceSections ? (
+              <div className="mb-12 lg:mb-16">
+                <AudienceTabs 
+                  sections={service.audienceSections || []} 
+                  globalOverview={service.overview}
+                  isMultiAudience={service.audienceSections!.length > 1}
+                  universalBenefits={undefined}
+                  universalExpectations={undefined}
+                  globalApproachItems={approachItems}
+                  globalWhyChooseItems={whyChooseItems}
+                  globalAdditionalSections={service.additionalSections}
+                />
+              </div>
+            ) : hasUniversalContent ? (
+              <div className="space-y-8 lg:space-y-10 mb-10 lg:mb-12">
+                {/* Premium Duo-Grid Layout for Universal Flow */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 items-stretch">
+                  {/* Primary Outcome (Green Box) */}
+                  <div className="lg:col-span-4 bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col">
+                    <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
+                      <Sparkles className="w-48 h-48 text-white" />
+                    </div>
+                    <div className="relative z-10 flex flex-col">
+                      <div className="lg:-mt-6 mb-6">
+                        <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
+                      </div>
+                      <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white">
+                        {renderTextWithBold(service.description)}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="w-full lg:w-72 shrink-0">
-                    {service.description && (
-                      <div className="bg-green p-6 lg:p-8 rounded-xl text-white shadow-lg shadow-green/5 relative overflow-hidden group">
-                        <div className="absolute -right-2 -bottom-2 opacity-10 group-hover:scale-110 transition-transform duration-500"> 
-                          <CheckCircle2 className="w-20 h-20" />
-                        </div>
-                        <p className="text-[9px] font-bold uppercase tracking-[0.2em] mb-3 opacity-70">Primary Outcome</p>
-                        <p className="text-lg font-serif italic leading-snug font-bold relative z-10">
-                          {renderTextWithBold(service.description)}
-                        </p>
+                  {/* Overview (White Box) */}
+                  <div className="lg:col-span-8 bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 relative overflow-hidden flex flex-col">
+                    <div className="relative z-10 flex flex-col">
+                      <div className="lg:-mt-6 mb-6">
+                        <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                       </div>
-                    )}
+                      <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
+                        {renderTextWithBold(service.overview || "")}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                {/* Benefits Grid */}
-                {service.benefits && service.benefits.length > 0 && (
-                  <div className="mb-10">
-                    <div className="flex items-center gap-4 mb-6">
-                      <h3 className="font-serif text-xl lg:text-2xl text-green">Universal Benefits</h3>
-                      <div className="flex-1 h-px bg-green/10" />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {service.benefits.map((benefit, i) => (
-                        <div key={i} className="h-full p-5 lg:p-6 rounded-xl bg-white border border-green/5 shadow-sm hover:shadow-md hover:border-green/20 transition-all group flex flex-col items-start text-left">
-                          <div className="w-9 h-9 rounded-full bg-green/5 flex items-center justify-center mb-4 group-hover:bg-green group-hover:text-white transition-all duration-300">
-                            <CheckCircle2 className="w-5 h-5" />
-                          </div>
-                          <p className="text-sm lg:text-base text-black/70 font-medium leading-relaxed">
-                            {benefit}
-                          </p>
+                {/* Benefits & Expectations Duo-Grid (Priority: Universal) */}
+                {((service.benefits?.length) || (service.whatToExpect?.length)) ? (
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
+                    {/* Benefits Card (Sage Tint) */}
+                    {service.benefits && service.benefits.length > 0 && (
+                      <div className="rounded-[2.5rem] flex flex-col h-full bg-[#7A9A7D]/5 border border-[#7A9A7D]/10 px-5 py-8 lg:px-10 lg:py-12">
+                        <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6 flex flex-col">
+                          <h3 className="text-lg lg:text-xl font-serif text-green flex items-baseline flex-wrap gap-x-3">
+                            <span>What Your Child Will Gain</span>
+                          </h3>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
 
-                {/* Process & Profile Comparison */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-6 border-t border-green/10 items-stretch">
-                  {service.whatToExpect && service.whatToExpect.length > 0 && (
-                    <div className="bg-white px-6 pb-6 pt-1 lg:px-8 lg:pb-8 lg:pt-2 rounded-2xl border border-green/10 flex flex-col">   
-                      <h3 className="font-serif text-xl text-green mb-6 flex items-center gap-3">
-                        <div className="w-1 h-5 bg-green/20 rounded-full" />
-                        What to Expect
-                      </h3>
-                      <div className="space-y-4 flex-1">
-                        {service.whatToExpect.map((item, i) => (
-                          <div key={i} className="flex gap-3 group">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
-                            <p className="text-sm lg:text-base text-black/70 font-medium leading-relaxed">
-                              {item}
-                            </p>
-                          </div>
-                        ))}
+                        <ul className="flex flex-col gap-y-3 flex-1">
+                          {service.benefits.map((item, i) => (
+                            <li key={i} className="flex items-start bg-white/50 backdrop-blur-sm pl-3 pr-4 py-4 lg:pl-3 lg:pr-4 lg:py-4 rounded-2xl border border-green/5 gap-2.5 h-fit">
+                              <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
+                              <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                                {renderItemText(item)}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
+                    )}
+                    
+                    {/* Expectations Card (Sage Tint) */}
+                    {service.whatToExpect && service.whatToExpect.length > 0 && (
+                      <div className="rounded-[2.5rem] flex flex-col h-full bg-[#7A9A7D]/5 border border-[#7A9A7D]/10 px-5 py-8 lg:px-10 lg:py-12">
+                        <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6 flex flex-col">
+                          <h3 className="text-lg lg:text-xl font-serif text-green flex items-baseline flex-wrap gap-x-3">
+                            <span>What to Expect</span>
+                          </h3>
+                        </div>
+
+                        <ul className="flex flex-col gap-y-3 flex-1">
+                          {service.whatToExpect.map((item, i) => (
+                            <li key={i} className="flex items-start bg-white/50 backdrop-blur-sm pl-3 pr-4 py-4 lg:pl-3 lg:pr-4 lg:py-4 rounded-2xl border border-green/5 gap-2.5 h-fit">
+                              <div className="w-6 h-6 rounded-full bg-green/10 flex items-center justify-center shrink-0 mt-0.5 text-green font-serif italic text-xs">
+                                {i + 1}
+                              </div>
+                              <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                                {renderItemText(item)}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                ) : null}
+
+                {/* Clean Lists for the rest (Is This Right for You, Why Choose Us, etc.) */}
+                <div className="space-y-6 pt-4">
+                  {/* Clean List: Is This Right for You? */}
+                  {service.whoIsItFor && service.whoIsItFor.length > 0 && (
+                    <div className="flex flex-col w-full">
+                      <div className="mb-6 border-l-2 border-green/20 pl-4">
+                        <h3 className="text-xl lg:text-2xl font-serif text-green italic">Is This the Right Support for Your Child?</h3>
+                      </div>
+                      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
+                        {service.whoIsItFor.map((item, i) => (
+                          <li key={i} className="flex items-start gap-3 py-1">
+                            <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
+                            <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                              {renderItemText(item)}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   )}
 
-                  {service.whoIsItFor && service.whoIsItFor.length > 0 && (
-                    <div className="bg-green/5 px-6 pb-6 pt-1 lg:px-8 lg:pb-8 lg:pt-2 rounded-2xl border border-green/10 flex flex-col"> 
-                      <h3 className="font-serif text-xl text-green mb-6">Is This Right for You?</h3>
-                      <div className="space-y-3 flex-1">
-                        {service.whoIsItFor.map((item, i) => (
-                          <div key={i} className="flex items-start gap-3">
-                            <div className="w-4 h-4 rounded-full bg-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">   
-                              <svg className="w-2.5 h-2.5 text-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={5}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                              </svg>
-                            </div>
-                            <span className="text-sm lg:text-base text-black/70 font-medium leading-snug">{item}</span>
+                  {/* Additional Universal Sections (Like Why Choose Us) */}
+                  {service.additionalSections && service.additionalSections.length > 0 && (
+                    <div className="pt-4 border-t border-green/10 space-y-8">
+                      {service.additionalSections.map((section, idx) => (
+                        <div key={idx} className="flex flex-col w-full">
+                          <div className="mb-6 border-l-2 border-green/20 pl-4">
+                            <h3 className="text-xl lg:text-2xl font-serif text-green italic">{section.title}</h3>
                           </div>
-                        ))}
-                      </div>
+                          {section.intro && (
+                            <p className="mb-6 text-[15px] lg:text-[16px] text-black/60 font-medium leading-relaxed italic">
+                              {renderTextWithBold(section.intro)}
+                            </p>
+                          )}
+                          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
+                            {section.items.map((item, i) => (
+                              <li key={i} className="flex items-start gap-3 py-1">
+                                <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
+                                <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                                  {renderItemText(item)}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Fallback for Why Choose Us if not in additionalSections (Speech Therapy Style) */}
+                  {(approachItems || whyChooseItems) && (
+                    <div className="pt-8 border-t border-green/10 grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-8">
+                      {approachItems && approachItems.length > 0 && (
+                        <div>
+                          <div className="mb-6 border-l-2 border-green/20 pl-4">
+                            <h3 className="text-xl lg:text-2xl font-serif text-green italic">Our Approach</h3>
+                          </div>
+                          <ul className="space-y-4">
+                            {approachItems.map((item, i) => (
+                              <li key={i} className="flex items-start gap-3 py-1">
+                                <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
+                                <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                                  {renderItemText(item)}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {whyChooseItems && whyChooseItems.length > 0 && (
+                        <div>
+                          <div className="mb-6 border-l-2 border-green/20 pl-4">
+                            <h3 className="text-xl lg:text-2xl font-serif text-green italic">Why Families Choose Us</h3>
+                          </div>
+                          <ul className="space-y-4">
+                            {whyChooseItems.map((item, i) => (
+                              <li key={i} className="flex items-start gap-3 py-1">
+                                <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
+                                <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                                  {renderItemText(item)}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
               </div>
-            )}
+            ) : null}
 
             {/* Rich Text Body */}
             {service.body && service.body.length > 0 && (
@@ -492,10 +611,12 @@ export default async function ServicePage({ params }: PageProps) {
       </section>
 
       {/* Specialist Oversight */}
-      <ServiceExperts
-        specialists={service.specialists || []}
-        onDemand={service.onDemand}
-      />
+      <div className="pt-10 lg:pt-16">
+        <ServiceExperts
+          specialists={service.specialists || []}
+          onDemand={service.onDemand}
+        />
+      </div>
 
       {/* FAQ Section */}
       <ServiceFAQ faqs={service.faqs || []} />
