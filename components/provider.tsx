@@ -8,9 +8,10 @@ import type { SiteSettings } from "@/lib/types";
 interface ProviderProps {
     children: React.ReactNode;
     siteSettings: SiteSettings | null;
+    announcement?: { text?: string | null } | null;
 }
 
-const Provider = ({ children, siteSettings }: ProviderProps) => {
+const Provider = ({ children, siteSettings, announcement }: ProviderProps) => {
     const pathname = usePathname();
 
     if (pathname.startsWith("/studio")) {
@@ -18,6 +19,11 @@ const Provider = ({ children, siteSettings }: ProviderProps) => {
     } else {
         return (
             <>
+                {announcement?.text && (
+                    <div className="bg-[#7A9A7D] text-white text-center py-2 px-4 text-xs md:text-sm font-bold uppercase tracking-widest relative z-[60]">
+                        <span className="animate-pulse">{announcement.text}</span>
+                    </div>
+                )}
                 <SiteHeader />
                 {children}
                 <SiteFooter siteSettings={siteSettings} />

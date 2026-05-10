@@ -7,8 +7,8 @@ import { FaqSection } from "@/components/homepage/faq-section";
 import { CtaSection } from "@/components/homepage/cta-section";
 import { ExplorePivotsSection } from "@/components/homepage/explore-pivots-section";
 import { sanityFetch } from "@/sanity/lib/live";
-import { TOP_REVIEWS_QUERY, THERAPY_SERVICES_QUERY, ANNOUNCEMENT_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
-import { ReviewsQueryResult, ServicesQueryResult, AnnouncementQueryResult } from "@/sanity/types";
+import { TOP_REVIEWS_QUERY, THERAPY_SERVICES_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import { ReviewsQueryResult, ServicesQueryResult } from "@/sanity/types";
 import type { SiteSettings, FAQ } from "@/lib/types";
 import {
   ORGANIZATION_REF,
@@ -21,7 +21,7 @@ import {
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Divit MindSpace | Leading Center for Mental Health, Neurodevelopment & Physiotherapy Bangalore",
+  title: "Divit MindSpace | Nurtured Minds, Independent Lives",
   description:
     "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy, serving children, teens, and adults. Located off Sarjapur Road (Kasavanahalli), we provide expert Clinical Assessments and therapies including Speech Therapy, Occupational Therapy, ABA, Pediatric & Adult Physiotherapy, CBT, and Special Education.",
   keywords: [
@@ -146,15 +146,13 @@ function generateFaqSchema(faqs: FAQ[]) {
 }
 
 export default async function Page() {
-  const [{ data: reviews }, { data: therapyServices }, { data: announcement }, { data: siteSettings }] = await Promise.all([
+  const [{ data: reviews }, { data: therapyServices }, { data: siteSettings }] = await Promise.all([
     sanityFetch({ query: TOP_REVIEWS_QUERY }),
     sanityFetch({ query: THERAPY_SERVICES_QUERY, tags: ["services"] }),
-    sanityFetch({ query: ANNOUNCEMENT_QUERY, tags: ["promowebsite"] }),
     sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY }),
   ]);
 
   const therapyServicesData = (therapyServices as ServicesQueryResult) ?? [];
-  const announcementData = announcement as AnnouncementQueryResult;
 
   // Get FAQ data from Sanity with fallback
   const homepageFaqs = siteSettings?.homepage?.faqs?.length ? siteSettings.homepage.faqs : defaultFaqs;
@@ -175,7 +173,7 @@ export default async function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <main>
-        <HeroSection announcement={announcementData?.text} siteSettings={siteSettings} />
+        <HeroSection siteSettings={siteSettings} />
         <ServicesSection serviceCategories={siteSettings?.homepage?.serviceCategories} />
         <TestimonialsSection reviews={(reviews as ReviewsQueryResult) ?? []} />
         <WhoNeedsItSection

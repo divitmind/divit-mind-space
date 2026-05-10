@@ -80,12 +80,14 @@ export function HeroSection({
   const seoLead = (
     <div className="max-w-5xl mx-auto text-center md:text-left">
       <div className="inline-block">
+        <div className="text-sm md:text-base font-bold text-[#7A9A7D] uppercase tracking-widest mb-4 px-1 drop-shadow-sm">
+          Bangalore&apos;s Leading Center for Mental Health, Neurodevelopment & Physiotherapy
+        </div>
         <h1 
           className="text-3xl md:text-5xl lg:text-6xl font-serif italic text-green mb-6 leading-[1.1] tracking-tight"
           style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
         >
-          <span className="lg:whitespace-nowrap">Bangalore&apos;s Leading Center for Mental Health,</span><br className="hidden lg:block" />
-          Neurodevelopment & Physiotherapy
+          Nurtured Minds, Independent Lives.
         </h1>
         
         <p className="mb-6 text-base md:text-lg lg:text-xl leading-relaxed text-black/60 max-w-3xl font-medium">
@@ -116,7 +118,7 @@ export function HeroSection({
   return (
 
 
-    <section className="pt-8 pb-8 lg:pt-12 lg:pb-10 bg-[#FAF9F5]">
+    <section className="pt-0 pb-8 lg:pt-2 lg:pb-10 bg-[#FAF9F5]">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           {/* Authority Statement as the primary entry point */}

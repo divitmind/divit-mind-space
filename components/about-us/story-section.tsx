@@ -49,7 +49,7 @@ export function StorySection({ data }: { data?: AboutUsStoryData }) {
             <div className="group p-8 lg:p-10 bg-[#7A9A7D] rounded-[2rem] text-white text-left flex flex-col justify-center shadow-xl shadow-[#7A9A7D]/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#7A9A7D]/20 hover:bg-[#6B8B6E]">
               <span className="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-80 group-hover:opacity-100 transition-opacity">Our Core Mission</span>
               <p className="text-2xl lg:text-3xl font-serif italic leading-tight">
-                Empowering potential through compassionate, evidence-based care.
+                Empowering minds across the lifespan through compassionate, evidence-based care.
               </p>
             </div>
 

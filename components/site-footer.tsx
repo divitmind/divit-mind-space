@@ -141,10 +141,13 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                                     className="object-contain"
                                 />
                             </div>
-                            <h3 className="font-serif italic text-lg lg:text-xl text-black leading-tight pt-1" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-                                {footerContent?.tagline || "Bangalore's Leading Center for Mental Health, Neurodevelopment & Physiotherapy"}
+                            <h3 className="font-serif italic text-xl lg:text-2xl text-black leading-tight pt-1" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
+                                {footerContent?.tagline || "Nurtured Minds, Independent Lives."}
                             </h3>
                         </div>
+                        <p className="text-xs font-bold text-[#7A9A7D] uppercase tracking-widest mb-4">
+                            Bangalore&apos;s Leading Center for Mental Health, Neurodevelopment & Physiotherapy
+                        </p>
                         <p className="text-[13px] text-black font-medium leading-relaxed max-w-[360px] mb-6">
                             {footerContent?.description ? (
                                 footerContent.description

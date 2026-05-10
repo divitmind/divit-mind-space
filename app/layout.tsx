@@ -5,8 +5,9 @@ import "./globals.css";
 import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import Provider from "@/components/provider";
 import { ClarityInit } from "@/components/clarity-init";
-import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import { SITE_SETTINGS_QUERY, ANNOUNCEMENT_QUERY } from "@/sanity/lib/queries";
 import type { SiteSettings } from "@/lib/types";
+import type { AnnouncementQueryResult } from "@/sanity/types";
 
 // GA4 — set NEXT_PUBLIC_GA_MEASUREMENT_ID in .env.local to activate.
 // The component renders nothing if the ID is missing, so this is safe to ship today.
@@ -27,8 +28,8 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL("https://divitmindspace.com"),
   title: {
-    default: "Divit MindSpace | Leading Center for Mental Health, Neurodevelopment & Physiotherapy Bangalore",
-    template: "%s | Divit MindSpace",
+    default: "Divit MindSpace | Nurtured Minds, Independent Lives",
+    template: "%s | Divit MindSpace | Nurtured Minds, Independent Lives",
   },
   description:
     "Bangalore’s leading center for Mental Health, Neurodevelopment & Physiotherapy, serving children, teens, and adults. Located off Sarjapur Road (Kasavanahalli), we provide expert Clinical Assessments and therapies including Speech Therapy, Occupational Therapy, ABA, Pediatric & Adult Physiotherapy (Pain Management & Rehab), CBT, and Special Education.",
@@ -336,9 +337,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { data: siteSettings } = await sanityFetch<SiteSettings>({
-    query: SITE_SETTINGS_QUERY,
-  });
+  const [{ data: siteSettings }, { data: announcement }] = await Promise.all([
+    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY }),
+    sanityFetch({ query: ANNOUNCEMENT_QUERY, tags: ["promowebsite"] }),
+  ]);
+  const announcementData = announcement as AnnouncementQueryResult;
 
   return (
     <html lang="en-IN" suppressHydrationWarning>
@@ -365,7 +368,7 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <SanityLive />
-        <Provider siteSettings={siteSettings}>{children}</Provider>
+        <Provider siteSettings={siteSettings} announcement={announcementData}>{children}</Provider>
         {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
       </body>
     </html>
