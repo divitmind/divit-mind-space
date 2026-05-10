@@ -45,8 +45,8 @@ export function HeroSection({ siteSettings }: HeroSectionProps) {
           {/* Text Content */}
           <div className="flex-[1.2] text-center md:text-left animate-in slide-in-from-bottom duration-700 fade-in">
             <div className="flex flex-col w-full max-w-[580px] mx-auto md:mx-0">
-              <div className="text-sm md:text-base font-bold text-[#7A9A7D] uppercase tracking-[0.2em] mb-4 md:mb-5 px-1 drop-shadow-sm">
-                Nurtured Minds, Independent Lives.
+              <div className="text-[11px] sm:text-xs md:text-base font-bold text-[#7A9A7D] uppercase tracking-widest md:tracking-[0.2em] mb-4 md:mb-5 px-1 drop-shadow-sm whitespace-nowrap sm:whitespace-normal">
+                Nurtured Minds, Independent Lives
               </div>
               <h1 className="flex flex-col tracking-tight text-black leading-none">
                 {/* Line 1: EMPOWERING EVERY CHILD'S with overlapping yellow strokes */}

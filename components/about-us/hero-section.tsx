@@ -84,10 +84,10 @@ export function HeroSection({
           Bangalore&apos;s Leading Center for Mental Health, Neurodevelopment & Physiotherapy
         </div>
         <h1 
-          className="text-3xl md:text-5xl lg:text-6xl font-serif italic text-green mb-6 leading-[1.1] tracking-tight"
+          className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-serif italic text-green mb-6 leading-[1.1] tracking-tight whitespace-nowrap sm:whitespace-normal"
           style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
         >
-          Nurtured Minds, Independent Lives.
+          Nurtured Minds, Independent Lives
         </h1>
         
         <p className="mb-6 text-base md:text-lg lg:text-xl leading-relaxed text-black/60 max-w-3xl font-medium">

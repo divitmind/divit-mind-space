@@ -20,7 +20,7 @@ const Provider = ({ children, siteSettings, announcement }: ProviderProps) => {
         return (
             <>
                 {announcement?.text && (
-                    <div className="bg-[#7A9A7D] text-white text-center py-2 px-4 text-xs md:text-sm font-bold uppercase tracking-widest relative z-[60]">
+                    <div className="bg-[#7A9A7D] text-white text-center py-1.5 md:py-2 px-2 md:px-4 text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider md:tracking-widest relative z-[60]">
                         <span className="animate-pulse">{announcement.text}</span>
                     </div>
                 )}

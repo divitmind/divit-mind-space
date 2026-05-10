@@ -142,7 +142,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                                 />
                             </div>
                             <h3 className="font-serif italic text-xl lg:text-2xl text-black leading-tight pt-1" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>
-                                {footerContent?.tagline || "Nurtured Minds, Independent Lives."}
+                                {footerContent?.tagline || "Nurtured Minds, Independent Lives"}
                             </h3>
                         </div>
                         <p className="text-xs font-bold text-[#7A9A7D] uppercase tracking-widest mb-4">
