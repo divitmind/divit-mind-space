@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
-import { ClipboardCheck, Heart, Users, GraduationCap, Activity, CheckCircle2 } from "lucide-react";
+import { ClipboardCheck, Heart, Users, GraduationCap, Activity, CheckCircle2, Search } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
 import type { SiteSettings, TrustMetrics } from "@/lib/types";
 
@@ -98,6 +98,7 @@ interface ServicesPageProps {
 export default function ServicesPage({ title: propTitle = "Our Services", services, siteSettings }: ServicesPageProps) {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Process services to handle manual category overrides
   const processedServices = useMemo(() => {
@@ -147,9 +148,18 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
   }, [searchParams]);
 
   const filteredServices = useMemo(() => {
-    const result = activeCategory === "all"
+    let result = activeCategory === "all"
       ? processedServices
       : processedServices.filter((s) => s.category === activeCategory);
+
+    // Apply text search filter
+    if (searchQuery.trim() !== "") {
+      const q = searchQuery.toLowerCase().trim();
+      result = result.filter(s => 
+        (s.title?.toLowerCase() || "").includes(q) || 
+        (s.description?.toLowerCase() || "").includes(q)
+      );
+    }
 
     // Apply custom ranking for therapy category
     if (activeCategory === "therapy") {
@@ -220,7 +230,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
     }
 
     return result;
-  }, [activeCategory, processedServices]);
+  }, [activeCategory, processedServices, searchQuery]);
 
   // Count services per category
   const categoryCounts = useMemo(() => {
@@ -294,13 +304,28 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
         </div>
       </section>
 
-      {/* Category Tabs */}
-      <section id="category-tabs" className="py-4 bg-[#FDFBF7] sticky top-20 z-40 border-y border-black/5">
-        <div className="container mx-auto px-4 relative">
-          {/* Mobile Scroll Indicator (Fade) */}
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#FDFBF7] via-[#FDFBF7]/80 to-transparent z-10 pointer-events-none md:hidden" />
+      {/* Category Tabs & Search */}
+      <section id="category-tabs" className="py-4 bg-[#FDFBF7] sticky top-20 z-40 border-y border-black/5 shadow-sm shadow-black/5">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center justify-center gap-4">
+            {/* Search Bar */}
+            <div className="w-full max-w-md relative shrink-0">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40" />
+              <input
+                type="text"
+                placeholder="Search services..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 pr-4 py-2.5 rounded-full border border-black/10 bg-white text-sm focus:outline-none focus:border-[#7A9A7D] focus:ring-1 focus:ring-[#7A9A7D] transition-all placeholder:text-black/30 shadow-sm"
+              />
+            </div>
 
-          <div className="flex overflow-x-auto no-scrollbar md:flex-wrap items-center md:justify-center gap-3 pb-2 md:pb-0 pr-8 md:pr-0">
+            {/* Tabs */}
+            <div className="w-full relative overflow-hidden">
+              {/* Mobile Scroll Indicator (Fade) */}
+              <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#FDFBF7] via-[#FDFBF7]/80 to-transparent z-10 pointer-events-none md:hidden" />
+
+              <div className="flex overflow-x-auto no-scrollbar md:flex-wrap items-center justify-start md:justify-center gap-3 pb-2 md:pb-0 pr-8 md:pr-0">
             {categories.map((cat) => {
               const isActive = activeCategory === cat.id;
               const count = categoryCounts[cat.id] || 0;
@@ -330,6 +355,8 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                 </button>
               );
             })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -659,10 +686,14 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                   <ClipboardCheck className="w-8 h-8 text-black/20" />
                 </div>
                 <h3 className="text-xl font-serif italic text-black mb-2">
-                  No services in this category yet
+                  {searchQuery.trim() !== "" 
+                    ? `No results found for "${searchQuery}"`
+                    : "No services in this category yet"}
                 </h3>
                 <p className="text-black/50 text-sm">
-                  Check other categories or contact us to learn about upcoming services.
+                  {searchQuery.trim() !== ""
+                    ? "Try adjusting your search terms or contact us to see if we can help."
+                    : "Check other categories or contact us to learn about upcoming services."}
                 </p>
               </div>
             </div>
@@ -683,10 +714,14 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
             <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
               <div className="text-center md:text-left">
                 <h2 className="text-xl md:text-4xl font-bold text-black font-[family-name:var(--font-cormorant)] italic mb-1 md:mb-2">
-                  Not ready to book?
+                  {searchQuery.trim() !== "" && filteredServices.length === 0 
+                    ? "Looking for something specific?" 
+                    : "Not ready to book?"}
                 </h2>
                 <p className="text-sm md:text-lg text-black/60 font-medium">
-                  Message us on WhatsApp. Ask us anything, we&apos;re here to help.
+                  {searchQuery.trim() !== "" && filteredServices.length === 0
+                    ? "Message us on WhatsApp. We offer many customized programs and might still be able to help."
+                    : "Message us on WhatsApp. Ask us anything, we're here to help."}
                 </p>
               </div>
             </div>
