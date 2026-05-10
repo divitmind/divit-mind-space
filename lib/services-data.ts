@@ -871,7 +871,7 @@ export const services: ServiceData[] = [
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     content: {
-      overview: "Brain Gym is a dynamic, movement-based program designed to supercharge a **child**'s learning, focus, and cognitive development. By using specific, purposeful physical activities, Brain Gym stimulates neural pathways, helping the brain and body work together in perfect harmony.",
+      overview: "Brain Gym is a dynamic, movement-based program designed to supercharge a **child**'s learning, focus, and cognitive development. By using specific, purposeful physical activities, Brain Gym stimulates neural pathways, helping the brain and body work together in perfect harmony. It is a fun, active, and evidence-based way to unlock a **child**'s full potential, bridging the gap between physical movement and cognitive function.",
       benefits: [
         "Enhanced Focus & Concentration: Better attention spans for academic tasks and daily routines.",
         "Improved Motor Skills: Greater physical coordination, balance, and spatial awareness.",

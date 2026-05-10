@@ -68,7 +68,7 @@ interface ServiceData {
   specialists?: Specialist[];
   approachItems?: string[];
   whyChooseItems?: string[];
-  additionalSections?: { title: string; items: string[]; color?: string }[];
+  additionalSections?: { title: string; intro?: string; items: string[]; color?: string }[];
 }
 
 interface PageProps {
