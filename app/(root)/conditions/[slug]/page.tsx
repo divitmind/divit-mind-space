@@ -169,6 +169,12 @@ export default async function ConditionPage({ params }: PageProps) {
         position: i + 1,
         url: `${SITE_URL}/services/${s.slug}`,
         name: s.title,
+        item: {
+          "@type": "MedicalTherapy",
+          name: s.title,
+          url: `${SITE_URL}/services/${s.slug}`,
+          provider: ORGANIZATION_REF,
+        },
       })),
     },
     {
