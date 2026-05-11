@@ -1,4 +1,5 @@
 import { Users, School, Briefcase, Building } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import type { WhoNeedsItCard } from "@/lib/types";
 
@@ -48,7 +49,7 @@ export function WhoNeedsItSection({ title, items: sanityItems }: WhoNeedsItSecti
 
     const sectionTitle = title || "Here's who we're here for";
     return (
-        <section className="pt-2 pb-6 lg:pt-4 lg:pb-10 bg-[#FDFBF7]">
+        <section className="py-6 lg:py-8 bg-[#FDFBF7]">
 
             <div className="container">
                 {/* Bridge Text - Original Wording */}
@@ -67,7 +68,8 @@ export function WhoNeedsItSection({ title, items: sanityItems }: WhoNeedsItSecti
                         const IconComponent = iconMap[item.icon as keyof typeof iconMap] || Users;
                         const isLastOnMobile = idx === items.length - 1;
                         return (
-                            <div
+                            <Link
+                                href="/services"
                                 key={item.id}
                                 className={cn(
                                     "group relative flex flex-col bg-white rounded-[1.5rem] lg:rounded-[2rem] p-5 lg:p-8 border border-black/5 hover:border-black/10 transition-all duration-500 hover:shadow-2xl hover:shadow-black/5",
@@ -84,10 +86,14 @@ export function WhoNeedsItSection({ title, items: sanityItems }: WhoNeedsItSecti
                                 </h3>
 
                                 {/* Description (Sans Medium - Unified) */}
-                                <p className="text-[12px] lg:text-sm text-black/60 font-medium leading-relaxed">
+                                <p className="text-[12px] lg:text-sm text-black/60 font-medium leading-relaxed mb-4">
                                     {item.description}
                                 </p>
-                            </div>
+                                
+                                <div className="mt-auto flex items-center gap-2 text-[10px] font-bold text-[#7A9A7D] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                                    Learn More <span className="text-lg leading-none">→</span>
+                                </div>
+                            </Link>
                         );
                     })}
                 </div>

@@ -77,7 +77,7 @@ export function HeroSection({ siteSettings }: HeroSectionProps) {
               </h1>
             </div>
 
-            <p className="mt-6 lg:mt-8 max-w-xl mx-auto md:mx-0 text-base lg:text-lg text-black/80 leading-relaxed font-medium text-balance text-center md:text-left">
+            <p className="mt-6 lg:mt-8 max-w-xl mx-auto md:mx-0 text-base lg:text-[1.125rem] text-black/80 leading-[1.75] font-medium text-balance text-center md:text-left">
               {heroDescription}
             </p>
             <div className="mt-8 lg:mt-10 flex flex-col sm:flex-row items-center gap-5 justify-center md:justify-start">

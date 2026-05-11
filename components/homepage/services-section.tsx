@@ -67,7 +67,7 @@ export function ServicesSection({ serviceCategories }: ServicesSectionProps) {
     })) : DEFAULT_SERVICES;
 
     return (
-        <section className="pt-0 pb-4 lg:pb-8 bg-[#FDFBF7]">
+        <section className="py-6 lg:py-8 bg-[#FDFBF7]">
             <div className="container">
 
                 {/* Bridge Text */}

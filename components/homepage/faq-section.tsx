@@ -16,7 +16,7 @@ export function FaqSection({ faqs, title = "Frequently Asked Questions" }: FaqSe
     const [openId, setOpenId] = useState<number | null>(null);
 
     return (
-        <section className="pt-2 pb-6 lg:pt-4 lg:pb-10 bg-[#FDFBF7] relative overflow-hidden">
+        <section className="py-6 lg:py-8 bg-[#FDFBF7] relative overflow-hidden">
             <div className="max-w-4xl mx-auto px-4 relative z-10">
                 <div className="text-center mb-6 lg:mb-10">
                     <h2 className="text-3xl lg:text-5xl font-bold text-black mb-0 tracking-tight font-[family-name:var(--font-cormorant)] italic">

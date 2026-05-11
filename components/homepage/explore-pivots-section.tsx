@@ -27,7 +27,7 @@ export function ExplorePivotsSection() {
   const topLocations = LOCATION_PIVOTS.slice(0, 6);
 
   return (
-    <section className="py-12 lg:py-16 bg-[#FDFBF7]">
+    <section className="py-6 lg:py-8 bg-[#FDFBF7]">
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-10 lg:mb-12">
@@ -111,38 +111,7 @@ export function ExplorePivotsSection() {
           </div>
         </div>
 
-        {/* Popular Questions teaser — deep-link directly to /faq + condition pages */}
-        <div className="mt-6 lg:mt-8 max-w-6xl mx-auto bg-white rounded-[2rem] border border-black/5 shadow-xl shadow-black/[0.02] p-6 lg:p-8">
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-10 h-10 rounded-xl bg-[#7A9A7D]/10 flex items-center justify-center shrink-0">
-              <HelpCircle className="w-5 h-5 text-[#7A9A7D]" />
-            </div>
-            <h3 className="text-xl lg:text-2xl font-serif italic text-black">
-              Popular Questions
-            </h3>
-          </div>
-          <ul className="space-y-2 mb-4">
-            {POPULAR_QUESTIONS.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="group flex items-center justify-between gap-3 p-4 rounded-2xl bg-[#FAF9F5] border border-black/5 hover:border-[#7A9A7D]/30 hover:bg-white transition-all"
-                >
-                  <span className="text-sm font-medium text-black/80 group-hover:text-[#7A9A7D] transition-colors">
-                    {item.q}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-black/30 group-hover:text-[#7A9A7D] group-hover:translate-x-1 transition-all shrink-0" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="/faq"
-            className="inline-flex items-center gap-2 text-[10px] font-bold text-[#7A9A7D] uppercase tracking-widest hover:gap-3 transition-all"
-          >
-            See all FAQs <ArrowRight className="w-3 h-3" />
-          </Link>
-        </div>
+
 
         {/* Specialists CTA strip */}
         <div className="mt-6 lg:mt-8 max-w-6xl mx-auto">

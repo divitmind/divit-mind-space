@@ -73,7 +73,7 @@ export function TestimonialCard({ name, role, quote, initial, className }: Testi
             ref={quoteRef}
             className="text-black/60 leading-relaxed max-h-[100px] overflow-hidden font-medium text-sm italic"
           >
-            &quot;{quote}&quot;
+            {quote.replace(/^["'“”‘’\s]+|["'“”‘’\s]+$/g, '')}
           </p>
           {isTruncated && (
             <button
@@ -119,7 +119,7 @@ export function TestimonialCard({ name, role, quote, initial, className }: Testi
           <StarsRow />
           <div className="overflow-y-auto flex-1 -mx-2 px-2 py-4">
             <p className="text-black/60 leading-relaxed text-base italic font-medium">
-              &quot;{quote}&quot;
+              {quote.replace(/^["'“”‘’\s]+|["'“”‘’\s]+$/g, '')}
             </p>
           </div>
           <div className="flex items-center gap-5 pt-8 mt-4 border-t border-black/5">
