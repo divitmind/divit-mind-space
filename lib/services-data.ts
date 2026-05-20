@@ -7,6 +7,7 @@ export interface ServiceData {
   description: string;
   category: "assessments" | "therapy" | "guidance" | "programs";
   image: string;
+  demographics?: string[];
   content: {
     overview: string;
     benefits?: string[];
@@ -61,31 +62,200 @@ export const services: ServiceData[] = [
     id: "1",
     title: "Psychometric Assessments",
     slug: "psychometric-assessments",
-    description: "Our psychometric assessments are designed to gently and accurately understand your **child**'s learning style, strengths, and areas where they may need additional support.",
+    description: "Our Psychometric Assessment Services help **children, adolescents, adults, and older adults** gain deeper insight into their cognitive, emotional, behavioral, and social functioning — creating a clear roadmap for support, self-understanding, and growth.",
     category: "assessments",
     image: "/features-service-card/child-autism-assessment.png",
+    demographics: ["Children", "Adolescents", "Adults", "Geriatric"],
     content: {
-      overview: "Our psychometric assessments are designed to gently and accurately understand your **child**'s learning style, strengths, and areas where they may need additional support. These assessments help identify cognitive abilities, emotional patterns, and developmental needs to create a clear roadmap for your **child**'s growth.",
+      overview: "A psychometric assessment is more than a diagnosis — it is a compassionate process that helps individuals and families better understand strengths, challenges, and support needs. At Divit MindSpace, we combine evidence-based clinical tools with an empathetic, neuro-affirming approach to provide meaningful insights that guide intervention, accommodations, emotional well-being, and long-term success.\n\nOur assessments are designed to explore cognitive abilities, emotional functioning, behavior patterns, executive functioning, adaptive skills, personality traits, and learning profiles in a holistic manner. We focus not only on identifying challenges, but also on recognizing strengths and creating practical, individualized recommendations for home, school, workplace, and everyday life.\n\nWe provide assessments for **children, adolescents, adults, and geriatrics** across areas such as Autism, ADHD, Learning Disabilities, Anxiety, Depression, Trauma, Executive Functioning, Personality, Cognitive Changes, and Emotional Well-Being.",
       benefits: [
-        "Clear understanding of your child's cognitive strengths and challenges",
-        "Detailed written report with actionable recommendations",
-        "Personalized strategies for home and school",
-        "Identification of learning style preferences",
-        "Foundation for educational planning and interventions",
+        "Clear understanding of cognitive, emotional, behavioral, and personality functioning",
+        "Identification of learning, attention, executive functioning, emotional, or behavioral challenges",
+        "Insight into strengths, coping styles, sensory profiles, and support needs",
+        "Diagnostic clarification where relevant",
+        "Personalized recommendations for therapy, school, workplace, and daily-life support",
+        "Guidance for accommodations, interventions, and future planning",
+        "A comprehensive roadmap for emotional well-being, self-awareness, and growth",
+        "Support in securing appropriate school, workplace, or lifestyle accommodations",
+        "Practical strategies for improving functioning across home, school, work, and social environments"
       ],
       whatToExpect: [
-        "Initial parent consultation to understand concerns and history",
-        "2-3 assessment sessions with your child in a child-friendly environment",
-        "Standardized testing using age-appropriate tools",
-        "Comprehensive written report within 7-10 days",
-        "Feedback session to discuss findings and recommendations",
+        "Detailed clinical interview and developmental history",
+        "Review of previous reports, school/work records, and relevant documentation",
+        "Parent, teacher, caregiver, or self-report questionnaires where appropriate",
+        "Standardized psychometric testing using evidence-based tools",
+        "Assessment of cognitive, emotional, behavioral, social, adaptive, and executive functioning",
+        "Child-friendly and supportive assessment process tailored to the individual’s pace and comfort",
+        "Comprehensive report with clear interpretation of findings and practical recommendations",
+        "Guidance regarding interventions, accommodations, therapy, and next steps"
       ],
-      whoIsItFor: [
-        "Children showing learning difficulties at school",
-        "Parents seeking clarity about their child's abilities",
-        "Schools requiring formal assessment for support planning",
-        "Children being considered for gifted programs",
-        "Families wanting to understand developmental delays",
+      audienceSections: [
+        {
+          audienceType: "children",
+          title: "Children",
+          hero: {
+            shortDescription: "We take a holistic view of a child’s cognitive, emotional, academic, and social development. Our goal is to translate complex behaviors into clear, actionable insights that support success at home, school, and beyond.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "pa-children-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "When to Reach Out for a Child or Adolescent Assessment:",
+              items: [
+                "Developmental gaps — delayed speech, social interaction, play, or motor milestones",
+                "Academic struggles — high effort with low outcomes, inconsistent performance, or increasing resistance to school",
+                "Attention and organization difficulties- affecting learning or daily functioning",
+                "Emotional volatility — intense meltdowns, withdrawal, anxiety, or low frustration tolerance",
+                "Behavioral patterns — sensory sensitivities, repetitive behaviors, impulsivity, or challenges understanding social situations",
+                "Recommendations from teachers, therapists, or caregivers for additional support or accommodations",
+                "Need for diagnostic clarification, school accommodations, or individualized educational planning"
+              ]
+            }
+          ],
+          additionalSections: [
+            {
+              title: "Assessments for Children",
+              intro: "We take a holistic view of a child’s cognitive, emotional, academic, and social development. Our goal is to translate complex behaviors into clear, actionable insights that support success at home, school, and beyond.",
+              items: [
+                "Autism Spectrum Assessments: Beyond surface symptoms, we explore social communication, sensory processing, adaptive functioning, emotional regulation, and special interests to help the child feel truly seen and understood.",
+                "ADHD & Executive Functioning Assessments: We look beyond hyperactivity to evaluate attention, organization, working memory, impulse control, planning, and emotional regulation — while carefully differentiating ADHD from anxiety, trauma, or learning differences.",
+                "Learning Disability & Psychoeducational Assessments: Focused evaluations for reading, writing, spelling, and mathematics to uncover the root causes of academic struggles, including dyslexia, dyscalculia, and dysgraphia.",
+                "Emotional & Behavioral Assessments: Assessment of anxiety, mood concerns, emotional dysregulation, behavioral difficulties, social challenges, and adaptive functioning impacting daily life.",
+                "Goal: To foster self-understanding, secure appropriate school accommodations and support, guide intervention planning, and create a personalized developmental and educational roadmap."
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "teens",
+          title: "Adolescents",
+          hero: {
+            shortDescription: "We take a holistic view of a child’s cognitive, emotional, academic, and social development. Our goal is to translate complex behaviors into clear, actionable insights that support success at home, school, and beyond.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "pa-teens-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "When to Reach Out for a Child or Adolescent Assessment:",
+              items: [
+                "Developmental gaps — delayed speech, social interaction, play, or motor milestones",
+                "Academic struggles — high effort with low outcomes, inconsistent performance, or increasing resistance to school",
+                "Attention and organization difficulties- affecting learning or daily functioning",
+                "Emotional volatility — intense meltdowns, withdrawal, anxiety, or low frustration tolerance",
+                "Behavioral patterns — sensory sensitivities, repetitive behaviors, impulsivity, or challenges understanding social situations",
+                "Recommendations from teachers, therapists, or caregivers for additional support or accommodations",
+                "Need for diagnostic clarification, school accommodations, or individualized educational planning"
+              ]
+            }
+          ],
+          additionalSections: [
+            {
+              title: "Assessments for Adolescents",
+              intro: "We take a holistic view of a child’s cognitive, emotional, academic, and social development. Our goal is to translate complex behaviors into clear, actionable insights that support success at home, school, and beyond.",
+              items: [
+                "Autism Spectrum Assessments: Beyond surface symptoms, we explore social communication, sensory processing, adaptive functioning, emotional regulation, and special interests to help the child feel truly seen and understood.",
+                "ADHD & Executive Functioning Assessments: We look beyond hyperactivity to evaluate attention, organization, working memory, impulse control, planning, and emotional regulation — while carefully differentiating ADHD from anxiety, trauma, or learning differences.",
+                "Learning Disability & Psychoeducational Assessments: Focused evaluations for reading, writing, spelling, and mathematics to uncover the root causes of academic struggles, including dyslexia, dyscalculia, and dysgraphia.",
+                "Emotional & Behavioral Assessments: Assessment of anxiety, mood concerns, emotional dysregulation, behavioral difficulties, social challenges, and adaptive functioning impacting daily life.",
+                "Goal: To foster self-understanding, secure appropriate school accommodations and support, guide intervention planning, and create a personalized developmental and educational roadmap."
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "adults",
+          title: "Adults",
+          hero: {
+            shortDescription: "Understanding your experiences can be a powerful step toward healing, clarity, and self-acceptance. Our adult and geriatric assessments are compassionate, collaborative, and focused on understanding the whole person — not just symptoms.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "pa-adults-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "When to Reach Out for an Adult or Senior Assessment:",
+              items: [
+                "Persistent stress, burnout, or emotional exhaustion",
+                "Anxiety, intrusive thoughts, panic, or social fears affecting daily life",
+                "Low mood, loss of motivation, or prolonged emotional distress",
+                "Difficulties with focus, organization, emotional regulation, or executive functioning",
+                "Exploration of lifelong patterns related to Adult ADHD or Autism",
+                "Trauma, grief, or unresolved emotional experiences impacting well-being",
+                "Concerns regarding substance use or addictive patterns",
+                "Changes in memory, mood, cognition, or independence in later adulthood"
+              ]
+            }
+          ],
+          additionalSections: [
+            {
+              title: "Assessments for Adults",
+              intro: "Understanding your experiences can be a powerful step toward healing, clarity, and self-acceptance. Our adult and geriatric assessments are compassionate, collaborative, and focused on understanding the whole person — not just symptoms.",
+              items: [
+                "Stress, Burnout & Emotional Well-Being: We identify stress patterns, emotional overload, coping styles, and nervous system responses to support movement from survival mode toward sustainable balance and resilience.",
+                "Anxiety & Mood Assessments: Support for anxiety disorders, OCD, panic, social anxiety, depression, burnout, and emotional regulation challenges through evidence-based evaluation and practical recommendations.",
+                "Adult Autism & Adult ADHD Assessments: Neuro-affirming evaluations for late-identified individuals seeking clarity about lifelong patterns, executive functioning, masking, sensory experiences, and identity — while differentiating neurodivergence from anxiety, trauma, or burnout.",
+                "Trauma, Grief & Personality Assessments: Safe, trauma-informed assessments that help individuals understand emotional patterns, coping mechanisms, interpersonal functioning, and the impact of past experiences.",
+                "Substance Use & Addiction Assessments: Non-judgmental evaluation of substance use patterns, underlying emotional factors, co-occurring concerns, and readiness for support.",
+                "Goal: To promote self-awareness, emotional well-being, effective coping strategies, workplace or lifestyle accommodations, and personalized plans for long-term psychological health and quality of life."
+              ]
+            }
+          ]
+        },
+        {
+          audienceType: "geriatrics",
+          title: "Geriatric",
+          hero: {
+            shortDescription: "Understanding your experiences can be a powerful step toward healing, clarity, and self-acceptance. Our adult and geriatric assessments are compassionate, collaborative, and focused on understanding the whole person — not just symptoms.",
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "pa-geriatrics-right-support",
+              title: "Is This the Right Support for You?",
+              intro: "When to Reach Out for an Adult or Senior Assessment:",
+              items: [
+                "Persistent stress, burnout, or emotional exhaustion",
+                "Anxiety, intrusive thoughts, panic, or social fears affecting daily life",
+                "Low mood, loss of motivation, or prolonged emotional distress",
+                "Difficulties with focus, organization, emotional regulation, or executive functioning",
+                "Exploration of lifelong patterns related to Adult ADHD or Autism",
+                "Trauma, grief, or unresolved emotional experiences impacting well-being",
+                "Concerns regarding substance use or addictive patterns",
+                "Changes in memory, mood, cognition, or independence in later adulthood"
+              ]
+            }
+          ],
+          additionalSections: [
+            {
+              title: "Assessments for Geriatric",
+              intro: "Understanding your experiences can be a powerful step toward healing, clarity, and self-acceptance. Our adult and geriatric assessments are compassionate, collaborative, and focused on understanding the whole person — not just symptoms.",
+              items: [
+                "Stress, Burnout & Emotional Well-Being: We identify stress patterns, emotional overload, coping styles, and nervous system responses to support movement from survival mode toward sustainable balance and resilience.",
+                "Anxiety & Mood Assessments: Support for anxiety disorders, OCD, panic, social anxiety, depression, burnout, and emotional regulation challenges through evidence-based evaluation and practical recommendations.",
+                "Adult Autism & Adult ADHD Assessments: Neuro-affirming evaluations for late-identified individuals seeking clarity about lifelong patterns, executive functioning, masking, sensory experiences, and identity — while differentiating neurodivergence from anxiety, trauma, or burnout.",
+                "Trauma, Grief & Personality Assessments: Safe, trauma-informed assessments that help individuals understand emotional patterns, coping mechanisms, interpersonal functioning, and the impact of past experiences.",
+                "Substance Use & Addiction Assessments: Non-judgmental evaluation of substance use patterns, underlying emotional factors, co-occurring concerns, and readiness for support.",
+                "Geriatric Assessments (55+): Dignified assessment of memory, cognition, mood, emotional well-being, and functional abilities to support independence, quality of life, and healthy aging.",
+                "Goal: To promote self-awareness, emotional well-being, effective coping strategies, workplace or lifestyle accommodations, and personalized plans for long-term psychological health and quality of life."
+              ]
+            }
+          ]
+        }
+      ],
+      approachItems: [
+        "Neuro-affirming, strengths-based, and person-centered perspective",
+        "Holistic understanding of emotional, cognitive, behavioral, social, and environmental factors",
+        "Collaborative process involving the individual, family, caregivers, and educators where relevant",
+        "Clear, practical, and actionable recommendations",
+        "Focus on empowerment through self-understanding and informed support",
+        "Respect for each individual’s unique experiences, identity, strengths, and goals"
+      ],
+      whyChooseItems: [
+        "At Divit MindSpace, we go beyond labels and standardized scores.",
+        "We advocate for compassionate, neuro-affirming, and strengths-based care that honors the individuality of every person. Our clinicians combine scientific expertise with empathy to create a safe and supportive assessment experience that focuses on understanding the whole individual - not just symptoms.",
+        "Our assessments are practical, collaborative, and designed to provide actionable recommendations that families, schools, workplaces, and individuals can confidently implement. Beyond assessment, we continue to guide individuals and families toward meaningful support, emotional well-being, self-acceptance, and long-term growth."
       ],
       duration: "2-3 sessions (60-90 minutes each)",
       format: "In-person at our center",

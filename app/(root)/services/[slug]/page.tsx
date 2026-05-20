@@ -183,6 +183,7 @@ export default async function ServicePage({ params }: PageProps) {
       description: staticService.description,
       category: staticService.category,
       overview: staticService.content.overview,
+      demographics: staticService.demographics,
     } as ServiceData;
   }
 
@@ -193,7 +194,7 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT, Counselling & Behavioral Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments") {
       service.description = staticService.description;
       service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;
@@ -203,6 +204,7 @@ export default async function ServicePage({ params }: PageProps) {
       service.whyChooseItems = staticContent.whyChooseItems;
       service.additionalSections = staticContent.additionalSections;
       service.faqs = staticContent.faqs || service.faqs;
+      service.demographics = staticService.demographics;
     } else {
       // Fallback logic for other services: prefer Sanity, but use static data if Sanity is empty
       if (!service.description) service.description = staticService.description;
@@ -574,23 +576,33 @@ export default async function ServicePage({ params }: PageProps) {
                           </ul>
                         </div>
                       )}
-                      {whyChooseItems && whyChooseItems.length > 0 && (
-                        <div>
-                          <div className="mb-6 border-l-2 border-green/20 pl-4">
-                            <h3 className="text-xl lg:text-2xl font-serif text-green italic">Why Families Choose Us</h3>
+                      {whyChooseItems && whyChooseItems.length > 0 && (() => {
+                        const hasIntro = whyChooseItems[0]?.startsWith("At Divit MindSpace");
+                        const intro = hasIntro ? whyChooseItems[0] : undefined;
+                        const items = hasIntro ? whyChooseItems.slice(1) : whyChooseItems;
+                        return (
+                          <div>
+                            <div className="mb-6 border-l-2 border-green/20 pl-4">
+                              <h3 className="text-xl lg:text-2xl font-serif text-green italic">Why Families Choose Us</h3>
+                            </div>
+                            {intro && (
+                              <p className="mb-6 text-[15px] lg:text-[16px] text-black/60 font-medium leading-relaxed italic">
+                                {renderTextWithBold(intro)}
+                              </p>
+                            )}
+                            <ul className="space-y-4">
+                              {items.map((item, i) => (
+                                <li key={i} className="flex items-start gap-3 py-1">
+                                  <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
+                                  <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                                    {renderItemText(item)}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
-                          <ul className="space-y-4">
-                            {whyChooseItems.map((item, i) => (
-                              <li key={i} className="flex items-start gap-3 py-1">
-                                <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
-                                <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
-                                  {renderItemText(item)}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+                        );
+                      })()}
                     </div>
                   )}
                 </div>

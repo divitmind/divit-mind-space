@@ -211,8 +211,8 @@ export function AudienceTabs({
                 if (displayTitle.toLowerCase().includes("children") && (displayTitle.toLowerCase().includes("teen") || displayTitle.toLowerCase().includes("adolescent"))) displayTitle = "Children & Teens";
                 else if (displayTitle.toLowerCase().includes("children")) displayTitle = "Children";
                 else if (displayTitle.toLowerCase().includes("teen") || displayTitle.toLowerCase().includes("adolescent")) displayTitle = "Adolescents";
+                else if (displayTitle.toLowerCase().includes("geriatric") || displayTitle.toLowerCase().includes("older") || displayTitle.toLowerCase().includes("late-life")) displayTitle = "Geriatric";
                 else if (displayTitle.toLowerCase().includes("adult")) displayTitle = "Adults";
-                else if (displayTitle.toLowerCase().includes("geriatric") || displayTitle.toLowerCase().includes("late-life")) displayTitle = "Geriatrics";
 
                 return (
                   <button
@@ -531,11 +531,17 @@ export function AudienceTabs({
       {(globalApproachItems?.length || globalWhyChooseItems?.length || globalAdditionalSections?.length) && (
         <div className="flex flex-col gap-8 lg:gap-12 mt-8 pt-8 border-t border-green/5">
           {globalApproachItems?.length ? renderCleanList("Our Approach", globalApproachItems, true) : null}
-          {globalWhyChooseItems?.length ? renderCleanList(
-            (activeTab === "adults" || activeTab === "geriatrics") ? "Why Families & Individuals Choose Divit MindSpace" : "Why Families Choose Us", 
-            globalWhyChooseItems, 
-            true
-          ) : null}
+          {globalWhyChooseItems?.length ? (() => {
+            const hasIntro = globalWhyChooseItems[0]?.startsWith("At Divit MindSpace");
+            const intro = hasIntro ? globalWhyChooseItems[0] : undefined;
+            const items = hasIntro ? globalWhyChooseItems.slice(1) : globalWhyChooseItems;
+            return renderCleanList(
+              (activeTab === "adults" || activeTab === "geriatrics") ? "Why Families & Individuals Choose Divit MindSpace" : "Why Families Choose Us", 
+              items, 
+              true,
+              intro
+            );
+          })() : null}
           
           {globalAdditionalSections?.map((section, idx) => (
             <div key={idx} className="pt-2">
