@@ -1757,6 +1757,108 @@ export const services: ServiceData[] = [
       ]
     }
   },
+  {
+    id: "23",
+    title: "Gym & Sports Injury Sessions",
+    slug: "gym--sports-injury-sessions",
+    description: "Our Gym & Sports Injury Sessions help individuals recover safely from injuries, improve physical performance, prevent future injuries, and return to daily activities, fitness routines, and sports participation with greater strength, confidence, and mobility.",
+    category: "programs",
+    image: "/about_pic3.png",
+    demographics: ["Children", "Adolescents", "Adults"],
+    content: {
+      overview: "At Divit MindSpace, our Gym & Sports Injury Sessions are designed to support individuals recovering from physical strain, sports-related injuries, movement limitations, postural concerns, and fitness-related discomfort through a structured, therapeutic, and evidence-based approach.\n\nWhether the goal is recovery, rehabilitation, strength-building, injury prevention, mobility enhancement, or return-to-sport training, our sessions are tailored to each individual’s physical condition, activity level, lifestyle, and recovery goals.\n\nWe combine therapeutic exercise, movement retraining, strengthening, mobility work, functional rehabilitation, and guided physical conditioning to promote safe recovery and long-term physical well-being. The focus is not only on healing the injury, but also on improving body awareness, movement efficiency, endurance, posture, and overall functional performance.\n\nOur approach is individualized, supportive, and goal-oriented — helping individuals return to activities with improved confidence, safety, and resilience.",
+      benefits: [
+        "Improved strength, mobility, and physical endurance",
+        "Better recovery from sports, gym, or movement-related injuries",
+        "Enhanced flexibility, posture, and body mechanics",
+        "Reduced pain, stiffness, and movement discomfort",
+        "Improved balance, coordination, and physical control",
+        "Safer return to exercise, sports, and physical activity",
+        "Injury prevention strategies and movement awareness",
+        "Greater confidence in physical functioning and performance"
+      ],
+      whatToExpect: [
+        "Initial assessment of posture, strength, mobility, pain, and movement patterns",
+        "Individualized rehabilitation and fitness planning based on recovery goals",
+        "Structured exercise and therapeutic movement sessions",
+        "Progressive strengthening and mobility training",
+        "Functional and activity-specific rehabilitation exercises",
+        "Education regarding posture, body mechanics, and injury prevention",
+        "Monitoring of recovery, endurance, and physical performance",
+        "Guidance for safe return to sports, workouts, and daily activities"
+      ],
+      whoIsItFor: [
+        "Pain or discomfort during exercise, sports, or movement",
+        "Recovery from sports injuries, muscle strain, or physical overuse",
+        "Difficulty returning to workouts or sports after injury",
+        "Reduced flexibility, balance, strength, or endurance",
+        "Postural issues or movement-related discomfort",
+        "Fear of re-injury or hesitation during physical activity",
+        "Need for guided rehabilitation or conditioning support",
+        "Desire to improve physical performance safely and effectively"
+      ],
+      duration: "Individualized based on recovery goals and needs",
+      format: "In-person at our center",
+      approachItems: [
+        "Individualized, evidence-based, and goal-oriented intervention",
+        "Focus on safe recovery, prevention, and long-term physical well-being",
+        "Supportive and motivating environment",
+        "Functional rehabilitation tailored to real-life activities and sports participation",
+        "Gradual progression based on comfort, endurance, and recovery",
+        "Emphasis on movement quality, body awareness, and confidence-building"
+      ],
+      whyChooseItems: [
+        "At Divit MindSpace, we believe recovery and physical fitness should be safe, empowering, and sustainable.",
+        "Our Gym & Sports Injury Sessions focus on understanding the individual as a whole — not just the injury. Through personalized rehabilitation, guided movement training, and compassionate support, we help individuals regain strength, confidence, mobility, and participation in the activities they enjoy.",
+        "We are committed to helping individuals move better, recover stronger, and return to active living with confidence and resilience."
+      ],
+      additionalSections: [
+        {
+          title: "Objective",
+          items: [
+            "To support recovery from gym-related or sports injuries",
+            "To improve strength, flexibility, balance, endurance, and mobility",
+            "To reduce pain, stiffness, and movement limitations",
+            "To prevent re-injury and improve movement mechanics",
+            "To support safe return to sports, fitness, or daily activities",
+            "To improve posture, body awareness, and functional performance",
+            "To build confidence in movement and physical participation"
+          ]
+        },
+        {
+          title: "Our Process",
+          items: [
+            "Therapeutic strengthening exercises",
+            "Mobility and flexibility training",
+            "Postural correction and body mechanics training",
+            "Functional rehabilitation exercises",
+            "Balance and coordination activities",
+            "Sports-specific or activity-specific conditioning",
+            "Pain management and recovery support",
+            "Endurance and movement retraining",
+            "Guided warm-up and injury prevention strategies"
+          ]
+        },
+        {
+          title: "Areas We Focus On",
+          items: [
+            "Injury Rehabilitation: Supporting recovery from sports injuries, muscle strain, joint discomfort, overuse injuries, post-workout pain, and movement-related limitations.",
+            "Strength & Conditioning: Improving muscle strength, endurance, stability, coordination, and physical resilience.",
+            "Mobility & Flexibility: Enhancing range of motion, flexibility, movement quality, and physical comfort.",
+            "Posture & Movement Mechanics: Correcting movement patterns and improving posture to reduce strain and prevent future injuries.",
+            "Balance & Functional Performance: Improving coordination, agility, balance, and movement control for daily activities and sports participation.",
+            "Injury Prevention & Recovery Education: Building awareness regarding safe exercise techniques, warm-up routines, recovery practices, and long-term injury prevention."
+          ]
+        },
+        {
+          title: "Goal",
+          items: [
+            "To help individuals recover safely, move confidently, improve physical performance, and return to active lifestyles with better strength, mobility, endurance, and injury prevention awareness."
+          ]
+        }
+      ]
+    }
+  },
 ];
 
 export function getServiceBySlug(slug: string): ServiceData | undefined {
