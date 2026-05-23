@@ -194,7 +194,7 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT, Counselling & Behavioral Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "speech-therapy") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "speech-therapy" || slug === "wheelchair-training") {
       service.description = staticService.description;
       service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;
@@ -315,12 +315,12 @@ export default async function ServicePage({ params }: PageProps) {
     );
   };
 
-  const isSchoolReadiness = slug === "school-readiness-program";
-  const outcomeSpan = isSchoolReadiness ? "lg:col-span-5" : "lg:col-span-4";
-  const overviewSpan = isSchoolReadiness ? "lg:col-span-7" : "lg:col-span-8";
-  const outcomePadding = isSchoolReadiness ? "p-6 lg:py-6 lg:px-8" : "p-6 lg:py-8 lg:px-8";
-  const overviewPadding = isSchoolReadiness ? "p-6 lg:py-6 lg:px-10" : "p-6 lg:py-8 lg:px-10";
-  const contentJustify = isSchoolReadiness ? "justify-start" : "justify-center";
+  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training";
+  const outcomeSpan = isCustomLayout ? "lg:col-span-5" : "lg:col-span-4";
+  const overviewSpan = isCustomLayout ? "lg:col-span-7" : "lg:col-span-8";
+  const outcomePadding = isCustomLayout ? "p-6 lg:py-6 lg:px-8" : "p-6 lg:py-8 lg:px-8";
+  const overviewPadding = isCustomLayout ? "p-6 lg:py-6 lg:px-10" : "p-6 lg:py-8 lg:px-10";
+  const contentJustify = isCustomLayout ? "justify-start" : "justify-center";
 
   return (
     <div className="bg-[#FAF9F5] min-h-screen">
