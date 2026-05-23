@@ -194,7 +194,7 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT, Counselling & Behavioral Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "speech-therapy" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "speech-therapy" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management") {
       service.description = staticService.description;
       service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;
@@ -315,7 +315,7 @@ export default async function ServicePage({ params }: PageProps) {
     );
   };
 
-  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions";
+  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management";
   const outcomeSpan = isCustomLayout ? "lg:col-span-5" : "lg:col-span-4";
   const overviewSpan = isCustomLayout ? "lg:col-span-7" : "lg:col-span-8";
   const outcomePadding = isCustomLayout ? "p-6 lg:py-6 lg:px-8" : "p-6 lg:py-8 lg:px-8";
