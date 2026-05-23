@@ -1961,6 +1961,120 @@ export const services: ServiceData[] = [
       ]
     }
   },
+
+  // ============================================================================
+  // SPECIAL EDUCATION & REMEDIAL SESSIONS
+  // ============================================================================
+  {
+    id: "special-education-remedial",
+    title: "Special Education & Remedial Sessions",
+    slug: "special-education--remedial-sessions",
+    description:
+      "Our Special Education & Remedial Sessions help **children and adolescents** strengthen academic, cognitive, communication, and learning-related skills through individualized, structured, and supportive intervention tailored to their unique learning needs.",
+    category: "programs",
+    image: "/features-service-card/therapy-services.png",
+    demographics: ["Children", "Adolescents"],
+    content: {
+      overview:
+        "At Divit MindSpace, our Special Education & Remedial Sessions are designed to support children who experience challenges in learning, attention, comprehension, academic performance, classroom participation, or skill acquisition. We recognize that every child learns differently, and our goal is to provide personalized support that nurtures confidence, understanding, independence, and meaningful progress.\n\nOur Special Education Program focuses on creating an inclusive, supportive, and engaging learning environment where children with a range of learning differences can thrive. Whether a child has a specific learning disability, developmental delay, ADHD, Autism, academic difficulties, or other learning-related challenges, our dedicated team of educators and specialists works collaboratively to provide the necessary support, strategies, and accommodations required for success.\n\nUsing a neuro-affirming, strengths-based, and child-centered approach, we address not only academic concerns, but also the social, emotional, behavioral, and functional aspects of learning. Through individualized learning plans, differentiated instruction, specialized support services, and evidence-based intervention strategies, we aim to create meaningful learning experiences that promote growth, confidence, and participation.\n\nAt Divit MindSpace, we believe every child has the potential to learn, grow, and succeed when provided with the right environment, support, and encouragement.",
+      benefits: [
+        "Improved reading, writing, spelling, and mathematics skills",
+        "Better attention, focus, and classroom participation",
+        "Enhanced comprehension, memory, and problem-solving abilities",
+        "Increased confidence and motivation toward learning",
+        "Development of individualized learning strategies and study skills",
+        "Improved communication and expressive abilities related to academics",
+        "Better emotional regulation and reduced academic frustration",
+        "Greater independence in school-related tasks and routines",
+        "Improved social interaction and participation within learning environments",
+      ],
+      whatToExpect: [
+        "Initial assessment of academic, cognitive, behavioral, and learning-related needs",
+        "Individualized goal-setting based on the child's strengths and challenges",
+        "Structured one-on-one or small-group intervention sessions",
+        "Multisensory and engaging teaching approaches tailored to learning style",
+        "Activities targeting literacy, numeracy, comprehension, attention, reasoning, and executive functioning skills",
+        "Ongoing monitoring of progress and adaptation of learning goals",
+        "Parent guidance and home-based learning strategies",
+        "Collaboration with schools, educators, and caregivers where needed",
+      ],
+      whoIsItFor: [
+        "Difficulty with reading, writing, spelling, or mathematics",
+        "Poor academic performance despite effort and support",
+        "Difficulty understanding classroom instructions or concepts",
+        "Attention, focus, memory, or organizational challenges affecting learning",
+        "Learning differences such as dyslexia, dyscalculia, dysgraphia, ADHD, or Autism",
+        "Low confidence, frustration, or emotional distress related to academics",
+        "Need for individualized learning support or classroom accommodations",
+        "Recommendations from teachers, therapists, or caregivers for additional academic intervention",
+        "Difficulty adapting to school expectations, peer interaction, or structured learning environments",
+      ],
+      duration: "Individualized based on learning profile and intervention goals",
+      format: "In-person at our center",
+      approachItems: [
+        "Neuro-affirming, strengths-based, and child-centered intervention",
+        "Inclusive and supportive learning environment",
+        "Individualized learning strategies tailored to each child's pace and profile",
+        "Multisensory, engaging, and evidence-based teaching methods",
+        "Focus on emotional safety, encouragement, confidence-building, and participation",
+        "Collaborative involvement of families, caregivers, educators, and therapists",
+        "Balance of academic support, cognitive development, social-emotional growth, and functional learning",
+      ],
+      whyChooseItems: [
+        "At Divit MindSpace, we believe every child is capable of learning and thriving when provided with the right support, understanding, and opportunities.",
+        "Our Special Education & Remedial Sessions go beyond academics by focusing on the child's overall confidence, emotional well-being, participation, and learning experience. Through compassionate guidance, individualized intervention, adaptive teaching strategies, and collaborative support, we help children overcome challenges and develop the skills needed to participate meaningfully and succeed in school and everyday life.",
+        "By fostering a culture of acceptance, inclusion, empowerment, and encouragement, we strive to create positive learning environments where every child feels understood, supported, and capable of reaching their fullest potential.",
+      ],
+      additionalSections: [
+        {
+          title: "Objective",
+          items: [
+            "To strengthen foundational academic and learning skills",
+            "To improve attention, comprehension, memory, and problem-solving abilities",
+            "To support children with learning differences and developmental challenges",
+            "To build confidence, participation, and independence in learning environments",
+            "To provide individualized learning strategies tailored to the child's needs",
+            "To improve classroom readiness and academic functioning",
+            "To support emotional well-being, positive learning experiences, and social participation",
+          ],
+        },
+        {
+          title: "Our Process",
+          items: [
+            "Academic skill-building activities",
+            "Remedial instruction for reading, writing, and mathematics",
+            "Attention and executive functioning support",
+            "Cognitive and memory-enhancement activities",
+            "Language and comprehension support",
+            "Structured teaching and multisensory learning approaches",
+            "Assistive strategies and adaptive learning resources",
+            "Behavioral and emotional support during learning",
+            "Small-group learning opportunities and peer interaction",
+            "School coordination and parent guidance where required",
+          ],
+        },
+        {
+          title: "Areas We Focus On",
+          items: [
+            "Reading & Literacy Skills: Supporting phonics, reading fluency, comprehension, spelling, vocabulary, and written expression.",
+            "Writing & Fine Motor Skills: Improving handwriting, sentence formation, written organization, and academic expression.",
+            "Mathematics & Problem-Solving Skills: Building foundational numeracy, calculation, reasoning, sequencing, and conceptual understanding.",
+            "Attention & Executive Functioning: Enhancing focus, organization, planning, working memory, task completion, and classroom participation.",
+            "Cognitive & Learning Skills: Supporting memory, processing speed, comprehension, reasoning, and adaptive learning strategies.",
+            "Communication & Academic Language: Strengthening receptive and expressive language skills required for learning and classroom interaction.",
+            "Social, Emotional & Behavioral Support: Helping children manage frustration, build confidence, regulate emotions, improve peer interaction, and develop a positive relationship with learning.",
+            "Inclusive & Adaptive Learning Support: Using differentiated instruction, evidence-based teaching strategies, adaptive resources, and individualized accommodations to support diverse learning needs.",
+          ],
+        },
+        {
+          title: "Goal",
+          items: [
+            "To help children become confident, capable, and engaged learners by strengthening academic foundations, supporting individualized learning needs, and promoting positive educational, emotional, and social experiences.",
+          ],
+        },
+      ],
+    },
+  },
 ];
 
 export function getServiceBySlug(slug: string): ServiceData | undefined {
