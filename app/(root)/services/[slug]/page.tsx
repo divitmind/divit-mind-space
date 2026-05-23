@@ -508,9 +508,7 @@ export default async function ServicePage({ params }: PageProps) {
                         <ul className="flex flex-col gap-y-3 flex-1">
                           {service.whatToExpect.map((item, i) => (
                             <li key={i} className="flex items-start bg-white/50 backdrop-blur-sm pl-3 pr-4 py-4 lg:pl-3 lg:pr-4 lg:py-4 rounded-2xl border border-green/5 gap-2.5 h-fit">
-                              <div className="w-6 h-6 rounded-full bg-green/10 flex items-center justify-center shrink-0 mt-0.5 text-green font-serif italic text-xs">
-                                {i + 1}
-                              </div>
+                              <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
                               <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
                                 {renderItemText(item)}
                               </span>
