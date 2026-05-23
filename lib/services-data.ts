@@ -364,6 +364,7 @@ export const services: ServiceData[] = [
     description: "At Divit MindSpace, we see communication as more than a skill—it is a **child**’s way of connecting with the world, expressing emotions, and building relationships.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
+    demographics: ["Children", "Adolescents", "Adults"],
     content: {
       overview: "We focus not just on how a **child** speaks, but on why they communicate, how they feel while doing so, and how communication can become meaningful for them. Our approach integrates speech clarity, language understanding, fluency, and social communication naturally into play, interaction, and everyday experiences—rather than isolating them into rigid drills.\n\nBy blending therapeutic expertise with a relationship-based, **child**-led approach, we help **children** move from pressure to comfort, and from hesitation to confident expression.",
       benefits: [
@@ -1345,34 +1346,100 @@ export const services: ServiceData[] = [
     id: "11",
     title: "School Readiness Program",
     slug: "school-readiness-program",
-    description: "Starting school is a major milestone in a **child**'s life. For many **children**, especially those with developmental or learning challenges, the transition can feel overwhelming.",
+    description: "Our School Readiness Program helps children build the foundational skills needed to transition into school with greater confidence, independence, emotional regulation, and participation. The program focuses on preparing children not just academically, but socially, emotionally, behaviorally, and developmentally for a successful school experience.",
     category: "programs",
     image: "/about_pic3.png",
+    demographics: ["Children", "Adolescents", "Adults"],
     content: {
-      overview: "Starting school is a major milestone in a **child**'s life. For many **children**, especially those with developmental or learning challenges, the transition can feel overwhelming. Our School Readiness Program prepares **children** for this important step by building the foundational skills they need to thrive in a classroom environment.",
+      overview: "Starting school is a significant milestone in a child’s life. Some children may need additional support to develop the skills required to adapt to classroom routines, group learning, communication demands, and social expectations. At Divit MindSpace, our School Readiness Program is designed to nurture the whole child through a structured, play-based, and neuro-affirming approach while considering each child’s individual strengths and special needs.\n\nThe aim of the program is to help children become school-ready by supporting their social, emotional, behavioral, communication, and academic development in a safe and supportive environment. We recognize that every child develops differently, and our approach focuses on building confidence, reducing anxiety, improving participation, and creating positive learning experiences.\n\nOur multidisciplinary team works collaboratively with parents and educators to ensure children are equipped with the practical, emotional, and developmental tools needed to thrive in school environments.",
       benefits: [
-        "Smooth transition to formal schooling",
-        "Development of pre-academic skills",
-        "Improved attention and focus",
-        "Better social skills for classroom settings",
-        "Increased confidence and independence",
+        "Improved ability to follow classroom routines and instructions",
+        "Enhanced communication and social interaction skills",
+        "Better attention span, listening, and participation abilities",
+        "Development of emotional regulation and coping skills",
+        "Increased independence in daily and classroom-related tasks",
+        "Strengthened fine motor, play, and pre-academic skills",
+        "Confidence in group settings and transitions",
+        "Improved readiness for structured learning environments",
+        "Greater comfort interacting with peers, teachers, and unfamiliar settings"
       ],
       whatToExpect: [
-        "Assessment of school readiness skills",
-        "Structured group sessions simulating classroom environment",
-        "Focus on pre-literacy and pre-numeracy skills",
-        "Social skills training for peer interactions",
-        "Parent guidance for supporting transition at home",
+        "Initial developmental screening and readiness assessment",
+        "Individualized goal-setting based on the child’s developmental profile",
+        "Structured sessions focusing on communication, social, emotional, motor, behavioral, and pre-academic skills",
+        "Play-based learning activities and guided peer interaction",
+        "Activities targeting attention, sitting tolerance, transitions, and classroom participation",
+        "Parent guidance and home-based support strategies",
+        "Regular monitoring of progress and adjustment of goals as needed",
+        "Collaborative feedback and support for school transition planning"
       ],
       whoIsItFor: [
-        "Children preparing to start formal school",
-        "Children with developmental delays entering school",
-        "Children who missed preschool experiences",
-        "Children anxious about starting school",
-        "Children aged 4-6 years",
+        "Difficulty adjusting to structured routines or group settings",
+        "Challenges following instructions or participating in classroom-like activities",
+        "Limited social interaction or difficulty engaging with peers",
+        "Short attention span, hyperactivity, or difficulty remaining seated",
+        "Speech, communication, or language delays affecting participation",
+        "Difficulty managing transitions, separation anxiety, or emotional outbursts",
+        "Delays in self-help, motor, or adaptive functioning skills",
+        "Concerns about readiness for preschool, kindergarten, or formal schooling",
+        "Need for additional support before school admission or transition"
       ],
-      duration: "6-8 week program with regular sessions",
+      duration: "4-month structured program with an additional 2+2 months extension if required, depending on the child’s progress and support needs.",
       format: "In-person small group at our center",
+      approachItems: [
+        "Neuro-affirming, child-centered, and strengths-based approach",
+        "Play-based and engaging learning experiences",
+        "Individualized support tailored to each child’s developmental profile",
+        "Focus on emotional safety, confidence-building, and positive participation",
+        "Collaborative involvement of parents, caregivers, therapists, and educators",
+        "Balance of structured teaching and naturalistic learning opportunities"
+      ],
+      whyChooseItems: [
+        "At Divit MindSpace, we understand that school readiness is about far more than academics.",
+        "We focus on helping children feel secure, confident, capable, and emotionally prepared for the demands of school life. Our multidisciplinary team combines developmental expertise with compassion to create supportive, engaging, and individualized learning experiences for every child.",
+        "Through structured therapies, guided social interaction, and family collaboration, we aim to make the transition to school smoother, more positive, and empowering for both children and families."
+      ],
+      additionalSections: [
+        {
+          title: "Objective",
+          items: [
+            "To help the child develop pre-requisite educational and readiness skills",
+            "To work on the child’s individual strengths, challenges, and unique support needs",
+            "To help the child become familiar and comfortable with school environments and routines",
+            "To encourage positive interaction and comfort around peers and group settings",
+            "To build emotional regulation, independence, and participation skills necessary for classroom learning"
+          ]
+        },
+        {
+          title: "Our Process",
+          items: [
+            "Duration: 4-month structured program with an additional 2+2 months extension if required, depending on the child’s progress and support needs.",
+            "Session Planning: 5 days a week",
+            "Session details: 4 sessions per day over 3 hours",
+            "Session format: 3 individual sessions and 1 group session daily",
+            "The program may include: Occupational Therapy, Speech Therapy, Cognitive Therapy, Special Education support, Social and group interaction activities"
+          ]
+        },
+        {
+          title: "Areas We Focus On",
+          items: [
+            "Creating a Supportive & Inclusive Environment: Building emotional safety, confidence, participation, and comfort within structured settings.",
+            "Developing Social Skills: Turn-taking, sharing, cooperative play, peer interaction, communication, and group participation.",
+            "Building Foundational Academic Skills: Early literacy, pre-writing, pre-math concepts, problem-solving, listening, and classroom learning readiness.",
+            "Addressing Behavior & Emotional Regulation: Improving attention, transitions, emotional regulation, coping skills, frustration tolerance, and adaptive responses.",
+            "Communication & Language Development: Understanding instructions, expressing needs, conversation skills, and classroom communication abilities.",
+            "Motor & Adaptive Skills: Fine motor development, pencil grasp, self-help skills, sensory regulation, dressing, eating independence, and classroom-related routines.",
+            "Parent & Caregiver Involvement: Supporting families through guidance, resources, strategies, and collaborative goal-setting to ensure consistency across home and school environments.",
+            "Monitoring Progress & Program Adaptation: Regular review of developmental progress and ongoing modification of intervention plans based on the child’s evolving needs."
+          ]
+        },
+        {
+          title: "Goal",
+          items: [
+            "To help children transition into school environments with confidence, independence, emotional readiness, and the foundational skills required for meaningful participation, learning, and social engagement."
+          ]
+        }
+      ]
     },
   },
   {
