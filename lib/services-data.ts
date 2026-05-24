@@ -2184,6 +2184,101 @@ export const services: ServiceData[] = [
       ],
     },
   },
+  {
+    id: "25",
+    title: "Post-Surgical Rehabilitation",
+    slug: "post-surgical-rehabilitation",
+    description: "Our Post-Surgical Rehabilitation Program helps individuals recover safely after surgery by improving mobility, strength, flexibility, endurance, pain management, and functional independence while supporting a smoother and more confident return to daily activities and overall well-being.",
+    category: "programs",
+    image: "/about_pic3.png",
+    demographics: ["Children", "Adolescents", "Adults"],
+    content: {
+      overview: "At Divit MindSpace, our Post-Surgical Rehabilitation Program supports individuals through every stage of recovery following surgery. We provide individualized plans tailored to your specific procedure and recovery goals, helping you heal safely and regain functional mobility.\n\nThrough structured therapeutic exercises, gradual movement training, and pain management strategies, we facilitate a safe transition back to daily life, restoring your strength and independence.\n\nOur approach emphasizes safe progression, physical recovery, emotional support, and long-term functional well-being while ensuring that rehabilitation is personalized, compassionate, and goal-oriented.",
+      benefits: [
+        "Improved mobility, flexibility, and physical functioning",
+        "Better pain management and reduced physical discomfort",
+        "Enhanced muscle strength, balance, and endurance",
+        "Safer return to daily activities, work, exercise, or sports participation",
+        "Improved posture, movement confidence, and body awareness",
+        "Reduced risk of stiffness, weakness, and movement-related complications",
+        "Greater independence in everyday tasks and routines",
+        "Structured guidance and support throughout the recovery process",
+      ],
+      whatToExpect: [
+        "Initial assessment of mobility, pain, strength, flexibility, posture, and functional limitations",
+        "Individualized rehabilitation planning based on surgical recovery goals",
+        "Structured and progressive therapeutic exercise sessions",
+        "Guided movement and mobility training tailored to recovery stage",
+        "Pain management and functional rehabilitation strategies",
+        "Monitoring of healing progress, endurance, and movement quality",
+        "Education regarding posture, body mechanics, pacing, and recovery precautions",
+        "Ongoing support for safe return to daily routines and activities",
+      ],
+      whoIsItFor: [
+        "Difficulty moving comfortably after surgery",
+        "Pain, stiffness, weakness, or reduced mobility during recovery",
+        "Need for guided rehabilitation after orthopedic, neurological, abdominal, or other surgeries",
+        "Difficulty returning to walking, exercise, work, or daily activities",
+        "Reduced balance, endurance, coordination, or physical confidence",
+        "Need for structured recovery support and movement retraining",
+        "Concerns regarding posture, strength, or physical functioning after surgery",
+        "Need for long-term rehabilitation and recovery planning",
+      ],
+      duration: "Individualized based on recovery goals and needs",
+      format: "In-person at our center",
+      approachItems: [
+        "Individualized, evidence-based, and goal-oriented rehabilitation",
+        "Safe and gradual progression based on recovery stage and comfort",
+        "Focus on functional independence, mobility, and quality of life",
+        "Compassionate, supportive, and person-centered care",
+        "Collaborative involvement of caregivers, medical professionals, and families where required",
+        "Emphasis on long-term recovery, resilience, and sustainable physical well-being",
+      ],
+      whyChooseItems: [
+        "At Divit MindSpace, we believe recovery after surgery is both a physical and emotional journey.",
+        "Our Post-Surgical Rehabilitation Program focuses on helping individuals feel supported, confident, and empowered throughout the healing process. Through personalized rehabilitation plans, therapeutic guidance, and compassionate care, we help individuals safely regain strength, mobility, independence, and participation in everyday life.",
+        "We are committed to providing structured, holistic, and supportive rehabilitation experiences that promote recovery, confidence, comfort, and long-term well-being.",
+      ],
+      additionalSections: [
+        {
+          title: "Objective",
+          items: [
+            "To support safe and effective recovery after surgery",
+            "To reduce pain, stiffness, swelling, and physical discomfort",
+            "To improve mobility, flexibility, strength, and endurance",
+            "To restore functional independence and participation in daily activities",
+            "To prevent post-surgical complications and movement limitations",
+            "To improve balance, posture, coordination, and movement confidence",
+            "To support emotional well-being and confidence during recovery",
+          ],
+        },
+        {
+          title: "Our Process",
+          items: [
+            "The Post-Surgical Rehabilitation Program is individualized based on the person’s surgery type, recovery stage, medical recommendations, mobility needs, and rehabilitation goals.",
+            "Rehabilitation sessions may include: Therapeutic strengthening and mobility exercises, Flexibility and range-of-motion training, Balance and coordination activities, Pain management and recovery support, Functional rehabilitation and movement retraining, Posture and body mechanics training, Walking and gait training where required, Breathing, endurance, and conditioning exercises, Home exercise programs and recovery guidance",
+          ],
+        },
+        {
+          title: "Areas We Focus On",
+          items: [
+            "Mobility & Functional Recovery: Improving movement, flexibility, walking ability, transfers, and participation in everyday activities.",
+            "Strength & Physical Conditioning: Rebuilding muscle strength, endurance, stability, and physical confidence after surgery.",
+            "Pain & Swelling Management: Supporting comfort, recovery, circulation, and reduction of stiffness or discomfort during healing.",
+            "Balance, Coordination & Gait Training: Improving movement control, balance, posture, and walking patterns where needed.",
+            "Posture & Body Mechanics: Helping individuals move safely and efficiently while reducing strain during recovery.",
+            "Return to Daily Activities: Supporting safe transition back to work, school, exercise, sports, self-care, and community participation.",
+          ],
+        },
+        {
+          title: "Goal",
+          items: [
+            "To help individuals recover safely and confidently after surgery by restoring physical functioning, improving independence, reducing discomfort, and supporting long-term mobility and quality of life.",
+          ],
+        },
+      ],
+    },
+  },
 ];
 
 export function getServiceBySlug(slug: string): ServiceData | undefined {
