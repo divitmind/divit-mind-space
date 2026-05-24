@@ -361,35 +361,77 @@ export const services: ServiceData[] = [
     id: "3",
     title: "Speech Therapy",
     slug: "speech-therapy",
-    description: "At Divit MindSpace, we see communication as more than a skill—it is a **child**’s way of connecting with the world, expressing emotions, and building relationships.",
+    description: "At Divit MindSpace, we see communication as more than a skill—it is a child’s way of connecting with the world, expressing emotions, and building relationships.",
     category: "therapy",
     image: "/features-service-card/therapy-services.png",
     demographics: ["Children", "Adolescents", "Adults"],
     content: {
-      overview: "We focus not just on how a **child** speaks, but on why they communicate, how they feel while doing so, and how communication can become meaningful for them. Our approach integrates speech clarity, language understanding, fluency, and social communication naturally into play, interaction, and everyday experiences—rather than isolating them into rigid drills.\n\nBy blending therapeutic expertise with a relationship-based, **child**-led approach, we help **children** move from pressure to comfort, and from hesitation to confident expression.",
+      overview: "We focus not just on how a child speaks, but on why they communicate, how they feel while doing so, and how communication can become meaningful for them.\n\nWe look at communication as a whole, including:\n• Speech clarity (articulation)\n• Understanding and using language\n• Fluency (flow of speech)\n• Social communication (verbal and non-verbal connection)\n\nOur approach integrates these areas naturally into play, interaction, and everyday experiences—rather than isolating them into rigid drills.\n\nBy blending therapeutic expertise with a relationship-based, child-led approach, we help children move from pressure to comfort, and from hesitation to confident expression.",
       benefits: [
-        "Confident communication across home, school, and social settings.",
-        "Clearer speech that is easily understood by family, peers, and teachers.",
-        "Enhanced ability to follow instructions and process language.",
-        "Stronger social skills, helping them build meaningful friendships.",
-        "Reduced frustration by giving them alternative ways to express needs.",
-        "A foundation for better reading, writing, and academic success."
+        "Clearer and more confident speech",
+        "Improved understanding and use of language",
+        "Increased willingness to communicate",
+        "Better social interaction and connection",
+        "Reduced communication-related frustration",
+        "Stronger self-expression of needs, thoughts, and emotions"
       ],
       whatToExpect: [
-        "A gentle, observation-based initial assessment of your child’s communication profile.",
-        "Individualized goals aligned with your child’s readiness and unique strengths.",
-        "Play-based, interaction-driven therapy sessions that feel like fun, not \"work.\"",
-        "Ongoing parent guidance and support to help you understand your child’s progress.",
-        "Practical tools and home strategies for everyday communication.",
-        "A collaborative approach with other therapies or schools, if applicable."
+        "A gentle, observation-based initial assessment",
+        "Individualized goals aligned with your child’s readiness",
+        "Play-based, interaction-driven therapy sessions",
+        "Ongoing parent guidance and support",
+        "Practical strategies for home carryover",
+        "Collaboration with other therapies (if applicable)"
       ],
       whoIsItFor: [
-        "Speech delays or limited speech for their age.",
-        "Difficulty being understood by people outside the family.",
-        "Struggling to follow simple instructions or understand questions.",
-        "Repeating words or sounds (stuttering) or avoiding talking.",
-        "Difficulty initiating or sustaining communication with peers.",
-        "Neurodivergent children (Autism/ADHD) needing communication support."
+        "Speech delays or limited speech",
+        "Non-verbal or very limited verbal communication",
+        "Unclear speech or pronunciation difficulties",
+        "Difficulty forming complete or grammatically correct sentences",
+        "Communication challenges associated with autism",
+        "Difficulty initiating or sustaining communication"
+      ],
+      approachItems: [
+        "**Child-Led, Relationship-Based:** We follow the child’s interests to create meaningful communication opportunities.",
+        "**Play as a Medium:** Communication is built through play, interaction, and shared experiences.",
+        "**Emotional Safety First:** A regulated child communicates better—so we prioritize comfort and trust.",
+        "**Parent as a Partner:** We support parents with practical strategies for everyday communication.",
+        "**Integrated Development:** We work on communication alongside attention, regulation, and social connection."
+      ],
+      whyChooseItems: [
+        "Warm, non-judgmental, and accepting environment",
+        "Therapists who combine expertise with empathy",
+        "Focus on long-term communication, not quick fixes",
+        "Respect for each child’s individuality and pace",
+        "A space where children feel seen, heard, and understood"
+      ],
+      additionalSections: [
+        {
+          title: "Children We Support",
+          intro: "We support children with a wide range of communication needs, including:",
+          items: [
+            "## Speech Clarity Difficulties",
+            "Challenges with clear sound production (articulation)",
+            "Speech patterns that make understanding difficult",
+            "## Language Delays",
+            "Difficulty understanding or expressing words, ideas, or sentences",
+            "## Fluency Challenges",
+            "Stuttering, repetitions, or interruptions in speech flow",
+            "## Autism & Social Communication Differences",
+            "Support in building verbal and non-verbal communication",
+            "Strengthening connection and interaction with others",
+            "## Hearing-Related Communication Needs",
+            "Supporting speech and language development in children with hearing differences",
+            "## Developmental Differences",
+            "Including Down syndrome, cerebral palsy, and other conditions that may impact communication"
+          ]
+        },
+        {
+          title: "Beyond Speech — Building Connection",
+          intro: "At Divit MindSpace, our goal is not just to help children speak better, but to help them connect better—with themselves and with the world around them.\n\nBecause when a child feels understood, communication naturally follows.",
+          items: [],
+          color: "sage"
+        }
       ],
       duration: "45-minute sessions, typically weekly",
       format: "In-person at our center",
