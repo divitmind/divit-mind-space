@@ -2279,6 +2279,101 @@ export const services: ServiceData[] = [
       ],
     },
   },
+  {
+    id: "26",
+    title: "Pain Modalities",
+    slug: "pain-modalities",
+    description: "Our Pain Modalities Program helps individuals manage pain, reduce physical discomfort, improve mobility, promote healing, and enhance overall physical functioning through evidence-based therapeutic pain-relief techniques and supportive rehabilitation approaches.",
+    category: "programs",
+    image: "/about_pic3.png",
+    demographics: ["Children", "Adolescents", "Adults"],
+    content: {
+      overview: "At Divit MindSpace, our Pain Modalities Program supports individuals experiencing acute, chronic, post-surgical, or movement-related pain. We focus on reducing discomfort, improving mobility, and helping you return to daily activities with greater ease and confidence.\n\nUsing personalized assessments, we integrate therapeutic pain-relief techniques (such as heat/cold, ultrasound, and stimulation) with target exercises. This approach addresses inflammation, muscle tightness, and stiffness to support long-term functional recovery.\n\nOur goal-oriented care is tailored to your unique pain patterns, physical condition, and lifestyle, promoting sustainable well-being and independence.",
+      benefits: [
+        "Reduced pain and muscle discomfort",
+        "Improved flexibility, movement, and physical comfort",
+        "Better circulation, relaxation, and tissue recovery",
+        "Enhanced mobility and functional participation",
+        "Improved posture and reduced physical strain",
+        "Greater ease in performing daily activities",
+        "Support for rehabilitation and recovery processes",
+        "Improved confidence, comfort, and overall well-being",
+      ],
+      whatToExpect: [
+        "Initial assessment of pain, mobility, posture, and physical functioning",
+        "Identification of pain triggers, movement limitations, and contributing factors",
+        "Individualized pain-relief and rehabilitation planning",
+        "Safe and structured application of therapeutic pain modalities",
+        "Integration of movement, strengthening, and flexibility exercises where required",
+        "Monitoring of pain levels, comfort, mobility, and recovery progress",
+        "Education regarding posture, body mechanics, pacing, and self-management strategies",
+        "Ongoing guidance for long-term pain management and prevention",
+      ],
+      whoIsItFor: [
+        "Persistent or recurring muscle or joint pain",
+        "Physical discomfort affecting movement or daily activities",
+        "Post-surgical or post-injury pain and stiffness",
+        "Reduced mobility, flexibility, or physical endurance",
+        "Muscle tightness, tension, or inflammation",
+        "Pain related to posture, repetitive strain, or physical overuse",
+        "Need for supportive pain-relief interventions during rehabilitation",
+        "Difficulty participating comfortably in work, exercise, or routine activities",
+      ],
+      duration: "Individualized based on recovery goals and needs",
+      format: "In-person at our center",
+      approachItems: [
+        "Individualized and evidence-based pain management support",
+        "Focus on comfort, recovery, and functional improvement",
+        "Safe, structured, and person-centered therapeutic interventions",
+        "Combination of pain-relief modalities with rehabilitation strategies",
+        "Gradual and goal-oriented progression tailored to individual needs",
+        "Emphasis on long-term well-being, prevention, and improved quality of life",
+      ],
+      whyChooseItems: [
+        "At Divit MindSpace, we understand that pain affects not only physical functioning, but also emotional well-being, confidence, and participation in everyday life.",
+        "Our Pain Modalities Program focuses on helping individuals feel supported, comfortable, and empowered throughout their recovery process. Through individualized therapeutic care, evidence-based pain-relief techniques, and compassionate rehabilitation support, we help individuals improve comfort, movement, recovery, and overall quality of life.",
+        "We are committed to providing safe, holistic, and supportive care that promotes healing, independence, resilience, and long-term physical well-being.",
+      ],
+      additionalSections: [
+        {
+          title: "Objective",
+          items: [
+            "To reduce pain, stiffness, and physical discomfort",
+            "To improve mobility, circulation, and muscle relaxation",
+            "To support tissue healing and physical recovery",
+            "To improve posture, flexibility, and movement quality",
+            "To reduce muscle tension, inflammation, and physical strain",
+            "To improve participation in daily activities and physical functioning",
+            "To support long-term pain management and rehabilitation goals",
+          ],
+        },
+        {
+          title: "Our Process",
+          items: [
+            "The Pain Modalities Program is individualized based on the person’s pain condition, physical needs, rehabilitation goals, and medical recommendations. Therapeutic interventions are carefully selected to support comfort, recovery, and improved physical functioning.",
+            "Pain management support may include: Heat and cold therapy, Electrical stimulation modalities where appropriate, Therapeutic ultrasound support, Muscle relaxation and soft tissue techniques, Stretching and mobility exercises, Postural correction and ergonomic guidance, Pain-relief positioning strategies, Movement-based rehabilitation support, Relaxation and body-awareness techniques",
+          ],
+        },
+        {
+          title: "Areas We Focus On",
+          items: [
+            "Musculoskeletal Pain Relief: Support for neck pain, back pain, shoulder pain, joint discomfort, muscle tightness, and movement-related strain.",
+            "Post-Injury & Post-Surgical Recovery: Reducing discomfort, stiffness, and movement limitations during rehabilitation and healing.",
+            "Mobility & Functional Improvement: Enhancing flexibility, movement quality, posture, endurance, and physical participation.",
+            "Muscle Relaxation & Recovery: Supporting circulation, reducing muscle tension, and promoting physical relaxation and comfort.",
+            "Posture & Ergonomic Support: Improving movement patterns, alignment, and physical habits that contribute to discomfort and strain.",
+            "Pain Management & Rehabilitation Integration: Combining pain-relief techniques with functional rehabilitation and strengthening strategies for long-term improvement.",
+          ],
+        },
+        {
+          title: "Goal",
+          items: [
+            "To help individuals experience reduced pain, improved mobility, greater physical comfort, and enhanced participation in daily life through safe, evidence-based, and supportive therapeutic pain management approaches.",
+          ],
+        },
+      ],
+    },
+  },
 ];
 
 export function getServiceBySlug(slug: string): ServiceData | undefined {
