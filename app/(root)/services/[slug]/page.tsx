@@ -131,7 +131,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!service) return { title: "Service Not Found" };
 
   if (staticService) {
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program") {
       service.title = staticService.title;
       service.description = staticService.description;
       if (service.seo) {
@@ -205,7 +205,7 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT, Counselling & Behavioral Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program") {
       service.title = staticService.title;
       service.description = staticService.description;
       service.overview = staticContent.overview;
@@ -327,7 +327,7 @@ export default async function ServicePage({ params }: PageProps) {
       </>
     );
   };
-  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities";
+  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program";
   const outcomeSpan = isCustomLayout ? "lg:col-span-5" : "lg:col-span-4";
   const overviewSpan = isCustomLayout ? "lg:col-span-7" : "lg:col-span-8";
   const outcomePadding = isCustomLayout ? "p-6 lg:py-6 lg:px-8" : "p-6 lg:p-12";
@@ -495,6 +495,8 @@ export default async function ServicePage({ params }: PageProps) {
                             <span>
                               {slug === "wheelchair-training" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities"
                                 ? "What You Will Gain"
+                                : slug === "nios-support-program"
+                                ? "What the Student Will Gain"
                                 : slug === "sensory-integration-program"
                                 ? "What You or Your Child Will Gain"
                                 : "What Your Child Will Gain"}
@@ -546,7 +548,7 @@ export default async function ServicePage({ params }: PageProps) {
                     <div className="flex flex-col w-full">
                       <div className="mb-6 border-l-2 border-green/20 pl-4">
                         <h3 className="text-xl lg:text-2xl font-serif text-green italic">
-                          {slug === "wheelchair-training" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities"
+                          {slug === "wheelchair-training" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program"
                             ? "Is This the Right Support for You?"
                             : slug === "sensory-integration-program"
                             ? "Is This the Right Support for You or Your Child?"
