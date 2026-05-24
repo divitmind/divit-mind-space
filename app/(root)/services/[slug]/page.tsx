@@ -194,7 +194,7 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT, Counselling & Behavioral Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training") {
       service.description = staticService.description;
       service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;
@@ -314,12 +314,13 @@ export default async function ServicePage({ params }: PageProps) {
       </>
     );
   };
-  const isSchoolReadiness = slug === "school-readiness-program";
-  const outcomeSpan = isSchoolReadiness ? "lg:col-span-5" : "lg:col-span-4";
-  const overviewSpan = isSchoolReadiness ? "lg:col-span-7" : "lg:col-span-8";
-  const outcomePadding = isSchoolReadiness ? "p-6 lg:py-6 lg:px-8" : "p-6 lg:p-12";
-  const overviewPadding = isSchoolReadiness ? "p-6 lg:py-6 lg:px-10" : "p-6 lg:p-12";
-  const contentJustify = isSchoolReadiness ? "justify-start" : "justify-center";
+  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training";
+  const outcomeSpan = isCustomLayout ? "lg:col-span-5" : "lg:col-span-4";
+  const overviewSpan = isCustomLayout ? "lg:col-span-7" : "lg:col-span-8";
+  const outcomePadding = isCustomLayout ? "p-6 lg:py-6 lg:px-8" : "p-6 lg:p-12";
+  const overviewPadding = isCustomLayout ? "p-6 lg:py-6 lg:px-10" : "p-6 lg:p-12";
+  const contentJustify = isCustomLayout ? "justify-start" : "justify-center";
+  const headerMargin = isCustomLayout ? "lg:mt-2 mb-6" : "lg:-mt-6 mb-6";
 
   return (
     <div className="bg-[#FAF9F5] min-h-screen">
@@ -392,7 +393,7 @@ export default async function ServicePage({ params }: PageProps) {
                       <Sparkles className="w-48 h-48 text-white" />
                     </div>
                     <div className="relative z-10 flex flex-col flex-1">
-                      <div className="lg:-mt-6 mb-6">
+                      <div className={headerMargin}>
                         <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
                       </div>
                       <div className={`flex-1 flex flex-col ${contentJustify}`}>
@@ -406,7 +407,7 @@ export default async function ServicePage({ params }: PageProps) {
                   {/* Overview (White Box) */}
                   <div className={`${overviewSpan} bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] ${overviewPadding} relative overflow-hidden flex flex-col`}>
                     <div className="relative z-10 flex flex-col flex-1">
-                      <div className="lg:-mt-6 mb-6">
+                      <div className={headerMargin}>
                         <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                       </div>
                       <div className={`flex-1 flex flex-col ${contentJustify}`}>
@@ -444,7 +445,7 @@ export default async function ServicePage({ params }: PageProps) {
                       <Sparkles className="w-48 h-48 text-white" />
                     </div>
                     <div className="relative z-10 flex flex-col flex-1">
-                      <div className="lg:-mt-6 mb-6">
+                      <div className={headerMargin}>
                         <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
                       </div>
                       <div className={`flex-1 flex flex-col ${contentJustify}`}>
@@ -458,7 +459,7 @@ export default async function ServicePage({ params }: PageProps) {
                   {/* Overview (White Box) */}
                   <div className={`${overviewSpan} bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] ${overviewPadding} relative overflow-hidden flex flex-col`}>
                     <div className="relative z-10 flex flex-col flex-1">
-                      <div className="lg:-mt-6 mb-6">
+                      <div className={headerMargin}>
                         <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                       </div>
                       <div className={`flex-1 flex flex-col ${contentJustify}`}>
