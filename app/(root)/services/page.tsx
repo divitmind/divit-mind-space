@@ -115,7 +115,7 @@ export default async function ServicesListPage() {
     "NIOS Support Program",
     "Certificate in Special Education",
     "Diploma in Special Education",
-    "Summer Camp",
+    "Summer Camp for Teens",
     "Physiotherapy — Pain Management",
     "Physiotherapy — Pain Modalities",
     "Post-Surgical Rehabilitation",

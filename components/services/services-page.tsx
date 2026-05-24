@@ -123,6 +123,9 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
       if (s.title === "Assistive Devices Assessment and Training") {
         updated.title = "Assistive Devices";
       }
+      if (s.title === "Summer Camp" || s.slug.current === "summer-camp") {
+        updated.title = "Summer Camp for Teens";
+      }
       return updated;
     });
   }, [services]);

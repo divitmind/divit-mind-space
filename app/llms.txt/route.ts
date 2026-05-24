@@ -47,7 +47,7 @@ const content = `# Divit MindSpace
 - Training Program (Shadow Teacher Training): https://divitmindspace.com/services/training-program-shadow-teacher-training-program
 - Certificate in Special Education: https://divitmindspace.com/services/certificate-in-special-education
 - Diploma in Special Education: https://divitmindspace.com/services/diploma-in-special-education
-- Summer Camp: https://divitmindspace.com/services/summer-camp
+- Summer Camp for Teens: https://divitmindspace.com/services/summer-camp
 
 ## Services — Physiotherapy
 - Pain Management: https://divitmindspace.com/services/pain-management

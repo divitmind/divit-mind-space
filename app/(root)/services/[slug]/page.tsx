@@ -130,6 +130,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!service) return { title: "Service Not Found" };
 
+  if (staticService) {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp") {
+      service.title = staticService.title;
+      service.description = staticService.description;
+      if (service.seo) {
+        service.seo.metaTitle = staticService.title;
+        service.seo.metaDescription = staticService.description;
+      }
+    }
+  }
+
   const serviceUrl = `https://divitmindspace.com/services/${service.slug.current}`;
   const title = service.seo?.metaTitle || service.title;
   const description = service.seo?.metaDescription || service.description;
@@ -194,12 +205,14 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT, Counselling & Behavioral Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp") {
+      service.title = staticService.title;
       service.description = staticService.description;
       service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;
       service.benefits = staticContent.benefits;
       service.whatToExpect = staticContent.whatToExpect;
+      service.whoIsItFor = staticContent.whoIsItFor;
       service.approachItems = staticContent.approachItems;
       service.whyChooseItems = staticContent.whyChooseItems;
       service.additionalSections = staticContent.additionalSections;
@@ -314,7 +327,7 @@ export default async function ServicePage({ params }: PageProps) {
       </>
     );
   };
-  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management";
+  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp";
   const outcomeSpan = isCustomLayout ? "lg:col-span-5" : "lg:col-span-4";
   const overviewSpan = isCustomLayout ? "lg:col-span-7" : "lg:col-span-8";
   const outcomePadding = isCustomLayout ? "p-6 lg:py-6 lg:px-8" : "p-6 lg:p-12";
@@ -479,7 +492,11 @@ export default async function ServicePage({ params }: PageProps) {
                       <div className="rounded-[2.5rem] flex flex-col h-full bg-[#7A9A7D]/5 border border-[#7A9A7D]/10 px-5 py-8 lg:px-10 lg:py-12">
                         <div className="-mt-6 lg:-mt-10 mb-4 lg:mb-6 flex flex-col">
                           <h3 className="text-lg lg:text-xl font-serif text-green flex items-baseline flex-wrap gap-x-3">
-                            <span>What Your Child Will Gain</span>
+                            <span>
+                              {slug === "wheelchair-training"
+                                ? "What You Will Gain"
+                                : "What Your Child Will Gain"}
+                            </span>
                           </h3>
                         </div>
 
@@ -508,9 +525,7 @@ export default async function ServicePage({ params }: PageProps) {
                         <ul className="flex flex-col gap-y-3 flex-1">
                           {service.whatToExpect.map((item, i) => (
                             <li key={i} className="flex items-start bg-white/50 backdrop-blur-sm pl-3 pr-4 py-4 lg:pl-3 lg:pr-4 lg:py-4 rounded-2xl border border-green/5 gap-2.5 h-fit">
-                              <div className="w-6 h-6 rounded-full bg-green/10 flex items-center justify-center shrink-0 mt-0.5 text-green font-serif italic text-xs">
-                                {i + 1}
-                              </div>
+                              <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5" />
                               <span className="text-[14px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
                                 {renderItemText(item)}
                               </span>
@@ -528,7 +543,11 @@ export default async function ServicePage({ params }: PageProps) {
                   {service.whoIsItFor && service.whoIsItFor.length > 0 && (
                     <div className="flex flex-col w-full">
                       <div className="mb-6 border-l-2 border-green/20 pl-4">
-                        <h3 className="text-xl lg:text-2xl font-serif text-green italic">Is This the Right Support for Your Child?</h3>
+                        <h3 className="text-xl lg:text-2xl font-serif text-green italic">
+                          {slug === "wheelchair-training"
+                            ? "Is This the Right Support for You?"
+                            : "Is This the Right Support for Your Child?"}
+                        </h3>
                       </div>
                       <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
                         {service.whoIsItFor.map((item, i) => (
