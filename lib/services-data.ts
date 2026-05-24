@@ -1353,7 +1353,7 @@ export const services: ServiceData[] = [
     category: "programs",
     image: "/about_pic2.png",
     content: {
-      overview: "At Divit MindSpace, our Special Education & Remedial Sessions support children facing challenges in learning, attention, academics, comprehension, or classroom participation. Using individualized, neuro-affirming, and evidence-based approaches, we help strengthen academic, cognitive, social, and functional skills while building confidence, independence, and positive learning experiences.",
+      overview: "At Divit MindSpace, our Special Education & Remedial Sessions support children facing challenges in learning, attention, academics, comprehension, or classroom participation. Using individualized, neuro-affirming, and evidence-based approaches, we help strengthen academic, cognitive, social, and functional skills while building confidence, independence, and positive learning experiences.\n\nThrough personalized learning plans, multisensory teaching methods, evidence-based intervention strategies, and small-group or one-on-one support, we aim to strengthen confidence, independence, participation, and meaningful progress across educational and everyday settings.",
       benefits: [
         "Improved reading, writing, spelling, and mathematics skills",
         "Better attention, focus, and classroom participation",

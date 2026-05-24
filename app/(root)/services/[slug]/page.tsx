@@ -327,7 +327,7 @@ export default async function ServicePage({ params }: PageProps) {
       </>
     );
   };
-  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp";
+  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions";
   const outcomeSpan = isCustomLayout ? "lg:col-span-5" : "lg:col-span-4";
   const overviewSpan = isCustomLayout ? "lg:col-span-7" : "lg:col-span-8";
   const outcomePadding = isCustomLayout ? "p-6 lg:py-6 lg:px-8" : "p-6 lg:p-12";
