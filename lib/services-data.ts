@@ -1312,34 +1312,110 @@ export const services: ServiceData[] = [
     id: "10",
     title: "Special Education & Remedial Sessions",
     slug: "special-education--remedial-sessions",
-    description: "Our Special Education and Remedial Sessions are designed to support **children** who experience learning difficulties, developmental delays, or academic challenges.",
+    description: "Our Special Education & Remedial Sessions help children and adolescents strengthen academic, cognitive, communication, and learning-related skills through individualized, structured, and supportive intervention tailored to their unique learning needs.",
     category: "programs",
-    image: "/about_pic2.png",
+    image: "/features-service-card/therapy-services.png",
+    demographics: ["Children", "Adolescents"],
     content: {
-      overview: "Our Special Education and Remedial Sessions are designed to support **children** who experience learning difficulties, developmental delays, or academic challenges. Using specialized teaching methods and individualized attention, we help **children** build academic skills at their own pace while addressing underlying learning differences.",
+      overview: "At Divit MindSpace, our Special Education & Remedial Sessions are designed to support children who experience challenges in learning, attention, comprehension, academic performance, classroom participation, or skill acquisition. We recognize that every child learns differently, and our goal is to provide personalized support that nurtures confidence, understanding, independence, and meaningful progress.\n\nOur Special Education Program focuses on creating an inclusive, supportive, and engaging learning environment where children with a range of learning differences can thrive. Whether a child has a specific learning disability, developmental delay, ADHD, Autism, academic difficulties, or other learning-related challenges, our dedicated team of educators and specialists works collaboratively to provide the necessary support, strategies, and accommodations required for success.\n\nUsing a neuro-affirming, strengths-based, and child-centered approach, we address not only academic concerns, but also the social, emotional, behavioral, and functional aspects of learning. Through individualized learning plans, differentiated instruction, specialized support services, and evidence-based intervention strategies, we aim to create meaningful learning experiences that promote growth, confidence, and participation.\n\nWe strongly emphasize individualized instruction and small-group settings to ensure every child receives focused attention, emotional support, and opportunities to learn at their own pace. Our team utilizes multisensory teaching methods, adaptive resources, assistive strategies, and evidence-based educational approaches to accommodate diverse learning styles and developmental profiles.\n\nAt Divit MindSpace, we believe every child has the potential to learn, grow, and succeed when provided with the right environment, support, and encouragement.",
       benefits: [
-        "Individualized education plan (IEP) for each child",
-        "Specialized teaching methods and materials",
-        "Targeted remediation of academic gaps",
-        "Building foundational literacy and numeracy skills",
-        "Improved confidence and motivation to learn",
+        "Improved reading, writing, spelling, and mathematics skills",
+        "Better attention, focus, and classroom participation",
+        "Enhanced comprehension, memory, and problem-solving abilities",
+        "Increased confidence and motivation toward learning",
+        "Development of individualized learning strategies and study skills",
+        "Improved communication and expressive abilities related to academics",
+        "Better emotional regulation and reduced academic frustration",
+        "Greater independence in school-related tasks and routines",
+        "Improved social interaction and participation within learning environments"
       ],
       whatToExpect: [
-        "Initial assessment of learning needs",
-        "Development of individualized goals",
-        "Regular one-on-one or small group sessions",
-        "Use of multi-sensory teaching approaches",
-        "Regular progress reports for parents",
+        "Initial assessment of academic, cognitive, behavioral, and learning-related needs",
+        "Individualized goal-setting based on the child’s strengths and challenges",
+        "Structured one-on-one or small-group intervention sessions",
+        "Multisensory and engaging teaching approaches tailored to learning style",
+        "Activities targeting literacy, numeracy, comprehension, attention, reasoning, and executive functioning skills",
+        "Ongoing monitoring of progress and adaptation of learning goals",
+        "Parent guidance and home-based learning strategies",
+        "Collaboration with schools, educators, and caregivers where needed"
       ],
       whoIsItFor: [
-        "Children with learning disabilities",
-        "Children falling behind in academics",
-        "Children with dyslexia, dyscalculia, or dysgraphia",
-        "Children needing individualized instruction",
-        "Students struggling in mainstream classrooms",
+        "Difficulty with reading, writing, spelling, or mathematics",
+        "Poor academic performance despite effort and support",
+        "Difficulty understanding classroom instructions or concepts",
+        "Attention, focus, memory, or organizational challenges affecting learning",
+        "Learning differences such as dyslexia, dyscalculia, dysgraphia, ADHD, or Autism",
+        "Low confidence, frustration, or emotional distress related to academics",
+        "Need for individualized learning support or classroom accommodations",
+        "Recommendations from teachers, therapists, or caregivers for additional academic intervention",
+        "Difficulty adapting to school expectations, peer interaction, or structured learning environments"
       ],
-      duration: "45-60 minute sessions, 2-3 times weekly",
-      format: "In-person at our center",
+      approachItems: [
+        "Neuro-affirming, strengths-based, and child-centered intervention",
+        "Inclusive and supportive learning environment",
+        "Individualized learning strategies tailored to each child’s pace and profile",
+        "Multisensory, engaging, and evidence-based teaching methods",
+        "Focus on emotional safety, encouragement, confidence-building, and participation",
+        "Collaborative involvement of families, caregivers, educators, and therapists",
+        "Balance of academic support, cognitive development, social-emotional growth, and functional learning"
+      ],
+      whyChooseItems: [
+        "At Divit MindSpace, we believe every child is capable of learning and thriving when provided with the right support, understanding, and opportunities.",
+        "Our Special Education & Remedial Sessions go beyond academics by focusing on the child’s overall confidence, emotional well-being, participation, and learning experience. Through compassionate guidance, individualized intervention, adaptive teaching strategies, and collaborative support, we help children overcome challenges and develop the skills needed to participate meaningfully and succeed in school and everyday life.",
+        "By fostering a culture of acceptance, inclusion, empowerment, and encouragement, we strive to create positive learning environments where every child feels understood, supported, and capable of reaching their fullest potential."
+      ],
+      additionalSections: [
+        {
+          title: "Objective",
+          items: [
+            "To strengthen foundational academic and learning skills",
+            "To improve attention, comprehension, memory, and problem-solving abilities",
+            "To support children with learning differences and developmental challenges",
+            "To build confidence, participation, and independence in learning environments",
+            "To provide individualized learning strategies tailored to the child’s needs",
+            "To improve classroom readiness and academic functioning",
+            "To support emotional well-being, positive learning experiences, and social participation"
+          ],
+          color: "sage"
+        },
+        {
+          title: "Areas We Focus On",
+          items: [
+            "## Reading & Literacy Skills",
+            "Supporting phonics, reading fluency, comprehension, spelling, vocabulary, and written expression.",
+            "## Writing & Fine Motor Skills",
+            "Improving handwriting, sentence formation, written organization, and academic expression.",
+            "## Mathematics & Problem-Solving Skills",
+            "Building foundational numeracy, calculation, reasoning, sequencing, and conceptual understanding.",
+            "## Attention & Executive Functioning",
+            "Enhancing focus, organization, planning, working memory, task completion, and classroom participation.",
+            "## Cognitive & Learning Skills",
+            "Supporting memory, processing speed, comprehension, reasoning, and adaptive learning strategies.",
+            "## Communication & Academic Language",
+            "Strengthening receptive and expressive language skills required for learning and classroom interaction.",
+            "## Social, Emotional & Behavioral Support",
+            "Helping children manage frustration, build confidence, regulate emotions, improve peer interaction, and develop a positive relationship with learning.",
+            "## Inclusive & Adaptive Learning Support",
+            "Using differentiated instruction, evidence-based teaching strategies, adaptive resources, and individualized accommodations to support diverse learning needs."
+          ]
+        },
+        {
+          title: "Our Process",
+          intro: "The Special Education & Remedial Program begins with understanding the child’s academic profile, developmental needs, strengths, challenges, emotional functioning, and learning style. Intervention plans are individualized and regularly adapted based on progress and support requirements.\n\nSessions may include:",
+          items: [
+            "Academic skill-building activities",
+            "Remedial instruction for reading, writing, and mathematics",
+            "Attention and executive functioning support",
+            "Cognitive and memory-enhancement activities",
+            "Language and comprehension support",
+            "Structured teaching and multisensory learning approaches",
+            "Assistive strategies and adaptive learning resources",
+            "Behavioral and emotional support during learning",
+            "Small-group learning opportunities and peer interaction",
+            "School coordination and parent guidance where required"
+          ]
+        }
+      ]
     },
   },
   {
@@ -1858,222 +1934,6 @@ export const services: ServiceData[] = [
         }
       ]
     }
-  },
-  {
-    id: "24",
-    title: "Pain Management",
-    slug: "pain-management",
-    description: "Our Pain Management Program helps individuals reduce pain, improve physical functioning, restore mobility, and enhance overall quality of life through a holistic, evidence-based, and individualized therapeutic approach.",
-    category: "programs",
-    image: "/about_pic3.png",
-    demographics: ["Children", "Adolescents", "Adults"],
-    content: {
-      overview: "At Divit MindSpace, our Pain Management Program is designed to support individuals experiencing acute, chronic, recurring, or movement-related pain that affects daily life, physical functioning, emotional well-being, and participation in routine activities.\n\nPain can impact mobility, sleep, energy, mood, work performance, relationships, and overall quality of life. Our approach focuses not only on symptom relief, but also on understanding the underlying physical, functional, postural, emotional, and lifestyle factors contributing to pain.\n\nThrough individualized assessment and intervention, we help individuals improve movement, reduce discomfort, build physical resilience, and regain confidence in their bodies. The program integrates therapeutic exercises, movement-based rehabilitation, posture correction, body mechanics training, relaxation strategies, and functional support tailored to each individual’s needs and goals.\n\nOur focus is on helping individuals move toward long-term pain management, improved independence, and sustainable physical well-being.",
-      benefits: [
-        "Reduced pain, stiffness, and physical discomfort",
-        "Improved mobility, flexibility, and movement confidence",
-        "Better posture, body mechanics, and physical alignment",
-        "Enhanced strength, endurance, and physical functioning",
-        "Greater ability to participate in daily activities comfortably",
-        "Improved awareness of pain triggers and self-management strategies",
-        "Support in managing stress and emotional impact related to chronic pain",
-        "Improved quality of life and overall well-being"
-      ],
-      whatToExpect: [
-        "Initial assessment of pain patterns, posture, mobility, strength, and daily functioning",
-        "Identification of contributing physical, functional, and lifestyle factors",
-        "Individualized pain management and rehabilitation planning",
-        "Structured therapeutic exercise and movement sessions",
-        "Gradual progression of mobility, endurance, and functional activities",
-        "Guidance regarding posture, ergonomics, pacing, and body mechanics",
-        "Strategies for self-management, recovery, and prevention of recurring pain",
-        "Ongoing monitoring of progress and functional improvement"
-      ],
-      whoIsItFor: [
-        "Persistent or recurring pain affecting daily life",
-        "Neck, back, shoulder, joint, or muscle pain",
-        "Pain related to posture, work strain, or repetitive activities",
-        "Difficulty moving comfortably or participating in physical activities",
-        "Recovery after injury, physical strain, or surgery",
-        "Reduced flexibility, endurance, or physical confidence",
-        "Stress-related physical tension or discomfort",
-        "Need for long-term strategies to manage chronic pain safely and effectively"
-      ],
-      duration: "Individualized based on recovery goals and needs",
-      format: "In-person at our center",
-      approachItems: [
-        "Individualized, holistic, and evidence-based intervention",
-        "Focus on functional improvement and quality of life",
-        "Compassionate, supportive, and person-centered care",
-        "Combination of rehabilitation, movement therapy, and preventive strategies",
-        "Gradual and safe progression tailored to each individual’s comfort and goals",
-        "Emphasis on long-term self-management, resilience, and sustainable recovery"
-      ],
-      whyChooseItems: [
-        "At Divit MindSpace, we understand that pain affects more than just the body — it can influence emotional well-being, confidence, independence, and participation in daily life.",
-        "Our Pain Management Program focuses on helping individuals feel heard, supported, and empowered throughout their recovery journey. Through personalized care, therapeutic guidance, and functional rehabilitation, we help individuals move toward reduced pain, improved movement, and greater overall well-being.",
-        "We are committed to creating safe, compassionate, and empowering experiences that support long-term recovery, confidence, and quality of life."
-      ],
-      additionalSections: [
-        {
-          title: "Objective",
-          items: [
-            "To reduce physical pain and discomfort",
-            "To improve mobility, flexibility, and functional independence",
-            "To address movement patterns, posture, and physical strain contributing to pain",
-            "To improve strength, endurance, and body awareness",
-            "To support emotional well-being associated with chronic pain experiences",
-            "To enhance participation in daily activities, work, exercise, and social life",
-            "To promote long-term pain management and injury prevention strategies"
-          ]
-        },
-        {
-          title: "Our Process",
-          items: [
-            "Therapeutic exercises and guided movement",
-            "Mobility and flexibility training",
-            "Postural correction and ergonomic guidance",
-            "Strengthening and stabilization exercises",
-            "Relaxation and body-awareness techniques",
-            "Pain-relief modalities and functional rehabilitation",
-            "Breathing and stress-regulation strategies",
-            "Education regarding pacing, recovery, and injury prevention",
-            "Lifestyle and activity modification guidance where required"
-          ]
-        },
-        {
-          title: "Areas We Focus On",
-          items: [
-            "Chronic & Recurring Pain: Support for long-term pain conditions affecting physical functioning, movement, and quality of life.",
-            "Musculoskeletal Pain: Management of neck pain, back pain, shoulder discomfort, joint pain, muscle tightness, and movement-related strain.",
-            "Posture & Ergonomics: Improving body alignment, sitting posture, movement habits, and workspace ergonomics to reduce physical stress and discomfort.",
-            "Mobility & Functional Rehabilitation: Enhancing flexibility, movement quality, endurance, and participation in everyday activities.",
-            "Stress & Pain Regulation: Addressing the relationship between stress, tension, emotional overload, and physical pain experiences.",
-            "Strength & Physical Resilience: Building muscle support, physical stability, and body awareness to improve long-term functioning and reduce re-injury risk."
-          ]
-        },
-        {
-          title: "Goal",
-          items: [
-            "To help individuals manage pain effectively, improve physical functioning, regain confidence in movement, and enhance overall well-being through safe, supportive, and sustainable therapeutic intervention."
-          ]
-        }
-      ]
-    }
-  },
-
-  // ============================================================================
-  // SPECIAL EDUCATION & REMEDIAL SESSIONS
-  // ============================================================================
-  {
-    id: "special-education-remedial",
-    title: "Special Education & Remedial Sessions",
-    slug: "special-education--remedial-sessions",
-    description:
-      "Our Special Education & Remedial Sessions help **children and adolescents** strengthen academic, cognitive, communication, and learning-related skills through individualized, structured, and supportive intervention tailored to their unique learning needs.",
-    category: "programs",
-    image: "/features-service-card/therapy-services.png",
-    demographics: ["Children", "Adolescents"],
-    content: {
-      overview:
-        "At Divit MindSpace, our Special Education & Remedial Sessions are designed to support children who experience challenges in learning, attention, comprehension, academic performance, classroom participation, or skill acquisition. We recognize that every child learns differently, and our goal is to provide personalized support that nurtures confidence, understanding, independence, and meaningful progress.\n\nOur Special Education Program focuses on creating an inclusive, supportive, and engaging learning environment where children with a range of learning differences can thrive. Whether a child has a specific learning disability, developmental delay, ADHD, Autism, academic difficulties, or other learning-related challenges, our dedicated team of educators and specialists works collaboratively to provide the necessary support, strategies, and accommodations required for success.\n\nUsing a neuro-affirming, strengths-based, and child-centered approach, we address not only academic concerns, but also the social, emotional, behavioral, and functional aspects of learning. Through individualized learning plans, differentiated instruction, specialized support services, and evidence-based intervention strategies, we aim to create meaningful learning experiences that promote growth, confidence, and participation.\n\nAt Divit MindSpace, we believe every child has the potential to learn, grow, and succeed when provided with the right environment, support, and encouragement.",
-      benefits: [
-        "Improved reading, writing, spelling, and mathematics skills",
-        "Better attention, focus, and classroom participation",
-        "Enhanced comprehension, memory, and problem-solving abilities",
-        "Increased confidence and motivation toward learning",
-        "Development of individualized learning strategies and study skills",
-        "Improved communication and expressive abilities related to academics",
-        "Better emotional regulation and reduced academic frustration",
-        "Greater independence in school-related tasks and routines",
-        "Improved social interaction and participation within learning environments",
-      ],
-      whatToExpect: [
-        "Initial assessment of academic, cognitive, behavioral, and learning-related needs",
-        "Individualized goal-setting based on the child's strengths and challenges",
-        "Structured one-on-one or small-group intervention sessions",
-        "Multisensory and engaging teaching approaches tailored to learning style",
-        "Activities targeting literacy, numeracy, comprehension, attention, reasoning, and executive functioning skills",
-        "Ongoing monitoring of progress and adaptation of learning goals",
-        "Parent guidance and home-based learning strategies",
-        "Collaboration with schools, educators, and caregivers where needed",
-      ],
-      whoIsItFor: [
-        "Difficulty with reading, writing, spelling, or mathematics",
-        "Poor academic performance despite effort and support",
-        "Difficulty understanding classroom instructions or concepts",
-        "Attention, focus, memory, or organizational challenges affecting learning",
-        "Learning differences such as dyslexia, dyscalculia, dysgraphia, ADHD, or Autism",
-        "Low confidence, frustration, or emotional distress related to academics",
-        "Need for individualized learning support or classroom accommodations",
-        "Recommendations from teachers, therapists, or caregivers for additional academic intervention",
-        "Difficulty adapting to school expectations, peer interaction, or structured learning environments",
-      ],
-      duration: "Individualized based on learning profile and intervention goals",
-      format: "In-person at our center",
-      approachItems: [
-        "Neuro-affirming, strengths-based, and child-centered intervention",
-        "Inclusive and supportive learning environment",
-        "Individualized learning strategies tailored to each child's pace and profile",
-        "Multisensory, engaging, and evidence-based teaching methods",
-        "Focus on emotional safety, encouragement, confidence-building, and participation",
-        "Collaborative involvement of families, caregivers, educators, and therapists",
-        "Balance of academic support, cognitive development, social-emotional growth, and functional learning",
-      ],
-      whyChooseItems: [
-        "At Divit MindSpace, we believe every child is capable of learning and thriving when provided with the right support, understanding, and opportunities.",
-        "Our Special Education & Remedial Sessions go beyond academics by focusing on the child's overall confidence, emotional well-being, participation, and learning experience. Through compassionate guidance, individualized intervention, adaptive teaching strategies, and collaborative support, we help children overcome challenges and develop the skills needed to participate meaningfully and succeed in school and everyday life.",
-        "By fostering a culture of acceptance, inclusion, empowerment, and encouragement, we strive to create positive learning environments where every child feels understood, supported, and capable of reaching their fullest potential.",
-      ],
-      additionalSections: [
-        {
-          title: "Objective",
-          items: [
-            "To strengthen foundational academic and learning skills",
-            "To improve attention, comprehension, memory, and problem-solving abilities",
-            "To support children with learning differences and developmental challenges",
-            "To build confidence, participation, and independence in learning environments",
-            "To provide individualized learning strategies tailored to the child's needs",
-            "To improve classroom readiness and academic functioning",
-            "To support emotional well-being, positive learning experiences, and social participation",
-          ],
-        },
-        {
-          title: "Our Process",
-          items: [
-            "Academic skill-building activities",
-            "Remedial instruction for reading, writing, and mathematics",
-            "Attention and executive functioning support",
-            "Cognitive and memory-enhancement activities",
-            "Language and comprehension support",
-            "Structured teaching and multisensory learning approaches",
-            "Assistive strategies and adaptive learning resources",
-            "Behavioral and emotional support during learning",
-            "Small-group learning opportunities and peer interaction",
-            "School coordination and parent guidance where required",
-          ],
-        },
-        {
-          title: "Areas We Focus On",
-          items: [
-            "Reading & Literacy Skills: Supporting phonics, reading fluency, comprehension, spelling, vocabulary, and written expression.",
-            "Writing & Fine Motor Skills: Improving handwriting, sentence formation, written organization, and academic expression.",
-            "Mathematics & Problem-Solving Skills: Building foundational numeracy, calculation, reasoning, sequencing, and conceptual understanding.",
-            "Attention & Executive Functioning: Enhancing focus, organization, planning, working memory, task completion, and classroom participation.",
-            "Cognitive & Learning Skills: Supporting memory, processing speed, comprehension, reasoning, and adaptive learning strategies.",
-            "Communication & Academic Language: Strengthening receptive and expressive language skills required for learning and classroom interaction.",
-            "Social, Emotional & Behavioral Support: Helping children manage frustration, build confidence, regulate emotions, improve peer interaction, and develop a positive relationship with learning.",
-            "Inclusive & Adaptive Learning Support: Using differentiated instruction, evidence-based teaching strategies, adaptive resources, and individualized accommodations to support diverse learning needs.",
-          ],
-        },
-        {
-          title: "Goal",
-          items: [
-            "To help children become confident, capable, and engaged learners by strengthening academic foundations, supporting individualized learning needs, and promoting positive educational, emotional, and social experiences.",
-          ],
-        },
-      ],
-    },
   },
 ];
 
