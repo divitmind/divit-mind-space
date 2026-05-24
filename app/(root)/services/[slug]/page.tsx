@@ -572,7 +572,7 @@ export default async function ServicePage({ params }: PageProps) {
 
                   {/* Fallback for Why Choose Us if not in additionalSections (Speech Therapy Style) */}
                   {(approachItems || whyChooseItems) && (
-                    <div className="pt-8 border-t border-green/10 grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-8">
+                    <div className="pt-8 border-t border-green/10 flex flex-col space-y-10">
                       {approachItems && approachItems.length > 0 && (
                         <div>
                           <div className="mb-6 border-l-2 border-green/20 pl-4">
