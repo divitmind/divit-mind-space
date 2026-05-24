@@ -57,7 +57,7 @@ interface ServiceData {
     supportedItems?: (string | { heading?: string; items: string[] })[];
     approachItems?: string[];
     whyChooseItems?: string[];
-    additionalSections?: { title: string; intro?: string; items: string[]; color?: string }[];
+    additionalSections?: { title: string; intro?: string; items: string[]; color?: string; position?: 'bottom' }[];
   }[];
   ctaOverride?: {
     title?: string;
@@ -68,7 +68,7 @@ interface ServiceData {
   specialists?: Specialist[];
   approachItems?: string[];
   whyChooseItems?: string[];
-  additionalSections?: { title: string; intro?: string; items: string[]; color?: string }[];
+  additionalSections?: { title: string; intro?: string; items: string[]; color?: string; position?: 'bottom' }[];
 }
 
 interface PageProps {
@@ -194,7 +194,7 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT, Counselling & Behavioral Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program") {
       service.description = staticService.description;
       service.overview = staticContent.overview;
       service.audienceSections = staticContent.audienceSections;
@@ -314,6 +314,12 @@ export default async function ServicePage({ params }: PageProps) {
       </>
     );
   };
+  const isSchoolReadiness = slug === "school-readiness-program";
+  const outcomeSpan = isSchoolReadiness ? "lg:col-span-5" : "lg:col-span-4";
+  const overviewSpan = isSchoolReadiness ? "lg:col-span-7" : "lg:col-span-8";
+  const outcomePadding = isSchoolReadiness ? "p-6 lg:py-6 lg:px-8" : "p-6 lg:p-12";
+  const overviewPadding = isSchoolReadiness ? "p-6 lg:py-6 lg:px-10" : "p-6 lg:p-12";
+  const contentJustify = isSchoolReadiness ? "justify-start" : "justify-center";
 
   return (
     <div className="bg-[#FAF9F5] min-h-screen">
@@ -381,29 +387,33 @@ export default async function ServicePage({ params }: PageProps) {
                 {/* Duo-Grid Style Consistency - Side-by-Side Grid with 4:8 Ratio for better vertical balance */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 mb-10 lg:mb-12 items-stretch">
                   {/* Primary Outcome (Green Box) */}
-                  <div className="lg:col-span-4 bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col">
+                  <div className={`${outcomeSpan} bg-green ${outcomePadding} rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col`}>
                     <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
                       <Sparkles className="w-48 h-48 text-white" />
                     </div>
-                    <div className="relative z-10 flex flex-col">
+                    <div className="relative z-10 flex flex-col flex-1">
                       <div className="lg:-mt-6 mb-6">
                         <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
                       </div>
-                      <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white">
-                        {renderTextWithBold(service.description)}
-                      </p>
+                      <div className={`flex-1 flex flex-col ${contentJustify}`}>
+                        <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white">
+                          {renderTextWithBold(service.description)}
+                        </p>
+                      </div>
                     </div>
                   </div>
 
                   {/* Overview (White Box) */}
-                  <div className="lg:col-span-8 bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 relative overflow-hidden flex flex-col">
-                    <div className="relative z-10 flex flex-col">
+                  <div className={`${overviewSpan} bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] ${overviewPadding} relative overflow-hidden flex flex-col`}>
+                    <div className="relative z-10 flex flex-col flex-1">
                       <div className="lg:-mt-6 mb-6">
                         <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                       </div>
-                      <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
-                        {renderTextWithBold(service.overview)}
-                      </p>
+                      <div className={`flex-1 flex flex-col ${contentJustify}`}>
+                        <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
+                          {renderTextWithBold(service.overview)}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -426,32 +436,36 @@ export default async function ServicePage({ params }: PageProps) {
               </div>
             ) : hasUniversalContent ? (
               <div className="space-y-8 lg:space-y-10 mb-10 lg:mb-12">
-                {/* Premium Duo-Grid Layout for Universal Flow */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 items-stretch">
+                {/* Duo-Grid Style Consistency - Side-by-Side Grid with 4:8 Ratio */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 mb-10 lg:mb-12 items-stretch">
                   {/* Primary Outcome (Green Box) */}
-                  <div className="lg:col-span-4 bg-green p-6 lg:p-12 rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col">
+                  <div className={`${outcomeSpan} bg-green ${outcomePadding} rounded-[2.5rem] text-white shadow-xl shadow-green/10 relative overflow-hidden group flex flex-col`}>
                     <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none"> 
                       <Sparkles className="w-48 h-48 text-white" />
                     </div>
-                    <div className="relative z-10 flex flex-col">
+                    <div className="relative z-10 flex flex-col flex-1">
                       <div className="lg:-mt-6 mb-6">
                         <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-white/70">Primary Outcome</p>
                       </div>
-                      <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white">
-                        {renderTextWithBold(service.description)}
-                      </p>
+                      <div className={`flex-1 flex flex-col ${contentJustify}`}>
+                        <p className="text-2xl lg:text-3xl font-serif italic leading-[1.4] font-bold text-white">
+                          {renderTextWithBold(service.description)}
+                        </p>
+                      </div>
                     </div>
                   </div>
 
                   {/* Overview (White Box) */}
-                  <div className="lg:col-span-8 bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 lg:p-12 relative overflow-hidden flex flex-col">
-                    <div className="relative z-10 flex flex-col">
+                  <div className={`${overviewSpan} bg-white rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_30px_rgb(0,0,0,0.02)] ${overviewPadding} relative overflow-hidden flex flex-col`}>
+                    <div className="relative z-10 flex flex-col flex-1">
                       <div className="lg:-mt-6 mb-6">
                         <h3 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-green/60">Overview</h3>
                       </div>
-                      <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
-                        {renderTextWithBold(service.overview || "")}
-                      </p>
+                      <div className={`flex-1 flex flex-col ${contentJustify}`}>
+                        <p className="text-black/70 text-base lg:text-lg leading-relaxed font-medium italic whitespace-pre-wrap">
+                          {renderTextWithBold(service.overview || "")}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -529,9 +543,10 @@ export default async function ServicePage({ params }: PageProps) {
                   )}
 
                   {/* Additional Universal Sections (Like Why Choose Us) */}
-                  {service.additionalSections && service.additionalSections.length > 0 && (
+                  {/* Top Additional Sections */}
+                  {service.additionalSections && service.additionalSections.filter(s => s.position !== 'bottom').length > 0 && (
                     <div className="pt-4 border-t border-green/10 space-y-8">
-                      {service.additionalSections.map((section, idx) => (
+                      {service.additionalSections.filter(s => s.position !== 'bottom').map((section, idx) => (
                         <div key={idx} className="flex flex-col w-full">
                           <div className="mb-6 border-l-2 border-green/20 pl-4">
                             <h3 className="text-xl lg:text-2xl font-serif text-green italic">{section.title}</h3>
@@ -558,7 +573,7 @@ export default async function ServicePage({ params }: PageProps) {
 
                   {/* Fallback for Why Choose Us if not in additionalSections (Speech Therapy Style) */}
                   {(approachItems || whyChooseItems) && (
-                    <div className="pt-8 border-t border-green/10 grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-8">
+                    <div className="pt-8 border-t border-green/10 flex flex-col space-y-10">
                       {approachItems && approachItems.length > 0 && (
                         <div>
                           <div className="mb-6 border-l-2 border-green/20 pl-4">
@@ -603,6 +618,34 @@ export default async function ServicePage({ params }: PageProps) {
                           </div>
                         );
                       })()}
+                    </div>
+                  )}
+
+                  {/* Bottom Additional Sections */}
+                  {service.additionalSections && service.additionalSections.filter(s => s.position === 'bottom').length > 0 && (
+                    <div className="pt-8 border-t border-green/10 space-y-8">
+                      {service.additionalSections.filter(s => s.position === 'bottom').map((section, idx) => (
+                        <div key={idx} className="flex flex-col w-full">
+                          <div className="mb-6 border-l-2 border-green/20 pl-4">
+                            <h3 className="text-xl lg:text-2xl font-serif text-green italic">{section.title}</h3>
+                          </div>
+                          {section.intro && (
+                            <p className="mb-6 text-[15px] lg:text-[16px] text-black/60 font-medium leading-relaxed italic">
+                              {renderTextWithBold(section.intro)}
+                            </p>
+                          )}
+                          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
+                            {section.items.map((item, i) => (
+                              <li key={i} className="flex items-start gap-3 py-1">
+                                <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
+                                <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                                  {renderItemText(item)}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
