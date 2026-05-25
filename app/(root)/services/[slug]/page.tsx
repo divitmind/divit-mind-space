@@ -131,7 +131,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!service) return { title: "Service Not Found" };
 
   if (staticService) {
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program" || slug === "early-intervention-program") {
       service.title = staticService.title;
       service.description = staticService.description;
       if (service.seo) {
@@ -205,7 +205,7 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT, Counselling & Behavioral Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program") {
+    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program" || slug === "early-intervention-program") {
       service.title = staticService.title;
       service.description = staticService.description;
       service.overview = staticContent.overview;
@@ -327,7 +327,7 @@ export default async function ServicePage({ params }: PageProps) {
       </>
     );
   };
-  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program";
+  const isCustomLayout = slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program" || slug === "early-intervention-program";
   const outcomeSpan = isCustomLayout ? "lg:col-span-5" : "lg:col-span-4";
   const overviewSpan = isCustomLayout ? "lg:col-span-7" : "lg:col-span-8";
   const outcomePadding = isCustomLayout ? "p-6 lg:py-6 lg:px-8" : "p-6 lg:p-12";
@@ -497,6 +497,8 @@ export default async function ServicePage({ params }: PageProps) {
                                 ? "What You Will Gain"
                                 : slug === "nios-support-program"
                                 ? "What the Student Will Gain"
+                                : slug === "early-intervention-program"
+                                ? "What Your Child & Family Will Gain"
                                 : slug === "sensory-integration-program"
                                 ? "What You or Your Child Will Gain"
                                 : "What Your Child Will Gain"}
@@ -572,28 +574,41 @@ export default async function ServicePage({ params }: PageProps) {
                   {/* Top Additional Sections */}
                   {service.additionalSections && service.additionalSections.filter(s => s.position !== 'bottom').length > 0 && (
                     <div className="pt-4 border-t border-green/10 space-y-8">
-                      {service.additionalSections.filter(s => s.position !== 'bottom').map((section, idx) => (
-                        <div key={idx} className="flex flex-col w-full">
-                          <div className="mb-6 border-l-2 border-green/20 pl-4">
-                            <h3 className="text-xl lg:text-2xl font-serif text-green italic">{section.title}</h3>
+                      {service.additionalSections.filter(s => s.position !== 'bottom').map((section, idx) => {
+                        const isGoal = section.title.toLowerCase() === "goal";
+                        if (isGoal) {
+                          return (
+                            <div key={idx} className="w-full py-6 border-y border-green/10 my-4">
+                              <p className="text-[15px] lg:text-[17px] text-black/70 font-medium leading-relaxed italic">
+                                <span className="font-serif font-bold text-green not-italic text-lg lg:text-xl mr-3">Goal:</span>
+                                {renderItemText(section.items[0])}
+                              </p>
+                            </div>
+                          );
+                        }
+                        return (
+                          <div key={idx} className="flex flex-col w-full">
+                            <div className="mb-6 border-l-2 border-green/20 pl-4">
+                              <h3 className="text-xl lg:text-2xl font-serif text-green italic">{section.title}</h3>
+                            </div>
+                            {section.intro && (
+                              <p className="mb-6 text-[15px] lg:text-[16px] text-black/60 font-medium leading-relaxed italic">
+                                {renderTextWithBold(section.intro)}
+                              </p>
+                            )}
+                            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
+                              {section.items.map((item, i) => (
+                                <li key={i} className="flex items-start gap-3 py-1">
+                                  <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
+                                  <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                                    {renderItemText(item)}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
-                          {section.intro && (
-                            <p className="mb-6 text-[15px] lg:text-[16px] text-black/60 font-medium leading-relaxed italic">
-                              {renderTextWithBold(section.intro)}
-                            </p>
-                          )}
-                          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
-                            {section.items.map((item, i) => (
-                              <li key={i} className="flex items-start gap-3 py-1">
-                                <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
-                                <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
-                                  {renderItemText(item)}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   )}
 
@@ -650,28 +665,41 @@ export default async function ServicePage({ params }: PageProps) {
                   {/* Bottom Additional Sections */}
                   {service.additionalSections && service.additionalSections.filter(s => s.position === 'bottom').length > 0 && (
                     <div className="pt-8 border-t border-green/10 space-y-8">
-                      {service.additionalSections.filter(s => s.position === 'bottom').map((section, idx) => (
-                        <div key={idx} className="flex flex-col w-full">
-                          <div className="mb-6 border-l-2 border-green/20 pl-4">
-                            <h3 className="text-xl lg:text-2xl font-serif text-green italic">{section.title}</h3>
+                      {service.additionalSections.filter(s => s.position === 'bottom').map((section, idx) => {
+                        const isGoal = section.title.toLowerCase() === "goal";
+                        if (isGoal) {
+                          return (
+                            <div key={idx} className="w-full py-6 border-y border-green/10 my-4">
+                              <p className="text-[15px] lg:text-[17px] text-black/70 font-medium leading-relaxed italic">
+                                <span className="font-serif font-bold text-green not-italic text-lg lg:text-xl mr-3">Goal:</span>
+                                {renderItemText(section.items[0])}
+                              </p>
+                            </div>
+                          );
+                        }
+                        return (
+                          <div key={idx} className="flex flex-col w-full">
+                            <div className="mb-6 border-l-2 border-green/20 pl-4">
+                              <h3 className="text-xl lg:text-2xl font-serif text-green italic">{section.title}</h3>
+                            </div>
+                            {section.intro && (
+                              <p className="mb-6 text-[15px] lg:text-[16px] text-black/60 font-medium leading-relaxed italic">
+                                {renderTextWithBold(section.intro)}
+                              </p>
+                            )}
+                            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
+                              {section.items.map((item, i) => (
+                                <li key={i} className="flex items-start gap-3 py-1">
+                                  <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
+                                  <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
+                                    {renderItemText(item)}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
-                          {section.intro && (
-                            <p className="mb-6 text-[15px] lg:text-[16px] text-black/60 font-medium leading-relaxed italic">
-                              {renderTextWithBold(section.intro)}
-                            </p>
-                          )}
-                          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
-                            {section.items.map((item, i) => (
-                              <li key={i} className="flex items-start gap-3 py-1">
-                                <CheckCircle2 className="w-5 h-5 text-green shrink-0 mt-0.5 opacity-80" />
-                                <span className="text-[15px] lg:text-[16px] text-black/70 font-medium leading-relaxed">
-                                  {renderItemText(item)}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   )}
                 </div>

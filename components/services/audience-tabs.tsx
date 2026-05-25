@@ -508,22 +508,35 @@ export function AudienceTabs({
           )}
 
           {/* Additional Sections (Common to both Modular & Legacy) */}
-          {activeData.additionalSections?.map((section, idx) => (
-            <div key={idx} className={`rounded-[2.5rem] border border-black/[0.03] p-6 lg:p-12 ${section.color === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white shadow-sm'}`}>
-              <h3 className="text-lg lg:text-xl font-serif text-green mb-8">{section.title}</h3>
-              {section.intro && <p className="mb-8 text-black/60 text-sm lg:text-base font-medium leading-relaxed">{renderTextWithBold(section.intro)}</p>}
-              <div className="flex flex-col gap-y-4">
-                {section.items?.map((item, i) => (
-                  <div key={i} className="flex items-start gap-5 group">
-                    <div className="w-6 h-6 rounded-full bg-green/5 flex items-center justify-center shrink-0 mt-0.5">
-                      <CheckCircle2 className="w-4 h-4 text-green" />
+          {activeData.additionalSections?.map((section, idx) => {
+            const isGoal = section.title.toLowerCase() === "goal";
+            if (isGoal) {
+              return (
+                <div key={idx} className="w-full py-6 border-y border-green/10 my-4">
+                  <p className="text-[15px] lg:text-[17px] text-black/70 font-medium leading-relaxed italic">
+                    <span className="font-serif font-bold text-green not-italic text-lg lg:text-xl mr-3">Goal:</span>
+                    {renderItemText(section.items[0])}
+                  </p>
+                </div>
+              );
+            }
+            return (
+              <div key={idx} className={`rounded-[2.5rem] border border-black/[0.03] p-6 lg:p-12 ${section.color === 'sage' ? 'bg-[#7A9A7D]/5' : 'bg-white shadow-sm'}`}>
+                <h3 className="text-lg lg:text-xl font-serif text-green mb-8">{section.title}</h3>
+                {section.intro && <p className="mb-8 text-black/60 text-sm lg:text-base font-medium leading-relaxed">{renderTextWithBold(section.intro)}</p>}
+                <div className="flex flex-col gap-y-4">
+                  {section.items?.map((item, i) => (
+                    <div key={i} className="flex items-start gap-5 group">
+                      <div className="w-6 h-6 rounded-full bg-green/5 flex items-center justify-center shrink-0 mt-0.5">
+                        <CheckCircle2 className="w-4 h-4 text-green" />
+                      </div>
+                      <span className="text-[14px] lg:text-[17px] text-black/70 font-medium leading-relaxed">{renderItemText(item)}</span>
                     </div>
-                    <span className="text-[14px] lg:text-[17px] text-black/70 font-medium leading-relaxed">{renderItemText(item)}</span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </motion.div>
       </AnimatePresence>
 
@@ -543,11 +556,24 @@ export function AudienceTabs({
             );
           })() : null}
           
-          {globalAdditionalSections?.map((section, idx) => (
-            <div key={idx} className="pt-2">
-              {renderCleanList(section.title, section.items, true, section.intro)}
-            </div>
-          ))}
+          {globalAdditionalSections?.map((section, idx) => {
+            const isGoal = section.title.toLowerCase() === "goal";
+            if (isGoal) {
+              return (
+                <div key={idx} className="w-full py-6 border-y border-green/10 my-4">
+                  <p className="text-[15px] lg:text-[17px] text-black/70 font-medium leading-relaxed italic">
+                    <span className="font-serif font-bold text-green not-italic text-lg lg:text-xl mr-3">Goal:</span>
+                    {renderItemText(section.items[0])}
+                  </p>
+                </div>
+              );
+            }
+            return (
+              <div key={idx} className="pt-2">
+                {renderCleanList(section.title, section.items, true, section.intro)}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
