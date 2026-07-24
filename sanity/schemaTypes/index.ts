@@ -13,6 +13,7 @@ import { reviewType } from './review'
 import { promowebsiteType } from './promowebsite'
 import { mindGymType } from './mindGym'
 import { siteSettingsType } from './siteSettings'
+import { spaceRentalType } from './spaceRental'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -30,5 +31,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     promowebsiteType,
     mindGymType,
     siteSettingsType,
+    spaceRentalType,
   ],
 }
