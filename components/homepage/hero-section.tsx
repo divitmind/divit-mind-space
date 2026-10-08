@@ -14,7 +14,7 @@ interface HeroSectionProps {
 const DEFAULT_ROLLING_AUDIENCES = ["CHILD'S", "TEEN'S", "ADULT'S", "FAMILY'S"];
 const DEFAULT_ROLLING_SCHOOLS = ["TISB", "Jyoti Nivas College", "Leading Pre-Schools", "Community Centers"];
 const DEFAULT_HERO_DESCRIPTION = "Bangalore's leading center for mental health, neurodevelopment, and physiotherapy. Expert clinical assessments, professional counseling, and specialized education for all ages.";
-const DEFAULT_CTA_PRIMARY = "Book a Free Consultation";
+const DEFAULT_CTA_PRIMARY = "Book a Consultation";
 const DEFAULT_CTA_SECONDARY = "Host a Free Workshop";
 const DEFAULT_METRICS = {
   familiesCount: "100+",
