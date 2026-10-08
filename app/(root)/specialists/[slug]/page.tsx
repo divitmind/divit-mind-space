@@ -11,7 +11,7 @@ import {
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
 import { ORGANIZATION_REF, SITE_URL } from "@/lib/seo";
-import { CONDITION_PIVOTS, LOCATION_PIVOTS } from "@/lib/seo-pivots";
+import { CONDITION_PIVOTS } from "@/lib/seo-pivots";
 import { ArrowRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -26,7 +26,12 @@ interface SpecialistData {
   specialties?: string[];
   teaser: string;
   fullBio?: unknown;
-  servicesProvided?: { _id: string; title: string; slug: string; category?: string }[];
+  servicesProvided?: {
+    _id: string;
+    title: string;
+    slug: string;
+    category?: string;
+  }[];
 }
 
 interface PageProps {
@@ -41,7 +46,9 @@ export async function generateStaticParams() {
   return (slugs || []).map((item) => ({ slug: item.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const { data } = (await sanityFetch({
     query: SPECIALIST_BY_SLUG_QUERY,
@@ -73,7 +80,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       images: data.image?.asset?.url
-        ? [{ url: data.image.asset.url, width: 1200, height: 630, alt: data.name }]
+        ? [
+            {
+              url: data.image.asset.url,
+              width: 1200,
+              height: 630,
+              alt: data.name,
+            },
+          ]
         : undefined,
       siteName: "Divit MindSpace",
     },
@@ -124,9 +138,10 @@ export default async function SpecialistPage({ params }: PageProps) {
     worksFor: ORGANIZATION_REF,
     knowsAbout: data.specialties || [],
     knowsLanguage: ["English", "Hindi", "Kannada"],
-    ...(data.specialties && data.specialties.length > 0 && {
-      medicalSpecialty: data.specialties,
-    }),
+    ...(data.specialties &&
+      data.specialties.length > 0 && {
+        medicalSpecialty: data.specialties,
+      }),
     ...(data.experience && {
       hasCredential: {
         "@type": "EducationalOccupationalCredential",
@@ -149,15 +164,27 @@ export default async function SpecialistPage({ params }: PageProps) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "About Us", item: `${SITE_URL}/about-us` },
-      { "@type": "ListItem", position: 3, name: data.name, item: specialistUrl },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "About Us",
+        item: `${SITE_URL}/about-us`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: data.name,
+        item: specialistUrl,
+      },
     ],
   };
 
   const pageGraph = {
     "@context": "https://schema.org",
     "@graph": [personJsonLd, breadcrumbJsonLd].map((s) => {
-      const clone: Record<string, unknown> = { ...(s as Record<string, unknown>) };
+      const clone: Record<string, unknown> = {
+        ...(s as Record<string, unknown>),
+      };
       delete clone["@context"];
       return clone;
     }),
@@ -175,11 +202,17 @@ export default async function SpecialistPage({ params }: PageProps) {
         <div className="bg-cream/50 border-b border-green/10">
           <div className="container mx-auto px-4 py-4">
             <nav className="flex items-center gap-2 text-sm text-green/60">
-              <Link href="/" className="hover:text-green transition-colors">
+              <Link
+                href="/"
+                className="hover:text-green transition-colors"
+              >
                 Home
               </Link>
               <span>/</span>
-              <Link href="/about-us" className="hover:text-green transition-colors">
+              <Link
+                href="/about-us"
+                className="hover:text-green transition-colors"
+              >
                 About Us
               </Link>
               <span>/</span>
@@ -212,36 +245,47 @@ export default async function SpecialistPage({ params }: PageProps) {
                   <span className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D]" />
                   Our Team
                 </div>
+
                 <h1
                   className="text-4xl lg:text-5xl font-serif text-black mb-4 leading-tight"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                  style={{
+                    fontFamily:
+                      "'Cormorant Garamond', 'Georgia', serif",
+                  }}
                 >
                   {data.name}
                 </h1>
-                <p className="text-base text-[#7A9A7D] font-semibold mb-4">{data.title}</p>
+
+                <p className="text-base text-[#7A9A7D] font-semibold mb-4">
+                  {data.title}
+                </p>
+
                 <p className="text-lg text-black/70 font-medium leading-relaxed mb-6">
                   {data.teaser}
                 </p>
 
                 {data.experience && (
                   <p className="text-sm text-black/60 font-medium mb-4">
-                    <span className="font-semibold text-black/80">Experience:</span>{" "}
+                    <span className="font-semibold text-black/80">
+                      Experience:
+                    </span>{" "}
                     {data.experience}
                   </p>
                 )}
 
-                {data.specialties && data.specialties.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {data.specialties.map((sp) => (
-                      <span
-                        key={sp}
-                        className="px-3 py-1.5 rounded-full bg-white border border-black/5 text-[11px] font-semibold text-black/70 shadow-sm shadow-black/[0.02] tracking-wide"
-                      >
-                        {sp}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                {data.specialties &&
+                  data.specialties.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {data.specialties.map((sp) => (
+                        <span
+                          key={sp}
+                          className="px-3 py-1.5 rounded-full bg-white border border-black/5 text-[11px] font-semibold text-black/70 shadow-sm shadow-black/[0.02] tracking-wide"
+                        >
+                          {sp}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
                 <WhatsAppConsultationLink className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-full bg-[#7A9A7D] text-white text-sm font-semibold hover:bg-[#6b8a6e] transition-colors">
                   Book a Consultation
@@ -253,23 +297,28 @@ export default async function SpecialistPage({ params }: PageProps) {
         </section>
 
         {/* Full bio */}
-        {Array.isArray(data.fullBio) && data.fullBio.length > 0 && (
-          <section className="pb-8 lg:pb-12">
-            <div className="container mx-auto px-4">
-              <div className="max-w-3xl mx-auto bg-white rounded-[2rem] border border-black/5 shadow-xl shadow-black/[0.02] p-8 lg:p-12">
-                <h2
-                  className="text-2xl lg:text-3xl font-serif text-black mb-6"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                >
-                  About {data.name.split(" ")[0]}
-                </h2>
-                <div className="prose prose-lg text-black/70 font-medium max-w-none">
-                  <PortableText value={data.fullBio as never} />
+        {Array.isArray(data.fullBio) &&
+          data.fullBio.length > 0 && (
+            <section className="pb-8 lg:pb-12">
+              <div className="container mx-auto px-4">
+                <div className="max-w-3xl mx-auto bg-white rounded-[2rem] border border-black/5 shadow-xl shadow-black/[0.02] p-8 lg:p-12">
+                  <h2
+                    className="text-2xl lg:text-3xl font-serif text-black mb-6"
+                    style={{
+                      fontFamily:
+                        "'Cormorant Garamond', 'Georgia', serif",
+                    }}
+                  >
+                    About {data.name.split(" ")[0]}
+                  </h2>
+
+                  <div className="prose prose-lg text-black/70 font-medium max-w-none">
+                    <PortableText value={data.fullBio as never} />
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-        )}
+            </section>
+          )}
 
         {/* Conditions supported — condition-first search intent */}
         {treatedConditions.length > 0 && (
@@ -278,10 +327,14 @@ export default async function SpecialistPage({ params }: PageProps) {
               <div className="max-w-4xl mx-auto">
                 <h2
                   className="text-2xl lg:text-3xl font-serif text-black mb-6 text-center"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
+                  style={{
+                    fontFamily:
+                      "'Cormorant Garamond', 'Georgia', serif",
+                  }}
                 >
                   Conditions {data.name.split(" ")[0]} Supports
                 </h2>
+
                 <div className="flex flex-wrap justify-center gap-3">
                   {treatedConditions.map((c) => (
                     <Link
@@ -299,69 +352,57 @@ export default async function SpecialistPage({ params }: PageProps) {
         )}
 
         {/* Services provided (internal linking for SEO + LLM entity chain) */}
-        {data.servicesProvided && data.servicesProvided.length > 0 && (
-          <section className="pb-8 lg:pb-12">
-            <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto">
-                <h2
-                  className="text-2xl lg:text-3xl font-serif text-black mb-6 text-center"
-                  style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-                >
-                  Services {data.name.split(" ")[0]} Provides
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {data.servicesProvided.map((svc) => (
-                    <Link
-                      key={svc._id}
-                      href={`/services/${svc.slug}`}
-                      className="block p-5 bg-white rounded-2xl border border-black/5 hover:border-[#7A9A7D]/30 hover:shadow-lg transition-all group"
-                    >
-                      <div className="flex items-center justify-between gap-4">
-                        <span className="font-semibold text-black group-hover:text-[#7A9A7D] transition-colors">
-                          {svc.title}
-                        </span>
-                        <ArrowRight className="w-4 h-4 text-black/40 group-hover:text-[#7A9A7D] group-hover:translate-x-1 transition-all shrink-0" />
-                      </div>
-                    </Link>
-                  ))}
+        {data.servicesProvided &&
+          data.servicesProvided.length > 0 && (
+            <section className="pb-8 lg:pb-12">
+              <div className="container mx-auto px-4">
+                <div className="max-w-4xl mx-auto">
+                  <h2
+                    className="text-2xl lg:text-3xl font-serif text-black mb-6 text-center"
+                    style={{
+                      fontFamily:
+                        "'Cormorant Garamond', 'Georgia', serif",
+                    }}
+                  >
+                    Services {data.name.split(" ")[0]} Provides
+                  </h2>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {data.servicesProvided.map((svc) => (
+                      <Link
+                        key={svc._id}
+                        href={`/services/${svc.slug}`}
+                        className="block p-5 bg-white rounded-2xl border border-black/5 hover:border-[#7A9A7D]/30 hover:shadow-lg transition-all group"
+                      >
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="font-semibold text-black group-hover:text-[#7A9A7D] transition-colors">
+                            {svc.title}
+                          </span>
+
+                          <ArrowRight className="w-4 h-4 text-black/40 group-hover:text-[#7A9A7D] group-hover:translate-x-1 transition-all shrink-0" />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-        )}
+            </section>
+          )}
 
-        {/* Where this specialist practices — closes specialist ↔ location entity graph */}
-        <section className="pb-8 lg:pb-12">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2
-                className="text-2xl lg:text-3xl font-serif text-black mb-6 text-center"
-                style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
-              >
-                Where {data.name.split(" ")[0]} Practices
-              </h2>
-              <p className="text-black/60 font-medium text-center mb-6 max-w-2xl mx-auto">
-                Our Kasavanahalli center (off Sarjapur Road) serves families across Bangalore.
-              </p>
-              <div className="flex flex-wrap justify-center gap-3">
-                {LOCATION_PIVOTS.map((l) => (
-                  <Link
-                    key={l.slug}
-                    href={`/near-me/${l.slug}`}
-                    className="px-4 py-2 rounded-full bg-white border border-black/5 text-sm font-semibold text-black/70 hover:bg-[#7A9A7D] hover:text-white hover:border-[#7A9A7D] transition-all"
-                  >
-                    {l.name} →
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Kasavanahalli center information */}
+        <p className="text-black text-center mb-6 max-w-2xl mx-auto">
+          <strong>
+            Our Kasavanahalli center (off Sarjapur Road) serves families
+            across Bangalore.
+          </strong>
+        </p>
 
         {/* Bottom CTA — shared voice */}
         <section className="pt-4 pb-12 lg:pt-6 lg:pb-16">
           <div className="container mx-auto px-4">
-            <InlineCtaBlock heading={`Work with ${data.name.split(" ")[0]}`} />
+            <InlineCtaBlock
+              heading={`Work with ${data.name.split(" ")[0]}`}
+            />
           </div>
         </section>
       </div>
