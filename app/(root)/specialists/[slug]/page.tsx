@@ -244,7 +244,7 @@ export default async function SpecialistPage({ params }: PageProps) {
                 )}
 
                 <WhatsAppConsultationLink className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-full bg-[#7A9A7D] text-white text-sm font-semibold hover:bg-[#6b8a6e] transition-colors">
-                  Book a Free Consultation
+                  Book a Consultation
                   <ArrowRight className="w-4 h-4" />
                 </WhatsAppConsultationLink>
               </div>
