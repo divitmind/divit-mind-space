@@ -11,7 +11,10 @@ import {
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
 import { ORGANIZATION_REF, SITE_URL } from "@/lib/seo";
-import { CONDITION_PIVOTS } from "@/lib/seo-pivots";
+import {
+  CONDITION_PIVOTS,
+  SPECIALIST_CONDITION_MAP,
+} from "@/lib/seo-pivots";
 import { ArrowRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -115,13 +118,41 @@ export default async function SpecialistPage({ params }: PageProps) {
   const imageUrl = data.image?.asset?.url;
 
   // Conditions this specialist supports — derived from their specialties matching condition pivot tags.
-  const specialtyLower = (data.specialties || []).map((s) => s.toLowerCase());
-  const treatedConditions = CONDITION_PIVOTS.filter((c) =>
-    c.specialtyTags.some((tag) => {
-      const t = tag.toLowerCase();
-      return specialtyLower.some((sp) => sp.includes(t) || t.includes(sp));
-    }),
-  );
+ // Conditions this specialist supports.
+//
+// For specialists with an explicit mapping in SPECIALIST_CONDITION_MAP,
+// use that exact condition list.
+//
+// For all other specialists, keep the existing specialty-tag matching
+// logic exactly as before.
+const explicitConditionSlugs = SPECIALIST_CONDITION_MAP[data.slug];
+
+const treatedConditions = explicitConditionSlugs
+  ? explicitConditionSlugs
+      .map((conditionSlug) =>
+        CONDITION_PIVOTS.find(
+          (condition) => condition.slug === conditionSlug,
+        ),
+      )
+      .filter(
+        (condition): condition is (typeof CONDITION_PIVOTS)[number] =>
+          Boolean(condition),
+      )
+  : (() => {
+      const specialtyLower = (data.specialties || []).map((s) =>
+        s.toLowerCase(),
+      );
+
+      return CONDITION_PIVOTS.filter((c) =>
+        c.specialtyTags.some((tag) => {
+          const t = tag.toLowerCase();
+
+          return specialtyLower.some(
+            (sp) => sp.includes(t) || t.includes(sp),
+          );
+        }),
+      );
+    })();
 
   // Person schema — references canonical Organization by @id.
   // medicalSpecialty mirrors the specialties tag list (LLMs match these to query intent).
