@@ -82,6 +82,7 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
       "early intervention autism Bangalore",
     ],
   },
+
   {
     slug: "adhd",
     name: "ADHD",
@@ -126,6 +127,7 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
       "parent training ADHD Bangalore",
     ],
   },
+
   {
     slug: "learning-disabilities",
     name: "Learning Disabilities",
@@ -170,6 +172,7 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
       "shadow teacher training Bangalore",
     ],
   },
+
   {
     slug: "stress-anxiety-depression",
     name: "Stress, Anxiety & Depression",
@@ -212,6 +215,7 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
       "adult counseling Bangalore",
     ],
   },
+
   {
     slug: "sensory-processing",
     name: "Sensory Processing Differences",
@@ -252,6 +256,7 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
       "sensory processing disorder Bangalore",
     ],
   },
+
   {
     slug: "developmental-delays",
     name: "Developmental Delays",
@@ -298,6 +303,7 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
       "motor skills delay Bangalore",
     ],
   },
+
   {
     slug: "pain-management",
     name: "Pain Management & Physiotherapy",
@@ -343,6 +349,557 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
       "assistive devices Bangalore",
     ],
   },
+
+  // ============================================================
+  // NEW CONDITION ENTRIES
+  // Existing condition logic above is unchanged.
+  // ============================================================
+
+  {
+    slug: "de-addiction",
+    name: "De-addiction",
+    intro:
+      "Psychological and counseling support for individuals and families navigating substance use, recovery, and related emotional challenges at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "counselling",
+      "cognitive-therapy",
+      "group-therapy-sessions",
+    ],
+    specialtyTags: [
+      "De-addiction",
+      "Addiction",
+      "Substance Use",
+      "Addiction Psychiatry",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace provide de-addiction support in Bangalore?",
+        answer:
+          "Divit MindSpace provides counseling and psychological support for individuals and families navigating substance use and recovery-related concerns at our Kasavanahalli center off Sarjapur Road.",
+      },
+      {
+        question: "Can family members receive support during addiction recovery?",
+        answer:
+          "Yes. Family counseling and psychological support can help family members understand recovery-related challenges and develop healthier ways of providing support.",
+      },
+      {
+        question: "What kind of psychological support may be available for substance use concerns?",
+        answer:
+          "Depending on the individual's needs, support may include counseling, cognitive therapy, and appropriate group-based support following an individual assessment.",
+      },
+    ],
+    metaTitle: "De-addiction & Addiction Support in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Psychological counseling and family support for individuals navigating substance use and recovery at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "de addiction Bangalore",
+      "de addiction counseling Bangalore",
+      "addiction support Bangalore",
+      "substance use counseling Bangalore",
+      "addiction psychologist Bangalore",
+      "de addiction Kasavanahalli",
+    ],
+  },
+
+  {
+    slug: "depression",
+    name: "Depression",
+    intro:
+      "Professional psychological support for individuals experiencing depression, persistent low mood, loss of interest, and related emotional challenges at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "counselling",
+      "cognitive-therapy",
+      "group-therapy-sessions",
+    ],
+    specialtyTags: [
+      "Depression",
+      "Mental Health",
+      "Counselling",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace provide counseling for depression in Bangalore?",
+        answer:
+          "Yes. Divit MindSpace provides counseling and cognitive therapy for individuals experiencing depression and related emotional challenges at our Kasavanahalli center off Sarjapur Road.",
+      },
+      {
+        question: "Can teenagers receive support for depression?",
+        answer:
+          "Yes. Teenagers can receive age-appropriate psychological support following an individual assessment of their emotional and developmental needs.",
+      },
+      {
+        question: "What psychological support may be helpful for depression?",
+        answer:
+          "Depending on individual needs, counseling and cognitive therapy may be considered to help individuals understand and manage emotional, cognitive, and behavioural challenges associated with depression.",
+      },
+    ],
+    metaTitle: "Depression Counseling & Therapy in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Professional counseling and cognitive therapy for depression and related emotional challenges at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "depression counseling Bangalore",
+      "depression therapy Bangalore",
+      "depression psychologist Bangalore",
+      "depression support Kasavanahalli",
+      "depression counseling Sarjapur Road",
+    ],
+  },
+
+  {
+    slug: "panic-disorder",
+    name: "Panic Disorder",
+    intro:
+      "Psychological support for individuals experiencing recurrent panic attacks, fear of future attacks, and related anxiety concerns at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "counselling",
+      "cognitive-therapy",
+    ],
+    specialtyTags: [
+      "Panic Disorder",
+      "Panic Attacks",
+      "Anxiety",
+      "Anxiety Disorders",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace provide support for panic disorder?",
+        answer:
+          "Yes. Counseling and cognitive therapy may be considered for individuals experiencing panic-related concerns following an appropriate clinical assessment.",
+      },
+      {
+        question: "Can panic attacks be discussed during counseling?",
+        answer:
+          "Yes. Counseling provides a structured setting to understand panic experiences, triggers, thoughts, emotions, and coping strategies.",
+      },
+      {
+        question: "When should someone seek professional support for panic attacks?",
+        answer:
+          "If panic attacks are recurrent, distressing, affecting daily life, or causing avoidance, professional assessment and support may be helpful.",
+      },
+    ],
+    metaTitle: "Panic Disorder Counseling & Support in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Psychological counseling and cognitive therapy for panic disorder and panic-related concerns at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "panic disorder Bangalore",
+      "panic attack counseling Bangalore",
+      "panic disorder therapy Bangalore",
+      "panic attacks psychologist Bangalore",
+      "panic disorder Kasavanahalli",
+    ],
+  },
+
+  {
+    slug: "dementias",
+    name: "Dementias",
+    intro:
+      "Psychological assessment, counseling, and supportive care for older adults and families navigating dementia-related concerns at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "psychometric-assessments",
+      "counselling",
+      "group-therapy-sessions",
+    ],
+    specialtyTags: [
+      "Dementia",
+      "Dementias",
+      "Geriatric Mental Health",
+      "Memory Disorders",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace support older adults with dementia-related concerns?",
+        answer:
+          "Divit MindSpace provides psychological assessment and supportive counseling for older adults and families navigating dementia-related concerns.",
+      },
+      {
+        question: "Can caregivers receive counseling for dementia-related challenges?",
+        answer:
+          "Yes. Counseling can provide emotional and practical support for caregivers and families managing changing needs associated with dementia.",
+      },
+      {
+        question: "What kind of assessment may be considered for memory concerns?",
+        answer:
+          "A psychological assessment may help understand cognitive and functional concerns. The appropriate assessment is determined based on the individual's presentation and clinical needs.",
+      },
+    ],
+    metaTitle: "Dementia Assessment & Support in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Psychological assessment and supportive counseling for older adults and families navigating dementia-related concerns at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "dementia support Bangalore",
+      "dementia assessment Bangalore",
+      "dementia counseling Bangalore",
+      "geriatric counseling Bangalore",
+      "memory assessment Bangalore",
+      "dementia support Kasavanahalli",
+    ],
+  },
+
+  {
+    slug: "schizophrenia",
+    name: "Schizophrenia",
+    intro:
+      "Psychological and family support for individuals and caregivers navigating schizophrenia and related mental health concerns, with care coordinated according to individual clinical needs.",
+    serviceSlugs: [
+      "counselling",
+      "cognitive-therapy",
+      "group-therapy-sessions",
+    ],
+    specialtyTags: [
+      "Schizophrenia",
+      "Psychotic Disorders",
+      "Mental Health",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace provide psychological support for schizophrenia?",
+        answer:
+          "Divit MindSpace provides psychological and family support for individuals navigating schizophrenia and related mental health concerns, with care based on individual clinical needs.",
+      },
+      {
+        question: "Can families receive support when a loved one has schizophrenia?",
+        answer:
+          "Yes. Family counseling and psychoeducation can help caregivers understand the condition and support the individual's ongoing care.",
+      },
+      {
+        question: "Does counseling replace psychiatric treatment for schizophrenia?",
+        answer:
+          "No. Psychological support should complement appropriate medical or psychiatric care when required. Treatment decisions should be made with qualified professionals based on the individual's needs.",
+      },
+    ],
+    metaTitle: "Schizophrenia Psychological & Family Support in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Psychological and family support for individuals and caregivers navigating schizophrenia and related mental health concerns in Bangalore.",
+    keywords: [
+      "schizophrenia support Bangalore",
+      "schizophrenia counseling Bangalore",
+      "schizophrenia psychologist Bangalore",
+      "schizophrenia family support Bangalore",
+      "schizophrenia support Kasavanahalli",
+    ],
+  },
+
+  {
+    slug: "bipolar-disorder",
+    name: "Bipolar Disorder",
+    intro:
+      "Psychological counseling and supportive care for individuals and families navigating bipolar disorder and related mood concerns at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "counselling",
+      "cognitive-therapy",
+      "group-therapy-sessions",
+    ],
+    specialtyTags: [
+      "Bipolar Disorder",
+      "Bipolar",
+      "Mood Disorders",
+      "Mental Health",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace provide psychological support for bipolar disorder?",
+        answer:
+          "Yes. Psychological counseling and supportive care may be provided based on the individual's needs and in coordination with appropriate psychiatric care where required.",
+      },
+      {
+        question: "Can families receive support for bipolar disorder?",
+        answer:
+          "Yes. Family counseling and psychoeducation can help families understand mood changes and develop supportive strategies.",
+      },
+      {
+        question: "Can counseling replace medication for bipolar disorder?",
+        answer:
+          "Counseling does not replace prescribed psychiatric treatment. Psychological support can complement medical care when recommended by qualified professionals.",
+      },
+    ],
+    metaTitle: "Bipolar Disorder Counseling & Support in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Psychological counseling and family support for individuals navigating bipolar disorder and related mood concerns in Bangalore.",
+    keywords: [
+      "bipolar disorder Bangalore",
+      "bipolar counseling Bangalore",
+      "bipolar psychologist Bangalore",
+      "bipolar support Kasavanahalli",
+      "mood disorder counseling Bangalore",
+    ],
+  },
+
+  {
+    slug: "social-communication",
+    name: "Social Communication",
+    intro:
+      "Support for children who experience challenges with social communication, interaction, conversation, and understanding social cues at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "speech-therapy",
+      "occupational-therapy",
+      "play-therapy",
+      "group-therapy-sessions",
+      "early-intervention-program",
+    ],
+    specialtyTags: [
+      "Social Communication",
+      "Social Communication Disorder",
+      "Communication",
+      "Speech and Language",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace support children with social communication difficulties?",
+        answer:
+          "Yes. Speech Therapy and developmentally appropriate therapy approaches can support children who experience challenges with social communication and interaction.",
+      },
+      {
+        question: "Can social communication difficulties be supported through speech therapy?",
+        answer:
+          "Yes. Speech Therapy may address communication, pragmatic language, conversational skills, and other areas depending on the child's individual profile.",
+      },
+      {
+        question: "Are group sessions available for social communication skills?",
+        answer:
+          "Group-based therapy may be appropriate for some children and can provide opportunities to practice communication and interaction skills in a supported setting.",
+      },
+    ],
+    metaTitle: "Social Communication Support & Therapy in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Speech Therapy and developmental support for children with social communication and interaction challenges at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "social communication therapy Bangalore",
+      "social communication disorder Bangalore",
+      "pragmatic language therapy Bangalore",
+      "social skills therapy Bangalore",
+      "speech therapy social communication",
+    ],
+  },
+
+  {
+    slug: "articulation-disorders",
+    name: "Articulation Disorders",
+    intro:
+      "Speech Therapy support for children experiencing difficulties producing speech sounds clearly and accurately at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "speech-therapy",
+      "early-intervention-program",
+      "group-therapy-sessions",
+    ],
+    specialtyTags: [
+      "Articulation Disorders",
+      "Articulation",
+      "Speech Therapy",
+      "Speech and Language",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace provide speech therapy for articulation difficulties?",
+        answer:
+          "Yes. Speech Therapy can support children who experience difficulties producing speech sounds clearly and accurately.",
+      },
+      {
+        question: "When should parents seek an assessment for unclear speech?",
+        answer:
+          "If a child's speech is consistently difficult to understand or parents have concerns about speech sound development, a speech-language assessment can help identify the child's needs.",
+      },
+      {
+        question: "How does articulation therapy work?",
+        answer:
+          "A speech-language professional assesses the child's speech sound patterns and develops an individualized therapy plan based on the child's specific difficulties.",
+      },
+    ],
+    metaTitle: "Articulation Disorder Speech Therapy in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Speech Therapy for children with articulation and speech sound difficulties at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "articulation therapy Bangalore",
+      "articulation disorder Bangalore",
+      "speech sound therapy Bangalore",
+      "speech therapy Kasavanahalli",
+      "child speech therapy Bangalore",
+    ],
+  },
+
+  {
+    slug: "language-delays",
+    name: "Language Delays",
+    intro:
+      "Speech and language support for children experiencing delays in understanding or using language at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "speech-therapy",
+      "early-intervention-program",
+      "play-therapy",
+      "parental-training-program",
+    ],
+    specialtyTags: [
+      "Language Delays",
+      "Language Delay",
+      "Speech and Language",
+      "Speech Therapy",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace provide therapy for language delays?",
+        answer:
+          "Yes. Speech Therapy and Early Intervention can support children experiencing delays in understanding or using language.",
+      },
+      {
+        question: "When should parents seek help for a language delay?",
+        answer:
+          "Parents can seek professional guidance whenever they have concerns about a child's communication or language development. An assessment can help determine whether additional support is appropriate.",
+      },
+      {
+        question: "Can parents be involved in language development therapy?",
+        answer:
+          "Yes. Parent involvement can help children practice communication and language skills across everyday routines and interactions.",
+      },
+    ],
+    metaTitle: "Language Delay & Speech Therapy in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Speech Therapy and Early Intervention for children with language delays at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "language delay Bangalore",
+      "language delay therapy Bangalore",
+      "speech therapy Bangalore",
+      "child language therapy Kasavanahalli",
+      "early language intervention Bangalore",
+    ],
+  },
+
+  {
+    slug: "emotional-dysregulation",
+    name: "Emotional Dysregulation",
+    intro:
+      "Support for children and young people who experience difficulty managing strong emotions, frustration, transitions, or emotional responses at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "behavioral-therapy",
+      "counselling",
+      "occupational-therapy",
+      "play-therapy",
+      "parental-training-program",
+    ],
+    specialtyTags: [
+      "Emotional Dysregulation",
+      "Emotional Regulation",
+      "Behavioral Therapy",
+      "Mental Health",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace support children with emotional dysregulation?",
+        answer:
+          "Yes. Depending on the child's needs, behavioral therapy, counseling, occupational therapy, play therapy, and parent training may be considered as part of an individualized support plan.",
+      },
+      {
+        question: "What can emotional dysregulation look like in children?",
+        answer:
+          "Some children may have difficulty managing frustration, transitions, disappointment, or strong emotions. The underlying reasons can vary, so individual assessment is important.",
+      },
+      {
+        question: "Can parents learn strategies to support emotional regulation?",
+        answer:
+          "Yes. Parent training can help caregivers understand emotional and behavioral patterns and develop practical strategies for everyday situations.",
+      },
+    ],
+    metaTitle: "Emotional Dysregulation Support for Children in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Behavioral Therapy, Counseling, Occupational Therapy, Play Therapy, and Parent Training for children experiencing emotional regulation difficulties in Bangalore.",
+    keywords: [
+      "emotional dysregulation Bangalore",
+      "emotional regulation therapy Bangalore",
+      "child emotional regulation Bangalore",
+      "behavioral therapy Bangalore",
+      "parent training emotional regulation",
+    ],
+  },
+
+  {
+    slug: "peer-socialization",
+    name: "Peer Socialization",
+    intro:
+      "Developmental support for children who need help building peer interaction, communication, play, cooperation, and social participation skills at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "group-therapy-sessions",
+      "play-therapy",
+      "speech-therapy",
+      "occupational-therapy",
+    ],
+    specialtyTags: [
+      "Peer Socialization",
+      "Social Skills",
+      "Social Communication",
+      "Group Therapy",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace support children's peer socialization skills?",
+        answer:
+          "Yes. Depending on a child's needs, group therapy, play therapy, speech therapy, and occupational therapy may support peer interaction and social participation.",
+      },
+      {
+        question: "Can group therapy help children practice social skills?",
+        answer:
+          "For children who are appropriate for a group setting, structured group sessions can provide opportunities to practice communication, cooperation, turn-taking, and peer interaction.",
+      },
+      {
+        question: "What skills can children develop through peer-based activities?",
+        answer:
+          "Depending on the child's goals, activities may focus on communication, turn-taking, sharing, cooperation, emotional regulation, and participating in group routines.",
+      },
+    ],
+    metaTitle: "Peer Socialization & Social Skills Support in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Developmental support for children's peer interaction, social communication, play, cooperation, and social participation at our Kasavanahalli center.",
+    keywords: [
+      "peer socialization Bangalore",
+      "social skills therapy Bangalore",
+      "child social skills Bangalore",
+      "peer interaction therapy Bangalore",
+      "social communication therapy Bangalore",
+    ],
+  },
+
+  {
+    slug: "pediatric-group-therapy",
+    name: "Pediatric Group Therapy",
+    intro:
+      "Structured group-based support for children to practice communication, social interaction, participation, and developmental skills in an age-appropriate setting at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "group-therapy-sessions",
+      "play-therapy",
+      "speech-therapy",
+      "occupational-therapy",
+    ],
+    specialtyTags: [
+      "Pediatric Group Therapy",
+      "Group Therapy",
+      "Group Therapy Sessions",
+      "Pediatric Therapy",
+    ],
+    faqs: [
+      {
+        question: "Does Divit MindSpace offer pediatric group therapy?",
+        answer:
+          "Divit MindSpace offers structured group-based support for children where group participation is appropriate for their developmental and therapeutic goals.",
+      },
+      {
+        question: "What can children work on during group therapy?",
+        answer:
+          "Depending on the group and individual goals, children may practice communication, turn-taking, cooperation, peer interaction, participation, and social skills.",
+      },
+      {
+        question: "Is group therapy suitable for every child?",
+        answer:
+          "Not every child will benefit from the same group format. Suitability should be determined based on the child's developmental profile, communication needs, goals, and ability to participate safely in a group.",
+      },
+    ],
+    metaTitle: "Pediatric Group Therapy in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Structured pediatric group therapy supporting communication, social interaction, participation, and developmental skills at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "pediatric group therapy Bangalore",
+      "children group therapy Bangalore",
+      "child group therapy Kasavanahalli",
+      "group therapy for children Bangalore",
+      "pediatric therapy Bangalore",
+    ],
+  },
 ];
 
 export type LocationPivot = {
@@ -366,7 +923,8 @@ export const LOCATION_PIVOTS: LocationPivot[] = [
       "Divit MindSpace is located directly off Sarjapur Road at Aadeshwar Chambers, Kasavanahalli — easy access for families along the Sarjapur Road corridor.",
     proximity: "Directly off Sarjapur Road",
     nearby: ["Kasavanahalli", "HSR Layout", "Bellandur", "Koramangala"],
-    metaTitle: "Mental Health, Neurodevelopment & Physiotherapy near Sarjapur Road | Divit MindSpace",
+    metaTitle:
+      "Mental Health, Neurodevelopment & Physiotherapy near Sarjapur Road | Divit MindSpace",
     metaDescription:
       "Expert Clinical Assessments, Therapies, Counseling, Special Education, NIOS Support, and Physiotherapy near Sarjapur Road, Bangalore. Serving families in Kasavanahalli, HSR Layout, Bellandur, and Koramangala.",
     keywords: [
@@ -385,7 +943,8 @@ export const LOCATION_PIVOTS: LocationPivot[] = [
       "Our center is in Kasavanahalli at Aadeshwar Chambers — walking distance for residents, and a short drive from anywhere along Sarjapur Road.",
     proximity: "In Kasavanahalli (Aadeshwar Chambers)",
     nearby: ["Sarjapur Road", "HSR Layout", "Bellandur", "Koramangala"],
-    metaTitle: "Therapy, Assessments & Physiotherapy in Kasavanahalli | Divit MindSpace",
+    metaTitle:
+      "Therapy, Assessments & Physiotherapy in Kasavanahalli | Divit MindSpace",
     metaDescription:
       "Divit MindSpace at Aadeshwar Chambers, Kasavanahalli — Clinical Assessments, Therapies, Counseling, Special Education, NIOS Support, and Physiotherapy. Serving Sarjapur Road, HSR Layout, Bellandur, and Bengaluru.",
     keywords: [
@@ -404,7 +963,8 @@ export const LOCATION_PIVOTS: LocationPivot[] = [
       "Divit MindSpace serves families across HSR Layout — a short drive from our Kasavanahalli center, off Sarjapur Road.",
     proximity: "Short drive from HSR Layout",
     nearby: ["Sarjapur Road", "Kasavanahalli", "Bellandur", "Koramangala"],
-    metaTitle: "Mental Health, Neurodevelopment & Physiotherapy near HSR Layout | Divit MindSpace",
+    metaTitle:
+      "Mental Health, Neurodevelopment & Physiotherapy near HSR Layout | Divit MindSpace",
     metaDescription:
       "Clinical Assessments, Therapies, Counseling, and Physiotherapy for families in HSR Layout. Our Kasavanahalli center (off Sarjapur Road) is easily accessible.",
     keywords: [
@@ -423,7 +983,8 @@ export const LOCATION_PIVOTS: LocationPivot[] = [
       "Divit MindSpace is a short drive from Bellandur, serving families and individuals with the full range of our clinical and physiotherapy services.",
     proximity: "Short drive from Bellandur",
     nearby: ["Sarjapur Road", "Kasavanahalli", "HSR Layout", "Marathahalli"],
-    metaTitle: "Mental Health, Neurodevelopment & Physiotherapy near Bellandur | Divit MindSpace",
+    metaTitle:
+      "Mental Health, Neurodevelopment & Physiotherapy near Bellandur | Divit MindSpace",
     metaDescription:
       "Clinical Assessments, Therapies, Counseling, and Physiotherapy for families in Bellandur. Our Kasavanahalli center is just off Sarjapur Road.",
     keywords: [
@@ -442,7 +1003,8 @@ export const LOCATION_PIVOTS: LocationPivot[] = [
       "Divit MindSpace serves families in Koramangala with the full range of our clinical, educational, and physiotherapy services at our nearby Kasavanahalli center.",
     proximity: "Short drive from Koramangala",
     nearby: ["HSR Layout", "Sarjapur Road", "Kasavanahalli", "Bellandur"],
-    metaTitle: "Mental Health, Neurodevelopment & Physiotherapy near Koramangala | Divit MindSpace",
+    metaTitle:
+      "Mental Health, Neurodevelopment & Physiotherapy near Koramangala | Divit MindSpace",
     metaDescription:
       "Clinical Assessments, Therapies, Counseling, Special Education, and Physiotherapy for families in Koramangala, at our Kasavanahalli center off Sarjapur Road.",
     keywords: [
@@ -461,7 +1023,8 @@ export const LOCATION_PIVOTS: LocationPivot[] = [
       "Divit MindSpace supports families in Whitefield with clinical assessments, therapy, counseling, and physiotherapy at our Kasavanahalli center (off Sarjapur Road).",
     proximity: "Accessible from Whitefield",
     nearby: ["Marathahalli", "Bellandur", "Sarjapur Road", "Kasavanahalli"],
-    metaTitle: "Mental Health, Neurodevelopment & Physiotherapy near Whitefield | Divit MindSpace",
+    metaTitle:
+      "Mental Health, Neurodevelopment & Physiotherapy near Whitefield | Divit MindSpace",
     metaDescription:
       "Clinical Assessments, Therapies, Counseling, and Physiotherapy for families in Whitefield at our Kasavanahalli center off Sarjapur Road.",
     keywords: [
