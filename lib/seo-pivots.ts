@@ -446,6 +446,46 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
   },
 
   {
+    slug: "anxiety",
+    name: "Anxiety",
+    intro:
+      "Professional psychological support for individuals experiencing anxiety, excessive worry, fear, and related emotional challenges at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "counselling",
+      "cognitive-therapy",
+      "group-therapy-sessions",
+    ],
+    specialtyTags: ["Anxiety", "Anxiety Disorders"],
+    faqs: [
+      {
+        question: "Does Divit MindSpace provide counseling for anxiety in Bangalore?",
+        answer:
+          "Yes. Divit MindSpace provides counseling and cognitive therapy for individuals experiencing anxiety and related emotional challenges at our Kasavanahalli center off Sarjapur Road.",
+      },
+      {
+        question: "Can teenagers receive support for anxiety?",
+        answer:
+          "Yes. Teenagers can receive age-appropriate psychological support following an individual assessment of their emotional and developmental needs.",
+      },
+      {
+        question: "What psychological support may help with anxiety?",
+        answer:
+          "Depending on individual needs, counseling and cognitive therapy may be considered to help individuals understand and manage anxiety, worry, thoughts, emotions, and related behavioural challenges.",
+      },
+    ],
+    metaTitle: "Anxiety Counseling & Therapy in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Professional counseling and cognitive therapy for anxiety and related emotional challenges at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "anxiety counseling Bangalore",
+      "anxiety therapy Bangalore",
+      "anxiety psychologist Bangalore",
+      "anxiety support Kasavanahalli",
+      "anxiety counseling Sarjapur Road",
+    ],
+  },
+
+  {
     slug: "panic-disorder",
     name: "Panic Disorder",
     intro:
@@ -902,7 +942,32 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
   },
 ];
 
-export type LocationPivot = {
+
+// Explicit specialist-to-condition mappings for specialist pages where the
+// available Sanity data does not contain condition/specialty tags.
+// Other specialists continue using the existing specialty-tag matching logic.
+export const SPECIALIST_CONDITION_MAP: Record<string, string[]> = {
+  "srinithi-s-o-": [
+    "de-addiction",
+    "depression",
+    "anxiety",
+    "panic-disorder",
+    "dementias",
+    "adhd",
+    "schizophrenia",
+    "bipolar-disorder",
+  ],
+  "akhila-r-n": [
+    "autism",
+    "social-communication",
+    "articulation-disorders",
+    "language-delays",
+    "emotional-dysregulation",
+    "peer-socialization",
+    "pediatric-group-therapy",
+  ],
+};
+\nexport type LocationPivot = {
   slug: string;
   name: string;
   intro: string;
