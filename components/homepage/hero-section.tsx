@@ -17,7 +17,7 @@ const DEFAULT_HERO_DESCRIPTION = "Bangalore's leading center for mental health, 
 const DEFAULT_CTA_PRIMARY = "Book a Free Consultation";
 const DEFAULT_CTA_SECONDARY = "Host a Free Workshop";
 const DEFAULT_METRICS = {
-  familiesCount: "100+",
+  familiesCount: "200+",
   specialistsCount: "6+",
   googleRating: "4.9 / 5",
 };
