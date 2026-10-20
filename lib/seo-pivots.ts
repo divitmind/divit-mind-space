@@ -490,8 +490,8 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
   },
 
   {
-    slug: "dementias",
-    name: "Dementias",
+    slug: "dementia",
+    name: "Dementia",
     intro:
       "Psychological assessment, counseling, and supportive care for older adults and families navigating dementia-related concerns at our Kasavanahalli center off Sarjapur Road, Bangalore.",
     serviceSlugs: [
@@ -501,7 +501,7 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
     ],
     specialtyTags: [
       "Dementia",
-      "Dementias",
+      "Dementia",
       "Geriatric Mental Health",
       "Memory Disorders",
     ],
@@ -954,7 +954,7 @@ export const SPECIALIST_CONDITION_MAP: Record<string, string[]> = {
     "depression",
     "anxiety",
     "panic-disorder",
-    "dementias",
+    "dementia",
     "adhd",
     "schizophrenia",
     "bipolar-disorder",
