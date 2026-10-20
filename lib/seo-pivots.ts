@@ -446,6 +446,45 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
   },
 
   {
+    slug: "stress",
+    name: "Stress",
+    intro:
+      "Psychological support for individuals experiencing stress and difficulty managing everyday pressures at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "counselling",
+      "cognitive-therapy",
+      "group-therapy-sessions",
+    ],
+    specialtyTags: ["Stress", "Mental Health", "Counselling"],
+    faqs: [
+      {
+        question: "Does Divit MindSpace provide counseling for stress in Bangalore?",
+        answer:
+          "Divit MindSpace provides counseling and cognitive therapy for individuals experiencing stress and related emotional challenges at our Kasavanahalli center off Sarjapur Road.",
+      },
+      {
+        question: "Can counseling help with everyday stress?",
+        answer:
+          "Counseling may help individuals understand their stressors and explore coping strategies based on their needs.",
+      },
+      {
+        question: "Where can I seek support for stress in Bangalore?",
+        answer:
+          "Divit MindSpace is located at Kasavanahalli, off Sarjapur Road, Bangalore. Contact the center to discuss available support and suitable appointments.",
+      },
+    ],
+    metaTitle: "Stress Counseling & Support in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Counseling and cognitive therapy for stress and related emotional challenges at Divit MindSpace in Kasavanahalli, off Sarjapur Road, Bangalore.",
+    keywords: [
+      "stress counseling Bangalore",
+      "stress management counseling Bangalore",
+      "stress support Kasavanahalli",
+      "stress counseling Sarjapur Road",
+    ],
+  },
+
+  {
     slug: "panic-disorder",
     name: "Panic Disorder",
     intro:
