@@ -52,6 +52,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/blog", destination: "/blogs", permanent: true },
+      { source: "/conditions/dementias", destination: "/conditions/dementia", permanent: true },
       { source: "/our-advisors", destination: "/specialists", permanent: true },
       { source: "/philosophy", destination: "/about-us", permanent: true },
       { source: "/special-education-sessions-for-children", destination: "/services", permanent: true },
