@@ -394,10 +394,10 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                 </div>
               </div>
 
-              {/* Two Column Section: Children & Adults - Balanced with 5:7 Ratio */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+              {/* Three Column Section: Children, Adults & Personality Assessments */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 items-stretch">
                 {/* Children & Adolescents */}
-                <div className="lg:col-span-5 flex flex-col gap-6">
+                <div className="flex flex-col gap-6">
                   <div className="flex items-center gap-4 mb-2">
                     <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
                       <Users className="w-6 h-6 text-green" />
@@ -454,7 +454,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                 </div>
 
                 {/* Adults & Geriatrics */}
-                <div className="lg:col-span-7 flex flex-col gap-6">
+                <div className="flex flex-col gap-6">
                   <div className="flex items-center gap-4 mb-2">
                     <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
                       <GraduationCap className="w-6 h-6 text-green" />
@@ -468,7 +468,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                       <p className="text-black/70 font-medium leading-relaxed mb-5 italic border-l-2 border-green/10 pl-6">
                         Understanding your past to empower your future.
                       </p>
-                      <ul className="grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-6 flex-grow">
+                      <ul className="grid grid-cols-1 gap-y-6 flex-grow">
                         {[
                           { title: "Stress", text: "We identify your specific triggers and help your nervous system move from survival mode to sustainable balance." },
                           { title: "Anxiety", text: "Support for OCD, Panic Disorder, Social Anxiety, and other patterns — providing clarity and practical regulation tools." },
@@ -515,6 +515,104 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                   </div>
                 </div>
               </div>
+
+                {/* Personality Assessment */}
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-12 h-12 rounded-2xl bg-green/5 flex items-center justify-center shrink-0">
+                      <ClipboardCheck className="w-6 h-6 text-green" />
+                    </div>
+                    <h3 className="text-xl lg:text-2xl font-serif text-black italic">
+                      <strong>Personality</strong> Assessment
+                    </h3>
+                  </div>
+
+                  {/* Top Box: Understanding Personality */}
+                  <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm">
+                    <div className="lg:min-h-[420px] flex flex-col">
+                      <p className="text-black/70 font-medium leading-relaxed mb-5 italic border-l-2 border-green/10 pl-6">
+                        Understand your individual traits, emotional patterns,
+                        strengths, and ways of relating to others through a
+                        thoughtful, individualized assessment.
+                      </p>
+
+                      <ul className="space-y-6 flex-grow">
+                        {[
+                          {
+                            title: "Personality Traits",
+                            text: "Explore characteristic patterns in thoughts, feelings, preferences, and behaviour."
+                          },
+                          {
+                            title: "Emotional Patterns",
+                            text: "Understand how you typically experience and respond to emotions and everyday challenges."
+                          },
+                          {
+                            title: "Relationships & Interactions",
+                            text: "Explore communication preferences, interpersonal patterns, and ways of connecting with others."
+                          },
+                          {
+                            title: "Strengths & Self-Awareness",
+                            text: "Build a clearer understanding of personal strengths, preferences, and areas for growth."
+                          }
+                        ].map((item) => (
+                          <li key={item.title} className="flex gap-4">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                            <p className="text-[15px] text-black/70 leading-relaxed">
+                              <strong className="text-black font-bold">
+                                {item.title}:
+                              </strong>{" "}
+                              {item.text}
+                            </p>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="mt-auto pt-5 border-t border-black/5">
+                        <p className="text-green font-bold italic tracking-wide text-sm">
+                          Goal: To support self-understanding and inform
+                          appropriate, individualized guidance.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Box: When to Consider an Assessment */}
+                  <div className="bg-white rounded-[2rem] border border-black/5 p-6 lg:p-7 shadow-sm h-full">
+                    <h4 className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-8 px-1">
+                      When to Consider an Assessment:
+                    </h4>
+                    <ul className="space-y-6">
+                      {[
+                        {
+                          title: "Self-understanding",
+                          text: "wanting to understand your personal traits and preferences"
+                        },
+                        {
+                          title: "Emotional awareness",
+                          text: "looking to understand recurring emotional patterns"
+                        },
+                        {
+                          title: "Relationship patterns",
+                          text: "seeking insight into communication and interpersonal styles"
+                        },
+                        {
+                          title: "Personal growth",
+                          text: "exploring strengths and areas where additional support may help"
+                        }
+                      ].map((item) => (
+                        <li key={item.title} className="flex gap-4">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <p className="text-[15px] text-black/70 leading-relaxed">
+                            <strong className="text-black font-bold">
+                              {item.title}:
+                            </strong>{" "}
+                            {item.text}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
 
               {/* Bridge Text before Grid */}
               <div className="text-center pt-4 border-t border-black/5">
