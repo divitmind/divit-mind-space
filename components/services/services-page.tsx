@@ -28,7 +28,7 @@ interface SanityService {
 
 const DEFAULT_METRICS: TrustMetrics = {
   familiesCount: "100+",
-  specialistsCount: "12+",
+  specialistsCount: "10+",
   servicesCount: "21+",
   googleRating: "4.9 / 5",
   googleReviewsUrl: "",
