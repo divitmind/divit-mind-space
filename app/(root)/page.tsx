@@ -118,6 +118,24 @@ const defaultFaqs: FAQ[] = [
     question: "What if my child doesn't cooperate during sessions?",
     answer: "This is completely normal and expected. Our therapists at Divit MindSpace are trained to work with children at their own pace. We use play-based and child-led approaches to build trust before diving into structured activities.",
   },
+  
+  {
+    question: "How are parents involved in their child's therapy journey?",
+    answer: "We believe parents and caregivers are important partners in a child's development. Where appropriate, our team shares practical strategies and guidance that families can use at home, helping children practise new skills in everyday routines. We work with each family to make support meaningful beyond the therapy room.",
+  },
+  {
+    question: "What happens during the first assessment at Divit MindSpace?",
+    answer: "The first appointment is an opportunity to understand your concerns, your child's strengths, developmental history, and everyday needs. Depending on the reason for your visit, our specialists may recommend further assessment or discuss suitable support options. We'll explain the next steps so you know what to expect.",
+  },
+  {
+    question: "Does Divit MindSpace offer support for teenagers and adults too?",
+    answer: "Yes. Divit MindSpace supports children, teenagers, and adults, with services and care tailored to individual needs. If you're unsure which service is appropriate for your age or concerns, contact our team and we'll help you explore the available options.",
+  },
+  {
+    question: "How do I know which therapy or support service is right for my child?",
+    answer: "Every child has different strengths, needs, and goals. Depending on your concerns, our team can help you understand whether speech therapy, occupational therapy, behavioural support, special education, or another service may be appropriate. Recommendations should be based on your child's individual needs rather than a one-size-fits-all approach.",
+  },
+
 ];
 
 // FAQPage JSON-LD — includes Speakable specification so voice assistants
