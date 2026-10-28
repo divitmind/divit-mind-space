@@ -18,8 +18,10 @@ const DEFAULT_CTA_PRIMARY = "Book a Free Consultation";
 const DEFAULT_CTA_SECONDARY = "Host a Free Workshop";
 const DEFAULT_METRICS = {
   familiesCount: "200+",
+  specialistsCount: "10+",
   googleRating: "4.9 / 5",
 };
+
 
 export function HeroSection({ siteSettings }: HeroSectionProps) {
   // Use Sanity data with fallbacks
