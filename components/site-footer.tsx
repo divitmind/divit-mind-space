@@ -153,7 +153,7 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                                 footerContent.description
                             ) : (
                                 <>
-                                    Offering expert clinical assessments, professional counselling, and specialized education for all ages. We provide neuro-affirming care through speech, occupational, behavioral, cognitive and play therapy, group sessions, special education, NIOS support, and physiotherapy—supporting <span className="font-bold text-green">children</span>, <span className="font-bold text-green">teens</span>, <span className="font-bold text-green">adults</span>, and <span className="font-bold text-green">geriatric</span> mental health across autism, ADHD, learning difficulties, anxiety, depression, stress, and OCD, along with early intervention, school readiness, and neurodivergent teen programs.
+                                    Offering expert clinical assessments, professional counselling, and specialized education for all ages. We provide neuro-affirming care through speech, occupational, behavioral, cognitive and play therapy, group sessions, special education, NIOS support, and physiotherapy—supporting <span className="font-bold text-green">children</span>, <span className="font-bold text-green">teens</span>, <span className="font-bold text-green">adults</span>, and <span className="font-bold text-green">geriatric</span> mental health across autism, ADHD, learning difficulties, anxiety, depression, stress, OCD and <span className="font-bold text-green">Personality traits</span>, along with early intervention, school readiness, and neurodivergent teen programs.
                                 </>
                             )}
                         </p>
@@ -331,4 +331,3 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
         </footer>
     );
 }
-
