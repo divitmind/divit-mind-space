@@ -125,15 +125,22 @@ export default async function SpecialistPage({ params }: PageProps) {
 //
 // For all other specialists, keep the existing specialty-tag matching
 // logic exactly as before.
-const explicitConditionSlugs = SPECIALIST_CONDITION_MAP[data.slug];
+const explicitConditionEntries = SPECIALIST_CONDITION_MAP[data.slug];
 
-const treatedConditions = explicitConditionSlugs
-  ? explicitConditionSlugs
-      .map((conditionSlug) =>
-        CONDITION_PIVOTS.find(
-          (condition) => condition.slug === conditionSlug,
-        ),
-      )
+const treatedConditions = explicitConditionEntries
+  ? explicitConditionEntries
+      .map((entry) => {
+        const conditionSlug = typeof entry === "string" ? entry : entry.slug;
+        const customName = typeof entry === "object" ? entry.name : undefined;
+        const condition = CONDITION_PIVOTS.find(
+          (c) => c.slug === conditionSlug,
+        );
+        if (!condition) return null;
+        return {
+          ...condition,
+          ...(customName ? { name: customName } : {}),
+        };
+      })
       .filter(
         (condition): condition is (typeof CONDITION_PIVOTS)[number] =>
           Boolean(condition),
@@ -363,15 +370,15 @@ const treatedConditions = explicitConditionSlugs
                       "'Cormorant Garamond', 'Georgia', serif",
                   }}
                 >
-                  Conditions {data.name.split(" ")[0]} Supports
+                  Conditions {data.name.startsWith("Dr.") ? "Dr." : data.name.split(" ")[0]} Supports
                 </h2>
 
-                <div className="flex flex-wrap justify-center gap-3">
+                <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3">
                   {treatedConditions.map((c) => (
                     <Link
                       key={c.slug}
                       href={`/conditions/${c.slug}`}
-                      className="px-4 py-2 rounded-full bg-white border border-black/5 text-sm font-semibold text-black/70 hover:bg-[#7A9A7D] hover:text-white hover:border-[#7A9A7D] transition-all"
+                      className="inline-flex items-center justify-center px-4 py-2 sm:py-2.5 rounded-full bg-white border border-black/5 text-xs sm:text-sm font-semibold text-black/70 hover:bg-[#7A9A7D] hover:text-white hover:border-[#7A9A7D] transition-all text-center max-w-full leading-snug"
                     >
                       {c.name} →
                     </Link>

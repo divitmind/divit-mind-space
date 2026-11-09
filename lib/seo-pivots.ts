@@ -31,6 +31,16 @@ export const RELATED_CONDITIONS: Record<string, string[]> = {
   "sensory-processing": ["autism", "developmental-delays"],
   "developmental-delays": ["autism", "sensory-processing", "learning-disabilities"],
   "pain-management": [],
+  "child-adolescent-emotional-behavioural-concerns": [
+    "adhd",
+    "autism",
+    "parent-counselling-behavioural-guidance",
+  ],
+  "parent-counselling-behavioural-guidance": [
+    "child-adolescent-emotional-behavioural-concerns",
+    "adhd",
+    "autism",
+  ],
 };
 
 export const CONDITION_PIVOTS: ConditionPivot[] = [
@@ -979,7 +989,125 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
       "pediatric therapy Bangalore",
     ],
   },
+
+  {
+    slug: "child-adolescent-emotional-behavioural-concerns",
+    name: "Child & Adolescent Emotional and Behavioural Concerns",
+    intro:
+      "Comprehensive, evidence-based psychological assessments and therapeutic interventions for children and teenagers experiencing emotional regulation difficulties, behavioural challenges, and adjustment concerns at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "behavioral-therapy",
+      "counselling",
+      "play-therapy",
+      "psychometric-assessments",
+      "parental-training-program",
+      "early-intervention-program",
+    ],
+    specialtyTags: [
+      "Behavioural Support",
+      "Emotional Regulation",
+      "Child & Adolescent Behaviour",
+      "Child Counselling",
+      "Adolescent Counselling",
+      "Behavioral Intervention",
+    ],
+    faqs: [
+      {
+        question: "When should parents seek help for a child or teen's emotional and behavioural concerns?",
+        answer:
+          "Parents should consider consulting a psychologist if emotional outbursts, persistent sadness, anxiety, defiance, withdrawal, or difficulty coping with school and social settings begin interfering with the young person's daily life, learning, or family well-being.",
+      },
+      {
+        question: "What therapies are offered at Divit MindSpace for child and adolescent behavioural concerns?",
+        answer:
+          "Our multidisciplinary team provides Cognitive Behavioural Therapy (CBT), Dialectical Behaviour Therapy (DBT skills), Behaviour Intervention Therapy, Play Therapy, Expressive Art Therapy, and structured Parent Guidance to help children build healthy self-regulation and coping strategies.",
+      },
+      {
+        question: "How are parents involved in adolescent emotional and behavioural support?",
+        answer:
+          "Parents are essential partners in therapeutic progress. Our specialists provide parent training and regular feedback sessions to establish consistent positive behavioural strategies, supportive communication, and emotional attunement at home.",
+      },
+      {
+        question: "How do I schedule an assessment for my child off Sarjapur Road, Bangalore?",
+        answer:
+          "You can reach Divit MindSpace by phone at +91-99016-66139 or via WhatsApp to schedule an initial consultation at our Kasavanahalli center off Sarjapur Road, Bangalore. No prior doctor referral is required.",
+      },
+    ],
+    metaTitle: "Child & Adolescent Emotional & Behavioural Support in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Expert child and adolescent psychological assessments, CBT, behavioral intervention, and parent guidance at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "child behavioral therapy Bangalore",
+      "adolescent counseling Bangalore",
+      "child psychologist Sarjapur Road",
+      "teen emotional regulation Bangalore",
+      "behavior intervention therapist Bangalore",
+      "child counseling Kasavanahalli",
+    ],
+  },
+
+  {
+    slug: "parent-counselling-behavioural-guidance",
+    name: "Parent Counselling & Behavioural Guidance",
+    intro:
+      "Supportive, expert-led parent counselling and behavioural guidance to empower caregivers with practical strategies, emotional resilience, and neuro-affirming tools at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    serviceSlugs: [
+      "parental-training-program",
+      "counselling",
+      "behavioral-therapy",
+      "early-intervention-program",
+      "psychometric-assessments",
+    ],
+    specialtyTags: [
+      "Parent Counselling",
+      "Parental Training",
+      "Behavioural Guidance",
+      "Behavioural Support",
+      "Emotional Regulation",
+    ],
+    faqs: [
+      {
+        question: "What is parent counselling and behavioural guidance?",
+        answer:
+          "Parent counselling and behavioural guidance is a structured therapeutic service designed to equip parents with practical techniques to manage challenging behaviours, strengthen emotional connection, and navigate developmental or neurodivergent needs with confidence.",
+      },
+      {
+        question: "How does parent training support children with ADHD, Autism, or emotional dysregulation?",
+        answer:
+          "Children spend the majority of their time at home and school. Parent guidance provides caregivers with neuro-affirming routines, de-escalation strategies, positive reinforcement systems, and co-regulation tools that reinforce clinical progress in day-to-day family life.",
+      },
+      {
+        question: "Are parent counselling sessions available for both parents?",
+        answer:
+          "Yes. We encourage both parents and primary caregivers to attend sessions together so consistent, collaborative parenting strategies can be implemented across the home environment.",
+      },
+      {
+        question: "How do I book a parent counselling session at Divit MindSpace Bangalore?",
+        answer:
+          "You can contact our Kasavanahalli clinic off Sarjapur Road at +91-99016-66139 or WhatsApp us to arrange an in-person or hybrid consultation with our family and behavioural specialists.",
+      },
+    ],
+    metaTitle: "Parent Counselling & Behavioural Guidance in Bangalore | Divit MindSpace",
+    metaDescription:
+      "Professional parent counselling, caregiver training, and behavioural guidance for neurodivergent and developing children at our Kasavanahalli center off Sarjapur Road, Bangalore.",
+    keywords: [
+      "parent counselling Bangalore",
+      "parent training program Bangalore",
+      "behavioral guidance for parents",
+      "parent support Sarjapur Road",
+      "parent coaching Kasavanahalli",
+      "ADHD parent training Bangalore",
+    ],
+  },
 ];
+
+export type SpecialistConditionEntry =
+  | string
+  | {
+      slug: string;
+      name?: string;
+    };
+
 /**
  * Explicit specialist-to-condition mappings.
  *
@@ -987,7 +1115,7 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
  * All other specialists continue using the existing specialtyTags
  * matching logic in the specialist page.
  */
-export const SPECIALIST_CONDITION_MAP: Record<string, string[]> = {
+export const SPECIALIST_CONDITION_MAP: Record<string, SpecialistConditionEntry[]> = {
   "srinithi-s-o-": [
     "de-addiction",
     "depression",
@@ -1007,6 +1135,60 @@ export const SPECIALIST_CONDITION_MAP: Record<string, string[]> = {
     "emotional-dysregulation",
     "peer-socialization",
     "pediatric-group-therapy",
+  ],
+
+  "dr-pavithra-lakshmi-narasimhan": [
+    {
+      slug: "child-adolescent-emotional-behavioural-concerns",
+      name: "Child & Adolescent Emotional and Behavioural Concerns",
+    },
+    {
+      slug: "stress-anxiety-depression",
+      name: "Anxiety, Depression & Stress Management",
+    },
+    {
+      slug: "adhd",
+      name: "ADHD & Emotional Regulation",
+    },
+    {
+      slug: "autism",
+      name: "Autism Spectrum Support & Neurodevelopmental Needs",
+    },
+    {
+      slug: "learning-disabilities",
+      name: "Learning Difficulties & Special Educational Needs (SEN)",
+    },
+    {
+      slug: "parent-counselling-behavioural-guidance",
+      name: "Parent Counselling & Behavioural Guidance",
+    },
+  ],
+
+  "pavithra-lakshmi-narasimhan": [
+    {
+      slug: "child-adolescent-emotional-behavioural-concerns",
+      name: "Child & Adolescent Emotional and Behavioural Concerns",
+    },
+    {
+      slug: "stress-anxiety-depression",
+      name: "Anxiety, Depression & Stress Management",
+    },
+    {
+      slug: "adhd",
+      name: "ADHD & Emotional Regulation",
+    },
+    {
+      slug: "autism",
+      name: "Autism Spectrum Support & Neurodevelopmental Needs",
+    },
+    {
+      slug: "learning-disabilities",
+      name: "Learning Difficulties & Special Educational Needs (SEN)",
+    },
+    {
+      slug: "parent-counselling-behavioural-guidance",
+      name: "Parent Counselling & Behavioural Guidance",
+    },
   ],
 };
 
