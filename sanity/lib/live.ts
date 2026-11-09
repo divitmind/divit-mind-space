@@ -17,10 +17,15 @@ export async function sanityFetch<T = unknown>(
     return { data: null };
   }
   try {
-    return await live.sanityFetch(options) as { data: T | null };
-  } catch (error) {
-    console.warn("Sanity fetch failed, returning empty data:", error);
-    return { data: null };
+    return (await live.sanityFetch(options)) as { data: T | null };
+  } catch {
+    try {
+      const data = await client.fetch<T>(options.query, options.params || {});
+      return { data };
+    } catch (clientErr) {
+      console.warn("Sanity fetch failed, returning empty data:", clientErr);
+      return { data: null };
+    }
   }
 }
 
