@@ -92,7 +92,7 @@ const PEOPLE: Person[] = [
       "B.O.Th. · Licensed Occupational Therapist · IOTR, NCAHP, AIOTA Life Member · USA certified BLS, ACLS & OPT-1, CLASI Sensory Integration, oromotor stimulation",
     image: "/mohmed.jpeg",
     experience: "2+ years",
-    specialties: ["ASD", "ADHD", "Sensory Processing", "Daily Living Skills", "Occupational Therapy"],
+    specialties: ["Occupational Therapy", "ASD", "ADHD", "Sensory Processing", "Daily Living Skills"],
     teaser:
       "I help children and adults build independence through sensory regulation and daily living skills training.",
     fullBio: [

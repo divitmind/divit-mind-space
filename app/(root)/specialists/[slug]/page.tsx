@@ -16,6 +16,7 @@ import {
   SPECIALIST_CONDITION_MAP,
 } from "@/lib/seo-pivots";
 import { ArrowRight } from "lucide-react";
+import { normalizeSpecialist } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -106,13 +107,14 @@ export async function generateMetadata({
 
 export default async function SpecialistPage({ params }: PageProps) {
   const { slug } = await params;
-  const { data } = (await sanityFetch({
+  const { data: rawData } = (await sanityFetch({
     query: SPECIALIST_BY_SLUG_QUERY,
     params: { slug },
     tags: ["specialist"],
   })) as { data: SpecialistData | null };
 
-  if (!data) notFound();
+  if (!rawData) notFound();
+  const data = normalizeSpecialist(rawData);
 
   const specialistUrl = `${SITE_URL}/specialists/${data.slug}`;
   const imageUrl = data.image?.asset?.url;

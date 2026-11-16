@@ -1127,6 +1127,12 @@ export const SPECIALIST_CONDITION_MAP: Record<string, SpecialistConditionEntry[]
     "bipolar-disorder",
   ],
 
+  "ankita-bhatnagar": [
+    "stress",
+    "anxiety",
+    "depression",
+  ],
+
   "akhila-r-n": [
     "autism",
     "social-communication",
