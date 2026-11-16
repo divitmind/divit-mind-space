@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
+import { cn, normalizeSpecialist } from "@/lib/utils";
 import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-link";
 import { Specialist } from "@/sanity/types";
 import { PortableText } from "next-sanity";
@@ -44,7 +44,8 @@ interface SpecialistCardProps {
   variant?: "full" | "compact";
 }
 
-export function SpecialistCard({ specialist, variant = "full" }: SpecialistCardProps) {
+export function SpecialistCard({ specialist: rawSpecialist, variant = "full" }: SpecialistCardProps) {
+  const specialist = normalizeSpecialist(rawSpecialist);
   const hasFullBio = specialist.fullBio && specialist.fullBio.length > 0;
 
   if (variant === "compact") {

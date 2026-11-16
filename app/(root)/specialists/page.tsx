@@ -7,6 +7,7 @@ import type { Specialist } from "@/sanity/types";
 import { ORGANIZATION_REF, SITE_URL, SITE_LANGUAGE, WEBSITE_ID } from "@/lib/seo";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
 import { ArrowRight } from "lucide-react";
+import { normalizeSpecialist } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -59,12 +60,12 @@ export default async function SpecialistsListPage() {
   });
 
   const raw = (data as Specialist[] | null) ?? [];
-  // Dedupe (Sanity can return draft+published pairs when queried with a token).
+  // Dedupe (Sanity can return draft+published pairs when queried with a token) and normalize.
   const specialists = Array.from(
     new Map(
       raw
         .filter((s) => s?.slug?.current)
-        .map((s) => [s.slug!.current, s]),
+        .map((s) => [s.slug!.current, normalizeSpecialist(s)]),
     ).values(),
   );
 
