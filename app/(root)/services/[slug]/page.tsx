@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
-import { SINGLE_SERVICE_QUERY, ALL_SERVICE_SLUGS_QUERY, RELATED_SERVICES_QUERY } from "@/sanity/lib/queries";
-import { ServiceExperts } from "@/components/services/service-experts";
+import { SINGLE_SERVICE_QUERY, ALL_SERVICE_SLUGS_QUERY, RELATED_SERVICES_QUERY, SPECIALISTS_QUERY } from "@/sanity/lib/queries";
+import { ServiceExperts, type SpecialistCategoryGroup } from "@/components/services/service-experts";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { CheckCircle2, Sparkles } from "lucide-react";
 import type { Specialist } from "@/sanity/types";
@@ -334,6 +334,79 @@ export default async function ServicePage({ params }: PageProps) {
   const overviewPadding = isCustomLayout ? "p-6 lg:py-6 lg:px-10" : "p-6 lg:p-12";
   const contentJustify = isCustomLayout ? "justify-start" : "justify-center";
   const headerMargin = isCustomLayout ? "lg:mt-2 mb-6" : "lg:-mt-6 mb-6";
+
+  // Resolve specialists for Assessment categories
+  let specialistGroups: SpecialistCategoryGroup[] | undefined;
+  let serviceSpecialists = service.specialists || [];
+
+  if (slug === "psychometric-assessments" || slug === "psychoeducational-assessments") {
+    const { data: allSpecialistsData } = (await sanityFetch({
+      query: SPECIALISTS_QUERY,
+      tags: ["specialists"],
+    })) as { data: Specialist[] | null };
+
+    const specialistMap = new Map<string, Specialist>();
+
+    (allSpecialistsData || []).forEach((s) => {
+      const slugKey = typeof s.slug === "string" ? s.slug : s.slug?.current;
+      if (slugKey) specialistMap.set(slugKey, s);
+      if (s._id) specialistMap.set(s._id, s);
+    });
+
+    (service.specialists || []).forEach((s) => {
+      const slugKey = typeof s.slug === "string" ? s.slug : s.slug?.current;
+      if (slugKey && !specialistMap.has(slugKey)) specialistMap.set(slugKey, s);
+      if (s._id && !specialistMap.has(s._id)) specialistMap.set(s._id, s);
+    });
+
+    const getSpecialist = (slugKey: string): Specialist | undefined => {
+      return (
+        specialistMap.get(slugKey) ||
+        specialistMap.get(slugKey.replace(/^dr-/, "")) ||
+        specialistMap.get(`dr-${slugKey}`)
+      );
+    };
+
+    if (slug === "psychometric-assessments") {
+      specialistGroups = [
+        {
+          categoryTitle: "Psychometric Assessments in Children & Adolescents",
+          specialists: [
+            getSpecialist("akhila-r-n"),
+            getSpecialist("dr-pavithra-lakshmi-narasimhan"),
+            getSpecialist("ankita-bhatnagar"),
+            getSpecialist("mohamed-nowful"),
+          ].filter((s): s is Specialist => Boolean(s)),
+        },
+        {
+          categoryTitle: "Psychometric Assessments in Adults & Geriatrics",
+          specialists: [
+            getSpecialist("dr-pavithra-lakshmi-narasimhan"),
+            getSpecialist("ankita-bhatnagar"),
+            getSpecialist("mohamed-nowful"),
+            getSpecialist("srinithi-s-o-"),
+          ].filter((s): s is Specialist => Boolean(s)),
+        },
+      ];
+      serviceSpecialists = [
+        ...specialistGroups[0].specialists,
+        ...specialistGroups[1].specialists,
+      ];
+    } else if (slug === "psychoeducational-assessments") {
+      specialistGroups = [
+        {
+          categoryTitle: "Psychoeducational Assessments",
+          specialists: [
+            getSpecialist("ankita-bhatnagar"),
+            getSpecialist("akhila-r-n"),
+            getSpecialist("mohamed-nowful"),
+            getSpecialist("dr-pavithra-lakshmi-narasimhan"),
+          ].filter((s): s is Specialist => Boolean(s)),
+        },
+      ];
+      serviceSpecialists = specialistGroups[0].specialists;
+    }
+  }
 
   return (
     <div className="bg-[#FAF9F5] min-h-screen">
@@ -732,7 +805,8 @@ export default async function ServicePage({ params }: PageProps) {
       {/* Specialist Oversight */}
       <div className="pt-10 lg:pt-16">
         <ServiceExperts
-          specialists={service.specialists || []}
+          specialists={serviceSpecialists}
+          specialistGroups={specialistGroups}
           onDemand={service.onDemand}
         />
       </div>
