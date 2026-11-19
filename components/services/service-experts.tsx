@@ -6,20 +6,27 @@ import { User } from "lucide-react";
 import { SpecialistCard } from "@/components/ui/specialist-card";
 import { Specialist } from "@/sanity/types";
 
-interface ServiceExpertsProps {
+export interface SpecialistCategoryGroup {
+  categoryTitle: string;
   specialists: Specialist[];
+}
+
+interface ServiceExpertsProps {
+  specialists?: Specialist[];
+  specialistGroups?: SpecialistCategoryGroup[];
   onDemand?: boolean;
 }
 
-export function ServiceExperts({ specialists, onDemand }: ServiceExpertsProps) {
-  const showLeadership = onDemand || specialists.length === 0;
+export function ServiceExperts({ specialists = [], specialistGroups, onDemand }: ServiceExpertsProps) {
+  const hasGroups = specialistGroups && specialistGroups.length > 0;
+  const showLeadership = onDemand || (!hasGroups && specialists.length === 0);
 
   return (
     <section className="bg-white -mt-8 lg:-mt-12">
       <div className="container mx-auto px-4 pt-0 pb-6 lg:pb-8">
         <div className="max-w-4xl mx-auto">
           <h2
-            className="text-2xl lg:text-3xl font-serif text-green mb-1.5"
+            className="text-2xl lg:text-3xl font-serif text-green mb-4"
             style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}
           >
             {showLeadership ? "Professional Specialist Oversight" : "Meet the Specialists"}
@@ -51,11 +58,36 @@ export function ServiceExperts({ specialists, onDemand }: ServiceExpertsProps) {
                 </div>
               </div>
             </div>
+          ) : hasGroups ? (
+            <div className="space-y-12">
+              {specialistGroups.map((group) => (
+                <div key={group.categoryTitle}>
+                  <div className="mb-5 border-l-2 border-green/20 pl-4">
+                    <h3 className="text-xl lg:text-2xl font-serif text-green italic">
+                      {group.categoryTitle}
+                    </h3>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {group.specialists.map((specialist, index) => (
+                      <motion.div
+                        key={`${group.categoryTitle}-${specialist._id || specialist.slug?.current || index}`}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <SpecialistCard specialist={specialist} variant="compact" />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {specialists.map((specialist, index) => (
                 <motion.div
-                  key={specialist._id}
+                  key={specialist._id || specialist.slug?.current || index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
