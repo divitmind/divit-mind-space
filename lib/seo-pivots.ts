@@ -189,6 +189,7 @@ export const CONDITION_PIVOTS: ConditionPivot[] = [
     intro:
       "Professional counseling and cognitive therapy for stress, anxiety, and depression — teenagers and adults — at our Kasavanahalli center off Sarjapur Road, Bangalore.",
     serviceSlugs: [
+      "psychiatric-consultation",
       "counselling",
       "cognitive-therapy",
       "group-therapy-sessions",

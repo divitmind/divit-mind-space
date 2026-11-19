@@ -14,6 +14,7 @@ import { portableTextComponents } from "@/components/portable-text-components";
 import { getServiceBySlug, type ServiceData as StaticServiceData } from "@/lib/services-data";
 import { AudienceTabs } from "@/components/services/audience-tabs";
 import { InlineCtaBlock } from "@/components/inline-cta-block";
+import { PsychiatricConsultationView } from "@/components/services/psychiatric-consultation-view";
 
 // Force dynamic rendering - always fetch fresh data from Sanity
 export const dynamic = "force-dynamic";
@@ -93,6 +94,7 @@ export async function generateStaticParams() {
   
   // Group Therapy is our primary static one for now
   allSlugs.add("group-therapy-sessions");
+  allSlugs.add("psychiatric-consultation");
 
   return Array.from(allSlugs).map((slug) => ({
     slug,
@@ -131,7 +133,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!service) return { title: "Service Not Found" };
 
   if (staticService) {
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program" || slug === "early-intervention-program" || slug === "customized-workshops" || slug === "certificate-in-special-education" || slug === "diploma-in-special-education" || slug === "ecce-early-childhood-care-and-education") {
+    if (slug === "psychiatric-consultation" || slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program" || slug === "early-intervention-program" || slug === "customized-workshops" || slug === "certificate-in-special-education" || slug === "diploma-in-special-education" || slug === "ecce-early-childhood-care-and-education") {
       service.title = staticService.title;
       service.description = staticService.description;
       if (service.seo) {
@@ -205,7 +207,7 @@ export default async function ServicePage({ params }: PageProps) {
     const staticContent = staticService.content as StaticServiceData["content"];
 
     // SPECIAL CASE: For Group Therapy, Psychoeducational Assessments, CBT, Counselling & Behavioral Therapy, prioritize static data for audience tabs and layout
-    if (slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program" || slug === "early-intervention-program" || slug === "customized-workshops" || slug === "certificate-in-special-education" || slug === "diploma-in-special-education" || slug === "ecce-early-childhood-care-and-education") {
+    if (slug === "psychiatric-consultation" || slug === "group-therapy-sessions" || slug === "psychoeducational-assessments" || slug === "cbt-cognitive-behavioral-therapy" || slug === "cognitive-behavioral-therapy-cbt" || slug === "counselling" || slug === "behavioral-therapy" || slug === "cognitive-therapy" || slug === "psychometric-assessments" || slug === "school-readiness-program" || slug === "wheelchair-training" || slug === "gym--sports-injury-sessions" || slug === "pain-management" || slug === "summer-camp" || slug === "special-education--remedial-sessions" || slug === "sensory-integration-program" || slug === "post-surgical-rehabilitation" || slug === "pain-modalities" || slug === "nios-support-program" || slug === "early-intervention-program" || slug === "customized-workshops" || slug === "certificate-in-special-education" || slug === "diploma-in-special-education" || slug === "ecce-early-childhood-care-and-education") {
       service.title = staticService.title;
       service.description = staticService.description;
       service.overview = staticContent.overview;
@@ -472,7 +474,13 @@ export default async function ServicePage({ params }: PageProps) {
       <section className="pt-0 pb-0 lg:pt-0 lg:pb-0 bg-cream">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {/* Global Overview Section (Shown for multi-audience services) */}
+            {slug === "psychiatric-consultation" ? (
+              <div className="py-6 lg:py-8">
+                <PsychiatricConsultationView title={service.title} />
+              </div>
+            ) : (
+              <>
+                {/* Global Overview Section (Shown for multi-audience services) */}
             {hasAudienceSections && service.audienceSections!.length > 1 && service.overview && (
               <div className="mb-0 lg:mb-2 pt-0 lg:pt-0">
                 {/* Duo-Grid Style Consistency - Side-by-Side Grid with 4:8 Ratio for better vertical balance */}
@@ -797,6 +805,8 @@ export default async function ServicePage({ params }: PageProps) {
                   components={portableTextComponents}
                 />
               </div>
+            )}
+              </>
             )}
           </div>
         </div>

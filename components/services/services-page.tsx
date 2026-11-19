@@ -9,6 +9,7 @@ import { WhatsAppConsultationLink } from "@/components/whatsapp-consultation-lin
 import { ClipboardCheck, Heart, Users, GraduationCap, Activity, CheckCircle2, Search } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
 import type { SiteSettings, TrustMetrics } from "@/lib/types";
+import { APPROVED_METRICS } from "@/lib/types";
 
 interface SanityService {
   _id: string;
@@ -26,13 +27,7 @@ interface SanityService {
   };
 }
 
-const DEFAULT_METRICS: TrustMetrics = {
-  familiesCount: "100+",
-  specialistsCount: "10+",
-  servicesCount: "21+",
-  googleRating: "4.9 / 5",
-  googleReviewsUrl: "",
-};
+const DEFAULT_METRICS: TrustMetrics = APPROVED_METRICS;
 
 const categories = [
   { id: "all", label: "All Services", icon: null },
@@ -100,9 +95,22 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Process services to handle manual category overrides
+  // Process services to handle manual category overrides and ensure newly introduced services are present
   const processedServices = useMemo(() => {
-    return services.map(s => {
+    const list = [...services];
+    if (!list.some(s => s.slug?.current === "psychiatric-consultation" || s.title === "Psychiatric Consultation")) {
+      list.push({
+        _id: "service-psychiatric-consultation",
+        title: "Psychiatric Consultation",
+        slug: { current: "psychiatric-consultation" },
+        description: "Professional psychiatric consultations for children, adolescents, adults, and older adults, with individualised assessment, treatment guidance, and ongoing mental health support.",
+        popular: true,
+        isTherapy: false,
+        category: "guidance",
+      });
+    }
+
+    return list.map(s => {
       const updated = { ...s };
       if (s.title === "Customized Workshops" || s.title === "Parental Training Program") {
         updated.category = "programs";
@@ -284,12 +292,12 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
               </div>
               <div className="w-px h-8 bg-black/10" />
               <div className="text-center group">
-                <div className="text-xl font-bold text-black">6+</div>
+                <div className="text-xl font-bold text-black">{DEFAULT_METRICS.specialistsCount}</div>
                 <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Specialists</div>
               </div>
               <div className="w-px h-8 bg-black/10" />
               <div className="text-center group">
-                <div className="text-xl font-bold text-black">100+</div>
+                <div className="text-xl font-bold text-black">{DEFAULT_METRICS.familiesCount}</div>
                 <div className="text-[9px] text-black/50 font-bold uppercase tracking-widest">Families</div>
               </div>
               <div className="w-px h-8 bg-black/10" />
@@ -300,7 +308,7 @@ export default function ServicesPage({ title: propTitle = "Our Services", servic
                   <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
                   <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                 </svg>
-                <span className="text-xl font-serif italic text-green leading-none" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>4.9 / 5</span>
+                <span className="text-xl font-serif italic text-green leading-none" style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif" }}>{DEFAULT_METRICS.googleRating}</span>
               </div>
             </motion.div>
           </div>
