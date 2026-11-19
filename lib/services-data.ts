@@ -2841,6 +2841,113 @@ export const services: ServiceData[] = [
       ],
     },
   },
+  {
+    id: "psychiatric-consultation",
+    title: "Psychiatric Consultation",
+    slug: "psychiatric-consultation",
+    description: "Professional psychiatric consultations for children, adolescents, adults, and older adults, with individualised assessment, treatment guidance, and ongoing mental health support.",
+    category: "guidance",
+    image: "/features-service-card/counseling.png",
+    demographics: ["Children", "Adolescents", "Adults", "Geriatric"],
+    content: {
+      overview: "Professional psychiatric consultations for the assessment and management of emotional, behavioural, and mental health concerns in Children, Teens, Adults, and Geriatrics.\n\nIndividualised mental health care, treatment guidance, and ongoing support at Divit MindSpace, Bangalore.",
+      benefits: [
+        "Professional psychiatric assessment and diagnostic clarity across all age groups",
+        "Individualised treatment planning and evidence-based clinical guidance",
+        "Careful evaluation for medication when clinically indicated",
+        "Collaborative support involving families, caregivers, and multidisciplinary specialists",
+        "Ongoing follow-up, monitoring, and compassionate mental health care"
+      ],
+      whatToExpect: [
+        "Comprehensive clinical interview and personal/developmental history exploration",
+        "Detailed review of emotional, behavioural, sleep, and medical patterns",
+        "Discussion of individual and family support needs in a safe, confidential environment",
+        "Clear recommendations including behavioural support, psychotherapy referrals, or medical interventions",
+        "Collaborative treatment roadmap and scheduled ongoing consultations"
+      ],
+      audienceSections: [
+        {
+          audienceType: "children",
+          title: "Children & Adolescents",
+          hero: {
+            shortDescription: "Professional psychiatric consultations for the assessment and management of emotional, behavioural, and mental health concerns in Children and Adolescents.",
+            overview: "Children and adolescents experience several emotional, behavioural, social, and developmental changes as they grow. Sometimes, these changes may be accompanied by difficulties that affect their relationships, learning, behaviour, or everyday functioning.\n\nA psychiatric consultation helps explore these concerns by understanding the child's emotional and behavioural experiences, developmental history, family environment, and overall well-being.\n\nAt Divit MindSpace, consultations aim to provide a better understanding of the challenges children and adolescents may be experiencing. The psychiatrist may assess concerns related to attention, mood, behaviour, anxiety, sleep, and other aspects of mental health. Parents and caregivers may also be involved in the consultation to provide relevant information and support the child's care.\n\nBased on the assessment, appropriate recommendations may include further evaluation, medication when clinically indicated, behavioural support, or referrals for psychological interventions."
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "pc-children-right-support",
+              title: "When to Reach Out – Children & Adolescents",
+              intro: "Children may not always have the words to express what they are feeling or experiencing. Changes in their behaviour, emotions, or everyday functioning may sometimes indicate that they need additional support.\n\nA psychiatric consultation may be helpful when a child or adolescent:",
+              items: [
+                "Experiences Persistent Emotional Distress: Frequently experiences sadness, excessive worry, irritability, emotional outbursts, or difficulty managing emotions.",
+                "Shows Changes in Behaviour: Displays significant or recurring changes in behaviour, including aggression, withdrawal, impulsivity, or unusual behavioural patterns.",
+                "Faces Attention and Concentration Difficulties: Struggles with maintaining attention, managing impulsive behaviour, or regulating activity levels in ways that affect everyday functioning.",
+                "Experiences Social or Developmental Concerns: Faces difficulties with social interactions, communication, or age-appropriate developmental milestones that may require further evaluation.",
+                "Has Sleep or Eating Difficulties: Experiences persistent changes in sleep patterns, appetite, or eating habits that affect overall well-being.",
+                "Struggles at School: Shows changes in academic performance, school participation, motivation, or adjustment that may be associated with emotional or behavioural difficulties.",
+                "Experiences Significant Life Changes: Has difficulty coping with family changes, loss, bullying, stressful experiences, or other challenging situations.",
+                "Shows Concerning Changes in Functioning: Experiences difficulties that interfere with relationships, daily activities, learning, or overall quality of life."
+              ]
+            }
+          ],
+          additionalSections: [
+            {
+              title: "Conclusion",
+              intro: "Seeking a consultation can help parents and caregivers better understand these concerns, explore possible underlying factors, and identify appropriate support for the child's well-being.",
+              items: []
+            }
+          ]
+        },
+        {
+          audienceType: "adults",
+          title: "Adults & Geriatrics",
+          hero: {
+            shortDescription: "Professional psychiatric consultations for the assessment and management of emotional, behavioural, and mental health concerns in Adults and Older Adults.",
+            overview: "Mental health is an important part of overall well-being at every stage of adulthood. Personal responsibilities, relationships, work-related pressures, health concerns, and major life transitions can sometimes affect an individual's emotional and psychological functioning.\n\nA psychiatric consultation provides an opportunity to discuss these experiences and explore concerns that may be affecting everyday life. It involves understanding an individual's symptoms, personal and medical history, emotional experiences, and overall mental health.\n\nFor adults, consultations may address concerns related to mood, anxiety, stress, sleep, behavioural changes, and other mental health difficulties. The psychiatrist works towards understanding the nature of these concerns and identifying appropriate treatment options.\n\nFor older adults, psychiatric consultations may also explore changes in mood, memory, behaviour, sleep, and everyday functioning. These concerns may be influenced by various psychological, physical, or age-related factors and may require further evaluation.\n\nAt Divit MindSpace, consultations are guided by individual needs and aim to provide appropriate assessment, treatment recommendations, and continued support. Depending on the findings, care may involve medication, further investigations, psychological interventions, or referrals to other healthcare professionals."
+          },
+          contentBlocks: [
+            {
+              _type: "fullWidthListBlock",
+              _key: "pc-adults-right-support",
+              title: "When to Reach Out – Adults & Geriatrics",
+              intro: "Mental health concerns can affect individuals in different ways and may not always be immediately recognised. Seeking professional guidance can help individuals understand what they are experiencing and explore appropriate ways to manage their concerns.\n\nA psychiatric consultation may be beneficial if you:",
+              items: [
+                "Experience Persistent Changes in Mood: Frequently feel sad, low, irritable, emotionally overwhelmed, or experience significant changes in mood.",
+                "Struggle with Anxiety or Excessive Worry: Experience persistent worry, fear, panic, restlessness, or difficulty managing everyday stress.",
+                "Notice Changes in Sleep or Appetite: Experience ongoing sleep disturbances, changes in eating habits, or alterations in daily routines.",
+                "Face Difficulties in Everyday Functioning: Find it increasingly difficult to manage work, studies, personal responsibilities, or relationships because of emotional or psychological concerns.",
+                "Experience Changes in Thoughts or Behaviour: Notice recurring patterns of distressing thoughts, unusual perceptions, changes in behaviour, or difficulties with concentration and decision-making.",
+                "Have Concerns About Substance Use: Experience difficulties related to alcohol or other substance use and wish to seek professional guidance.",
+                "Navigate Major Life Changes: Experience emotional difficulties following loss, relationship challenges, significant transitions, or stressful life experiences.",
+                "Notice Changes in Later Life: Observe changes in memory, mood, behaviour, sleep, or daily functioning that may require further assessment.",
+                "Need a Professional Mental Health Evaluation: Wish to understand persistent psychological concerns, seek clarification about an existing diagnosis, or explore treatment options recommended by a healthcare professional."
+              ]
+            }
+          ],
+          additionalSections: [
+            {
+              title: "Conclusion",
+              intro: "A psychiatric consultation can help identify possible underlying concerns, clarify treatment needs, and establish an appropriate plan of care. Seeking help early can make it easier to understand and address mental health difficulties.",
+              items: []
+            }
+          ]
+        }
+      ],
+      approachItems: [
+        "Thorough and compassionate psychiatric evaluation tailored to each developmental stage",
+        "Evidence-based clinical guidelines combined with person-centered care",
+        "Judicious and careful consideration of medications only when clinically indicated",
+        "Active collaboration with psychologists, therapists, families, and caregivers",
+        "Continuous support, follow-up, and long-term well-being planning"
+      ],
+      whyChooseItems: [
+        "At Divit MindSpace, our psychiatric consultations provide comprehensive, empathetic care for individuals across the lifespan.",
+        "We believe in treating the whole person, taking into account medical, emotional, developmental, and environmental factors.",
+        "Our consultations offer a safe, confidential environment to gain clarity, receive expert clinical guidance, and develop an actionable care plan."
+      ]
+    }
+  },
 ];
 
 export function getServiceBySlug(slug: string): ServiceData | undefined {

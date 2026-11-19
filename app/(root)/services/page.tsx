@@ -92,6 +92,7 @@ export default async function ServicesListPage() {
   const staticServiceNames = [
     "Psychometric Assessment",
     "Psychoeducational Assessment",
+    "Psychiatric Consultation",
     "Clinical Assessment for Autism",
     "Clinical Assessment for ADHD",
     "Learning Disability Assessment",

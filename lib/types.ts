@@ -25,6 +25,15 @@ export interface TrustMetrics {
   googleReviewsUrl: string;
 }
 
+export const APPROVED_METRICS: TrustMetrics & { approach: string } = {
+  familiesCount: "200+",
+  specialistsCount: "10+",
+  servicesCount: "21+",
+  googleRating: "4.9 / 5",
+  googleReviewsUrl: "",
+  approach: "Holistic Family Approach",
+};
+
 export interface FooterContent {
   tagline: string;
   description: string;
