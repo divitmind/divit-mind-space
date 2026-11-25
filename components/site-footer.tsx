@@ -148,14 +148,8 @@ export function SiteFooter({ siteSettings }: SiteFooterProps) {
                         <p className="text-xs font-bold text-[#7A9A7D] uppercase tracking-widest mb-4">
                             Bangalore&apos;s Leading Center for Mental Health, Neurodevelopment & Physiotherapy
                         </p>
-                        <p className="text-[13px] text-black font-medium leading-relaxed max-w-[360px] mb-6">
-                            {footerContent?.description ? (
-                                footerContent.description
-                            ) : (
-                                <>
-                                    Offering expert clinical assessments, professional counselling, and specialized education for all ages. We provide neuro-affirming care through speech, occupational, behavioral, cognitive and play therapy, group sessions, special education, NIOS support, and physiotherapy—supporting <span className="font-bold text-green">children</span>, <span className="font-bold text-green">teens</span>, <span className="font-bold text-green">adults</span>, and <span className="font-bold text-green">geriatric</span> mental health across autism, ADHD, learning difficulties, anxiety, depression, stress, OCD and <span className="font-bold text-green">Personality traits</span>, along with early intervention, school readiness, and neurodivergent teen programs.
-                                </>
-                            )}
+                        <p className="text-[13px] text-black/75 font-medium leading-relaxed max-w-[360px] mb-6">
+                            Offering expert <strong className="font-bold text-black">clinical assessments, specialized therapies,</strong> <strong className="font-bold text-black">professional counselling, psychiatric consultations, and specialized educational support</strong> for all age groups. We provide <strong className="font-bold text-black">neuro-affirming, holistic</strong> care through speech, occupational, behavioural, cognitive and play therapy, group sessions, special education, NIOS support, and physiotherapy. Our services cater to <strong className="font-bold text-black">children, teenagers, adults and geriatric</strong> mental health across autism, ADHD, learning difficulties, anxiety, depression, stress, OCD and personality-related concerns, along with early intervention, school readiness, and neurodivergent teen programs.
                         </p>
                         {/* Credential line — Indian YMYL trust signal. RCI regulates clinical
                             psychologists; NCAHP covers speech, OT, and allied-health staff. */}

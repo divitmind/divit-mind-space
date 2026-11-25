@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { type TrustMetrics, APPROVED_METRICS } from "@/lib/types";
+import { type TrustMetrics } from "@/lib/types";
 
 interface AboutUsHeroImage {
   asset?: { url?: string };
@@ -18,7 +18,13 @@ interface AboutUsHeroData {
   images?: AboutUsHeroImage[];
 }
 
-const DEFAULT_METRICS: TrustMetrics = APPROVED_METRICS;
+const DEFAULT_METRICS: TrustMetrics = {
+  familiesCount: "100+",
+  specialistsCount: "10+",
+  servicesCount: "21+",
+  googleRating: "4.9 / 5",
+  googleReviewsUrl: "",
+};
 
 const SERVICE_CHIPS = [
   // Clinical Assessments

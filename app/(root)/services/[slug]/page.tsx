@@ -320,12 +320,41 @@ export default async function ServicePage({ params }: PageProps) {
       separatorIndex = dashIndex;
     }
 
-    if (separatorIndex === -1) return cleanText;
+    if (separatorIndex === -1) {
+      if (cleanText.includes('\n\n')) {
+        return (
+          <span className="space-y-3 block">
+            {cleanText.split('\n\n').map((para, pIdx) => (
+              <span key={pIdx} className="block">{para}</span>
+            ))}
+          </span>
+        );
+      }
+      return cleanText;
+    }
+
+    const boldPrefix = cleanText.slice(0, separatorIndex + 1);
+    const rest = cleanText.slice(separatorIndex + 1);
+
+    if (rest.includes('\n\n')) {
+      const paragraphs = rest.split('\n\n');
+      return (
+        <span className="space-y-3 block">
+          <span className="block">
+            <strong className="text-black font-bold">{boldPrefix}</strong>
+            {paragraphs[0]}
+          </span>
+          {paragraphs.slice(1).map((p, pIdx) => (
+            <span key={pIdx} className="block">{p}</span>
+          ))}
+        </span>
+      );
+    }
 
     return (
       <>
-        <strong className="text-black font-bold">{cleanText.slice(0, separatorIndex + 1)}</strong>
-        {cleanText.slice(separatorIndex + 1)}
+        <strong className="text-black font-bold">{boldPrefix}</strong>
+        {rest}
       </>
     );
   };
