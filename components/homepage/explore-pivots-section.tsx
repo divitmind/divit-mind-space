@@ -107,11 +107,8 @@ export function ExplorePivotsSection() {
                 Our centre is located in Kasavanahalli, off Sarjapur Road. We welcome families from across Bangalore, including HSR Layout, Bellandur, Koramangala, Whitefield and nearby areas.
               </p>
 
-              {/* Physical Centre */}
+              {/* Kasavanahalli Centre Details */}
               <div className="mb-5">
-                <div className="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                  Our Physical Centre
-                </div>
                 <Link
                   href={`/near-me/${physicalCentre?.slug || "kasavanahalli"}`}
                   className="group block p-4 rounded-2xl bg-[#FAF9F5] border border-[#7A9A7D]/25 hover:border-[#7A9A7D] hover:bg-white hover:shadow-md transition-all"
