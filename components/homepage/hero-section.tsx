@@ -96,9 +96,9 @@ export function HeroSection({ siteSettings }: HeroSectionProps) {
               </Link>
               <Link
                 href="/services/psychiatric-consultation"
-                className="dm-pill-button dm-pill-button-secondary w-full sm:w-auto !h-12 !py-2.5 !px-4 sm:!px-5 lg:!px-3.5 xl:!px-5 !text-[13px] sm:!text-[14px] xl:!text-[14.5px] whitespace-nowrap shrink-0"
+                className="dm-pill-button dm-pill-button-primary w-full sm:w-auto !h-12 !py-2.5 !px-4 sm:!px-5 lg:!px-3.5 xl:!px-5 !text-[13px] sm:!text-[14px] xl:!text-[14.5px] whitespace-nowrap shrink-0"
               >
-                Explore Psychiatry Services
+                Explore Psychiatric Consultation
               </Link>
             </div>
 
