@@ -41,10 +41,10 @@ export function HeroSection({ siteSettings }: HeroSectionProps) {
   return (
     <section className="relative overflow-hidden pt-0 pb-4 lg:pt-2 lg:pb-10 min-h-[auto] md:min-h-[450px] lg:min-h-[500px] flex items-start">
       <div className="container relative z-10">
-        <div className="flex flex-col md:flex-row items-center gap-6 lg:gap-4">
+        <div className="flex flex-col md:flex-row items-center gap-6 lg:gap-6 xl:gap-8">
 
           {/* Text Content */}
-          <div className="flex-[1.2] text-center md:text-left animate-in slide-in-from-bottom duration-700 fade-in">
+          <div className="flex-[1.2] lg:flex-[1.35] xl:flex-[1.4] text-center md:text-left animate-in slide-in-from-bottom duration-700 fade-in">
             <div className="flex flex-col w-full max-w-[580px] mx-auto md:mx-0">
               <div className="text-[11px] sm:text-xs md:text-base font-bold text-[#7A9A7D] uppercase tracking-widest md:tracking-[0.2em] mb-4 md:mb-5 px-1 drop-shadow-sm whitespace-nowrap sm:whitespace-normal">
                 Nurtured Minds, Independent Lives
@@ -81,24 +81,24 @@ export function HeroSection({ siteSettings }: HeroSectionProps) {
             <p className="mt-6 lg:mt-8 max-w-xl mx-auto md:mx-0 text-base lg:text-[1.125rem] text-black/80 leading-[1.75] font-medium text-balance text-center md:text-left">
               {heroDescription}
             </p>
-            <div className="mt-8 lg:mt-10 flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-4 justify-center md:justify-start">
-              <WhatsAppConsultationLink className="dm-pill-button dm-pill-button-primary">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <div className="mt-8 lg:mt-10 flex flex-col sm:flex-row lg:flex-nowrap items-center gap-2.5 sm:gap-3 xl:gap-3.5 justify-center md:justify-start">
+              <WhatsAppConsultationLink className="dm-pill-button dm-pill-button-primary w-full sm:w-auto !h-12 !py-2.5 !px-4 sm:!px-5 lg:!px-3.5 xl:!px-5 !text-[13px] sm:!text-[14px] xl:!text-[15px] whitespace-nowrap shrink-0">
+                <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                 </svg>
-                {ctaPrimary}
+                <span>{ctaPrimary}</span>
               </WhatsAppConsultationLink>
               <Link
                 href="/awareness-program"
-                className="dm-pill-button dm-pill-button-secondary"
+                className="dm-pill-button dm-pill-button-secondary w-full sm:w-auto !h-12 !py-2.5 !px-4 sm:!px-5 lg:!px-3.5 xl:!px-5 !text-[13px] sm:!text-[14px] xl:!text-[14.5px] whitespace-nowrap shrink-0"
               >
                 {ctaSecondary}
               </Link>
               <Link
                 href="/services/psychiatric-consultation"
-                className="dm-pill-button dm-pill-button-secondary"
+                className="dm-pill-button dm-pill-button-secondary w-full sm:w-auto !h-12 !py-2.5 !px-4 sm:!px-5 lg:!px-3.5 xl:!px-5 !text-[13px] sm:!text-[14px] xl:!text-[14.5px] whitespace-nowrap shrink-0"
               >
-                Psychiatric Consultation
+                Explore Psychiatry Services
               </Link>
             </div>
 
@@ -156,7 +156,7 @@ export function HeroSection({ siteSettings }: HeroSectionProps) {
           </div>
 
           {/* Right Visual - Triptych Story */}
-          <div className="flex-1 w-full max-w-sm sm:max-w-md lg:max-w-xl relative animate-in slide-in-from-right duration-1000 fade-in delay-200">
+          <div className="flex-1 lg:flex-[0.85] xl:flex-[0.9] w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl relative animate-in slide-in-from-right duration-1000 fade-in delay-200">
             {/* Offset shadow layers - Sage Green & Light Gold palette */}
             <div className="absolute inset-0 bg-[#7A9A7D] rounded-2xl transform rotate-2 translate-x-2 translate-y-2 opacity-40" />
             <div className="absolute inset-0 bg-[#E8D5B7] rounded-2xl transform -rotate-1 translate-x-1 translate-y-3 opacity-50" />
