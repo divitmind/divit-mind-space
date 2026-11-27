@@ -22,6 +22,7 @@ const serviceCategories = [
   { id: "guidance",    label: "Counselling", hub: false, href: "/services?category=guidance",     icon: Users },
   { id: "programs",    label: "Programs",    hub: false, href: "/services?category=programs",     icon: GraduationCap },
   { id: "physiotherapy", label: "Physiotherapy", hub: false, href: "/services?category=physiotherapy", icon: Activity },
+  { id: "psychiatric-consultation", label: "Psychiatric Consultation", hub: false, href: "/services/psychiatric-consultation", icon: Stethoscope },
 ];
 
 const popularServices = [
@@ -60,8 +61,8 @@ export function MainNav() {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="w-[400px] p-6 md:w-[500px] lg:w-[600px] bg-white rounded-[2.5rem] shadow-2xl border border-black/5">
-              {/* Category Links — all 5 in one row */}
-              <div className="grid grid-cols-5 gap-2 mb-6">
+              {/* Category Links — 3 columns x 2 rows */}
+              <div className="grid grid-cols-3 gap-3 mb-6">
                 {serviceCategories.map((cat) => (
                   <Link
                     key={cat.id}

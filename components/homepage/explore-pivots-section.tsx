@@ -99,7 +99,7 @@ export function ExplorePivotsSection() {
                   <MapPin className="w-5 h-5 text-[#7A9A7D]" />
                 </div>
                 <h3 className="text-xl lg:text-2xl font-serif italic text-black leading-tight">
-                  One Centre, Supporting Families Across Bangalore
+                  We are located at Kasavanahalli
                 </h3>
               </div>
 
@@ -110,7 +110,6 @@ export function ExplorePivotsSection() {
               {/* Physical Centre */}
               <div className="mb-5">
                 <div className="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#7A9A7D]" />
                   Our Physical Centre
                 </div>
                 <Link
@@ -122,9 +121,6 @@ export function ExplorePivotsSection() {
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-sm sm:text-base font-semibold text-black group-hover:text-[#7A9A7D] transition-colors">
                           Kasavanahalli, Off Sarjapur Road
-                        </span>
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#7A9A7D]/15 text-[#5e7c61]">
-                          Main Centre
                         </span>
                       </div>
                       <p className="text-xs text-black/60">

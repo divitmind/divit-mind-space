@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, FileText, Heart, Users, GraduationCap, Compass, ClipboardList, Activity, Sparkles } from "lucide-react";
+import { ArrowRight, FileText, Heart, Users, GraduationCap, Compass, ClipboardList, Activity } from "lucide-react";
 import type { ServiceCategoryCard } from "@/lib/types";
 
 // Default fallback services
@@ -112,42 +112,6 @@ export function ServicesSection({ serviceCategories }: ServicesSectionProps) {
                             </Link>
                         );
                     })}
-                </div>
-
-                {/* Highlighted Service: Psychiatric Consultation */}
-                <div className="mt-6 lg:mt-8">
-                    <div className="relative overflow-hidden rounded-[1.5rem] lg:rounded-[2rem] border border-black/5 bg-white p-5 lg:p-8 shadow-xl shadow-black/[0.02] hover:border-black/10 transition-all duration-500">
-                        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-                            <div className="flex items-start gap-4 lg:gap-6">
-                                <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-2xl flex items-center justify-center shrink-0 bg-[#E8D5B7] transition-all">
-                                    <Sparkles className="h-6 w-6 lg:h-7 lg:w-7 text-[#7A9A7D]" />
-                                </div>
-                                <div className="space-y-1.5 max-w-3xl">
-                                    <div className="flex items-center gap-2 flex-wrap">
-                                        <span className="px-2.5 py-0.5 rounded-full text-[9px] lg:text-[10px] font-bold uppercase tracking-widest bg-[#7A9A7D] text-white">
-                                            Specialist Care
-                                        </span>
-                                        <span className="text-[11px] font-medium text-black/50">
-                                            Children • Teens • Adults • Geriatrics
-                                        </span>
-                                    </div>
-                                    <h3 className="text-xl lg:text-2xl font-bold text-black font-[family-name:var(--font-cormorant)] italic leading-tight">
-                                        Psychiatric Consultation
-                                    </h3>
-                                    <p className="text-[13px] lg:text-sm text-black/60 font-medium leading-relaxed">
-                                        Professional psychiatric consultations for children, adolescents, adults, and older adults, with individualised assessment, treatment guidance, and ongoing mental health support.
-                                    </p>
-                                </div>
-                            </div>
-                            <Link
-                                href="/services/psychiatric-consultation"
-                                className="dm-pill-button dm-pill-button-primary w-full sm:w-auto whitespace-nowrap shrink-0 group flex items-center justify-center gap-2"
-                            >
-                                <span>Explore Psychiatric Consultation</span>
-                                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                            </Link>
-                        </div>
-                    </div>
                 </div>
 
             </div>
